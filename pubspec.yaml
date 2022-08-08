@@ -48,6 +48,8 @@ dependencies:
   flutter_easyrefresh: ^2.2.1
   # 图片裁剪 https://pub.flutter-io.cn/packages/image_cropper/install
 #  image_cropper: ^2.0.3
+  # toast组件 https://pub.flutter-io.cn/packages/fluttertoast/install
+  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_test:

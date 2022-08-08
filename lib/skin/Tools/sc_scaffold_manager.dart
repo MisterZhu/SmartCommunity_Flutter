@@ -77,12 +77,16 @@ class SCScaffoldManager {
   Future<String> getRouterBasePath() async{
     SharedPreferences preferences = await SharedPreferences.getInstance();
     bool isShowGuide = preferences.getBool(SCKey.isShowGuide) ?? true;
-    String basePath = SCRouterPath.guidePath;
+    bool isShowPrivacy = preferences.getBool(SCKey.isShowPrivacyAlert) ?? true;
+    String basePath = SCRouterPath.tabPath;
 
-    if (isShowGuide == false) {
-      basePath = SCRouterPath.basePrivacyPath;
+    if (isShowGuide == true) {
+      basePath = SCRouterPath.guidePath;
+    } else {
+      if (isShowPrivacy == true) {
+        basePath = SCRouterPath.basePrivacyPath;
+      }
     }
-
     return Future(() => basePath);
   }
 

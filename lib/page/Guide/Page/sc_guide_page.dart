@@ -7,6 +7,8 @@ import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_key.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 
+import '../../../utils/Router/sc_router_path.dart';
+
 /// 引导页page
 
 class SCGuidePage extends StatefulWidget {
@@ -45,7 +47,12 @@ class SCGuideState extends State <SCGuidePage> {
     if (index == imageList.length - 1) {
       SharedPreferences preference = await SharedPreferences.getInstance();
       preference.setBool(SCKey.isShowGuide, false);
-      SCRouterHelper.codeOffAllPage(10000, null);
+      bool isShowPrivacy = preference.getBool(SCKey.isShowPrivacyAlert) ?? true;
+      if (isShowPrivacy == true) {
+        SCRouterHelper.codeOffAllPage(8000, null);
+      } else {
+        SCRouterHelper.codeOffAllPage(10000, null);
+      }
     }
   }
 
