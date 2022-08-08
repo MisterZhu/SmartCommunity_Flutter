@@ -4,8 +4,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import '../../../constants/sc_colors.dart';
+import '../../../constants/sc_key.dart';
+import '../../../utils/Toast/sc_toast.dart';
 import '../GetXController/sc_base_privacy_controller.dart';
 import '../View/Privacy/sc_privacy_alert.dart';
 
@@ -62,8 +65,14 @@ class SCBasePrivacyState extends State<SCBasePrivacyPage> {
         cancelAction: (){
           log('取消');
         },
-        sureAction: () {
-          SCRouterHelper.codeOffAllPage(10000, null);
+        sureAction: () async {
+          if (state.isAgree == true) {
+            SharedPreferences preference = await SharedPreferences.getInstance();
+            preference.setBool(SCKey.isShowPrivacyAlert, false);
+            SCRouterHelper.codeOffAllPage(10000, null);
+          } else {
+            SCToast.showTip('请先同意用户协议和隐私政策');
+          }
         },
         agreeAction: () {
           state.updateAgreementState();
