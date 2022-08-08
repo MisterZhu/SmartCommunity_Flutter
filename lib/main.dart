@@ -4,13 +4,15 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smartcommunity/base/sc_all_binding.dart';
+import 'package:smartcommunity/constants/sc_key.dart';
 import 'package:smartcommunity/utils/Router/sc_router_pages.dart';
 import 'package:smartcommunity/utils/Router/sc_router_path.dart';
 
 import 'skin/Tools/sc_scaffold_manager.dart';
 
-void main() {
+void main() async{
   SCScaffoldManager.instance.initBase();
 
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -23,11 +25,15 @@ void main() {
     ));
   }
 
+
+  /// 路由的basePath
+  String basePath = await SCScaffoldManager.instance.getRouterBasePath();
+
   runApp(GetMaterialApp(
     navigatorKey: navigatorKey,
     debugShowCheckedModeBanner: false,
     getPages: SCRouterPages.getPages,
-    initialRoute: SCRouterPath.tabPath,
+    initialRoute: basePath,
     initialBinding: SCAllBinding(),
   ));
 }

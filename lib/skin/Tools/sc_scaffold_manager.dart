@@ -2,10 +2,13 @@
 
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smartcommunity/utils/Router/sc_router_path.dart';
+import '../../constants/sc_key.dart';
 import '../../utils/Colors/sc_color_hex.dart';
 import '../../constants/sc_skin_key.dart';
 import '../../constants/sc_skin_value.dart';
@@ -46,9 +49,12 @@ class SCScaffoldManager {
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-    bool hasKey = sharedPreferences.containsKey(SkinDefaultKey.scaffold_key);
+    bool hasScaffoldKey = sharedPreferences.containsKey(SkinDefaultKey.scaffold_key);
 
-    if(hasKey) {
+    /// 引导页key
+    bool hasGuideKey = sharedPreferences.containsKey(SCKey.isShowGuide);
+
+    if(hasScaffoldKey) {
       String? scaffolfJsonString = sharedPreferences.getString(SkinDefaultKey.scaffold_key);
       var localJson = jsonDecode(scaffolfJsonString ?? '');
       _scaffoldModel = new SCScaffoldModel.fromJson(localJson);
@@ -65,6 +71,19 @@ class SCScaffoldManager {
     state.setPrimaryColor(color);
     state.setTitleColor(SCHexColor(_scaffoldModel.titleColor ?? scaffoldJson['titleColor']));
     return sharedPreferences;
+  }
+
+  /// 获取Router的BasePath
+  Future<String> getRouterBasePath() async{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    bool isShowGuide = preferences.getBool(SCKey.isShowGuide) ?? true;
+    String basePath = SCRouterPath.guidePath;
+
+    if (isShowGuide == false) {
+      basePath = SCRouterPath.basePrivacyPath;
+    }
+
+    return Future(() => basePath);
   }
 
   /*修改Nav背景颜色*/

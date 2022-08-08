@@ -17,6 +17,13 @@ class SCRouterHelper {
     return Get.offAndToNamed(path!, arguments: params);
   }
 
+  /*关闭所有页面*/
+  static Future? codeOffAllPage(int code, dynamic params) {
+    params ??= '';
+    String? path = SCRouterPages.pageCode[code];
+    return Get.offAllNamed(path!, arguments: params);
+  }
+
   /*通过path跳转页面*/
   static Future? pathPage(String path, dynamic params) {
     params ??= '';
