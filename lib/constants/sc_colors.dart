@@ -40,8 +40,10 @@ class SCColors {
   static const Color color_FF3B3B = Color(0xFFFF3B3B);
   static const Color color_FF4040 = Color(0xFFFF4040);
   static const Color color_8D8E99 = Color(0xFF8D8E99);
+  static const Color color_D8D8D8 = Color(0xFFD8D8D8);
   static const Color color_8D8E9A = Color(0xFF8D8E9A);
   static const Color color_D7D8DB = Color(0xFFD7D8DB);
+  static const Color color_D7D7DB = Color(0xFFD7D7DB);
   static const Color color_4F7AB2 = Color(0xFF4F7AB2);
   static const Color color_F2F3F5 = Color(0xFFF2F3F5);
   static const Color color_FFEBEC = Color(0xFFFFEBEC);

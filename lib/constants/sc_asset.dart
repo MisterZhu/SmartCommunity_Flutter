@@ -135,4 +135,19 @@ class SCAsset {
   /// 首页-资讯6
   static const String homeIconNews6 = 'images/icon_news6.png';
   /************* 测试用的数据 *************/
+
+  /************* 引导页图片 *************/
+  static const String guide1 = 'images/guide/start1_812.png';
+  static const String guide2 = 'images/guide/start2_812.png';
+  static const String guide3 = 'images/guide/start3_812.png';
+  static const String guide4 = 'images/guide/start4_812.png';
+  static const String guide5 = 'images/guide/start5_812.png';
+  /************* 引导页图片 *************/
+
+  /************* 用户协议和隐私政策 *************/
+  /// 同意
+  static const String iconAgree = 'images/icon_choose.png';
+  /// 不同意
+  static const String iconNotAgree = 'images/icon_unchoose.png';
+  /************* 用户协议和隐私政策 *************/
 }
