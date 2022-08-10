@@ -78,7 +78,7 @@ class SCScaffoldManager {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     bool isShowGuide = preferences.getBool(SCKey.isShowGuide) ?? true;
     bool isShowPrivacy = preferences.getBool(SCKey.isShowPrivacyAlert) ?? true;
-    String basePath = SCRouterPath.tabPath;
+    String basePath = SCRouterPath.codeLoginPath;
 
     if (isShowGuide == true) {
       basePath = SCRouterPath.guidePath;

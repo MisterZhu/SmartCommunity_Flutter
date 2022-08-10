@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:smartcommunity/page/Guide/Page/sc_base_privacy_page.dart';
 import 'package:smartcommunity/page/Guide/Page/sc_guide_page.dart';
 import 'package:smartcommunity/page/Home/Page/sc_home_page.dart';
+import 'package:smartcommunity/page/Login/Page/sc_login_page.dart';
 import 'package:smartcommunity/page/Tab/Page/sc_tab_page.dart';
 
 import 'sc_router_path.dart';
@@ -12,6 +13,8 @@ class SCRouterPages {
   static final List<GetPage> getPages = [
     /*tab*/
     GetPage(name: SCRouterPath.tabPath, page: () => SCTabPage()),
+    /*验证码登录*/
+    GetPage(name: SCRouterPath.codeLoginPath, page: () => SCLoginPage()),
     /*首页*/
     GetPage(name: SCRouterPath.homePath, page: () => SCHomePage()),
     /*引导页*/
@@ -26,6 +29,8 @@ class SCRouterPages {
     8000 : SCRouterPath.basePrivacyPath,
     /*引导页*/
     9000 : SCRouterPath.guidePath,
+    /*验证码登录*/
+    9001 : SCRouterPath.codeLoginPath,
     /*tab*/
     10000 : SCRouterPath.tabPath,
     /*首页*/

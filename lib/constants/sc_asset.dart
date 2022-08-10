@@ -150,4 +150,20 @@ class SCAsset {
   /// 不同意
   static const String iconNotAgree = 'images/icon_unchoose.png';
   /************* 用户协议和隐私政策 *************/
+
+  /************* logo *************/
+  /// logo_56
+  static const String iconLogo56 = 'images/logo/icon_logo_56.png';
+  /// logo_168
+  static const String iconLogo168 = 'images/logo/icon_logo_168.png';
+  /// logo_180
+  static const String iconLogo180 = 'images/logo/icon_logo_180.png';
+  /// logo_1024
+  static const String iconLogo1024 = 'images/logo/icon_logo_1024.png';
+  /************* logo *************/
+
+  /************* 登录 *************/
+  /// 删除
+  static const String iconGreyDelete = 'images/login/icon_delete_gray.png';
+  /************* 登录 *************/
 }

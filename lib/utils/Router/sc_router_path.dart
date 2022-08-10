@@ -12,6 +12,10 @@ class SCRouterPath {
   /// 用户协议和隐私政策弹窗
   static String basePrivacyPath = "/root/basePrivacyPage";
 
+  /***************************** 登录 ******************************/
+  /// 验证码登录
+  static String codeLoginPath = "/root/login/codeLogin";
+
   /***************************** 首页 ******************************/
   /// 首页
   static String homePath = "/home/HomePage";

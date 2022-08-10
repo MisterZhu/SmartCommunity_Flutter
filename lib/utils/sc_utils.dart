@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:smartcommunity/constants/sc_default_value.dart';
 
 /// 工具类
 
@@ -26,4 +27,13 @@ class SCUtils {
     return MediaQueryData.fromWindow(window).padding.bottom;
   }
 
+  /*关闭键盘*/
+  hideKeyboard({required BuildContext context}) {
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
+
+  /*验证手机号*/
+  bool checkPhone({required String phone}) {
+    return RegExp(SCDefaultValue.phoneReg).hasMatch(phone);
+  }
 }
