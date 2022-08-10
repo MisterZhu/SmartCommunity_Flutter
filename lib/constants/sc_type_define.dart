@@ -34,4 +34,15 @@ class SCTypeDefine {
   /// 服务
   static const int SC_MINE_TYPE_SERVICE = 5;
   /************************* 我的-cellType *************************/
+
+  /************************* 登录页面-cellType *************************/
+  /// logo
+  static const int SC_LOGIN_TYPE_LOGO = 0;
+  /// 手机号验证码输入框
+  static const int SC_LOGIN_TYPE_TEXTFIELD = 1;
+  /// 登录按钮
+  static const int SC_LOGIN_TYPE_BUTTON = 2;
+  /// 协议
+  static const int SC_LOGIN_TYPE_AGREEMENT = 3;
+  /************************* 登录页面-cellType *************************/
 }
