@@ -133,8 +133,8 @@ class SCLoginAgreement extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Image.asset(
                 isAgree ? SCAsset.iconAgree : SCAsset.iconNotAgree,
-                width: 16,
-                height: 16,
+                width: 22,
+                height: 22,
               )),
           onTap: () {
             if (agreeAction != null) {

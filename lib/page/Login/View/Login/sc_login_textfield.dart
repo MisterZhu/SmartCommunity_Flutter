@@ -82,10 +82,11 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
   Widget phoneItem() {
     return Container(
       height: 46.0,
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      padding: const EdgeInsets.only(left: 12.0),
       alignment: Alignment.centerLeft,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(child: phoneTextField()),
           const SizedBox(
@@ -135,7 +136,14 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
   Widget deleteIcon() {
     if (isShowPhoneClear) {
       return GestureDetector(
-        child: Image.asset(SCAsset.iconGreyDelete, width: 18.0, height: 18.0),
+        child: Container(
+          padding: const EdgeInsets.only(right: 12.0),
+          width: 36,
+          height: 40,
+          alignment: Alignment.centerRight,
+          color: Colors.white,
+          child: Image.asset(SCAsset.iconGreyDelete, width: 18.0, height: 18.0),
+        ),
         onTap: () {
           phoneController.clear();
         },
@@ -351,7 +359,7 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
           isCodeBtnEnable = phoneController.text.length == phoneLength ? true : false;
           codeText = "获取验证码";
           disposeTimer();
-        }else {
+        } else {
           codeText = '${codeTime}s';
           codeBGColor = SCColors.color_FF6C00;
         }
@@ -371,5 +379,6 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
     codeNode.dispose();
     phoneController.dispose();
     codeController.dispose();
+    disposeTimer();
   }
 }
