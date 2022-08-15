@@ -59,6 +59,10 @@ dependencies:
   webview_flutter: ^3.0.4
   #自适应文字
   auto_size_text: ^3.0.0
+  # 列表组件 https://pub.flutter-io.cn/packages/azlistview/install
+  azlistview: ^2.0.0
+  # 汉字转拼音 https://pub.flutter-io.cn/packages/lpinyin
+  lpinyin: ^2.0.2
 
 dev_dependencies:
   flutter_test:
