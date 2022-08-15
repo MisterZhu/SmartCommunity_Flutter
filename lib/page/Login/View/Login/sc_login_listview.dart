@@ -24,22 +24,27 @@ class SCLoginListView extends StatelessWidget {
 
   /// body
   Widget body() {
-    return ListView.separated(keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,shrinkWrap: true, itemBuilder: (BuildContext context, int index){
-      return getCell(index:index);
-    }, separatorBuilder: (BuildContext context, int index){
-      return getSeperator(index: index);
-    }, itemCount: 5);
+    return ListView.separated(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        shrinkWrap: true,
+        itemBuilder: (BuildContext context, int index) {
+          return getCell(index: index);
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return getSeparateItem(index: index);
+        },
+        itemCount: 5);
   }
 
   /// cell
   Widget getCell({required int index}) {
     if (index == SCTypeDefine.SC_LOGIN_TYPE_LOGO) {
       return logoItem();
-    } else if (index == SCTypeDefine.SC_LOGIN_TYPE_TEXTFIELD){
+    } else if (index == SCTypeDefine.SC_LOGIN_TYPE_TEXTFIELD) {
       return textFieldItem();
-    } else if (index == SCTypeDefine.SC_LOGIN_TYPE_BUTTON){
+    } else if (index == SCTypeDefine.SC_LOGIN_TYPE_BUTTON) {
       return loginBtnItem();
-    } else if (index == SCTypeDefine.SC_LOGIN_TYPE_AGREEMENT){
+    } else if (index == SCTypeDefine.SC_LOGIN_TYPE_AGREEMENT) {
       return agreementItem();
     } else {
       return const SizedBox();
@@ -47,16 +52,16 @@ class SCLoginListView extends StatelessWidget {
   }
 
   /// 分割线
-  Widget getSeperator({required int index}) {
+  Widget getSeparateItem({required int index}) {
     if (index == SCTypeDefine.SC_LOGIN_TYPE_LOGO) {
       return const SizedBox(
         height: 0,
       );
-    } else if (index == SCTypeDefine.SC_LOGIN_TYPE_TEXTFIELD){
+    } else if (index == SCTypeDefine.SC_LOGIN_TYPE_TEXTFIELD) {
       return const SizedBox(
         height: 32.0,
       );
-    } else if (index == SCTypeDefine.SC_LOGIN_TYPE_BUTTON){
+    } else if (index == SCTypeDefine.SC_LOGIN_TYPE_BUTTON) {
       return const SizedBox(
         height: 10.0,
       );
@@ -72,14 +77,14 @@ class SCLoginListView extends StatelessWidget {
 
   /// 手机号验证码输入框
   Widget textFieldItem() {
-    return GetBuilder<SCLoginController>(builder: (state){
+    return GetBuilder<SCLoginController>(builder: (state) {
       return SCLoginTextField();
     });
   }
 
   /// 登录按钮
   Widget loginBtnItem() {
-    return GetBuilder<SCLoginController>(builder: (state){
+    return GetBuilder<SCLoginController>(builder: (state) {
       return SCLoginBtn(
         enable: state.loginBtnEnable,
         onPressed: () {
@@ -95,7 +100,7 @@ class SCLoginListView extends StatelessWidget {
           }
 
           if (state.isAgree == false) {
-            SCToast.showTip('请同意用户服务协议和隐私政策');
+            SCToast.showTip('请同意用户服务协议和隐私协议');
             return;
           }
           // if (state.phone.isEmpty) {
@@ -114,7 +119,7 @@ class SCLoginListView extends StatelessWidget {
           //   return;
           // }
 
-          SCRouterHelper.codeOffAllPage(10000, null);
+          SCRouterHelper.codePage(9002, null);
         },
       );
     });
@@ -122,15 +127,13 @@ class SCLoginListView extends StatelessWidget {
 
   /// 用户协议和隐私政策
   Widget agreementItem() {
-    return GetBuilder<SCLoginController>(builder: (state){
+    return GetBuilder<SCLoginController>(builder: (state) {
       return SCLoginAgreement(
         isAgree: state.isAgree,
-        agreeAction: (){
+        agreeAction: () {
           state.updateAgreementState();
         },
-        agreementDetailAction: (String url){
-
-        },
+        agreementDetailAction: (String url) {},
       );
     });
   }

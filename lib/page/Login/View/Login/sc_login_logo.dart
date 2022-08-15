@@ -17,7 +17,7 @@ class SCLoginLogo extends StatelessWidget {
   /// body
   Widget body() {
     return Padding(
-      padding: const EdgeInsets.only(top: 62.5, bottom: 88.0),
+      padding: const EdgeInsets.only(top: 57.5, bottom: 88.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,

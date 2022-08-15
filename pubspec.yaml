@@ -50,6 +50,10 @@ dependencies:
 #  image_cropper: ^2.0.3
   # toast组件 https://pub.flutter-io.cn/packages/fluttertoast/install
   fluttertoast: ^8.0.9
+  # 列表组件 https://pub.flutter-io.cn/packages/azlistview/install
+  azlistview: ^2.0.0
+  # 汉字转拼音 https://pub.flutter-io.cn/packages/lpinyin
+  lpinyin: ^2.0.2
 
   # webView
   webview_flutter: ^3.0.4
@@ -80,6 +84,7 @@ flutter:
     - images/guide/
     - images/logo/
     - images/login/
+    - json/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

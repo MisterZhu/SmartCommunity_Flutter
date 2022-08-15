@@ -83,11 +83,11 @@ class SCLoginAgreement extends StatelessWidget {
         'title': '、',
         'imageUrl': '',
         'url': '',
-        'color': SCHexColor.colorToString(SCColors.color_1B1C33)
+        'color': SCHexColor.colorToString(SCColors.color_FF6C00)
       },
       {
         'type': richTextTypeText,
-        'title': '隐私政策',
+        'title': '隐私协议',
         'imageUrl': '',
         'url': privacyPolicyUrl,
         'color': SCHexColor.colorToString(SCColors.color_FF6C00)
@@ -152,6 +152,10 @@ class SCLoginAgreement extends StatelessWidget {
     return TextSpan(
         text: title,
         style: TextStyle(fontSize: SCFonts.f12, color: color),
-        recognizer: TapGestureRecognizer()..onTap = () {});
+        recognizer: TapGestureRecognizer()..onTap = () {
+          if (agreementDetailAction != null) {
+            agreementDetailAction?.call(url);
+          }
+        });
   }
 }

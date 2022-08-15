@@ -184,12 +184,12 @@ class SCBasicPrivacyAlert extends StatelessWidget {
         child: GestureDetector(
           child: Container(
               width: 22.0,
-              height: 16.0,
+              height: 22.0,
               alignment: Alignment.centerLeft,
               child: Image.asset(
                 isAgree ? SCAsset.iconAgree : SCAsset.iconNotAgree,
-                width: 16,
-                height: 16,
+                width: 22,
+                height: 22,
               )),
           onTap: () {
             selectAgreementAction();
