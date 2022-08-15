@@ -6,6 +6,7 @@ import 'package:smartcommunity/constants/sc_key.dart';
 import 'package:smartcommunity/utils/Router/sc_router_pages.dart';
 import 'package:smartcommunity/utils/Router/sc_router_path.dart';
 
+import 'constants/sc_colors.dart';
 import 'skin/Tools/sc_scaffold_manager.dart';
 
 void main() async{
@@ -17,6 +18,10 @@ void main() async{
   String basePath = await SCScaffoldManager.instance.getRouterBasePath();
 
   runApp(GetMaterialApp(
+    theme: ThemeData(
+        primaryColor: Colors.white,
+        colorScheme: const ColorScheme(brightness: Brightness.light, primary: Colors.white, onPrimary: SCColors.color_1B1C33, secondary: SCColors.color_1B1C33, onSecondary: Colors.white, error: Colors.white, onError: Colors.white, background: Colors.white, onBackground: Colors.white, surface: Colors.white, onSurface: Colors.white)
+    ),
     navigatorKey: navigatorKey,
     debugShowCheckedModeBanner: false,
     getPages: SCRouterPages.getPages,

@@ -39,8 +39,6 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
   bool isCodeBtnEnable = false;
   /// 验证码按钮text
   String codeText = "获取验证码";
-  /// 验证码定时器
-  late Timer codeTimer;
   /// 倒计时
   int codeTime = 60;
   /// 验证码按钮背景颜色
@@ -127,7 +125,7 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
         formatPhoneNumber(value);
       },
       keyboardType: TextInputType.phone,
-      keyboardAppearance: Brightness.dark,
+      keyboardAppearance: Brightness.light,
       textInputAction: TextInputAction.next,
     );
   }
@@ -210,7 +208,7 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
       ),
       onChanged: (value) {},
       keyboardType: TextInputType.number,
-      keyboardAppearance: Brightness.dark,
+      keyboardAppearance: Brightness.light,
       textInputAction: TextInputAction.next,
     );
   }
@@ -267,9 +265,11 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
       status = true;
     }
 
-    setState(() {
-      isShowPhoneClear = status;
-    });
+    if (mounted) {
+      setState(() {
+        isShowPhoneClear = status;
+      });
+    }
   }
 
   /// 登录按钮是否可以点击
@@ -296,9 +296,11 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
       status = false;
     }
 
-    setState(() {
-      isShowPhoneClear = status;
-    });
+    if (mounted) {
+      setState(() {
+        isShowPhoneClear = status;
+      });
+    }
   }
 
   /// 手机号格式化
@@ -321,15 +323,19 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
     }
 
     if (text.length == phoneLength) {
-      setState(() {
-        isCodeBtnEnable = true;
-        codeBGColor = SCColors.color_FF6C00;
-      });
+      if (mounted) {
+        setState(() {
+          isCodeBtnEnable = true;
+          codeBGColor = SCColors.color_FF6C00;
+        });
+      }
     } else {
-      setState(() {
-        isCodeBtnEnable = false;
-        codeBGColor = SCColors.color_FFC59B;
-      });
+      if (mounted) {
+        setState(() {
+          isCodeBtnEnable = false;
+          codeBGColor = SCColors.color_FFC59B;
+        });
+      }
     }
 
     if (text.length == phoneLength) {
@@ -350,26 +356,22 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
   /// 初始化定时器
   void initTimer() {
     isCodeBtnEnable = false;
-    codeTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       codeTime--;
-      setState(() {
-        if (codeTime <= 0) {
-          codeTime = 60;
-          codeBGColor = phoneController.text.length == phoneLength ? SCColors.color_FF6C00 : SCColors.color_FFC59B;
-          isCodeBtnEnable = phoneController.text.length == phoneLength ? true : false;
-          codeText = "获取验证码";
-          disposeTimer();
-        } else {
-          codeText = '${codeTime}s';
-          codeBGColor = SCColors.color_FF6C00;
-        }
-      });
+      if (mounted) {
+        setState(() {
+          if (codeTime <= 0) {
+            codeTime = 60;
+            codeBGColor = phoneController.text.length == phoneLength ? SCColors.color_FF6C00 : SCColors.color_FFC59B;
+            isCodeBtnEnable = phoneController.text.length == phoneLength ? true : false;
+            codeText = "获取验证码";
+          } else {
+            codeText = '${codeTime}s';
+            codeBGColor = SCColors.color_FF6C00;
+          }
+        });
+      }
     });
-  }
-
-  /*销毁定时器*/
-  void disposeTimer() {
-    codeTimer.cancel();
   }
 
   @override
@@ -379,6 +381,5 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
     codeNode.dispose();
     phoneController.dispose();
     codeController.dispose();
-    disposeTimer();
   }
 }

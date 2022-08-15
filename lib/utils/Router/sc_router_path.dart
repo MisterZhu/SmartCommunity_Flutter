@@ -15,6 +15,8 @@ class SCRouterPath {
   /***************************** 登录 ******************************/
   /// 验证码登录
   static String codeLoginPath = "/root/login/codeLogin";
+  /// 城市选择
+  static String selectCityPath = "/root/login/selectCityPage";
 
   /***************************** 首页 ******************************/
   /// 首页

@@ -6,6 +6,10 @@ async
 2.12
 file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/async-2.8.2/
 file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/async-2.8.2/lib/
+azlistview
+2.12
+file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/azlistview-2.0.0/
+file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/azlistview-2.0.0/lib/
 boolean_selector
 2.12
 file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0/
@@ -106,6 +110,10 @@ lints
 2.17
 file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/lints-2.0.0/
 file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/lints-2.0.0/lib/
+lpinyin
+2.12
+file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/lpinyin-2.0.3/
+file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/lpinyin-2.0.3/lib/
 matcher
 2.12
 file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.11/
@@ -174,6 +182,10 @@ rxdart
 2.12
 file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.4/
 file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.4/lib/
+scrollable_positioned_list
+2.12
+file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/scrollable_positioned_list-0.2.3/
+file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/scrollable_positioned_list-0.2.3/lib/
 shared_preferences
 2.14
 file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.15/

@@ -39,7 +39,6 @@ class SCLoginBtn extends StatelessWidget {
             ),
             onPressed: () {
               SCUtils().hideKeyboard(context: context);
-
               if (onPressed != null) {
                 onPressed?.call();
               }

@@ -28,11 +28,13 @@ class SCGuideState extends State <SCGuidePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      width: double.infinity,
-      height: double.infinity,
-      child: banner2(context),
+    return Scaffold(
+      body: Container(
+        color: Colors.white,
+        width: double.infinity,
+        height: double.infinity,
+        child: banner2(context),
+      ),
     );
   }
 
