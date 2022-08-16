@@ -54,6 +54,8 @@ dependencies:
   azlistview: ^2.0.0
   # 汉字转拼音 https://pub.flutter-io.cn/packages/lpinyin
   lpinyin: ^2.0.2
+  # 网络库 https://pub.flutter-io.cn/packages/dio/install
+  dio: ^4.0.6
 
   # webView
   webview_flutter: ^3.0.4
