@@ -4,22 +4,30 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter/services.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 
 import '../../../constants/sc_colors.dart';
-import '../GetXController/sc_community_controller.dart';
-import '../Model/sc_city_model.dart';
-import '../View/SelectCity/sc_city_search_header.dart';
-import 'package:smartcommunity/page/Login/View/SelectCity/sc_city_search_result_listview.dart';
+import '../GetXController/sc_search_community_controller.dart';
+import '../GetXController/sc_select_community_controller.dart';
+import '../Model/sc_community_model.dart';
+import '../View/SelectCommunity/sc_community_header.dart';
+import 'package:smartcommunity/page/Login/View/SelectCommunity/sc_community_search_result_listview.dart';
 import 'package:smartcommunity/page/Login/View/SelectCommunity/sc_community_listView.dart';
 
 class SCSelectCommunityPage extends StatefulWidget {
+
+  const SCSelectCommunityPage({Key? key}) : super(key: key);
+
   @override
   SCSelectCommunityState createState() => SCSelectCommunityState();
 }
 
 class SCSelectCommunityState extends State<SCSelectCommunityPage> {
+
+  SCSearchCommunityController searchState = Get.put(SCSearchCommunityController());
+
+  SCSelectCommunityController selectState = Get.put(SCSelectCommunityController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,14 +57,19 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> {
 
   /// header
   Widget header() {
-    return GetBuilder<SCSelectCommunityController>(builder: (state){
-      return SCCitySearchHeader(isShowCancel: state.isSearch);
+    return GetBuilder<SCSearchCommunityController>(builder: (state){
+      return SCCommunityHeader(isShowCancel: state.isShowCancel, cancelAction: (){
+        cancelAction();
+      }, valueChangedAction: (String value) {
+        valueChangedAction(value);
+      },);
     });
   }
 
+
   /// title
   Widget titleItem() {
-    return const Text('选择城市', style: TextStyle(
+    return const Text('选择项目', style: TextStyle(
         fontSize: SCFonts.f16,
         fontWeight: FontWeight.bold,
         color: SCColors.color_1B1C33
@@ -66,14 +79,47 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> {
   /// 社区列表
   Widget communityListView() {
     return GetBuilder<SCSelectCommunityController>(builder: (state){
-      if (state.isSearch) {
-        return SCCitySearchResultListView(cityList: state.searchList, selectCityHandler: (SCCityModel model) {
-          state.updateSelectCity(model: model);
+      if (state.isShowResult) {
+        return SCCommunitySearchResultListView(communityList: state.searchList, selectCommunityHandler: (SCCommunityModel model) {
+          state.updateSelectCommunity(model: model);
         },);
       } else {
-        return SCCommunityListView();
+        return const SCCommunityListView();
       }
     });
+  }
+
+  /// 取消
+  cancelAction() {
+    SCSelectCommunityController state = Get.find<SCSelectCommunityController>();
+    state.updateSearchResult(status: false);
+    state.updateSearchList(list: []);
+
+    SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
+    searchState.updateCancelButtonStatus(status: false);
+  }
+
+  /// 文本框内容改变
+  valueChangedAction(String value) {
+    SCSelectCommunityController state = Get.find<SCSelectCommunityController>();
+
+    if (value.isNotEmpty) {
+      List<SCCommunityModel> list = [];
+      if (state.communityList != null) {
+        for(int i = 0; i < state.communityList!.length; i++) {
+          SCCommunityModel communityModel = state.communityList![i];
+          String name = communityModel.name;
+          String namePinYin = communityModel?.namePinyin ?? '';
+          String tagIndex = communityModel?.tagIndex ?? '';
+          if (name.contains(value)) {
+            list.add(communityModel);
+          }
+        }
+        state.updateSearchList(list: list);
+      }
+    } else {
+      state.updateSearchList(list: []);
+    }
   }
 
 }

@@ -21,7 +21,7 @@ class SCBasePrivacyPage extends StatefulWidget {
 
 class SCBasePrivacyState extends State<SCBasePrivacyPage> {
 
-  SCBasePrivacyController state = Get.find<SCBasePrivacyController>();
+  SCBasePrivacyController state = Get.put(SCBasePrivacyController());
 
   @override
   Widget build(BuildContext context) {
