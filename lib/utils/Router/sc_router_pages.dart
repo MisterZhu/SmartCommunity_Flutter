@@ -6,6 +6,7 @@ import 'package:smartcommunity/page/Login/Page/sc_login_page.dart';
 import 'package:smartcommunity/page/Tab/Page/sc_tab_page.dart';
 
 import '../../page/Login/Page/sc_select_city_page.dart';
+import '../../page/Login/Page/sc_select_community_page.dart';
 import 'sc_router_path.dart';
 
 /// 路由-pages
@@ -24,6 +25,8 @@ class SCRouterPages {
     GetPage(name: SCRouterPath.basePrivacyPath, page: () => SCBasePrivacyPage()),
     /*城市选择*/
     GetPage(name: SCRouterPath.selectCityPath, page: () => SCSelectCityPage()),
+    /*社区选择*/
+    GetPage(name: SCRouterPath.selectCommunityPath, page: () => SCSelectCommunityPage()),
   ];
 
   /*根据code使用路由*/
@@ -36,6 +39,8 @@ class SCRouterPages {
     9001 : SCRouterPath.codeLoginPath,
     /*城市选择*/
     9002 : SCRouterPath.selectCityPath,
+    /*社区选择*/
+    9003 : SCRouterPath.selectCommunityPath,
     /*tab*/
     10000 : SCRouterPath.tabPath,
     /*首页*/

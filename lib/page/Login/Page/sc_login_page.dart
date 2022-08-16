@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_login_controller.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_login_listview.dart';
 
 import '../../../utils/sc_utils.dart';
@@ -12,6 +14,9 @@ class SCLoginPage extends StatefulWidget {
 }
 
 class SCLoginState extends State<SCLoginPage> {
+
+  SCLoginController state = Get.put(SCLoginController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

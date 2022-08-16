@@ -7,12 +7,12 @@ import 'package:get/get.dart';
 import 'package:lpinyin/lpinyin.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
-import 'package:smartcommunity/page/Login/GetXController/sc_city_controller.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_city_controller.dart';
 import 'package:smartcommunity/page/Login/View/SelectCity/sc_city_listview.dart';
 import 'package:smartcommunity/page/Login/View/SelectCity/sc_city_search_result_listview.dart';
 
 import '../../../utils/sc_utils.dart';
-import '../GetXController/sc_city_search_controller.dart';
+import '../GetXController/sc_search_city_controller.dart';
 import '../Model/sc_city_model.dart';
 import '../View/SelectCity/sc_city_search_header.dart';
 
@@ -25,7 +25,7 @@ class SCSelectCityState extends State<SCSelectCityPage> {
   List<SCCityModel> cityList = [];
 
   SCSelectCityController state = Get.put(SCSelectCityController());
-  SCCitySearchController searchState = Get.put(SCCitySearchController());
+  SCSearchCityController searchState = Get.put(SCSearchCityController());
 
   @override
   void initState() {
@@ -96,8 +96,12 @@ class SCSelectCityState extends State<SCSelectCityPage> {
 
   /// header
   Widget header() {
-    return GetBuilder<SCCitySearchController>(builder: (state){
-      return SCCitySearchHeader(isShowCancel: state.isShowCancel);
+    return GetBuilder<SCSearchCityController>(builder: (state){
+      return SCCitySearchHeader(isShowCancel: state.isShowCancel, cancelAction: (){
+        cancelAction();
+      }, valueChangedAction: (String value) {
+        valueChangedAction(value);
+      },);
     });
   }
 
@@ -121,6 +125,39 @@ class SCSelectCityState extends State<SCSelectCityPage> {
         return SCCityListView(cityList: state.cityList);
       }
     });
+  }
+
+  /// 取消
+  cancelAction() {
+    SCSelectCityController state = Get.find<SCSelectCityController>();
+    state.updateSearchResult(status: false);
+    state.updateSearchList(list: []);
+
+    SCSearchCityController searchState = Get.find<SCSearchCityController>();
+    searchState.updateCancelButtonStatus(status: false);
+  }
+
+  /// 文本框内容改变
+  valueChangedAction(String value) {
+    SCSelectCityController state = Get.find<SCSelectCityController>();
+
+    if (value.isNotEmpty) {
+      List<SCCityModel> list = [];
+      if (state.cityList != null) {
+        for(int i=0; i < state.cityList!.length; i++) {
+          SCCityModel cityModel = state.cityList![i];
+          String name = cityModel.name;
+          String namePinYin = cityModel?.namePinyin ?? '';
+          String tagIndex = cityModel?.tagIndex ?? '';
+          if (name.contains(value)) {
+            list.add(cityModel);
+          }
+        }
+        state.updateSearchList(list: list);
+      }
+    } else {
+      state.updateSearchList(list: []);
+    }
   }
 
 }

@@ -119,7 +119,7 @@ class SCLoginListView extends StatelessWidget {
           //   return;
           // }
 
-          SCRouterHelper.codePage(9002, null);
+          SCRouterHelper.codePage(9003, null);
         },
       );
     });
