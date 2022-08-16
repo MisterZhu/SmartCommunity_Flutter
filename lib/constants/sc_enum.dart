@@ -7,6 +7,13 @@ enum SCEnvironment {
   production
 }
 
+enum SCHttpMethod {
+  get,
+  post,
+  put,
+  delete
+}
+
 enum SCHomeFeatureStyle {
   /// 一张图片
   featureStyle1,
