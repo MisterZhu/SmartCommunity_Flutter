@@ -3,24 +3,32 @@ import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/network/sc_base_api.dart';
 import 'package:smartcommunity/network/sc_config.dart';
 
-class SCNewBaseApi extends SCBaseApi {
+class SCNewBaseApi implements SCBaseApi {
 
   String baseUrl = '';
 
+  SCHttpMethod method = SCHttpMethod.get;
+
+  dynamic params = {};
+
   @override
-  SCHttpMethod method(SCHttpMethod method) {
-    return SCHttpMethod.get;
+  initMethod(SCHttpMethod httpMethod) {
+    method = httpMethod;
   }
 
   @override
-  params(params) {
-    return {};
+  initParams(value) {
+    params = value;
   }
 
   @override
-  String url(String url) {
+  initUrl(String url) {
     baseUrl = SCConfig.BASE_URL + url;
-    return baseUrl;
+  }
+
+  @override
+  request() {
+
   }
 
 }

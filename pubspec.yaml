@@ -56,6 +56,8 @@ dependencies:
   lpinyin: ^2.0.2
   # 网络库 https://pub.flutter-io.cn/packages/dio/install
   dio: ^4.0.6
+  # 定位 https://pub.flutter-io.cn/packages/geolocator/install
+  geolocator: ^9.0.1
 
   # webView
   webview_flutter: ^3.0.4

@@ -4,11 +4,14 @@ import 'package:smartcommunity/constants/sc_enum.dart';
 abstract class SCBaseApi {
 
   /// url
-  String url(String url);
+  initUrl(String url);
 
   /// method
-  SCHttpMethod method(SCHttpMethod method);
+  initMethod(SCHttpMethod method);
 
   /// params
-  dynamic params(dynamic params);
+  initParams(dynamic params);
+
+  /// 发起网络请求
+  request();
 }

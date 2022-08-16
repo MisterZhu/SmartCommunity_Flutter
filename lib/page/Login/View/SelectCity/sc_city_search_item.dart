@@ -72,7 +72,7 @@ class SCCitySearchItem extends StatelessWidget {
 
   showKeyboard(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 100),(){
-      FocusScope.of(context).requestFocus(node);
+      node.requestFocus();
     });
   }
 
@@ -94,6 +94,7 @@ class SCCitySearchItem extends StatelessWidget {
 
   /// 点击取消按钮
   cancelItemClick () {
+    node.unfocus();
     if (cancelAction != null) {
       cancelAction?.call();
     }
@@ -150,7 +151,7 @@ class SCCitySearchItem extends StatelessWidget {
         valueChanged(value);
       },
       onSubmitted: (value) {
-        SCUtils().hideKeyboard(context: context);
+        node.unfocus();
       },
       keyboardType: TextInputType.text,
       keyboardAppearance: Brightness.light,

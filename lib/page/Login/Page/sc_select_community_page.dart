@@ -7,12 +7,16 @@ import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 
 import '../../../constants/sc_colors.dart';
+import '../../../utils/Router/sc_router_helper.dart';
+import '../../../utils/sc_utils.dart';
 import '../GetXController/sc_search_community_controller.dart';
 import '../GetXController/sc_select_community_controller.dart';
 import '../Model/sc_community_model.dart';
 import '../View/SelectCommunity/sc_community_header.dart';
 import 'package:smartcommunity/page/Login/View/SelectCommunity/sc_community_search_result_listview.dart';
 import 'package:smartcommunity/page/Login/View/SelectCommunity/sc_community_listView.dart';
+
+/// 选择园区
 
 class SCSelectCommunityPage extends StatefulWidget {
 
@@ -62,6 +66,11 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> {
         cancelAction();
       }, valueChangedAction: (String value) {
         valueChangedAction(value);
+      },selectCityAction: () {
+        // 收起键盘
+        // SCUtils().hideKeyboard(context: context);
+        // cancelAction();
+        SCRouterHelper.codePage(9002, null);
       },);
     });
   }

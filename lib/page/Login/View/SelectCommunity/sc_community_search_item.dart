@@ -28,7 +28,10 @@ class SCCommunitySearchItem extends StatelessWidget {
   /// 文本框内容改变
   final Function(String value)? valueChangedAction;
 
-  SCCommunitySearchItem({Key? key, this.isShowCancel = false, this.cancelAction, this.valueChangedAction}) : super(key: key);
+  /// 选择城市
+  final Function? selectCityAction;
+
+  SCCommunitySearchItem({Key? key, this.isShowCancel = false, this.cancelAction, this.valueChangedAction, this.selectCityAction}) : super(key: key);
 
   // controller
   final TextEditingController controller = TextEditingController();
@@ -53,7 +56,7 @@ class SCCommunitySearchItem extends StatelessWidget {
               const SizedBox(width: 4,),
               Expanded(child: searchItem(context)),
               const SizedBox(width: 6,),
-              cancelItem()
+              cancelItem(context)
             ]
         ),
       );
@@ -83,7 +86,7 @@ class SCCommunitySearchItem extends StatelessWidget {
 
   showKeyboard(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 100),(){
-      FocusScope.of(context).requestFocus(node);
+      node.requestFocus();
     });
   }
 
@@ -119,14 +122,15 @@ class SCCommunitySearchItem extends StatelessWidget {
           ],
         ),
       onTap: () {
-        // 收起键盘
-        SCUtils().hideKeyboard(context: context);
-        SCRouterHelper.codePage(9002, null);
+        node.unfocus();
+        if (selectCityAction != null) {
+          selectCityAction?.call();
+        }
       },
     );
   }
 
-  Widget cancelItem() {
+  Widget cancelItem(BuildContext context) {
     return CupertinoButton(
         padding: EdgeInsets.zero,
         child: const Text(
@@ -137,6 +141,7 @@ class SCCommunitySearchItem extends StatelessWidget {
             color: SCColors.color_000000,
           ),),
         onPressed: () {
+          node.unfocus();
           cancelItemClick();
         }
     );
@@ -144,6 +149,7 @@ class SCCommunitySearchItem extends StatelessWidget {
 
   /// 点击取消按钮
   cancelItemClick() {
+    node.unfocus();
     if (cancelAction != null) {
       cancelAction?.call();
     }
@@ -200,7 +206,7 @@ class SCCommunitySearchItem extends StatelessWidget {
         valueChanged(value);
       },
       onSubmitted: (value) {
-        SCUtils().hideKeyboard(context: context);
+        node.unfocus();
       },
       keyboardType: TextInputType.text,
       keyboardAppearance: Brightness.light,

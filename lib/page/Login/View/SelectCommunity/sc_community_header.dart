@@ -15,7 +15,10 @@ class SCCommunityHeader extends StatelessWidget {
   /// 文本框内容改变
   final Function(String value)? valueChangedAction;
 
-  const SCCommunityHeader({Key? key, this.isShowCancel = false, this.cancelAction, this.valueChangedAction}) : super(key: key);
+  /// 选择城市
+  final Function? selectCityAction;
+
+  const SCCommunityHeader({Key? key, this.isShowCancel = false, this.cancelAction, this.valueChangedAction, this.selectCityAction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +36,10 @@ class SCCommunityHeader extends StatelessWidget {
         }, valueChangedAction: (String value) {
           if (valueChangedAction != null) {
             valueChangedAction?.call(value);
+          }
+        },selectCityAction: (){
+          if (selectCityAction != null) {
+            selectCityAction?.call();
           }
         },),
         const SCCurrentCityItem(status: SCLocationStatus.success, address: '杭州',)
