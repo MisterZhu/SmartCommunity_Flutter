@@ -1,3 +1,11 @@
+enum SCEnvironment {
+  /// 研发环境
+  develop,
+  /// 预发环境
+  pretest,
+  /// 生产环境
+  production
+}
 
 enum SCHomeFeatureStyle {
   /// 一张图片
