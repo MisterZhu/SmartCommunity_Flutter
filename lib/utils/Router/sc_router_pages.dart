@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:smartcommunity/page/Home/Page/sc_home_page.dart';
 import 'package:smartcommunity/page/Tab/Page/sc_tab_page.dart';
+import 'package:smartcommunity/page/Webview/Page/sc_webview_page.dart';
 
 import 'sc_router_path.dart';
 
@@ -12,6 +13,8 @@ class SCRouterPages {
     GetPage(name: SCRouterPath.tabPath, page: () => SCTabPage()),
     /*首页*/
     GetPage(name: SCRouterPath.homePath, page: () => SCHomePage()),
+    /*webView*/
+    GetPage(name: SCRouterPath.webViewPath, page: () => SCWebViewPage()),
   ];
 
   /*根据code使用路由*/
@@ -20,5 +23,7 @@ class SCRouterPages {
     10000 : SCRouterPath.tabPath,
     /*首页*/
     10001 : SCRouterPath.homePath,
+    /*webView*/
+    20000 : SCRouterPath.webViewPath,
   };
 }

@@ -1,4 +1,8 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/base/sc_all_binding.dart';
 import 'package:smartcommunity/utils/Router/sc_router_pages.dart';
@@ -10,6 +14,15 @@ void main() {
   SCScaffoldManager.instance.initBase();
 
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+  // Android设备设置沉浸式
+  if(Platform.isAndroid) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarBrightness: Brightness.light,
+    ));
+  }
+
   runApp(GetMaterialApp(
     navigatorKey: navigatorKey,
     debugShowCheckedModeBanner: false,

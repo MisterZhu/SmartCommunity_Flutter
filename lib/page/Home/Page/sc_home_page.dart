@@ -32,11 +32,6 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
   @override
   initState() {
     super.initState();
-    SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
-      statusBarColor: Colors.red,
-      statusBarBrightness: Brightness.dark,
-    );
-    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
 
   /// body
@@ -69,18 +64,25 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
 
       /// 应用列表
       {'type': SCTypeDefine.SC_HOME_TYPE_ALLITEMS, 'data': []},
+
       /// 图片
-      {'type' : SCTypeDefine.SC_HOME_TYPE_IMAGE, 'data' : []},
+      {'type': SCTypeDefine.SC_HOME_TYPE_IMAGE, 'data': []},
+
       /// 热门活动
       {'type': SCTypeDefine.SC_HOME_TYPE_ACTIVITY, 'data': []},
+
       /// 精选商家
       {'type': SCTypeDefine.SC_HOME_TYPE_FEATURE, 'data': []},
+
       /// 网格图片
-      {'type' : SCTypeDefine.SC_HOME_TYPE_GRID, 'data' : []},
+      {'type': SCTypeDefine.SC_HOME_TYPE_GRID, 'data': []},
+
       /// swiper广告图
-      {'type' : SCTypeDefine.SC_HOME_TYPE_SWIPER, 'data' : []},
+      {'type': SCTypeDefine.SC_HOME_TYPE_SWIPER, 'data': []},
+
       /// swiper广告图
-      {'type' : SCTypeDefine.SC_HOME_TYPE_SWIPER, 'data' : []},
+      {'type': SCTypeDefine.SC_HOME_TYPE_SWIPER, 'data': []},
+
       /// 精选商家
       {'type': SCTypeDefine.SC_HOME_TYPE_FEATURE, 'data': []},
 
@@ -106,7 +108,7 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
       {'type': 1001, 'data': []},
     ];
 
-    return GetBuilder<SCHomeController>(builder: (state){
+    return GetBuilder<SCHomeController>(builder: (state) {
       String bannerBackgroundImageUrl = state.allBannerBGList.isEmpty
           ? SCAsset.homeBannerBG1
           : state.allBannerBGList[state.bannerCurrentIndex];

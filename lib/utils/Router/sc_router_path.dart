@@ -10,4 +10,8 @@ class SCRouterPath {
   /***************************** 首页 ******************************/
   /// 首页
   static String homePath = "/home/HomePage";
+
+  /***************************** 通用页 ******************************/
+  /// webView
+  static String webViewPath = "/root/webViewPage";
 }
