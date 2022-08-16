@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
-import 'package:smartcommunity/page/Login/Model/sc_city_model.dart';
+import 'package:smartcommunity/page/Login/Model/sc_community_model.dart';
 
-/// 城市搜索结果item
+/// 社区搜索结果item
 
-class SCCitySearchResultListView extends StatelessWidget {
+class SCCommunitySearchResultListView extends StatelessWidget {
 
-  final List<SCCityModel>? cityList;
+  final List<SCCommunityModel>? communityList;
 
-  final Function(SCCityModel model)? selectCityHandler;
+  final Function(SCCommunityModel model)? selectCommunityHandler;
 
-  const SCCitySearchResultListView({Key? key, this.cityList, this.selectCityHandler}) : super(key: key);
+  const SCCommunitySearchResultListView({Key? key, this.communityList, this.selectCommunityHandler}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +28,17 @@ class SCCitySearchResultListView extends StatelessWidget {
         separatorBuilder: (BuildContext context, int index) {
           return const SizedBox();
         },
-        itemCount: cityList?.length ?? 0);
+        itemCount: communityList?.length ?? 0);
   }
 
-  /// 城市cell
+  /// 社区cell
   Widget cell({int index= 0}) {
     return GestureDetector(
       child: Padding(
         padding: const EdgeInsets.only(left: 16.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [cityItem(index: index), separatorItem()],
+          children: [communityItem(index: index), separatorItem()],
         ),
       ),
       onTap: () {
@@ -48,8 +48,8 @@ class SCCitySearchResultListView extends StatelessWidget {
   }
 
   /// 城市item
-  Widget cityItem({int index= 0}) {
-    SCCityModel model = cityList![index];
+  Widget communityItem({int index= 0}) {
+    SCCommunityModel model = communityList![index];
     return Container(
       height: 48.0,
       alignment: Alignment.centerLeft,
@@ -71,11 +71,11 @@ class SCCitySearchResultListView extends StatelessWidget {
     );
   }
 
-  /// 选择城市
+  /// 选择社区
   selectCity({int index= 0}) {
-    SCCityModel model = cityList![index];
-    if (selectCityHandler != null) {
-      selectCityHandler?.call(model);
+    SCCommunityModel model = communityList![index];
+    if (selectCommunityHandler != null) {
+      selectCommunityHandler?.call(model);
     }
   }
 }

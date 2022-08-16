@@ -12,12 +12,13 @@ import 'package:smartcommunity/page/Login/View/SelectCity/sc_city_search_view.da
 import 'package:smartcommunity/utils/sc_utils.dart';
 
 import '../../../../constants/sc_fonts.dart';
-import '../../GetXController/sc_search_city_controller.dart';
-import '../../GetXController/sc_select_city_controller.dart';
+import '../../../../utils/Router/sc_router_helper.dart';
+import '../../GetXController/sc_search_community_controller.dart';
+import '../../GetXController/sc_select_community_controller.dart';
 
 /// 城市-搜索框
 
-class SCCitySearchItem extends StatelessWidget {
+class SCCommunitySearchItem extends StatelessWidget {
 
   final bool isShowCancel;
 
@@ -27,7 +28,7 @@ class SCCitySearchItem extends StatelessWidget {
   /// 文本框内容改变
   final Function(String value)? valueChangedAction;
 
-  SCCitySearchItem({Key? key, this.isShowCancel = false, this.cancelAction, this.valueChangedAction}) : super(key: key);
+  SCCommunitySearchItem({Key? key, this.isShowCancel = false, this.cancelAction, this.valueChangedAction}) : super(key: key);
 
   // controller
   final TextEditingController controller = TextEditingController();
@@ -48,6 +49,8 @@ class SCCitySearchItem extends StatelessWidget {
         padding: const EdgeInsets.only(left: 16.0),
         child: Row(
             children: [
+              leftCityItem(context),
+              const SizedBox(width: 4,),
               Expanded(child: searchItem(context)),
               const SizedBox(width: 6,),
               cancelItem()
@@ -55,18 +58,26 @@ class SCCitySearchItem extends StatelessWidget {
         ),
       );
     } else {
-      return Padding(padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 7.0),
-          child: SCCitySearchView(placeHolder: '搜索城市', textViewTapAction: (){
-            showCancelButton();
-          },));
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 7),
+        child: Row(
+          children: [
+            leftCityItem(context),
+            const SizedBox(width: 4,),
+            Expanded(child: SCCitySearchView(placeHolder: '查找社区/园区/小镇等', textViewTapAction: () {
+                showCancelButton();
+            })),
+          ],
+        )
+      );
     }
   }
 
   showCancelButton() {
-    SCSearchCityController searchState = Get.find<SCSearchCityController>();
+    SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
     searchState.updateCancelButtonStatus(status: true);
 
-    SCSelectCityController state = Get.find<SCSelectCityController>();
+    SCSelectCommunityController state = Get.find<SCSelectCommunityController>();
     state.updateSearchResult(status: true);
   }
 
@@ -76,9 +87,48 @@ class SCCitySearchItem extends StatelessWidget {
     });
   }
 
+  Widget leftCityItem(BuildContext context) {
+    return GestureDetector(
+      child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 44,
+              decoration: const BoxDecoration(
+                color: Colors.transparent,
+              ),
+              child: const Text('杭州市',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.normal,
+                  color: SCColors.color_000000,
+                ),),
+            ),
+            const SizedBox(width: 4.0,),
+            Container(
+              padding: const EdgeInsets.only(bottom: 4),
+              decoration: const BoxDecoration(
+                color: Colors.transparent,
+              ),
+              child: Image.asset(SCAsset.iconSelectCityArrow, width: 20.0, height: 20.0,),
+            )
+          ],
+        ),
+      onTap: () {
+        // 收起键盘
+        SCUtils().hideKeyboard(context: context);
+        SCRouterHelper.codePage(9002, null);
+      },
+    );
+  }
+
   Widget cancelItem() {
     return CupertinoButton(
-      padding: EdgeInsets.zero,
+        padding: EdgeInsets.zero,
         child: const Text(
           '取消',
           style: TextStyle(
@@ -93,7 +143,7 @@ class SCCitySearchItem extends StatelessWidget {
   }
 
   /// 点击取消按钮
-  cancelItemClick () {
+  cancelItemClick() {
     if (cancelAction != null) {
       cancelAction?.call();
     }
@@ -134,7 +184,7 @@ class SCCitySearchItem extends StatelessWidget {
       style: const TextStyle(fontSize: SCFonts.f14, fontWeight: FontWeight.w400, color: SCColors.color_1B1C33),
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 0),
-        hintText: "搜索城市",
+        hintText: "查找社区/园区/小镇等",
         hintStyle: TextStyle(fontSize: SCFonts.f14, fontWeight: FontWeight.w400, color: SCColors.color_B0B1B8),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(width: 0, color: Colors.transparent)),

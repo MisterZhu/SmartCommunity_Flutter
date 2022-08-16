@@ -172,5 +172,7 @@ class SCAsset {
   /// 选择城市-搜索icon
   static const String iconLocationSearchCity = 'images/ic_location_search_city.png';
 
+  static const String iconSelectCityArrow = 'images/ic_select_city_arrow.png';
+
 /************* 登录 *************/
 }

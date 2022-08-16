@@ -1,18 +1,17 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:smartcommunity/page/Login/GetXController/sc_city_search_controller.dart';
 
 import '../../../../constants/sc_asset.dart';
 import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_fonts.dart';
-import '../../GetXController/sc_city_controller.dart';
+
 
 /// 静态搜索框
 
 class SCCitySearchView extends StatelessWidget {
 
-  const SCCitySearchView({Key? key}) : super(key: key);
+  final Function? textViewTapAction;
+  final String? placeHolder;
+  const SCCitySearchView({Key? key, this.placeHolder, this.textViewTapAction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +37,11 @@ class SCCitySearchView extends StatelessWidget {
             )
         ),
       onTap: () {
-         SCCitySearchController searchState = Get.find<SCCitySearchController>();
-         searchState.updateSearchStatus(status: true);
-
-         SCSelectCityController state = Get.find<SCSelectCityController>();
-         state.updateSearchResult(status: true);
-         },);
+        if (textViewTapAction != null) {
+            textViewTapAction?.call();
+        }
+      },
+    );
 
   }
 
@@ -53,9 +51,10 @@ class SCCitySearchView extends StatelessWidget {
   }
 
   Widget searchView() {
-    return const Expanded(child: Text('搜索城市',
+    return Expanded(child: Text(
+      placeHolder!,
       textAlign: TextAlign.left,
-      style: TextStyle(
+      style: const TextStyle(
           fontSize: SCFonts.f14,
           fontWeight: FontWeight.normal,
           color: SCColors.color_B0B1B8),

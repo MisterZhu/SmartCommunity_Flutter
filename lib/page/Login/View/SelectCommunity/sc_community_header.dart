@@ -1,11 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
-import 'package:smartcommunity/page/Login/View/SelectCity/sc_city_search_item.dart';
+import 'package:smartcommunity/page/Login/View/SelectCommunity/sc_community_search_item.dart';
 import 'package:smartcommunity/page/Login/View/SelectCity/sc_current_city_item.dart';
 
-/// 搜索城市header
+/// 搜索社区header
 
-class SCCitySearchHeader extends StatelessWidget {
+class SCCommunityHeader extends StatelessWidget {
 
   final bool isShowCancel;
 
@@ -15,7 +15,7 @@ class SCCitySearchHeader extends StatelessWidget {
   /// 文本框内容改变
   final Function(String value)? valueChangedAction;
 
-  const SCCitySearchHeader({Key? key, this.isShowCancel = false, this.cancelAction, this.valueChangedAction}) : super(key: key);
+  const SCCommunityHeader({Key? key, this.isShowCancel = false, this.cancelAction, this.valueChangedAction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class SCCitySearchHeader extends StatelessWidget {
   Widget body() {
     return Column(
       children: [
-        SCCitySearchItem(isShowCancel: isShowCancel,cancelAction: (){
+        SCCommunitySearchItem(isShowCancel: isShowCancel,cancelAction: (){
           if (cancelAction != null) {
             cancelAction?.call();
           }
