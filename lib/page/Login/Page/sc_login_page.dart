@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
@@ -6,10 +7,12 @@ import 'package:smartcommunity/page/Login/GetXController/sc_login_controller.dar
 import 'package:smartcommunity/page/Login/View/Login/sc_login_listview.dart';
 
 import '../../../utils/sc_utils.dart';
-import '../API/sc_geocode_api.dart';
 
 /// 登录page
 class SCLoginPage extends StatefulWidget {
+
+  const SCLoginPage({Key? key}) : super(key: key);
+
   @override
   SCLoginState createState() => SCLoginState();
 }
@@ -20,7 +23,6 @@ class SCLoginState extends State<SCLoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    location();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -54,11 +56,5 @@ class SCLoginState extends State<SCLoginPage> {
       fontWeight: FontWeight.bold,
       color: SCColors.color_1B1C33
     ),);
-  }
-
-  /// 定位
-  location() {
-    SCGeoCodeApi api = SCGeoCodeApi();
-    api.startRequest();
   }
 }
