@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_fonts.dart';
@@ -46,20 +47,27 @@ class SCCommunityItem extends StatelessWidget {
       padding: const EdgeInsets.only(right: 15.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
-          Text(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Text(
             '慧享生活馆',
             style: TextStyle(
               fontSize: SCFonts.f16,
               fontWeight: FontWeight.w400,
               color: SCColors.color_1B1D33),
           ),
-          Text(
-            '<500m',
-            style: TextStyle(
-              fontSize: SCFonts.f14,
-              fontWeight: FontWeight.w400,
-              color: SCColors.color_1B1D33),
+          Container(
+            padding: const EdgeInsets.only(top: 4),
+            decoration: const BoxDecoration(
+              color: Colors.transparent,
+            ),
+            child: const Text(
+              '<500m',
+              style: TextStyle(
+                  fontSize: SCFonts.f14,
+                  fontWeight: FontWeight.w400,
+                  color: SCColors.color_1B1D33),
+            ),
           ),
         ],
       )

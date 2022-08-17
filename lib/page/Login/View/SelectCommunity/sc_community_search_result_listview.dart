@@ -4,7 +4,7 @@ import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/page/Login/Model/sc_community_model.dart';
 
-/// 社区搜索结果item
+/// 社区搜索结果列表
 
 class SCCommunitySearchResultListView extends StatelessWidget {
 
@@ -47,7 +47,7 @@ class SCCommunitySearchResultListView extends StatelessWidget {
     );
   }
 
-  /// 城市item
+  /// 社区item
   Widget communityItem({int index= 0}) {
     SCCommunityModel model = communityList![index];
     return Container(
