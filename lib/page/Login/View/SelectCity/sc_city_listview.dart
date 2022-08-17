@@ -35,7 +35,10 @@ class SCCityListView extends StatelessWidget {
         String tag = model.getSuspensionTag();
         return headerItem(context, tag);
       },
-      indexBarData: kIndexBarData,
+      indexBarData: getTagIndexList(cityList),
+      indexBarWidth: 24.0,
+      indexBarItemHeight: 18.0,
+      indexBarMargin: const EdgeInsets.only(bottom: 44),
       indexBarOptions: const IndexBarOptions(
         textStyle: TextStyle(
             fontSize: SCFonts.f12,
@@ -44,6 +47,22 @@ class SCCityListView extends StatelessWidget {
         )
       ),
     );
+  }
+
+  /// 获取索引列表
+  static List<String> getTagIndexList(List<ISuspensionBean>? list) {
+    List<String> indexData = [];
+    if (list != null && list.isNotEmpty) {
+      String? tempTag;
+      for (int i = 0, length = list.length; i < length; i++) {
+        String tag = list[i].getSuspensionTag();
+        if (tempTag != tag) {
+          indexData.add(tag);
+          tempTag = tag;
+        }
+      }
+    }
+    return indexData;
   }
 
   /// header-字母标题

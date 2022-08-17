@@ -9,14 +9,12 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/page/Login/View/SelectCity/sc_city_search_view.dart';
-import 'package:smartcommunity/utils/sc_utils.dart';
 
 import '../../../../constants/sc_fonts.dart';
-import '../../../../utils/Router/sc_router_helper.dart';
 import '../../GetXController/sc_search_community_controller.dart';
 import '../../GetXController/sc_select_community_controller.dart';
 
-/// 城市-搜索框
+/// 社区-搜索框
 
 class SCCommunitySearchItem extends StatelessWidget {
 
@@ -104,6 +102,7 @@ class SCCommunitySearchItem extends StatelessWidget {
               ),
               child: const Text('杭州市',
                 maxLines: 1,
+                textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: 14.0,
@@ -111,7 +110,7 @@ class SCCommunitySearchItem extends StatelessWidget {
                   color: SCColors.color_000000,
                 ),),
             ),
-            const SizedBox(width: 4.0,),
+            const SizedBox(width: 3.0,),
             Container(
               padding: const EdgeInsets.only(bottom: 4),
               decoration: const BoxDecoration(
