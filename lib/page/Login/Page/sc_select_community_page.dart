@@ -1,18 +1,21 @@
 
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/utils/sc_location_utils.dart';
 
 import '../../../constants/sc_colors.dart';
 import '../../../utils/Router/sc_router_helper.dart';
-import '../../../utils/sc_utils.dart';
 import '../GetXController/sc_search_community_controller.dart';
 import '../GetXController/sc_select_community_controller.dart';
+import '../Model/SelectCommunity/sc_location_model.dart';
 import '../Model/sc_community_model.dart';
 import '../View/SelectCommunity/sc_community_header.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:smartcommunity/page/Login/View/SelectCommunity/sc_community_search_result_listview.dart';
 import 'package:smartcommunity/page/Login/View/SelectCommunity/sc_community_listView.dart';
 
@@ -31,6 +34,12 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> {
   SCSearchCommunityController searchState = Get.put(SCSearchCommunityController());
 
   SCSelectCommunityController selectState = Get.put(SCSelectCommunityController());
+
+  @override
+  initState() {
+    super.initState();
+    startLocation();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -126,6 +135,31 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> {
     } else {
       state.updateSearchList(list: []);
     }
+  }
+
+  /// 定位
+  startLocation() async{
+    LocationPermission permission= await SCLocationUtils.requestPermission();
+
+    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+      /// 定位被拒绝，无权限
+    } else if(permission == LocationPermission.whileInUse || permission == LocationPermission.always) {
+      /// 已获取定位权限
+      Position position = await SCLocationUtils.location();
+      reGeoCode(position: position);
+    } else {
+      /// 权限无法确定
+    }
+  }
+
+  /// 逆地理编码
+  reGeoCode({required Position position}) async{
+    await SCLocationUtils.reGeoCode(position: position, success: (value){
+      SCLocationModel model = value;
+      log('城市:${model.addressComponent?.city ?? ''}');
+    }, failure: (value){
+
+    });
   }
 
 }
