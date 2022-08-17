@@ -71,19 +71,18 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> {
   /// header
   Widget header() {
     return GetBuilder<SCSearchCommunityController>(builder: (state){
-      return SCCommunityHeader(isShowCancel: state.isShowCancel, cancelAction: (){
+      return SCCommunityHeader(
+        node: state.node,
+        isShowCancel: state.isShowCancel,
+        cancelAction: (){
         cancelAction();
       }, valueChangedAction: (String value) {
         valueChangedAction(value);
       },selectCityAction: () {
-        // 收起键盘
-        // SCUtils().hideKeyboard(context: context);
-        // cancelAction();
         SCRouterHelper.codePage(9002, null);
       },);
     });
   }
-
 
   /// title
   Widget titleItem() {
@@ -102,7 +101,7 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> {
           state.updateSelectCommunity(model: model);
         },);
       } else {
-        return const SCCommunityListView();
+        return SCCommunityListView(communityList: state.communityList,);
       }
     });
   }
@@ -126,9 +125,7 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> {
       if (state.communityList != null) {
         for(int i = 0; i < state.communityList!.length; i++) {
           SCCommunityModel communityModel = state.communityList![i];
-          String name = communityModel.name;
-          String namePinYin = communityModel?.namePinyin ?? '';
-          String tagIndex = communityModel?.tagIndex ?? '';
+          String name = communityModel?.name ?? '';
           if (name.contains(value)) {
             list.add(communityModel);
           }

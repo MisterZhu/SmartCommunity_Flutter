@@ -29,13 +29,20 @@ class SCCommunitySearchItem extends StatelessWidget {
   /// 选择城市
   final Function? selectCityAction;
 
-  SCCommunitySearchItem({Key? key, this.isShowCancel = false, this.cancelAction, this.valueChangedAction, this.selectCityAction}) : super(key: key);
+  SCCommunitySearchItem(
+      {
+        Key? key,
+        this.isShowCancel = false,
+        this.cancelAction, this.valueChangedAction,
+        this.selectCityAction,
+        required this.node,
+      }) : super(key: key);
 
   // controller
   final TextEditingController controller = TextEditingController();
 
   /// focusNode
-  final FocusNode node = FocusNode();
+  final FocusNode node;
 
   @override
   Widget build(BuildContext context) {
@@ -121,6 +128,7 @@ class SCCommunitySearchItem extends StatelessWidget {
           ],
         ),
       onTap: () {
+        // 收起键盘
         node.unfocus();
         if (selectCityAction != null) {
           selectCityAction?.call();

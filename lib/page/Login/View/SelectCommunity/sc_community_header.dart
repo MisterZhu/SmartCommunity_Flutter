@@ -18,7 +18,18 @@ class SCCommunityHeader extends StatelessWidget {
   /// 选择城市
   final Function? selectCityAction;
 
-  const SCCommunityHeader({Key? key, this.isShowCancel = false, this.cancelAction, this.valueChangedAction, this.selectCityAction}) : super(key: key);
+  /// focusNode
+  final FocusNode node;
+
+  const SCCommunityHeader(
+      {
+        Key? key,
+        this.isShowCancel = false,
+        this.cancelAction,
+        this.valueChangedAction,
+        this.selectCityAction,
+        required this.node,
+      }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +40,10 @@ class SCCommunityHeader extends StatelessWidget {
   Widget body() {
     return Column(
       children: [
-        SCCommunitySearchItem(isShowCancel: isShowCancel,cancelAction: (){
+        SCCommunitySearchItem(
+          node: node,
+          isShowCancel: isShowCancel,
+          cancelAction: (){
           if (cancelAction != null) {
             cancelAction?.call();
           }
