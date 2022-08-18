@@ -6,6 +6,8 @@ import 'package:dio/dio.dart';
 import 'package:smartcommunity/constants/sc_default_value.dart';
 import 'package:smartcommunity/network/sc_config.dart';
 
+import '../utils/Loading/sc_loading_utils.dart';
+
 class SCHttpManager {
   factory SCHttpManager() => _getInstance();
 
@@ -170,6 +172,7 @@ class SCHttpManager {
 /// 处理dio请求成功后,网络数据解包
 doResponse(Response response) {
   if (response.statusCode == 200) {
+    SCLoadingUtils.hide();
     // 请求成功
     // var code = response.data["code"];
     // var msg = response.data["msg"];
@@ -198,5 +201,6 @@ doResponse(Response response) {
 
 /// 处理dio请求异常
 doError(e) {
+  SCLoadingUtils.hide();
   return e;
 }

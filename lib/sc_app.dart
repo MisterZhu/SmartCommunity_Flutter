@@ -1,14 +1,18 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/base/sc_all_binding.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
+import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/utils/Router/sc_router_pages.dart';
 
 void startApp() async {
   SCScaffoldManager.instance.initBase();
+
+  SCLoadingUtils.initLoading();
 
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -25,6 +29,7 @@ void startApp() async {
     getPages: SCRouterPages.getPages,
     initialRoute: basePath,
     initialBinding: SCAllBinding(),
+    builder: EasyLoading.init(),
   ));
 }
 
