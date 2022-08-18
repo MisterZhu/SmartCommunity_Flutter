@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:lpinyin/lpinyin.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
@@ -11,8 +13,12 @@ import 'package:smartcommunity/page/Login/GetXController/sc_select_city_controll
 import 'package:smartcommunity/page/Login/View/SelectCity/sc_city_listview.dart';
 import 'package:smartcommunity/page/Login/View/SelectCity/sc_city_search_result_listview.dart';
 
+import '../../../constants/sc_enum.dart';
+import '../../../utils/Router/sc_router_helper.dart';
+import '../../../utils/sc_location_utils.dart';
 import '../../../utils/sc_utils.dart';
 import '../GetXController/sc_search_city_controller.dart';
+import '../Model/SelectCommunity/sc_location_model.dart';
 import '../Model/sc_city_model.dart';
 import '../View/SelectCity/sc_city_search_header.dart';
 
@@ -21,16 +27,46 @@ class SCSelectCityPage extends StatefulWidget {
   SCSelectCityState createState() => SCSelectCityState();
 }
 
-class SCSelectCityState extends State<SCSelectCityPage> {
+class SCSelectCityState extends State<SCSelectCityPage> with WidgetsBindingObserver {
   List<SCCityModel> cityList = [];
+
+  String cityCode = '';
+  String locationCity = '';
+  SCLocationStatus locationStatus = SCLocationStatus.failure;
 
   SCSelectCityController state = Get.put(SCSelectCityController());
   SCSearchCityController searchState = Get.put(SCSearchCityController());
 
+
   @override
   void initState() {
     super.initState();
+    var params = Get.arguments;
+    log('获取到的参数:$params');
+    cityCode = params['cityCode'];
+    locationCity = params['locationCity'];
+    locationStatus = params['locationStatus'];
     loadData();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  /// 由后台返回主屏幕 刷新数据
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.resumed) {
+      if (searchState.locationCity == '') {
+        /// 重新定位
+        startLocation();
+      }
+    }
+  }
+
+  @override
+  dispose() {
+    super.dispose();
+    /// 销毁观察者
+    WidgetsBinding.instance.removeObserver(this);
   }
 
   void loadData() async {
@@ -97,7 +133,11 @@ class SCSelectCityState extends State<SCSelectCityPage> {
   /// header
   Widget header() {
     return GetBuilder<SCSearchCityController>(builder: (state){
-      return SCCitySearchHeader(isShowCancel: state.isShowCancel, cancelAction: (){
+      return SCCitySearchHeader(
+        locationStatus: locationStatus,
+        locationCity: locationCity,
+        isShowCancel: state.isShowCancel,
+        cancelAction: (){
         cancelAction();
       }, valueChangedAction: (String value) {
         valueChangedAction(value);
@@ -118,11 +158,26 @@ class SCSelectCityState extends State<SCSelectCityPage> {
   Widget cityListView() {
     return GetBuilder<SCSelectCityController>(builder: (state){
       if (state.isShowResult) {
-        return SCCitySearchResultListView(cityList: state.searchList, selectCityHandler: (SCCityModel model) {
-          state.updateSelectCity(model: model);
+        return SCCitySearchResultListView(cityList: state.searchList,
+          selectCityHandler: (SCCityModel model) {
+            state.updateSelectCity(model: model);
+            var params = {
+              'selectCity' : model.name,
+              'selectCityCode' : model.cityCode,
+            };
+            log('搜索城市结果cell点击返回：$params');
+            SCRouterHelper.back(params);
         },);
       } else {
-        return SCCityListView(cityList: state.cityList);
+        return SCCityListView(cityList: state.cityList, selectCityHandler: (SCCityModel model) {
+          state.updateSelectCity(model: model);
+          var params = {
+            'selectCity' : model.name,
+            'selectCityCode' : model.cityCode,
+          };
+          log('城市列表cell点击返回：$params');
+          SCRouterHelper.back(params);
+        });
       }
     });
   }
@@ -158,6 +213,35 @@ class SCSelectCityState extends State<SCSelectCityPage> {
     } else {
       state.updateSearchList(list: []);
     }
+  }
+
+  /// 定位
+  startLocation() async{
+    LocationPermission permission = await SCLocationUtils.requestPermission();
+    SCSearchCityController searchState = Get.find<SCSearchCityController>();
+    searchState.updateLocationPermission(permission: permission);
+    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+      /// 定位被拒绝，无权限
+    } else if(permission == LocationPermission.whileInUse || permission == LocationPermission.always) {
+      /// 已获取定位权限
+      Position position = await SCLocationUtils.location();
+      reGeoCode(position: position);
+    } else {
+      /// 权限无法确定
+    }
+  }
+
+  /// 逆地理编码
+  reGeoCode({required Position position}) async{
+    await SCLocationUtils.reGeoCode(position: position, success: (value){
+      SCLocationModel model = value;
+      log('城市:${model.addressComponent?.city ?? ''}');
+      SCSearchCityController searchState = Get.find<SCSearchCityController>();
+      searchState.updateLocationCity(city: model.addressComponent?.city ?? '');
+      searchState.updateLocationCityCode(code: model.addressComponent?.citycode ?? '');
+    }, failure: (value){
+
+    });
   }
 
 }

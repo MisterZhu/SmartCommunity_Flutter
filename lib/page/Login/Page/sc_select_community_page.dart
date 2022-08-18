@@ -29,7 +29,7 @@ class SCSelectCommunityPage extends StatefulWidget {
   SCSelectCommunityState createState() => SCSelectCommunityState();
 }
 
-class SCSelectCommunityState extends State<SCSelectCommunityPage> {
+class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBindingObserver {
 
   SCSearchCommunityController searchState = Get.put(SCSearchCommunityController());
 
@@ -39,6 +39,26 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> {
   initState() {
     super.initState();
     startLocation();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  /// 由后台返回主屏幕 刷新数据
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.resumed) {
+      if (searchState.locationCity == '') {
+        /// 重新定位
+        startLocation();
+      }
+    }
+  }
+
+  @override
+  dispose() {
+    super.dispose();
+    /// 销毁观察者
+    WidgetsBinding.instance.removeObserver(this);
   }
 
   @override
@@ -72,6 +92,9 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> {
   Widget header() {
     return GetBuilder<SCSearchCommunityController>(builder: (state){
       return SCCommunityHeader(
+        locationStatus: state.locationStatus,
+        locationCity: state.locationCity,
+        selectCity: state.selectCity,
         node: state.node,
         isShowCancel: state.isShowCancel,
         cancelAction: (){
@@ -79,7 +102,7 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> {
       }, valueChangedAction: (String value) {
         valueChangedAction(value);
       },selectCityAction: () {
-        SCRouterHelper.codePage(9002, null);
+        openSelectCityPage();
       },);
     });
   }
@@ -139,8 +162,9 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> {
 
   /// 定位
   startLocation() async{
-    LocationPermission permission= await SCLocationUtils.requestPermission();
-
+    LocationPermission permission = await SCLocationUtils.requestPermission();
+    SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
+    searchState.updateLocationPermission(permission: permission);
     if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
       /// 定位被拒绝，无权限
     } else if(permission == LocationPermission.whileInUse || permission == LocationPermission.always) {
@@ -157,10 +181,34 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> {
     await SCLocationUtils.reGeoCode(position: position, success: (value){
       SCLocationModel model = value;
       log('城市:${model.addressComponent?.city ?? ''}');
+      SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
+      searchState.updateLocationCity(city: model.addressComponent?.city ?? '');
+      searchState.updateLocationCityCode(code: model.addressComponent?.citycode ?? '');
     }, failure: (value){
 
     });
   }
 
+  ///  选择城市
+  openSelectCityPage() async{
+    SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
+    var params = {
+      'locationCity' : searchState.locationCity,
+      'locationStatus' : searchState.locationStatus,
+      'cityCode' : searchState.cityCode,
+    };
+    var backParams = await SCRouterHelper.codePage(9002, params);
+    log('返回的参数:$backParams');
+
+    String city = backParams['selectCity'] ?? '';
+    String cityCode = backParams['selectCityCode'] ?? '';
+
+    log('选择的城市:$city');
+
+    searchState.updateSelectCity(city: city ?? '');
+    searchState.updateSelectCityCode(code: cityCode ?? '');
+
+
+  }
 }
 
