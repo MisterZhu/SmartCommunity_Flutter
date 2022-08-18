@@ -9,21 +9,17 @@ class SCCityModel extends ISuspensionBean {
   String? namePinyin;
   String? cityCode;
 
-  SCCityModel({
-    required this.name,
-    this.tagIndex,
-    this.namePinyin,
-    this.cityCode
-  });
+  SCCityModel(
+      {required this.name, this.tagIndex, this.namePinyin, this.cityCode});
 
-  SCCityModel.fromJson(Map<String, dynamic> json) : name = json['name'];
+  SCCityModel.fromJson(Map<String, dynamic> json) : name = json['name'], cityCode = json['cityCode'];
 
   Map<String, dynamic> toJson() => {
-    'name': name,
-//        'tagIndex': tagIndex,
-//        'namePinyin': namePinyin,
-//        'isShowSuspension': isShowSuspension
-  };
+        'name': name,
+        'tagIndex': tagIndex,
+        'namePinyin': namePinyin,
+        'isShowSuspension': isShowSuspension
+      };
 
   @override
   String getSuspensionTag() => tagIndex!;
@@ -65,13 +61,13 @@ class ContactInfo extends ISuspensionBean {
 
   Map<String, dynamic> toJson() => {
 //        'id': id,
-    'name': name,
-    'img': img,
+        'name': name,
+        'img': img,
 //        'firstletter': firstletter,
 //        'tagIndex': tagIndex,
 //        'namePinyin': namePinyin,
 //        'isShowSuspension': isShowSuspension
-  };
+      };
 
   @override
   String getSuspensionTag() => tagIndex!;

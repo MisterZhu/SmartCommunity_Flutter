@@ -42,7 +42,7 @@ class SCSelectCityState extends State<SCSelectCityPage> with WidgetsBindingObser
   void initState() {
     super.initState();
     var params = Get.arguments;
-    log('获取到的参数:$params');
+    log('上个页面传过来的参数:$params');
     cityCode = params['cityCode'];
     locationCity = params['locationCity'];
     locationStatus = params['locationStatus'];

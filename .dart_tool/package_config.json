@@ -116,6 +116,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_easyloading",
+      "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/flutter_easyloading-3.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_easyrefresh",
       "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/flutter_easyrefresh-2.2.1",
       "packageUri": "lib/",
@@ -126,6 +132,12 @@
       "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/flutter_lints-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "flutter_spinkit",
+      "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/flutter_spinkit-5.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_staggered_grid_view",
@@ -482,7 +494,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-08-17T01:20:22.547067Z",
+  "generated": "2022-08-18T08:01:13.768228Z",
   "generator": "pub",
   "generatorVersion": "2.17.1"
 }
