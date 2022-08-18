@@ -47,7 +47,7 @@ dependencies:
   # 刷新控件 https://pub.flutter-io.cn/packages/flutter_easyrefresh
   flutter_easyrefresh: ^2.2.1
   # 图片裁剪 https://pub.flutter-io.cn/packages/image_cropper/install
-#  image_cropper: ^2.0.3
+  # image_cropper: ^2.0.3
   # toast组件 https://pub.flutter-io.cn/packages/fluttertoast/install
   fluttertoast: ^8.0.9
   # 列表组件 https://pub.flutter-io.cn/packages/azlistview/install
@@ -58,6 +58,8 @@ dependencies:
   dio: ^4.0.6
   # 定位 https://pub.flutter-io.cn/packages/geolocator/install
   geolocator: ^9.0.1
+  # 加载组件 https://pub.flutter-io.cn/packages/flutter_easyloading/install
+  flutter_easyloading: ^3.0.5
 
 dev_dependencies:
   flutter_test:

@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:geolocator/geolocator.dart';
+import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
 
 import '../constants/sc_default_value.dart';
 import '../network/sc_http_manager.dart';
@@ -18,6 +19,7 @@ class SCLocationUtils {
   /// 获取位置
   static Future<Position> location() async{
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    log('定位位置:${position.toJson()}');
     return position;
   }
 
@@ -39,6 +41,8 @@ class SCLocationUtils {
       'output': 'json',
       'key': SCDefaultValue.kAMapWebKey
     };
+
+    SCLoadingUtils.show();
     SCHttpManager.instance.get(
         url: SCUrl.kReGeoCodeUrl, params: params, success: (response) {
       int status = int.parse(response['status']);
