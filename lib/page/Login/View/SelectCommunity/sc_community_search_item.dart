@@ -29,11 +29,16 @@ class SCCommunitySearchItem extends StatelessWidget {
   /// 选择城市
   final Function? selectCityAction;
 
+  /// 选择的城市
+  final String? selectCity;
+
   SCCommunitySearchItem(
       {
         Key? key,
+        this.selectCity = '请选择',
         this.isShowCancel = false,
-        this.cancelAction, this.valueChangedAction,
+        this.cancelAction,
+        this.valueChangedAction,
         this.selectCityAction,
         required this.node,
       }) : super(key: key);
@@ -96,6 +101,11 @@ class SCCommunitySearchItem extends StatelessWidget {
   }
 
   Widget leftCityItem(BuildContext context) {
+    String cityString = selectCity ?? '请选择';
+    if (selectCity == '') {
+      cityString = '请选择';
+    }
+
     return GestureDetector(
       child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -107,11 +117,12 @@ class SCCommunitySearchItem extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Colors.transparent,
               ),
-              child: const Text('杭州市',
+              child: Text(
+                cityString,
                 maxLines: 1,
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14.0,
                   fontWeight: FontWeight.normal,
                   color: SCColors.color_000000,

@@ -9,9 +9,11 @@ import '../../Model/sc_city_model.dart';
 
 class SCCityListView extends StatelessWidget {
 
-  const SCCityListView({Key? key, this.cityList}) : super(key: key);
-
   final List<SCCityModel>? cityList;
+
+  final Function(SCCityModel model)? selectCityHandler;
+
+  const SCCityListView({Key? key, this.cityList, this.selectCityHandler}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -94,29 +96,41 @@ class SCCityListView extends StatelessWidget {
   /// content-城市
   Widget contentItem(BuildContext context, SCCityModel model,
       {double susHeight = 40}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            height: 48.0,
-            color: SCColors.color_FFFFFF,
-            child: Text(
-              model.name,
-              maxLines: 1,
-              style: const TextStyle(
-                  fontSize: SCFonts.f16,
-                  color: SCColors.color_1B1C33,
-                  fontWeight: FontWeight.normal),
+    return GestureDetector(
+      onTap: () {
+        selectCity(model: model);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              height: 48.0,
+              color: SCColors.color_FFFFFF,
+              child: Text(
+                model.name,
+                maxLines: 1,
+                style: const TextStyle(
+                    fontSize: SCFonts.f16,
+                    color: SCColors.color_1B1C33,
+                    fontWeight: FontWeight.normal),
+              ),
             ),
-          ),
-          const Padding(padding: EdgeInsets.only(right: 8.0), child: Divider(
-            height: 0.5,
-            color: SCColors.color_EDEDF0,
-          ),)
-        ],
+            const Padding(padding: EdgeInsets.only(right: 8.0), child: Divider(
+              height: 0.5,
+              color: SCColors.color_EDEDF0,
+            ),)
+          ],
+        ),
       ),
     );
+  }
+
+  /// 选择城市
+  selectCity({required SCCityModel model}) {
+    if (selectCityHandler != null) {
+      selectCityHandler?.call(model);
+    }
   }
 }

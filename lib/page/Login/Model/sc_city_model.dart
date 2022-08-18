@@ -7,11 +7,13 @@ class SCCityModel extends ISuspensionBean {
   String name;
   String? tagIndex;
   String? namePinyin;
+  String? cityCode;
 
   SCCityModel({
     required this.name,
     this.tagIndex,
     this.namePinyin,
+    this.cityCode
   });
 
   SCCityModel.fromJson(Map<String, dynamic> json) : name = json['name'];
@@ -34,6 +36,7 @@ class ContactInfo extends ISuspensionBean {
   String name;
   String? tagIndex;
   String? namePinyin;
+  String? cityCode;
 
   Color? bgColor;
   IconData? iconData;
@@ -46,6 +49,7 @@ class ContactInfo extends ISuspensionBean {
     required this.name,
     this.tagIndex,
     this.namePinyin,
+    this.cityCode,
     this.bgColor,
     this.iconData,
     this.img,

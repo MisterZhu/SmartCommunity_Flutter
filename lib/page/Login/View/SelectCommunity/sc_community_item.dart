@@ -58,7 +58,8 @@ class SCCommunityItem extends StatelessWidget {
       onTap: () {
         SCSearchCommunityController state = Get.find<SCSearchCommunityController>();
         state.hideKeyboard();
-        SCRouterHelper.codePage(9001, null);
+        /// 去选房号
+        //测试数据=>  SCRouterHelper.codePage(9001, null);
       },
     );
   }

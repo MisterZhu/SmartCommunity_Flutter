@@ -15,7 +15,20 @@ class SCCitySearchHeader extends StatelessWidget {
   /// 文本框内容改变
   final Function(String value)? valueChangedAction;
 
-  const SCCitySearchHeader({Key? key, this.isShowCancel = false, this.cancelAction, this.valueChangedAction}) : super(key: key);
+  /// 定位的城市
+  final String? locationCity;
+
+  /// 定位状态，默认未知
+  SCLocationStatus locationStatus;
+
+  SCCitySearchHeader(
+      { Key? key,
+        this.locationStatus = SCLocationStatus.failure,
+        this.locationCity = '',
+        this.isShowCancel = false,
+        this.cancelAction,
+        this.valueChangedAction,
+      }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +39,9 @@ class SCCitySearchHeader extends StatelessWidget {
   Widget body() {
     return Column(
       children: [
-        SCCitySearchItem(isShowCancel: isShowCancel,cancelAction: (){
+        SCCitySearchItem(
+          isShowCancel: isShowCancel,
+          cancelAction: (){
           if (cancelAction != null) {
             cancelAction?.call();
           }
@@ -35,7 +50,7 @@ class SCCitySearchHeader extends StatelessWidget {
             valueChangedAction?.call(value);
           }
         },),
-        const SCCurrentCityItem(status: SCLocationStatus.success, address: '杭州',)
+        SCCurrentCityItem(locationStatus: locationStatus, city: locationCity ?? '',)
       ],
     );
   }

@@ -22,10 +22,10 @@ enum SCHomeFeatureStyle {
 }
 
 enum SCLocationStatus {
-  /// 未开启定位
+  /// 定位未开启
   notOpen,
-  /// 刷新定位
-  reload,
+  /// 定位失败
+  failure,
   /// 定位成功
-  success
+  success,
 }
