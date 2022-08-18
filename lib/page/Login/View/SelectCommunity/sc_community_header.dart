@@ -18,7 +18,30 @@ class SCCommunityHeader extends StatelessWidget {
   /// 选择城市
   final Function? selectCityAction;
 
-  const SCCommunityHeader({Key? key, this.isShowCancel = false, this.cancelAction, this.valueChangedAction, this.selectCityAction}) : super(key: key);
+  /// focusNode
+  final FocusNode node;
+
+  /// 定位的城市
+  final String? locationCity;
+
+  /// 定位状态，默认未知
+  SCLocationStatus locationStatus;
+
+  /// 选择的城市
+  final String? selectCity;
+
+  SCCommunityHeader(
+      {
+        Key? key,
+        this.locationStatus = SCLocationStatus.failure,
+        this.locationCity = '',
+        this.selectCity = '',
+        this.isShowCancel = false,
+        this.cancelAction,
+        this.valueChangedAction,
+        this.selectCityAction,
+        required this.node,
+      }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +50,17 @@ class SCCommunityHeader extends StatelessWidget {
 
   /// body
   Widget body() {
+    String? city = selectCity;
+    if (selectCity == '') {
+      city = locationCity;
+    }
     return Column(
       children: [
-        SCCommunitySearchItem(isShowCancel: isShowCancel,cancelAction: (){
+        SCCommunitySearchItem(
+          selectCity: city ?? '请选择',
+          node: node,
+          isShowCancel: isShowCancel,
+          cancelAction: (){
           if (cancelAction != null) {
             cancelAction?.call();
           }
@@ -42,7 +73,7 @@ class SCCommunityHeader extends StatelessWidget {
             selectCityAction?.call();
           }
         },),
-        const SCCurrentCityItem(status: SCLocationStatus.success, address: '杭州',)
+        SCCurrentCityItem(locationStatus: locationStatus, city: locationCity ?? '',)
       ],
     );
   }

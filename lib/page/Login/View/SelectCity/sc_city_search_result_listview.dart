@@ -23,7 +23,8 @@ class SCCitySearchResultListView extends StatelessWidget {
   Widget body() {
     return ListView.separated(
         itemBuilder: (BuildContext context, int index) {
-          return cell(index: index);
+          SCCityModel model = cityList![index];
+          return cell(model: model);
         },
         separatorBuilder: (BuildContext context, int index) {
           return const SizedBox();
@@ -32,25 +33,25 @@ class SCCitySearchResultListView extends StatelessWidget {
   }
 
   /// 城市cell
-  Widget cell({int index= 0}) {
+  Widget cell({required SCCityModel model}) {
     return GestureDetector(
       child: Padding(
         padding: const EdgeInsets.only(left: 16.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: [cityItem(index: index), separatorItem()],
+          children: [cityItem(model: model), separatorItem()],
         ),
       ),
       onTap: () {
-
+        selectCity(model: model);
       },
     );
   }
 
   /// 城市item
-  Widget cityItem({int index= 0}) {
-    SCCityModel model = cityList![index];
+  Widget cityItem({required SCCityModel model}) {
     return Container(
+      color: Colors.transparent,
       height: 48.0,
       alignment: Alignment.centerLeft,
       child: Text(
@@ -72,8 +73,7 @@ class SCCitySearchResultListView extends StatelessWidget {
   }
 
   /// 选择城市
-  selectCity({int index= 0}) {
-    SCCityModel model = cityList![index];
+  selectCity({required SCCityModel model}) {
     if (selectCityHandler != null) {
       selectCityHandler?.call(model);
     }

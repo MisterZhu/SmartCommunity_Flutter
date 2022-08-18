@@ -6,9 +6,9 @@ import '../../Model/sc_community_model.dart';
 
 class SCCommunityListView extends StatelessWidget {
 
-  const SCCommunityListView({Key? key, this.cmmunityList}) : super(key: key);
+  const SCCommunityListView({Key? key, this.communityList}) : super(key: key);
 
-  final List<SCCommunityModel>? cmmunityList;
+  final List<SCCommunityModel>? communityList;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,8 @@ class SCCommunityListView extends StatelessWidget {
     return ListView.separated(
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
-          return getCell(index: index);
+          SCCommunityModel model = communityList![index];
+          return getCell(model: model);
         },
         separatorBuilder: (BuildContext context, int index) {
           return const SizedBox();
@@ -28,8 +29,8 @@ class SCCommunityListView extends StatelessWidget {
         itemCount: 5);
   }
 
-  Widget getCell({required int index}) {
-    return SCCommunityItem();
+  Widget getCell({required SCCommunityModel model}) {
+    return SCCommunityItem(model: model,);
   }
 
 }

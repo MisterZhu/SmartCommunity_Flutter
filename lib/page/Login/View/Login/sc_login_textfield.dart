@@ -105,6 +105,7 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
       cursorWidth: 2,
       focusNode: phoneNode,
       inputFormatters: [
+        phoneInputFormatter(),
         LengthLimitingTextInputFormatter(phoneLength),
       ],
       decoration: const InputDecoration(
@@ -128,6 +129,47 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
       keyboardAppearance: Brightness.light,
       textInputAction: TextInputAction.next,
     );
+  }
+
+  TextInputFormatter phoneInputFormatter() {
+    return TextInputFormatter.withFunction((oldValue, newValue) {
+      String text = newValue.text;
+      // 获取光标左边的文本
+      final positionStr = (text.substring(0, newValue.selection.baseOffset)).replaceAll(RegExp(r"\s+\b|\b\s"), "");
+      // 计算格式化后的光标位置
+      int length = positionStr.length;
+      var position = 0;
+      if (length <= 3) {
+        position = length;
+      } else if (length <= 7) {
+        // 因为前面的字符串里面加了一个空格
+        position = length + 1;
+      } else if (length <= 11) {
+        // 因为前面的字符串里面加了两个空格
+        position = length + 2;
+      } else {
+        // 号码本身为 11 位数字，因多了两个空格，故为 13
+        position = 13;
+      }
+
+      //这里格式化整个输入文本
+      text = text.replaceAll(RegExp(r"\s+\b|\b\s"), "");
+      var string = "";
+      for (int i = 0; i < text.length; i++) {
+        // 这里第 4 位，与第 8 位，我们用空格填充
+        if (i == 3 || i == 7) {
+          if (text[i] != " ") {
+            string = string + " ";
+          }
+        }
+        string += text[i];
+      }
+
+      return TextEditingValue(
+        text: string,
+        selection: TextSelection.fromPosition(TextPosition(offset: position, affinity: TextAffinity.upstream)),
+      );
+    });
   }
 
   /// 删除icon
@@ -305,22 +347,6 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
 
   /// 手机号格式化
   formatPhoneNumber(String text) {
-
-    if (text.length > inputLength) {
-      // 输入
-      if (text.length == 4 || text.length == 9) {
-        text = "${text.substring(0, text.length - 1)} ${text.substring(text.length - 1, text.length)}";
-        phoneController.text = text;
-        phoneController.selection = TextSelection.fromPosition(TextPosition(affinity: TextAffinity.downstream, offset: text.length)); //光标移到最后
-      }
-    } else {
-      // 删除
-      if (text.length == 4 || text.length == 9) {
-        text = text.substring(0, text.length - 1);
-        phoneController.text = text;
-        phoneController.selection = TextSelection.fromPosition(TextPosition(affinity: TextAffinity.downstream, offset: text.length)); //光标移到最后
-      }
-    }
 
     if (text.length == phoneLength) {
       if (mounted) {
