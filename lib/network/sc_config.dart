@@ -8,7 +8,7 @@ class SCConfig {
   static String get BASE_URL {
     switch (env) {
       case SCEnvironment.develop:
-        return "https://yshk8s.lcfw.co";
+        return "https://jmdev.wisharetec.com";
       case SCEnvironment.pretest:
         return "https://shushuapitest.4001113900.com:10020";
       case SCEnvironment.production:

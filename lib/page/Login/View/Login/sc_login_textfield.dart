@@ -1,5 +1,6 @@
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +9,8 @@ import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_login_controller.dart';
+
+import '../../../../network/sc_http_manager.dart';
 
 /// 手机号和验证码输入框
 
@@ -275,7 +278,8 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
       return GestureDetector(
         onTap: (){
           if (isCodeBtnEnable == true) {
-            initTimer();
+            /// 发送验证码
+            sendCode();
           }
         },
         child: Container(
@@ -403,6 +407,20 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
           }
         });
       }
+    });
+  }
+  
+  sendCode() {
+    log('请求发送验证码接口');
+    SCHttpManager.instance.post(
+      url: '/api/user/sms',
+      params: {'mobileNum' : phoneController.text.removeAllWhitespace},
+      success: (value) {
+        log('验证码发送成功');
+        initTimer();
+      },
+      failure: (value) {
+        log('验证码发送失败');
     });
   }
 
