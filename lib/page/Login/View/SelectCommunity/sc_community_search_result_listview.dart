@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:smartcommunity/constants/sc_colors.dart';
-import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/page/Login/Model/sc_community_model.dart';
 import 'package:smartcommunity/page/Login/View/SelectCommunity/sc_community_item.dart';
 

@@ -8,12 +8,14 @@ import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/utils/sc_location_utils.dart';
 
+import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_colors.dart';
 import '../../../utils/Router/sc_router_helper.dart';
 import '../GetXController/sc_search_community_controller.dart';
 import '../GetXController/sc_select_community_controller.dart';
 import '../Model/SelectCommunity/sc_location_model.dart';
 import '../Model/sc_community_model.dart';
+import '../View/SelectCommunity/sc_community_empty_item.dart';
 import '../View/SelectCommunity/sc_community_header.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:smartcommunity/page/Login/View/SelectCommunity/sc_community_search_result_listview.dart';
@@ -120,13 +122,34 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
   Widget communityListView() {
     return GetBuilder<SCSelectCommunityController>(builder: (state){
       if (state.isShowResult) {
-        return SCCommunitySearchResultListView(communityList: state.searchList, selectCommunityHandler: (SCCommunityModel model) {
-          state.updateSelectCommunity(model: model);
-        },);
+        if (state.searchList!.isNotEmpty) {
+          return SCCommunitySearchResultListView(communityList: state.searchList, selectCommunityHandler: (SCCommunityModel model) {
+            state.updateSelectCommunity(model: model);
+          },);
+        } else {
+          return emptyView();
+        }
       } else {
-        return SCCommunityListView(communityList: state.communityList,);
+        if (state.communityList!.isNotEmpty) {
+          return SCCommunityListView(communityList: state.communityList,);
+        } else {
+          return emptyView();
+        }
       }
     });
+  }
+
+  Widget emptyView() {
+    /// 数据加载失败就显示底部重新获取按钮
+    return SCCommunityEmptyItem(
+      imageName: SCAsset.iconCommunityNoData,
+      content: '暂无可选项目',
+      buttonTitle: '重新获取',
+      showButton: false,
+      btnTapAction: () {
+        /// 重新加载数据
+
+      },);
   }
 
   /// 取消
@@ -203,11 +226,8 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
     String city = backParams['selectCity'] ?? '';
     String cityCode = backParams['selectCityCode'] ?? '';
 
-    log('选择的城市:$city');
-
     searchState.updateSelectCity(city: city ?? '');
     searchState.updateSelectCityCode(code: cityCode ?? '');
-
 
   }
 }

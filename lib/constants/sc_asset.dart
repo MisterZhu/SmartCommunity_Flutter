@@ -165,14 +165,16 @@ class SCAsset {
   /************* 登录 *************/
   /// 删除
   static const String iconGreyDelete = 'images/login/icon_delete_gray.png';
-  /// 选择城市-刷新定位
+  /// 选择城市-重新定位
   static const String iconLocationReload = 'images/ic_relocate.png';
   /// 选择城市-定位
   static const String iconLocationCity = 'images/ic_location_city.png';
   /// 选择城市-搜索icon
   static const String iconLocationSearchCity = 'images/ic_location_search_city.png';
-
+  /// 选择城市向下箭头
   static const String iconSelectCityArrow = 'images/ic_select_city_arrow.png';
+  /// 选择项目列表空白占位图
+  static const String iconCommunityNoData = 'images/ic_community_nodata.png';
 
 /************* 登录 *************/
 }
