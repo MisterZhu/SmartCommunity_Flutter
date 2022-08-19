@@ -30,7 +30,7 @@ class SCSelectCommunityController extends GetxController {
       {'name':'天堂软件园','id':4, 'address':'北京路88号','distance':'<1km>'},
       {'name':'蒋村商务中心','id':5, 'address':'文涛路99号','distance':'<2km'}
     ];
-    //communityList = testList.map((e) => SCCommunityModel.fromJson(e)).toList();
+    communityList = testList.map((e) => SCCommunityModel.fromJson(e)).toList();
 
   }
 
