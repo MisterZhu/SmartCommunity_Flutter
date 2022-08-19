@@ -162,12 +162,21 @@ class SCCurrentCityItem extends StatelessWidget {
   Widget notOpenLocationItem() {
     return CupertinoButton(
         padding: EdgeInsets.zero,
-        child: const Text(
-          '定位未开启',
-          style: TextStyle(
-              fontSize: SCFonts.f14,
-              fontWeight: FontWeight.w400,
-              color: SCColors.color_4DA6FF),
+        child: Container(
+          width: 96.0,
+          height: 30.0,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              color: SCColors.color_FFFFFF,
+              borderRadius: BorderRadius.circular(4.0),
+              border: Border.all(color: SCColors.color_B0B1B8, width: 0.5)),
+          child: const Text(
+            '定位未开启',
+            style: TextStyle(
+                fontSize: SCFonts.f14,
+                fontWeight: FontWeight.w400,
+                color: SCColors.color_1B1D33),
+          ),
         ),
         onPressed: () {
           /// 打开定位设置

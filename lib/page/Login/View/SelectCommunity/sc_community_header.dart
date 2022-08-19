@@ -68,7 +68,7 @@ class SCCommunityHeader extends StatelessWidget {
           if (valueChangedAction != null) {
             valueChangedAction?.call(value);
           }
-        },selectCityAction: (){
+        }, selectCityAction: (){
           if (selectCityAction != null) {
             selectCityAction?.call();
           }

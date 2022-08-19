@@ -44,7 +44,7 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
   /// 验证码按钮背景颜色
   Color codeBGColor = SCColors.color_FFC59B;
 
-  /// 手机号长度
+  /// 手机号长度，因为中间有两个空格，所以是13
   final int phoneLength = 13;
 
   @override
