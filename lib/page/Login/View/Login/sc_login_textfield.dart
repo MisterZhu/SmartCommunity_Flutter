@@ -1,5 +1,6 @@
 
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -46,6 +47,9 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
 
   /// 手机号长度，因为中间有两个空格，所以是13
   final int phoneLength = 13;
+
+  /// 光标的位置，手机号输入完成时光标位置为11
+  int cursorPosition = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -138,6 +142,7 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
       final positionStr = (text.substring(0, newValue.selection.baseOffset)).replaceAll(RegExp(r"\s+\b|\b\s"), "");
       // 计算格式化后的光标位置
       int length = positionStr.length;
+      cursorPosition = length;
       var position = 0;
       if (length <= 3) {
         position = length;
@@ -364,7 +369,8 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
       }
     }
 
-    if (text.length == phoneLength) {
+  /// 输入的文本内容长度为13，且光标在文本最后，cursorPosition=11时，焦点自动跳到验证码输入框
+  if (text.length == phoneLength && cursorPosition == phoneLength - 2) {
       phoneNode.unfocus();
       codeNode.requestFocus();
     }
