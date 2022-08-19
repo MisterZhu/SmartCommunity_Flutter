@@ -89,18 +89,17 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
                   height: 12.0,
                 ),
                 onTap: () {
-                  print('--->click back');
                   SCRouterHelper.back(null);
                 },
               )),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           SizedBox(
               width: 24,
               height: 24,
               child: GestureDetector(
-                child: Icon(Icons.close),
+                child: const Icon(Icons.close),
                 onTap: () {
                   goBack();
                 },
@@ -118,7 +117,6 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
                     StringUtils.isNullOrEmpty(_url))))
         ? Container(
             padding: const EdgeInsets.all(16),
-            color: Colors.green,
             child: const Center(
               child: Text("当前路径为空"),
             ),
@@ -133,7 +131,7 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
                 javascriptMode: JavascriptMode.unrestricted,
 
                 javascriptChannels: <JavascriptChannel>[
-                  // 跟H5交互的方法到此处处理
+                  /// 跟H5交互的方法到此处处理
                 ].toSet(),
 
                 ///WebView创建

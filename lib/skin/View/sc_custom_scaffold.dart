@@ -20,6 +20,8 @@ class SCCustomScaffold extends StatelessWidget {
   /*标题是否居中*/
   late bool centerTitle;
 
+  late double? elevation;
+
   /*是否显示背景图片*/
   late bool showBackgroundImage;
 
@@ -54,6 +56,7 @@ class SCCustomScaffold extends StatelessWidget {
         this.navBackgroundColor,
         this.textStyle,
         this.leading,
+        this.elevation,
         this.leadingWidth,
         this.actions,
         this.customTitleWidget})
@@ -76,6 +79,7 @@ class SCCustomScaffold extends StatelessWidget {
           systemOverlayStyle: state.statusBarStyle,
           automaticallyImplyLeading: showBackIcon,
           flexibleSpace: getNavBackgroundImage(),
+          elevation: elevation,
           leading: leading,
           leadingWidth: leadingWidth,
           actions: actions,

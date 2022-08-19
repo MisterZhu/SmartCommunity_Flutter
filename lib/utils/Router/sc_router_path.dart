@@ -18,6 +18,10 @@ class SCRouterPath {
   /// 城市选择
   static String selectCityPath = "/root/login/selectCityPage";
 
+  /// 房号选择
+  static String selectHousePath = "/root/login/SCSelectHousePage";
+
+
   /***************************** 首页 ******************************/
   /// 首页
   static String homePath = "/home/HomePage";
