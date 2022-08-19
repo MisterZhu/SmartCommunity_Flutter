@@ -30,7 +30,7 @@ class SCHttpManager {
   ///通用全局单例，第一次使用时初始化
   SCHttpManager._internal() {
     if (null == _dio) {
-      _headers = {'Content-Type': 'application/json; charset=utf-8'};
+      _headers = {'Content-Type': 'application/json; charset=utf-8', 'client' : SCDefaultValue.client};
       _baseOptions = BaseOptions(
         baseUrl: SCConfig.BASE_URL,
         connectTimeout: SCDefaultValue.timeOut,
@@ -100,7 +100,7 @@ class SCHttpManager {
     );
 
     try {
-      Response response = await _dio!.post(url, queryParameters: params, options: headers == null ? null : options);
+      Response response = await _dio!.post(url, queryParameters: params, data: params, options: headers == null ? null : options);
       var data = doResponse(response);
       bool result = data['success'];
 
@@ -125,7 +125,7 @@ class SCHttpManager {
     );
 
     try {
-      Response response = await _dio!.put(url, queryParameters: params, options: headers == null ? null : options);
+      Response response = await _dio!.put(url, queryParameters: params, data: params, options: headers == null ? null : options);
       var data = doResponse(response);
       bool result = data['success'];
 
@@ -150,7 +150,7 @@ class SCHttpManager {
     );
 
     try {
-      Response response = await _dio!.delete(url, queryParameters: params, options: headers == null ? null : options);
+      Response response = await _dio!.delete(url, queryParameters: params, data: params, options: headers == null ? null : options);
       var data = doResponse(response);
       bool result = data['success'];
 
