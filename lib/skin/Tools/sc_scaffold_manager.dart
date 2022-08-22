@@ -14,6 +14,7 @@ import '../../constants/sc_skin_key.dart';
 import '../../constants/sc_skin_value.dart';
 import '../GetXController/sc_scaffold_controller.dart';
 import '../Model/sc_scaffold_model.dart';
+import '../Model/sc_user.dart';
 
 class SCScaffoldManager {
 
@@ -25,18 +26,23 @@ class SCScaffoldManager {
 
   static late SCScaffoldModel _scaffoldModel;
 
+  static late SCUser _user;
+
   SCScaffoldManager._internal() {
-    _scaffoldModel = new SCScaffoldModel();
+    _scaffoldModel = SCScaffoldModel();
+    _user = SCUser();
   }
 
   static SCScaffoldManager _getInstance() {
     if(_instance == null) {
-      _instance = new SCScaffoldManager._internal();
+      _instance = SCScaffoldManager._internal();
     }
     return _instance;
   }
 
   SCScaffoldModel get scaffoldModel => _scaffoldModel;
+
+  SCUser get user => _user;
 
   /// 初始化
   void initBase () {
@@ -57,11 +63,11 @@ class SCScaffoldManager {
     if(hasScaffoldKey) {
       String? scaffolfJsonString = sharedPreferences.getString(SkinDefaultKey.scaffold_key);
       var localJson = jsonDecode(scaffolfJsonString ?? '');
-      _scaffoldModel = new SCScaffoldModel.fromJson(localJson);
+      _scaffoldModel = SCScaffoldModel.fromJson(localJson);
       log('皮肤数据:${SCScaffoldManager.instance.scaffoldModel.toJson()}');
       log('皮肤已设置完成');
     }else {
-      _scaffoldModel = new SCScaffoldModel.fromJson(scaffoldJson);
+      _scaffoldModel = SCScaffoldModel.fromJson(scaffoldJson);
       sharedPreferences.setString(SkinDefaultKey.scaffold_key, jsonEncode(scaffoldJson));
       log('设置皮肤完成');
     }
@@ -109,5 +115,11 @@ class SCScaffoldManager {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setString(SkinDefaultKey.scaffold_key, jsonEncode(_scaffoldModel.toJson()));
   }
+
+  /*缓存用户信息*/
+ cacheUserData(dynamic data) async{
+   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+ }
 
 }
