@@ -11,6 +11,6 @@ class SCUrl {
   static const String kSendCodeUrl = '/api/user/sms';
 
   /// 验证码登陆url
-  static const String kPhoneCodeLoginUrl = '/user/loginByCode';
+  static const String kPhoneCodeLoginUrl = '/api/user/loginByCode';
 
 }
