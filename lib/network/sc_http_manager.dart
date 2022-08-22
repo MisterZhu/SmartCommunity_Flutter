@@ -69,31 +69,13 @@ class SCHttpManager {
   }
 
   /// 通用的GET请求
-  get({required String url,dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
+  get({required String url, dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
     Options options = Options(
         headers: headers
     );
 
     try {
       Response response = await _dio!.get(url, queryParameters: params, options: headers == null ? null : options);
-      var data = doResponse(response);
-      success?.call(data);
-      return data;
-    } catch (e) {
-      return doError(e);
-    } finally {
-
-    }
-  }
-
-  /// 通用的POST请求
-  post({required String url,dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
-    Options options = Options(
-        headers: headers
-    );
-
-    try {
-      Response response = await _dio!.post(url, queryParameters: params, data: params, options: headers == null ? null : options);
       var data = doResponse(response);
       success?.call(data);
       return data;
@@ -105,8 +87,28 @@ class SCHttpManager {
     }
   }
 
+  /// 通用的POST请求
+  post({required String url, dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
+    Options options = Options(
+        headers: headers
+    );
+
+    try {
+      Response response = await _dio!.post(url, queryParameters: params, data: params, options: headers == null ? null : options);
+      var data = doResponse(response);
+      success?.call(data);
+      return data;
+    } catch (e) {
+      var data = doError(e);
+      failure?.call(data);
+      return data;
+    } finally {
+
+    }
+  }
+
   /// 通用的PUT请求
-  put({required String url,dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
+  put({required String url, dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
     Options options = Options(
         headers: headers
     );
@@ -114,24 +116,19 @@ class SCHttpManager {
     try {
       Response response = await _dio!.put(url, queryParameters: params, data: params, options: headers == null ? null : options);
       var data = doResponse(response);
-      bool result = data['success'];
-
-      if (result) {
-        success?.call(data['data']);
-      } else {
-        failure?.call(data['data']);
-      }
-
+      success?.call(data);
       return data;
     } catch (e) {
-      return doError(e);
+      var data = doError(e);
+      failure?.call(data);
+      return data;
     } finally {
 
     }
   }
 
   /// 通用的DELETE请求
-  delete({required String url,dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
+  delete({required String url, dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
     Options options = Options(
         headers: headers
     );
@@ -139,17 +136,12 @@ class SCHttpManager {
     try {
       Response response = await _dio!.delete(url, queryParameters: params, data: params, options: headers == null ? null : options);
       var data = doResponse(response);
-      bool result = data['success'];
-
-      if (result) {
-        success?.call(data['data']);
-      } else {
-        failure?.call(data['data']);
-      }
-
+      success?.call(data);
       return data;
     } catch (e) {
-      return doError(e);
+      var data = doError(e);
+      failure?.call(data);
+      return data;
     } finally {
 
     }
@@ -192,9 +184,10 @@ doError(e) {
       }
       break;
   }
-  log('网络失败1:${error.response}');
-  log('网络失败2:${error.response?.statusCode}');
-  log('123111:${e.toString()}');
+  var params = {
+    'code' : error.response?.statusCode,
+    'message' : error.response?.data.toString(),
+  };
   SCLoadingUtils.hide();
-  return e;
+  return params;
 }

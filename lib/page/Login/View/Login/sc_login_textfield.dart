@@ -12,6 +12,7 @@ import 'package:smartcommunity/network/sc_url.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_login_controller.dart';
 
 import '../../../../network/sc_http_manager.dart';
+import '../../../../utils/Toast/sc_toast.dart';
 
 /// 手机号和验证码输入框
 
@@ -430,7 +431,8 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
         initTimer();
       },
       failure: (value) {
-        log('验证码发送失败');
+        String message = value['message'];
+        SCToast.showTip(message);
     });
   }
 

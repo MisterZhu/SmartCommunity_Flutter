@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_type_define.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_login_controller.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_login_btn.dart';
@@ -14,6 +13,7 @@ import 'package:smartcommunity/utils/sc_utils.dart';
 
 import '../../../../network/sc_http_manager.dart';
 import '../../../../network/sc_url.dart';
+import '../../../../utils/Loading/sc_loading_utils.dart';
 import 'sc_login_agreement.dart';
 
 /// 登录页listview
@@ -130,7 +130,9 @@ class SCLoginListView extends StatelessWidget {
                 SCRouterHelper.codePage(9003, null);
               },
               failure: (value) {
-                log('登陆失败');
+                log('登陆失败===$value');
+                String message = value['message'];
+                SCToast.showTip(message);
               });
         },
       );
