@@ -71,20 +71,13 @@ class SCHttpManager {
   /// 通用的GET请求
   get({required String url,dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
     Options options = Options(
-      headers: headers
+        headers: headers
     );
 
     try {
       Response response = await _dio!.get(url, queryParameters: params, options: headers == null ? null : options);
       var data = doResponse(response);
-      bool result = data['success'];
-
-      if (result) {
-        success?.call(data['data']);
-      } else {
-        failure?.call(data['data']);
-      }
-
+      success?.call(data);
       return data;
     } catch (e) {
       return doError(e);
@@ -102,16 +95,10 @@ class SCHttpManager {
     try {
       Response response = await _dio!.post(url, queryParameters: params, data: params, options: headers == null ? null : options);
       var data = doResponse(response);
-      bool result = data['success'];
-
-      if (result) {
-        success?.call(data['data']);
-      } else {
-        failure?.call(data['data']);
-      }
-
+      success?.call(data);
       return data;
     } catch (e) {
+      failure?.call(doError(e));
       return doError(e);
     } finally {
 
@@ -173,34 +160,41 @@ class SCHttpManager {
 doResponse(Response response) {
   if (response.statusCode == 200) {
     SCLoadingUtils.hide();
-    // 请求成功
-    // var code = response.data["code"];
-    // var msg = response.data["msg"];
-    var status = response.data["status"];
-
-    var data = {'success' : true, 'data' : response.data};
-
-    if (status == 100) {
-      return data;
-    } else if (status == 401) {
-      return data;
-    } else if (status == 403) {
-      return data;
-    } else if (status == 404) {
-      return data;
-    } else if (status == 500) {
-      return data;
-    } else {
-      return data;
-    }
+    return response.data;
   } else {
-    var data = {'success' : false, 'data' : response.data};
-    return data;
+    log('失败：${response.data}');
+    return response.data;
   }
 }
 
 /// 处理dio请求异常
 doError(e) {
+  DioError error = e;
+  switch(error.response?.statusCode) {
+    case 400:
+      {
+
+      }
+      break;
+    case 401:
+      {
+
+      }
+      break;
+    case 403:
+      {
+
+      }
+      break;
+    case 404:
+      {
+
+      }
+      break;
+  }
+  log('网络失败1:${error.response}');
+  log('网络失败2:${error.response?.statusCode}');
+  log('123111:${e.toString()}');
   SCLoadingUtils.hide();
   return e;
 }
