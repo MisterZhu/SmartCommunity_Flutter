@@ -96,6 +96,10 @@ class SCHttpManager {
     try {
       Response response = await _dio!.post(url, queryParameters: params, data: params, options: headers == null ? null : options);
       var data = doResponse(response);
+
+      log('headers=====${response.headers.map['authorization']}');
+      log('map=====${response.headers.map}');
+
       success?.call(data);
       return data;
     } catch (e) {
