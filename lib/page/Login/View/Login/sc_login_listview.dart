@@ -12,6 +12,8 @@ import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
+import '../../../../network/sc_http_manager.dart';
+import '../../../../network/sc_url.dart';
 import 'sc_login_agreement.dart';
 
 /// 登录页listview
@@ -119,7 +121,17 @@ class SCLoginListView extends StatelessWidget {
           //   return;
           // }
 
-          SCRouterHelper.codePage(9003, null);
+          log('请求验证码登陆接口');
+          SCHttpManager.instance.post(
+              url: SCUrl.kPhoneCodeLoginUrl,
+              params: {'mobileNum' : state.phone, 'code' : state.code},
+              success: (value) {
+                log('登陆成功');
+                SCRouterHelper.codePage(9003, null);
+              },
+              failure: (value) {
+                log('登陆失败');
+              });
         },
       );
     });

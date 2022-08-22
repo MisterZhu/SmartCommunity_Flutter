@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/network/sc_url.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_login_controller.dart';
 
 import '../../../../network/sc_http_manager.dart';
@@ -39,6 +40,8 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
   /// 是否显示手机号删除按钮
   bool isShowPhoneClear = false;
 
+  /// 验证码定时器
+  Timer? codeTimer;
   /// 验证码按钮是否可以点击
   bool isCodeBtnEnable = false;
   /// 验证码按钮text
@@ -392,7 +395,7 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
   /// 初始化定时器
   void initTimer() {
     isCodeBtnEnable = false;
-    Timer.periodic(const Duration(seconds: 1), (timer) {
+    codeTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       codeTime--;
       if (mounted) {
         setState(() {
@@ -401,6 +404,7 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
             codeBGColor = phoneController.text.length == phoneLength ? SCColors.color_FF6C00 : SCColors.color_FFC59B;
             isCodeBtnEnable = phoneController.text.length == phoneLength ? true : false;
             codeText = "获取验证码";
+            disposeTimer();
           } else {
             codeText = '${codeTime}s';
             codeBGColor = SCColors.color_FF6C00;
@@ -409,11 +413,17 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
       }
     });
   }
+
+  /*销毁定时器*/
+  void disposeTimer() {
+    codeTimer?.cancel();
+    codeTimer = null;
+  }
   
   sendCode() {
     log('请求发送验证码接口');
     SCHttpManager.instance.post(
-      url: '/api/user/sms',
+      url: SCUrl.kSendCodeUrl,
       params: {'mobileNum' : phoneController.text.removeAllWhitespace},
       success: (value) {
         log('验证码发送成功');
@@ -431,5 +441,6 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
     codeNode.dispose();
     phoneController.dispose();
     codeController.dispose();
+    disposeTimer();
   }
 }
