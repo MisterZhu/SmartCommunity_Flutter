@@ -12,6 +12,7 @@ import 'package:smartcommunity/network/sc_url.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_login_controller.dart';
 
 import '../../../../network/sc_http_manager.dart';
+import '../../../../utils/Loading/sc_loading_utils.dart';
 import '../../../../utils/Toast/sc_toast.dart';
 
 /// 手机号和验证码输入框
@@ -423,17 +424,11 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
   
   sendCode() {
     log('请求发送验证码接口');
-    SCLoadingUtils.show();
-    SCHttpManager.instance.post(
-      url: SCUrl.kSendCodeUrl,
-      params: {'mobileNum' : phoneController.text.removeAllWhitespace},
-      success: (value) {
-        log('验证码发送成功');
+    SCLoginController state = Get.find<SCLoginController>();
+    state.sendCode(resultHandler: (status){
+      if (status == true) {
         initTimer();
-      },
-      failure: (value) {
-        String message = value['message'];
-        SCToast.showTip(message);
+      }
     });
   }
 

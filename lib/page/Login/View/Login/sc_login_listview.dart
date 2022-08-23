@@ -7,15 +7,9 @@ import 'package:smartcommunity/page/Login/GetXController/sc_login_controller.dar
 import 'package:smartcommunity/page/Login/View/Login/sc_login_btn.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_login_logo.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_login_textfield.dart';
-import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
-import '../../../../network/sc_http_manager.dart';
-import '../../../../network/sc_url.dart';
-import '../../../../skin/Model/sc_user.dart';
-import '../../../../skin/Tools/sc_scaffold_manager.dart';
-import '../../../../utils/Loading/sc_loading_utils.dart';
 import 'sc_login_agreement.dart';
 
 /// 登录页listview
@@ -122,22 +116,9 @@ class SCLoginListView extends StatelessWidget {
           //   SCToast.showTip('请输入正确的验证码');
           //   return;
           // }
-
           log('请求验证码登陆接口');
-          SCLoadingUtils.show();
-          SCHttpManager.instance.post(
-              url: SCUrl.kPhoneCodeLoginUrl,
-              params: {'mobileNum' : state.phone, 'code' : state.code},
-              success: (value) {
-                SCUser user = SCScaffoldManager.instance.getUserData();
-                log('登陆成功获取用户token=====${user.token}===用户昵称：${user.userName}');
-                SCRouterHelper.codePage(9003, null);
-              },
-              failure: (value) {
-                log('登陆失败===$value');
-                String message = value['message'];
-                SCToast.showTip(message);
-              });
+          state.login();
+
         },
       );
     });
