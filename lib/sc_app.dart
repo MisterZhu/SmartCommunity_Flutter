@@ -11,9 +11,12 @@ import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/utils/Router/sc_router_pages.dart';
+import 'package:smartcommunity/utils/sc_sp_utils.dart';
 
 void startApp() async {
   SCScaffoldManager.instance.initBase();
+
+  SCSpUtil.getInstance();
 
   SCLoadingUtils.initLoading();
 

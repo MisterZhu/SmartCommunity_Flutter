@@ -5,6 +5,9 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:smartcommunity/constants/sc_default_value.dart';
 import 'package:smartcommunity/network/sc_config.dart';
+import 'package:smartcommunity/network/sc_url.dart';
+import 'package:smartcommunity/skin/Model/sc_user.dart';
+import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 
 import '../utils/Loading/sc_loading_utils.dart';
 
@@ -96,10 +99,8 @@ class SCHttpManager {
     try {
       Response response = await _dio!.post(url, queryParameters: params, data: params, options: headers == null ? null : options);
       var data = doResponse(response);
-
-      log('headers=====${response.headers.map['authorization']}');
-      log('map=====${response.headers.map}');
-
+      log('data=====$data');
+      checkLogin(url: url, headers: response.headers.map, data: data);
       success?.call(data);
       return data;
     } catch (e) {
@@ -150,6 +151,24 @@ class SCHttpManager {
 
     }
   }
+
+  checkLogin({required String url , dynamic headers, dynamic data}) {
+
+    String token = '';
+    var list = headers['authorization'];
+    if (list != null) {
+      int count = list.length;
+      if (count > 0) {
+        token = list[0];
+      }
+    }
+
+    if (url == SCUrl.kPhoneCodeLoginUrl) {
+      var userData = data['userInfoV'];
+      userData['token'] = token;
+      SCScaffoldManager.instance.cacheUserData(userData);
+    }
+  }
 }
 
 /// 处理dio请求成功后,网络数据解包
@@ -158,6 +177,7 @@ doResponse(Response response) {
     SCLoadingUtils.hide();
     return response.data;
   } else {
+    SCLoadingUtils.hide();
     log('失败：${response.data}');
     return response.data;
   }
