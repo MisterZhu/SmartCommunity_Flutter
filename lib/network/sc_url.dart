@@ -13,4 +13,10 @@ class SCUrl {
   /// 验证码登陆url
   static const String kPhoneCodeLoginUrl = '/api/user/loginByCode';
 
+  /// 通过坐标经纬度查询项目url
+  static const String kSearchCommunityByLocationUrl = '/api/space/community/searchCommunityByPlace';
+
+  /// 通过城市名称查询项目url
+  static const String kSearchCommunityByCityUrl = '/api/space/community/pageSearchCommunity';
+
 }

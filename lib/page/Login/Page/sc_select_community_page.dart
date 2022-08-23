@@ -168,7 +168,7 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
 
     if (value.isNotEmpty) {
       List<SCCommunityModel> list = [];
-      if (state.communityList != null) {
+      if (state.communityList.length > 0) {
         for(int i = 0; i < state.communityList!.length; i++) {
           SCCommunityModel communityModel = state.communityList![i];
           String name = communityModel?.name ?? '';
@@ -205,8 +205,13 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
       SCLocationModel model = value;
       log('城市:${model.addressComponent?.city ?? ''}');
       SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
-      searchState.updateLocationCity(city: model.addressComponent?.city ?? '');
-      searchState.updateLocationCityCode(code: model.addressComponent?.citycode ?? '');
+      searchState.updateLocationCity(
+        city: model.addressComponent?.city ?? '',
+        code: model.addressComponent?.citycode ?? '',
+        lati: position.latitude,
+        long: position.longitude
+      );
+      loadData();
     }, failure: (value){
 
     });
@@ -225,10 +230,15 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
 
     String city = backParams['selectCity'] ?? '';
     String cityCode = backParams['selectCityCode'] ?? '';
-
-    searchState.updateSelectCity(city: city ?? '');
-    searchState.updateSelectCityCode(code: cityCode ?? '');
-
+    searchState.updateSelectCity(city: city ?? '', code: cityCode ?? '');
+    loadData();
   }
+
+  loadData() {
+    log('选择项目页面去请求数据==================');
+    SCSelectCommunityController state = Get.find<SCSelectCommunityController>();
+    state.loadCommunityData();
+  }
+
 }
 

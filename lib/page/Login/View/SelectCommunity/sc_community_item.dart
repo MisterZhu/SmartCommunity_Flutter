@@ -65,6 +65,10 @@ class SCCommunityItem extends StatelessWidget {
   }
 
   Widget topItem() {
+    String distance = '';
+    if (model.distance != null) {
+      distance = '${model.distance}m';
+    }
     return Container(
       padding: const EdgeInsets.only(right: 15.0),
       child: Row(
@@ -84,7 +88,7 @@ class SCCommunityItem extends StatelessWidget {
               color: Colors.transparent,
             ),
             child: Text(
-              model.distance ?? '',
+              distance,
               style: const TextStyle(
                 fontSize: SCFonts.f14,
                 fontWeight: FontWeight.w400,

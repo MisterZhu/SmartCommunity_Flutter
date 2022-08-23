@@ -33,7 +33,11 @@ class SCHttpManager {
   ///通用全局单例，第一次使用时初始化
   SCHttpManager._internal() {
     if (null == _dio) {
-      _headers = {'Content-Type': 'application/json; charset=utf-8', 'client' : SCDefaultValue.client};
+      SCUser user = SCScaffoldManager.instance.getUserData();
+      _headers = {'Content-Type': 'application/json; charset=utf-8',
+        'client' : SCDefaultValue.client,
+        'Authorization' : user.token};
+      log('通用全局单例====headers=====$_headers');
       _baseOptions = BaseOptions(
         baseUrl: SCConfig.BASE_URL,
         connectTimeout: SCDefaultValue.timeOut,
@@ -153,13 +157,14 @@ class SCHttpManager {
   }
 
   checkLogin({required String url , dynamic headers, dynamic data}) {
-
     String token = '';
     var list = headers['authorization'];
     if (list != null) {
       int count = list.length;
       if (count > 0) {
         token = list[0];
+        _headers!['Authorization'] = token;
+        SCHttpManager.instance._baseOptions?.headers = _headers;
       }
     }
 
@@ -186,28 +191,6 @@ doResponse(Response response) {
 /// 处理dio请求异常
 doError(e) {
   DioError error = e;
-  switch(error.response?.statusCode) {
-    case 400:
-      {
-
-      }
-      break;
-    case 401:
-      {
-
-      }
-      break;
-    case 403:
-      {
-
-      }
-      break;
-    case 404:
-      {
-
-      }
-      break;
-  }
   var params = {
     'code' : error.response?.statusCode,
     'message' : error.response?.data.toString(),

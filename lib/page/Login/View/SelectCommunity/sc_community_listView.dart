@@ -26,7 +26,7 @@ class SCCommunityListView extends StatelessWidget {
         separatorBuilder: (BuildContext context, int index) {
           return const SizedBox();
         },
-        itemCount: 5);
+        itemCount: communityList?.length ?? 0);
   }
 
   Widget getCell({required SCCommunityModel model}) {
