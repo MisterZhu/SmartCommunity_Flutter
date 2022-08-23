@@ -20,6 +20,12 @@ class SCSearchCityController extends GetxController {
   /// 定位城市的编码
   String cityCode = '';
 
+  /// 定位城市的纬度
+  double latitude = 0.0;
+
+  /// 定位城市的经度
+  double longitude = 0.0;
+
   /// 定位状态，默认失败
   SCLocationStatus locationStatus = SCLocationStatus.failure;
 
@@ -50,20 +56,14 @@ class SCSearchCityController extends GetxController {
     update();
   }
 
-  /// 更新定位城市
-  updateLocationCity({required String city}) {
+  /// 更新定位城市信息
+  updateLocationCity({required String city, required String code, required double lati, required double long}) {
     locationCity = city;
-    locationStatus = SCLocationStatus.success;
-
-    SCSearchCommunityController communityState = Get.find<SCSearchCommunityController>();
-    communityState.updateLocationCity(city: city);
-    update();
-  }
-
-  updateLocationCityCode({required String code}) {
     cityCode = code;
+    latitude = lati;
+    longitude = long;
+    locationStatus = SCLocationStatus.success;
     update();
   }
-
 
 }

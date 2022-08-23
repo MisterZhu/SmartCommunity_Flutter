@@ -237,8 +237,11 @@ class SCSelectCityState extends State<SCSelectCityPage> with WidgetsBindingObser
       SCLocationModel model = value;
       log('城市:${model.addressComponent?.city ?? ''}');
       SCSearchCityController searchState = Get.find<SCSearchCityController>();
-      searchState.updateLocationCity(city: model.addressComponent?.city ?? '');
-      searchState.updateLocationCityCode(code: model.addressComponent?.citycode ?? '');
+      searchState.updateLocationCity(
+          city: model.addressComponent?.city ?? '',
+          code: model.addressComponent?.citycode ?? '',
+          lati: position.latitude,
+          long: position.longitude);
     }, failure: (value){
 
     });

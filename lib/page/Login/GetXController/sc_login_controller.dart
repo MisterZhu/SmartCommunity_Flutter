@@ -53,19 +53,21 @@ class SCLoginController extends GetxController {
   }
 
   login() {
-    SCLoadingUtils.show();
-    SCHttpManager.instance.post(
-        url: SCUrl.kPhoneCodeLoginUrl,
-        params: {'mobileNum' : phone, 'code' : code},
-        success: (value) {
-          SCUser user = SCScaffoldManager.instance.getUserData();
-          log('登陆成功获取用户token=====${user.token}===用户昵称：${user.userName}');
-          SCRouterHelper.codePage(9003, null);
-        },
-        failure: (value) {
-          log('登陆失败===$value');
-          String message = value['message'];
-          SCToast.showTip(message);
-        });
+    SCRouterHelper.codePage(9003, null);
+
+    // SCLoadingUtils.show();
+    // SCHttpManager.instance.post(
+    //     url: SCUrl.kPhoneCodeLoginUrl,
+    //     params: {'mobileNum' : phone, 'code' : code},
+    //     success: (value) {
+    //       SCUser user = SCScaffoldManager.instance.getUserData();
+    //       log('登陆成功获取用户token=====${user.token}===用户昵称：${user.userName}');
+    //       SCRouterHelper.codePage(9003, null);
+    //     },
+    //     failure: (value) {
+    //       log('登陆失败===$value');
+    //       String message = value['message'];
+    //       SCToast.showTip(message);
+    //     });
   }
 }
