@@ -424,17 +424,11 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
   
   sendCode() {
     log('请求发送验证码接口');
-    SCLoadingUtils.show();
-    SCHttpManager.instance.post(
-      url: SCUrl.kSendCodeUrl,
-      params: {'mobileNum' : phoneController.text.removeAllWhitespace},
-      success: (value) {
-        SCToast.showTip('验证码发送成功');
+    SCLoginController state = Get.find<SCLoginController>();
+    state.sendCode(resultHandler: (status){
+      if (status == true) {
         initTimer();
-      },
-      failure: (value) {
-        String message = value['message'];
-        SCToast.showTip(message);
+      }
     });
   }
 
