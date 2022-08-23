@@ -4,4 +4,6 @@ class SCKey {
   static const String isShowGuide = 'SCIsShowGuidePage';
   /// 隐私政策key
   static const String isShowPrivacyAlert = 'SCIsShowPrivacyAlert';
+  /// 用户信息key
+  static const String kUserData = 'kUserData';
 }

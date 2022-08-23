@@ -12,6 +12,7 @@ import '../../constants/sc_key.dart';
 import '../../utils/Colors/sc_color_hex.dart';
 import '../../constants/sc_skin_key.dart';
 import '../../constants/sc_skin_value.dart';
+import '../../utils/sc_sp_utils.dart';
 import '../GetXController/sc_scaffold_controller.dart';
 import '../Model/sc_scaffold_model.dart';
 import '../Model/sc_user.dart';
@@ -28,6 +29,8 @@ class SCScaffoldManager {
 
   static late SCUser _user;
 
+  static bool _isLogin = false;
+
   SCScaffoldManager._internal() {
     _scaffoldModel = SCScaffoldModel();
     _user = SCUser();
@@ -43,6 +46,8 @@ class SCScaffoldManager {
   SCScaffoldModel get scaffoldModel => _scaffoldModel;
 
   SCUser get user => _user;
+
+  bool get isLogin => _isLogin;
 
   /// 初始化
   void initBase () {
@@ -118,8 +123,18 @@ class SCScaffoldManager {
 
   /*缓存用户信息*/
  cacheUserData(dynamic data) async{
-   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+   SCSpUtil.setMap(SCKey.kUserData, data);
+ }
 
+ /*获取用户信息*/
+ getUserData() {
+   bool contains = SCSpUtil.containsKey(SCKey.kUserData);
+   if (contains == true) {
+     var data = SCSpUtil.getMap(SCKey.kUserData);
+     _user = SCUser.fromJson(data);
+     _isLogin = _user?.token == null ? false : true;
+     return _user;
+   }
  }
 
 }

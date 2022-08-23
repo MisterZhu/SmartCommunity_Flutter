@@ -424,6 +424,7 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
   
   sendCode() {
     log('请求发送验证码接口');
+    SCLoadingUtils.show();
     SCHttpManager.instance.post(
       url: SCUrl.kSendCodeUrl,
       params: {'mobileNum' : phoneController.text.removeAllWhitespace},
