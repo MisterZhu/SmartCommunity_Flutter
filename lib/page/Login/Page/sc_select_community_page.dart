@@ -148,8 +148,8 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
     if (value.isNotEmpty) {
       List<SCCommunityModel> list = [];
       if (state.communityList.length > 0) {
-        for(int i = 0; i < state.communityList!.length; i++) {
-          SCCommunityModel communityModel = state.communityList![i];
+        for(int i = 0; i < state.communityList.length; i++) {
+          SCCommunityModel communityModel = state.communityList[i];
           String name = communityModel?.name ?? '';
           if (name.contains(value)) {
             list.add(communityModel);
@@ -214,7 +214,6 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
   }
 
   loadData() {
-    log('选择项目页面去请求数据==================');
     SCSelectCommunityController state = Get.find<SCSelectCommunityController>();
     state.loadCommunityData();
   }

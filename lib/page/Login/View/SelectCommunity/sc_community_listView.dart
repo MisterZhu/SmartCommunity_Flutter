@@ -29,7 +29,7 @@ class SCCommunityListView extends StatelessWidget {
   Widget body() {
 
     return Container(
-      color: SCColors.color_F2F3F5,
+      color: SCColors.color_FFFFFF,
       child: EasyRefresh(
           header: ClassicalHeader(
             refreshText: '下拉刷新',

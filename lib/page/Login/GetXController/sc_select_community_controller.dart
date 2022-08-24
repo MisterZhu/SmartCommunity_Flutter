@@ -34,7 +34,6 @@ class SCSelectCommunityController extends GetxController {
   @override
   onInit() {
     super.onInit();
-
   }
 
   /// 更新社区列表数据源
