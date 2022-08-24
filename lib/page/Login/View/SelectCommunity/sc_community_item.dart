@@ -59,7 +59,7 @@ class SCCommunityItem extends StatelessWidget {
         SCSearchCommunityController state = Get.find<SCSearchCommunityController>();
         state.hideKeyboard();
         /// 去选房号
-        //测试数据=>  SCRouterHelper.codePage(9001, null);
+
       },
     );
   }

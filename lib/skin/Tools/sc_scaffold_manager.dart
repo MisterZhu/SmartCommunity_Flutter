@@ -65,13 +65,13 @@ class SCScaffoldManager {
     /// 引导页key
     bool hasGuideKey = sharedPreferences.containsKey(SCKey.isShowGuide);
 
-    if(hasScaffoldKey) {
+    if (hasScaffoldKey) {
       String? scaffolfJsonString = sharedPreferences.getString(SkinDefaultKey.scaffold_key);
       var localJson = jsonDecode(scaffolfJsonString ?? '');
       _scaffoldModel = SCScaffoldModel.fromJson(localJson);
       log('皮肤数据:${SCScaffoldManager.instance.scaffoldModel.toJson()}');
       log('皮肤已设置完成');
-    }else {
+    } else {
       _scaffoldModel = SCScaffoldModel.fromJson(scaffoldJson);
       sharedPreferences.setString(SkinDefaultKey.scaffold_key, jsonEncode(scaffoldJson));
       log('设置皮肤完成');
@@ -91,11 +91,22 @@ class SCScaffoldManager {
     bool isShowPrivacy = preferences.getBool(SCKey.isShowPrivacyAlert) ?? true;
     String basePath = SCRouterPath.codeLoginPath;
 
+    bool contains = SCSpUtil.containsKey(SCKey.kIsLogin);
+    if (contains == true) {
+      _isLogin = SCSpUtil.getBool(SCKey.kIsLogin);
+    }
+
+    log('SCScaffoldManager--isLogin=====$_isLogin');
+
     if (isShowGuide == true) {
       basePath = SCRouterPath.guidePath;
     } else {
       if (isShowPrivacy == true) {
         basePath = SCRouterPath.basePrivacyPath;
+      } else {
+        if (_isLogin) {
+          basePath = SCRouterPath.selectCommunityPath;
+        }
       }
     }
     return Future(() => basePath);
@@ -121,6 +132,11 @@ class SCScaffoldManager {
     sharedPreferences.setString(SkinDefaultKey.scaffold_key, jsonEncode(_scaffoldModel.toJson()));
   }
 
+  /*缓存用户登录状态*/
+  cacheUserIsLogin(bool login) {
+    SCSpUtil.setBool(SCKey.kIsLogin, login);
+  }
+
   /*缓存用户信息*/
  cacheUserData(dynamic data) async{
    SCSpUtil.setMap(SCKey.kUserData, data);
@@ -132,7 +148,6 @@ class SCScaffoldManager {
    if (contains == true) {
      var data = SCSpUtil.getMap(SCKey.kUserData);
      _user = SCUser.fromJson(data);
-     _isLogin = _user?.token == null ? false : true;
      return _user;
    }
  }

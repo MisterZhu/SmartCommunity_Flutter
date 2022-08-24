@@ -6,4 +6,6 @@ class SCKey {
   static const String isShowPrivacyAlert = 'SCIsShowPrivacyAlert';
   /// 用户信息key
   static const String kUserData = 'kUserData';
+  /// 用户是否已登录key
+  static const String kIsLogin = 'kIsLogin';
 }
