@@ -2,8 +2,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_search_community_controller.dart';
+import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
 
 import '../../../network/sc_http_manager.dart';
 import '../../../network/sc_url.dart';
@@ -25,19 +27,13 @@ class SCSelectCommunityController extends GetxController {
   /// 选择的社区
   SCCommunityModel? selectCommunityModel;
 
+  EasyRefreshController refreshController = EasyRefreshController();
+
+  int currentPage = 1;
+  int pageSize = 20;
   @override
   onInit() {
     super.onInit();
-
-    /// 测试数据
-    var testList = [
-      {'name':'慧享生活园区','id':1, 'address':'文一西路767号','distance':'<300m'},
-      {'name':'绿城园区','id':2, 'address':'文一西路777号','distance':'<500m'},
-      {'name':'蒋村地铁','id':3, 'address':'文二路11号','distance':'<600m>'},
-      {'name':'天堂软件园','id':4, 'address':'北京路88号','distance':'<1km>'},
-      {'name':'蒋村商务中心','id':5, 'address':'文涛路99号','distance':'<2km'}
-    ];
-    //communityList = testList.map((e) => SCCommunityModel.fromJson(e)).toList();
 
   }
 
@@ -66,7 +62,8 @@ class SCSelectCommunityController extends GetxController {
     update();
   }
 
-  loadCommunityData() {
+  loadCommunityData({bool isLoadMore = false}) async{
+    SCLoadingUtils.show();
     SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
 
     if (searchState.selectCity == '' && searchState.latitude == 0.0) {
@@ -91,25 +88,40 @@ class SCSelectCommunityController extends GetxController {
               updateCommunityList(list: []);
             });
       } else {
+        int curPage = 1;
+        if (isLoadMore) {
+          curPage = currentPage + 1;
+        } else {
+          currentPage = 1;
+        }
+
         SCHttpManager.instance.post(
-            url: SCUrl.kSearchCommunityByCityUrl,
-            params: {'conditions': {'city': searchState.selectCity}},
-            success: (value) {
-              log('通过城市获取项目数据===$value');
-              var data = value['records'];
-              log('data===$data');
-              if (data.length > 0) {
-                communityList = List<SCCommunityModel>.from(data.map((e) => SCCommunityModel.fromJson(e)).toList());
-                updateCommunityList(list: communityList);
-              } else {
-                updateCommunityList(list: []);
+          url: SCUrl.kSearchCommunityByCityUrl,
+          params: {'conditions': {'city': searchState.selectCity}, 'pageNum':curPage, 'pageSize': pageSize},
+          success: (value) {
+            log('通过城市获取项目数据===$value');
+            var data = value['records'];
+            List<SCCommunityModel> dataList = List<SCCommunityModel>.from(data.map((e) => SCCommunityModel.fromJson(e)).toList());
+            //log('dataList===$dataList');
+            if (isLoadMore) {
+              if (dataList.length > 0) {
+                communityList.addAll(dataList!);
+                currentPage++;
               }
-            },
-            failure: (value) {
+            } else {
+              communityList = dataList;
+            }
+            refreshController.finishRefresh(success: true);
+            updateCommunityList(list: communityList);
+          },
+          failure: (value) {
+            log('请求失败=====$value');
+            if (value['message'] != null) {
               String message = value['message'];
               SCToast.showTip(message);
-              updateCommunityList(list: []);
-            });
+            }
+            updateCommunityList(list: []);
+          });
       }
     }
   }
