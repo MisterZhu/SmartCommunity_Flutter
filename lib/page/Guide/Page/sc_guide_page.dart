@@ -53,7 +53,7 @@ class SCGuideState extends State <SCGuidePage> {
       if (isShowPrivacy == true) {
         SCRouterHelper.codeOffAllPage(8000, null);
       } else {
-        SCRouterHelper.codeOffAllPage(10000, null);
+        SCRouterHelper.codeOffAllPage(9001, null);
       }
     }
   }

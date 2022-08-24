@@ -9,7 +9,9 @@ import 'package:smartcommunity/network/sc_url.dart';
 import 'package:smartcommunity/skin/Model/sc_user.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 
+import '../constants/sc_key.dart';
 import '../utils/Loading/sc_loading_utils.dart';
+import '../utils/sc_sp_utils.dart';
 
 class SCHttpManager {
   factory SCHttpManager() => _getInstance();
@@ -33,10 +35,13 @@ class SCHttpManager {
   ///通用全局单例，第一次使用时初始化
   SCHttpManager._internal() {
     if (null == _dio) {
-      SCUser user = SCScaffoldManager.instance.getUserData();
       _headers = {'Content-Type': 'application/json; charset=utf-8',
-        'client' : SCDefaultValue.client,
-        'Authorization' : user.token};
+        'client' : SCDefaultValue.client};
+      if (SCScaffoldManager.instance.isLogin == true) {
+        SCUser user = SCScaffoldManager.instance.getUserData();
+        _headers!['Authorization'] = user.token;
+      }
+
       log('通用全局单例====headers=====$_headers');
       _baseOptions = BaseOptions(
         baseUrl: SCConfig.BASE_URL,
@@ -156,21 +161,25 @@ class SCHttpManager {
     }
   }
 
-  checkLogin({required String url , dynamic headers, dynamic data}) {
-    String token = '';
-    var list = headers['authorization'];
-    if (list != null) {
-      int count = list.length;
-      if (count > 0) {
-        token = list[0];
-        _headers!['Authorization'] = token;
-        SCHttpManager.instance._baseOptions?.headers = _headers;
-      }
-    }
-
+  checkLogin({required String url, dynamic headers, dynamic data}) {
     if (url == SCUrl.kPhoneCodeLoginUrl) {
+      String token = '';
+
+      var list = headers['authorization'];
+      if (list != null) {
+        int count = list.length;
+        if (count > 0) {
+          token = list[0];
+          _headers!['Authorization'] = token;
+          SCHttpManager.instance._baseOptions?.headers = _headers;
+        }
+      }
+
       var userData = data['userInfoV'];
       userData['token'] = token;
+      if (token != '') {
+        SCScaffoldManager.instance.cacheUserIsLogin(true);
+      }
       SCScaffoldManager.instance.cacheUserData(userData);
     }
   }
