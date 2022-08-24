@@ -205,8 +205,11 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
       'cityCode' : searchState.cityCode,
     };
     var backParams = await SCRouterHelper.codePage(9002, params);
-    log('返回的参数:$backParams');
 
+    /// 当在搜索结果页面输入时点击选择城市跳转要收起键盘，调用cancelAction方法
+    cancelAction();
+
+    log('返回的参数:$backParams');
     String city = backParams['selectCity'] ?? '';
     String cityCode = backParams['selectCityCode'] ?? '';
     searchState.updateSelectCity(city: city ?? '', code: cityCode ?? '');
