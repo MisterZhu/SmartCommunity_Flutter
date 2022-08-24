@@ -122,34 +122,13 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
   Widget communityListView() {
     return GetBuilder<SCSelectCommunityController>(builder: (state){
       if (state.isShowResult) {
-        if (state.searchList!.isNotEmpty) {
-          return SCCommunitySearchResultListView(communityList: state.searchList, selectCommunityHandler: (SCCommunityModel model) {
-            state.updateSelectCommunity(model: model);
-          },);
-        } else {
-          return emptyView();
-        }
+        return SCCommunitySearchResultListView(communityList: state.searchList, selectCommunityHandler: (SCCommunityModel model) {
+          state.updateSelectCommunity(model: model);
+        },);
       } else {
-        if (state.communityList!.isNotEmpty) {
-          return SCCommunityListView(communityList: state.communityList,);
-        } else {
-          return emptyView();
-        }
+        return SCCommunityListView(communityList: state.communityList,);
       }
     });
-  }
-
-  Widget emptyView() {
-    /// 数据加载失败就显示底部重新获取按钮
-    return SCCommunityEmptyItem(
-      imageName: SCAsset.iconCommunityNoData,
-      content: '暂无可选项目',
-      buttonTitle: '重新获取',
-      showButton: false,
-      btnTapAction: () {
-        /// 重新加载数据
-
-      },);
   }
 
   /// 取消
