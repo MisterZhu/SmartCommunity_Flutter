@@ -62,7 +62,9 @@ class SCSelectCommunityController extends GetxController {
   }
 
   loadCommunityData({bool isLoadMore = false}) async{
-    SCLoadingUtils.show();
+    if (isLoadMore == false) {
+      SCLoadingUtils.show();
+    }
     SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
 
     if (searchState.selectCity == '' && searchState.latitude == 0.0) {

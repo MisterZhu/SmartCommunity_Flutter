@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/page/Login/View/SelectCommunity/sc_community_empty_item.dart';
 import 'package:smartcommunity/page/Login/View/SelectCommunity/sc_community_item.dart';
+import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
 import '../../../../constants/sc_asset.dart';
 import '../../../../constants/sc_colors.dart';
 import '../../GetXController/sc_search_community_controller.dart';
