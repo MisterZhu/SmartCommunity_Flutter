@@ -200,10 +200,40 @@ doResponse(Response response) {
 /// 处理dio请求异常
 doError(e) {
   DioError error = e;
+  if (e is DioError) {
+    switch(error.response?.statusCode) {
+      case 201: {
+
+      }
+      break;
+      case 401: {
+        /// 登录失效
+        updateUserData();
+      }
+      break;
+      case 403: {
+
+      }
+      break;
+      case 404: {
+
+      }
+      break;
+    }
+
+  }
   var params = {
     'code' : error.response?.statusCode,
     'message' : error.response?.data.toString(),
   };
   SCLoadingUtils.hide();
   return params;
+}
+
+updateUserData() {
+  log('登陆已失效，清空token，刷新本地缓存用户数据');
+  SCUser user = SCScaffoldManager.instance.getUserData();
+  user.token = '';
+  SCScaffoldManager.instance.cacheUserIsLogin(false);
+  SCScaffoldManager.instance.cacheUserData(user);
 }
