@@ -25,11 +25,6 @@ class SCMineState extends State<SCMinePage> {
   @override
   initState() {
     super.initState();
-    SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
-      statusBarColor: Colors.red,
-      statusBarBrightness: Brightness.dark,
-    );
-    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
 
   /// body
