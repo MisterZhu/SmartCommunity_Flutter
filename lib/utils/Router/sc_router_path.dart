@@ -23,4 +23,7 @@ class SCRouterPath {
   /***************************** 首页 ******************************/
   /// 首页
   static String homePath = "/home/HomePage";
+
+
+  static String servicePagePath = "/root/Service/sc_service_page";
 }

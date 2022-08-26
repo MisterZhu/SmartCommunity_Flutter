@@ -176,5 +176,16 @@ class SCAsset {
   /// 选择项目列表空白占位图
   static const String iconCommunityNoData = 'images/ic_community_nodata.png';
 
-/************* 登录 *************/
+  /************* 登录 *************/
+
+  /************* 全部应用 *************/
+
+  static const String iconServiceQrCode = 'images/ic_service_qrcode.png';
+  /// 编辑首页应用向下箭头
+  static const String iconEditAppDownArrow = 'images/ic_edit_app_down.png';
+  /// 编辑首页应用向上箭头
+  static const String iconEditAppUpArrow = 'images/ic_edit_app_up.png';
+
+  /************* 全部应用 *************/
+
 }
