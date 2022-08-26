@@ -31,4 +31,7 @@ class SCRouterPath {
   /***************************** 通用页 ******************************/
   /// webView
   static String webViewPath = "/root/webViewPage";
+
+
+  static String servicePagePath = "/root/Service/sc_service_page";
 }
