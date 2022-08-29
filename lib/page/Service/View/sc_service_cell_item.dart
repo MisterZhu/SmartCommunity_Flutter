@@ -148,10 +148,15 @@ class SCServiceCellItem extends StatelessWidget {
         crossAxisSpacing: 8,
         crossAxisCount: 5,
         shrinkWrap: true,
-        itemCount: section == 0 ? state.homeAppCount : list?.length ?? 0,
+        itemCount: section == 0 ? state.homeAppList.length : list?.length ?? 0,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          SCServiceModel model = list![index];
+          SCServiceModel model;
+          if (section == 0) {
+            model = state.homeAppList![index];
+          } else {
+            model = list![index];
+          }
           return gridItem(model);
         },
         staggeredTileBuilder: (int index) {
@@ -165,10 +170,10 @@ class SCServiceCellItem extends StatelessWidget {
       onTap: (){
         if (section == 0) {
           log('首页应用删除');
-          state.deleteHomeApp('id');
+          state.deleteHomeApp(model);
         } else {
           log('应用添加');
-          state.addHomeApp('id');
+          state.addHomeApp(model);
         }
       },
       child: appItem(model),
@@ -212,14 +217,15 @@ class SCServiceCellItem extends StatelessWidget {
               width: 36,
               height: 36,
           )),
-        addIconItem(model),
+        addOrDeleteIconItem(model),
       ],
     );
   }
 
-  Widget addIconItem(SCServiceModel model) {
+  Widget addOrDeleteIconItem(SCServiceModel model) {
     SCServiceController state = Get.find<SCServiceController>();
     return Offstage(
+      /// offstage = true（隐藏）
       offstage: state.isEditing ? false : true,
       child: Container(
         width: 16,

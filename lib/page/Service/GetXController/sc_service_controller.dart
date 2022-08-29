@@ -13,10 +13,9 @@ class SCServiceController extends GetxController {
   /// 是否正在编辑，默认不编辑
   bool isEditing = false;
 
-  /// 首页app数量
-  int homeAppCount = 5;
-
-  /// 搜索的数据源
+  /// 首页应用列表
+  List<SCServiceModel> homeAppList = [];
+  /// 应用列表
   List<SCServiceModel> appList = [];
 
 
@@ -24,6 +23,13 @@ class SCServiceController extends GetxController {
   @override
   onInit() {
     super.onInit();
+    var hoemTestList = [
+    {'id': '0', 'name': '业主二维码', 'icon': SCAsset.iconServiceQrCode, 'added': false},
+    {'id': '1', 'name': '公务用车', 'icon': SCAsset.iconServiceCar, 'added': false},
+    {'id': '2', 'name': '积分管理', 'icon': SCAsset.iconServiceIntegral, 'added': false},
+    {'id': '3', 'name': '报事报修', 'icon': SCAsset.iconServiceReport, 'added': false},
+    ];
+
     var testList = [
       {'id': '0', 'name': '业主二维码', 'icon': SCAsset.iconServiceQrCode, 'added': false},
       {'id': '1', 'name': '公务用车', 'icon': SCAsset.iconServiceCar, 'added': false},
@@ -38,6 +44,8 @@ class SCServiceController extends GetxController {
     ];
 
     appList = testList.map((e) => SCServiceModel.fromJson(e)).toList();
+
+    homeAppList = hoemTestList.map((e) => SCServiceModel.fromJson(e)).toList();
   }
 
   /// 更新首页应用展开状态
@@ -52,13 +60,13 @@ class SCServiceController extends GetxController {
     update();
   }
 
-  deleteHomeApp(String id) {
-    homeAppCount--;
+  deleteHomeApp(SCServiceModel model) {
+    homeAppList.remove(model);
     update();
   }
 
-  addHomeApp(String id) {
-    homeAppCount++;
+  addHomeApp(SCServiceModel model) {
+    homeAppList.add(model);
     update();
   }
 
