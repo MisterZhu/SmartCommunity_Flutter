@@ -8,19 +8,26 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 /// Date: 2022/8/29 9:37
 /// Description: 选择房号controller
 class SCSelectHouseController extends GetxController {
-
   late PageController pageController;
   late int pageIndex;
+  late String communityId;
+
+  // 更新上个页面选中的communityId
+  updateCommunityId({required String communityId}) {
+    this.communityId = communityId;
+    update();
+  }
 
   // 初始化pageController
-  initPageController({required PageController pageController, required int pageIndex}){
+  initPageController(
+      {required PageController pageController, required int pageIndex}) {
     this.pageController = pageController;
     this.pageIndex = pageIndex;
     update();
   }
 
   // 切换tab
-  switchTab({required int pageIndex}){
+  switchTab({required int pageIndex}) {
     this.pageIndex = pageIndex;
     pageController.jumpToPage(pageIndex);
     update();

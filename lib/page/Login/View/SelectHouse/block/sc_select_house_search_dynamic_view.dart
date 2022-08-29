@@ -8,7 +8,6 @@ import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_block_controller.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_block_search_status_controller.dart.dart';
-import 'package:smartcommunity/page/Login/Model/SelectHouse/demo_sc_house_block_model.dart';
 import 'package:smartcommunity/page/Login/View/SelectHouse/block/sc_select_house_search_static_view.dart';
 
 /// Copyright (c), 浙江慧享信息科技有限公司
@@ -168,7 +167,7 @@ class SCHouseSearchDynamicView extends StatelessWidget {
     if (valueChangedAction != null) {
       valueChangedAction?.call(value);
     }
-    SCSelectHouseBlockController state = Get.find<SCSelectHouseBlockController>();
+   /* SCSelectHouseBlockController state = Get.find<SCSelectHouseBlockController>();
     List<DemoSCHouseBlockModel> houseCommunityList = state.houseCommunityList;
     List<DemoSCHouseBlockModel> searchResultList = [];
     if(value.isNotEmpty) {
@@ -185,6 +184,6 @@ class SCHouseSearchDynamicView extends StatelessWidget {
     } else {
       print('-->输入的东西为空');
       state.updateSearchList(list:[]);
-    }
+    }*/
   }
 }

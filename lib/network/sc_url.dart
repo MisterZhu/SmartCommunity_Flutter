@@ -19,4 +19,6 @@ class SCUrl {
   /// 通过城市名称查询项目url
   static const String kSearchCommunityByCityUrl = '/api/space/community/pageSearchCommunity';
 
+  /// 通过项目Id获取房号数据url
+  static const String kGetSpaceNodesUrl = '/api/space/space/getSpaceNodes';
 }

@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_select_house_block_model.dart';
 
-import '../Model/SelectHouse/demo_sc_house_block_model.dart';
 
 /// Copyright (c), 浙江慧享信息科技有限公司
 /// FileName: sc_select_house_block_controller
@@ -12,18 +11,18 @@ import '../Model/SelectHouse/demo_sc_house_block_model.dart';
 class SCSelectHouseBlockController extends GetxController {
 
   /// 苑级别的list
-  List<DemoSCHouseBlockModel> houseCommunityList = [];
+  List<ScSelectHouseBlockModel> blockList = [];
   /// 苑层级 - 搜索结果
-  List<DemoSCHouseBlockModel> searchResultList = [];
+  List<ScSelectHouseBlockModel> searchResultList = [];
 
   /// 刷新数据 - 选择房号 苑级别
-  updateHouseCommunityList({required List<DemoSCHouseBlockModel> list}){
-    houseCommunityList = list;
+  updateHouseBlockList({required List<ScSelectHouseBlockModel> list}){
+    blockList = list;
     update();
   }
 
   /// 刷新数据 - 选择房号 苑级别
-  updateSearchList({required List<DemoSCHouseBlockModel> list}){
+  updateSearchList({required List<ScSelectHouseBlockModel> list}){
     searchResultList = list;
     update();
   }

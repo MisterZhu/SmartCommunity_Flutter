@@ -1,12 +1,16 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
+import 'package:smartcommunity/network/sc_http_manager.dart';
+import 'package:smartcommunity/network/sc_url.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_block_controller.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_block_search_status_controller.dart.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_controller.dart';
+import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_select_house_block_model.dart';
 import 'package:smartcommunity/page/Login/View/SelectHouse/block/sc_select_house_block_listview.dart';
 import 'package:smartcommunity/page/Login/View/SelectHouse/block/sc_select_house_search_dynamic_view.dart';
 import 'package:smartcommunity/page/Login/View/SelectHouse/block/sc_select_house_search_static_view.dart';
+import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 
 /// Copyright (c), 浙江慧享信息科技有限公司
 /// FileName: sc_select_house_community_page_view
@@ -15,6 +19,9 @@ import 'package:smartcommunity/page/Login/View/SelectHouse/block/sc_select_house
 /// Date: 2022/8/18 9:56
 /// Description: 选择房号-苑
 class SCSelectHouseBlockPageView extends StatefulWidget {
+
+
+
   const SCSelectHouseBlockPageView({Key? key}) : super(key: key);
 
   @override
@@ -24,6 +31,14 @@ class SCSelectHouseBlockPageView extends StatefulWidget {
 
 class _SCSelectHouseBlockPageViewState
     extends State<SCSelectHouseBlockPageView> {
+  SCSelectHouseController selectHouseController =
+      Get.find<SCSelectHouseController>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return _body();
@@ -82,7 +97,8 @@ class _SCSelectHouseBlockPageViewState
   }
 
   Widget searchHeader() {
-    return GetBuilder<SCSelectHouseBlockSearchStatusController>(builder: (state) {
+    return GetBuilder<SCSelectHouseBlockSearchStatusController>(
+        builder: (state) {
       if (state.isShowCancel) {
         // 搜索中……
         return SCHouseSearchDynamicView(
@@ -94,5 +110,4 @@ class _SCSelectHouseBlockPageViewState
       }
     });
   }
-
 }

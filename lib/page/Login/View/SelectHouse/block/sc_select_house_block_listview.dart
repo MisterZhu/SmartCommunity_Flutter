@@ -1,15 +1,10 @@
-import 'dart:math';
-
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_block_controller.dart';
-import 'package:smartcommunity/page/Login/GetXController/sc_select_house_controller.dart';
 
 import '../../../GetXController/sc_select_house_block_search_status_controller.dart.dart';
-import '../../../Model/SelectHouse/demo_sc_house_block_model.dart';
 
 /// Copyright (c), 浙江慧享信息科技有限公司
 /// FileName: sc_select_house_community_listview
@@ -59,7 +54,7 @@ class _SCSelectHouseBlockListViewState
               ? 0
               : scSelectHouseBlockController.searchResultList.length,
           itemBuilder: (context, index) {
-            bool? isChecked =
+            /*bool? isChecked =
                 scSelectHouseBlockController.searchResultList[index].isChecked;
             if (isChecked!) {
               // 选中
@@ -67,7 +62,8 @@ class _SCSelectHouseBlockListViewState
             } else {
               // 未选中
               return _hasNotChecked(true, index);
-            }
+            }*/
+            return _hasNotChecked(true, index);
           });
     } else {
       return GridView.builder(
@@ -79,18 +75,20 @@ class _SCSelectHouseBlockListViewState
               childAspectRatio: 2.5,
               mainAxisSpacing: 12.0),
           scrollDirection: Axis.vertical,
-          itemCount: sCSelectHouseBlockState.houseCommunityList == null
+          itemCount: sCSelectHouseBlockState.blockList == null
               ? 0
-              : sCSelectHouseBlockState.houseCommunityList.length,
+              : sCSelectHouseBlockState.blockList.length,
+
           itemBuilder: (context, index) {
-            bool? isChecked = sCSelectHouseBlockState.houseCommunityList[index].isChecked;
+           /* bool? isChecked = sCSelectHouseBlockState.blockList[index].isChecked;
             if (isChecked!) {
               // 选中
               return _hasChecked(false, index);
             } else {
               // 未选中
               return _hasNotChecked(false, index);
-            }
+            }*/
+            return _hasNotChecked(true, index);
           });
     }
   }
@@ -110,7 +108,7 @@ class _SCSelectHouseBlockListViewState
 
       child: Center(
         child: Text(
-          breakWord(isSearch ? '${sCSelectHouseBlockState.searchResultList[index].name}' : '${sCSelectHouseBlockState.houseCommunityList[index].name}'),
+          breakWord(isSearch ? '${sCSelectHouseBlockState.searchResultList[index].name}' : '${sCSelectHouseBlockState.blockList[index].name}'),
           style: _hasCheckedTextStyle(),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
@@ -131,7 +129,7 @@ class _SCSelectHouseBlockListViewState
         // child: Text('${state.houseCommunityList[index].name}'),
         child: Center(
           child: Text(
-            breakWord(isSearch ? '${sCSelectHouseBlockState.searchResultList[index].name}' : '${sCSelectHouseBlockState.houseCommunityList[index].name}'),
+            breakWord(isSearch ? '${sCSelectHouseBlockState.searchResultList[index].name}' : '${sCSelectHouseBlockState.blockList[index].name}'),
             style: _hasNotCheckedTextStyle(),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -139,7 +137,7 @@ class _SCSelectHouseBlockListViewState
         ),
       ),
       onTap: () {
-        if(isSearch){
+        /*if(isSearch){
           List<DemoSCHouseBlockModel> searchResultList =
               sCSelectHouseBlockState.searchResultList;
           for (int i = 0; i < searchResultList.length; i++) {
@@ -169,7 +167,7 @@ class _SCSelectHouseBlockListViewState
           // pageView跳转
           SCSelectHouseController selectHouseController = Get.put(SCSelectHouseController());
           selectHouseController.switchTab(pageIndex: 1);
-        }
+        }*/
 
       },
     );

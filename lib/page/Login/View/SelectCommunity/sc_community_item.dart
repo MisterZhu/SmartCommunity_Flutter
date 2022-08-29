@@ -59,9 +59,14 @@ class SCCommunityItem extends StatelessWidget {
         SCSearchCommunityController state = Get.find<SCSearchCommunityController>();
         state.hideKeyboard();
         /// 去选房号
+        var params = {
+          'communityId' : model.id,
+          'communityName': model.name
+        };
+        SCRouterHelper.codePage(20001, params);
 
         /// 测试数据，跳转到全部应用列表
-        SCRouterHelper.codePage(10011, null);
+        // SCRouterHelper.codePage(10011, null);
       },
     );
   }
