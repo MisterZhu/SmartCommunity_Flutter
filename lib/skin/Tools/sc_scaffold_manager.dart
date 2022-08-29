@@ -104,9 +104,12 @@ class SCScaffoldManager {
       if (isShowPrivacy == true) {
         basePath = SCRouterPath.basePrivacyPath;
       } else {
-        if (_isLogin) {
-          basePath = SCRouterPath.selectCommunityPath;
-        }
+        /// 测试
+        basePath = SCRouterPath.tabPath;
+
+        // if (_isLogin) {
+        //   basePath = SCRouterPath.selectCommunityPath;
+        // }
       }
     }
     return Future(() => basePath);

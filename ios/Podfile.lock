@@ -30,9 +30,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - Toast
-  trunk:
     - FMDB
+    - Toast
 
 EXTERNAL SOURCES:
   Flutter:

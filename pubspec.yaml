@@ -60,10 +60,6 @@ dependencies:
   geolocator: ^9.0.1
   # 加载组件 https://pub.flutter-io.cn/packages/flutter_easyloading/install
   flutter_easyloading: ^3.0.5
-  # auto_size_text https://pub.flutter-io.cn/packages/auto_size_text/install
-  auto_size_text: ^3.0.0
-  # webview https://pub.flutter-io.cn/packages/webview_flutter/install
-  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_test:
@@ -88,11 +84,10 @@ flutter:
   uses-material-design: true
   assets:
     - images/
-    - images/common/
     - images/guide/
     - images/logo/
     - images/login/
-    - images/loading/
+    - images/appList/
     - json/
 
   # To add assets to your application, add an assets section, like this:
