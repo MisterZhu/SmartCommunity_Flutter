@@ -166,44 +166,50 @@ class SCServiceCellItem extends StatelessWidget {
 
   Widget gridItem(SCServiceModel model) {
     SCServiceController state = Get.find<SCServiceController>();
+    bool hide = true;
+    if (section == 0) {
+      hide = state.isEditing ? false : true;
+    } else {
+      if (state.isEditing) {
+        hide = state.homeAppList.any((element) => model.id == element.id);
+      }
+    }
     return GestureDetector(
       onTap: (){
-        if (section == 0) {
-          log('首页应用删除');
-          state.deleteHomeApp(model);
-        } else {
-          log('应用添加');
-          state.addHomeApp(model);
+        if (!hide) {
+          if (section == 0) {
+            log('首页应用删除');
+            state.deleteHomeApp(model);
+          } else {
+            log('应用添加');
+            state.addHomeApp(model);
+          }
         }
       },
-      child: appItem(model),
-    );
-  }
-
-  Widget appItem(SCServiceModel model) {
-    return  Container(
-      color: SCColors.color_FFFFFF,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          topIconItem(model),
-          const SizedBox(
-            height: 4,
-          ),
-          Text(
-            model.name ?? '',
-            textAlign: TextAlign.center,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(fontSize: 12, color: SCColors.color_5E5F66),
-          )
-        ],
+      child: Container(
+        color: SCColors.color_FFFFFF,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            topIconItem(model, hide),
+            const SizedBox(
+              height: 4,
+            ),
+            Text(
+              model.name ?? '',
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontSize: 12, color: SCColors.color_5E5F66),
+            )
+          ],
+        ),
       ),
     );
   }
 
-  Widget topIconItem(SCServiceModel model) {
+  Widget topIconItem(SCServiceModel model, bool hide) {
     return Stack(
       alignment: Alignment.topRight,
       children: [
@@ -217,16 +223,15 @@ class SCServiceCellItem extends StatelessWidget {
               width: 36,
               height: 36,
           )),
-        addOrDeleteIconItem(model),
+        addOrDeleteIconItem(model, hide),
       ],
     );
   }
 
-  Widget addOrDeleteIconItem(SCServiceModel model) {
-    SCServiceController state = Get.find<SCServiceController>();
+  Widget addOrDeleteIconItem(SCServiceModel model, bool hide) {
     return Offstage(
       /// offstage = true（隐藏）
-      offstage: state.isEditing ? false : true,
+      offstage: hide,
       child: Container(
         width: 16,
         height: 16,
