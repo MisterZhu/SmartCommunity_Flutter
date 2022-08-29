@@ -18,6 +18,9 @@ class SCDefaultValue {
   /// 网络加载失败
   static const String errorMessage = '加载失败，请稍后重试！';
 
+  /// 网络不稳定
+  static const String netErrorMessage = '网络不稳定，请稍后重试！';
+
   /// 高德web key
   static const String kAMapWebKey = 'fb48becc7b7a077d4da585a977d39ed2';
 

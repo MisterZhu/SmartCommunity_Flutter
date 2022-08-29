@@ -8,7 +8,7 @@ class SCLoadingUtils {
 
   /// 显示加载框
   static show({String? text}) {
-    if (text == null) {
+    if (text == null || text == '') {
       EasyLoading.instance.contentPadding = const EdgeInsets.all(20.0);
       EasyLoading.show();
     } else {
@@ -24,12 +24,24 @@ class SCLoadingUtils {
 
   /// 成功提示
   static success({String? text}) {
-    EasyLoading.showSuccess(text ?? '');
+    if (text == null || text == '') {
+      EasyLoading.instance.contentPadding = const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 10);
+      EasyLoading.showSuccess(text ?? '');
+    } else {
+      EasyLoading.instance.contentPadding = const EdgeInsets.only(left: 40, right: 40, top: 30, bottom: 20);
+      EasyLoading.showSuccess(text ?? '');
+    }
   }
 
   /// 失败提示
   static failure({String? text}) {
-    EasyLoading.showError(text ?? '');
+    if (text == null || text == '') {
+      EasyLoading.instance.contentPadding = const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 10);
+      EasyLoading.showError(text ?? '');
+    } else {
+      EasyLoading.instance.contentPadding = const EdgeInsets.only(left: 40, right: 40, top: 30, bottom: 20);
+      EasyLoading.showError(text ?? '');
+    }
   }
 
   /// 信息提示

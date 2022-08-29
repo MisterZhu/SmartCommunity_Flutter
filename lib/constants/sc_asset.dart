@@ -3,12 +3,20 @@ class SCAsset {
 
   static const String iconFilter = 'images/icon_filter.png';
   static const String iconSearch = 'images/icon_search.png';
-  static const String iconBackBlack = 'images/icon_back_black.png';
+  /// 导航栏返回按钮，默认黑色
+  static const String iconNavigationBack = 'images/common/icon_navigation_back.png';
+  /// 导航栏关闭按钮，默认黑色
+  static const String iconNavigationClose = 'images/common/icon_navigation_close.png';
   static const String iconBackWhite = 'images/icon_back_white.png';
   static const String iconNoData = 'images/icon_no_data.png';
   static const String iconAdd = 'images/icon_add.png';
   static const String iconNewEnergyAdd = 'images/icon_new_energy_add.png';
   static const String iconPaymentSuccessful = 'images/icon_payment_successful.png';
+
+  /// loading-成功
+  static const String iconLoadingSuccess = 'images/loading/icon_success_white.png';
+  /// loading-失败
+  static const String iconLoadingFailed = 'images/loading/icon_failed_white.png';
 
   /// 白色定位icon
   static const String iconLocation = 'images/icon_location_white.png';

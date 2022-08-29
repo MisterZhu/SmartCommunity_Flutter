@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,6 +44,7 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
   void initState() {
     super.initState();
     dynamic params = Get.arguments;
+    log('webView接收的参数：$params');
     _title =
         StringUtils.isNotNullOrEmpty(params?["title"]) ? params!["title"] : "";
     _url = StringUtils.isNotNullOrEmpty(params?["url"]) ? params!["url"] : "";
@@ -84,9 +86,9 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
               height: 24,
               child: GestureDetector(
                 child: Image.asset(
-                  SCAsset.iconBackBlack,
-                  width: 12.0,
-                  height: 12.0,
+                  SCAsset.iconNavigationBack,
+                  width: 24.0,
+                  height: 24.0,
                 ),
                 onTap: () {
                   SCRouterHelper.back(null);
@@ -99,7 +101,11 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
               width: 24,
               height: 24,
               child: GestureDetector(
-                child: const Icon(Icons.close),
+                child: Image.asset(
+                  SCAsset.iconNavigationClose,
+                  width: 24.0,
+                  height: 24.0,
+                ),
                 onTap: () {
                   goBack();
                 },

@@ -22,8 +22,6 @@ class SCRouterPages {
     GetPage(name: SCRouterPath.codeLoginPath, page: () => SCLoginPage()),
     /*首页*/
     GetPage(name: SCRouterPath.homePath, page: () => SCHomePage()),
-    /*webView*/
-    GetPage(name: SCRouterPath.webViewPath, page: () => SCWebViewPage()),
     /*引导页*/
     GetPage(name: SCRouterPath.guidePath, page: () => SCGuidePage()),
     /*首次的用户协议和隐私政策弹窗*/
@@ -32,6 +30,8 @@ class SCRouterPages {
     GetPage(name: SCRouterPath.selectCityPath, page: () => SCSelectCityPage()),
     /*社区选择*/
     GetPage(name: SCRouterPath.selectCommunityPath, page: () => SCSelectCommunityPage()),
+    /*webView*/
+    GetPage(name: SCRouterPath.webViewPath, page: () => SCWebViewPage()),
     /*房号选择*/
     GetPage(name: SCRouterPath.selectHousePath, page: () => SCSelectHousePage()),
     /*全部应用*/

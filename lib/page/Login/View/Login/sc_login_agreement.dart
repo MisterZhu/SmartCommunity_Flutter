@@ -43,7 +43,7 @@ class SCLoginAgreement extends StatelessWidget {
   final String? privacyPolicyUrl;
 
   /// 协议详情
-  final Function(String url)? agreementDetailAction;
+  final Function(String title,String url)? agreementDetailAction;
 
   /// 勾选协议
   final Function? agreeAction;
@@ -154,7 +154,7 @@ class SCLoginAgreement extends StatelessWidget {
         style: TextStyle(fontSize: SCFonts.f12, color: color),
         recognizer: TapGestureRecognizer()..onTap = () {
           if (agreementDetailAction != null) {
-            agreementDetailAction?.call(url);
+            agreementDetailAction?.call(title, url);
           }
         });
   }
