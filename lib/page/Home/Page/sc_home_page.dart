@@ -19,7 +19,7 @@ class SCHomePage extends StatefulWidget {
 }
 
 class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
-  SCHomeController state = Get.find<SCHomeController>();
+  SCHomeController state = Get.put(SCHomeController());
 
   @override
   Widget build(BuildContext context) {
