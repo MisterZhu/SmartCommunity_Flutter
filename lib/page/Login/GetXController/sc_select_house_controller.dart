@@ -1,38 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
-import '../Model/demo_sc_house_community_model.dart';
-
 /// Copyright (c), 浙江慧享信息科技有限公司
-/// FileName: sc_select_house_controller.dart
+/// FileName: sc_select_house_controller
 /// Author: wang tao
 /// Email: wangtao1@lvchengfuwu.com
-/// Date: 2022/8/17 14:23
-/// Description: 选择房号Controller
+/// Date: 2022/8/29 9:37
+/// Description: 选择房号controller
 class SCSelectHouseController extends GetxController {
 
-  /// 苑级别的list
-  List<DemoSCHouseCommunityModel> houseCommunityList = [];
-  /// 苑层级 - 搜索是否显示取消
-  bool isShowCancel = false;
-  /// 苑层级 - 搜索结果
-  List<DemoSCHouseCommunityModel> searchResultList = [];
+  late PageController pageController;
+  late int pageIndex;
 
-  /// 刷新数据 - 选择房号 苑级别
-  updateHouseCommunityList(List<DemoSCHouseCommunityModel> list){
-    houseCommunityList = list;
+  // 初始化pageController
+  initPageController({required PageController pageController, required int pageIndex}){
+    this.pageController = pageController;
+    this.pageIndex = pageIndex;
     update();
   }
 
-  /// 刷新搜索状态
-  updateSearchStatus({bool isShowCancel = false}){
-    this.isShowCancel = isShowCancel;
-    update();
-  }
-
-  /// 刷新数据 - 选择房号 苑级别
-  updateSearchList(List<DemoSCHouseCommunityModel> list){
-    searchResultList = list;
+  // 切换tab
+  switchTab({required int pageIndex}){
+    this.pageIndex = pageIndex;
+    pageController.jumpToPage(pageIndex);
     update();
   }
 }

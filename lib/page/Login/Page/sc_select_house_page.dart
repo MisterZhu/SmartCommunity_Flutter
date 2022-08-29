@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_building_controller.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_building_search_status_controller.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_block_search_status_controller.dart.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_controller.dart';
-import 'package:smartcommunity/page/Login/Model/demo_sc_house_community_model.dart';
-import 'package:smartcommunity/page/Login/View/SelectHouse/sc_select_house_building_page_view.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_room_controller.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_room_search_status_controller.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_room_search_status_controller.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_unit_controller.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_unit_search_status_controller.dart';
+import 'package:smartcommunity/page/Login/Model/SelectHouse/demo_sc_house_block_model.dart';
+import 'package:smartcommunity/page/Login/Model/SelectHouse/demo_sc_house_building_model.dart';
+import 'package:smartcommunity/page/Login/Model/SelectHouse/demo_sc_house_room_model.dart';
+import 'package:smartcommunity/page/Login/Model/SelectHouse/demo_sc_house_unit_model.dart';
+import 'package:smartcommunity/page/Login/View/SelectHouse/block/sc_select_house_block_page_view.dart';
+import 'package:smartcommunity/page/Login/View/SelectHouse/building/sc_select_house_building_page_view.dart';
+import 'package:smartcommunity/page/Login/View/SelectHouse/room/sc_select_house_room_page_view.dart';
+import 'package:smartcommunity/page/Login/View/SelectHouse/unit/sc_select_house_unit_page_view.dart';
 import 'package:smartcommunity/skin/View/sc_custom_scaffold.dart';
 
 import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_fonts.dart';
-import '../View/SelectHouse/sc_select_house_community_page_view.dart';
+import '../GetXController/sc_select_house_block_controller.dart';
 
 /// Copyright (c), 浙江慧享信息科技有限公司
 /// FileName: sc_select_house_page
@@ -24,17 +38,55 @@ class SCSelectHousePage extends StatefulWidget {
 }
 
 class _SCSelectHousePageState extends State<SCSelectHousePage> {
+  SCSelectHouseController selectHouseController =
+      Get.put(SCSelectHouseController());
+
   /// 苑级别的list
-  List<DemoSCHouseCommunityModel> houseCommunityList = [];
-  SCSelectHouseController state = Get.put(SCSelectHouseController());
+  List<DemoSCHouseBlockModel> houseCommunityList = [];
+  SCSelectHouseBlockSearchStatusController blockSearchStatusState =
+      Get.put(SCSelectHouseBlockSearchStatusController());
+  SCSelectHouseBlockController scSelectHouseBlockController =
+      Get.put(SCSelectHouseBlockController());
+
+  /// 幢级别的list
+  List<DemoSCHouseBuildingModel> buildingList = [];
+  SCSelectHouseBuildingSearchStatusController
+      scSelectHouseBuildingSearchStatusController =
+      Get.put(SCSelectHouseBuildingSearchStatusController());
+  SCSelectHouseBuildingController scSelectHouseBuildingController =
+      Get.put(SCSelectHouseBuildingController());
+
+  /// 单元级别的list
+  List<DemoSCHouseUnitModel> unitList = [];
+  SCSelectHouseUnitSearchStatusController
+      scSelectHouseUnitSearchStatusController =
+      Get.put(SCSelectHouseUnitSearchStatusController());
+  SCSelectHouseUnitController scSelectHouseUnitController =
+      Get.put(SCSelectHouseUnitController());
+
+  /// 单元级别的list
+  List<DemoSCHouseRoomModel> roomList = [];
+  SCSelectHouseRoomSearchStatusController
+      scSelectHouseRoomSearchStatusController =
+      Get.put(SCSelectHouseRoomSearchStatusController());
+  SCSelectHouseRoomController scSelectHouseRoomController =
+      Get.put(SCSelectHouseRoomController());
+
   late PageController pageController;
-  List<Widget> widgetList = [SCSelectHouseCommunityPageView(), SCSelectHouseBuildingPageView()];
+  List<Widget> widgetList = [
+    SCSelectHouseBlockPageView(),
+    SCSelectHouseBuildingPageView(),
+    SCSelectHouseUnitPageView(),
+    SCSelectHouseRoomPageView()
+  ];
 
   @override
   void initState() {
     super.initState();
     loadData();
     pageController = PageController(initialPage: 0);
+    selectHouseController.initPageController(
+        pageController: pageController, pageIndex: 0);
   }
 
   @override
@@ -45,14 +97,38 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
 
   /// 加载数据
   void loadData() {
-    /// 构建静态数据
+    /// 构建静态数据  苑
     for (int i = 0; i <= 5; i++) {
-      DemoSCHouseCommunityModel demoSCHouseCommunityModel =
-          DemoSCHouseCommunityModel(
-              id: '$i', name: '这是第$i个苑', isChecked: false);
-      houseCommunityList.add(demoSCHouseCommunityModel);
+      DemoSCHouseBlockModel demoSCHouseBlockModel =
+          DemoSCHouseBlockModel(id: '$i', name: '这是第$i个苑', isChecked: false);
+      houseCommunityList.add(demoSCHouseBlockModel);
     }
-    state.updateHouseCommunityList(houseCommunityList);
+    scSelectHouseBlockController.updateHouseCommunityList(
+        list: houseCommunityList);
+
+    /// 构建静态数据  幢
+    for (int i = 0; i <= 22; i++) {
+      DemoSCHouseBuildingModel demoSCHouseBuildingModel =
+          DemoSCHouseBuildingModel(id: '$i', name: '这是第$i个幢', isChecked: false);
+      buildingList.add(demoSCHouseBuildingModel);
+    }
+    scSelectHouseBuildingController.updateHouseBuildingList(list: buildingList);
+
+    /// 构建静态数据  单元
+    for (int i = 0; i <= 10; i++) {
+      DemoSCHouseUnitModel demoSCHouseUnitModel =
+          DemoSCHouseUnitModel(id: '$i', name: '这是第$i个单元', isChecked: false);
+      unitList.add(demoSCHouseUnitModel);
+    }
+    scSelectHouseUnitController.updateHouseUnitList(list: unitList);
+
+    /// 构建静态数据  房间
+    for (int i = 0; i <= 10; i++) {
+      DemoSCHouseRoomModel demoSCHouseRoomModel =
+          DemoSCHouseRoomModel(id: '$i', name: '这是第$i个室', isChecked: false);
+      roomList.add(demoSCHouseRoomModel);
+    }
+    scSelectHouseRoomController.updateRoomList(list: roomList);
   }
 
   @override
@@ -87,7 +163,8 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
 
   /// 顶部导航栏  慧享服务中心 > 慧享生活馆 > 幢 > 单元
   Widget navigatorBarWidget() {
-    return GetBuilder<SCSelectHouseController>(builder: (state) {
+    return GetBuilder<SCSelectHouseBlockSearchStatusController>(
+        builder: (state) {
       return Container(
         height: 54.0,
         padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -99,21 +176,21 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
 
   /// 内容
   Widget contentWidget() {
-    return PageView.builder(
-      itemCount: widgetList.length,
-      scrollDirection: Axis.horizontal,
-      reverse: false,
-      controller: pageController,
-      physics: const PageScrollPhysics(parent: ClampingScrollPhysics()),
-      itemBuilder: ((context, index) {
-        return GestureDetector(
-          child: widgetList[index]
-        );
-      }),
-      onPageChanged: (index){
-
-      },
-    );
+    return GetBuilder<SCSelectHouseController>(builder: (state) {
+      return PageView.builder(
+        itemCount: widgetList.length,
+        scrollDirection: Axis.horizontal,
+        reverse: false,
+        controller: state.pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: ((context, index) {
+          return GestureDetector(child: widgetList[index]);
+        }),
+        onPageChanged: (index) {
+          print('print--> $index');
+        },
+      );
+    });
   }
 
   /// 标题textStyle

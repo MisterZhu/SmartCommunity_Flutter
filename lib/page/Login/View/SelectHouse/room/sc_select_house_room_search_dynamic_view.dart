@@ -1,16 +1,19 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartcommunity/page/Login/GetXController/sc_select_house_controller.dart';
-import 'package:smartcommunity/page/Login/Model/demo_sc_house_community_model.dart';
-import 'package:smartcommunity/page/Login/View/SelectHouse/sc_select_house_search_static_view.dart';
+import 'package:smartcommunity/constants/sc_asset.dart';
+import 'package:smartcommunity/constants/sc_colors.dart';
+import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_building_controller.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_building_search_status_controller.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_room_controller.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_room_search_status_controller.dart';
+import 'package:smartcommunity/page/Login/Model/SelectHouse/demo_sc_house_building_model.dart';
+import 'package:smartcommunity/page/Login/Model/SelectHouse/demo_sc_house_room_model.dart';
+import 'package:smartcommunity/page/Login/View/SelectHouse/building/sc_select_house_building_search_static_view.dart';
+import 'package:smartcommunity/page/Login/View/SelectHouse/room/sc_select_house_room_search_static_view.dart';
 
-import '../../../../constants/sc_asset.dart';
-import '../../../../constants/sc_colors.dart';
-import '../../../../constants/sc_fonts.dart';
-import '../../../../utils/sc_utils.dart';
 
 /// Copyright (c), 浙江慧享信息科技有限公司
 /// FileName: sc_select_house_search_view
@@ -18,18 +21,23 @@ import '../../../../utils/sc_utils.dart';
 /// Email: wangtao1@lvchengfuwu.com
 /// Date: 2022/8/18 11:46
 /// Description: 搜索框 - 可输入
-class SCHouseSearchDynamicView extends StatelessWidget {
+class SCHouseRoomSearchDynamicView extends StatelessWidget {
+
   final bool isShowCancel;
 
-  SCHouseSearchDynamicView({Key? key, this.isShowCancel = false}) : super(key: key);
+  /// 取消
+  final Function? cancelAction;
+
+  /// 文本框内容改变
+  final Function(String value)? valueChangedAction;
+
+  SCHouseRoomSearchDynamicView({Key? key, this.isShowCancel = false, this.cancelAction, this.valueChangedAction}) : super(key: key);
 
   // controller
-  TextEditingController controller = TextEditingController();
+  final TextEditingController controller = TextEditingController();
 
   /// focusNode
-  FocusNode node = FocusNode();
-
-  SCSelectHouseController state = Get.find<SCSelectHouseController>();
+  final FocusNode node = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +58,24 @@ class SCHouseSearchDynamicView extends StatelessWidget {
         ),
       );
     } else {
-      return SCSelectHouseSearchStaticView();
+      return SCSelectHouseRoomSearchStaticView();
     }
+  }
+
+  showCancelButton() {
+    // SCSearchCityController searchState = Get.find<SCSearchCityController>();
+    // searchState.updateCancelButtonStatus(status: true);
+    //
+    // SCSelectCityController state = Get.find<SCSelectCityController>();
+    // state.updateSearchResult(status: true);
   }
 
   showKeyboard(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 100),(){
-      FocusScope.of(context).requestFocus(node);
+      node.requestFocus();
     });
   }
 
-  /// 取消
   Widget cancelItem() {
     return Container(
         color: SCColors.color_FFFFFF,
@@ -82,24 +97,30 @@ class SCHouseSearchDynamicView extends StatelessWidget {
 
   /// 点击取消按钮
   cancelItemClick () {
-    SCSelectHouseController state = Get.find<SCSelectHouseController>();
+    node.unfocus();
+    if (cancelAction != null) {
+      cancelAction?.call();
+    }
+    SCSelectHouseRoomSearchStatusController state = Get.find<SCSelectHouseRoomSearchStatusController>();
+    SCSelectHouseRoomController sCSelectHouseState = Get.find<SCSelectHouseRoomController>();
     state.updateSearchStatus(isShowCancel: false);
-    state.updateSearchList([]);
+    sCSelectHouseState.updateSearchList(list: []);
   }
 
   /// 搜索框
-  Widget searchItem (BuildContext context) {
+  Widget searchItem(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       height: 36.0,
       decoration: BoxDecoration(
           color: SCColors.color_F2F3F5,
-          borderRadius: BorderRadius.circular(18.0)
-      ),
+          borderRadius: BorderRadius.circular(18.0)),
       child: Row(
         children: [
           searchIcon(),
-          const SizedBox(width: 10.0,),
+          const SizedBox(
+            width: 10.0,
+          ),
           searchTextField(context)
         ],
       ),
@@ -110,7 +131,6 @@ class SCHouseSearchDynamicView extends StatelessWidget {
   Widget searchIcon() {
     return Image.asset(SCAsset.iconLocationSearchCity, width: 16.0, height: 16.0,);
   }
-
 
   ///  搜索框
   Widget searchTextField(BuildContext context) {
@@ -123,7 +143,7 @@ class SCHouseSearchDynamicView extends StatelessWidget {
       style: const TextStyle(fontSize: SCFonts.f14, fontWeight: FontWeight.w400, color: SCColors.color_1B1C33),
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 0),
-        hintText: "搜索城市",
+        hintText: "请输入",
         hintStyle: TextStyle(fontSize: SCFonts.f14, fontWeight: FontWeight.w400, color: SCColors.color_B0B1B8),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(width: 0, color: Colors.transparent)),
@@ -139,7 +159,7 @@ class SCHouseSearchDynamicView extends StatelessWidget {
         valueChanged(value);
       },
       onSubmitted: (value) {
-        SCUtils().hideKeyboard(context: context);
+        node.unfocus();
       },
       keyboardType: TextInputType.text,
       keyboardAppearance: Brightness.light,
@@ -147,29 +167,28 @@ class SCHouseSearchDynamicView extends StatelessWidget {
     ));
   }
 
-
   /// 输入框内容改变
   valueChanged(String value) {
-    print('---> $value');
-    if (value.isNotEmpty) {
-      state.updateSearchList([]);
-      List<DemoSCHouseCommunityModel> list = [];
-      if (state.houseCommunityList != null) {
-        for (int i = 0; i < state.houseCommunityList!.length; i++) {
-          DemoSCHouseCommunityModel demoSCHouseCommunityModel =
-          state.houseCommunityList![i];
-          demoSCHouseCommunityModel.isChecked = false;
+    if (valueChangedAction != null) {
+      valueChangedAction?.call(value);
+    }
+    SCSelectHouseRoomController state = Get.find<SCSelectHouseRoomController>();
+    List<DemoSCHouseRoomModel> houseCommunityList = state.houseCommunityList;
+    List<DemoSCHouseRoomModel> searchResultList = [];
+    if(value.isNotEmpty) {
+      if(houseCommunityList != null){
+        for(int i = 0; i < houseCommunityList.length; i++) {
+          DemoSCHouseRoomModel demoSCHouseCommunityModel = houseCommunityList[i];
           String? name = demoSCHouseCommunityModel.name;
-          if (name!.contains(value)) {
-            list.add(demoSCHouseCommunityModel);
+          if(name!.contains(value)) {
+            searchResultList.add(demoSCHouseCommunityModel);
           }
         }
-        state.updateSearchList(list);
-
-        log('搜索数据:${list}');
       }
+      state.updateSearchList(list:searchResultList);
     } else {
-      state.updateSearchList([]);
+      print('-->输入的东西为空');
+      state.updateSearchList(list:[]);
     }
   }
 }

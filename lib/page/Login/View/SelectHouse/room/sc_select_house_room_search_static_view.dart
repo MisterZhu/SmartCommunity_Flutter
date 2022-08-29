@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartcommunity/page/Login/GetXController/sc_select_house_controller.dart';
+import 'package:smartcommunity/constants/sc_asset.dart';
+import 'package:smartcommunity/constants/sc_colors.dart';
+import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_room_search_status_controller.dart';
 
-import '../../../../constants/sc_asset.dart';
-import '../../../../constants/sc_colors.dart';
-import '../../../../constants/sc_fonts.dart';
+
 
 /// Copyright (c), 浙江慧享信息科技有限公司
 /// FileName: sc_select_house_search_header
@@ -12,9 +13,9 @@ import '../../../../constants/sc_fonts.dart';
 /// Email: wangtao1@lvchengfuwu.com
 /// Date: 2022/8/17 16:19
 /// Description: 选择房号搜索框 - 不可输入
-class SCSelectHouseSearchStaticView extends StatelessWidget {
+class SCSelectHouseRoomSearchStaticView extends StatelessWidget {
 
-  const SCSelectHouseSearchStaticView({Key? key}) : super(key: key);
+  const SCSelectHouseRoomSearchStaticView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class SCSelectHouseSearchStaticView extends StatelessWidget {
           )
       ),
       onTap: () {
-        SCSelectHouseController searchState = Get.find<SCSelectHouseController>();
+        SCSelectHouseRoomSearchStatusController searchState = Get.find<SCSelectHouseRoomSearchStatusController>();
         searchState.updateSearchStatus(isShowCancel: true);
       },);
 
