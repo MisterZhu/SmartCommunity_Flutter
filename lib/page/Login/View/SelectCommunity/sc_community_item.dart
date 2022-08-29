@@ -60,8 +60,6 @@ class SCCommunityItem extends StatelessWidget {
         state.hideKeyboard();
         /// 去选房号
 
-        /// 测试数据，跳转到全部应用列表
-        SCRouterHelper.codePage(10011, null);
       },
     );
   }
