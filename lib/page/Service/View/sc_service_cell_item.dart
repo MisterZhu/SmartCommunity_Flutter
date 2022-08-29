@@ -9,21 +9,25 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_colors.dart';
 import '../GetXController/sc_service_controller.dart';
+import '../Model/sc_service_model.dart';
 
 class SCServiceCellItem extends StatelessWidget {
 
-  final int index;
+  final int section;
   /// 头部标题
   final String? headerTitle;
   /// 是否显示编辑按钮
   final bool isShowEditBtn;
 
+  final List<SCServiceModel>? list;
+
   SCServiceCellItem(
       {
         Key? key,
-        this.index = 0,
+        this.section = 0,
         this.headerTitle = '',
         this.isShowEditBtn = true,
+        this.list,
       }) : super(key: key);
 
   @override
@@ -47,8 +51,8 @@ class SCServiceCellItem extends StatelessWidget {
                 children: [
                   headerItem(1),
                   Offstage(
-                    offstage: index == 0 ? !state.isExpansion : false,
-                    child: itemsCell(1),
+                    offstage: section == 0 ? !state.isExpansion : false,
+                    child: itemsCell(),
                   ),
                 ],
               ),
@@ -60,7 +64,6 @@ class SCServiceCellItem extends StatelessWidget {
     });
   }
 
-
   /*header*/
   Widget headerItem(int index) {
     return Container(
@@ -71,6 +74,7 @@ class SCServiceCellItem extends StatelessWidget {
           color: SCColors.color_FFFFFF,
           borderRadius: BorderRadius.circular(4.0)),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -92,7 +96,6 @@ class SCServiceCellItem extends StatelessWidget {
 
   /*header-left*/
   Widget headerRightContainer() {
-    SCServiceController state = Get.find<SCServiceController>();
     return GetBuilder<SCServiceController>(builder: (state){
       return Offstage(
         offstage: !isShowEditBtn,
@@ -136,53 +139,104 @@ class SCServiceCellItem extends StatelessWidget {
     });
   }
 
-
   /*cell*/
-  Widget itemsCell(int index) {
-     int count = 10;
-     double mainAxisSpacing = count > 5 ? 10 : 0;
+  Widget itemsCell() {
+    SCServiceController state = Get.find<SCServiceController>();
     return StaggeredGridView.countBuilder(
-        padding: const EdgeInsets.only(left: 6.0, right: 6.0, top: 2.0, bottom: 12),
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 10,
+        padding: const EdgeInsets.only(left: 5.5, right: 5.5, top: 3.0, bottom: 2.0),
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 8,
         crossAxisCount: 5,
         shrinkWrap: true,
-        itemCount: 10,
+        itemCount: section == 0 ? state.homeAppList.length : list?.length ?? 0,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          return gridItem(count);
+          SCServiceModel model;
+          if (section == 0) {
+            model = state.homeAppList![index];
+          } else {
+            model = list![index];
+          }
+          return gridItem(model);
         },
         staggeredTileBuilder: (int index) {
           return const StaggeredTile.fit(1);
         });
   }
 
-  Widget gridItem(int index) {
+  Widget gridItem(SCServiceModel model) {
+    SCServiceController state = Get.find<SCServiceController>();
+    bool hide = true;
+    if (section == 0) {
+      hide = state.isEditing ? false : true;
+    } else {
+      if (state.isEditing) {
+        hide = state.homeAppList.any((element) => model.id == element.id);
+      }
+    }
     return GestureDetector(
       onTap: (){
-
+        if (!hide) {
+          if (section == 0) {
+            log('首页应用删除');
+            state.deleteHomeApp(model);
+          } else {
+            log('应用添加');
+            state.addHomeApp(model);
+          }
+        }
       },
       child: Container(
         color: SCColors.color_FFFFFF,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Image.asset(
-              SCAsset.iconServiceQrCode,
-              width: 36,
-              height: 36,
-            ),
+            topIconItem(model, hide),
             const SizedBox(
               height: 4,
             ),
             Text(
-              '小区缴费',
+              model.name ?? '',
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: 12, color: SCColors.color_5E5F66),
+              style: const TextStyle(fontSize: 12, color: SCColors.color_5E5F66),
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget topIconItem(SCServiceModel model, bool hide) {
+    return Stack(
+      alignment: Alignment.topRight,
+      children: [
+        Container(
+          width: 42,
+          height: 42,
+          color: Colors.transparent,
+          alignment: Alignment.center,
+          child: Image.asset(
+              model.icon ?? '',
+              width: 36,
+              height: 36,
+          )),
+        addOrDeleteIconItem(model, hide),
+      ],
+    );
+  }
+
+  Widget addOrDeleteIconItem(SCServiceModel model, bool hide) {
+    return Offstage(
+      /// offstage = true（隐藏）
+      offstage: hide,
+      child: Container(
+        width: 16,
+        height: 16,
+        color: Colors.transparent,
+        child: Image.asset(section == 0 ? SCAsset.iconEditAppDelete : SCAsset.iconEditAppAdd, width: 16.0, height: 16.0,),
       ),
     );
   }
