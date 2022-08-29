@@ -180,11 +180,36 @@ class SCAsset {
 
   /************* 全部应用 *************/
 
-  static const String iconServiceQrCode = 'images/ic_service_qrcode.png';
   /// 编辑首页应用向下箭头
-  static const String iconEditAppDownArrow = 'images/ic_edit_app_down.png';
+  static const String iconEditAppDownArrow = 'images/appList/ic_edit_app_down.png';
   /// 编辑首页应用向上箭头
-  static const String iconEditAppUpArrow = 'images/ic_edit_app_up.png';
+  static const String iconEditAppUpArrow = 'images/appList/ic_edit_app_up.png';
+  /// 删除首页应用
+  static const String iconEditAppDelete = 'images/appList/ic_edit_app_delete.png';
+  /// 添加首页应用
+  static const String iconEditAppAdd = 'images/appList/ic_edit_app_add.png';
+
+  /// 应用icon-二维码
+  static const String iconServiceQrCode = 'images/appList/ic_service_qrcode.png';
+  /// 应用icon-公务用车
+  static const String iconServiceCar = 'images/appList/ic_service_car.png';
+  /// 应用icon-积分管理
+  static const String iconServiceIntegral = 'images/appList/ic_service_integral.png';
+  /// 应用icon-报事报修
+  static const String iconServiceReport = 'images/appList/ic_service_report.png';
+  /// 应用icon-小区缴费
+  static const String iconServicePay = 'images/appList/ic_service_pay.png';
+  /// 应用icon-家庭理财
+  static const String iconServiceFinance = 'images/appList/ic_service_finance.png';
+  /// 应用icon-社群社团
+  static const String iconServiceCommunity = 'images/appList/ic_service_community.png';
+  /// 应用icon-工单调度
+  static const String iconServiceSchedule = 'images/appList/ic_service_schedule.png';
+  /// 应用icon-权益优惠
+  static const String iconServiceDiscount = 'images/appList/ic_service_discount.png';
+  /// 应用icon-周边楼盘
+  static const String iconServiceSurrounding = 'images/appList/ic_service_surrounding.png';
+
 
   /************* 全部应用 *************/
 

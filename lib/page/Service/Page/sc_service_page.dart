@@ -13,8 +13,6 @@ class SCServicePage extends StatefulWidget {
   SCServiceState createState() => SCServiceState();
 }
 
-
-
 class SCServiceState extends State<SCServicePage> {
   SCServiceController state = Get.put(SCServiceController());
   @override
