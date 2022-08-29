@@ -32,7 +32,7 @@ class _SCSelectHouseBuildingPageViewState
           height: 4,
           decoration: BoxDecoration(
             borderRadius: BorderRadiusDirectional.circular(5.0),
-            color: SCColors.color_1A1B1C33,
+            color: SCColors.color_1B1C33,
           ),
         ),
 

@@ -20,6 +20,9 @@
       <root url="file://$PROJECT_DIR$/../../../my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.6" />
       <root url="file://$PROJECT_DIR$/../../../my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/shared_preferences_linux-2.1.1" />
       <root url="file://$PROJECT_DIR$/../../../my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.2+1" />
+      <root url="file://$PROJECT_DIR$/../../../my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/webview_flutter-3.0.4" />
+      <root url="file://$PROJECT_DIR$/../../../my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/webview_flutter_android-2.9.5" />
+      <root url="file://$PROJECT_DIR$/../../../my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/webview_flutter_wkwebview-2.9.3" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

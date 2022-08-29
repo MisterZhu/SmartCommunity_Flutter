@@ -199,34 +199,58 @@ doResponse(Response response) {
 
 /// 处理dio请求异常
 doError(e) {
-  DioError error = e;
-  if (e is DioError) {
-    switch(error.response?.statusCode) {
-      case 201: {
-
-      }
-      break;
-      case 401: {
-        /// 登录失效
-        updateUserData();
-      }
-      break;
-      case 403: {
-
-      }
-      break;
-      case 404: {
-
-      }
-      break;
-    }
-
-  }
-  var params = {
-    'code' : error.response?.statusCode,
-    'message' : error.response?.data.toString(),
-  };
   SCLoadingUtils.hide();
+
+  /// 错误码
+  int code = 0;
+  /// message
+  String message = '';
+
+  if (e is DioError) {
+    DioError error = e;
+
+    if (e.error is SocketException) {
+      code = 500;
+      message = SCDefaultValue.netErrorMessage;
+    } else {
+      code = error.response?.statusCode ?? 0;
+
+      if (error.response?.data is Map) {
+        var errorData = error.response?.data;
+        message = errorData['msg'] ?? SCDefaultValue.errorMessage;
+      } else {
+        message = error.response?.data.toString() ?? SCDefaultValue.errorMessage;
+      }
+
+      switch(error.response?.statusCode) {
+        case 201: {
+
+        }
+        break;
+        case 401: {
+          /// 登录失效
+          updateUserData();
+        }
+        break;
+        case 403: {
+
+        }
+        break;
+        case 404: {
+
+        }
+        break;
+      }
+    }
+  } else {
+    code = 500;
+    message = SCDefaultValue.errorMessage;
+  }
+
+  var params = {
+    'code' : code,
+    'message' : message,
+  };
   return params;
 }
 

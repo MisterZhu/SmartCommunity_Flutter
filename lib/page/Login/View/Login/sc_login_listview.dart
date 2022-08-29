@@ -2,11 +2,14 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smartcommunity/constants/sc_agreement.dart';
 import 'package:smartcommunity/constants/sc_type_define.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_login_controller.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_login_btn.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_login_logo.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_login_textfield.dart';
+import 'package:smartcommunity/page/Webview/Page/sc_webview_page.dart';
+import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
@@ -129,10 +132,15 @@ class SCLoginListView extends StatelessWidget {
     return GetBuilder<SCLoginController>(builder: (state) {
       return SCLoginAgreement(
         isAgree: state.isAgree,
+        userAgreementUrl: SCAgreement.userAgreementUrl,
+        privacyPolicyUrl: SCAgreement.privacyProtocolUrl,
         agreeAction: () {
           state.updateAgreementState();
         },
-        agreementDetailAction: (String url) {},
+        agreementDetailAction: (String title, String url) {
+          var params = {'title' : title, 'url' : url};
+          SCRouterHelper.codePage(20000, params);
+        },
       );
     });
   }
