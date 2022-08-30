@@ -20,7 +20,7 @@ class SCHomeController extends GetxController {
   final double navigationOffset = 120.0;
 
   /// 导航栏背景颜色,默认白色
-  Color navigationBackgroundColor = Colors.black;
+  Color navigationBackgroundColor = SCColors.color_FE8947;
   /// 导航栏状态，是否置顶
   bool navigationSticky = false;
   /// 导航栏置顶颜色,默认黑色

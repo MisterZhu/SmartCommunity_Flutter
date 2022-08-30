@@ -1,4 +1,4 @@
-/// 首页-listview
+/// 首页第一套皮肤-listview
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
@@ -14,10 +14,10 @@ import 'package:smartcommunity/page/Home/View/sc_home_news_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_swiper.dart';
 import 'package:smartcommunity/widgets/Refresh/sc_refresh_footer.dart';
 import 'package:smartcommunity/widgets/Refresh/sc_refresh_header.dart';
-import 'sc_home_feature_item.dart';
+import '../sc_home_feature_item.dart';
 
-class SCHomeListView extends StatelessWidget {
-  SCHomeListView(
+class SCHomeListView1 extends StatelessWidget {
+  SCHomeListView1(
       {Key? key,
         this.scrollFunction,
         required this.dataList,
@@ -72,7 +72,7 @@ class SCHomeListView extends StatelessWidget {
             },
             separatorBuilder: (BuildContext context, int index) {
               if (dataList[index] == SCTypeDefine.SC_HOME_TYPE_GRID) {
-                return SizedBox();
+                return const SizedBox();
               } else {
                 return lineWidget();
               }

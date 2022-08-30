@@ -24,6 +24,7 @@ class SCLoadingUtils {
 
   /// 成功提示
   static success({String? text}) {
+    hide();
     if (text == null || text == '') {
       EasyLoading.instance.contentPadding = const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 10);
       EasyLoading.showSuccess(text ?? '');
@@ -35,6 +36,7 @@ class SCLoadingUtils {
 
   /// 失败提示
   static failure({String? text}) {
+    hide();
     if (text == null || text == '') {
       EasyLoading.instance.contentPadding = const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 10);
       EasyLoading.showError(text ?? '');
@@ -46,6 +48,7 @@ class SCLoadingUtils {
 
   /// 信息提示
   static info({String? text}) {
+    hide();
     EasyLoading.showInfo(text ?? '');
   }
 

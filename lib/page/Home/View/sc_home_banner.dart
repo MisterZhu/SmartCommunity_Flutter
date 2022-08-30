@@ -89,7 +89,7 @@ class SCHomeBanner extends StatelessWidget {
             child: Container(
               height: height,
               child: Swiper(
-                autoplay: true,
+                autoplay: false,
                 itemBuilder: (BuildContext context, int index) {
                   return Image.asset(
                     bannerList[index],
