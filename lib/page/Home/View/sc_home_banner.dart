@@ -65,7 +65,7 @@ class SCHomeBanner extends StatelessWidget {
         bottom: -1,
         child: Container(
           height: 8.0 * screenScale,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               color: SCColors.color_F5F5F5,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(8.0),

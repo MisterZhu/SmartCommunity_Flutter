@@ -1,4 +1,3 @@
-/// 首页-listview
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
@@ -14,10 +13,15 @@ import 'package:smartcommunity/page/Home/View/sc_home_news_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_swiper.dart';
 import 'package:smartcommunity/widgets/Refresh/sc_refresh_footer.dart';
 import 'package:smartcommunity/widgets/Refresh/sc_refresh_header.dart';
-import 'sc_home_feature_item.dart';
+import '../sc_home_community_activity.dart';
+import '../sc_home_feature_item.dart';
+import '../sc_home_life.dart';
 
-class SCHomeListView extends StatelessWidget {
-  SCHomeListView(
+/// 首页第二套皮肤-listview
+
+class SCHomeListView2 extends StatelessWidget {
+
+  SCHomeListView2(
       {Key? key,
         this.scrollFunction,
         required this.dataList,
@@ -72,7 +76,7 @@ class SCHomeListView extends StatelessWidget {
             },
             separatorBuilder: (BuildContext context, int index) {
               if (dataList[index] == SCTypeDefine.SC_HOME_TYPE_GRID) {
-                return SizedBox();
+                return const SizedBox();
               } else {
                 return lineWidget();
               }
@@ -105,7 +109,13 @@ class SCHomeListView extends StatelessWidget {
     } else if (type == SCTypeDefine.SC_HOME_TYPE_GRID) {
       // 网格图片
       return gridImageCell();
-    } else {
+    } else if (type == SCTypeDefine.SC_HOME_TYPE_COMMUNITY) {
+      // 网格图片
+      return communityActivityCell();
+    } else if (type == SCTypeDefine.SC_HOME_TYPE_LIFE) {
+      // 网格图片
+      return lifeCell();
+    }  else {
       // 测试
       return testCell();
     }
@@ -199,6 +209,20 @@ class SCHomeListView extends StatelessWidget {
     );
   }
 
+  /// 园区活动列表-cell
+  Widget communityActivityCell() {
+    return SCHomeCommunityActivity(
+      activityList: state.allActivityImageList,
+    );
+  }
+
+  /// 美好生活列表-cell
+  Widget lifeCell() {
+    return SCHomeLife(
+      activityList: state.allActivityImageList,
+    );
+  }
+
   /// 测试-cell
   Widget testCell() {
     return Container(
@@ -245,3 +269,4 @@ class SCHomeListView extends StatelessWidget {
     });
   }
 }
+
