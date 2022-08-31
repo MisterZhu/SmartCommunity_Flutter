@@ -25,9 +25,9 @@ class SCHomeAllItem extends StatelessWidget {
     return DecoratedBox(decoration: BoxDecoration(
       color: SCColors.color_F5F5F5,
     ), child: StaggeredGridView.countBuilder(
-        padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
-        mainAxisSpacing: 16,
-        crossAxisSpacing: 22,
+        padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 0.0, bottom: 0.0),
+        mainAxisSpacing: 8,
+        crossAxisSpacing: 8,
         crossAxisCount: crossAxisCount,
         shrinkWrap: true,
         itemCount: itemList.length,

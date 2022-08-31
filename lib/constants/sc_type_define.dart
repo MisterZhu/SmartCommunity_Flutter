@@ -18,6 +18,11 @@ class SCTypeDefine {
   static const int SC_HOME_TYPE_SWIPER = 6;
   /// 网格图片
   static const int SC_HOME_TYPE_GRID = 7;
+  /// 园区活动
+  static const int SC_HOME_TYPE_COMMUNITY = 8;
+  /// 美好生活
+  static const int SC_HOME_TYPE_LIFE = 9;
+
   /************************* 首页-cellType *************************/
 
   /************************* 我的-cellType *************************/

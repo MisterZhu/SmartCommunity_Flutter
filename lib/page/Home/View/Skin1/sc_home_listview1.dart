@@ -211,7 +211,7 @@ class SCHomeListView1 extends StatelessWidget {
   /// 分割线
   Widget lineWidget() {
     return const SizedBox(
-      height: 8.0,
+      height: 10.0,
     );
   }
 
