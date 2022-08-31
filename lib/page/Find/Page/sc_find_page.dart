@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:smartcommunity/constants/sc_asset.dart';
+import 'package:smartcommunity/utils/sc_utils.dart';
+
+import '../../../constants/sc_colors.dart';
+import '../../Home/View/Skin2/sc_home_skin2.dart';
 
 /// 发现-page
 
@@ -10,8 +16,25 @@ class SCFindPage extends StatefulWidget {
 class SCFindState extends State<SCFindPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
+    return body();
+  }
+
+  @override
+  initState() {
+    super.initState();
+    SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.light);
+  }
+
+  /// body
+  Widget body() {
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.topLeft,
+        color: SCColors.color_F5F5F5,
+        width: double.infinity,
+        height: double.infinity,
+        child: Container(),
+      ),
     );
   }
 }

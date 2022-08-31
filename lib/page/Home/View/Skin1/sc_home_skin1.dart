@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 
 import '../../../../constants/sc_asset.dart';
 import '../../../../constants/sc_type_define.dart';
-import '../../GetXController/sc_home_controller.dart';
+import '../../GetXController/sc_home_controller1.dart';
 import 'sc_home_listview1.dart';
-import '../sc_home_navigation.dart';
+import 'sc_home_navigation1.dart';
 
 /// 首页第一套皮肤
 
@@ -80,7 +80,7 @@ class SCHomeSkin1 extends StatelessWidget {
       {'type': 1001, 'data': []},
     ];
 
-    return GetBuilder<SCHomeController>(builder: (state) {
+    return GetBuilder<SCHomeController1>(builder: (state) {
       String bannerBackgroundImageUrl = state.allBannerBGList.isEmpty
           ? SCAsset.homeBannerBG1
           : state.allBannerBGList[state.bannerCurrentIndex];
@@ -100,8 +100,8 @@ class SCHomeSkin1 extends StatelessWidget {
 
   /// navigation
   Widget navigation() {
-    return GetBuilder<SCHomeController>(builder: (state) {
-      return SCHomeNavigation(
+    return GetBuilder<SCHomeController1>(builder: (state) {
+      return SCHomeNavigation1(
         opacity: state.opacity,
         backgroundColor: state.navigationBackgroundColor,
         isSticky: state.navigationSticky,

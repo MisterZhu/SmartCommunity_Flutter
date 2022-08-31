@@ -1,4 +1,4 @@
-/// 首页-GetxController
+/// 首页皮肤1-GetxController
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ import 'package:smartcommunity/constants/sc_skin_value.dart';
 import 'package:smartcommunity/page/Home/Model/sc_home_news_model.dart';
 // import 'package:image_cropper/image_cropper.dart';
 
-class SCHomeController extends GetxController {
+class SCHomeController1 extends GetxController {
 
   /// 导航栏不透明度
   double opacity = 1.0;

@@ -7,7 +7,7 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
-import 'package:smartcommunity/page/Home/GetXController/sc_home_controller.dart';
+import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart';
 
 class SCHomeBanner extends StatelessWidget {
   const SCHomeBanner(
@@ -108,7 +108,7 @@ class SCHomeBanner extends StatelessWidget {
 
   /// swiper切换
   void changeIndex({int? index}) {
-    SCHomeController state = Get.find<SCHomeController>();
+    SCHomeController1 state = Get.find<SCHomeController1>();
     state.changeBannerIndex(index: index ?? 0);
   }
 }

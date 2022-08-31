@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:smartcommunity/constants/sc_default_value.dart';
 
 /// 工具类
@@ -22,9 +23,21 @@ class SCUtils {
     return MediaQueryData.fromWindow(window).size.height;
   }
 
+  /*屏幕默认scale*/
+  double getScreenScale() {
+    double screenWidth = getScreenWidth();
+    double scale = screenWidth / SCDefaultValue.defaultScreenWidth;
+    return scale;
+  }
+
   /*获取屏幕底部安全距离*/
   double getBottomSafeArea() {
     return MediaQueryData.fromWindow(window).padding.bottom;
+  }
+
+  /*获取屏幕顶部安全距离*/
+  double getTopSafeArea() {
+    return MediaQueryData.fromWindow(window).padding.top;
   }
 
   /*关闭键盘*/
@@ -35,5 +48,10 @@ class SCUtils {
   /*验证手机号*/
   bool checkPhone({required String phone}) {
     return RegExp(SCDefaultValue.phoneReg).hasMatch(phone);
+  }
+
+  /*修改状态颜色*/
+  changeStatusBarStyle({required SystemUiOverlayStyle style}) {
+    SystemChrome.setSystemUIOverlayStyle(style);
   }
 }

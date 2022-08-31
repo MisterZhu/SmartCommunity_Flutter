@@ -4,7 +4,7 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_type_define.dart';
-import 'package:smartcommunity/page/Home/GetXController/sc_home_controller.dart';
+import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_activity_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_banner.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_grid_image_item.dart';
@@ -34,9 +34,10 @@ class SCHomeListView1 extends StatelessWidget {
 
   ScrollController scrollController = ScrollController();
 
+  /// 滑动回调
   Function(double offset)? scrollFunction;
 
-  SCHomeController state = Get.find<SCHomeController>();
+  SCHomeController1 state = Get.find<SCHomeController1>();
 
   /// banner背景大图比例
   final double bannerBGScale;

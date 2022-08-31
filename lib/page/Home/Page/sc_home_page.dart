@@ -1,8 +1,11 @@
 /// 首页-page
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
-import 'package:smartcommunity/page/Home/GetXController/sc_home_controller.dart';
+import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart';
+import 'package:smartcommunity/page/Home/GetXController/sc_home_controller2.dart';
+import 'package:smartcommunity/utils/sc_utils.dart';
 
 import '../View/Skin1/sc_home_skin1.dart';
 
@@ -14,7 +17,8 @@ class SCHomePage extends StatefulWidget {
 }
 
 class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
-  SCHomeController state = Get.put(SCHomeController());
+  SCHomeController1 state1 = Get.put(SCHomeController1());
+  SCHomeController2 state2 = Get.put(SCHomeController2());
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +31,7 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
   @override
   initState() {
     super.initState();
+    SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.light);
   }
 
   /// body
@@ -45,4 +50,5 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
   Widget skin1() {
     return const SCHomeSkin1();
   }
+
 }

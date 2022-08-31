@@ -1,9 +1,9 @@
-/// 首页-顶部导航栏
+/// 首页-顶部导航栏1
 import 'package:flutter/material.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 
-class SCHomeNavigation extends StatelessWidget {
+class SCHomeNavigation1 extends StatelessWidget {
 
   /// 透明度
   final double? opacity;
@@ -32,7 +32,7 @@ class SCHomeNavigation extends StatelessWidget {
   /// 切换房号
   final Function? changeRoomAction;
 
-  SCHomeNavigation(
+  SCHomeNavigation1(
       {Key? key,
       this.backgroundColor = Colors.transparent,
       this.normalColor = Colors.white,

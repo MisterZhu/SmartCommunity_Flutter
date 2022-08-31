@@ -32,6 +32,8 @@ class SCAsset {
   static const String iconNormalLike = 'images/icon_like_normal.png';
   /// 点赞-红色icon
   static const String iconSelectedLike = 'images/icon_like_selected.png';
+  /// 导航栏搜索框-白色
+  static const String iconNavSearchWhite = 'images/skin/icon_nav_search_white.png';
 
   /// tab-首页-normal
   static const String iconNormalHome = 'images/icon_home_normal.png';
@@ -142,6 +144,11 @@ class SCAsset {
   static const String homeIconNews5 = 'images/icon_news5.png';
   /// 首页-资讯6
   static const String homeIconNews6 = 'images/icon_news6.png';
+
+  /// 首页-皮肤2-顶部背景图
+  static const String homeSkin2TopBG = 'images/skin/skin2_home_top_bg.png';
+  /// 首页-皮肤2-banner1
+  static const String homeSkin2Banner = 'images/skin/icon_skin2_banner1.png';
   /************* 测试用的数据 *************/
 
   /************* 引导页图片 *************/
