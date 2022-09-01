@@ -63,6 +63,7 @@ class SCHomeSkin2 extends StatelessWidget {
       padding: EdgeInsets.only(top: navHeight + 5.0),
       child: GetBuilder<SCHomeController2>(builder: (state){
        return SCHomeListView2(
+         dataList: state.listViewData,
           scrollFunction: (value) {
             state.changeNavigationState(offset: value);
           },

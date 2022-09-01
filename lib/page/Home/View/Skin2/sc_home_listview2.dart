@@ -2,17 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
+import 'package:smartcommunity/page/Home/View/sc_home_life.dart';
+import 'package:smartcommunity/page/Home/View/sc_home_selected_goods.dart';
 
 import '../../../../constants/sc_asset.dart';
+import '../../../../constants/sc_type_define.dart';
 import '../../../../widgets/Refresh/sc_refresh_footer.dart';
 import '../../../../widgets/Refresh/sc_refresh_header.dart';
 import '../../GetXController/sc_home_controller2.dart';
+import '../sc_home_community_activity.dart';
 import '../sc_home_items.dart';
 import '../sc_home_swiper.dart';
 
 /// 首页第二套皮肤-listview
 
 class SCHomeListView2 extends StatelessWidget {
+
+  /// listView数据源
+  final List dataList;
+
   /// 滑动回调
   Function(double offset)? scrollFunction;
 
@@ -20,7 +28,7 @@ class SCHomeListView2 extends StatelessWidget {
 
   SCHomeController2 state = Get.find<SCHomeController2>();
 
-  SCHomeListView2({Key? key, this.scrollFunction}) : super(key: key);
+  SCHomeListView2({Key? key, this.scrollFunction, required this.dataList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,18 +48,36 @@ class SCHomeListView2 extends StatelessWidget {
             shrinkWrap: true,
             padding: EdgeInsets.zero,
             itemBuilder: (BuildContext context, int index) {
-              if (index == 0) {
-                return swiperCell();
-              } else if(index == 1) {
-                return itemsCell();
-              } else {
-                return testCell();
-              }
+              int type = dataList[index]['type'];
+              return getCell(type: type);
             },
             separatorBuilder: (BuildContext context, int index) {
               return lineWidget();
             },
-            itemCount: 5));
+            itemCount: dataList.length));
+  }
+
+  /// 获取cell
+  Widget getCell({required int type}) {
+    if (type == SCTypeDefine.SC_HOME_TYPE_BANNER) {
+      // banner
+      return bannerCell();
+    } else if (type == SCTypeDefine.SC_HOME_TYPE_ALLITEMS) {
+      // 应用列表
+      return itemsCell();
+    } else if (type == SCTypeDefine.SC_HOME_TYPE_COMMUNITY) {
+      // 园区活动
+      return communityCell();
+    } else if (type == SCTypeDefine.SC_HOME_TYPE_LIFE) {
+      // 美好生活
+      return lifeCell();
+    } else if (type == SCTypeDefine.SC_HOME_TYPE_GOODS) {
+      // 精选商品
+      return goodsCell();
+    } else {
+      // 测试
+      return testCell();
+    }
   }
 
   /// 分割线
@@ -62,11 +88,11 @@ class SCHomeListView2 extends StatelessWidget {
   }
 
   /// swiper广告图
-  Widget swiperCell() {
+  Widget bannerCell() {
     return SCHomeSwiper(
       horizontalPadding: 16.0,
       radius: 4.0,
-      imageScale: 686.0 / 168.0,
+      imageScale: 686.0 / 232.0,
       imageList: const [
         SCAsset.homeSkin2Banner,
       ],
@@ -79,6 +105,29 @@ class SCHomeListView2 extends StatelessWidget {
   /// 应用列表-cell
   Widget itemsCell() {
     return SCHomeAllItem(itemList: state.allItemsList);
+  }
+
+  /// 园区活动cell
+  Widget communityCell() {
+    return SCHomeCommunityActivity(dataList: const [
+      SCAsset.homeActivity4,
+      SCAsset.homeActivity5,
+      SCAsset.homeActivity6
+    ],);
+  }
+
+  /// 美好生活
+  Widget lifeCell() {
+    return const SCHomeLife(dataList: [
+      SCAsset.homeLife1,
+      SCAsset.homeLife2,
+      SCAsset.homeLife1,
+    ]);
+  }
+
+  /// 精选商品cell
+  Widget goodsCell() {
+    return SCHomeSelectedGoodsItem();
   }
 
   /// 测试-cell

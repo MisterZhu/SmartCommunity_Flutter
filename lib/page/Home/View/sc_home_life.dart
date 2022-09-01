@@ -8,14 +8,14 @@ import 'package:smartcommunity/constants/sc_fonts.dart';
 class SCHomeLife extends StatelessWidget {
   final String title = '美好生活';
 
-  final List activityList;
+  final List dataList;
 
   /// 图片大小
   final double imageWidth = 156.0;
 
   final double imageHeight = 78.0;
 
-  const SCHomeLife({Key? key, required this.activityList}) : super(key: key);
+  const SCHomeLife({Key? key, required this.dataList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class SCHomeLife extends StatelessWidget {
               width: 8.0,
             );
           },
-          itemCount: activityList.length),
+          itemCount: dataList.length),
     );
   }
 
@@ -105,7 +105,7 @@ class SCHomeLife extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(4.0),
       child: Image.asset(
-        activityList[index],
+        dataList[index],
         width: imageWidth,
         height: imageHeight,
         fit: BoxFit.cover,),

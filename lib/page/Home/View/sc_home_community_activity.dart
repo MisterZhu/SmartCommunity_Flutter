@@ -14,11 +14,11 @@ class SCHomeCommunityActivity extends StatelessWidget {
 
   final String title = '园区活动';
 
-  final List activityList;
+  final List dataList;
   /// 图片大小
   final double imageWidth = (SCUtils().getScreenWidth() - 56.0) / 3.0;
 
-  SCHomeCommunityActivity({Key? key, required this.activityList}) : super(key: key);
+  SCHomeCommunityActivity({Key? key, required this.dataList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class SCHomeCommunityActivity extends StatelessWidget {
               width: 6.0,
             );
           },
-          itemCount: activityList.length > 3 ? 3 : activityList.length),
+          itemCount: dataList.length > 3 ? 3 : dataList.length),
     );
   }
 
@@ -131,7 +131,7 @@ class SCHomeCommunityActivity extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(2.0),
       child: Image.asset(
-        activityList[index],
+        dataList[index],
         fit: BoxFit.cover,),
     );
   }

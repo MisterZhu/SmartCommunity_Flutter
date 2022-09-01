@@ -80,6 +80,8 @@ class SCAsset {
   static const String iconMineInteraction = 'images/icon_mine_interaction.png';
   /// 地址
   static const String iconMineAddress = 'images/icon_mine_address.png';
+  /// 灰色详情icon
+  static const String iconDropDownGray = 'images/skin/icon_dropdown_gray.png';
 
   /************* 测试用的数据 *************/
   /// 首页-业主二维码
@@ -124,6 +126,17 @@ class SCAsset {
   static const String homeActivity2 = 'images/icon_activity2.png';
   /// 首页-活动3
   static const String homeActivity3 = 'images/icon_activity3.png';
+  /// 首页-活动4
+  static const String homeActivity4 = 'images/icon_activity4.png';
+  /// 首页-活动5
+  static const String homeActivity5 = 'images/icon_activity5.png';
+  /// 首页-活动6
+  static const String homeActivity6 = 'images/icon_activity6.png';
+
+  /// 首页-美好生活1
+  static const String homeLife1 = 'images/icon_life1.png';
+  /// 首页-美好生活2
+  static const String homeLife2 = 'images/icon_life2.png';
 
   /// 首页-商家
   static const String homeMerchant = 'images/icon_merchant.png';
@@ -149,6 +162,22 @@ class SCAsset {
   static const String homeSkin2TopBG = 'images/skin/skin2_home_top_bg.png';
   /// 首页-皮肤2-banner1
   static const String homeSkin2Banner = 'images/skin/icon_skin2_banner1.png';
+
+  /// 首页-精选商品1
+  static const String homeGoods1 = 'images/goods/icon_good1.png';
+  /// 首页-精选商品2
+  static const String homeGoods2 = 'images/goods/icon_good2.png';
+  /// 首页-精选商品3
+  static const String homeGoods3 = 'images/goods/icon_good3.png';
+  /// 首页-精选商品4
+  static const String homeGoods4 = 'images/goods/icon_good4.png';
+  /// 首页-精选商品-标签1
+  static const String homeGoodsTag1 = 'images/goods/icon_goods_tag1.png';
+  /// 首页-精选商品-标签2
+  static const String homeGoodsTag2 = 'images/goods/icon_goods_tag2.png';
+  /// 首页-精选商品-标签3
+  static const String homeGoodsTag3 = 'images/goods/icon_goods_tag3.png';
+
   /************* 测试用的数据 *************/
 
   /************* 引导页图片 *************/

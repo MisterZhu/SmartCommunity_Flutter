@@ -52,10 +52,10 @@ class SCHomeAllItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset(itemList[index], width: icon_size, height: icon_size,),
-          SizedBox(
+          const SizedBox(
             height: 4.0,
           ),
-          SizedBox(
+          const SizedBox(
             height: 18.0,
             width: double.infinity,
             child: Text('业主维码', textAlign: TextAlign.center,overflow: TextOverflow.ellipsis, maxLines: 1, style: TextStyle(

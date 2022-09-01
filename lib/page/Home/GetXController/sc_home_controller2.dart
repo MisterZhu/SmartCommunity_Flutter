@@ -10,6 +10,8 @@ import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/constants/sc_skin_value.dart';
 import 'package:smartcommunity/page/Home/Model/sc_home_news_model.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
+
+import '../../../constants/sc_type_define.dart';
 // import 'package:image_cropper/image_cropper.dart';
 
 class SCHomeController2 extends GetxController {
@@ -17,7 +19,7 @@ class SCHomeController2 extends GetxController {
   /// 背景图片scale
   double topNavBGImageScale = 782.0 / 384.0;
   /// 背景图片高度
-  double topNavBGImageHeight = 168.0 - (SCUtils().getTopSafeArea() > 20 ? 10.0 : 40.0);
+  double topNavBGImageHeight = 168.0 - (SCUtils().getTopSafeArea() > 20 ? 0.0 : 30.0);
 
   /// 导航栏不透明度
   double opacity = 1.0;
@@ -37,6 +39,9 @@ class SCHomeController2 extends GetxController {
   /// 所有应用
   List allItemsList = [];
 
+  /// listView数据
+  List listViewData = [];
+
   @override
   void onInit() {
     super.onInit();
@@ -51,6 +56,22 @@ class SCHomeController2 extends GetxController {
       SCAsset.iconItem8,
       SCAsset.iconItem9,
       SCAsset.iconItem10
+    ];
+    listViewData =  [
+      /// banner
+      {'type': SCTypeDefine.SC_HOME_TYPE_BANNER, 'data': []},
+
+      /// 应用列表
+      {'type': SCTypeDefine.SC_HOME_TYPE_ALLITEMS, 'data': []},
+
+      /// 图片
+      {'type': SCTypeDefine.SC_HOME_TYPE_COMMUNITY, 'data': []},
+
+      /// 热门活动
+      {'type': SCTypeDefine.SC_HOME_TYPE_LIFE, 'data': []},
+
+      /// 精选商品
+      {'type': SCTypeDefine.SC_HOME_TYPE_GOODS, 'data': []},
     ];
     // navigationOffset = 44.0 + SCUtils().getTopSafeArea();
     navigationOffset = topNavBGImageHeight;

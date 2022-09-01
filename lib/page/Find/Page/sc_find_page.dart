@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
+import 'package:smartcommunity/page/Home/GetXController/sc_home_controller2.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
 import '../../../constants/sc_colors.dart';
@@ -14,6 +16,9 @@ class SCFindPage extends StatefulWidget {
 }
 
 class SCFindState extends State<SCFindPage> {
+
+  SCHomeController2 state = Get.put(SCHomeController2());
+
   @override
   Widget build(BuildContext context) {
     return body();
@@ -33,8 +38,13 @@ class SCFindState extends State<SCFindPage> {
         color: SCColors.color_F5F5F5,
         width: double.infinity,
         height: double.infinity,
-        child: Container(),
+        child: skin2(),
       ),
     );
+  }
+
+  /// skin2
+  Widget skin2() {
+    return SCHomeSkin2();
   }
 }
