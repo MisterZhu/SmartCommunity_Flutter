@@ -23,7 +23,7 @@ class SCServiceController extends GetxController {
   @override
   onInit() {
     super.onInit();
-    var hoemTestList = [
+    var homeTestList = [
     {'id': '0', 'name': '业主二维码', 'icon': SCAsset.iconServiceQrCode, 'added': false},
     {'id': '1', 'name': '公务用车', 'icon': SCAsset.iconServiceTiger, 'added': false},
     {'id': '2', 'name': '积分管理', 'icon': SCAsset.iconServiceIntegral, 'added': false},
@@ -45,7 +45,7 @@ class SCServiceController extends GetxController {
 
     appList = testList.map((e) => SCServiceModel.fromJson(e)).toList();
 
-    homeAppList = hoemTestList.map((e) => SCServiceModel.fromJson(e)).toList();
+    homeAppList = homeTestList.map((e) => SCServiceModel.fromJson(e)).toList();
   }
 
   /// 更新首页应用展开状态

@@ -68,6 +68,8 @@ class SCColors {
   static const Color color_FFF0E6 = Color(0xFFFFF0E6);
   static const Color color_FE8947 = Color(0xFFFE8947);
 
+  static const Color color_FFF0D5 = Color(0xFFFFF0D5);
+  static const Color color_FEA500 = Color(0xFFFEA500);
   /// 主题色
   static const Color primaryColor = Color(0xFF8B63E6);
 

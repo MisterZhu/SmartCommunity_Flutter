@@ -11,6 +11,7 @@ import '../../../constants/sc_colors.dart';
 import '../GetXController/sc_service_controller.dart';
 import '../Model/sc_service_model.dart';
 
+/// 全部应用cell
 class SCServiceCellItem extends StatelessWidget {
 
   final int section;
@@ -49,7 +50,7 @@ class SCServiceCellItem extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  headerItem(1),
+                  headerItem(),
                   Offstage(
                     offstage: section == 0 ? !state.isExpansion : false,
                     child: itemsCell(),
@@ -65,7 +66,7 @@ class SCServiceCellItem extends StatelessWidget {
   }
 
   /*header*/
-  Widget headerItem(int index) {
+  Widget headerItem() {
     return Container(
       padding: const EdgeInsets.only(left: 12, right: 10, top: 12, bottom: 12),
       width: double.infinity,
