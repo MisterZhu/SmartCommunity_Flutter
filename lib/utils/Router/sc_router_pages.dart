@@ -3,7 +3,6 @@ import 'package:smartcommunity/page/Guide/Page/sc_base_privacy_page.dart';
 import 'package:smartcommunity/page/Guide/Page/sc_guide_page.dart';
 import 'package:smartcommunity/page/Home/Page/sc_home_page.dart';
 import 'package:smartcommunity/page/Login/Page/sc_login_page.dart';
-import 'package:smartcommunity/page/Login/Page/sc_select_house_page.dart';
 import 'package:smartcommunity/page/Tab/Page/sc_tab_page.dart';
 import 'package:smartcommunity/page/Webview/Page/sc_webview_page.dart';
 
@@ -36,6 +35,8 @@ class SCRouterPages {
     GetPage(name: SCRouterPath.selectHousePath, page: () => SCSelectHousePage()),
     /*全部应用*/
     GetPage(name: SCRouterPath.servicePagePath, page: () => SCServicePage()),
+    /*切换房屋*/
+    GetPage(name: SCRouterPath.toggleHousesPagePath, page: () => SCToggleHousesPage()),
 
   ];
 
@@ -60,6 +61,8 @@ class SCRouterPages {
     /*房号选择*/
     20001 : SCRouterPath.selectHousePath,
     /*全部应用*/
-    10011 : SCRouterPath.servicePagePath
+    10011 : SCRouterPath.servicePagePath,
+    /*切换房屋*/
+    5001 : SCRouterPath.toggleHousesPagePath,
   };
 }

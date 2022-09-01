@@ -115,9 +115,10 @@ class SCHomeLife extends StatelessWidget {
   /// 活动-title
   Widget activityTitleItem() {
     return Container(
+      alignment: Alignment.centerLeft,
       color: SCColors.color_FFFFFF,
       height: 22.0,
-      child: const Text('到家服务一应俱全', textAlign: TextAlign.left, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(
+      child: const Text('到家服务一应俱全钱钱钱钱请求', textAlign: TextAlign.left, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(
         fontSize: SCFonts.f14,
         fontWeight: FontWeight.w500,
         color: SCColors.color_1B1D33,

@@ -15,7 +15,7 @@ class SCHomeCommunityActivity extends StatelessWidget {
   final String title = '园区活动';
 
   final List activityList;
-  /// 图片大小
+  /// 图片宽度
   final double imageWidth = (SCUtils().getScreenWidth() - 56.0) / 3.0;
 
   SCHomeCommunityActivity({Key? key, required this.activityList}) : super(key: key);

@@ -220,4 +220,23 @@ class SCAsset {
 
 /************* 全部应用 *************/
 
+/************* 我的-切换房屋 *************/
+
+  /// 我的-切换房号-添加房号icon
+  static const String iconMineHouseAdd = 'images/mine/ic_mine_house_add.png';
+  /// 我的-切换房号-切换房号icon
+  static const String iconMineHouseToggle = 'images/mine/ic_mine_house_toggle.png';
+  /// 我的-我的房号-审核中
+  static const String iconMineHouseVerify = 'images/mine/ic_mine_house_verify.png';
+  /// 我的-我的房号-未通过
+  static const String iconMineHouseReject = 'images/mine/ic_mine_house_reject.png';
+  /// 我的-我的房号-当前房屋-审核箭头
+  static const String iconMineHouseReviewArrow = 'images/mine/ic_mine_house_review_arrow.png';
+
+  /// 我的-我的房号-当前房屋-背景图
+  static const String iconMineHouseBg = 'images/mine/ic_mine_house_bg.png';
+
+
+/************* 我的-切换房屋 *************/
+
 }
