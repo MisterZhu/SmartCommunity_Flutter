@@ -22,8 +22,8 @@ class SCCurrentHouseController extends GetxController {
       'houseNumber': '慧享生活馆-小邑苑-11幢-1单元-101室',
       'houseType': 1,
       'owner': '张三',
-      'identity':0,
-      'endDate':'2033-5-11',
+      'identity': 1,
+      'endDate': '2033-5-11',
     };
 
     infoModel = SCCurrentHouseInfoModel.fromJson(info);

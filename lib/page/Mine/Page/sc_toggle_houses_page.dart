@@ -12,7 +12,6 @@ import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_fonts.dart';
 import '../GetXController/sc_current_house_controller.dart';
 import '../GetXController/sc_my_room_number_controller.dart';
-import '../Model/sc_current_house_info_model.dart';
 import '../View/ToggleHouses/sc_current_house_info_item.dart';
 import '../View/ToggleHouses/sc_current_house_review_item.dart';
 
@@ -65,8 +64,6 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
       body: body(),
     );
   }
-
-
 
   /// title
   Widget titleItem() {
@@ -157,6 +154,7 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
     );
   }
 
+  /// 我的房号listView
   Widget myRoomNumberListView() {
     return ListView.separated(
         padding: const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 0),
@@ -164,11 +162,12 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
           return SCMyRoomNumberItem();
         },
         separatorBuilder: (BuildContext context, int index) {
-          return SizedBox(height: 0.5,);
+          return const SizedBox(height: 0.5,);
         },
         itemCount: 3);
   }
 
+  /// 底部新增房号按钮
   Widget myRoomNumberBottomItem() {
     return Container(
       color: SCColors.color_FFFFFF,
@@ -207,6 +206,7 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
     );
   }
 
+  /// 当前房屋listView
   Widget currentHouseListView() {
     return GetBuilder<SCCurrentHouseController>(builder: (state) {
       return ListView.separated(
@@ -224,10 +224,10 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
             );
           },
           itemCount: 2);
-
     });
   }
 
+  /// 当前房屋底部解除绑定按钮
   Widget currentHouseBottomItem() {
     return Container(
       color: SCColors.color_FFFFFF,
@@ -242,7 +242,7 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
               borderRadius: BorderRadius.circular(4.0)),
           child: CupertinoButton(
               padding: EdgeInsets.zero,
-              child: Text(
+              child: const Text(
                   '解除绑定',
                   style: TextStyle(
                     fontSize: 16.0,

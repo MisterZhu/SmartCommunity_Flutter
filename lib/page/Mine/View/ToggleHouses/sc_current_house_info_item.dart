@@ -6,13 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/page/Mine/View/ToggleHouses/sc_mine_house_tag_item.dart';
 
+import '../../../../constants/sc_asset.dart';
 import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_fonts.dart';
 import '../../Model/sc_current_house_info_model.dart';
 
 /// 当前房屋-房屋信息cell
 class SCCurrentHouseInfoItem extends StatelessWidget {
-  List nameList = ['房号', '房屋类型', '户主', '本人身份','租期'];
+  List nameList = ['房号', '房屋类型', '户主', '本人身份', '租期'];
 
   SCCurrentHouseInfoModel infoModel;
 
@@ -26,38 +27,40 @@ class SCCurrentHouseInfoItem extends StatelessWidget {
   /// body
   Widget body() {
     return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
-        decoration: BoxDecoration(
-            color: SCColors.color_FFFFFF,
-            borderRadius: BorderRadius.circular(4.0)),
-        child: contentItem(),
-        // child: Stack(
-        //   alignment: Alignment.bottomCenter,
-        //   children: [
-        //     //Image.asset('',),
-        //     //contentItem(),
-        //
-        //   ],
-      );
+      decoration: BoxDecoration(
+          color: SCColors.color_FFFFFF,
+          borderRadius: BorderRadius.circular(4.0),
+          image: const DecorationImage(
+              fit: BoxFit.fill, image: AssetImage(SCAsset.iconMineHouseBg))),
+      child: contentItem(),
+    );
   }
 
   Widget contentItem() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          '房屋信息',
-          textAlign: TextAlign.left,
-          maxLines: 1,
-          style: TextStyle(
-              fontSize: SCFonts.f16,
-              fontWeight: FontWeight.w500,
-              color: SCColors.color_1B1D33),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: SCColors.color_FFFFFF.withOpacity(0.7),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              '房屋信息',
+              textAlign: TextAlign.left,
+              maxLines: 1,
+              style: TextStyle(
+                  fontSize: SCFonts.f16,
+                  fontWeight: FontWeight.w500,
+                  color: SCColors.color_1B1D33),
+            ),
+            contentListView(),
+          ],
         ),
-        contentListView(),
-      ],
+      ),
     );
   }
 
@@ -66,7 +69,7 @@ class SCCurrentHouseInfoItem extends StatelessWidget {
       infoModel.houseNumber,
       infoModel.houseType == 0 ? '' : '',
       infoModel.owner,
-      infoModel.identity == 1 ? '业主': '租户',
+      infoModel.identity == 1 ? '业主' : '租户', /// 测试数据
       infoModel.endDate
     ];
 
@@ -76,14 +79,17 @@ class SCCurrentHouseInfoItem extends StatelessWidget {
         ListView.separated(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            padding: const EdgeInsets.only(top: 20, left: 0, right: 0, bottom: 8),
+            padding:
+                const EdgeInsets.only(top: 20, left: 0, right: 0, bottom: 8),
             itemBuilder: (BuildContext context, int index) {
               String name = nameList[index];
               int? type = 0;
               String content = valueList[index];
               if (name == '房屋类型') {
                 type = infoModel.houseType as int?;
-                content = '住宅';  ///  测试数据
+                content = '住宅';
+
+                ///  测试数据
               }
               return contentCellItem(type!, name, content);
             },
@@ -142,10 +148,8 @@ class SCCurrentHouseInfoItem extends StatelessWidget {
         bgColor = SCColors.color_F2F3F5;
         textColor = SCColors.color_8D8E99;
       }
-      return SCMineHouseTagItem(name: content, bgColor: bgColor, textColor: textColor);
+      return SCMineHouseTagItem(
+          name: content, bgColor: bgColor, textColor: textColor);
     }
-
   }
 }
-
-
