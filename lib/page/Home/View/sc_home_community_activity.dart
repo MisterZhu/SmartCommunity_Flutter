@@ -88,25 +88,29 @@ class SCHomeCommunityActivity extends StatelessWidget {
   /// cell
   Widget activityCell(int index) {
     return Container(
-      color: SCColors.color_FFFFFF,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(2.0)),
       width: imageWidth,
       height: cellHeight(),
       child: Stack(
         alignment: Alignment.bottomLeft,
         children: [
           activityImageItem(index),
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color.fromRGBO(0, 0, 0, 0),
-                  Color.fromRGBO(0, 0, 0, 0.6),
-                ],
+          Padding(padding: const EdgeInsets.only(right: 1),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(2.0),
+                gradient: const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color.fromRGBO(0, 0, 0, 0),
+                    Color.fromRGBO(0, 0, 0, 0.6),
+                  ],
+                ),
               ),
+              height: 30.0,
             ),
-            height: 30.0,
           ),
           const Padding(padding: EdgeInsets.symmetric(horizontal: 6,vertical: 6),
             child: Text(

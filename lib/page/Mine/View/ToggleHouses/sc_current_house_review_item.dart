@@ -70,8 +70,8 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: SCFonts.f14,
-                      fontWeight: state.selectIndex == 0 ?  FontWeight.w600 : FontWeight.w400,
-                      color: state.selectIndex == 0 ? SCColors.color_1B1D33 : SCColors.color_5E5E66),
+                      fontWeight: state.selectReviewIndex == 0 ?  FontWeight.w600 : FontWeight.w400,
+                      color: state.selectReviewIndex == 0 ? SCColors.color_1B1D33 : SCColors.color_5E5E66),
                 ),
               ),
             ),
@@ -86,8 +86,8 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: SCFonts.f14,
-                    fontWeight: state.selectIndex == 1 ?  FontWeight.w600 : FontWeight.w400,
-                    color: state.selectIndex == 1 ? SCColors.color_1B1D33 : SCColors.color_5E5E66),
+                    fontWeight: state.selectReviewIndex == 1 ?  FontWeight.w600 : FontWeight.w400,
+                    color: state.selectReviewIndex == 1 ? SCColors.color_1B1D33 : SCColors.color_5E5E66),
               ),
             ),
           ],
@@ -133,7 +133,7 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
               Expanded(child: leftItem(model)),
               const SizedBox(width: 20.0,),
               Offstage(
-                offstage: state.selectIndex == 0 ? true : false,
+                offstage: state.selectReviewIndex == 0 ? true : false,
                 child: Image.asset(SCAsset.iconMineHouseReviewArrow, width: 16.0, height: 16.0,),
               )
             ]

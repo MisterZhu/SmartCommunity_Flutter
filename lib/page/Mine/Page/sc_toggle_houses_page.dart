@@ -1,4 +1,5 @@
 
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,12 @@ import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_fonts.dart';
 import '../GetXController/sc_current_house_controller.dart';
 import '../GetXController/sc_my_room_number_controller.dart';
+import '../GetXController/sc_toggle_houses_controller.dart';
 import '../View/ToggleHouses/sc_current_house_info_item.dart';
 import '../View/ToggleHouses/sc_current_house_review_item.dart';
+import '../View/ToggleHouses/sc_message_tab.dart';
+import '../View/ToggleHouses/sc_normal_tab.dart';
+import '../View/ToggleHouses/sc_tab_indicator.dart';
 
 /// 切换房屋-page
 
@@ -24,15 +29,16 @@ class SCToggleHousesPage extends StatefulWidget {
 
 class SCToggleHousesState extends State<SCToggleHousesPage>
     with SingleTickerProviderStateMixin {
+  SCToggleHousesController toggleHouseState = Get.put(SCToggleHousesController());
+
   SCMyRoomNumberController myRoomNumberState = Get.put(SCMyRoomNumberController());
   SCCurrentHouseController currentHouseState = Get.put(SCCurrentHouseController());
 
-  int currentIndex = 0;
+  double tabItemWidth = 140;
+  double tabItemHeight = 44.0;
+  int number = 0;
+  List<Widget> tabList = [];
 
-  List tabList = [
-  '我的房号',
-  '当前房屋',
-  ];
   final double scale = 1.0;
 
   late TabController tabController;
@@ -40,10 +46,20 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
   @override
   initState() {
     super.initState();
+    if (number > 0) {
+      tabList.add(messageTabItem('我的房号', 0));
+    } else {
+      tabList.add(normalTabItem('我的房号', 0));
+    }
+    tabList.add(normalTabItem('当前房屋', 1));
     tabController = TabController(length: tabList.length, vsync: this);
+
+    SCToggleHousesController state = Get.find<SCToggleHousesController>();
     tabController.addListener(() {
-      currentIndex = tabController.index;
+      int currentIndex = tabController.index;
+      state.updateSelectIndex(currentIndex);
     });
+
   }
 
   @override
@@ -132,26 +148,52 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
                   labelPadding: const EdgeInsets.symmetric(horizontal: 12.0),
                   isScrollable: true,
                   indicatorSize: TabBarIndicatorSize.label,
+                  indicator: SCTabIndicator(borderSide: const BorderSide(width: 3.0, color: SCColors.color_FF6C00)),
                   indicatorColor: SCColors.color_FF6C00,
                   unselectedLabelColor: SCColors.color_5E5F66,
                   labelColor: SCColors.color_1B1D33,
                   indicatorWeight: 3.0,
-                  labelStyle:
-                  TextStyle(fontSize: SCFonts.f16 * scale, fontWeight: FontWeight.w500),
+                  labelStyle: TextStyle(fontSize: SCFonts.f14 * scale, fontWeight: FontWeight.w500),
                   unselectedLabelStyle: TextStyle(
-                      fontSize: SCFonts.f16 * scale, fontWeight: FontWeight.w400),
-                  tabs: const [
-                    Tab(
-                      text: '我的房号',
-                    ),
-                    Tab(
-                      text: '当前房屋',
-                    ),
-                  ],
-
+                      fontSize: SCFonts.f14 * scale, fontWeight: FontWeight.w400),
+                  tabs: tabList,
                 )),
           )),
     );
+  }
+
+  /*普通tab*/
+  Widget normalTabItem(String title, int index) {
+    return GetBuilder<SCToggleHousesController>(builder: (state) {
+      TextStyle textStyle = TextStyle(
+          fontSize: 14,
+          fontWeight: state.selectIndex == index ? FontWeight.w500 : FontWeight.w400,
+          color: state.selectIndex == index ? SCColors.color_1B1D33 : SCColors.color_5E5F66
+      );
+      return SCNormalTab(
+          text: title,
+          width: tabItemWidth,
+          height: tabItemHeight,
+          textStyle: textStyle);
+    });
+  }
+
+  /*带数字消息的tab*/
+  Widget messageTabItem(String title, int index) {
+    return GetBuilder<SCToggleHousesController>(builder: (state) {
+      TextStyle textStyle = TextStyle(
+          fontSize: 14,
+          fontWeight: state.selectIndex == index ? FontWeight.w500 : FontWeight.w400,
+          color: state.selectIndex == index ? SCColors.color_1B1C33 : SCColors.color_5E5F66
+      );
+      return SCMessageTab(text: title,
+        width: tabItemWidth,
+        height: tabItemHeight,
+        textStyle: textStyle,
+        circleColor: SCColors.color_FF4040,
+        numberColor: Colors.white,
+        numberText: number > 99 ? '99+' : number.toString(),);
+    });
   }
 
   /// 我的房号listView
@@ -164,7 +206,7 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
         separatorBuilder: (BuildContext context, int index) {
           return const SizedBox(height: 0.5,);
         },
-        itemCount: 3);
+        itemCount: 6);
   }
 
   /// 底部新增房号按钮
@@ -199,7 +241,7 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
                 ],
               ),
               onPressed: () {
-
+                /// 去新增房号
               }),
         ),
       ),
@@ -215,7 +257,7 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
             if (index == 0) {
               return SCCurrentHouseInfoItem(infoModel: state.infoModel);
             } else {
-              return SCCurrentHouseReviewItem(reviewList: state.selectIndex == 0 ? state.reviewList : state.notReviewList);
+              return SCCurrentHouseReviewItem(reviewList: state.selectReviewIndex == 0 ? state.reviewList : state.notReviewList);
             }
           },
           separatorBuilder: (BuildContext context, int index) {
