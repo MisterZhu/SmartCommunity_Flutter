@@ -230,8 +230,12 @@ class SCAsset {
   static const String iconMineHouseVerify = 'images/mine/ic_mine_house_verify.png';
   /// 我的-我的房号-未通过
   static const String iconMineHouseReject = 'images/mine/ic_mine_house_reject.png';
-  /// 我的-我的房号-当前房屋-审核箭头
+  /// 我的-我的房号-当前房屋-审核箭头icon
   static const String iconMineHouseReviewArrow = 'images/mine/ic_mine_house_review_arrow.png';
+  /// 我的-我的房号-新增房号-右箭头icon
+  static const String iconAddHouseArrow = 'images/mine/ic_add_house_arrow.png';
+  /// 我的-我的房号-新增房号-提醒icon
+  static const String iconAddHouseTips = 'images/mine/ic_add_house_tips.png';
 
   /// 我的-我的房号-当前房屋-背景图
   static const String iconMineHouseBg = 'images/mine/ic_mine_house_bg.png';

@@ -43,4 +43,6 @@ class SCRouterPath {
   /// 切换房屋
   static String toggleHousesPagePath = "/root/Mine/sc_toggle_houses_page";
 
+  /// 新增房号
+  static String addHousePagePath = "/root/Mine/sc_add_house_page";
 }
