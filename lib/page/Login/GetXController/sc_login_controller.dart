@@ -9,6 +9,7 @@ import '../../../skin/Model/sc_user.dart';
 import '../../../skin/Tools/sc_scaffold_manager.dart';
 import '../../../utils/Loading/sc_loading_utils.dart';
 import '../../../utils/Router/sc_router_helper.dart';
+import '../../../utils/Router/sc_router_path.dart';
 import '../../../utils/Toast/sc_toast.dart';
 
 class SCLoginController extends GetxController {
@@ -60,7 +61,7 @@ class SCLoginController extends GetxController {
         success: (value) {
           SCUser user = SCScaffoldManager.instance.getUserData();
           log('登陆成功获取用户token=====${user.token}===用户昵称：${user.userName}');
-          SCRouterHelper.codePage(9003, null);
+          SCRouterHelper.pathPage(SCRouterPath.tabPath, null);
         },
         failure: (value) {
           log('登陆失败===$value');

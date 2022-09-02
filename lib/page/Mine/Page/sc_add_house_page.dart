@@ -21,7 +21,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
   SCAddHouseController state = Get.put(SCAddHouseController());
 
   List nameList = ['所居住小区', '房号', '家庭/企业', '身份'];
-  List valueList = ['慧享生活馆', '哈哈哈哈哈哈苑1幢1单元101室', '', ''];
+  List valueList = ['慧享生活馆', '绿城科技园1幢1单元101室', '', ''];
 
   @override
   initState() {
