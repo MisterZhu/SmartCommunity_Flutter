@@ -1,5 +1,4 @@
 
-
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../Model/sc_current_house_info_model.dart';
@@ -7,7 +6,7 @@ import '../Model/sc_current_house_review_model.dart';
 
 class SCCurrentHouseController extends GetxController {
 
-  int selectIndex = 0;
+  int selectReviewIndex = 0;
 
   List<SCCurrentHouseReviewModel>? reviewList = [];
 
@@ -50,10 +49,9 @@ class SCCurrentHouseController extends GetxController {
 
   }
 
-
-  /// 更新编辑状态
+  /// 更新点击的按钮index
   updateSelectIndex(int index) {
-    selectIndex = index;
+    selectReviewIndex = index;
     update();
   }
 

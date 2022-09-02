@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:smartcommunity/page/Mine/View/ToggleHouses/sc_mine_house_tag_item.dart';
 
 import '../../../../constants/sc_asset.dart';

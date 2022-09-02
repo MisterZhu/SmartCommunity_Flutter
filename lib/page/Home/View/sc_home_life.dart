@@ -83,6 +83,8 @@ class SCHomeLife extends StatelessWidget {
   /// cell
   Widget activityCell(int index) {
     return Container(
+      width: 156.0,
+      height: 114.0,
       color: SCColors.color_FFFFFF,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,10 +120,14 @@ class SCHomeLife extends StatelessWidget {
       alignment: Alignment.centerLeft,
       color: SCColors.color_FFFFFF,
       height: 22.0,
-      child: const Text('到家服务一应俱全钱钱钱钱请求', textAlign: TextAlign.left, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(
-        fontSize: SCFonts.f14,
-        fontWeight: FontWeight.w500,
-        color: SCColors.color_1B1D33,
+      child: const Text('到家服务一应俱全',
+        textAlign: TextAlign.left,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          fontSize: SCFonts.f14,
+          fontWeight: FontWeight.w500,
+          color: SCColors.color_1B1D33,
       ),),
     );
   }
