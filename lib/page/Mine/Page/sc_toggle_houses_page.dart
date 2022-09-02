@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/page/Mine/View/ToggleHouses/sc_my_room_number_item.dart';
+import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
 import '../../../constants/sc_asset.dart';
@@ -242,6 +243,7 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
               ),
               onPressed: () {
                 /// 去新增房号
+                SCRouterHelper.codePage(5002, null);
               }),
         ),
       ),
