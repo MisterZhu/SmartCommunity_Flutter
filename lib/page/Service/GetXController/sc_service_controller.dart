@@ -1,8 +1,12 @@
 
 
+import 'dart:developer';
+
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../../constants/sc_asset.dart';
+import '../../../network/sc_http_manager.dart';
+import '../../../network/sc_url.dart';
 import '../Model/sc_service_model.dart';
 
 class SCServiceController extends GetxController {
@@ -17,7 +21,6 @@ class SCServiceController extends GetxController {
   List<SCServiceModel> homeAppList = [];
   /// 应用列表
   List<SCServiceModel> appList = [];
-
 
 
   @override
@@ -46,6 +49,19 @@ class SCServiceController extends GetxController {
     appList = testList.map((e) => SCServiceModel.fromJson(e)).toList();
 
     homeAppList = homeTestList.map((e) => SCServiceModel.fromJson(e)).toList();
+  }
+
+  loadAppListData() {
+    SCHttpManager.instance.get(
+        url: SCUrl.kServiceAppListUrl,
+        success: (value) {
+          log('appList成功===$value');
+
+        },
+        failure: (value) {
+          log('appList失败===$value');
+
+        });
   }
 
   /// 更新首页应用展开状态

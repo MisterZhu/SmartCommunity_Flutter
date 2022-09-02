@@ -26,7 +26,7 @@ class SCMyRoomNumberItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(child: leftItem()),
-          const SizedBox(width: 20.0,),
+          const SizedBox(width: 24.0,),
           rightItem()
       ],
     )
@@ -44,7 +44,7 @@ class SCMyRoomNumberItem extends StatelessWidget {
           height: 2,
         ),
         Text(
-          '樱花苑-11幢-1单元-101室樱花苑-11幢',
+          '樱花苑-11幢-1单元-101室樱花苑11幢2单元',
           textAlign: TextAlign.left,
           style: const TextStyle(
               fontSize: SCFonts.f14,
@@ -70,7 +70,10 @@ class SCMyRoomNumberItem extends StatelessWidget {
               color: SCColors.color_1B1D33),
         ),
         const SizedBox(width: 8.0,),
-        Image.asset(SCAsset.iconMineHouseVerify, width: 46.0, height: 18.0,),
+        Offstage(
+          offstage: true,
+          child: Image.asset(SCAsset.iconMineHouseVerify, width: 46.0, height: 18.0,),
+        )
       ],
     );
   }
@@ -83,24 +86,27 @@ class SCMyRoomNumberItem extends StatelessWidget {
         width: 54,
         height: 32,
         color: SCColors.color_FFFFFF,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(SCAsset.iconMineHouseToggle, width: 14.0, height: 14.0,),
-            const SizedBox(width: 8.0,),
-            const Text(
-              '切换',
-              maxLines: 1,
-              textAlign: TextAlign.left,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 14.0,
-                fontWeight: FontWeight.normal,
-                color: SCColors.color_FF6C00,
-              ),),
-          ],
+        child: Offstage(
+          offstage: false,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(SCAsset.iconMineHouseToggle, width: 14.0, height: 14.0,),
+              const SizedBox(width: 8.0,),
+              const Text(
+                '切换',
+                maxLines: 1,
+                textAlign: TextAlign.left,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.normal,
+                  color: SCColors.color_FF6C00,
+                ),),
+            ],
+          ),
         ),
       ),
       onPressed: () {

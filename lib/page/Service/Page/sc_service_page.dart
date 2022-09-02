@@ -15,6 +15,13 @@ class SCServicePage extends StatefulWidget {
 
 class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientMixin{
   SCServiceController state = Get.put(SCServiceController());
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,4 +58,8 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 
+  loadData() {
+    SCServiceController state = Get.find<SCServiceController>();
+    state.loadAppListData();
+  }
 }

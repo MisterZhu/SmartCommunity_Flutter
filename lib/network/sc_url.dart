@@ -19,4 +19,8 @@ class SCUrl {
   /// 通过城市名称查询项目url
   static const String kSearchCommunityByCityUrl = '/api/space/community/pageSearchCommunity';
 
+ /************************* 服务 *************************/
+  /// 应用列表url
+  static const String kServiceAppListUrl = '/api/applet/tenant/list';
+
 }
