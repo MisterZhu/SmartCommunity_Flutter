@@ -6,8 +6,9 @@ import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
-import 'package:smartcommunity/page/Login/GetXController/sc_select_house_block_controller.dart';
-import 'package:smartcommunity/page/Login/GetXController/sc_select_house_block_search_status_controller.dart.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_data_controller.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_search_status_controller.dart.dart';
+import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_select_house_block_model.dart';
 import 'package:smartcommunity/page/Login/View/SelectHouse/block/sc_select_house_search_static_view.dart';
 
 /// Copyright (c), 浙江慧享信息科技有限公司
@@ -96,8 +97,8 @@ class SCHouseSearchDynamicView extends StatelessWidget {
     if (cancelAction != null) {
       cancelAction?.call();
     }
-    SCSelectHouseBlockController state = Get.find<SCSelectHouseBlockController>();
-    SCSelectHouseBlockSearchStatusController sCSelectHouseState = Get.find<SCSelectHouseBlockSearchStatusController>();
+    SCSelectHouseDataController state = Get.find<SCSelectHouseDataController>();
+    SCSelectHouseSearchStatusController sCSelectHouseState = Get.find<SCSelectHouseSearchStatusController>();
     sCSelectHouseState.updateSearchStatus(isShowCancel: false);
     state.updateSearchList(list: []);
   }
@@ -167,16 +168,16 @@ class SCHouseSearchDynamicView extends StatelessWidget {
     if (valueChangedAction != null) {
       valueChangedAction?.call(value);
     }
-   /* SCSelectHouseBlockController state = Get.find<SCSelectHouseBlockController>();
-    List<DemoSCHouseBlockModel> houseCommunityList = state.houseCommunityList;
-    List<DemoSCHouseBlockModel> searchResultList = [];
+    SCSelectHouseDataController state = Get.find<SCSelectHouseDataController>();
+    List<ScSelectHouseModel> houseCommunityList = state.dataList;
+    List<ScSelectHouseModel> searchResultList = [];
     if(value.isNotEmpty) {
       if(houseCommunityList != null){
         for(int i = 0; i < houseCommunityList.length; i++) {
-          DemoSCHouseBlockModel demoSCHouseCommunityModel = houseCommunityList[i];
-          String? name = demoSCHouseCommunityModel.name;
+          ScSelectHouseModel scSelectHouseModel = houseCommunityList[i];
+          String? name = scSelectHouseModel.name;
           if(name!.contains(value)) {
-            searchResultList.add(demoSCHouseCommunityModel);
+            searchResultList.add(scSelectHouseModel);
           }
         }
       }
@@ -184,6 +185,6 @@ class SCHouseSearchDynamicView extends StatelessWidget {
     } else {
       print('-->输入的东西为空');
       state.updateSearchList(list:[]);
-    }*/
+    }
   }
 }

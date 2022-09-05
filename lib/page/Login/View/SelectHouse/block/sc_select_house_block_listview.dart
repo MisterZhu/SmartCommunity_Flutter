@@ -2,16 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
-import 'package:smartcommunity/page/Login/GetXController/sc_select_house_block_controller.dart';
+import 'package:smartcommunity/network/sc_http_manager.dart';
+import 'package:smartcommunity/network/sc_url.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_controller.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_data_controller.dart';
+import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_select_house_block_model.dart';
+import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 
-import '../../../GetXController/sc_select_house_block_search_status_controller.dart.dart';
+import '../../../GetXController/sc_select_house_search_status_controller.dart.dart';
 
 /// Copyright (c), 浙江慧享信息科技有限公司
 /// FileName: sc_select_house_community_listview
 /// Author: wang tao
 /// Email: wangtao1@lvchengfuwu.com
 /// Date: 2022/8/18 11:50
-/// Description: 选择房号 - 苑 列表
+/// Description: 选择房号 - 列表
 class SCSelectHouseBlockListView extends StatefulWidget {
   const SCSelectHouseBlockListView({Key? key}) : super(key: key);
 
@@ -22,25 +27,28 @@ class SCSelectHouseBlockListView extends StatefulWidget {
 
 class _SCSelectHouseBlockListViewState
     extends State<SCSelectHouseBlockListView> {
-  SCSelectHouseBlockSearchStatusController scSelectHouseController = Get.put(SCSelectHouseBlockSearchStatusController());
-  SCSelectHouseBlockSearchStatusController sCSelectHouseState = Get.find<SCSelectHouseBlockSearchStatusController>();
+  SCSelectHouseSearchStatusController searchStatusController = Get.put(SCSelectHouseSearchStatusController());
+  SCSelectHouseSearchStatusController searchStatusState = Get.find<SCSelectHouseSearchStatusController>();
 
-  SCSelectHouseBlockController scSelectHouseBlockController = Get.put(SCSelectHouseBlockController());
-  SCSelectHouseBlockController sCSelectHouseBlockState = Get.find<SCSelectHouseBlockController>();
+  SCSelectHouseDataController dataController = Get.put(SCSelectHouseDataController());
+  SCSelectHouseDataController dataState = Get.find<SCSelectHouseDataController>();
+
+  SCSelectHouseController selectHouseController = Get.put(SCSelectHouseController());
+
   @override
   void initState() {}
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SCSelectHouseBlockSearchStatusController>(builder: (sCSelectHouseState) {
-      return GetBuilder<SCSelectHouseBlockController>(builder: (state) {
+    return GetBuilder<SCSelectHouseSearchStatusController>(builder: (sCSelectHouseState) {
+      return GetBuilder<SCSelectHouseDataController>(builder: (state) {
         return houseList();
       });
     });
   }
 
   Widget houseList() {
-    if (sCSelectHouseState.isShowCancel) {
+    if (searchStatusState.isShowCancel) {
       return GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
@@ -50,20 +58,19 @@ class _SCSelectHouseBlockListViewState
               childAspectRatio: 2.5,
               mainAxisSpacing: 12.0),
           scrollDirection: Axis.vertical,
-          itemCount: scSelectHouseBlockController.searchResultList == null
+          itemCount: dataState.searchResultList == null
               ? 0
-              : scSelectHouseBlockController.searchResultList.length,
+              : dataState.searchResultList.length,
           itemBuilder: (context, index) {
-            /*bool? isChecked =
-                scSelectHouseBlockController.searchResultList[index].isChecked;
+            bool? isChecked =
+                dataState.searchResultList[index].isChecked;
             if (isChecked!) {
               // 选中
               return _hasChecked(true, index);
             } else {
               // 未选中
               return _hasNotChecked(true, index);
-            }*/
-            return _hasNotChecked(true, index);
+            }
           });
     } else {
       return GridView.builder(
@@ -75,20 +82,19 @@ class _SCSelectHouseBlockListViewState
               childAspectRatio: 2.5,
               mainAxisSpacing: 12.0),
           scrollDirection: Axis.vertical,
-          itemCount: sCSelectHouseBlockState.blockList == null
+          itemCount: dataState.dataList == null
               ? 0
-              : sCSelectHouseBlockState.blockList.length,
+              : dataState.dataList.length,
 
           itemBuilder: (context, index) {
-           /* bool? isChecked = sCSelectHouseBlockState.blockList[index].isChecked;
+            bool? isChecked = dataState.dataList[index].isChecked;
             if (isChecked!) {
               // 选中
               return _hasChecked(false, index);
             } else {
               // 未选中
               return _hasNotChecked(false, index);
-            }*/
-            return _hasNotChecked(true, index);
+            }
           });
     }
   }
@@ -108,7 +114,7 @@ class _SCSelectHouseBlockListViewState
 
       child: Center(
         child: Text(
-          breakWord(isSearch ? '${sCSelectHouseBlockState.searchResultList[index].name}' : '${sCSelectHouseBlockState.blockList[index].name}'),
+          breakWord(isSearch ? '${dataState.searchResultList[index].name}' : '${dataState.dataList[index].name}'),
           style: _hasCheckedTextStyle(),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
@@ -126,10 +132,9 @@ class _SCSelectHouseBlockListViewState
           borderRadius: BorderRadiusDirectional.circular(8.0),
           color: SCColors.color_F7F8FA,
         ),
-        // child: Text('${state.houseCommunityList[index].name}'),
         child: Center(
           child: Text(
-            breakWord(isSearch ? '${sCSelectHouseBlockState.searchResultList[index].name}' : '${sCSelectHouseBlockState.blockList[index].name}'),
+            breakWord(isSearch ? '${dataState.searchResultList[index].name}' : '${dataState.dataList[index].name}'),
             style: _hasNotCheckedTextStyle(),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -137,9 +142,9 @@ class _SCSelectHouseBlockListViewState
         ),
       ),
       onTap: () {
-        /*if(isSearch){
-          List<DemoSCHouseBlockModel> searchResultList =
-              sCSelectHouseBlockState.searchResultList;
+        if(isSearch){
+          List<ScSelectHouseModel> searchResultList =
+              dataState.searchResultList;
           for (int i = 0; i < searchResultList.length; i++) {
             if (i == index) {
               searchResultList[i].isChecked = true;
@@ -147,14 +152,18 @@ class _SCSelectHouseBlockListViewState
               searchResultList[i].isChecked = false;
             }
           }
-          scSelectHouseBlockController.updateSearchList(list: searchResultList);
+          dataController.updateSearchList(list: searchResultList);
 
-          // pageView跳转
-          SCSelectHouseController selectHouseController = Get.put(SCSelectHouseController());
-          selectHouseController.switchTab(pageIndex: 1);
+          // todo
+          bool? haveChild = searchResultList[index].haveChild;
+          if(haveChild!) {
+            loadData((searchResultList[index].id).toString());
+          } else {
+            SCToast.showTip('没有下一级');
+          }
         } else{
-          List<DemoSCHouseBlockModel> houseCommunityList =
-              sCSelectHouseBlockState.houseCommunityList;
+          List<ScSelectHouseModel> houseCommunityList =
+              dataState.dataList;
           for (int i = 0; i < houseCommunityList.length; i++) {
             if (i == index) {
               houseCommunityList[i].isChecked = true;
@@ -162,15 +171,43 @@ class _SCSelectHouseBlockListViewState
               houseCommunityList[i].isChecked = false;
             }
           }
-          scSelectHouseBlockController.updateHouseCommunityList(list: houseCommunityList);
+          dataController.updateDataList(list: houseCommunityList);
 
-          // pageView跳转
-          SCSelectHouseController selectHouseController = Get.put(SCSelectHouseController());
-          selectHouseController.switchTab(pageIndex: 1);
-        }*/
+          // todo
 
+          bool? haveChild = houseCommunityList[index].haveChild;
+          if(haveChild!) {
+            loadData((houseCommunityList[index].id).toString());
+          } else {
+            SCToast.showTip('没有下一级');
+          }
+        }
       },
     );
+  }
+
+
+  void loadData(String currentId) {
+    SCHttpManager.instance.get(
+        url: SCUrl.kGetSpaceNodesUrl,
+        params: {'communityId': selectHouseController.communityId, 'currentId': currentId},
+        success: (value) {
+          List<ScSelectHouseModel> dataList =
+          List<ScSelectHouseModel>.from(value
+              .map((e) => ScSelectHouseModel.fromJson(e))
+              .toList());
+          print('print--> 获取苑数据===$dataList');
+
+          dataController.updateDataList(
+              list: dataList == null ? [] : dataList);
+        },
+        failure: (value) {
+          if (value['message'] != null) {
+            String message = value['message'];
+            SCToast.showTip(message);
+          }
+          dataController.updateDataList(list: []);
+        });
   }
 
   /// 选中字体颜色

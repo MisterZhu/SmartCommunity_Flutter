@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
-import 'package:smartcommunity/page/Login/GetXController/sc_select_house_block_search_status_controller.dart.dart';
-
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_search_status_controller.dart.dart';
 
 
 /// Copyright (c), 浙江慧享信息科技有限公司
@@ -41,7 +40,7 @@ class SCSelectHouseSearchStaticView extends StatelessWidget {
           )
       ),
       onTap: () {
-        SCSelectHouseBlockSearchStatusController searchState = Get.find<SCSelectHouseBlockSearchStatusController>();
+        SCSelectHouseSearchStatusController searchState = Get.find<SCSelectHouseSearchStatusController>();
         searchState.updateSearchStatus(isShowCancel: true);
       },);
 

@@ -66,12 +66,6 @@ dependencies:
   # webview https://pub.flutter-io.cn/packages/webview_flutter/install
   webview_flutter: ^3.0.4
 
-  # webView
-  webview_flutter: ^3.0.4
-  #自适应文字
-  auto_size_text: ^3.0.0
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

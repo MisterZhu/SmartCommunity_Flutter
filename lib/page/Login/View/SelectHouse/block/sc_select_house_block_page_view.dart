@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/network/sc_http_manager.dart';
 import 'package:smartcommunity/network/sc_url.dart';
-import 'package:smartcommunity/page/Login/GetXController/sc_select_house_block_controller.dart';
-import 'package:smartcommunity/page/Login/GetXController/sc_select_house_block_search_status_controller.dart.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_data_controller.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_search_status_controller.dart.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_controller.dart';
 import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_select_house_block_model.dart';
 import 'package:smartcommunity/page/Login/View/SelectHouse/block/sc_select_house_block_listview.dart';
@@ -17,10 +17,8 @@ import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 /// Author: wang tao
 /// Email: wangtao1@lvchengfuwu.com
 /// Date: 2022/8/18 9:56
-/// Description: 选择房号-苑
+/// Description: 选择房号
 class SCSelectHouseBlockPageView extends StatefulWidget {
-
-
 
   const SCSelectHouseBlockPageView({Key? key}) : super(key: key);
 
@@ -90,14 +88,16 @@ class _SCSelectHouseBlockPageViewState
                     ),
                   ],
                 ),
-              )),
+              ),
+          ),
         )
+
       ],
     );
   }
 
   Widget searchHeader() {
-    return GetBuilder<SCSelectHouseBlockSearchStatusController>(
+    return GetBuilder<SCSelectHouseSearchStatusController>(
         builder: (state) {
       if (state.isShowCancel) {
         // 搜索中……
