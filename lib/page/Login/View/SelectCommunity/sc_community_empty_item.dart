@@ -6,16 +6,15 @@ import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_fonts.dart';
 
 class SCCommunityEmptyItem extends StatelessWidget {
-
+  /// 图片
   final String? imageName;
-
+  /// 图片下面的提示文字
   final String? content;
   /// 按钮标题
   final String? buttonTitle;
-
+  /// 是否显示底部按钮
   final bool showButton;
-
-  /// 取消
+  /// 按钮点击事件
   final Function? btnTapAction;
 
   SCCommunityEmptyItem(
@@ -46,7 +45,7 @@ class SCCommunityEmptyItem extends StatelessWidget {
         children: [
           const SizedBox(height: 34,),
           Image.asset(
-            imageName ?? 'iconCommunityNoData',
+            imageName!,
             width: 144.0,
             height: 144.0,
           ),

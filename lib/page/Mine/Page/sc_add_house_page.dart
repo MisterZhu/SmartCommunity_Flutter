@@ -73,6 +73,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
     );
   }
 
+  /// 顶部提示item
   Widget topTipsItem() {
     return Container(
       color: SCColors.color_FFF7D4,
@@ -88,6 +89,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
     );
   }
 
+  /// listView
   Widget listView() {
     return ListView.separated(
         padding: const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 0),
@@ -100,6 +102,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
         itemCount: nameList.length);
   }
 
+  /// cell
   Widget cellItem(String name, String value, int index) {
     return GestureDetector(
         onTap: () {
@@ -154,6 +157,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
     );
   }
 
+  /// 底部提示item
   Widget bottomTipsItem() {
     return Container(
       height: 30,

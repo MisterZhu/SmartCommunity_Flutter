@@ -163,7 +163,7 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
     );
   }
 
-  /*普通tab*/
+  /// 普通tab
   Widget normalTabItem(String title, int index) {
     return GetBuilder<SCToggleHousesController>(builder: (state) {
       TextStyle textStyle = TextStyle(
@@ -179,7 +179,7 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
     });
   }
 
-  /*带数字消息的tab*/
+  /// 带数字消息的tab
   Widget messageTabItem(String title, int index) {
     return GetBuilder<SCToggleHousesController>(builder: (state) {
       TextStyle textStyle = TextStyle(

@@ -50,6 +50,7 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
     );
   }
 
+  /// 已审核/未审核 按钮
   Widget topBtnItem() {
     return GetBuilder<SCCurrentHouseController>(builder: (state) {
       return Center(
@@ -94,7 +95,6 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
         ),
       );
     });
-
   }
 
   Widget listView() {
@@ -117,6 +117,7 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
     );
   }
 
+  /// cell
   Widget cellItem(SCCurrentHouseReviewModel model) {
     SCCurrentHouseController state = Get.find<SCCurrentHouseController>();
 
@@ -217,7 +218,6 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
               color: SCColors.color_8D8E99),
         ),
       ],
-
     );
   }
 
