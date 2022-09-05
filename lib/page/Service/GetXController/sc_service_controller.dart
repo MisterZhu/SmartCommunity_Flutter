@@ -28,7 +28,7 @@ class SCServiceController extends GetxController {
     super.onInit();
     var homeTestList = [
     {'id': '0', 'name': '业主二维码', 'icon': SCAsset.iconServiceQrCode, 'added': false},
-    {'id': '1', 'name': '公务用车', 'icon': SCAsset.iconServiceTiger, 'added': false},
+    {'id': '1', 'name': '公务用车', 'icon': SCAsset.iconServiceCar, 'added': false},
     {'id': '2', 'name': '积分管理', 'icon': SCAsset.iconServiceIntegral, 'added': false},
     {'id': '3', 'name': '报事报修', 'icon': SCAsset.iconServiceReport, 'added': false},
     ];
