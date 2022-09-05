@@ -51,6 +51,7 @@ class SCServiceController extends GetxController {
     homeAppList = homeTestList.map((e) => SCServiceModel.fromJson(e)).toList();
   }
 
+  /// 获取应用列表数据
   loadAppListData() {
     SCHttpManager.instance.get(
         url: SCUrl.kServiceAppListUrl,
@@ -76,11 +77,13 @@ class SCServiceController extends GetxController {
     update();
   }
 
+  /// 移除首页应用
   deleteHomeApp(SCServiceModel model) {
     homeAppList.remove(model);
     update();
   }
 
+  /// 添加首页应用
   addHomeApp(SCServiceModel model) {
     homeAppList.add(model);
     update();

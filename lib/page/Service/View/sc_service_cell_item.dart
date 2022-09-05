@@ -61,11 +61,10 @@ class SCServiceCellItem extends StatelessWidget {
           )
         ],
       );
-
     });
   }
 
-  /*header*/
+  /// header
   Widget headerItem() {
     return Container(
       padding: const EdgeInsets.only(left: 12, right: 10, top: 12, bottom: 12),
@@ -94,8 +93,7 @@ class SCServiceCellItem extends StatelessWidget {
     );
   }
 
-
-  /*header-left*/
+  /// header-Right
   Widget headerRightContainer() {
     return GetBuilder<SCServiceController>(builder: (state){
       return Offstage(
@@ -140,7 +138,7 @@ class SCServiceCellItem extends StatelessWidget {
     });
   }
 
-  /*cell*/
+  /// cell
   Widget itemsCell() {
     SCServiceController state = Get.find<SCServiceController>();
     return StaggeredGridView.countBuilder(
@@ -229,6 +227,7 @@ class SCServiceCellItem extends StatelessWidget {
     );
   }
 
+  /// 右上角的+/-图标
   Widget addOrDeleteIconItem(SCServiceModel model, bool hide) {
     return Offstage(
       /// offstage = true（隐藏）
@@ -241,6 +240,5 @@ class SCServiceCellItem extends StatelessWidget {
       ),
     );
   }
-
 
 }
