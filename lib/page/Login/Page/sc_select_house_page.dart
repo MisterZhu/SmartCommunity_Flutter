@@ -135,8 +135,8 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
         height: 54.0,
         padding: EdgeInsets.symmetric(horizontal: 10.0),
         alignment: Alignment.centerLeft,
-        // child: Text('慧享服务中心 > 慧享生活馆 > 幢 > 单元'),
-        child: CustomScrollView(
+        child: Text('慧享服务中心 > 慧享生活馆 > 幢 > 单元'),
+        /*child: CustomScrollView(
           controller: null,
           slivers: [
             ListView(
@@ -145,7 +145,7 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
               ],
             )
           ],
-        ),
+        ),*/
       );
     });
   }
