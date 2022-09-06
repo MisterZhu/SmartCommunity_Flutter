@@ -29,7 +29,7 @@ class SCUrl {
 
 
   /// 获取用户身份
-  // static const String kBindAsset = '/api/space/space-pa/resident/user/bind';
+  static const String kResidentUserIdentity = '/api/space/resident/user/community/identity';
   /// 绑定房产
-  static const String kBindAsset = '/api/space/space-pa/resident/user/bind';
+  static const String kBindAsset = '/api/space/resident/user/bind';
 }

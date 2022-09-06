@@ -7,7 +7,6 @@ class SCAsset {
   static const String iconNavigationBack = 'images/common/icon_navigation_back.png';
   /// 导航栏关闭按钮，默认黑色
   static const String iconNavigationClose = 'images/common/icon_navigation_close.png';
-  static const String iconBackBlack = 'images/icon_back_black.png';
   static const String iconBackWhite = 'images/icon_back_white.png';
   static const String iconNoData = 'images/icon_no_data.png';
   static const String iconAdd = 'images/icon_add.png';
@@ -33,6 +32,8 @@ class SCAsset {
   static const String iconNormalLike = 'images/icon_like_normal.png';
   /// 点赞-红色icon
   static const String iconSelectedLike = 'images/icon_like_selected.png';
+  /// 导航栏搜索框-白色
+  static const String iconNavSearchWhite = 'images/skin/icon_nav_search_white.png';
 
   /// tab-首页-normal
   static const String iconNormalHome = 'images/icon_home_normal.png';
@@ -79,6 +80,8 @@ class SCAsset {
   static const String iconMineInteraction = 'images/icon_mine_interaction.png';
   /// 地址
   static const String iconMineAddress = 'images/icon_mine_address.png';
+  /// 灰色详情icon
+  static const String iconDropDownGray = 'images/skin/icon_dropdown_gray.png';
 
   /************* 测试用的数据 *************/
   /// 首页-业主二维码
@@ -123,6 +126,17 @@ class SCAsset {
   static const String homeActivity2 = 'images/icon_activity2.png';
   /// 首页-活动3
   static const String homeActivity3 = 'images/icon_activity3.png';
+  /// 首页-活动4
+  static const String homeActivity4 = 'images/icon_activity4.png';
+  /// 首页-活动5
+  static const String homeActivity5 = 'images/icon_activity5.png';
+  /// 首页-活动6
+  static const String homeActivity6 = 'images/icon_activity6.png';
+
+  /// 首页-美好生活1
+  static const String homeLife1 = 'images/icon_life1.png';
+  /// 首页-美好生活2
+  static const String homeLife2 = 'images/icon_life2.png';
 
   /// 首页-商家
   static const String homeMerchant = 'images/icon_merchant.png';
@@ -143,6 +157,27 @@ class SCAsset {
   static const String homeIconNews5 = 'images/icon_news5.png';
   /// 首页-资讯6
   static const String homeIconNews6 = 'images/icon_news6.png';
+
+  /// 首页-皮肤2-顶部背景图
+  static const String homeSkin2TopBG = 'images/skin/skin2_home_top_bg.png';
+  /// 首页-皮肤2-banner1
+  static const String homeSkin2Banner = 'images/skin/icon_skin2_banner1.png';
+
+  /// 首页-精选商品1
+  static const String homeGoods1 = 'images/goods/icon_good1.png';
+  /// 首页-精选商品2
+  static const String homeGoods2 = 'images/goods/icon_good2.png';
+  /// 首页-精选商品3
+  static const String homeGoods3 = 'images/goods/icon_good3.png';
+  /// 首页-精选商品4
+  static const String homeGoods4 = 'images/goods/icon_good4.png';
+  /// 首页-精选商品-标签1
+  static const String homeGoodsTag1 = 'images/goods/icon_goods_tag1.png';
+  /// 首页-精选商品-标签2
+  static const String homeGoodsTag2 = 'images/goods/icon_goods_tag2.png';
+  /// 首页-精选商品-标签3
+  static const String homeGoodsTag3 = 'images/goods/icon_goods_tag3.png';
+
   /************* 测试用的数据 *************/
 
   /************* 引导页图片 *************/
@@ -222,9 +257,9 @@ class SCAsset {
   /// 应用icon-测试gif
   static const String iconServiceTiger = 'images/appList/ic_service_tiger.gif';
 
-/************* 全部应用 *************/
+  /************* 全部应用 *************/
 
-/************* 我的-切换房屋 *************/
+  /************* 我的-切换房屋 *************/
 
   /// 我的-切换房号-添加房号icon
   static const String iconMineHouseAdd = 'images/mine/ic_mine_house_add.png';

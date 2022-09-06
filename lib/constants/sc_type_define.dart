@@ -22,6 +22,8 @@ class SCTypeDefine {
   static const int SC_HOME_TYPE_COMMUNITY = 8;
   /// 美好生活
   static const int SC_HOME_TYPE_LIFE = 9;
+  /// 精选商品
+  static const int SC_HOME_TYPE_GOODS = 10;
 
   /************************* 首页-cellType *************************/
 

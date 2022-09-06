@@ -1,8 +1,15 @@
 import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:smartcommunity/network/sc_http_manager.dart';
+import 'package:smartcommunity/network/sc_url.dart';
+import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_user_identity.dart';
+import 'package:smartcommunity/utils/Toast/sc_toast.dart';
+import 'package:smartcommunity/widgets/Dialog/sc_bottom_sheet_model.dart';
+import 'package:smartcommunity/widgets/Dialog/sc_dialog_utils.dart';
 
 import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_colors.dart';
@@ -20,10 +27,12 @@ class SCAddHousePage extends StatefulWidget {
 class SCAddHouseState extends State<SCAddHousePage> {
   SCAddHouseController state = Get.put(SCAddHouseController());
 
-  List nameList = ['所居住小区', '房号', '家庭/企业', '身份'];
+  // List nameList = ['所居住小区', '房号', '家庭/企业', '身份'];
+  List nameList = ['所居住小区', '房号', '身份'];
   List valueList = [];
   String communityId = '';
   String houseId = '';
+  String identityId = '';
 
   @override
   initState() {
@@ -37,6 +46,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
     print('print--> valueList: ${valueList}');
     print('print--> communityId: ${communityId}');
     print('print--> houseId: ${houseId}');
+
   }
 
   @override
@@ -128,15 +138,9 @@ class SCAddHouseState extends State<SCAddHousePage> {
             /// 选择房号
             log('点击选择房号');
           } else if (index == 2) {
-            /// 选择家庭/企业
-            log('点击选择家庭');
-          } else if (index == 3) {
             /// 选择身份
             log('点击选择身份');
-            /// 调用接口 获取身份列表
-
-            /// 底部弹窗
-
+            loadResidentUserIdentity();
           }
         },
         child: Container(
@@ -238,9 +242,80 @@ class SCAddHouseState extends State<SCAddHousePage> {
                   color: SCColors.color_FFFFFF,
                 ),
               ),
-              onPressed: () {}),
+              onPressed: () {
+                commit();
+              }),
         ),
       ),
     );
+  }
+
+  /// 加载用户身份列表
+  loadResidentUserIdentity() {
+    SCHttpManager.instance.get(
+        url: SCUrl.kResidentUserIdentity,
+        params: {
+          'communityId': communityId,
+        },
+        success: (value) {
+          List<ScUserIdentity> dataList = List<ScUserIdentity>.from(
+              value.map((e) => ScUserIdentity.fromJson(e)).toList());
+
+          if (dataList == null || dataList.length == 0) {
+            SCToast.showTip('身份信息为空');
+            return;
+          }
+
+          showIdentityDialog(dataList);
+        },
+        failure: (value) {
+          if (value['message'] != null) {
+            String message = value['message'];
+            SCToast.showTip(message);
+          }
+        });
+  }
+
+  /// 身份底部弹窗
+  showIdentityDialog(List<ScUserIdentity> identityList) {
+    List<SCBottomSheetModel> dataList = [];
+    for (int i = 0; i < identityList.length; i++) {
+      SCBottomSheetModel scBottomSheetModel = SCBottomSheetModel(
+          title: identityList[i].identity,
+          color: SCColors.color_1B1C33,
+          fontSize: SCFonts.f16,
+          fontWeight: FontWeight.w400);
+      dataList.add(scBottomSheetModel);
+    }
+    SCDialogUtils.instance.showBottomDialog(
+        context: context,
+        dataList: dataList,
+        isShowCancel: true,
+        onTap: (index, context) {
+          // valueList[2] = identityList[index].identity!;
+          identityId = identityList[index].identityId!;
+          print('点击 $identityId');
+        });
+  }
+
+  /// 提交
+  commit() {
+    SCHttpManager.instance.post(
+        url: SCUrl.kBindAsset,
+        params: {
+          'communityId': communityId,
+          'identityId': identityId,
+          'spaceId': houseId
+        },
+        success: (value) {
+          /// 成功
+
+        },
+        failure: (value) {
+          if (value['message'] != null) {
+            String message = value['message'];
+            SCToast.showTip(message);
+          }
+        });
   }
 }

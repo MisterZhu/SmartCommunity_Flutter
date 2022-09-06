@@ -131,8 +131,16 @@ class SCDialogUtils {
             dataList: dataList,
             isShowCancel: isShowCancel,
             customCancelModel: cancelModel,
-            onTap: (int index, BuildContext context) {},
-            onCancelTap: (BuildContext context) {},
+            onTap: (int index, BuildContext context) {
+              if (onTap != null) {
+                onTap?.call(index, context);
+              }
+            },
+            onCancelTap: (BuildContext context) {
+              if (onCancelTap != null) {
+                onCancelTap?.call(context);
+              }
+            },
           );
         });
   }
