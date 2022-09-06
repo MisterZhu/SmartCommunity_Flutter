@@ -60,24 +60,6 @@ class SCHomeSkin1 extends StatelessWidget {
 
       /// 精选资讯
       {'type': SCTypeDefine.SC_HOME_TYPE_NEWS, 'data': []},
-
-      /// 其他
-      {'type': 1001, 'data': []},
-
-      /// 其他
-      {'type': 1001, 'data': []},
-
-      /// 其他
-      {'type': 1001, 'data': []},
-
-      /// 其他
-      {'type': 1001, 'data': []},
-
-      /// 其他
-      {'type': 1001, 'data': []},
-
-      /// 其他
-      {'type': 1001, 'data': []},
     ];
 
     return GetBuilder<SCHomeController1>(builder: (state) {
