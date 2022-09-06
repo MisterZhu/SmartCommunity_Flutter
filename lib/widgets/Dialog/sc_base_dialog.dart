@@ -10,7 +10,7 @@ enum DiaLogLocation {
   bottom
 }
 
-enum buttonArrangeType {
+enum ButtonArrangeType {
   row,
   column
 }
@@ -93,7 +93,7 @@ class SCBaseDialog extends StatefulWidget {
   /// 按钮字重  默认500
   final FontWeight? otherButtonFontWeight;
   /// 按钮排列方式 默认横向排列
-  final buttonArrangeType? arrangeType;
+  final ButtonArrangeType? arrangeType;
   /// 点击返回index 0 1
   final Function(int index, BuildContext context)? onTap;
 
@@ -125,7 +125,7 @@ class SCBaseDialog extends StatefulWidget {
     this.otherButtonFontSize = 16.0,
     this.cancelButtonFontWeight = FontWeight.w400,
     this.otherButtonFontWeight = FontWeight.w400,
-    this.arrangeType = buttonArrangeType.row,
+    this.arrangeType = ButtonArrangeType.row,
     this.onTap,
   }) : super(key: key);
 
@@ -144,7 +144,7 @@ class SCBaseDialogState extends State<SCBaseDialog> {
     String title = widget.title ?? '';
     String content = widget.content ?? '';
     bool isSystemBottomDialog = widget.isSystemBottomDialog ?? false;
-    buttonArrangeType arrangeType = widget.arrangeType ?? buttonArrangeType.row;
+    ButtonArrangeType arrangeType = widget.arrangeType ?? ButtonArrangeType.row;
 
     bool emptyTitle =
     ((title.isEmpty || title == '' ) && widget.customTitleWidget == null); // 是否有标题
@@ -235,7 +235,7 @@ class SCBaseDialogState extends State<SCBaseDialog> {
   Widget _createBaseMiddleDiaLog() {
     String title = widget.title ?? '';
     String content = widget.content ?? '';
-    buttonArrangeType arrangeType = widget.arrangeType ?? buttonArrangeType.row;
+    ButtonArrangeType arrangeType = widget.arrangeType ?? ButtonArrangeType.row;
 
     bool emptyTitle = ((title.isEmpty || title == '') && widget.customTitleWidget == null); // 是否有标题
     bool emptyContent = ((content.isEmpty || content == '') && widget.customContentWidget == null); // 是否有内容
@@ -318,12 +318,12 @@ class SCBaseDialogState extends State<SCBaseDialog> {
   }
 
   /// 创建默认buttons组
-  Widget _createDefaultButtons(buttonArrangeType type, double buttonHeight) {
+  Widget _createDefaultButtons(ButtonArrangeType type, double buttonHeight) {
     List<String> buttons = widget.buttons ?? [];
 
     return (buttons.isEmpty)
         ? Container()
-        : (type == buttonArrangeType.column)
+        : (type == ButtonArrangeType.column)
         ? _createDefaultColumnButtons(buttonHeight)
         : _createDefaultRowButtons(buttonHeight);
   }
@@ -406,11 +406,11 @@ class SCBaseDialogState extends State<SCBaseDialog> {
   }
 
   /// 创建自定义buttons
-  Widget _createCustomButtons(buttonArrangeType type) {
+  Widget _createCustomButtons(ButtonArrangeType type) {
     List<Widget> customWidgetButtons = widget.customWidgetButtons ?? [];
     return (customWidgetButtons.isEmpty)
         ? Container()
-        : (type == buttonArrangeType.column)
+        : (type == ButtonArrangeType.column)
         ? _createCustomColumnButtons()
         : _createCustomRowButtons();
   }
