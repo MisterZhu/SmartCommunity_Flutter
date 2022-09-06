@@ -5,6 +5,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../../network/sc_http_manager.dart';
 import '../../../network/sc_url.dart';
+import '../../../utils/Loading/sc_loading_utils.dart';
 import '../Model/sc_current_house_info_model.dart';
 import '../Model/sc_current_house_review_model.dart';
 
@@ -60,6 +61,7 @@ class SCCurrentHouseController extends GetxController {
   }
 
   loadData() {
+    SCLoadingUtils.show();
     SCHttpManager.instance.get(
         url: SCUrl.kCurrentHouseInfoUrl,
         success: (value) {

@@ -118,6 +118,7 @@ class SCMyHouseItem extends StatelessWidget {
         /// 切换,把项目id存在用户信息里
         SCUser user = SCScaffoldManager.instance.getUserData();
         user.housingId = model.communityId;
+        user.communityName = model.communityName;
         SCScaffoldManager.instance.cacheUserData(user);
       },
     );
