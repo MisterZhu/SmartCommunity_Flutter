@@ -8,12 +8,6 @@ import 'package:smartcommunity/page/Mine/View/sc_mine_property_item.dart';
 import 'package:smartcommunity/page/Mine/View/sc_mine_score_item.dart';
 import 'package:smartcommunity/page/Mine/View/sc_mine_service_item.dart';
 import 'package:smartcommunity/page/Mine/View/sc_mine_wallet_item.dart';
-import 'package:smartcommunity/widgets/Dialog/sc_dialog_utils.dart';
-
-import '../../../constants/sc_colors.dart';
-import '../../../constants/sc_fonts.dart';
-import '../../../widgets/Dialog/sc_base_dialog.dart';
-import '../../../widgets/Dialog/sc_bottom_sheet_model.dart';
 
 /// 我的-listview
 
