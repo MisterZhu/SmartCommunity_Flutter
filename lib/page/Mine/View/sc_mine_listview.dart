@@ -8,14 +8,22 @@ import 'package:smartcommunity/page/Mine/View/sc_mine_property_item.dart';
 import 'package:smartcommunity/page/Mine/View/sc_mine_score_item.dart';
 import 'package:smartcommunity/page/Mine/View/sc_mine_service_item.dart';
 import 'package:smartcommunity/page/Mine/View/sc_mine_wallet_item.dart';
+import 'package:smartcommunity/widgets/Dialog/sc_dialog_utils.dart';
+
+import '../../../constants/sc_colors.dart';
+import '../../../constants/sc_fonts.dart';
+import '../../../widgets/Dialog/sc_base_dialog.dart';
+import '../../../widgets/Dialog/sc_bottom_sheet_model.dart';
 
 /// 我的-listview
 
 class SCMineListView extends StatelessWidget {
-
-  SCMineListView({Key? key, this.scrollFunction, required this.dataList, this.propertCurrentIndex = 0})
+  SCMineListView(
+      {Key? key,
+      this.scrollFunction,
+      required this.dataList,
+      this.propertCurrentIndex = 0})
       : super(key: key);
-
 
   /// listView数据源
   final List dataList;
@@ -37,11 +45,11 @@ class SCMineListView extends StatelessWidget {
   Widget body() {
     scrollNotify();
     return ListView.separated(
-      controller: scrollController,
+        controller: scrollController,
         padding: EdgeInsets.zero,
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
-          return getCell(type: dataList[index]);
+          return getCell(type: dataList[index], context: context);
         },
         separatorBuilder: (BuildContext context, int index) {
           return lineWidget();
@@ -50,13 +58,13 @@ class SCMineListView extends StatelessWidget {
   }
 
   /// 获取cell
-  Widget getCell({required int type}) {
+  Widget getCell({required int type, required BuildContext context}) {
     if (type == SCTypeDefine.SC_MINE_TYPE_HEADER) {
       // header
       return headerCell();
     } else if (type == SCTypeDefine.SC_MINE_TYPE_CHANGERHOUSE) {
       // 切换房号
-      return changeAddressCell();
+      return changeAddressCell(context);
     } else if (type == SCTypeDefine.SC_MINE_TYPE_SCORE) {
       // 积分
       return scoreCell();
@@ -81,8 +89,10 @@ class SCMineListView extends StatelessWidget {
   }
 
   /// 切换房号-cell
-  Widget changeAddressCell() {
-    return SCMineChangeAddressItem();
+  Widget changeAddressCell(BuildContext context) {
+    return SCMineChangeAddressItem(
+      onTap: () {},
+    );
   }
 
   /// 积分、红包-cell
@@ -98,7 +108,10 @@ class SCMineListView extends StatelessWidget {
   /// 我的资产-cell
   Widget propertyCell() {
     SCPropertyModel model = SCPropertyModel.fromJson(dataMap);
-    return SCMinePropertyItem(currentIndex: propertCurrentIndex, model: model,);
+    return SCMinePropertyItem(
+      currentIndex: propertCurrentIndex,
+      model: model,
+    );
   }
 
   /// 我的服务-cell

@@ -15,7 +15,7 @@ class SCMinePage extends StatefulWidget {
 }
 
 class SCMineState extends State<SCMinePage> {
-  SCMineController state = Get.find<SCMineController>();
+  SCMineController state = Get.put(SCMineController());
 
   @override
   Widget build(BuildContext context) {

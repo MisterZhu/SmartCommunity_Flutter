@@ -48,7 +48,8 @@ class SCHomeSelectedGoodsItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: SCColors.color_FFFFFF,
-            borderRadius: BorderRadius.circular(6.0)),
+            borderRadius: BorderRadius.circular(6.0),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
