@@ -1,6 +1,10 @@
 
+import 'dart:developer';
+
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
+import '../../../network/sc_http_manager.dart';
+import '../../../network/sc_url.dart';
 import '../Model/sc_current_house_info_model.dart';
 import '../Model/sc_current_house_review_model.dart';
 
@@ -53,6 +57,33 @@ class SCCurrentHouseController extends GetxController {
   updateSelectIndex(int index) {
     selectReviewIndex = index;
     update();
+  }
+
+  loadData() {
+    SCHttpManager.instance.get(
+        url: SCUrl.kCurrentHouseInfoUrl,
+        success: (value) {
+          log('当前房屋详情===$value');
+
+        },
+        failure: (value) {
+          String message = value['message'];
+
+        });
+  }
+
+  /// 解除绑定房号接口
+  unBindHouse() {
+    SCHttpManager.instance.delete(
+        url: SCUrl.kUnbindHouseUrl,
+        params: {'housingId': ''},
+        success: (value) {
+
+        },
+        failure: (value) {
+          String message = value['message'];
+
+        });
   }
 
 }

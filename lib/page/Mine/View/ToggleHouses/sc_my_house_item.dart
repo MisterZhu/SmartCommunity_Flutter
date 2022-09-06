@@ -6,10 +6,15 @@ import 'package:flutter/material.dart';
 import '../../../../constants/sc_asset.dart';
 import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_fonts.dart';
+import '../../../../skin/Model/sc_user.dart';
+import '../../../../skin/Tools/sc_scaffold_manager.dart';
+import '../../Model/sc_my_house_model.dart';
 /// 我的房号cell
-class SCMyRoomNumberItem extends StatelessWidget {
+class SCMyHouseItem extends StatelessWidget {
 
-  List roomList = [];
+  final SCMyHouseModel model;
+
+  const SCMyHouseItem({Key? key, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +49,7 @@ class SCMyRoomNumberItem extends StatelessWidget {
           height: 2,
         ),
         Text(
-          '樱花苑-11幢-1单元-101室樱花苑11幢2单元',
+          model.spaceName ?? '',
           textAlign: TextAlign.left,
           style: const TextStyle(
               fontSize: SCFonts.f14,
@@ -62,7 +67,7 @@ class SCMyRoomNumberItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          '慧享科技',
+          model.communityName ?? '',
           textAlign: TextAlign.left,
           style: const TextStyle(
               fontSize: SCFonts.f16,
@@ -110,7 +115,10 @@ class SCMyRoomNumberItem extends StatelessWidget {
         ),
       ),
       onPressed: () {
-        /// 切换
+        /// 切换,把项目id存在用户信息里
+        SCUser user = SCScaffoldManager.instance.getUserData();
+        user.housingId = model.communityId;
+        SCScaffoldManager.instance.cacheUserData(user);
       },
     );
   }

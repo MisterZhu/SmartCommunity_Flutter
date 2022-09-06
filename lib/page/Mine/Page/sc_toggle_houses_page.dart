@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:smartcommunity/page/Mine/View/ToggleHouses/sc_my_room_number_item.dart';
+import 'package:smartcommunity/page/Mine/View/ToggleHouses/sc_my_house_item.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
@@ -13,8 +13,9 @@ import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_fonts.dart';
 import '../GetXController/sc_current_house_controller.dart';
-import '../GetXController/sc_my_room_number_controller.dart';
+import '../GetXController/sc_my_house_controller.dart';
 import '../GetXController/sc_toggle_houses_controller.dart';
+import '../Model/sc_my_house_model.dart';
 import '../View/ToggleHouses/sc_current_house_info_item.dart';
 import '../View/ToggleHouses/sc_current_house_review_item.dart';
 import '../View/ToggleHouses/sc_message_tab.dart';
@@ -32,7 +33,7 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
     with SingleTickerProviderStateMixin {
   SCToggleHousesController toggleHouseState = Get.put(SCToggleHousesController());
 
-  SCMyRoomNumberController myRoomNumberState = Get.put(SCMyRoomNumberController());
+  SCMyHouseController myRoomNumberState = Get.put(SCMyHouseController());
   SCCurrentHouseController currentHouseState = Get.put(SCCurrentHouseController());
 
   double tabItemWidth = 140;
@@ -61,6 +62,7 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
       state.updateSelectIndex(currentIndex);
     });
 
+    loadMyHouseData();
   }
 
   @override
@@ -109,7 +111,7 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
               children: [
                 Column(
                   children: [
-                    Expanded(child: myRoomNumberListView()),
+                    Expanded(child: myHouseListView()),
                     myRoomNumberBottomItem()
                   ],
                 ),
@@ -198,16 +200,19 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
   }
 
   /// 我的房号listView
-  Widget myRoomNumberListView() {
-    return ListView.separated(
-        padding: const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 0),
-        itemBuilder: (BuildContext context, int index) {
-          return SCMyRoomNumberItem();
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(height: 0.5,);
-        },
-        itemCount: 6);
+  Widget myHouseListView() {
+    return GetBuilder<SCMyHouseController>(builder: (state) {
+      return ListView.separated(
+          padding: const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 0),
+          itemBuilder: (BuildContext context, int index) {
+            SCMyHouseModel model = state.dataList[index];
+            return SCMyHouseItem(model: model,);
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(height: 0.5,);
+          },
+          itemCount: state.dataList.length);
+    });
   }
 
   /// 底部新增房号按钮
@@ -300,6 +305,11 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
         ),
       ),
     );
+  }
+
+  loadMyHouseData() {
+    SCMyHouseController state = Get.find<SCMyHouseController>();
+    state.loadData();
   }
 
 }
