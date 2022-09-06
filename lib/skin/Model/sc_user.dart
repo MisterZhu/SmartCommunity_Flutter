@@ -31,6 +31,7 @@ class SCUser {
     gmtModify = json['gmtModify'];
     token = json['token'];
     housingId = json['housingId'];
+    communityName = json['communityName'];
   }
   String? id;
   String? account;
@@ -46,6 +47,7 @@ class SCUser {
   String? gmtModify;
   String? token;
   String? housingId;
+  String? communityName;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -63,6 +65,7 @@ class SCUser {
     map['gmtModify'] = gmtModify;
     map['token'] = token;
     map['housingId'] = housingId;
+    map['communityName'] = communityName;
     return map;
   }
 

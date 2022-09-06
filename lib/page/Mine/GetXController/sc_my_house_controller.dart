@@ -6,6 +6,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../../network/sc_http_manager.dart';
 import '../../../network/sc_url.dart';
+import '../../../utils/Loading/sc_loading_utils.dart';
 import '../Model/sc_my_house_model.dart';
 
 class SCMyHouseController extends GetxController {
@@ -22,6 +23,7 @@ class SCMyHouseController extends GetxController {
 
 
   loadData() {
+    SCLoadingUtils.show();
     SCHttpManager.instance.get(
         url: SCUrl.kMyHouseUrl,
         success: (value) {
