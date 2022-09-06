@@ -109,7 +109,7 @@ class SCHomeListView2 extends StatelessWidget {
 
   /// 园区活动cell
   Widget communityCell() {
-    return SCHomeCommunityActivity(dataList: const [
+    return SCHomeCommunityActivity(activityList: const [
       SCAsset.homeActivity4,
       SCAsset.homeActivity5,
       SCAsset.homeActivity6

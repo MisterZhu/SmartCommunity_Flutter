@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:smartcommunity/constants/sc_default_value.dart';
 
 /// 工具类
@@ -27,6 +28,11 @@ class SCUtils {
     return MediaQueryData.fromWindow(window).padding.bottom;
   }
 
+  /*获取屏幕顶部安全距离*/
+  double getTopSafeArea() {
+    return MediaQueryData.fromWindow(window).padding.top;
+  }
+
   /*关闭键盘*/
   hideKeyboard({required BuildContext context}) {
     FocusScope.of(context).requestFocus(FocusNode());
@@ -48,5 +54,10 @@ class SCUtils {
         text: TextSpan(text: text, style: style), maxLines: maxLines)
       ..layout(maxWidth: maxWidth);
     return textPainter.size;
+  }
+
+  /*修改状态栏颜色*/
+  changeStatusBarStyle({required SystemUiOverlayStyle style}) {
+    SystemChrome.setSystemUIOverlayStyle(style);
   }
 }

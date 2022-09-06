@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
@@ -11,14 +8,15 @@ import '../../../constants/sc_fonts.dart';
 /// 首页-园区活动cell
 
 class SCHomeCommunityActivity extends StatelessWidget {
-
   final String title = '园区活动';
 
   final List activityList;
+
   /// 图片宽度
   final double imageWidth = (SCUtils().getScreenWidth() - 56.0) / 3.0;
 
-  SCHomeCommunityActivity({Key? key, required this.activityList}) : super(key: key);
+  SCHomeCommunityActivity({Key? key, required this.activityList})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +69,8 @@ class SCHomeCommunityActivity extends StatelessWidget {
       height: cellHeight() + 8,
       child: ListView.separated(
           scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.only(left: 6.0, right: 6, top: 2, bottom: 6),
+          padding:
+              const EdgeInsets.only(left: 6.0, right: 6, top: 2, bottom: 6),
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
             return activityCell(index);
@@ -88,15 +87,15 @@ class SCHomeCommunityActivity extends StatelessWidget {
   /// cell
   Widget activityCell(int index) {
     return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(2.0)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(2.0)),
       width: imageWidth,
       height: cellHeight(),
       child: Stack(
         alignment: Alignment.bottomLeft,
         children: [
           activityImageItem(index),
-          Padding(padding: const EdgeInsets.only(right: 1),
+          Padding(
+            padding: const EdgeInsets.only(right: 1),
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(2.0),
@@ -112,7 +111,8 @@ class SCHomeCommunityActivity extends StatelessWidget {
               height: 30.0,
             ),
           ),
-          const Padding(padding: EdgeInsets.symmetric(horizontal: 6,vertical: 6),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
             child: Text(
               '业主义卖h哈哈哈哈哈哈哈呵呵',
               textAlign: TextAlign.left,
@@ -136,10 +136,10 @@ class SCHomeCommunityActivity extends StatelessWidget {
       borderRadius: BorderRadius.circular(2.0),
       child: Image.asset(
         activityList[index],
-        fit: BoxFit.cover,),
+        fit: BoxFit.cover,
+      ),
     );
   }
-
 
   /// 标题文本高度
   double titleHeight() {
@@ -150,6 +150,4 @@ class SCHomeCommunityActivity extends StatelessWidget {
   double cellHeight() {
     return imageWidth * 102.0 / 107.0;
   }
-
 }
-
