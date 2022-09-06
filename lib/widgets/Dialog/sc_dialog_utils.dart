@@ -116,7 +116,9 @@ class SCDialogUtils {
       {required BuildContext context,
       required List<SCBottomSheetModel> dataList,
       bool? isShowCancel,
-      SCBottomSheetModel? cancelModel}) {
+      SCBottomSheetModel? cancelModel,
+      Function(int index, BuildContext context)? onTap,
+      Function(BuildContext context)? onCancelTap}) {
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
@@ -126,9 +128,12 @@ class SCDialogUtils {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         builder: (BuildContext context) {
           return SCBottomSheet(
-              dataList: dataList,
-              isShowCancel: isShowCancel,
-              customCancelModel: cancelModel);
+            dataList: dataList,
+            isShowCancel: isShowCancel,
+            customCancelModel: cancelModel,
+            onTap: (int index, BuildContext context) {},
+            onCancelTap: (BuildContext context) {},
+          );
         });
   }
 }

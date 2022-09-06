@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/widgets/Dialog/sc_bottom_sheet_model.dart';
 
@@ -20,6 +21,12 @@ class SCBottomSheet extends StatelessWidget {
   /// 取消按钮默认model
   SCBottomSheetModel? cancelModel;
 
+  /// 按钮点击
+  final Function(int index, BuildContext context)? onTap;
+
+  /// 取消按钮点击
+  final Function(BuildContext context)? onCancelTap;
+
   /// count
   int count = 0;
 
@@ -27,16 +34,18 @@ class SCBottomSheet extends StatelessWidget {
     Key? key,
     required this.dataList,
     this.isShowCancel = true,
-    this.customCancelModel
+    this.customCancelModel,
+    this.onCancelTap,
+    this.onTap
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return body();
+    return body(context);
   }
 
   /// body
-  Widget body() {
+  Widget body(BuildContext context) {
     initData();
     return DecoratedBox(
       decoration: const BoxDecoration(
@@ -47,7 +56,7 @@ class SCBottomSheet extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
-            return cell(index);
+            return cell(index:index, context: context);
           },
           separatorBuilder: (BuildContext context, int index) {
             return line(index);
@@ -74,7 +83,7 @@ class SCBottomSheet extends StatelessWidget {
   }
 
   /// cell
-  Widget cell(int index) {
+  Widget cell({required int index, required BuildContext context}) {
     bool cancelStatus = isShowCancel ?? true;
     String title;
     double fontSize;
@@ -104,7 +113,19 @@ class SCBottomSheet extends StatelessWidget {
       child: CupertinoButton(
           color: Colors.white,
           child: Text(title, textAlign: TextAlign.center, style: style),
-          onPressed: () {}),
+          onPressed: () {
+            if (cancelStatus && index == count - 1) {// 取消
+              Navigator.of(context).pop();
+
+              if (onCancelTap != null) {
+                onCancelTap?.call(context);
+              }
+            } else {// 其他点击
+              if (onTap != null) {
+                onTap?.call(index, context);
+              }
+            }
+          }),
     );
   }
 
