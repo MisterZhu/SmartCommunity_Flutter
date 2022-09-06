@@ -1,7 +1,7 @@
 
 Map<String, dynamic> scaffoldJson = {
   "skinStyle" : 1,
-  "navBackgroundColor" : "#4285F4",
+  "navBackgroundColor" : "#FFFFFF",
   "leadingColor" : "#000000",
   "trainingColor" : "#000000",
   "titleColor" : "#000000",
