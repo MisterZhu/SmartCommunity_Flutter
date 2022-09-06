@@ -6,7 +6,6 @@ import 'package:smartcommunity/page/Find/Page/sc_find_page.dart';
 import 'package:smartcommunity/page/Home/Page/sc_home_page.dart';
 import 'package:smartcommunity/page/Mine/Page/sc_mine_page.dart';
 import 'package:smartcommunity/page/Service/Page/sc_service_page.dart';
-import 'package:smartcommunity/utils/Colors/sc_color_hex.dart';
 
 /// tab-page
 
@@ -97,9 +96,9 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
         this.pageController.jumpToPage(index);
       });
     } else {
-      setState(() {
-        changeTab();
-      });
+      // setState(() {
+      //   changeTab();
+      // });
     }
   }
 

@@ -8,6 +8,11 @@ import '../../../utils/Router/sc_router_helper.dart';
 /// 我的-切换房号cell
 
 class SCMineChangeAddressItem extends StatelessWidget {
+
+  Function? onTap;
+
+  SCMineChangeAddressItem({Key? key, this.onTap}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return body();
@@ -15,23 +20,28 @@ class SCMineChangeAddressItem extends StatelessWidget {
 
   /// body
   Widget body() {
-    return Padding(padding: EdgeInsets.symmetric(horizontal: 16.0), child: Container(
-      height: 70.0,
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(4.0),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(child: houseItem()),
-          SizedBox(width: 30.0,),
-          changeItem(),
-        ],
-      ),
-    ),);
+    return GestureDetector(
+      onTap: () {
+        changeHouse();
+      },
+      child: Padding(padding: EdgeInsets.symmetric(horizontal: 16.0), child: Container(
+        height: 70.0,
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(4.0),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(child: houseItem()),
+            SizedBox(width: 30.0,),
+            changeItem(),
+          ],
+        ),
+      ),),
+    );
   }
 
   /// 房号item
@@ -74,5 +84,12 @@ class SCMineChangeAddressItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  /// 切换房屋
+  changeHouse() {
+    if (onTap != null) {
+      onTap?.call();
+    }
   }
 }
