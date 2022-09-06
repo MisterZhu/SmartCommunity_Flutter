@@ -114,7 +114,7 @@ class SCHomeCommunityActivity extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
             child: Text(
-              '业主义卖h哈哈哈哈哈哈哈呵呵',
+              '',
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
