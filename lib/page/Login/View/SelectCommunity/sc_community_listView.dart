@@ -79,7 +79,6 @@ class SCCommunityListView extends StatelessWidget {
 
   Widget emptyView() {
     SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
-
     SCSelectCommunityController selectState = Get.find<SCSelectCommunityController>();
 
     bool showButton = false;

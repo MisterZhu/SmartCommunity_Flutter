@@ -11,6 +11,7 @@ import '../../../constants/sc_colors.dart';
 import '../GetXController/sc_service_controller.dart';
 import '../Model/sc_service_model.dart';
 
+/// 全部应用cell
 class SCServiceCellItem extends StatelessWidget {
 
   final int section;
@@ -49,7 +50,7 @@ class SCServiceCellItem extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  headerItem(1),
+                  headerItem(),
                   Offstage(
                     offstage: section == 0 ? !state.isExpansion : false,
                     child: itemsCell(),
@@ -60,12 +61,11 @@ class SCServiceCellItem extends StatelessWidget {
           )
         ],
       );
-
     });
   }
 
-  /*header*/
-  Widget headerItem(int index) {
+  /// header
+  Widget headerItem() {
     return Container(
       padding: const EdgeInsets.only(left: 12, right: 10, top: 12, bottom: 12),
       width: double.infinity,
@@ -93,8 +93,7 @@ class SCServiceCellItem extends StatelessWidget {
     );
   }
 
-
-  /*header-left*/
+  /// header-Right
   Widget headerRightContainer() {
     return GetBuilder<SCServiceController>(builder: (state){
       return Offstage(
@@ -139,7 +138,7 @@ class SCServiceCellItem extends StatelessWidget {
     });
   }
 
-  /*cell*/
+  /// cell
   Widget itemsCell() {
     SCServiceController state = Get.find<SCServiceController>();
     return StaggeredGridView.countBuilder(
@@ -228,6 +227,7 @@ class SCServiceCellItem extends StatelessWidget {
     );
   }
 
+  /// 右上角的+/-图标
   Widget addOrDeleteIconItem(SCServiceModel model, bool hide) {
     return Offstage(
       /// offstage = true（隐藏）
@@ -240,6 +240,5 @@ class SCServiceCellItem extends StatelessWidget {
       ),
     );
   }
-
 
 }

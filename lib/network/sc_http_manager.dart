@@ -200,7 +200,6 @@ doResponse(Response response) {
 /// 处理dio请求异常
 doError(e) {
   SCLoadingUtils.hide();
-
   /// 错误码
   int code = 0;
   /// message

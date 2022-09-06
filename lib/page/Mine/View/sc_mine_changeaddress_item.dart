@@ -3,6 +3,8 @@ import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 
+import '../../../utils/Router/sc_router_helper.dart';
+
 /// 我的-切换房号cell
 
 class SCMineChangeAddressItem extends StatelessWidget {
@@ -66,16 +68,21 @@ class SCMineChangeAddressItem extends StatelessWidget {
 
   /// 切换item
   Widget changeItem() {
-    return Row(
-     children: [
-       Text('切换房屋', maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.left, style: TextStyle(
-         fontSize: SCFonts.f12,
-         fontWeight: FontWeight.w400,
-         color: SCColors.color_5E5F66,
-       ),),
-       SizedBox(width: 4.0,),
-       Image.asset(SCAsset.iconMineDetailGrey, width: 12.0, height: 12.0, fit: BoxFit.cover,),
-     ],
+    return GestureDetector(
+      onTap: (){
+        SCRouterHelper.codePage(5001, null);
+      },
+      child: Row(
+        children: [
+          const Text('切换房屋', maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.left, style: TextStyle(
+            fontSize: SCFonts.f12,
+            fontWeight: FontWeight.w400,
+            color: SCColors.color_5E5F66,
+          ),),
+          const SizedBox(width: 4.0,),
+          Image.asset(SCAsset.iconMineDetailGrey, width: 12.0, height: 12.0, fit: BoxFit.cover,),
+        ],
+      ),
     );
   }
 

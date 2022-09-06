@@ -14,11 +14,11 @@ class SCHomeCommunityActivity extends StatelessWidget {
 
   final String title = '园区活动';
 
-  final List dataList;
-  /// 图片大小
+  final List activityList;
+  /// 图片宽度
   final double imageWidth = (SCUtils().getScreenWidth() - 56.0) / 3.0;
 
-  SCHomeCommunityActivity({Key? key, required this.dataList}) : super(key: key);
+  SCHomeCommunityActivity({Key? key, required this.activityList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -81,32 +81,36 @@ class SCHomeCommunityActivity extends StatelessWidget {
               width: 6.0,
             );
           },
-          itemCount: dataList.length > 3 ? 3 : dataList.length),
+          itemCount: activityList.length > 3 ? 3 : activityList.length),
     );
   }
 
   /// cell
   Widget activityCell(int index) {
     return Container(
-      color: SCColors.color_FFFFFF,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(2.0)),
       width: imageWidth,
       height: cellHeight(),
       child: Stack(
         alignment: Alignment.bottomLeft,
         children: [
           activityImageItem(index),
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color.fromRGBO(0, 0, 0, 0),
-                  Color.fromRGBO(0, 0, 0, 0.6),
-                ],
+          Padding(padding: const EdgeInsets.only(right: 1),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(2.0),
+                gradient: const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color.fromRGBO(0, 0, 0, 0),
+                    Color.fromRGBO(0, 0, 0, 0.6),
+                  ],
+                ),
               ),
+              height: 30.0,
             ),
-            height: 30.0,
           ),
           const Padding(padding: EdgeInsets.symmetric(horizontal: 6,vertical: 6),
             child: Text(
@@ -131,7 +135,7 @@ class SCHomeCommunityActivity extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(2.0),
       child: Image.asset(
-        dataList[index],
+        activityList[index],
         fit: BoxFit.cover,),
     );
   }

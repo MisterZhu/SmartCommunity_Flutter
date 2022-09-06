@@ -6,18 +6,14 @@ import 'package:smartcommunity/page/Login/View/SelectCity/sc_current_city_item.d
 /// 搜索城市header
 
 class SCCitySearchHeader extends StatelessWidget {
-
+  /// 是否显示取消按钮
   final bool isShowCancel;
-
   /// 取消
   final Function? cancelAction;
-
   /// 文本框内容改变
   final Function(String value)? valueChangedAction;
-
   /// 定位的城市
   final String? locationCity;
-
   /// 定位状态，默认未知
   SCLocationStatus locationStatus;
 

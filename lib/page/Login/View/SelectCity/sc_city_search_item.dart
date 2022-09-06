@@ -18,12 +18,10 @@ import '../../GetXController/sc_select_city_controller.dart';
 /// 城市-搜索框
 
 class SCCitySearchItem extends StatelessWidget {
-
+  /// 是否显示取消按钮
   final bool isShowCancel;
-
   /// 取消
   final Function? cancelAction;
-
   /// 文本框内容改变
   final Function(String value)? valueChangedAction;
 

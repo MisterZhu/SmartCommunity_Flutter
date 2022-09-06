@@ -1,8 +1,12 @@
 
 
+import 'dart:developer';
+
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../../constants/sc_asset.dart';
+import '../../../network/sc_http_manager.dart';
+import '../../../network/sc_url.dart';
 import '../Model/sc_service_model.dart';
 
 class SCServiceController extends GetxController {
@@ -19,13 +23,12 @@ class SCServiceController extends GetxController {
   List<SCServiceModel> appList = [];
 
 
-
   @override
   onInit() {
     super.onInit();
-    var hoemTestList = [
+    var homeTestList = [
     {'id': '0', 'name': '业主二维码', 'icon': SCAsset.iconServiceQrCode, 'added': false},
-    {'id': '1', 'name': '公务用车', 'icon': SCAsset.iconServiceTiger, 'added': false},
+    {'id': '1', 'name': '公务用车', 'icon': SCAsset.iconServiceCar, 'added': false},
     {'id': '2', 'name': '积分管理', 'icon': SCAsset.iconServiceIntegral, 'added': false},
     {'id': '3', 'name': '报事报修', 'icon': SCAsset.iconServiceReport, 'added': false},
     ];
@@ -45,7 +48,21 @@ class SCServiceController extends GetxController {
 
     appList = testList.map((e) => SCServiceModel.fromJson(e)).toList();
 
-    homeAppList = hoemTestList.map((e) => SCServiceModel.fromJson(e)).toList();
+    homeAppList = homeTestList.map((e) => SCServiceModel.fromJson(e)).toList();
+  }
+
+  /// 获取应用列表数据
+  loadAppListData() {
+    SCHttpManager.instance.get(
+        url: SCUrl.kServiceAppListUrl,
+        success: (value) {
+          log('appList成功===$value');
+
+        },
+        failure: (value) {
+          log('appList失败===$value');
+
+        });
   }
 
   /// 更新首页应用展开状态
@@ -60,11 +77,13 @@ class SCServiceController extends GetxController {
     update();
   }
 
+  /// 移除首页应用
   deleteHomeApp(SCServiceModel model) {
     homeAppList.remove(model);
     update();
   }
 
+  /// 添加首页应用
   addHomeApp(SCServiceModel model) {
     homeAppList.add(model);
     update();

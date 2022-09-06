@@ -26,6 +26,14 @@ class SCRouterPath {
   /// 首页
   static String homePath = "/home/HomePage";
 
-
+  /***************************** 服务 ******************************/
+  /// 全部应用
   static String servicePagePath = "/root/Service/sc_service_page";
+
+  /***************************** 我的 ******************************/
+  /// 切换房屋
+  static String toggleHousesPagePath = "/root/Mine/sc_toggle_houses_page";
+
+  /// 新增房号
+  static String addHousePagePath = "/root/Mine/sc_add_house_page";
 }

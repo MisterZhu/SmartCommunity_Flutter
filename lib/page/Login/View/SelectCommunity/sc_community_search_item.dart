@@ -17,18 +17,14 @@ import '../../GetXController/sc_select_community_controller.dart';
 /// 社区-搜索框
 
 class SCCommunitySearchItem extends StatelessWidget {
-
+  /// 是否显示取消按钮
   final bool isShowCancel;
-
   /// 取消
   final Function? cancelAction;
-
   /// 文本框内容改变
   final Function(String value)? valueChangedAction;
-
   /// 选择城市
   final Function? selectCityAction;
-
   /// 选择的城市
   final String? selectCity;
 
