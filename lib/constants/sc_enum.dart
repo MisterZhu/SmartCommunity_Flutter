@@ -29,14 +29,3 @@ enum SCLocationStatus {
   /// 定位成功
   success,
 }
-
-enum SCSelectHouseType {
-  /// 苑
-  block,
-  /// 幢
-  building,
-  /// 单元
-  unit,
-  /// 室
-  room
-}

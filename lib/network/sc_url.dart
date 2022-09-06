@@ -21,4 +21,7 @@ class SCUrl {
 
   /// 通过项目Id获取房号数据url
   static const String kGetSpaceNodesUrl = '/api/space/space/getSpaceNodes';
+
+  /// 绑定房产
+  static const String kBindAsset = '/api/space/space-pa/resident/user/bind';
 }

@@ -14,6 +14,7 @@ class ScSelectHouseModel {
   String? name;
   String? pid;
   String? communityId;
+  int? isAsset; //是否可以是资产：0：否，1是
   num? type;
   String? typeName;
   String? typeNameFlag;
@@ -28,6 +29,7 @@ class ScSelectHouseModel {
     this.communityId,
     this.type,
     this.typeName,
+    this.isAsset,
     this.typeNameFlag,
     this.floor,
     this.haveChild,
@@ -40,6 +42,7 @@ class ScSelectHouseModel {
     pid = json['pid'];
     communityId = json['communityId'];
     type = json['type'];
+    isAsset = json['isAsset'];
     typeName = json['typeName'];
     typeNameFlag = json['typeNameFlag'];
     floor = json['floor'];
@@ -53,6 +56,7 @@ class ScSelectHouseModel {
     map['pid'] = pid;
     map['communityId'] = communityId;
     map['type'] = type;
+    map['isAsset'] = isAsset;
     map['typeName'] = typeName;
     map['typeNameFlag'] = typeNameFlag;
     map['floor'] = floor;
@@ -62,6 +66,6 @@ class ScSelectHouseModel {
 
   @override
   String toString() {
-    return 'ScSelectHouseModel{id: $id, name: $name, pid: $pid, communityId: $communityId, type: $type, typeName: $typeName, typeNameFlag: $typeNameFlag, floor: $floor, haveChild: $haveChild, isChecked: $isChecked}';
+    return 'ScSelectHouseModel{id: $id, name: $name, pid: $pid, communityId: $communityId, type: $type, isAsset: $isAsset, typeName: $typeName, typeNameFlag: $typeNameFlag, floor: $floor, haveChild: $haveChild, isChecked: $isChecked}';
   }
 }

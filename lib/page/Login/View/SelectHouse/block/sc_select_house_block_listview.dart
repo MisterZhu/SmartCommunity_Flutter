@@ -27,21 +27,33 @@ class SCSelectHouseBlockListView extends StatefulWidget {
 
 class _SCSelectHouseBlockListViewState
     extends State<SCSelectHouseBlockListView> {
-  SCSelectHouseSearchStatusController searchStatusController = Get.put(SCSelectHouseSearchStatusController());
-  SCSelectHouseSearchStatusController searchStatusState = Get.find<SCSelectHouseSearchStatusController>();
+  SCSelectHouseSearchStatusController searchStatusController =
+      Get.put(SCSelectHouseSearchStatusController());
+  SCSelectHouseSearchStatusController searchStatusState =
+      Get.find<SCSelectHouseSearchStatusController>();
 
-  SCSelectHouseDataController dataController = Get.put(SCSelectHouseDataController());
-  SCSelectHouseDataController dataState = Get.find<SCSelectHouseDataController>();
+  SCSelectHouseDataController dataController =
+      Get.put(SCSelectHouseDataController());
+  SCSelectHouseDataController dataState =
+      Get.find<SCSelectHouseDataController>();
 
-  SCSelectHouseController selectHouseController = Get.put(SCSelectHouseController());
+  SCSelectHouseController selectHouseController =
+      Get.put(SCSelectHouseController());
 
   @override
   void initState() {}
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SCSelectHouseSearchStatusController>(builder: (sCSelectHouseState) {
+    return GetBuilder<SCSelectHouseSearchStatusController>(
+        builder: (sCSelectHouseState) {
       return GetBuilder<SCSelectHouseDataController>(builder: (state) {
+        /*print("-->isShowCancel ${searchStatusState.isShowCancel}");
+        if (searchStatusState.isShowCancel) {
+          print('dataState.searchResultList--> ${dataState.searchResultList}');
+        } else {
+          print('dataState.dataList--> ${dataState.dataList}');
+        }*/
         return houseList();
       });
     });
@@ -49,54 +61,50 @@ class _SCSelectHouseBlockListViewState
 
   Widget houseList() {
     if (searchStatusState.isShowCancel) {
-      return GridView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 12.0,
-              childAspectRatio: 2.5,
-              mainAxisSpacing: 12.0),
-          scrollDirection: Axis.vertical,
-          itemCount: dataState.searchResultList == null
-              ? 0
-              : dataState.searchResultList.length,
-          itemBuilder: (context, index) {
-            bool? isChecked =
-                dataState.searchResultList[index].isChecked;
-            if (isChecked!) {
-              // 选中
-              return _hasChecked(true, index);
-            } else {
-              // 未选中
-              return _hasNotChecked(true, index);
-            }
-          });
+      List<ScSelectHouseModel> searchResultList = dataState.searchResultList;
+      if(searchResultList == null || searchResultList.length == 0){
+        return _emptyView();
+      } else {
+        return _gridView(dataState.searchResultList);
+      }
     } else {
-      return GridView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 12.0,
-              childAspectRatio: 2.5,
-              mainAxisSpacing: 12.0),
-          scrollDirection: Axis.vertical,
-          itemCount: dataState.dataList == null
-              ? 0
-              : dataState.dataList.length,
-
-          itemBuilder: (context, index) {
-            bool? isChecked = dataState.dataList[index].isChecked;
-            if (isChecked!) {
-              // 选中
-              return _hasChecked(false, index);
-            } else {
-              // 未选中
-              return _hasNotChecked(false, index);
-            }
-          });
+      List<ScSelectHouseModel> dataList = dataState.dataList;
+      if(dataList == null || dataList.length == 0){
+        return _emptyView();
+      } else {
+        return _gridView(dataState.dataList);
+      }
     }
+  }
+
+  Widget _emptyView(){
+    return Container(
+      child: Text('暂时没有数据哦~'),
+    );
+  }
+
+  /// gridView
+  GridView _gridView(List<ScSelectHouseModel> dataList){
+    return GridView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 12.0,
+            childAspectRatio: 2.5,
+            mainAxisSpacing: 12.0),
+        scrollDirection: Axis.vertical,
+        itemCount: dataList == null ? 0 : dataList.length,
+        itemBuilder: (context, index) {
+          bool? isChecked = dataList[index].isChecked;
+          if (isChecked!) {
+            // 选中
+            return _hasChecked(false, index);
+          } else {
+            // 未选中
+            return _hasNotChecked(false, index);
+          }
+        });
   }
 
   /// 选中状态
@@ -111,10 +119,11 @@ class _SCSelectHouseBlockListViewState
         //设置四周边框
         border: new Border.all(width: 1, color: SCColors.color_FF6C00),
       ),
-
       child: Center(
         child: Text(
-          breakWord(isSearch ? '${dataState.searchResultList[index].name}' : '${dataState.dataList[index].name}'),
+          breakWord(isSearch
+              ? '${dataState.searchResultList[index].name}'
+              : '${dataState.dataList[index].name}'),
           style: _hasCheckedTextStyle(),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
@@ -134,7 +143,9 @@ class _SCSelectHouseBlockListViewState
         ),
         child: Center(
           child: Text(
-            breakWord(isSearch ? '${dataState.searchResultList[index].name}' : '${dataState.dataList[index].name}'),
+            breakWord(isSearch
+                ? '${dataState.searchResultList[index].name}'
+                : '${dataState.dataList[index].name}'),
             style: _hasNotCheckedTextStyle(),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -142,7 +153,7 @@ class _SCSelectHouseBlockListViewState
         ),
       ),
       onTap: () {
-        if(isSearch){
+        if (isSearch) {
           List<ScSelectHouseModel> searchResultList =
               dataState.searchResultList;
           for (int i = 0; i < searchResultList.length; i++) {
@@ -154,16 +165,20 @@ class _SCSelectHouseBlockListViewState
           }
           dataController.updateSearchList(list: searchResultList);
 
-          // todo
           bool? haveChild = searchResultList[index].haveChild;
-          if(haveChild!) {
-            loadData((searchResultList[index].id).toString());
+          if (haveChild!) {
+            loadData((searchResultList[index].id).toString(),
+                (searchResultList[index].name).toString());
           } else {
-            SCToast.showTip('没有下一级');
+            int? isAsset = searchResultList[index].isAsset;
+            if (isAsset == 1) {
+              bindHouse();
+            } else {
+              SCToast.showTip('当前不是资产，无法绑定~');
+            }
           }
-        } else{
-          List<ScSelectHouseModel> houseCommunityList =
-              dataState.dataList;
+        } else {
+          List<ScSelectHouseModel> houseCommunityList = dataState.dataList;
           for (int i = 0; i < houseCommunityList.length; i++) {
             if (i == index) {
               houseCommunityList[i].isChecked = true;
@@ -173,33 +188,54 @@ class _SCSelectHouseBlockListViewState
           }
           dataController.updateDataList(list: houseCommunityList);
 
-          // todo
-
           bool? haveChild = houseCommunityList[index].haveChild;
-          if(haveChild!) {
-            loadData((houseCommunityList[index].id).toString());
+          if (haveChild!) {
+            loadData((houseCommunityList[index].id).toString(),
+                (houseCommunityList[index].name).toString());
           } else {
-            SCToast.showTip('没有下一级');
+            // isAsset 是否可以是资产 0 否 1 是
+            int? isAsset = houseCommunityList[index].isAsset;
+            if (isAsset == 1) {
+              bindHouse();
+            } else {
+              SCToast.showTip('当前不是资产，无法绑定~');
+            }
           }
         }
       },
     );
   }
 
+  /// 加载数据
+  void loadData(String currentId, String currentName) {
+    // 缓存顶部导航栏数据
+    ScSelectHouseModel scSelectHouseModel = ScSelectHouseModel(
+        communityId: currentId, id: int.parse(currentId), name: currentName);
 
-  void loadData(String currentId) {
+    SCSelectHouseDataController scSelectHouseDataController =
+        Get.put(SCSelectHouseDataController());
+    List<ScSelectHouseModel> navigatorList =
+        scSelectHouseDataController.navigatorList;
+    navigatorList.removeAt(navigatorList.length - 1);
+    navigatorList.add(scSelectHouseModel);
+
+    ScSelectHouseModel scSelectHouseModelTemp =
+        ScSelectHouseModel(id: 0, name: "请选择");
+    navigatorList.add(scSelectHouseModelTemp);
+    scSelectHouseDataController.updateNavigatorList(list: navigatorList);
+
     SCHttpManager.instance.get(
         url: SCUrl.kGetSpaceNodesUrl,
-        params: {'communityId': selectHouseController.communityId, 'currentId': currentId},
+        params: {
+          'communityId': selectHouseController.communityId,
+          'currentId': currentId
+        },
         success: (value) {
-          List<ScSelectHouseModel> dataList =
-          List<ScSelectHouseModel>.from(value
-              .map((e) => ScSelectHouseModel.fromJson(e))
-              .toList());
+          List<ScSelectHouseModel> dataList = List<ScSelectHouseModel>.from(
+              value.map((e) => ScSelectHouseModel.fromJson(e)).toList());
           print('print--> 获取苑数据===$dataList');
 
-          dataController.updateDataList(
-              list: dataList == null ? [] : dataList);
+          dataController.updateDataList(list: dataList == null ? [] : dataList);
         },
         failure: (value) {
           if (value['message'] != null) {
@@ -209,6 +245,9 @@ class _SCSelectHouseBlockListViewState
           dataController.updateDataList(list: []);
         });
   }
+
+  /// 绑定房号
+  void bindHouse() {}
 
   /// 选中字体颜色
   TextStyle _hasCheckedTextStyle() {

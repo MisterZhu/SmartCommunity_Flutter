@@ -26,10 +26,4 @@ class SCSelectHouseController extends GetxController {
     update();
   }
 
-  // 切换tab
-  switchTab({required int pageIndex}) {
-    this.pageIndex = pageIndex;
-    pageController.jumpToPage(pageIndex);
-    update();
-  }
 }
