@@ -9,7 +9,7 @@ import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_data_controller.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_search_status_controller.dart.dart';
 import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_select_house_block_model.dart';
-import 'package:smartcommunity/page/Login/View/SelectHouse/block/sc_select_house_search_static_view.dart';
+import 'package:smartcommunity/page/Login/View/SelectHouse/sc_select_house_search_static_view.dart';
 
 /// Copyright (c), 浙江慧享信息科技有限公司
 /// FileName: sc_select_house_search_view

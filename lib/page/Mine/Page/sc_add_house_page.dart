@@ -21,11 +21,22 @@ class SCAddHouseState extends State<SCAddHousePage> {
   SCAddHouseController state = Get.put(SCAddHouseController());
 
   List nameList = ['所居住小区', '房号', '家庭/企业', '身份'];
-  List valueList = ['慧享生活馆', '绿城科技园1幢1单元101室', '', ''];
+  List valueList = [];
+  String communityId = '';
+  String houseId = '';
 
   @override
   initState() {
     super.initState();
+
+    var params = Get.arguments;
+    valueList = params['valueList'];
+    communityId = params['communityId'];
+    houseId = params['houseId'];
+
+    print('print--> valueList: ${valueList}');
+    print('print--> communityId: ${communityId}');
+    print('print--> houseId: ${houseId}');
   }
 
   @override
@@ -43,11 +54,13 @@ class SCAddHouseState extends State<SCAddHousePage> {
 
   /// title
   Widget titleItem() {
-    return const Text('新增小区地址', style: TextStyle(
-        fontSize: SCFonts.f16,
-        fontWeight: FontWeight.bold,
-        color: SCColors.color_1B1C33
-    ),);
+    return const Text(
+      '新增小区地址',
+      style: TextStyle(
+          fontSize: SCFonts.f16,
+          fontWeight: FontWeight.bold,
+          color: SCColors.color_1B1C33),
+    );
   }
 
   /// body
@@ -61,16 +74,16 @@ class SCAddHouseState extends State<SCAddHousePage> {
             children: [
               topTipsItem(),
               Expanded(child: listView()),
-              const SizedBox(height: 20.0,),
+              const SizedBox(
+                height: 20.0,
+              ),
               bottomTipsItem(),
               bottomBtnItem(),
               Container(
                 color: SCColors.color_FFFFFF,
                 height: SCUtils().getBottomSafeArea(),
               ),
-            ]
-        )
-    );
+            ]));
   }
 
   /// 顶部提示item
@@ -97,7 +110,9 @@ class SCAddHouseState extends State<SCAddHousePage> {
           return cellItem(nameList[index], valueList[index], index);
         },
         separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(height: 0.5,);
+          return const SizedBox(
+            height: 0.5,
+          );
         },
         itemCount: nameList.length);
   }
@@ -118,12 +133,18 @@ class SCAddHouseState extends State<SCAddHousePage> {
           } else if (index == 3) {
             /// 选择身份
             log('点击选择身份');
+            /// 调用接口 获取身份列表
+
+            /// 底部弹窗
+
           }
         },
-        child:Container(
+        child: Container(
             height: 48,
             color: SCColors.color_FFFFFF,
-            padding: const EdgeInsets.symmetric(horizontal: 16.0,),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+            ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -137,24 +158,31 @@ class SCAddHouseState extends State<SCAddHousePage> {
                       fontWeight: FontWeight.w400,
                       color: SCColors.color_1B1C33),
                 ),
-                const SizedBox(width: 20.0,),
-                Expanded(child: Container(
-                  color: SCColors.color_FFFFFF,
-                  child: Text(
-                    value == '' ? '请选择' : value,
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                        fontSize: SCFonts.f14,
-                        fontWeight: FontWeight.w400,
-                        color: value == '' ? SCColors.color_B0B1B8 : SCColors.color_5E5E66),
+                const SizedBox(
+                  width: 20.0,
+                ),
+                Expanded(
+                  child: Container(
+                    color: SCColors.color_FFFFFF,
+                    child: Text(
+                      value == '' ? '请选择' : value,
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          fontSize: SCFonts.f14,
+                          fontWeight: FontWeight.w400,
+                          color: value == ''
+                              ? SCColors.color_B0B1B8
+                              : SCColors.color_5E5E66),
+                    ),
                   ),
                 ),
+                Image.asset(
+                  SCAsset.iconAddHouseArrow,
+                  width: 16.0,
+                  height: 16.0,
                 ),
-                Image.asset(SCAsset.iconAddHouseArrow, width: 16.0, height: 16.0,),
               ],
-            )
-        )
-    );
+            )));
   }
 
   /// 底部提示item
@@ -167,8 +195,14 @@ class SCAddHouseState extends State<SCAddHousePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(SCAsset.iconAddHouseTips, width: 12.0, height: 12.0,),
-            const SizedBox(width: 6,),
+            Image.asset(
+              SCAsset.iconAddHouseTips,
+              width: 12.0,
+              height: 12.0,
+            ),
+            const SizedBox(
+              width: 6,
+            ),
             const Text(
               '提交小区地址后，我们会在一个工作日内核实您的申请',
               textAlign: TextAlign.left,
@@ -177,8 +211,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
                   fontWeight: FontWeight.w400,
                   color: SCColors.color_8D8E99),
             )
-          ]
-      ),
+          ]),
     );
   }
 
@@ -187,7 +220,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
     return Container(
       color: SCColors.color_FFFFFF,
       width: double.infinity,
-      height: 54.0 ,
+      height: 54.0,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 7.0),
         child: Container(
@@ -205,12 +238,9 @@ class SCAddHouseState extends State<SCAddHousePage> {
                   color: SCColors.color_FFFFFF,
                 ),
               ),
-              onPressed: () {
-
-              }),
+              onPressed: () {}),
         ),
       ),
     );
   }
-
 }

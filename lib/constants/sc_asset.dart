@@ -3,6 +3,10 @@ class SCAsset {
 
   static const String iconFilter = 'images/icon_filter.png';
   static const String iconSearch = 'images/icon_search.png';
+  /// 导航栏返回按钮，默认黑色
+  static const String iconNavigationBack = 'images/common/icon_navigation_back.png';
+  /// 导航栏关闭按钮，默认黑色
+  static const String iconNavigationClose = 'images/common/icon_navigation_close.png';
   static const String iconBackBlack = 'images/icon_back_black.png';
   static const String iconBackWhite = 'images/icon_back_white.png';
   static const String iconNoData = 'images/icon_no_data.png';

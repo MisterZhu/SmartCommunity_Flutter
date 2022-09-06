@@ -3,11 +3,11 @@
 import 'dart:developer';
 
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:smartcommunity/page/Service/Model/sc_service_model.dart';
 
 import '../../../constants/sc_asset.dart';
 import '../../../network/sc_http_manager.dart';
 import '../../../network/sc_url.dart';
-import '../Model/sc_service_model.dart';
 
 class SCServiceController extends GetxController {
 

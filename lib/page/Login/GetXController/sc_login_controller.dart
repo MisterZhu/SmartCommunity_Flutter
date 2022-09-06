@@ -61,7 +61,10 @@ class SCLoginController extends GetxController {
         success: (value) {
           SCUser user = SCScaffoldManager.instance.getUserData();
           log('登陆成功获取用户token=====${user.token}===用户昵称：${user.userName}');
-          SCRouterHelper.pathPage(SCRouterPath.tabPath, null);
+          // SCRouterHelper.pathPage(SCRouterPath.tabPath, null);
+
+          /// todo 测试数据
+          SCRouterHelper.codePage(9003, null);
         },
         failure: (value) {
           log('登陆失败===$value');

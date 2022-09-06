@@ -7,9 +7,10 @@ import 'package:smartcommunity/network/sc_url.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_controller.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_data_controller.dart';
 import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_select_house_block_model.dart';
+import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 
-import '../../../GetXController/sc_select_house_search_status_controller.dart.dart';
+import '../../GetXController/sc_select_house_search_status_controller.dart.dart';
 
 /// Copyright (c), 浙江慧享信息科技有限公司
 /// FileName: sc_select_house_community_listview
@@ -62,14 +63,14 @@ class _SCSelectHouseBlockListViewState
   Widget houseList() {
     if (searchStatusState.isShowCancel) {
       List<ScSelectHouseModel> searchResultList = dataState.searchResultList;
-      if(searchResultList == null || searchResultList.length == 0){
+      if (searchResultList == null || searchResultList.length == 0) {
         return _emptyView();
       } else {
         return _gridView(dataState.searchResultList);
       }
     } else {
       List<ScSelectHouseModel> dataList = dataState.dataList;
-      if(dataList == null || dataList.length == 0){
+      if (dataList == null || dataList.length == 0) {
         return _emptyView();
       } else {
         return _gridView(dataState.dataList);
@@ -77,14 +78,14 @@ class _SCSelectHouseBlockListViewState
     }
   }
 
-  Widget _emptyView(){
+  Widget _emptyView() {
     return Container(
       child: Text('暂时没有数据哦~'),
     );
   }
 
   /// gridView
-  GridView _gridView(List<ScSelectHouseModel> dataList){
+  GridView _gridView(List<ScSelectHouseModel> dataList) {
     return GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
@@ -172,7 +173,8 @@ class _SCSelectHouseBlockListViewState
           } else {
             int? isAsset = searchResultList[index].isAsset;
             if (isAsset == 1) {
-              bindHouse();
+              bindHousePage((searchResultList[index].id).toString(),
+                  (searchResultList[index].name).toString());
             } else {
               SCToast.showTip('当前不是资产，无法绑定~');
             }
@@ -196,7 +198,8 @@ class _SCSelectHouseBlockListViewState
             // isAsset 是否可以是资产 0 否 1 是
             int? isAsset = houseCommunityList[index].isAsset;
             if (isAsset == 1) {
-              bindHouse();
+              bindHousePage((houseCommunityList[index].id).toString(),
+                  (houseCommunityList[index].name).toString());
             } else {
               SCToast.showTip('当前不是资产，无法绑定~');
             }
@@ -247,7 +250,35 @@ class _SCSelectHouseBlockListViewState
   }
 
   /// 绑定房号
-  void bindHouse() {}
+  void bindHousePage(String houseId, String currentRoomName) {
+    /// 从缓存中去取数据
+    /// 第一个数据是园区
+    SCSelectHouseDataController scSelectHouseDataController =
+        Get.find<SCSelectHouseDataController>();
+    List<ScSelectHouseModel> navigatorList =
+        scSelectHouseDataController.navigatorList;
+    String houseName = '';
+
+    for (int i = 1; i < navigatorList.length - 1; i++) {
+      String? name = navigatorList[i].name;
+      houseName = houseName + name!;
+    }
+    houseName = houseName + currentRoomName;
+
+    List valueList = [
+      '${navigatorList[0].name}',
+      houseName,
+      '',
+      ''
+    ];
+
+    var params = {
+      'communityId': '${navigatorList[0].communityId}',
+      'houseId': houseId,
+      'valueList': valueList,
+    };
+    SCRouterHelper.codePage(5002, params);
+  }
 
   /// 选中字体颜色
   TextStyle _hasCheckedTextStyle() {

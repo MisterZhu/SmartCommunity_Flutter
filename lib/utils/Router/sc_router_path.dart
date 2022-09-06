@@ -11,8 +11,6 @@ class SCRouterPath {
   static String guidePath = "/root/guidePage";
   /// 用户协议和隐私政策弹窗
   static String basePrivacyPath = "/root/basePrivacyPage";
-  /// webView
-  static String webViewPath = "/root/webView/webViewPage";
 
   /***************************** 登录 ******************************/
   /// 验证码登录
@@ -32,8 +30,7 @@ class SCRouterPath {
 
   /***************************** 通用页 ******************************/
   /// webView
-  static String webViewPath = "/root/webViewPage";
-
+  static String webViewPath = "/root/webView/webViewPage";
 
   /***************************** 服务 ******************************/
   /// 全部应用

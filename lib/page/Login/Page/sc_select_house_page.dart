@@ -6,7 +6,7 @@ import 'package:smartcommunity/page/Login/GetXController/sc_select_house_data_co
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_search_status_controller.dart.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_controller.dart';
 import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_select_house_block_model.dart';
-import 'package:smartcommunity/page/Login/View/SelectHouse/block/sc_select_house_block_page_view.dart';
+import 'package:smartcommunity/page/Login/View/SelectHouse/sc_select_house_block_page_view.dart';
 import 'package:smartcommunity/skin/View/sc_custom_scaffold.dart';
 import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 

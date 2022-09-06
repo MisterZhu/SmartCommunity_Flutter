@@ -105,7 +105,9 @@ class SCScaffoldManager {
         basePath = SCRouterPath.basePrivacyPath;
       } else {
         if (_isLogin) {
-          basePath = SCRouterPath.tabPath;
+          // basePath = SCRouterPath.tabPath;
+          /// todo 测试数据
+          basePath = SCRouterPath.selectCommunityPath;
         }
       }
     }

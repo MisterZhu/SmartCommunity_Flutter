@@ -3,6 +3,8 @@ import 'package:smartcommunity/page/Guide/Page/sc_base_privacy_page.dart';
 import 'package:smartcommunity/page/Guide/Page/sc_guide_page.dart';
 import 'package:smartcommunity/page/Home/Page/sc_home_page.dart';
 import 'package:smartcommunity/page/Login/Page/sc_login_page.dart';
+import 'package:smartcommunity/page/Login/Page/sc_select_house_page.dart';
+import 'package:smartcommunity/page/Mine/Page/sc_add_house_page.dart';
 import 'package:smartcommunity/page/Mine/Page/sc_toggle_houses_page.dart';
 import 'package:smartcommunity/page/Tab/Page/sc_tab_page.dart';
 import 'package:smartcommunity/page/Webview/Page/sc_webview_page.dart';
