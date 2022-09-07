@@ -112,25 +112,81 @@ class _SCSelectHouseBlockListViewState
   /// isSearch true 搜索  false 不是
   /// index 下标
   Widget _hasChecked(bool isSearch, int index) {
-    return Container(
-      padding: EdgeInsets.only(left: 14.0, right: 14.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadiusDirectional.circular(8.0),
-        color: SCColors.color_FFF0E6,
-        //设置四周边框
-        border: new Border.all(width: 1, color: SCColors.color_FF6C00),
-      ),
-      child: Center(
-        child: Text(
-          breakWord(isSearch
-              ? '${dataState.searchResultList[index].name}'
-              : '${dataState.dataList[index].name}'),
-          style: _hasCheckedTextStyle(),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
+    return GestureDetector(
+      child: Container(
+        padding: EdgeInsets.only(left: 14.0, right: 14.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadiusDirectional.circular(8.0),
+          color: SCColors.color_FFF0E6,
+          //设置四周边框
+          border: new Border.all(width: 1, color: SCColors.color_FF6C00),
+        ),
+        child: Center(
+          child: Text(
+            breakWord(isSearch
+                ? '${dataState.searchResultList[index].name}'
+                : '${dataState.dataList[index].name}'),
+            style: _hasCheckedTextStyle(),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ),
+      onTap: () {
+        if (isSearch) {
+          List<ScSelectHouseModel> searchResultList =
+              dataState.searchResultList;
+          for (int i = 0; i < searchResultList.length; i++) {
+            if (i == index) {
+              searchResultList[i].isChecked = true;
+            } else {
+              searchResultList[i].isChecked = false;
+            }
+          }
+          dataController.updateSearchList(list: searchResultList);
+
+          bool? haveChild = searchResultList[index].haveChild;
+          if (haveChild!) {
+            loadData((searchResultList[index].id).toString(),
+                (searchResultList[index].name).toString());
+          } else {
+            int? isAsset = searchResultList[index].isAsset;
+            if (isAsset == 1) {
+              bindHousePage((searchResultList[index].id).toString(),
+                  (searchResultList[index].name).toString());
+            } else {
+              SCToast.showTip('当前不是资产，无法绑定~');
+            }
+          }
+        } else {
+          List<ScSelectHouseModel> houseCommunityList = dataState.dataList;
+          for (int i = 0; i < houseCommunityList.length; i++) {
+            if (i == index) {
+              houseCommunityList[i].isChecked = true;
+            } else {
+              houseCommunityList[i].isChecked = false;
+            }
+          }
+          dataController.updateDataList(list: houseCommunityList);
+
+          bool? haveChild = houseCommunityList[index].haveChild;
+          if (haveChild!) {
+            loadData((houseCommunityList[index].id).toString(),
+                (houseCommunityList[index].name).toString());
+          } else {
+            // isAsset 是否可以是资产 0 否 1 是
+            int? isAsset = houseCommunityList[index].isAsset;
+            if (isAsset == 1) {
+              bindHousePage((houseCommunityList[index].id).toString(),
+                  (houseCommunityList[index].name).toString());
+            } else {
+              SCToast.showTip('当前不是资产，无法绑定~');
+            }
+          }
+        }
+      },
     );
+
   }
 
   /// 未选中状态
@@ -276,6 +332,7 @@ class _SCSelectHouseBlockListViewState
       'communityId': '${navigatorList[0].communityId}',
       'houseId': houseId,
       'valueList': valueList,
+      'isFromLogin': true
     };
     SCRouterHelper.codePage(5002, params);
   }

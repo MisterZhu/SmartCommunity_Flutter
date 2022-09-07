@@ -7,7 +7,12 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/network/sc_http_manager.dart';
 import 'package:smartcommunity/network/sc_url.dart';
 import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_user_identity.dart';
+import 'package:smartcommunity/skin/Model/sc_user.dart';
+import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
+import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
+import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/Toast/sc_toast.dart';
+import 'package:smartcommunity/widgets/Dialog/sc_base_dialog.dart';
 import 'package:smartcommunity/widgets/Dialog/sc_bottom_sheet_model.dart';
 import 'package:smartcommunity/widgets/Dialog/sc_dialog_utils.dart';
 
@@ -34,6 +39,8 @@ class SCAddHouseState extends State<SCAddHousePage> {
   String houseId = '';
   String identityId = '';
 
+  bool isFromLogin = false;
+
   @override
   initState() {
     super.initState();
@@ -42,11 +49,11 @@ class SCAddHouseState extends State<SCAddHousePage> {
     valueList = params['valueList'];
     communityId = params['communityId'];
     houseId = params['houseId'];
+    isFromLogin = params['isFromLogin'];
 
     print('print--> valueList: ${valueList}');
     print('print--> communityId: ${communityId}');
     print('print--> houseId: ${houseId}');
-
   }
 
   @override
@@ -243,7 +250,11 @@ class SCAddHouseState extends State<SCAddHousePage> {
                 ),
               ),
               onPressed: () {
-                commit();
+                if (identityId == '') {
+                  SCToast.showTip('请选择身份');
+                  return;
+                }
+                showConfirmDialog();
               }),
         ),
       ),
@@ -252,6 +263,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
 
   /// 加载用户身份列表
   loadResidentUserIdentity() {
+    SCLoadingUtils.show();
     SCHttpManager.instance.get(
         url: SCUrl.kResidentUserIdentity,
         params: {
@@ -292,14 +304,37 @@ class SCAddHouseState extends State<SCAddHousePage> {
         dataList: dataList,
         isShowCancel: true,
         onTap: (index, context) {
-          // valueList[2] = identityList[index].identity!;
+          valueList[2] = identityList[index].identity!;
           identityId = identityList[index].identityId!;
-          print('点击 $identityId');
+          setState(() {});
         });
+  }
+
+  /// 确认弹窗
+  showConfirmDialog() {
+    SCDialogUtils.instance.showMiddleDialog(
+      context: context,
+      title: '确认提交',
+      content: '确认绑定当前房号吗？',
+      customWidgetButtons: [
+        defaultCustomButton(context,
+            text: '取消',
+            textColor: SCColors.color_1B1C33,
+            fontWeight: FontWeight.w400),
+        TextButton(
+            onPressed: () {
+              commit();
+            },
+            child: Text('确定',
+                style: TextStyle(
+                    color: SCColors.color_FF6C00, fontSize: SCFonts.f16)))
+      ],
+    );
   }
 
   /// 提交
   commit() {
+    SCLoadingUtils.show();
     SCHttpManager.instance.post(
         url: SCUrl.kBindAsset,
         params: {
@@ -308,8 +343,21 @@ class SCAddHouseState extends State<SCAddHousePage> {
           'spaceId': houseId
         },
         success: (value) {
-          /// 成功
+          /// 1.toast 提示成功
+          SCToast.showTip('提交成功 我们会尽快为您审核');
 
+          /// 2.存储数据到SCUser
+          SCUser scUser = SCScaffoldManager.instance.getUserData();
+          scUser.housingId = houseId;
+          SCScaffoldManager.instance.cacheUserData(scUser);
+
+          /// 3.栈
+          if (isFromLogin) {
+            // 如果是从登录进入，就直接进入主页
+            SCRouterHelper.codeOffAllPage(10000, null);
+          } else {
+            // todo
+          }
         },
         failure: (value) {
           if (value['message'] != null) {
