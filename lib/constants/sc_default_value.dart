@@ -26,4 +26,7 @@ class SCDefaultValue {
 
   /// 网络超时时间
   static const int timeOut = 30000;
+
+  /// 图片路径
+  static const String files = "/files/";
 }

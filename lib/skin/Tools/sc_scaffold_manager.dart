@@ -142,6 +142,11 @@ class SCScaffoldManager {
    SCSpUtil.setMap(SCKey.kUserData, data);
  }
 
+  /*清空用户信息*/
+ clearUserData() {
+   SCSpUtil.remove(SCKey.kUserData);
+ }
+
  /*获取用户信息*/
  getUserData() {
    bool contains = SCSpUtil.containsKey(SCKey.kUserData);

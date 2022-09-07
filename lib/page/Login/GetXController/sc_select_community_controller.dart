@@ -79,7 +79,6 @@ class SCSelectCommunityController extends GetxController {
               'city': searchState.locationCity,
               'range': 5000},
             success: (value) {
-              log('通过经纬度获取项目数据===$value');
               communityList = List<SCCommunityModel>.from(value.map((e) => SCCommunityModel.fromJson(e)).toList());
               updateCommunityList(list: communityList);
             },

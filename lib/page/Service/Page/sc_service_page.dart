@@ -30,6 +30,7 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
         title: titleItem(),
         backgroundColor: SCColors.color_FFFFFF,
         elevation: 0,
+        automaticallyImplyLeading: false,
       ),
       body: body(),
     );
@@ -37,12 +38,14 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
 
   /// body
   Widget body() {
-    return Container(
+    return GetBuilder<SCServiceController>(builder: (state){
+      return Container(
         width: double.infinity,
         height: double.infinity,
         color: SCColors.color_F6F6F6,
-        child: SCServiceListView(),
-    );
+        child: SCServiceListView(appList: state.appList,),
+      );
+    });
   }
 
   /// title

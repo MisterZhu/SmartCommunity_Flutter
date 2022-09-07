@@ -1,3 +1,4 @@
+import 'package:smartcommunity/constants/sc_default_value.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
 
 /// 环境配置
@@ -16,6 +17,10 @@ class SCConfig {
       default:
         return "https://yshk8s.lcfw.co";
     }
+  }
+
+  static String getImageUrl(String url) {
+    return BASE_URL + SCDefaultValue.files + url;
   }
 
 }

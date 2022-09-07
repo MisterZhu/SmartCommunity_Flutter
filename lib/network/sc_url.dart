@@ -22,7 +22,7 @@ class SCUrl {
  /************************* 服务 *************************/
 
   /// 应用列表url
-  static const String kServiceAppListUrl = '/api/applet/tenant/list';
+  static const String kServiceAppListUrl = '/api/applet/user/list';
 
   /************************* 我的 *************************/
 
