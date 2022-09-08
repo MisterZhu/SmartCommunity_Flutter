@@ -13,6 +13,8 @@ class SCUser {
       this.operatorName, 
       this.gmtModify, 
       this.token,
+      this.communityId,
+      this.communityName,
       this.housingId,
   });
 
@@ -30,8 +32,9 @@ class SCUser {
     operatorName = json['operatorName'];
     gmtModify = json['gmtModify'];
     token = json['token'];
-    housingId = json['housingId'];
+    communityId = json['communityId'];
     communityName = json['communityName'];
+    housingId = json['housingId'];
   }
   String? id;
   String? account;
@@ -46,8 +49,9 @@ class SCUser {
   String? operatorName;
   String? gmtModify;
   String? token;
-  String? housingId;
+  String? communityId;
   String? communityName;
+  String? housingId;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -64,8 +68,9 @@ class SCUser {
     map['operatorName'] = operatorName;
     map['gmtModify'] = gmtModify;
     map['token'] = token;
-    map['housingId'] = housingId;
+    map['communityId'] = communityId;
     map['communityName'] = communityName;
+    map['housingId'] = housingId;
     return map;
   }
 

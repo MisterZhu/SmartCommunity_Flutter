@@ -1,5 +1,5 @@
 
-
+import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -85,6 +85,9 @@ class SCMyHouseItem extends StatelessWidget {
 
   /// 右边的切换按钮
   Widget rightItem() {
+    SCUser user = SCScaffoldManager.instance.getUserData();
+    String? housingId = user.communityId;
+    bool same = housingId == model.communityId ? true : false;
     return CupertinoButton(
       padding: EdgeInsets.zero,
       child: Container(
@@ -92,7 +95,7 @@ class SCMyHouseItem extends StatelessWidget {
         height: 32,
         color: SCColors.color_FFFFFF,
         child: Offstage(
-          offstage: false,
+          offstage: same,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.end,
@@ -117,9 +120,10 @@ class SCMyHouseItem extends StatelessWidget {
       onPressed: () {
         /// 切换,把项目id存在用户信息里
         SCUser user = SCScaffoldManager.instance.getUserData();
-        user.housingId = model.communityId;
+        user.housingId = model.id;
+        user.communityId = model.communityId;
         user.communityName = model.communityName;
-        SCScaffoldManager.instance.cacheUserData(user);
+        SCScaffoldManager.instance.cacheUserData(user.toJson());
       },
     );
   }

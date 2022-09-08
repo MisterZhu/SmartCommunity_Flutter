@@ -254,9 +254,7 @@ doError(e) {
 }
 
 updateUserData() {
-  log('登陆已失效，清空token，刷新本地缓存用户数据');
-  SCUser user = SCScaffoldManager.instance.getUserData();
-  user.token = '';
+  log('登陆已失效，清空用户数据，刷新本地缓存用户数据');
   SCScaffoldManager.instance.cacheUserIsLogin(false);
-  SCScaffoldManager.instance.cacheUserData(user);
+  SCScaffoldManager.instance.clearUserData();
 }
