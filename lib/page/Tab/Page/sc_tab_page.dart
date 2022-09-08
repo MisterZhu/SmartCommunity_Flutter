@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/page/Find/Page/sc_find_page.dart';
 import 'package:smartcommunity/page/Home/Page/sc_home_page.dart';
 import 'package:smartcommunity/page/Mine/Page/sc_mine_page.dart';
 import 'package:smartcommunity/page/Service/Page/sc_service_page.dart';
+
+import '../../../utils/sc_utils.dart';
 
 /// tab-page
 
@@ -52,7 +55,7 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
     // TODO: implement initState
     super.initState();
     tabController = TabController(length: tabbarItems.length, vsync: this);
-    pageController = PageController(initialPage: this.currentIndex);
+    pageController = PageController(initialPage: currentIndex);
   }
 
   @override
@@ -68,7 +71,7 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
     // TODO: implement build
     return Scaffold(
       body: PageView(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         controller: this.pageController,
         children: this.pageList,
       ),
@@ -90,15 +93,30 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
 
   /*底部tabbar点击*/
   void tabbarTap(int index) {
-    if (this.currentIndex != index) {
+    updateStatusBar(index);
+
+    if (currentIndex != index) {
       setState(() {
-        this.currentIndex = index;
-        this.pageController.jumpToPage(index);
+        currentIndex = index;
+        pageController.jumpToPage(index);
       });
     } else {
       // setState(() {
       //   changeTab();
       // });
+    }
+  }
+
+  /// 更新状态栏
+  updateStatusBar(int index) {
+    if (index == 0) {
+      SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.light);
+    } else if (index == 1) {
+      SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.dark);
+    } else if (index == 2) {
+      SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.light);
+    } else {
+      SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.dark);
     }
   }
 

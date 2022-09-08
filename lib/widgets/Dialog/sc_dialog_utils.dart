@@ -55,7 +55,7 @@ class SCDialogUtils {
       double otherButtonFontSize = SCFonts.f16,
       FontWeight cancelButtonFontWeight = FontWeight.w400,
       FontWeight otherButtonFontWeight = FontWeight.w400,
-      buttonArrangeType arrangeType = buttonArrangeType.row,
+      ButtonArrangeType arrangeType = ButtonArrangeType.row,
       Function(int index, BuildContext context)? onTap}) {
     return showDialog(
         barrierDismissible: true,
@@ -117,6 +117,7 @@ class SCDialogUtils {
       required List<SCBottomSheetModel> dataList,
       bool? isShowCancel,
       SCBottomSheetModel? cancelModel,
+      bool? isCloseDialog,
       Function(int index, BuildContext context)? onTap,
       Function(BuildContext context)? onCancelTap}) {
     showModalBottomSheet(
@@ -131,8 +132,17 @@ class SCDialogUtils {
             dataList: dataList,
             isShowCancel: isShowCancel,
             customCancelModel: cancelModel,
-            onTap: (int index, BuildContext context) {},
-            onCancelTap: (BuildContext context) {},
+            isCloseDialog: isCloseDialog,
+            onTap: (int index, BuildContext context) {
+              if (onTap != null) {
+                onTap?.call(index, context);
+              }
+            },
+            onCancelTap: (BuildContext context) {
+              if (onCancelTap != null) {
+                onCancelTap?.call(context);
+              }
+            },
           );
         });
   }

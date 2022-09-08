@@ -5,6 +5,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smartcommunity/constants/sc_agreement.dart';
+import 'package:smartcommunity/constants/sc_default_value.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_key.dart';
@@ -60,10 +62,10 @@ class SCBasePrivacyState extends State<SCBasePrivacyPage> {
         isAgree: state.isAgree,
         titleString: state.title,
         contentString: state.content,
-        userAgreementUrl: '用户协议url',
-        privacyPolicyUrl: '隐私政策url',
+        userAgreementUrl: SCAgreement.userAgreementUrl,
+        privacyPolicyUrl: SCAgreement.privacyProtocolUrl,
         cancelAction: (){
-          log('取消');
+          SCToast.showTip(SCDefaultValue.canUseAppMessage);
         },
         sureAction: () async {
           if (state.isAgree == true) {
@@ -72,14 +74,14 @@ class SCBasePrivacyState extends State<SCBasePrivacyPage> {
             //SCRouterHelper.codeOffAllPage(10000, null);
             SCRouterHelper.codeOffAllPage(9001, null);
           } else {
-            SCToast.showTip('请先同意用户协议和隐私政策');
+            SCToast.showTip(SCDefaultValue.agreeUserAgreementMessage);
           }
         },
         agreeAction: () {
           state.updateAgreementState();
         },
-        agreementDetailAction: (String url) {
-          log('协议详情:${url}');
+        agreementDetailAction: (String url, String? title) {
+          SCRouterHelper.codePage(20000, {"url" : url, "title" : title});
         },
       );
     });

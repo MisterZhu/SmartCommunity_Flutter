@@ -8,6 +8,10 @@ import 'package:smartcommunity/utils/Colors/sc_color_hex.dart';
 /// 我的-积分、红包cell
 
 class SCMineScoreItem extends StatelessWidget {
+  final Function(int index)? onTap;
+
+  const SCMineScoreItem({Key? key, this.onTap}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return body();
@@ -46,7 +50,9 @@ class SCMineScoreItem extends StatelessWidget {
               subTitle: data[index]['subTitle'],
               titleColor: SCHexColor(data[index]['titleColor']),
               subTitleColor: SCHexColor(data[index]['subTitleColor']),
-              url: data[index]['url']);
+              url: data[index]['url'],
+              index: index
+          );
         },
         staggeredTileBuilder: (int index) {
           return const StaggeredTile.fit(1);
@@ -59,23 +65,32 @@ class SCMineScoreItem extends StatelessWidget {
       required String subTitle,
       required Color titleColor,
       required Color subTitleColor,
-      required String url}) {
-    return Container(
-      height: 70.0,
-      padding: const EdgeInsets.only(left: 12.0, right: 10.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(4.0),
-      ),
-      child: Row(
-        children: [
-          contentItem(
-              title: title,
-              subTitle: subTitle,
-              titleColor: titleColor,
-              subTitleColor: subTitleColor),
-          iconItem(url: url),
-        ],
+      required String url,
+      required int index
+      }) {
+    return GestureDetector(
+      onTap: () {
+        if (onTap != null) {
+          onTap?.call(index);
+        }
+      },
+      child: Container(
+        height: 70.0,
+        padding: const EdgeInsets.only(left: 12.0, right: 10.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(4.0),
+        ),
+        child: Row(
+          children: [
+            contentItem(
+                title: title,
+                subTitle: subTitle,
+                titleColor: titleColor,
+                subTitleColor: subTitleColor),
+            iconItem(url: url),
+          ],
+        ),
       ),
     );
   }

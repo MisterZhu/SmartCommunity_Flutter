@@ -22,6 +22,8 @@ void startApp() async {
   /// 路由的basePath
   String basePath = await SCScaffoldManager.instance.getRouterBasePath();
 
+  RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+
   runApp(GetMaterialApp(
     theme: ThemeData(
         primaryColor: Colors.white,
@@ -33,6 +35,7 @@ void startApp() async {
     initialRoute: basePath,
     initialBinding: SCAllBinding(),
     builder: EasyLoading.init(),
+    navigatorObservers: [routeObserver],
   ));
 }
 

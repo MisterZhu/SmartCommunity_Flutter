@@ -27,6 +27,9 @@ class SCBottomSheet extends StatelessWidget {
   /// 取消按钮点击
   final Function(BuildContext context)? onCancelTap;
 
+  /// 是否关闭弹窗，默认是
+  bool? isCloseDialog;
+
   /// count
   int count = 0;
 
@@ -36,7 +39,8 @@ class SCBottomSheet extends StatelessWidget {
     this.isShowCancel = true,
     this.customCancelModel,
     this.onCancelTap,
-    this.onTap
+    this.onTap,
+    this.isCloseDialog = true
   }) : super(key: key);
 
   @override
@@ -115,18 +119,29 @@ class SCBottomSheet extends StatelessWidget {
           child: Text(title, textAlign: TextAlign.center, style: style),
           onPressed: () {
             if (cancelStatus && index == count - 1) {// 取消
-              Navigator.of(context).pop();
-
               if (onCancelTap != null) {
                 onCancelTap?.call(context);
               }
+
+              closeDialogAction(context);
             } else {// 其他点击
               if (onTap != null) {
                 onTap?.call(index, context);
               }
+
+              bool closeState = isCloseDialog ?? true;
+
+              if (closeState) {
+                closeDialogAction(context);
+              }
             }
           }),
     );
+  }
+
+  /// 关闭弹窗
+  closeDialogAction(BuildContext context) {
+    Navigator.of(context).pop();
   }
 
   /// line
