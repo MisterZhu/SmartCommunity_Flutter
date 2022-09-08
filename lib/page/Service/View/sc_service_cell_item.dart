@@ -152,7 +152,7 @@ class SCServiceCellItem extends StatelessWidget {
         itemBuilder: (context, index) {
           SCServiceModel model;
           if (section == 0) {
-            model = state.homeAppList![index];
+            model = state.homeAppList[index];
           } else {
             model = list![index];
           }

@@ -8,6 +8,7 @@ import 'package:smartcommunity/page/Mine/View/sc_mine_property_item.dart';
 import 'package:smartcommunity/page/Mine/View/sc_mine_score_item.dart';
 import 'package:smartcommunity/page/Mine/View/sc_mine_service_item.dart';
 import 'package:smartcommunity/page/Mine/View/sc_mine_wallet_item.dart';
+import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 
 /// 我的-listview
 
@@ -79,7 +80,11 @@ class SCMineListView extends StatelessWidget {
 
   /// header-cell
   Widget headerCell() {
-    return SCMineHeaderItem();
+    return SCMineHeaderItem(
+      settingTap: (){
+        SCRouterHelper.codePage(5003, null);
+      },
+    );
   }
 
   /// 切换房号-cell
@@ -115,9 +120,8 @@ class SCMineListView extends StatelessWidget {
 
   /// 测试-cell
   Widget testCell() {
-    return Container(
-      color: Colors.yellowAccent,
-      height: 200,
+    return const SizedBox(
+      height: 20.0,
     );
   }
 

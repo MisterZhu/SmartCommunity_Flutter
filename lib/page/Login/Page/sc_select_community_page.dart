@@ -147,7 +147,7 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
 
     if (value.isNotEmpty) {
       List<SCCommunityModel> list = [];
-      if (state.communityList.length > 0) {
+      if (state.communityList.isNotEmpty) {
         for(int i = 0; i < state.communityList.length; i++) {
           SCCommunityModel communityModel = state.communityList[i];
           String name = communityModel?.name ?? '';

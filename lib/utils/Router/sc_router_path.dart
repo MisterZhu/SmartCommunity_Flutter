@@ -36,4 +36,7 @@ class SCRouterPath {
 
   /// 新增房号
   static String addHousePagePath = "/root/Mine/sc_add_house_page";
+
+  /// 设置
+  static String settingPath = "/root/Mine/sc_setting_page";
 }

@@ -19,11 +19,11 @@ import '../Model/sc_user.dart';
 
 class SCScaffoldManager {
 
-  factory SCScaffoldManager() => _getInstance();
+  factory SCScaffoldManager() => _instance;
 
-  static SCScaffoldManager get instance => _getInstance();
+  static SCScaffoldManager get instance => _instance;
 
-  static late SCScaffoldManager _instance = SCScaffoldManager._internal();
+  static SCScaffoldManager _instance = SCScaffoldManager._internal();
 
   static late SCScaffoldModel _scaffoldModel;
 
@@ -34,13 +34,6 @@ class SCScaffoldManager {
   SCScaffoldManager._internal() {
     _scaffoldModel = SCScaffoldModel();
     _user = SCUser();
-  }
-
-  static SCScaffoldManager _getInstance() {
-    if(_instance == null) {
-      _instance = SCScaffoldManager._internal();
-    }
-    return _instance;
   }
 
   SCScaffoldModel get scaffoldModel => _scaffoldModel;

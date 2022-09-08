@@ -21,10 +21,15 @@ class SCMineHeaderItem extends StatelessWidget {
   /// 用户名
   final String userName = '李莉莉';
 
+  /// 设置
+  final Function? settingTap;
+
   const SCMineHeaderItem(
       {Key? key,
       this.backgroundImageUrl = SCAsset.iconMineBackground,
-      this.backgroundImageScale = 750.0 / 380.0})
+      this.backgroundImageScale = 750.0 / 380.0,
+      this.settingTap
+      })
       : super(key: key);
 
   @override
@@ -107,10 +112,7 @@ class SCMineHeaderItem extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               onTap: () {
-                // todo 跳转到设置页面  此处当作测试  跳转到webView  后续修改
-                Map<String, dynamic> routeParams = {'title': '这是webView',
-                  'url':'https://saasprod.4001113900.com:10020/h5new/newUser/index.html#/volunteer/home?companyCode=ss&defCommunityId=fe38ad0a-beaa-11eb-bdca-005056b13afd&appVersion=139&defLatitude=30.28529&mobileType=131&mobileVersion=10&defAreaCode=330106&mobileNo=uuidd5000eda-b8c8-4200-9621-f3b285e83ccb&version=2&defLongitude=120.06839&token=47a2ab63-c82e-46b4-9aa6-6cfd1a27121f&defRoomId=2759511&time=1660196749&defOrgId=2678533&mobileName=HUAWEI TAS-AL00'};
-                SCRouterHelper.codePage(20000, routeParams);
+                settingAction();
               },
             )
           ],
@@ -228,5 +230,12 @@ class SCMineHeaderItem extends StatelessWidget {
             )
           ],
         ));
+  }
+
+  /// 设置
+  settingAction() {
+    if (settingTap != null) {
+      settingTap?.call();
+    }
   }
 }

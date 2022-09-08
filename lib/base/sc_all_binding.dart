@@ -8,6 +8,7 @@ import 'package:smartcommunity/page/Login/GetXController/sc_select_community_con
 import 'package:smartcommunity/page/Mine/GetXController/sc_mine_controller.dart';
 import 'package:smartcommunity/page/Service/GetXController/sc_service_controller.dart';
 
+import '../page/Home/GetXController/sc_home_controller.dart';
 import '../page/Home/GetXController/sc_home_controller2.dart';
 import '../page/Login/GetXController/sc_search_community_controller.dart';
 
@@ -15,6 +16,7 @@ import '../page/Login/GetXController/sc_search_community_controller.dart';
 class SCAllBinding extends Bindings {
   @override
   void dependencies() {
+    Get.lazyPut<SCHomeController>(() => SCHomeController());
     Get.lazyPut<SCHomeController1>(() => SCHomeController1());
     Get.lazyPut<SCMineController>(() => SCMineController());
     Get.lazyPut<SCBasePrivacyController>(() => SCBasePrivacyController());

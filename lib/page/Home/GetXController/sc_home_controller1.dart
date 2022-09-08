@@ -139,4 +139,16 @@ class SCHomeController1 extends GetxController {
   void croperImage() {
 
   }
+
+  /// 重置数据
+  void resetAllData() {
+    opacity = 1;
+    navigationBackgroundColor = SCColors.color_FE8947;
+    navigationSticky = false;
+    navigationStickyColor = Colors.white;
+    navigationNormalColor = Colors.white;
+    isRefreshing = false;
+    bannerCurrentIndex = 0;
+    update();
+  }
 }

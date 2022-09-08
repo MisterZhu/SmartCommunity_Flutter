@@ -89,4 +89,15 @@ class SCHomeController2 extends GetxController {
 
     update();
   }
+
+  /// 重置数据
+  void resetAllData() {
+    opacity = 1.0;
+    navigationOffset = 64.0;
+    navigationBackgroundColor = SCColors.color_FE8947;
+    navigationSticky = false;
+    navigationStickyColor = Colors.white;
+    navigationNormalColor = Colors.white;
+    update();
+  }
 }

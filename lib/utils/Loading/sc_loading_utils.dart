@@ -8,48 +8,52 @@ class SCLoadingUtils {
 
   /// 显示加载框
   static show({String? text}) {
-    if (text == null || text == '') {
+    String textString = text ?? '';
+    hide();
+
+    if (textString.isEmpty || textString == '') {
       EasyLoading.instance.contentPadding = const EdgeInsets.all(20.0);
       EasyLoading.show();
     } else {
       EasyLoading.instance.contentPadding = const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 15);
-      EasyLoading.show(status: text);
+      EasyLoading.show(status: textString);
     }
-  }
-
-  /// 隐藏加载框
-  static hide() {
-    EasyLoading.dismiss(animation: true);
   }
 
   /// 成功提示
   static success({String? text}) {
+    String textString = text ?? '';
     hide();
-    if (text == null || text == '') {
+
+    if (textString.isEmpty || textString == '') {
       EasyLoading.instance.contentPadding = const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 10);
-      EasyLoading.showSuccess(text ?? '');
+      EasyLoading.showSuccess(textString);
     } else {
       EasyLoading.instance.contentPadding = const EdgeInsets.only(left: 40, right: 40, top: 30, bottom: 20);
-      EasyLoading.showSuccess(text ?? '');
+      EasyLoading.showSuccess(textString);
     }
   }
 
   /// 失败提示
   static failure({String? text}) {
+    String textString = text ?? '';
     hide();
-    if (text == null || text == '') {
+
+    if (textString.isEmpty || textString == '') {
       EasyLoading.instance.contentPadding = const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 10);
-      EasyLoading.showError(text ?? '');
+      EasyLoading.showError(textString);
     } else {
       EasyLoading.instance.contentPadding = const EdgeInsets.only(left: 40, right: 40, top: 30, bottom: 20);
-      EasyLoading.showError(text ?? '');
+      EasyLoading.showError(textString);
     }
   }
 
   /// 信息提示
   static info({String? text}) {
+    String textString = text ?? '';
     hide();
-    EasyLoading.showInfo(text ?? '');
+
+    EasyLoading.showInfo(textString);
   }
 
   /// 初始化loading配置
@@ -69,5 +73,10 @@ class SCLoadingUtils {
       radius: 16.0,
       color: Colors.white,
     );
+  }
+
+  /// 隐藏loading
+  static hide() {
+    EasyLoading.dismiss(animation: true);
   }
 }
