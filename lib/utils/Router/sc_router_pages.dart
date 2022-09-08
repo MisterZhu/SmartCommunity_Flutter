@@ -11,6 +11,7 @@ import 'package:smartcommunity/page/Webview/Page/sc_webview_page.dart';
 
 import '../../page/Login/Page/sc_select_city_page.dart';
 import '../../page/Login/Page/sc_select_community_page.dart';
+import '../../page/Mine/Page/sc_setting_page.dart';
 import '../../page/Service/Page/sc_service_page.dart';
 import 'sc_router_path.dart';
 

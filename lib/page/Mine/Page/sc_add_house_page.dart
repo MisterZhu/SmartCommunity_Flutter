@@ -1,14 +1,9 @@
 import 'dart:developer';
-<<<<<<< HEAD
-=======
 
->>>>>>> develop-wt
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-<<<<<<< HEAD
-=======
 import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/network/sc_http_manager.dart';
 import 'package:smartcommunity/network/sc_url.dart';
@@ -21,7 +16,6 @@ import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 import 'package:smartcommunity/widgets/Dialog/sc_base_dialog.dart';
 import 'package:smartcommunity/widgets/Dialog/sc_bottom_sheet_model.dart';
 import 'package:smartcommunity/widgets/Dialog/sc_dialog_utils.dart';
->>>>>>> develop-wt
 
 import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_colors.dart';
@@ -39,10 +33,6 @@ class SCAddHousePage extends StatefulWidget {
 class SCAddHouseState extends State<SCAddHousePage> {
   SCAddHouseController state = Get.put(SCAddHouseController());
 
-<<<<<<< HEAD
-  List nameList = ['所居住小区', '房号', '家庭/企业', '身份'];
-  List valueList = ['慧享生活馆', '绿城科技园1幢1单元101室', '', ''];
-=======
   // List nameList = ['所居住小区', '房号', '家庭/企业', '身份'];
   List nameList = ['所居住小区', '房号', '身份'];
   List? valueList = [];
@@ -52,13 +42,10 @@ class SCAddHouseState extends State<SCAddHousePage> {
 
   SCSelectHouseLogicType type = SCSelectHouseLogicType.login;
   List<ScUserIdentity> dataList = [];
->>>>>>> develop-wt
 
   @override
   initState() {
     super.initState();
-<<<<<<< HEAD
-=======
 
     var params = Get.arguments;
     if (params != null) {
@@ -76,7 +63,6 @@ class SCAddHouseState extends State<SCAddHousePage> {
         loadResidentUserIdentity(false);
       }
     }
->>>>>>> develop-wt
   }
 
   @override
@@ -94,13 +80,6 @@ class SCAddHouseState extends State<SCAddHousePage> {
 
   /// title
   Widget titleItem() {
-<<<<<<< HEAD
-    return const Text('新增小区地址', style: TextStyle(
-        fontSize: SCFonts.f16,
-        fontWeight: FontWeight.bold,
-        color: SCColors.color_1B1C33
-    ),);
-=======
     return const Text(
       '新增小区地址',
       style: TextStyle(
@@ -108,7 +87,6 @@ class SCAddHouseState extends State<SCAddHousePage> {
           fontWeight: FontWeight.bold,
           color: SCColors.color_1B1C33),
     );
->>>>>>> develop-wt
   }
 
   /// body
@@ -122,26 +100,16 @@ class SCAddHouseState extends State<SCAddHousePage> {
             children: [
               topTipsItem(),
               Expanded(child: listView()),
-<<<<<<< HEAD
-              const SizedBox(height: 20.0,),
-=======
               const SizedBox(
                 height: 20.0,
               ),
->>>>>>> develop-wt
               bottomTipsItem(),
               bottomBtnItem(),
               Container(
                 color: SCColors.color_FFFFFF,
                 height: SCUtils().getBottomSafeArea(),
               ),
-<<<<<<< HEAD
-            ]
-        )
-    );
-=======
             ]));
->>>>>>> develop-wt
   }
 
   /// 顶部提示item
@@ -165,19 +133,12 @@ class SCAddHouseState extends State<SCAddHousePage> {
     return ListView.separated(
         padding: const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 0),
         itemBuilder: (BuildContext context, int index) {
-<<<<<<< HEAD
-          return cellItem(nameList[index], valueList[index], index);
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(height: 0.5,);
-=======
           return cellItem(nameList[index], valueList?[index], index);
         },
         separatorBuilder: (BuildContext context, int index) {
           return const SizedBox(
             height: 0.5,
           );
->>>>>>> develop-wt
         },
         itemCount: nameList.length);
   }
@@ -189,28 +150,12 @@ class SCAddHouseState extends State<SCAddHousePage> {
           if (index == 0) {
             /// 选择小区
             log('点击选择小区');
-<<<<<<< HEAD
-=======
             var params = {'type': SCSelectHouseLogicType.addHouse};
             SCRouterHelper.codePage(9003, params);
->>>>>>> develop-wt
           } else if (index == 1) {
             /// 选择房号
             log('点击选择房号');
           } else if (index == 2) {
-<<<<<<< HEAD
-            /// 选择家庭/企业
-            log('点击选择家庭');
-          } else if (index == 3) {
-            /// 选择身份
-            log('点击选择身份');
-          }
-        },
-        child:Container(
-            height: 48,
-            color: SCColors.color_FFFFFF,
-            padding: const EdgeInsets.symmetric(horizontal: 16.0,),
-=======
             /// 选择身份
             log('点击选择身份');
             if (dataList == null || dataList.length == 0) {
@@ -226,7 +171,6 @@ class SCAddHouseState extends State<SCAddHousePage> {
             padding: const EdgeInsets.symmetric(
               horizontal: 16.0,
             ),
->>>>>>> develop-wt
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -240,26 +184,6 @@ class SCAddHouseState extends State<SCAddHousePage> {
                       fontWeight: FontWeight.w400,
                       color: SCColors.color_1B1C33),
                 ),
-<<<<<<< HEAD
-                const SizedBox(width: 20.0,),
-                Expanded(child: Container(
-                  color: SCColors.color_FFFFFF,
-                  child: Text(
-                    value == '' ? '请选择' : value,
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                        fontSize: SCFonts.f14,
-                        fontWeight: FontWeight.w400,
-                        color: value == '' ? SCColors.color_B0B1B8 : SCColors.color_5E5E66),
-                  ),
-                ),
-                ),
-                Image.asset(SCAsset.iconAddHouseArrow, width: 16.0, height: 16.0,),
-              ],
-            )
-        )
-    );
-=======
                 const SizedBox(
                   width: 20.0,
                 ),
@@ -285,7 +209,6 @@ class SCAddHouseState extends State<SCAddHousePage> {
                 ),
               ],
             )));
->>>>>>> develop-wt
   }
 
   /// 底部提示item
@@ -298,10 +221,6 @@ class SCAddHouseState extends State<SCAddHousePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-<<<<<<< HEAD
-            Image.asset(SCAsset.iconAddHouseTips, width: 12.0, height: 12.0,),
-            const SizedBox(width: 6,),
-=======
             Image.asset(
               SCAsset.iconAddHouseTips,
               width: 12.0,
@@ -310,7 +229,6 @@ class SCAddHouseState extends State<SCAddHousePage> {
             const SizedBox(
               width: 6,
             ),
->>>>>>> develop-wt
             const Text(
               '提交小区地址后，我们会在一个工作日内核实您的申请',
               textAlign: TextAlign.left,
@@ -319,12 +237,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
                   fontWeight: FontWeight.w400,
                   color: SCColors.color_8D8E99),
             )
-<<<<<<< HEAD
-          ]
-      ),
-=======
           ]),
->>>>>>> develop-wt
     );
   }
 
@@ -333,11 +246,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
     return Container(
       color: SCColors.color_FFFFFF,
       width: double.infinity,
-<<<<<<< HEAD
-      height: 54.0 ,
-=======
       height: 54.0,
->>>>>>> develop-wt
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 7.0),
         child: Container(
@@ -356,9 +265,6 @@ class SCAddHouseState extends State<SCAddHousePage> {
                 ),
               ),
               onPressed: () {
-<<<<<<< HEAD
-
-=======
                 if (valueList == null ||
                     valueList?[0] == '' ||
                     valueList?[0] == null) {
@@ -376,16 +282,12 @@ class SCAddHouseState extends State<SCAddHousePage> {
                   return;
                 }
                 showConfirmDialog();
->>>>>>> develop-wt
               }),
         ),
       ),
     );
   }
 
-<<<<<<< HEAD
-}
-=======
   /// 加载用户身份列表
   loadResidentUserIdentity(bool isNeedShowDialog) {
     if (communityId == '' || communityId == null) {
@@ -501,4 +403,3 @@ class SCAddHouseState extends State<SCAddHousePage> {
         });
   }
 }
->>>>>>> develop-wt

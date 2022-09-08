@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
@@ -16,38 +15,17 @@ import '../Model/sc_current_house_info_model.dart';
 import '../Model/sc_current_house_review_model.dart';
 
 class SCCurrentHouseController extends GetxController {
-
   int selectReviewIndex = 0;
 
   List<SCCurrentHouseReviewModel>? reviewList = [];
 
   List<SCCurrentHouseReviewModel>? notReviewList = [];
 
-
   late ScCurrentHouseInfoDataModel infoModel;
 
   @override
   onInit() {
     super.onInit();
-
-    var testList = [
-      {'id': '0', 'name': '旺旺', 'mobile': '132111111111', 'endDate':'2033-5-11','type':1},
-      {'id': '1', 'name': '丽丽', 'mobile': '13312233223', 'endDate':'2033-5-11','type':2},
-    ];
-
-
-    var testList2 = [
-      {'id': '0', 'name': '你好', 'mobile': '1331111111', 'endDate':'2033-5-11','type':1},
-      {'id': '1', 'name': '未审核', 'mobile': '1341111111', 'endDate':'2033-5-11','type':2},
-      {'id': '2', 'name': '周年', 'mobile': '1552111111', 'endDate':'2033-5-11','type':2},
-      {'id': '3', 'name': '周一', 'mobile': '1561111111', 'endDate':'2033-5-11','type':1},
-      {'id': '4', 'name': '周末', 'mobile': '1581111111', 'endDate':'2033-5-11','type':3},
-      {'id': '6', 'name': '周二', 'mobile': '16511111111', 'endDate':'2033-5-11','type':3},
-    ];
-
-    reviewList = testList.map((e) => SCCurrentHouseReviewModel.fromJson(e)).toList();
-
-    notReviewList = testList2.map((e) => SCCurrentHouseReviewModel.fromJson(e)).toList();
 
     var testList = [
       {
@@ -130,15 +108,13 @@ class SCCurrentHouseController extends GetxController {
         url: SCUrl.kCurrentHouseInfoUrl,
         success: (value) {
           log('当前房屋详情===$value');
-
         },
         failure: (value) {
           String message = value['message'];
+        });
     // 取当前房号Id
     // todo wangtao 测试数据 待删除
-    var params = {
-      'housingId': 112111271725101
-    };
+    var params = {'housingId': 112111271725101};
     SCHttpManager.instance.get(
         url: SCUrl.kCurrentHouseInfoUrl,
         params: params,
@@ -155,13 +131,9 @@ class SCCurrentHouseController extends GetxController {
     SCHttpManager.instance.delete(
         url: SCUrl.kUnbindHouseUrl,
         params: {'housingId': ''},
-        success: (value) {
-
-        },
+        success: (value) {},
         failure: (value) {
           String message = value['message'];
-
         });
   }
-
 }

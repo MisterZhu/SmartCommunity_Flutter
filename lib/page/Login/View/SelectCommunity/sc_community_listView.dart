@@ -116,16 +116,4 @@ class SCCommunityListView extends StatelessWidget {
     communityController.loadCommunityData(isLoadMore: false);
   }
 
-  Future onRefresh() async{
-    communityController.loadCommunityData(isLoadMore: false);
-  }
-
-  Future onLoadMore() async{
-    communityController.loadCommunityData(isLoadMore: true);
-  }
-
-  reload() {
-    communityController.loadCommunityData(isLoadMore: false);
-  }
-
 }

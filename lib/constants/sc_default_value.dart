@@ -27,9 +27,6 @@ class SCDefaultValue {
   /// 网络不稳定
   static const String netErrorMessage = '网络不稳定，请稍后重试！';
 
-  /// 高德web key
-  static const String kAMapWebKey = 'fb48becc7b7a077d4da585a977d39ed2';
-
   /// 同意协议才可以使用APP
   static const String canUseAppMessage = '同意协议后才可以使用!';
 

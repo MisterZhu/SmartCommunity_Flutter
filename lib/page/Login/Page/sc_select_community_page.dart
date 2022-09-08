@@ -148,11 +148,6 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
             state.updateSelectCommunity(model: model);
           },
         );
-      } else {
-        return SCCommunityListView(
-          communityList: state.communityList,
-          type: type,
-        );
       }
     });
   }
