@@ -33,6 +33,9 @@ class SCDefaultValue {
   /// 同意用户协议
   static const String agreeUserAgreementMessage = '请先同意用户协议和隐私政策！';
 
+  /// 账户过期
+  static const String accountExpiredMessage = '账户已过期,请重新登录!';
+
   /// 图片路径
   static const files = "/files/";
 }

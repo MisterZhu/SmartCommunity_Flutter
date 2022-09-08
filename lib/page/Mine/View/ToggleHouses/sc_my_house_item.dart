@@ -123,6 +123,9 @@ class SCMyHouseItem extends StatelessWidget {
         user.housingId = model.id;
         user.communityId = model.communityId;
         user.communityName = model.communityName;
+        user.spaceId = model.spaceId;
+        user.spaceName = model.spaceName;
+        user.identityId = model.identityId;
         SCScaffoldManager.instance.cacheUserData(user.toJson());
       },
     );

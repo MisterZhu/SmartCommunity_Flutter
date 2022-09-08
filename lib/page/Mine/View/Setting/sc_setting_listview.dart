@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/page/Mine/View/Setting/sc_logout_cell.dart';
 import 'package:smartcommunity/page/Mine/View/Setting/sc_setting_cell.dart';
+import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 
 import '../../../Home/GetXController/sc_home_controller.dart';
@@ -62,7 +63,9 @@ class SCSettingListView extends StatelessWidget {
   
   /// 退出
   Widget logoutCell() {
-    return SCLogOutCell();
+    return SCLogOutCell(onTap: (){
+      SCScaffoldManager.instance.logout();
+    },);
   }
 
   /// line

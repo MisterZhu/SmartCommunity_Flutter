@@ -116,7 +116,7 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
     } else if (index == 2) {
       SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.light);
     } else {
-      SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.light);
+      SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.dark);
     }
   }
 
