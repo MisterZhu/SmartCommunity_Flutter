@@ -32,4 +32,7 @@ class SCDefaultValue {
 
   /// 同意用户协议
   static const String agreeUserAgreementMessage = '请先同意用户协议和隐私政策！';
+
+  /// 图片路径
+  static const files = "/files/";
 }
