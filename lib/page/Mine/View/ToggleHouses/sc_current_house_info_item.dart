@@ -1,8 +1,12 @@
+
 import 'dart:math';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:smartcommunity/page/Mine/Model/Sc_current_house_info_data_model.dart';
 import 'package:smartcommunity/page/Mine/View/ToggleHouses/sc_mine_house_tag_item.dart';
 
 import '../../../../constants/sc_asset.dart';
@@ -14,7 +18,7 @@ import '../../Model/sc_current_house_info_model.dart';
 class SCCurrentHouseInfoItem extends StatelessWidget {
   List nameList = ['房号', '房屋类型', '户主', '本人身份', '租期'];
 
-  SCCurrentHouseInfoModel infoModel;
+  ScCurrentHouseInfoDataModel infoModel;
 
   SCCurrentHouseInfoItem({Key? key, required this.infoModel}) : super(key: key);
 
@@ -65,11 +69,11 @@ class SCCurrentHouseInfoItem extends StatelessWidget {
 
   Widget contentListView() {
     List valueList = [
-      infoModel.houseNumber,
-      infoModel.houseType == 0 ? '' : '',
-      infoModel.owner,
-      infoModel.identity == 1 ? '业主' : '租户', /// 测试数据
-      infoModel.endDate
+      infoModel.housing?.spaceName,
+      // infoModel.houseType == 0 ? '' : '',
+      // infoModel.owner,
+      // infoModel.identity == 1 ? '业主' : '租户', /// 测试数据
+      // infoModel.endDate
     ];
 
     return Column(
@@ -83,9 +87,10 @@ class SCCurrentHouseInfoItem extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               String name = nameList[index];
               int? type = 0;
-              String content = valueList[index];
+              // String content = valueList[index];
+              String content = '';
               if (name == '房屋类型') {
-                type = infoModel.houseType as int?;
+                // type = infoModel.houseType as int?;
                 content = '住宅';
 
                 ///  测试数据
@@ -97,7 +102,7 @@ class SCCurrentHouseInfoItem extends StatelessWidget {
                 height: 16,
               );
             },
-            itemCount: infoModel.identity == 1 ? 4 : 5)
+            itemCount: 1 == 1 ? 4 : 5)
       ],
     );
   }

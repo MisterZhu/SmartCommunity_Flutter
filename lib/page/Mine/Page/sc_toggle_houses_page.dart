@@ -63,6 +63,10 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
     });
 
     loadMyHouseData();
+<<<<<<< HEAD
+=======
+    loadCurrentHouseBasicData();
+>>>>>>> develop-wt
   }
 
   @override
@@ -248,7 +252,17 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
               ),
               onPressed: () {
                 /// 去新增房号
+<<<<<<< HEAD
                 SCRouterHelper.codePage(5002, null);
+=======
+                var params = {
+                  'communityId': '',
+                  'houseId': '',
+                  'valueList': ['', '', '', ''],
+                  'isFromLogin': false
+                };
+                SCRouterHelper.codePage(5002, params);
+>>>>>>> develop-wt
               }),
         ),
       ),
@@ -264,7 +278,11 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
             if (index == 0) {
               return SCCurrentHouseInfoItem(infoModel: state.infoModel);
             } else {
+<<<<<<< HEAD
               return SCCurrentHouseReviewItem(reviewList: state.selectReviewIndex == 0 ? state.reviewList : state.notReviewList);
+=======
+              return SCCurrentHouseReviewItem(reviewList: state.selectReviewIndex == 0 ? state.infoModel.adoptMembers : state.infoModel.underReviewMembers);
+>>>>>>> develop-wt
             }
           },
           separatorBuilder: (BuildContext context, int index) {
@@ -312,4 +330,12 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
     state.loadData();
   }
 
+<<<<<<< HEAD
+=======
+  /// 加载当前房屋 房屋信息
+  loadCurrentHouseBasicData(){
+    SCCurrentHouseController state = Get.find<SCCurrentHouseController>();
+    state.loadData();
+  }
+>>>>>>> develop-wt
 }

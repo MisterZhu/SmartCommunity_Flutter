@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartcommunity/page/Login/GetXController/sc_select_house_controller.dart';
-import 'package:smartcommunity/page/Login/Model/demo_sc_house_community_model.dart';
-import 'package:smartcommunity/page/Login/View/SelectHouse/sc_select_house_building_page_view.dart';
+import 'package:smartcommunity/constants/sc_colors.dart';
+import 'package:smartcommunity/constants/sc_enum.dart';
+import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_data_controller.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_search_status_controller.dart.dart';
+import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_select_house_block_model.dart';
+import 'package:smartcommunity/page/Login/View/SelectHouse/sc_select_house_listview.dart';
+import 'package:smartcommunity/page/Login/View/SelectHouse/sc_select_house_search_dynamic_view.dart';
+import 'package:smartcommunity/page/Login/View/SelectHouse/sc_select_house_search_static_view.dart';
 import 'package:smartcommunity/skin/View/sc_custom_scaffold.dart';
 
-import '../../../constants/sc_colors.dart';
-import '../../../constants/sc_fonts.dart';
-import '../View/SelectHouse/sc_select_house_community_page_view.dart';
-
 /// Copyright (c), 浙江慧享信息科技有限公司
-/// FileName: sc_select_house_page
+/// FileName: sc_select_house_new_page
 /// Author: wang tao
 /// Email: wangtao1@lvchengfuwu.com
-/// Date: 2022/8/17 13:53
-/// Description: 选择房号
-
+/// Date: 2022/9/8 15:18
+/// Description: 选择房号重构
 class SCSelectHousePage extends StatefulWidget {
   const SCSelectHousePage({Key? key}) : super(key: key);
 
@@ -24,35 +25,37 @@ class SCSelectHousePage extends StatefulWidget {
 }
 
 class _SCSelectHousePageState extends State<SCSelectHousePage> {
-  /// 苑级别的list
-  List<DemoSCHouseCommunityModel> houseCommunityList = [];
-  SCSelectHouseController state = Get.put(SCSelectHouseController());
-  late PageController pageController;
-  List<Widget> widgetList = [SCSelectHouseCommunityPageView(), SCSelectHouseBuildingPageView()];
+  late String communityId;
+  late String communityName;
+  /// 导航list
+  List<ScSelectHouseModel> navigatorList = [];
+  late SCSelectHouseLogicType type = SCSelectHouseLogicType.login;
+
+  SCSelectHouseDataController scSelectHouseDataController = Get.put(SCSelectHouseDataController());
 
   @override
   void initState() {
     super.initState();
-    loadData();
-    pageController = PageController(initialPage: 0);
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-    pageController.dispose();
-  }
-
-  /// 加载数据
-  void loadData() {
-    /// 构建静态数据
-    for (int i = 0; i <= 5; i++) {
-      DemoSCHouseCommunityModel demoSCHouseCommunityModel =
-          DemoSCHouseCommunityModel(
-              id: '$i', name: '这是第$i个苑', isChecked: false);
-      houseCommunityList.add(demoSCHouseCommunityModel);
+    // 获取上个页面的传参 communityId
+    var params = Get.arguments;
+    if (params != null) {
+      communityId = params["communityId"];
+      communityName = params["communityName"];
+      type = params['type'];
+      print('communityId----  $communityId');
     }
-    state.updateHouseCommunityList(houseCommunityList);
+
+    // 缓存顶部导航栏数据
+    ScSelectHouseModel scSelectHouseModel = ScSelectHouseModel(
+        communityId: communityId, id: 0, name: communityName);
+    navigatorList.add(scSelectHouseModel);
+
+    ScSelectHouseModel scSelectHouseModelTemp =
+    ScSelectHouseModel(id: 0, name: "请选择");
+    navigatorList.add(scSelectHouseModelTemp);
+    scSelectHouseDataController.updateNavigatorList(list: navigatorList);
+    scSelectHouseDataController.loadHouseInfo(communityId: communityId, currentId: "");
   }
 
   @override
@@ -67,6 +70,14 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
         body: _body());
   }
 
+  /// 标题textStyle
+  TextStyle _textStyle() {
+    return const TextStyle(
+        fontSize: SCFonts.f16,
+        fontWeight: FontWeight.bold,
+        color: SCColors.color_1B1C33);
+  }
+
   /// body
   Widget _body() {
     return Container(
@@ -77,7 +88,8 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
         children: [
           // 导航栏
           navigatorBarWidget(),
-
+          // 搜索框
+          searchWidget(),
           // 内容
           Expanded(child: contentWidget())
         ],
@@ -87,40 +99,140 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
 
   /// 顶部导航栏  慧享服务中心 > 慧享生活馆 > 幢 > 单元
   Widget navigatorBarWidget() {
-    return GetBuilder<SCSelectHouseController>(builder: (state) {
+    return GetBuilder<SCSelectHouseDataController>(builder: (state) {
       return Container(
         height: 54.0,
         padding: EdgeInsets.symmetric(horizontal: 10.0),
         alignment: Alignment.centerLeft,
-        child: Text('慧享服务中心 > 慧享生活馆 > 幢 > 单元'),
+        // child: Text('慧享服务中心 > 慧享生活馆 > 幢 > 单元'),
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return _navigatorItem(state.navigatorList[index], index,
+                (state.navigatorList.length - 1) == index);
+          },
+          itemCount: (state.navigatorList?.length != null)
+              ? (state.navigatorList.length)
+              : 0,
+        ),
       );
     });
   }
 
-  /// 内容
-  Widget contentWidget() {
-    return PageView.builder(
-      itemCount: widgetList.length,
-      scrollDirection: Axis.horizontal,
-      reverse: false,
-      controller: pageController,
-      physics: const PageScrollPhysics(parent: ClampingScrollPhysics()),
-      itemBuilder: ((context, index) {
-        return GestureDetector(
-          child: widgetList[index]
-        );
-      }),
-      onPageChanged: (index){
+  Widget _navigatorItem(ScSelectHouseModel model, int index, bool isLast) {
+    return GestureDetector(
+      child: Row(
+        children: [
+          Visibility(
+            visible: index != 0,
+            child: Text(
+              '>',
+              style: TextStyle(color: SCColors.color_8D8E99),
+            ),
+          ),
+          Container(
+            padding: index == 0
+                ? EdgeInsets.only(left: 0, right: 4)
+                : EdgeInsets.only(left: 4, right: 4),
+            child: Text(
+              '${model.name}',
+              style: isLast
+                  ? TextStyle(color: SCColors.color_FF6C00)
+                  : TextStyle(color: SCColors.color_8D8E99),
+            ),
+          ),
+        ],
+      ),
+      onTap: () {
+        if (isLast) {
+          return;
+        }
+        List<ScSelectHouseModel> newList = [];
+        List<ScSelectHouseModel> navigatorList = scSelectHouseDataController.navigatorList;
 
+        navigatorList.removeAt(navigatorList.length - 1);
+
+        for (int i = 0; i < navigatorList.length; i++) {
+          if (i <= index) {
+            newList.add(navigatorList[i]);
+          }
+        }
+
+        ScSelectHouseModel scSelectHouseModel =
+        ScSelectHouseModel(id: 0, name: "请选择");
+        newList.add(scSelectHouseModel);
+        scSelectHouseDataController.updateNavigatorList(list: newList);
+
+        if (index == 0) {
+          scSelectHouseDataController.loadHouseInfo(communityId: communityId);
+        } else {
+          String? currentId = newList[index].communityId.toString();
+          scSelectHouseDataController.loadHouseInfo(communityId: communityId, currentId: currentId);
+        }
       },
     );
   }
 
-  /// 标题textStyle
-  TextStyle _textStyle() {
-    return const TextStyle(
-        fontSize: SCFonts.f16,
-        fontWeight: FontWeight.bold,
-        color: SCColors.color_1B1C33);
+  Widget searchWidget() {
+    return Container(
+      margin: const EdgeInsets.only(top: 2.0, left: 16.0, right: 16.0),
+      child: Container(
+        decoration: const BoxDecoration(
+          borderRadius:  BorderRadiusDirectional.only(topStart: Radius.circular(8.0), topEnd: Radius.circular(8.0), bottomStart: Radius.zero, bottomEnd: Radius.zero),
+          color: SCColors.color_FFFFFF,
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 16.0),
+        child:
+        searchHeader()
+      ),
+    );
+  }
+
+  Widget searchHeader() {
+    return GetBuilder<SCSelectHouseSearchStatusController>(
+        builder: (state) {
+          if (state.isShowCancel) {
+            // 搜索中……
+            return SCHouseSearchDynamicView(
+              isShowCancel: state.isShowCancel,
+            );
+          } else {
+            // 搜索完成
+            return SCSelectHouseSearchStaticView();
+          }
+        });
+  }
+
+  /// 列表
+  Widget contentWidget() {
+    return// 内容
+      SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.only(top: 0, left: 16.0, right: 16.0),
+          child: DecoratedBox(
+            decoration: BoxDecoration(color: SCColors.color_F2F3F5),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: const BoxDecoration(
+                    borderRadius:  BorderRadiusDirectional.only(topStart: Radius.zero, topEnd: Radius.zero, bottomStart: Radius.circular(8.0), bottomEnd: Radius.circular(8.0)),
+                    color: SCColors.color_FFFFFF,
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 16.0),
+                  child: Column(
+                    children: [
+                      // 列表
+                      SCSelectHouseListView(communityId: communityId, type: type,)
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
   }
 }

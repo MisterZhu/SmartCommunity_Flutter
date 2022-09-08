@@ -29,3 +29,11 @@ enum SCLocationStatus {
   /// 定位成功
   success,
 }
+
+/// 选择房号的逻辑链路
+enum SCSelectHouseLogicType {
+  /// 登录逻辑  去绑定房号
+  login,
+  /// 新增房号  去绑定房号
+  addHouse,
+}

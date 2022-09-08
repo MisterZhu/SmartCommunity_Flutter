@@ -60,10 +60,10 @@ dependencies:
   geolocator: ^9.0.1
   # 加载组件 https://pub.flutter-io.cn/packages/flutter_easyloading/install
   flutter_easyloading: ^3.0.5
-  # webView
-  webview_flutter: ^3.0.4
-  #自适应文字
+  # auto_size_text https://pub.flutter-io.cn/packages/auto_size_text/install
   auto_size_text: ^3.0.0
+  # webview https://pub.flutter-io.cn/packages/webview_flutter/install
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_test:

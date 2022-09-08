@@ -18,6 +18,7 @@ class SCAllBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<SCHomeController>(() => SCHomeController());
     Get.lazyPut<SCHomeController1>(() => SCHomeController1());
+    Get.lazyPut<SCHomeController2>(() => SCHomeController2());
     Get.lazyPut<SCMineController>(() => SCMineController());
     Get.lazyPut<SCBasePrivacyController>(() => SCBasePrivacyController());
     Get.lazyPut<SCLoginController>(() => SCLoginController());
@@ -26,6 +27,5 @@ class SCAllBinding extends Bindings {
     Get.lazyPut<SCSelectCommunityController>(() => SCSelectCommunityController());
     Get.lazyPut<SCSearchCommunityController>(() => SCSearchCommunityController());
     Get.lazyPut<SCServiceController>(() => SCServiceController());
-    Get.lazyPut<SCHomeController2>(() => SCHomeController2());
   }
 }

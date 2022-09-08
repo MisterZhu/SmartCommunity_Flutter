@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartcommunity/page/Login/GetXController/sc_select_house_controller.dart';
+import 'package:smartcommunity/constants/sc_asset.dart';
+import 'package:smartcommunity/constants/sc_colors.dart';
+import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_search_status_controller.dart.dart';
 
-import '../../../../constants/sc_asset.dart';
-import '../../../../constants/sc_colors.dart';
-import '../../../../constants/sc_fonts.dart';
 
 /// Copyright (c), 浙江慧享信息科技有限公司
 /// FileName: sc_select_house_search_header
@@ -40,7 +40,7 @@ class SCSelectHouseSearchStaticView extends StatelessWidget {
           )
       ),
       onTap: () {
-        SCSelectHouseController searchState = Get.find<SCSelectHouseController>();
+        SCSelectHouseSearchStatusController searchState = Get.find<SCSelectHouseSearchStatusController>();
         searchState.updateSearchStatus(isShowCancel: true);
       },);
 

@@ -22,9 +22,16 @@ class SCRouterPath {
   /// 社区选择
   static String selectCommunityPath = "/root/login/selectCommunityPage";
 
+  /// 房号选择
+  static String selectHousePath = "/root/login/SCSelectHousePage";
+
   /***************************** 首页 ******************************/
   /// 首页
   static String homePath = "/home/HomePage";
+
+  /***************************** 通用页 ******************************/
+  /// webView
+  static String webViewPath = "/root/webView/webViewPage";
 
   /***************************** 服务 ******************************/
   /// 全部应用

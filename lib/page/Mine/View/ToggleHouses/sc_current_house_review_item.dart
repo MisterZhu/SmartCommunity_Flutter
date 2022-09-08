@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
+import 'package:smartcommunity/page/Mine/Model/Sc_current_house_info_data_model.dart';
 import 'package:smartcommunity/page/Mine/View/ToggleHouses/sc_mine_house_tag_item.dart';
 
 import '../../../../constants/sc_asset.dart';
@@ -18,7 +19,7 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
 
   SCCurrentHouseReviewItem({Key? key, required this.reviewList}) : super(key: key);
 
-  final List<SCCurrentHouseReviewModel>? reviewList;
+  final List<AdoptMembers>? reviewList;
 
   int selectIndex = 0;
 
@@ -106,7 +107,7 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
             shrinkWrap: true,
             padding: const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 0),
             itemBuilder: (BuildContext context, int index) {
-              SCCurrentHouseReviewModel model = reviewList![index];
+              AdoptMembers model = reviewList![index];
               return cellItem(model);
             },
             separatorBuilder: (BuildContext context, int index) {
@@ -118,7 +119,7 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
   }
 
   /// cell
-  Widget cellItem(SCCurrentHouseReviewModel model) {
+  Widget cellItem(AdoptMembers model) {
     SCCurrentHouseController state = Get.find<SCCurrentHouseController>();
 
     return Container(
@@ -143,7 +144,7 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
     );
   }
 
-  Widget leftItem(SCCurrentHouseReviewModel model) {
+  Widget leftItem(AdoptMembers model) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,14 +152,16 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
       children: [
         topItem(model),
         SizedBox(
-          height: model.type == 3 ? 11.0 : 0.0,
+          // height: model.type == 3 ? 11.0 : 0.0,
+          height: 11.0 ,
         ),
         Offstage(
-          offstage: model.type == 3 ? false : true,
+          // offstage: model.type == 3 ? false : true,
+          offstage: true,
           child: Container(
             color: SCColors.color_FFFFFF,
             child: Text(
-              '租期结束时间：${model.endDate ?? ''}',
+              '租期结束时间：${model.gmtLiveEnd ?? ''}',
               textAlign: TextAlign.left,
               style: const TextStyle(
                   fontSize: SCFonts.f12,
@@ -171,12 +174,25 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
     );
   }
 
-  Widget topItem(SCCurrentHouseReviewModel model) {
-    String typeString;
+  Widget topItem(AdoptMembers model) {
+    String? typeString = model.identity;
     Color bgColor;
     Color textColor;
     /// type:人员类型-----暂定------1=业主，2=家属，3=租客,4=朋友
-    if (model.type == 1) {
+    if(typeString == "业主") {
+      bgColor = SCColors.color_E7F1FF;
+      textColor = SCColors.color_1677FF;
+    } else if (typeString == "家属"){
+      bgColor = SCColors.color_FFEBEC;
+      textColor = SCColors.color_FF1D32;
+    } else if (typeString == "租客") {
+      bgColor = SCColors.color_E3FFF1;
+      textColor = SCColors.color_00C365;
+    } else {
+      bgColor = SCColors.color_F2F3F5;
+      textColor = SCColors.color_8D8E99;
+    }
+    /*if (model.type == 1) {
       typeString = '业主';
       bgColor = SCColors.color_E7F1FF;
       textColor = SCColors.color_1677FF;
@@ -192,13 +208,13 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
       typeString = '朋友';
       bgColor = SCColors.color_F2F3F5;
       textColor = SCColors.color_8D8E99;
-    }
+    }*/
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SCMineHouseTagItem(name: typeString, bgColor: bgColor, textColor: textColor),
+        SCMineHouseTagItem(name: typeString!, bgColor: bgColor, textColor: textColor),
         const SizedBox(width: 10,),
         Text(
           model.name ?? '',
@@ -210,7 +226,7 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
         ),
         const SizedBox(width: 10,),
         Text(
-          '(${model.mobile ?? ''})',
+          '(${model.phone ?? ''})',
           textAlign: TextAlign.left,
           style: const TextStyle(
               fontSize: SCFonts.f14,

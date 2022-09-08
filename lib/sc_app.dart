@@ -1,6 +1,9 @@
 
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/base/sc_all_binding.dart';
@@ -23,6 +26,14 @@ void startApp() async {
   String basePath = await SCScaffoldManager.instance.getRouterBasePath();
 
   RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+
+  // Android设备设置沉浸式
+  if(Platform.isAndroid) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarBrightness: Brightness.light,
+    ));
+  }
 
   runApp(GetMaterialApp(
     theme: ThemeData(

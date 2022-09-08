@@ -38,4 +38,11 @@ class SCUrl {
   /// 解除绑定房号接口url
   static const String kUnbindHouseUrl = '/api/space/resident/user/unbind';
 
+  /// 通过项目Id获取房号数据url
+  static const String kGetSpaceNodesUrl = '/api/space/space/getSpaceNodes';
+
+  /// 获取用户身份
+  static const String kResidentUserIdentity = '/api/space/resident/user/community/identity';
+  /// 绑定房产
+  static const String kBindAsset = '/api/space/resident/user/bind';
 }
