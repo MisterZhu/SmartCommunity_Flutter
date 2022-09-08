@@ -120,7 +120,6 @@ class SCServiceCellItem extends StatelessWidget {
             const SizedBox(width: 4.0,),
             GestureDetector(
                 onTap: (){
-                  log('常用应用收起展开=======${state.isExpansion}');
                   state.updateExpansionStatus();
                 },
                 child: Container(
@@ -139,7 +138,6 @@ class SCServiceCellItem extends StatelessWidget {
   /// cell
   Widget itemsCell() {
     List<Applets>?list = moduleModel.applets;
-    SCServiceController state = Get.find<SCServiceController>();
     return StaggeredGridView.countBuilder(
         padding: const EdgeInsets.only(left: 5.5, right: 5.5, top: 3.0, bottom: 2.0),
         mainAxisSpacing: 12,
@@ -204,10 +202,7 @@ class SCServiceCellItem extends StatelessWidget {
   }
 
   Widget topIconItem(Applets model, bool hide) {
-    //String url = '${SCConfig.BASE_URL}/files/${model.icon?.fileKey}';
     String url = SCConfig.getImageUrl(model.icon?.fileKey ?? '');
-    log('url=======$url');
-
     return Stack(
       alignment: Alignment.topRight,
       children: [

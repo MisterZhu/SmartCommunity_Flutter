@@ -102,7 +102,6 @@ class SCSelectCommunityController extends GetxController {
             log('通过城市获取项目数据===$value');
             var data = value['records'];
             List<SCCommunityModel> dataList = List<SCCommunityModel>.from(data.map((e) => SCCommunityModel.fromJson(e)).toList());
-            //log('dataList===$dataList');
             if (isLoadMore) {
               if (dataList.length > 0) {
                 communityList.addAll(dataList!);

@@ -1,13 +1,9 @@
 
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:smartcommunity/page/Service/Model/sc_service_module_model.dart';
 import 'package:smartcommunity/page/Service/View/sc_service_cell_item.dart';
-
-import '../GetXController/sc_service_controller.dart';
 
 class SCServiceListView extends StatelessWidget {
 
