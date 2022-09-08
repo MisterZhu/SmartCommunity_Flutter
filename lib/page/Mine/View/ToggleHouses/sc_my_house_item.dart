@@ -2,12 +2,14 @@
 import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 import '../../../../constants/sc_asset.dart';
 import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_fonts.dart';
 import '../../../../skin/Model/sc_user.dart';
 import '../../../../skin/Tools/sc_scaffold_manager.dart';
+import '../../GetXController/sc_my_house_controller.dart';
 import '../../Model/sc_my_house_model.dart';
 /// 我的房号cell
 class SCMyHouseItem extends StatelessWidget {
@@ -85,46 +87,47 @@ class SCMyHouseItem extends StatelessWidget {
 
   /// 右边的切换按钮
   Widget rightItem() {
-    SCUser user = SCScaffoldManager.instance.getUserData();
-    String? housingId = user.communityId;
-    bool same = housingId == model.communityId ? true : false;
-    return CupertinoButton(
-      padding: EdgeInsets.zero,
-      child: Container(
-        width: 54,
-        height: 32,
-        color: SCColors.color_FFFFFF,
-        child: Offstage(
-          offstage: same,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset(SCAsset.iconMineHouseToggle, width: 14.0, height: 14.0,),
-              const SizedBox(width: 8.0,),
-              const Text(
-                '切换',
-                maxLines: 1,
-                textAlign: TextAlign.left,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.normal,
-                  color: SCColors.color_FF6C00,
-                ),),
-            ],
+    return GetBuilder<SCMyHouseController>(builder: (state) {
+      bool same = state.housingId == model.id ? true : false;
+      return CupertinoButton(
+        padding: EdgeInsets.zero,
+        child: Container(
+          width: 54,
+          height: 32,
+          color: SCColors.color_FFFFFF,
+          child: Offstage(
+            offstage: same,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(SCAsset.iconMineHouseToggle, width: 14.0, height: 14.0,),
+                const SizedBox(width: 8.0,),
+                const Text(
+                  '切换',
+                  maxLines: 1,
+                  textAlign: TextAlign.left,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.normal,
+                    color: SCColors.color_FF6C00,
+                  ),),
+              ],
+            ),
           ),
         ),
-      ),
-      onPressed: () {
-        /// 切换,把项目id存在用户信息里
-        SCUser user = SCScaffoldManager.instance.getUserData();
-        user.housingId = model.id;
-        user.communityId = model.communityId;
-        user.communityName = model.communityName;
-        SCScaffoldManager.instance.cacheUserData(user.toJson());
-      },
-    );
+        onPressed: () {
+          /// 切换,把项目id存在用户信息里
+          SCUser user = SCScaffoldManager.instance.getUserData();
+          user.housingId = model.id;
+          user.communityId = model.communityId;
+          user.communityName = model.communityName;
+          SCScaffoldManager.instance.cacheUserData(user.toJson());
+          state.updateCurrentHousingId(model.id);
+        },
+      );
+    });
   }
 }
