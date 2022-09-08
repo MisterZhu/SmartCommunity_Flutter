@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/network/sc_http_manager.dart';
 import 'package:smartcommunity/network/sc_url.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_data_controller.dart';
@@ -43,9 +44,10 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
 
   late String communityId;
   late PageController pageController;
-  List<Widget> widgetList = [
-    SCSelectHouseBlockPageView(),
-  ];
+
+  SCSelectHouseLogicType type = SCSelectHouseLogicType.login;
+
+  List<Widget> widgetList = [];
 
   @override
   void initState() {
@@ -59,6 +61,10 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
     print('print--> 上个页面传过来的参数:$params');
     communityId = params["communityId"];
     String communityName = params["communityName"];
+    type = params['type'];
+
+    widgetList = [SCSelectHouseBlockPageView(type: type,)];
+
     selectHouseController.updateCommunityId(communityId: communityId);
 
     // 缓存顶部导航栏数据

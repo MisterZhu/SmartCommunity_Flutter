@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/network/sc_http_manager.dart';
 import 'package:smartcommunity/network/sc_url.dart';
 import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_user_identity.dart';
@@ -34,26 +35,34 @@ class SCAddHouseState extends State<SCAddHousePage> {
 
   // List nameList = ['所居住小区', '房号', '家庭/企业', '身份'];
   List nameList = ['所居住小区', '房号', '身份'];
-  List valueList = [];
-  String communityId = '';
-  String houseId = '';
-  String identityId = '';
+  List? valueList = [];
+  String? communityId = '';
+  String? houseId = '';
+  String? identityId = '';
 
   bool isFromLogin = false;
+  List<ScUserIdentity> dataList = [];
 
   @override
   initState() {
     super.initState();
 
     var params = Get.arguments;
-    valueList = params['valueList'];
-    communityId = params['communityId'];
-    houseId = params['houseId'];
-    isFromLogin = params['isFromLogin'];
+    if(params != null) {
+      valueList = params['valueList'];
+      communityId = params['communityId'];
+      houseId = params['houseId'];
+      isFromLogin = params['isFromLogin'];
 
-    print('print--> valueList: ${valueList}');
-    print('print--> communityId: ${communityId}');
-    print('print--> houseId: ${houseId}');
+      print('print--> valueList: ${valueList}');
+      print('print--> communityId: ${communityId}');
+      print('print--> houseId: ${houseId}');
+
+      if(communityId != null || communityId != '' ) {
+        // 获取身份信息
+        loadResidentUserIdentity(false);
+      }
+    }
   }
 
   @override
@@ -124,7 +133,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
     return ListView.separated(
         padding: const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 0),
         itemBuilder: (BuildContext context, int index) {
-          return cellItem(nameList[index], valueList[index], index);
+          return cellItem(nameList[index], valueList?[index], index);
         },
         separatorBuilder: (BuildContext context, int index) {
           return const SizedBox(
@@ -141,13 +150,21 @@ class SCAddHouseState extends State<SCAddHousePage> {
           if (index == 0) {
             /// 选择小区
             log('点击选择小区');
+            var params = {
+              'type' : SCSelectHouseLogicType.addHouse
+            };
+            SCRouterHelper.codePage(9003, params);
           } else if (index == 1) {
             /// 选择房号
             log('点击选择房号');
           } else if (index == 2) {
             /// 选择身份
             log('点击选择身份');
-            loadResidentUserIdentity();
+            if(dataList == null || dataList.length == 0) {
+              loadResidentUserIdentity(true);
+            } else {
+              showIdentityDialog(dataList);
+            }
           }
         },
         child: Container(
@@ -250,8 +267,16 @@ class SCAddHouseState extends State<SCAddHousePage> {
                 ),
               ),
               onPressed: () {
+                if(valueList == null || valueList?[0] == '' || valueList?[0] == null){
+                  SCToast.showTip('居住小区不能为空');
+                  return;
+                }
+                if(valueList == null || valueList?[1] == '' || valueList?[1] == null){
+                  SCToast.showTip('房号不能为空');
+                  return;
+                }
                 if (identityId == '') {
-                  SCToast.showTip('请选择身份');
+                  SCToast.showTip('身份不能为空');
                   return;
                 }
                 showConfirmDialog();
@@ -262,7 +287,11 @@ class SCAddHouseState extends State<SCAddHousePage> {
   }
 
   /// 加载用户身份列表
-  loadResidentUserIdentity() {
+  loadResidentUserIdentity(bool isNeedShowDialog) {
+    if(communityId == '' || communityId == null){
+      SCToast.showTip('请先选择所居住小区');
+      return;
+    }
     SCLoadingUtils.show();
     SCHttpManager.instance.get(
         url: SCUrl.kResidentUserIdentity,
@@ -270,15 +299,16 @@ class SCAddHouseState extends State<SCAddHousePage> {
           'communityId': communityId,
         },
         success: (value) {
-          List<ScUserIdentity> dataList = List<ScUserIdentity>.from(
+          dataList = List<ScUserIdentity>.from(
               value.map((e) => ScUserIdentity.fromJson(e)).toList());
 
-          if (dataList == null || dataList.length == 0) {
-            SCToast.showTip('身份信息为空');
-            return;
+          if (isNeedShowDialog) {
+            if (dataList == null || dataList.length == 0) {
+              SCToast.showTip('身份信息为空');
+              return;
+            }
+            showIdentityDialog(dataList);
           }
-
-          showIdentityDialog(dataList);
         },
         failure: (value) {
           if (value['message'] != null) {
@@ -304,7 +334,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
         dataList: dataList,
         isShowCancel: true,
         onTap: (index, context) {
-          valueList[2] = identityList[index].identity!;
+          valueList?[2] = identityList[index].identity!;
           identityId = identityList[index].identityId!;
           setState(() {});
         });
@@ -347,7 +377,11 @@ class SCAddHouseState extends State<SCAddHousePage> {
           SCToast.showTip('提交成功 我们会尽快为您审核');
 
           /// 2.存储数据到SCUser
+          log('SCScaffoldManager.instance.getUserData()--> ${SCScaffoldManager.instance.getUserData()}');
           SCUser scUser = SCScaffoldManager.instance.getUserData();
+          log('SCUser--> ${scUser}');
+          scUser.communityId = communityId;
+          scUser.communityName = valueList?[0];
           scUser.housingId = houseId;
           SCScaffoldManager.instance.cacheUserData(scUser);
 
@@ -356,7 +390,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
             // 如果是从登录进入，就直接进入主页
             SCRouterHelper.codeOffAllPage(10000, null);
           } else {
-            // todo
+            // todo wangtao 是否是登录逻辑
           }
         },
         failure: (value) {

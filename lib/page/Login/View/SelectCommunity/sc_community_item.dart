@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/page/Login/Model/sc_community_model.dart';
 
 import '../../../../constants/sc_colors.dart';
@@ -16,8 +17,9 @@ import '../../GetXController/sc_search_community_controller.dart';
 class SCCommunityItem extends StatelessWidget {
 
   final SCCommunityModel model;
+  final SCSelectHouseLogicType type;
 
-  const SCCommunityItem({Key? key, required this.model}) : super(key: key);
+  const SCCommunityItem({Key? key, required this.model, required this.type}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +61,14 @@ class SCCommunityItem extends StatelessWidget {
         SCSearchCommunityController state = Get.find<SCSearchCommunityController>();
         state.hideKeyboard();
         /// 去选房号
+
+        print('wangtao type--->  $type');
         var params = {
           'communityId' : model.id,
-          'communityName': model.name
+          'communityName': model.name,
+          'type': type
         };
         SCRouterHelper.codePage(20001, params);
-
-        /// 测试数据，跳转到全部应用列表
-        // SCRouterHelper.codePage(10011, null);
       },
     );
   }

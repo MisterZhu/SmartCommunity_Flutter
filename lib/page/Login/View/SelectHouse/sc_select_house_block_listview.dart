@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
+import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/network/sc_http_manager.dart';
 import 'package:smartcommunity/network/sc_url.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_controller.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_data_controller.dart';
 import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_select_house_block_model.dart';
+import 'package:smartcommunity/page/Login/Page/sc_select_community_page.dart';
+import 'package:smartcommunity/page/Mine/Page/sc_add_house_page.dart';
+import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
+import 'package:smartcommunity/utils/Router/sc_router_pages.dart';
 import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 
 import '../../GetXController/sc_select_house_search_status_controller.dart.dart';
@@ -19,7 +24,9 @@ import '../../GetXController/sc_select_house_search_status_controller.dart.dart'
 /// Date: 2022/8/18 11:50
 /// Description: 选择房号 - 列表
 class SCSelectHouseBlockListView extends StatefulWidget {
-  const SCSelectHouseBlockListView({Key? key}) : super(key: key);
+  SCSelectHouseLogicType? type = SCSelectHouseLogicType.login;
+
+  SCSelectHouseBlockListView({Key? key, this.type}) : super(key: key);
 
   @override
   State<SCSelectHouseBlockListView> createState() =>
@@ -49,12 +56,6 @@ class _SCSelectHouseBlockListViewState
     return GetBuilder<SCSelectHouseSearchStatusController>(
         builder: (sCSelectHouseState) {
       return GetBuilder<SCSelectHouseDataController>(builder: (state) {
-        /*print("-->isShowCancel ${searchStatusState.isShowCancel}");
-        if (searchStatusState.isShowCancel) {
-          print('dataState.searchResultList--> ${dataState.searchResultList}');
-        } else {
-          print('dataState.dataList--> ${dataState.dataList}');
-        }*/
         return houseList();
       });
     });
@@ -186,7 +187,6 @@ class _SCSelectHouseBlockListViewState
         }
       },
     );
-
   }
 
   /// 未选中状态
@@ -283,6 +283,7 @@ class _SCSelectHouseBlockListViewState
     navigatorList.add(scSelectHouseModelTemp);
     scSelectHouseDataController.updateNavigatorList(list: navigatorList);
 
+    SCLoadingUtils.show();
     SCHttpManager.instance.get(
         url: SCUrl.kGetSpaceNodesUrl,
         params: {
@@ -321,20 +322,36 @@ class _SCSelectHouseBlockListViewState
     }
     houseName = houseName + currentRoomName;
 
-    List valueList = [
-      '${navigatorList[0].name}',
-      houseName,
-      '',
-      ''
-    ];
+    List valueList = ['${navigatorList[0].name}', houseName, '', ''];
 
-    var params = {
-      'communityId': '${navigatorList[0].communityId}',
-      'houseId': houseId,
-      'valueList': valueList,
-      'isFromLogin': true
-    };
-    SCRouterHelper.codePage(5002, params);
+    print('bindHouse---> ${widget.type}');
+    if (widget.type == SCSelectHouseLogicType.login) {
+      var params = {
+        'communityId': '${navigatorList[0].communityId}',
+        'houseId': houseId,
+        'valueList': valueList,
+        'isFromLogin': true
+      };
+      SCRouterHelper.codePage(5002, params);
+    } else if (widget.type == SCSelectHouseLogicType.addHouse) {
+      var params = {
+        'communityId': '${navigatorList[0].communityId}',
+        'houseId': houseId,
+        'valueList': valueList,
+        'isFromLogin': false
+      };
+
+      /// todo wangtao 处理栈
+      // Get.offUntil(GetPageRoute(
+      //   settings: RouteSettings(
+      //     arguments: params
+      //   ),
+      //   page: () => SCAddHousePage(),
+      // ), (route) => (route as GetPageRoute).routeName == "/sc_toggle_houses_page");
+
+      String? path = SCRouterPages.pageCode[5002];
+      Get.offNamedUntil(path!, (route) => true, arguments: params);
+    }
   }
 
   /// 选中字体颜色

@@ -1,10 +1,10 @@
-
 import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/utils/sc_location_utils.dart';
 
@@ -24,24 +24,33 @@ import 'package:smartcommunity/page/Login/View/SelectCommunity/sc_community_list
 /// 选择园区
 
 class SCSelectCommunityPage extends StatefulWidget {
-
   const SCSelectCommunityPage({Key? key}) : super(key: key);
 
   @override
   SCSelectCommunityState createState() => SCSelectCommunityState();
 }
 
-class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBindingObserver {
+class SCSelectCommunityState extends State<SCSelectCommunityPage>
+    with WidgetsBindingObserver {
+  SCSearchCommunityController searchState =
+      Get.put(SCSearchCommunityController());
 
-  SCSearchCommunityController searchState = Get.put(SCSearchCommunityController());
+  SCSelectCommunityController selectState =
+      Get.put(SCSelectCommunityController());
 
-  SCSelectCommunityController selectState = Get.put(SCSelectCommunityController());
+  // 默认是登录成功后直接进来选则房号
+  SCSelectHouseLogicType type = SCSelectHouseLogicType.login;
 
   @override
   initState() {
     super.initState();
     startLocation();
     WidgetsBinding.instance.addObserver(this);
+
+    var arguments = Get.arguments;
+    if (arguments != null) {
+      type = arguments['type'];
+    }
   }
 
   /// 由后台返回主屏幕 刷新数据
@@ -59,6 +68,7 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
   @override
   dispose() {
     super.dispose();
+
     /// 销毁观察者
     WidgetsBinding.instance.removeObserver(this);
   }
@@ -92,41 +102,53 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
 
   /// header
   Widget header() {
-    return GetBuilder<SCSearchCommunityController>(builder: (state){
+    return GetBuilder<SCSearchCommunityController>(builder: (state) {
       return SCCommunityHeader(
         locationStatus: state.locationStatus,
         locationCity: state.locationCity,
         selectCity: state.selectCity,
         node: state.node,
         isShowCancel: state.isShowCancel,
-        cancelAction: (){
-        cancelAction();
-      }, valueChangedAction: (String value) {
-        valueChangedAction(value);
-      },selectCityAction: () {
-        openSelectCityPage();
-      },);
+        cancelAction: () {
+          cancelAction();
+        },
+        valueChangedAction: (String value) {
+          valueChangedAction(value);
+        },
+        selectCityAction: () {
+          openSelectCityPage();
+        },
+      );
     });
   }
 
   /// title
   Widget titleItem() {
-    return const Text('选择项目', style: TextStyle(
-        fontSize: SCFonts.f16,
-        fontWeight: FontWeight.bold,
-        color: SCColors.color_1B1C33
-    ),);
+    return const Text(
+      '选择项目',
+      style: TextStyle(
+          fontSize: SCFonts.f16,
+          fontWeight: FontWeight.bold,
+          color: SCColors.color_1B1C33),
+    );
   }
 
   /// 社区列表
   Widget communityListView() {
-    return GetBuilder<SCSelectCommunityController>(builder: (state){
+    return GetBuilder<SCSelectCommunityController>(builder: (state) {
       if (state.isShowResult) {
-        return SCCommunitySearchResultListView(communityList: state.searchList, selectCommunityHandler: (SCCommunityModel model) {
-          state.updateSelectCommunity(model: model);
-        },);
+        return SCCommunitySearchResultListView(
+          communityList: state.searchList,
+          type: type,
+          selectCommunityHandler: (SCCommunityModel model) {
+            state.updateSelectCommunity(model: model);
+          },
+        );
       } else {
-        return SCCommunityListView(communityList: state.communityList,);
+        return SCCommunityListView(
+          communityList: state.communityList,
+          type: type,
+        );
       }
     });
   }
@@ -137,7 +159,8 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
     state.updateSearchResult(status: false);
     state.updateSearchList(list: []);
 
-    SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
+    SCSearchCommunityController searchState =
+        Get.find<SCSearchCommunityController>();
     searchState.updateCancelButtonStatus(status: false);
   }
 
@@ -148,7 +171,7 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
     if (value.isNotEmpty) {
       List<SCCommunityModel> list = [];
       if (state.communityList.length > 0) {
-        for(int i = 0; i < state.communityList.length; i++) {
+        for (int i = 0; i < state.communityList.length; i++) {
           SCCommunityModel communityModel = state.communityList[i];
           String name = communityModel?.name ?? '';
           if (name.contains(value)) {
@@ -163,13 +186,16 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
   }
 
   /// 定位
-  startLocation() async{
+  startLocation() async {
     LocationPermission permission = await SCLocationUtils.requestPermission();
-    SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
+    SCSearchCommunityController searchState =
+        Get.find<SCSearchCommunityController>();
     searchState.updateLocationPermission(permission: permission);
-    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
       /// 定位被拒绝，无权限
-    } else if(permission == LocationPermission.whileInUse || permission == LocationPermission.always) {
+    } else if (permission == LocationPermission.whileInUse ||
+        permission == LocationPermission.always) {
       /// 已获取定位权限
       Position position = await SCLocationUtils.location();
       reGeoCode(position: position);
@@ -179,30 +205,32 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
   }
 
   /// 逆地理编码
-  reGeoCode({required Position position}) async{
-    await SCLocationUtils.reGeoCode(position: position, success: (value){
-      SCLocationModel model = value;
-      log('城市:${model.addressComponent?.city ?? ''}');
-      SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
-      searchState.updateLocationCity(
-        city: model.addressComponent?.city ?? '',
-        code: model.addressComponent?.citycode ?? '',
-        lati: position.latitude,
-        long: position.longitude
-      );
-      loadData();
-    }, failure: (value){
-
-    });
+  reGeoCode({required Position position}) async {
+    await SCLocationUtils.reGeoCode(
+        position: position,
+        success: (value) {
+          SCLocationModel model = value;
+          log('城市:${model.addressComponent?.city ?? ''}');
+          SCSearchCommunityController searchState =
+              Get.find<SCSearchCommunityController>();
+          searchState.updateLocationCity(
+              city: model.addressComponent?.city ?? '',
+              code: model.addressComponent?.citycode ?? '',
+              lati: position.latitude,
+              long: position.longitude);
+          loadData();
+        },
+        failure: (value) {});
   }
 
   ///  选择城市
-  openSelectCityPage() async{
-    SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
+  openSelectCityPage() async {
+    SCSearchCommunityController searchState =
+        Get.find<SCSearchCommunityController>();
     var params = {
-      'locationCity' : searchState.locationCity,
-      'locationStatus' : searchState.locationStatus,
-      'cityCode' : searchState.cityCode,
+      'locationCity': searchState.locationCity,
+      'locationStatus': searchState.locationStatus,
+      'cityCode': searchState.cityCode,
     };
     var backParams = await SCRouterHelper.codePage(9002, params);
 
@@ -220,6 +248,4 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage> with WidgetsBi
     SCSelectCommunityController state = Get.find<SCSelectCommunityController>();
     state.loadCommunityData();
   }
-
 }
-

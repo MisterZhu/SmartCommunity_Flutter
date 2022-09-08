@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
+import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_controller.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_search_status_controller.dart.dart';
 import 'package:smartcommunity/page/Login/View/SelectHouse/sc_select_house_block_listview.dart';
@@ -15,7 +16,9 @@ import 'package:smartcommunity/page/Login/View/SelectHouse/sc_select_house_searc
 /// Description: 选择房号
 class SCSelectHouseBlockPageView extends StatefulWidget {
 
-  const SCSelectHouseBlockPageView({Key? key}) : super(key: key);
+  SCSelectHouseLogicType? type;
+
+   SCSelectHouseBlockPageView({Key? key, this.type = SCSelectHouseLogicType.login}) : super(key: key);
 
   @override
   State<SCSelectHouseBlockPageView> createState() =>
@@ -77,7 +80,7 @@ class _SCSelectHouseBlockPageViewState
                           ),
 
                           // 列表
-                          SCSelectHouseBlockListView()
+                          SCSelectHouseBlockListView(type: widget.type,)
                         ],
                       ),
                     ),

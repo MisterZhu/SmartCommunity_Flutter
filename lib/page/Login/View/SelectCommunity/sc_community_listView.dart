@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/page/Login/View/SelectCommunity/sc_community_empty_item.dart';
 import 'package:smartcommunity/page/Login/View/SelectCommunity/sc_community_item.dart';
 import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
@@ -15,9 +16,11 @@ import '../../Model/sc_community_model.dart';
 
 class SCCommunityListView extends StatelessWidget {
 
-  SCCommunityListView({Key? key, this.communityList}) : super(key: key);
+  SCCommunityListView({Key? key, this.communityList, this.type = SCSelectHouseLogicType.login}) : super(key: key);
 
   final List<SCCommunityModel>? communityList;
+
+  SCSelectHouseLogicType type;
 
   SCSelectCommunityController communityController = Get.find<SCSelectCommunityController>();
 
@@ -100,7 +103,7 @@ class SCCommunityListView extends StatelessWidget {
   }
 
   Widget getCell({required SCCommunityModel model}) {
-    return SCCommunityItem(model: model,);
+    return SCCommunityItem(model: model,type: type,);
   }
 
   Future onRefresh() async{

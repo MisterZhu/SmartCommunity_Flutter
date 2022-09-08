@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/page/Login/Model/sc_community_model.dart';
 import 'package:smartcommunity/page/Login/View/SelectCommunity/sc_community_item.dart';
 
@@ -10,7 +11,9 @@ class SCCommunitySearchResultListView extends StatelessWidget {
 
   final Function(SCCommunityModel model)? selectCommunityHandler;
 
-  const SCCommunitySearchResultListView({Key? key, this.communityList, this.selectCommunityHandler}) : super(key: key);
+  final SCSelectHouseLogicType type;
+
+  const SCCommunitySearchResultListView({Key? key, this.communityList, this.selectCommunityHandler,  this.type = SCSelectHouseLogicType.login}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class SCCommunitySearchResultListView extends StatelessWidget {
   }
 
   Widget getCell({required SCCommunityModel model}) {
-    return SCCommunityItem(model: model,);
+    return SCCommunityItem(model: model, type: type);
   }
 
 }
