@@ -19,9 +19,8 @@ class SCRouterPath {
   static String selectCityPath = "/root/login/selectCityPage";
   /// 社区选择
   static String selectCommunityPath = "/root/login/selectCommunityPage";
-
   /// 房号选择
-  static String selectHousePath = "/root/login/SCSelectRoomNumberPage";
+  static String selectHousePath = "/root/login/SCSelectHousePage";
 
 
   /***************************** 首页 ******************************/

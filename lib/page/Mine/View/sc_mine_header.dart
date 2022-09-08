@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
+import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 
@@ -108,9 +109,17 @@ class SCMineHeaderItem extends StatelessWidget {
               ),
               onTap: () {
                 // todo 跳转到设置页面  此处当作测试  跳转到webView  后续修改
-                Map<String, dynamic> routeParams = {'title': '这是webView',
+                /* Map<String, dynamic> routeParams = {'title': '这是webView',
                   'url':'https://saasprod.4001113900.com:10020/h5new/newUser/index.html#/volunteer/home?companyCode=ss&defCommunityId=fe38ad0a-beaa-11eb-bdca-005056b13afd&appVersion=139&defLatitude=30.28529&mobileType=131&mobileVersion=10&defAreaCode=330106&mobileNo=uuidd5000eda-b8c8-4200-9621-f3b285e83ccb&version=2&defLongitude=120.06839&token=47a2ab63-c82e-46b4-9aa6-6cfd1a27121f&defRoomId=2759511&time=1660196749&defOrgId=2678533&mobileName=HUAWEI TAS-AL00'};
-                SCRouterHelper.codePage(20000, routeParams);
+                SCRouterHelper.codePage(20000, routeParams);*/
+
+                // todo wangtao
+                var params = {
+                  "communityId": "38f258cd-89c7-11ea-bf80-005056b167dc",
+                  "communityName": "海滨项目",
+                  "type": SCSelectHouseLogicType.addHouse
+                };
+                SCRouterHelper.codePage(20001, params);
               },
             )
           ],

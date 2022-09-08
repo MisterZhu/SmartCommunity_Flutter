@@ -40,7 +40,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
   String? houseId = '';
   String? identityId = '';
 
-  bool isFromLogin = false;
+  SCSelectHouseLogicType type = SCSelectHouseLogicType.login;
   List<ScUserIdentity> dataList = [];
 
   @override
@@ -48,17 +48,17 @@ class SCAddHouseState extends State<SCAddHousePage> {
     super.initState();
 
     var params = Get.arguments;
-    if(params != null) {
+    if (params != null) {
       valueList = params['valueList'];
       communityId = params['communityId'];
       houseId = params['houseId'];
-      isFromLogin = params['isFromLogin'];
+      type = params['type'];
 
       print('print--> valueList: ${valueList}');
       print('print--> communityId: ${communityId}');
       print('print--> houseId: ${houseId}');
 
-      if(communityId != null || communityId != '' ) {
+      if (communityId != '') {
         // 获取身份信息
         loadResidentUserIdentity(false);
       }
@@ -150,9 +150,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
           if (index == 0) {
             /// 选择小区
             log('点击选择小区');
-            var params = {
-              'type' : SCSelectHouseLogicType.addHouse
-            };
+            var params = {'type': SCSelectHouseLogicType.addHouse};
             SCRouterHelper.codePage(9003, params);
           } else if (index == 1) {
             /// 选择房号
@@ -160,7 +158,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
           } else if (index == 2) {
             /// 选择身份
             log('点击选择身份');
-            if(dataList == null || dataList.length == 0) {
+            if (dataList == null || dataList.length == 0) {
               loadResidentUserIdentity(true);
             } else {
               showIdentityDialog(dataList);
@@ -267,11 +265,15 @@ class SCAddHouseState extends State<SCAddHousePage> {
                 ),
               ),
               onPressed: () {
-                if(valueList == null || valueList?[0] == '' || valueList?[0] == null){
+                if (valueList == null ||
+                    valueList?[0] == '' ||
+                    valueList?[0] == null) {
                   SCToast.showTip('居住小区不能为空');
                   return;
                 }
-                if(valueList == null || valueList?[1] == '' || valueList?[1] == null){
+                if (valueList == null ||
+                    valueList?[1] == '' ||
+                    valueList?[1] == null) {
                   SCToast.showTip('房号不能为空');
                   return;
                 }
@@ -288,7 +290,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
 
   /// 加载用户身份列表
   loadResidentUserIdentity(bool isNeedShowDialog) {
-    if(communityId == '' || communityId == null){
+    if (communityId == '' || communityId == null) {
       SCToast.showTip('请先选择所居住小区');
       return;
     }
@@ -386,7 +388,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
           SCScaffoldManager.instance.cacheUserData(scUser);
 
           /// 3.栈
-          if (isFromLogin) {
+          if (type == SCSelectHouseLogicType.login) {
             // 如果是从登录进入，就直接进入主页
             SCRouterHelper.codeOffAllPage(10000, null);
           } else {

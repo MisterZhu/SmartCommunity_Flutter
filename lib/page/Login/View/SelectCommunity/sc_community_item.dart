@@ -62,7 +62,6 @@ class SCCommunityItem extends StatelessWidget {
         state.hideKeyboard();
         /// 去选房号
 
-        print('wangtao type--->  $type');
         var params = {
           'communityId' : model.id,
           'communityName': model.name,

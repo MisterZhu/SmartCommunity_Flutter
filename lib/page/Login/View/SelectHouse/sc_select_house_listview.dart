@@ -3,14 +3,8 @@ import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
-import 'package:smartcommunity/network/sc_http_manager.dart';
-import 'package:smartcommunity/network/sc_url.dart';
-import 'package:smartcommunity/page/Login/GetXController/sc_select_house_controller.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_data_controller.dart';
 import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_select_house_block_model.dart';
-import 'package:smartcommunity/page/Login/Page/sc_select_community_page.dart';
-import 'package:smartcommunity/page/Mine/Page/sc_add_house_page.dart';
-import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/Router/sc_router_pages.dart';
 import 'package:smartcommunity/utils/Toast/sc_toast.dart';
@@ -23,42 +17,43 @@ import '../../GetXController/sc_select_house_search_status_controller.dart.dart'
 /// Email: wangtao1@lvchengfuwu.com
 /// Date: 2022/8/18 11:50
 /// Description: 选择房号 - 列表
-class SCSelectHouseBlockListView extends StatefulWidget {
+class SCSelectHouseListView extends StatefulWidget {
   SCSelectHouseLogicType? type = SCSelectHouseLogicType.login;
+  final String? communityId;
 
-  SCSelectHouseBlockListView({Key? key, this.type}) : super(key: key);
+  SCSelectHouseListView({Key? key, this.communityId, this.type})
+      : super(key: key);
 
   @override
-  State<SCSelectHouseBlockListView> createState() =>
-      _SCSelectHouseBlockListViewState();
+  State<SCSelectHouseListView> createState() =>
+      _SCSelectHouseListViewState();
 }
 
-class _SCSelectHouseBlockListViewState
-    extends State<SCSelectHouseBlockListView> {
+class _SCSelectHouseListViewState
+    extends State<SCSelectHouseListView> {
   SCSelectHouseSearchStatusController searchStatusController =
-      Get.put(SCSelectHouseSearchStatusController());
+  Get.put(SCSelectHouseSearchStatusController());
   SCSelectHouseSearchStatusController searchStatusState =
-      Get.find<SCSelectHouseSearchStatusController>();
+  Get.find<SCSelectHouseSearchStatusController>();
 
   SCSelectHouseDataController dataController =
-      Get.put(SCSelectHouseDataController());
+  Get.put(SCSelectHouseDataController());
   SCSelectHouseDataController dataState =
-      Get.find<SCSelectHouseDataController>();
-
-  SCSelectHouseController selectHouseController =
-      Get.put(SCSelectHouseController());
+  Get.find<SCSelectHouseDataController>();
 
   @override
-  void initState() {}
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SCSelectHouseSearchStatusController>(
         builder: (sCSelectHouseState) {
-      return GetBuilder<SCSelectHouseDataController>(builder: (state) {
-        return houseList();
-      });
-    });
+          return GetBuilder<SCSelectHouseDataController>(builder: (state) {
+            return houseList();
+          });
+        });
   }
 
   Widget houseList() {
@@ -80,8 +75,9 @@ class _SCSelectHouseBlockListViewState
   }
 
   Widget _emptyView() {
-    return Container(
-      child: Text('暂时没有数据哦~'),
+    return const SizedBox(
+      height: 400,
+      child: Center(child: Text('暂时没有数据哦~'),),
     );
   }
 
@@ -148,8 +144,12 @@ class _SCSelectHouseBlockListViewState
 
           bool? haveChild = searchResultList[index].haveChild;
           if (haveChild!) {
-            loadData((searchResultList[index].id).toString(),
-                (searchResultList[index].name).toString());
+            dataController.loadHouseInfo(
+                communityId: widget.communityId!,
+                currentId: (searchResultList[index].id).toString(),
+                callback: () {
+                  handlerNavigatorData((searchResultList[index].id).toString(), (searchResultList[index].name).toString());
+                });
           } else {
             int? isAsset = searchResultList[index].isAsset;
             if (isAsset == 1) {
@@ -172,8 +172,12 @@ class _SCSelectHouseBlockListViewState
 
           bool? haveChild = houseCommunityList[index].haveChild;
           if (haveChild!) {
-            loadData((houseCommunityList[index].id).toString(),
-                (houseCommunityList[index].name).toString());
+            dataController.loadHouseInfo(
+                communityId: widget.communityId!,
+                currentId: (houseCommunityList[index].id).toString(),
+                callback: () {
+                  handlerNavigatorData((houseCommunityList[index].id).toString(), (houseCommunityList[index].name).toString());
+                });
           } else {
             // isAsset 是否可以是资产 0 否 1 是
             int? isAsset = houseCommunityList[index].isAsset;
@@ -224,8 +228,12 @@ class _SCSelectHouseBlockListViewState
 
           bool? haveChild = searchResultList[index].haveChild;
           if (haveChild!) {
-            loadData((searchResultList[index].id).toString(),
-                (searchResultList[index].name).toString());
+            dataController.loadHouseInfo(
+                communityId: widget.communityId!,
+                currentId: (searchResultList[index].id).toString(),
+                callback: () {
+                  handlerNavigatorData((searchResultList[index].id).toString(), (searchResultList[index].name).toString());
+                });
           } else {
             int? isAsset = searchResultList[index].isAsset;
             if (isAsset == 1) {
@@ -248,8 +256,12 @@ class _SCSelectHouseBlockListViewState
 
           bool? haveChild = houseCommunityList[index].haveChild;
           if (haveChild!) {
-            loadData((houseCommunityList[index].id).toString(),
-                (houseCommunityList[index].name).toString());
+            dataController.loadHouseInfo(
+                communityId: widget.communityId!,
+                currentId: (houseCommunityList[index].id).toString(),
+                callback: () {
+                  handlerNavigatorData((houseCommunityList[index].id).toString(), (houseCommunityList[index].name).toString());
+                });
           } else {
             // isAsset 是否可以是资产 0 否 1 是
             int? isAsset = houseCommunityList[index].isAsset;
@@ -265,45 +277,22 @@ class _SCSelectHouseBlockListViewState
     );
   }
 
-  /// 加载数据
-  void loadData(String currentId, String currentName) {
-    // 缓存顶部导航栏数据
+  /// 处理顶部导航栏数据
+  handlerNavigatorData(String currentId, String currentName) {
     ScSelectHouseModel scSelectHouseModel = ScSelectHouseModel(
         communityId: currentId, id: int.parse(currentId), name: currentName);
 
     SCSelectHouseDataController scSelectHouseDataController =
-        Get.put(SCSelectHouseDataController());
+    Get.put(SCSelectHouseDataController());
     List<ScSelectHouseModel> navigatorList =
         scSelectHouseDataController.navigatorList;
     navigatorList.removeAt(navigatorList.length - 1);
     navigatorList.add(scSelectHouseModel);
 
     ScSelectHouseModel scSelectHouseModelTemp =
-        ScSelectHouseModel(id: 0, name: "请选择");
+    ScSelectHouseModel(id: 0, name: "请选择");
     navigatorList.add(scSelectHouseModelTemp);
     scSelectHouseDataController.updateNavigatorList(list: navigatorList);
-
-    SCLoadingUtils.show();
-    SCHttpManager.instance.get(
-        url: SCUrl.kGetSpaceNodesUrl,
-        params: {
-          'communityId': selectHouseController.communityId,
-          'currentId': currentId
-        },
-        success: (value) {
-          List<ScSelectHouseModel> dataList = List<ScSelectHouseModel>.from(
-              value.map((e) => ScSelectHouseModel.fromJson(e)).toList());
-          print('print--> 获取苑数据===$dataList');
-
-          dataController.updateDataList(list: dataList == null ? [] : dataList);
-        },
-        failure: (value) {
-          if (value['message'] != null) {
-            String message = value['message'];
-            SCToast.showTip(message);
-          }
-          dataController.updateDataList(list: []);
-        });
   }
 
   /// 绑定房号
@@ -311,7 +300,7 @@ class _SCSelectHouseBlockListViewState
     /// 从缓存中去取数据
     /// 第一个数据是园区
     SCSelectHouseDataController scSelectHouseDataController =
-        Get.find<SCSelectHouseDataController>();
+    Get.find<SCSelectHouseDataController>();
     List<ScSelectHouseModel> navigatorList =
         scSelectHouseDataController.navigatorList;
     String houseName = '';
@@ -330,7 +319,7 @@ class _SCSelectHouseBlockListViewState
         'communityId': '${navigatorList[0].communityId}',
         'houseId': houseId,
         'valueList': valueList,
-        'isFromLogin': true
+        'type': widget.type
       };
       SCRouterHelper.codePage(5002, params);
     } else if (widget.type == SCSelectHouseLogicType.addHouse) {
@@ -338,17 +327,10 @@ class _SCSelectHouseBlockListViewState
         'communityId': '${navigatorList[0].communityId}',
         'houseId': houseId,
         'valueList': valueList,
-        'isFromLogin': false
+        'type': widget.type
       };
 
       /// todo wangtao 处理栈
-      // Get.offUntil(GetPageRoute(
-      //   settings: RouteSettings(
-      //     arguments: params
-      //   ),
-      //   page: () => SCAddHousePage(),
-      // ), (route) => (route as GetPageRoute).routeName == "/sc_toggle_houses_page");
-
       String? path = SCRouterPages.pageCode[5002];
       Get.offNamedUntil(path!, (route) => true, arguments: params);
     }
@@ -356,7 +338,7 @@ class _SCSelectHouseBlockListViewState
 
   /// 选中字体颜色
   TextStyle _hasCheckedTextStyle() {
-    return TextStyle(
+    return const TextStyle(
       fontSize: SCFonts.f16,
       fontWeight: FontWeight.bold,
       color: SCColors.color_FF6C00,
@@ -365,7 +347,7 @@ class _SCSelectHouseBlockListViewState
 
   /// 未选中字体颜色
   TextStyle _hasNotCheckedTextStyle() {
-    return TextStyle(
+    return const TextStyle(
       fontSize: SCFonts.f16,
       fontWeight: FontWeight.bold,
       color: SCColors.color_1B1C33,

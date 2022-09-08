@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
-import 'package:smartcommunity/network/sc_http_manager.dart';
-import 'package:smartcommunity/network/sc_url.dart';
+import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_data_controller.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_search_status_controller.dart.dart';
-import 'package:smartcommunity/page/Login/GetXController/sc_select_house_controller.dart';
 import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_select_house_block_model.dart';
-import 'package:smartcommunity/page/Login/View/SelectHouse/sc_select_house_block_page_view.dart';
+import 'package:smartcommunity/page/Login/View/SelectHouse/sc_select_house_listview.dart';
+import 'package:smartcommunity/page/Login/View/SelectHouse/sc_select_house_search_dynamic_view.dart';
+import 'package:smartcommunity/page/Login/View/SelectHouse/sc_select_house_search_static_view.dart';
 import 'package:smartcommunity/skin/View/sc_custom_scaffold.dart';
-import 'package:smartcommunity/utils/Toast/sc_toast.dart';
-
-import '../../../constants/sc_colors.dart';
-import '../../../constants/sc_fonts.dart';
 
 /// Copyright (c), 浙江慧享信息科技有限公司
-/// FileName: sc_select_house_page
+/// FileName: sc_select_house_new_page
 /// Author: wang tao
 /// Email: wangtao1@lvchengfuwu.com
-/// Date: 2022/8/17 13:53
-/// Description: 选择房号
-
+/// Date: 2022/9/8 15:18
+/// Description: 选择房号重构
 class SCSelectHousePage extends StatefulWidget {
   const SCSelectHousePage({Key? key}) : super(key: key);
 
@@ -29,43 +25,26 @@ class SCSelectHousePage extends StatefulWidget {
 }
 
 class _SCSelectHousePageState extends State<SCSelectHousePage> {
-  SCSelectHouseController selectHouseController =
-      Get.put(SCSelectHouseController());
-
-  /// 列表list
-  List<ScSelectHouseModel> houseCommunityList = [];
-  SCSelectHouseSearchStatusController searchStatusController =
-      Get.put(SCSelectHouseSearchStatusController());
-  SCSelectHouseDataController scSelectHouseController =
-      Get.put(SCSelectHouseDataController());
-
+  late String communityId;
+  late String communityName;
   /// 导航list
   List<ScSelectHouseModel> navigatorList = [];
+  late SCSelectHouseLogicType type = SCSelectHouseLogicType.login;
 
-  late String communityId;
-  late PageController pageController;
-
-  SCSelectHouseLogicType type = SCSelectHouseLogicType.login;
-
-  List<Widget> widgetList = [];
+  SCSelectHouseDataController scSelectHouseDataController = Get.put(SCSelectHouseDataController());
 
   @override
   void initState() {
     super.initState();
 
-    pageController = PageController(initialPage: 0);
-    selectHouseController.initPageController(
-        pageController: pageController, pageIndex: 0);
-    // 获取上一个页面的参数
+    // 获取上个页面的传参 communityId
     var params = Get.arguments;
-    print('print--> 上个页面传过来的参数:$params');
-    communityId = params["communityId"];
-    String communityName = params["communityName"];
-    type = params['type'];
-
-    widgetList = [SCSelectHouseBlockPageView(type: type,)];
-
-    selectHouseController.updateCommunityId(communityId: communityId);
+    if (params != null) {
+      communityId = params["communityId"];
+      communityName = params["communityName"];
+      type = params['type'];
+      print('communityId----  $communityId');
+    }
 
     // 缓存顶部导航栏数据
     ScSelectHouseModel scSelectHouseModel = ScSelectHouseModel(
@@ -73,45 +52,10 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
     navigatorList.add(scSelectHouseModel);
 
     ScSelectHouseModel scSelectHouseModelTemp =
-        ScSelectHouseModel(id: 0, name: "请选择");
+    ScSelectHouseModel(id: 0, name: "请选择");
     navigatorList.add(scSelectHouseModelTemp);
-    scSelectHouseController.updateNavigatorList(list: navigatorList);
-
-    loadData(true, 0);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    pageController.dispose();
-  }
-
-  /// 加载数据
-  /// isFirstLevel 是否是第一级目录
-  void loadData(bool isFirstLevel, int currentId) {
-    SCHttpManager.instance.get(
-        url: SCUrl.kGetSpaceNodesUrl,
-        params: isFirstLevel
-            ? {'communityId': selectHouseController.communityId}
-            : {
-                'communityId': selectHouseController.communityId,
-                'currentId': currentId
-              },
-        success: (value) {
-          List<ScSelectHouseModel> dataList = List<ScSelectHouseModel>.from(
-              value.map((e) => ScSelectHouseModel.fromJson(e)).toList());
-          print('print--> 获取苑数据===$dataList');
-
-          scSelectHouseController.updateDataList(
-              list: dataList == null ? [] : dataList);
-        },
-        failure: (value) {
-          if (value['message'] != null) {
-            String message = value['message'];
-            SCToast.showTip(message);
-          }
-          scSelectHouseController.updateDataList(list: []);
-        });
+    scSelectHouseDataController.updateNavigatorList(list: navigatorList);
+    scSelectHouseDataController.loadHouseInfo(communityId: communityId, currentId: "");
   }
 
   @override
@@ -126,6 +70,14 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
         body: _body());
   }
 
+  /// 标题textStyle
+  TextStyle _textStyle() {
+    return const TextStyle(
+        fontSize: SCFonts.f16,
+        fontWeight: FontWeight.bold,
+        color: SCColors.color_1B1C33);
+  }
+
   /// body
   Widget _body() {
     return Container(
@@ -136,7 +88,8 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
         children: [
           // 导航栏
           navigatorBarWidget(),
-
+          // 搜索框
+          searchWidget(),
           // 内容
           Expanded(child: contentWidget())
         ],
@@ -195,8 +148,7 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
           return;
         }
         List<ScSelectHouseModel> newList = [];
-        List<ScSelectHouseModel> navigatorList =
-            scSelectHouseController.navigatorList;
+        List<ScSelectHouseModel> navigatorList = scSelectHouseDataController.navigatorList;
 
         navigatorList.removeAt(navigatorList.length - 1);
 
@@ -207,42 +159,80 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
         }
 
         ScSelectHouseModel scSelectHouseModel =
-            ScSelectHouseModel(id: 0, name: "请选择");
+        ScSelectHouseModel(id: 0, name: "请选择");
         newList.add(scSelectHouseModel);
-        scSelectHouseController.updateNavigatorList(list: newList);
+        scSelectHouseDataController.updateNavigatorList(list: newList);
 
         if (index == 0) {
-          loadData(true, 0);
+          scSelectHouseDataController.loadHouseInfo(communityId: communityId);
         } else {
-          String? communityId = newList[index].communityId.toString();
-          loadData(false, int.parse(communityId));
+          String? currentId = newList[index].communityId.toString();
+          scSelectHouseDataController.loadHouseInfo(communityId: communityId, currentId: currentId);
         }
       },
     );
   }
 
-  /// 内容
-  Widget contentWidget() {
-    return GetBuilder<SCSelectHouseController>(builder: (state) {
-      return PageView.builder(
-        itemCount: widgetList.length,
-        scrollDirection: Axis.horizontal,
-        reverse: false,
-        controller: state.pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: ((context, index) {
-          return GestureDetector(child: widgetList[index]);
-        }),
-        onPageChanged: (index) {},
-      );
-    });
+  Widget searchWidget() {
+    return Container(
+      margin: const EdgeInsets.only(top: 2.0, left: 16.0, right: 16.0),
+      child: Container(
+        decoration: const BoxDecoration(
+          borderRadius:  BorderRadiusDirectional.only(topStart: Radius.circular(8.0), topEnd: Radius.circular(8.0), bottomStart: Radius.zero, bottomEnd: Radius.zero),
+          color: SCColors.color_FFFFFF,
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 16.0),
+        child:
+        searchHeader()
+      ),
+    );
   }
 
-  /// 标题textStyle
-  TextStyle _textStyle() {
-    return const TextStyle(
-        fontSize: SCFonts.f16,
-        fontWeight: FontWeight.bold,
-        color: SCColors.color_1B1C33);
+  Widget searchHeader() {
+    return GetBuilder<SCSelectHouseSearchStatusController>(
+        builder: (state) {
+          if (state.isShowCancel) {
+            // 搜索中……
+            return SCHouseSearchDynamicView(
+              isShowCancel: state.isShowCancel,
+            );
+          } else {
+            // 搜索完成
+            return SCSelectHouseSearchStaticView();
+          }
+        });
+  }
+
+  /// 列表
+  Widget contentWidget() {
+    return// 内容
+      SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.only(top: 0, left: 16.0, right: 16.0),
+          child: DecoratedBox(
+            decoration: BoxDecoration(color: SCColors.color_F2F3F5),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: const BoxDecoration(
+                    borderRadius:  BorderRadiusDirectional.only(topStart: Radius.zero, topEnd: Radius.zero, bottomStart: Radius.circular(8.0), bottomEnd: Radius.circular(8.0)),
+                    color: SCColors.color_FFFFFF,
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 16.0),
+                  child: Column(
+                    children: [
+                      // 列表
+                      SCSelectHouseListView(communityId: communityId, type: type,)
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
   }
 }
