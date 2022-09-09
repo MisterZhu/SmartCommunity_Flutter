@@ -87,7 +87,7 @@ class SCCurrentHouseInfoItem extends StatelessWidget {
                 height: 16,
               );
             },
-            itemCount: 1 == 1 ? 4 : 5)
+            itemCount: 4)
       ],
     );
   }

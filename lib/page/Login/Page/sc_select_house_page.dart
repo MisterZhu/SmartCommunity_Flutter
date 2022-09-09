@@ -44,7 +44,7 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
       communityId = params["communityId"];
       communityName = params["communityName"];
       type = params['type'];
-      print('communityId----  $communityId');
+      print('communityId---->  $communityId');
     }
 
     // 缓存顶部导航栏数据

@@ -45,6 +45,13 @@ class SCUrl {
 
   /// 获取用户身份
   static const String kResidentUserIdentity = '/api/space/resident/user/community/identity';
+
   /// 绑定房产
   static const String kBindAsset = '/api/space/resident/user/bind';
+
+  /// 居民档案审核通过
+  static const String kExaminePass = '/api/space/archive/examine/pass';
+
+  /// 居民档案审核拒绝
+  static const String kExamineReject = '/api/space/archive/examine/refuse';
 }

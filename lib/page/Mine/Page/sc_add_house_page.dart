@@ -8,6 +8,7 @@ import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/network/sc_http_manager.dart';
 import 'package:smartcommunity/network/sc_url.dart';
 import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_user_identity.dart';
+import 'package:smartcommunity/page/Login/Page/sc_select_house_page.dart';
 import 'package:smartcommunity/skin/Model/sc_user.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
@@ -151,10 +152,39 @@ class SCAddHouseState extends State<SCAddHousePage> {
             /// 选择小区
             log('点击选择小区');
             var params = {'type': SCSelectHouseLogicType.addHouse};
-            SCRouterHelper.codePage(9003, params);
+            SCRouterHelper.codePage(9003, params)?.then((value) {
+              if (value != null) {
+                communityId = value['communityId'];
+                valueList?[0] = value['communityName'];
+
+                /// 选好了之后置空其余选择
+                houseId = '';
+                valueList?[1] = '';
+                identityId = '';
+                valueList?[2] = '';
+                setState(() {});
+              }
+            });
           } else if (index == 1) {
             /// 选择房号
             log('点击选择房号');
+            if (communityId!.isEmpty) {
+              SCToast.showTip('请先选择所居住小区');
+              return;
+            }
+            var params = {
+              'communityId': communityId,
+              'communityName': valueList?[0],
+              'type': SCSelectHouseLogicType.addHouse
+            };
+            SCRouterHelper.codePage(20001, params)?.then((value) {
+              if (value != null) {
+                houseId = value['houseId'];
+                valueList?[1] = value['houseName'];
+                setState(() {});
+              }
+            });
+
           } else if (index == 2) {
             /// 选择身份
             log('点击选择身份');
