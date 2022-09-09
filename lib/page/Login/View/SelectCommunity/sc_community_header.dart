@@ -10,8 +10,8 @@ class SCCommunityHeader extends StatelessWidget {
   final bool isShowCancel;
   /// 取消
   final Function? cancelAction;
-  /// 文本框内容改变
-  final Function(String value)? valueChangedAction;
+  /// 搜索
+  final Function(String value)? searchAction;
   /// 选择城市
   final Function? selectCityAction;
   /// focusNode
@@ -31,7 +31,7 @@ class SCCommunityHeader extends StatelessWidget {
         this.selectCity = '',
         this.isShowCancel = false,
         this.cancelAction,
-        this.valueChangedAction,
+        this.searchAction,
         this.selectCityAction,
         required this.node,
       }) : super(key: key);
@@ -57,9 +57,9 @@ class SCCommunityHeader extends StatelessWidget {
           if (cancelAction != null) {
             cancelAction?.call();
           }
-        }, valueChangedAction: (String value) {
-          if (valueChangedAction != null) {
-            valueChangedAction?.call(value);
+        }, searchAction: (String value) {
+          if (searchAction != null) {
+            searchAction?.call(value);
           }
         }, selectCityAction: (){
           if (selectCityAction != null) {
