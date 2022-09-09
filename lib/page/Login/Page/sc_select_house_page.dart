@@ -32,6 +32,7 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
   late SCSelectHouseLogicType type = SCSelectHouseLogicType.login;
 
   SCSelectHouseDataController scSelectHouseDataController = Get.put(SCSelectHouseDataController());
+  SCSelectHouseSearchStatusController scSelectHouseSearchStatusController = Get.put(SCSelectHouseSearchStatusController());
 
   @override
   void initState() {
