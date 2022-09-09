@@ -220,8 +220,10 @@ class SCCommunitySearchItem extends StatelessWidget {
         // valueChanged(value);
       },
       onSubmitted: (value) {
-        searchSubmitted(value);
-        node.unfocus();
+        if (value.isNotEmpty) {
+          searchSubmitted(value);
+          node.unfocus();
+        }
       },
       keyboardType: TextInputType.text,
       keyboardAppearance: Brightness.light,

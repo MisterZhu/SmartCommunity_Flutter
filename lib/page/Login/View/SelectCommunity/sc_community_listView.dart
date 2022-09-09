@@ -60,7 +60,7 @@ class SCCommunityListView extends StatelessWidget {
             // 加载完成显示的文字
             loadedText: '加载完成',
           ),
-          emptyWidget: communityList!.length > 0 ? null : emptyView(),
+          emptyWidget: communityList!.isNotEmpty ? null : emptyView(),
           onLoad: onLoadMore,
           onRefresh: onRefresh,
           controller: communityController.refreshController,
