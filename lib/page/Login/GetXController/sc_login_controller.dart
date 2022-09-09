@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
-import 'package:smartcommunity/constants/sc_enum.dart';
 
+import '../../../constants/sc_enum.dart';
 import '../../../network/sc_http_manager.dart';
 import '../../../network/sc_url.dart';
 import '../../../skin/Model/sc_user.dart';
@@ -41,7 +41,7 @@ class SCLoginController extends GetxController {
     SCLoadingUtils.show();
     SCHttpManager.instance.post(
         url: SCUrl.kSendCodeUrl,
-        params: {'mobileNum': phone},
+        params: {'mobileNum' : phone},
         success: (value) {
           SCToast.showTip('验证码发送成功');
           resultHandler(true);
