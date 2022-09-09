@@ -40,6 +40,9 @@ class SCHomeController1 extends GetxController {
   /// banner当前index
   int bannerCurrentIndex = 0;
 
+  /// 项目名称
+  String communityName = "请登录";
+
   EasyRefreshController refreshController = EasyRefreshController();
 
   /// 所有应用
@@ -132,6 +135,16 @@ class SCHomeController1 extends GetxController {
   /// 修改bannerIndex
   void changeBannerIndex({int index = 0}) {
     bannerCurrentIndex = index;
+    update();
+  }
+
+  /// 修改项目名称
+  changeCommunityName({required String name}) {
+    if (name.isEmpty) {
+      communityName = "请登录";
+    } else {
+      communityName = name;
+    }
     update();
   }
 

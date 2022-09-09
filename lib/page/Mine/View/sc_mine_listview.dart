@@ -94,7 +94,9 @@ class SCMineListView extends StatelessWidget {
   /// 切换房号-cell
   Widget changeAddressCell(BuildContext context) {
     return SCMineChangeAddressItem(
-      onTap: () {},
+      onTap: () {
+        SCRouterHelper.codePage(5001, null);
+      },
     );
   }
 

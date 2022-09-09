@@ -6,6 +6,7 @@ import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller2.dart';
+import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
 import '../View/Skin1/sc_home_skin1.dart';
@@ -35,6 +36,8 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
   initState() {
     super.initState();
     SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.light);
+    state1.communityName = SCScaffoldManager.instance.user.communityName ?? "请登录";
+    state2.communityName = SCScaffoldManager.instance.user.communityName ?? "请登录";
   }
 
   /// body

@@ -6,6 +6,7 @@ import 'package:smartcommunity/page/Home/View/Skin2/sc_home_navigation2.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
 import '../../../../constants/sc_asset.dart';
+import '../../../../utils/Router/sc_router_helper.dart';
 
 /// 首页第二套皮肤
 
@@ -49,8 +50,12 @@ class SCHomeSkin2 extends StatelessWidget {
         height: navHeight,
         child: GetBuilder<SCHomeController2>(builder: (state){
           return SCHomeNavigation2(
+            roomTitle: state.communityName,
             isSticky: state.navigationSticky,
             backgroundColor: state.navigationBackgroundColor,
+            changeHouseAction: () {
+              SCRouterHelper.codePage(5001, null);
+            },
           );
         }));
   }

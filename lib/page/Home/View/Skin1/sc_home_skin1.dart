@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../constants/sc_asset.dart';
 import '../../../../constants/sc_type_define.dart';
+import '../../../../utils/Router/sc_router_helper.dart';
 import '../../GetXController/sc_home_controller1.dart';
 import 'sc_home_listview1.dart';
 import 'sc_home_navigation1.dart';
@@ -84,11 +85,15 @@ class SCHomeSkin1 extends StatelessWidget {
   Widget navigation() {
     return GetBuilder<SCHomeController1>(builder: (state) {
       return SCHomeNavigation1(
+        roomTitle: state.communityName,
         opacity: state.opacity,
         backgroundColor: state.navigationBackgroundColor,
         isSticky: state.navigationSticky,
         stickyColor: state.navigationStickyColor,
         normalColor: state.navigationNormalColor,
+        changeHouseAction: () {
+          SCRouterHelper.codePage(5001, null);
+        },
       );
     });
   }
