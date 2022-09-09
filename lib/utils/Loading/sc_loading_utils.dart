@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:smartcommunity/constants/sc_asset.dart';
 
 /// 加载显示工具类
 
@@ -72,6 +73,16 @@ class SCLoadingUtils {
     EasyLoading.instance.indicatorWidget = const CupertinoActivityIndicator(
       radius: 16.0,
       color: Colors.white,
+    );
+    EasyLoading.instance.successWidget = SizedBox(
+      width: 24.0,
+      height: 24.0,
+      child: Image.asset(SCAsset.iconLoadingSuccess, width: 24.0, height: 24.0,),
+    );
+    EasyLoading.instance.errorWidget = SizedBox(
+      width: 24.0,
+      height: 24.0,
+      child: Image.asset(SCAsset.iconLoadingFailed, width: 24.0, height: 24.0,),
     );
   }
 
