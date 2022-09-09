@@ -5,6 +5,8 @@ import 'package:smartcommunity/page/Login/GetXController/sc_select_city_controll
 import 'package:smartcommunity/page/Login/GetXController/sc_search_city_controller.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_login_controller.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_community_controller.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_data_controller.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_select_house_search_status_controller.dart.dart';
 import 'package:smartcommunity/page/Mine/GetXController/sc_mine_controller.dart';
 import 'package:smartcommunity/page/Service/GetXController/sc_service_controller.dart';
 
@@ -27,5 +29,7 @@ class SCAllBinding extends Bindings {
     Get.lazyPut<SCSelectCommunityController>(() => SCSelectCommunityController());
     Get.lazyPut<SCSearchCommunityController>(() => SCSearchCommunityController());
     Get.lazyPut<SCServiceController>(() => SCServiceController());
+    Get.lazyPut<SCSelectHouseSearchStatusController>(() => SCSelectHouseSearchStatusController());
+    Get.lazyPut<SCSelectHouseDataController>(() => SCSelectHouseDataController());
   }
 }

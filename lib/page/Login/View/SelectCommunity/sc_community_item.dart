@@ -15,11 +15,11 @@ import '../../GetXController/sc_search_community_controller.dart';
 /// 选择社区列表cell
 
 class SCCommunityItem extends StatelessWidget {
-
   final SCCommunityModel model;
   final SCSelectHouseLogicType type;
 
-  const SCCommunityItem({Key? key, required this.model, required this.type}) : super(key: key);
+  const SCCommunityItem({Key? key, required this.model, required this.type})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,22 +51,30 @@ class SCCommunityItem extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Container(
-                height: 0.5,
-                color: SCColors.color_EDEDF0)
+            Container(height: 0.5, color: SCColors.color_EDEDF0)
           ],
         ),
       ),
       onTap: () {
-        SCSearchCommunityController state = Get.find<SCSearchCommunityController>();
+        SCSearchCommunityController state =
+            Get.find<SCSearchCommunityController>();
         state.hideKeyboard();
-        /// 去选房号
-        var params = {
-          'communityId' : model.id,
-          'communityName': model.name,
-          'type': type
-        };
-        SCRouterHelper.codePage(20001, params);
+
+        if (type == SCSelectHouseLogicType.login) {
+          /// 去选房号
+          var params = {
+            'communityId': model.id,
+            'communityName': model.name,
+            'type': type
+          };
+          SCRouterHelper.codePage(20001, params);
+        } else {
+          var params = {
+            'communityId': model.id,
+            'communityName': model.name,
+          };
+          SCRouterHelper.back(params);
+        }
       },
     );
   }
@@ -77,33 +85,32 @@ class SCCommunityItem extends StatelessWidget {
       distance = '${model.distance}m';
     }
     return Container(
-      padding: const EdgeInsets.only(right: 15.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            model.name ?? '',
-            style: const TextStyle(
-              fontSize: SCFonts.f16,
-              fontWeight: FontWeight.w400,
-              color: SCColors.color_1B1D33),
-          ),
-          Container(
-            padding: const EdgeInsets.only(top: 4),
-            decoration: const BoxDecoration(
-              color: Colors.transparent,
-            ),
-            child: Text(
-              distance,
+        padding: const EdgeInsets.only(right: 15.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              model.name ?? '',
               style: const TextStyle(
-                fontSize: SCFonts.f14,
-                fontWeight: FontWeight.w400,
-                color: SCColors.color_1B1D33),
+                  fontSize: SCFonts.f16,
+                  fontWeight: FontWeight.w400,
+                  color: SCColors.color_1B1D33),
             ),
-          ),
-        ],
-      )
-    );
+            Container(
+              padding: const EdgeInsets.only(top: 4),
+              decoration: const BoxDecoration(
+                color: Colors.transparent,
+              ),
+              child: Text(
+                distance,
+                style: const TextStyle(
+                    fontSize: SCFonts.f14,
+                    fontWeight: FontWeight.w400,
+                    color: SCColors.color_1B1D33),
+              ),
+            ),
+          ],
+        ));
   }
 }
