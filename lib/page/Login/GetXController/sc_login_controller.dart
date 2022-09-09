@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 
+import '../../../constants/sc_enum.dart';
 import '../../../network/sc_http_manager.dart';
 import '../../../network/sc_url.dart';
 import '../../../skin/Model/sc_user.dart';
@@ -61,7 +62,7 @@ class SCLoginController extends GetxController {
         success: (value) {
           SCUser user = SCScaffoldManager.instance.getUserData();
           log('登陆成功获取用户token=====${user.token}===用户昵称：${user.userName}');
-          SCRouterHelper.pathPage(SCRouterPath.tabPath, null);
+          SCRouterHelper.pathPage(SCRouterPath.selectCommunityPath, {"type" : SCSelectHouseLogicType.login});
         },
         failure: (value) {
           log('登陆失败===$value');

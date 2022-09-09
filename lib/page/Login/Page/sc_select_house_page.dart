@@ -32,6 +32,7 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
   late SCSelectHouseLogicType type = SCSelectHouseLogicType.login;
 
   SCSelectHouseDataController scSelectHouseDataController = Get.put(SCSelectHouseDataController());
+  SCSelectHouseSearchStatusController state = Get.put(SCSelectHouseSearchStatusController());
 
   @override
   void initState() {
@@ -85,6 +86,7 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
       height: double.infinity,
       color: SCColors.color_F2F3F5,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           // 导航栏
           navigatorBarWidget(),
@@ -174,8 +176,8 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
   }
 
   Widget searchWidget() {
-    return Container(
-      margin: const EdgeInsets.only(top: 2.0, left: 16.0, right: 16.0),
+    return Padding(
+      padding: const EdgeInsets.only(top: 2.0, left: 16.0, right: 16.0),
       child: Container(
         decoration: const BoxDecoration(
           borderRadius:  BorderRadiusDirectional.only(topStart: Radius.circular(8.0), topEnd: Radius.circular(8.0), bottomStart: Radius.zero, bottomEnd: Radius.zero),
@@ -205,9 +207,9 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
 
   /// 列表
   Widget contentWidget() {
-    return// 内容
-      SingleChildScrollView(
-        child: Container(
+    return ListView(
+      children: [
+        Container(
           margin: const EdgeInsets.only(top: 0, left: 16.0, right: 16.0),
           child: DecoratedBox(
             decoration: BoxDecoration(color: SCColors.color_F2F3F5),
@@ -232,7 +234,8 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
               ],
             ),
           ),
-        ),
-      );
+        )
+      ],
+    );
   }
 }
