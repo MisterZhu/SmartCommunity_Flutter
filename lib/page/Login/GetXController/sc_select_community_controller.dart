@@ -24,16 +24,25 @@ class SCSelectCommunityController extends GetxController {
   /// 是否搜索结果页面
   bool isShowResult = false;
 
+  String keyword = '';
+
   /// 选择的社区
   SCCommunityModel? selectCommunityModel;
 
   EasyRefreshController refreshController = EasyRefreshController();
 
   int currentPage = 1;
-  int pageSize = 20;
+  int pageSize = 100;
   @override
   onInit() {
     super.onInit();
+  }
+
+  updateKeyword(String value) {
+    keyword = value;
+    /// 先清空之前的数据，再请求数据
+    searchList = [];
+    update();
   }
 
   /// 更新社区列表数据源
@@ -103,7 +112,7 @@ class SCSelectCommunityController extends GetxController {
             var data = value['records'];
             List<SCCommunityModel> dataList = List<SCCommunityModel>.from(data.map((e) => SCCommunityModel.fromJson(e)).toList());
             if (isLoadMore) {
-              if (dataList.length > 0) {
+              if (dataList.isNotEmpty) {
                 communityList.addAll(dataList!);
                 currentPage++;
               }
@@ -123,5 +132,49 @@ class SCSelectCommunityController extends GetxController {
           });
       }
     }
+  }
+
+  loadSearchResultData({bool isLoadMore = false}) {
+    if (isLoadMore == false) {
+      SCLoadingUtils.show();
+    }
+    int curPage = 1;
+    if (isLoadMore) {
+      curPage = currentPage + 1;
+    } else {
+      currentPage = 1;
+    }
+    SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
+
+    String city = searchState.selectCity;
+    if (searchState.selectCity == '') {
+      city = searchState.locationCity;
+    }
+    SCHttpManager.instance.post(
+        url: SCUrl.kSearchCommunityByCityUrl,
+        params: {'conditions': {'city': city, 'name': keyword}, 'pageNum': curPage, 'pageSize': pageSize},
+        success: (value) {
+          var data = value['records'];
+          //log('搜索结果data===$data');
+          List<SCCommunityModel> dataList = List<SCCommunityModel>.from(data.map((e) => SCCommunityModel.fromJson(e)).toList());
+          if (isLoadMore) {
+            if (dataList.isNotEmpty) {
+              communityList.addAll(dataList!);
+              currentPage++;
+            }
+          } else {
+            communityList = dataList;
+          }
+          refreshController.finishRefresh(success: true);
+          updateSearchList(list: communityList);
+        },
+        failure: (value) {
+          log('请求失败=====$value');
+          if (value['message'] != null) {
+            String message = value['message'];
+            SCToast.showTip(message);
+          }
+          updateSearchList(list: []);
+        });
   }
 }

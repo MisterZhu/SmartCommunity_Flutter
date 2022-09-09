@@ -21,8 +21,8 @@ class SCCommunitySearchItem extends StatelessWidget {
   final bool isShowCancel;
   /// 取消
   final Function? cancelAction;
-  /// 文本框内容改变
-  final Function(String value)? valueChangedAction;
+  /// 搜索
+  final Function(String value)? searchAction;
   /// 选择城市
   final Function? selectCityAction;
   /// 选择的城市
@@ -34,7 +34,7 @@ class SCCommunitySearchItem extends StatelessWidget {
         this.selectCity = '请选择',
         this.isShowCancel = false,
         this.cancelAction,
-        this.valueChangedAction,
+        this.searchAction,
         this.selectCityAction,
         required this.node,
       }) : super(key: key);
@@ -217,9 +217,10 @@ class SCCommunitySearchItem extends StatelessWidget {
         isCollapsed: true,
       ),
       onChanged: (value) {
-        valueChanged(value);
+        // valueChanged(value);
       },
       onSubmitted: (value) {
+        searchSubmitted(value);
         node.unfocus();
       },
       keyboardType: TextInputType.text,
@@ -228,10 +229,10 @@ class SCCommunitySearchItem extends StatelessWidget {
     ));
   }
 
-  /// 输入框内容改变
-  valueChanged(String value) {
-    if (valueChangedAction != null) {
-      valueChangedAction?.call(value);
+  /// 点击搜索
+  searchSubmitted(String value) {
+    if (searchAction != null) {
+      searchAction?.call(value);
     }
   }
 }
