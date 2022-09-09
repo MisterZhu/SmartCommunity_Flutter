@@ -44,7 +44,7 @@ class SCLoginController extends GetxController {
         url: SCUrl.kSendCodeUrl,
         params: {'mobileNum' : phone},
         success: (value) {
-          SCToast.showTip('验证码发送成功');
+          SCLoadingUtils.success(text:'验证码发送成功');
           resultHandler(true);
         },
         failure: (value) {
