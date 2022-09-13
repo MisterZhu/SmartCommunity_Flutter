@@ -41,8 +41,10 @@ class SCMyHouseController extends GetxController {
           updateHouseList(list: dataList);
         },
         failure: (value) {
-          String message = value['message'];
-          SCToast.showTip(message);
+            if (value['message'] != null) {
+              String message = value['message'];
+              SCToast.showTip(message);
+            }
         });
   }
 
