@@ -1,9 +1,15 @@
+
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/page/Service/GetXController/sc_service_controller.dart';
 
 import '../../../constants/sc_colors.dart';
+import '../../../constants/sc_default_value.dart';
 import '../../../constants/sc_fonts.dart';
+import '../../../constants/sc_h5.dart';
+import '../../../skin/Tools/sc_scaffold_manager.dart';
+import '../../../utils/Router/sc_router_helper.dart';
 import '../View/sc_service_listView.dart';
 
 /// 服务-page
@@ -43,7 +49,17 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
         width: double.infinity,
         height: double.infinity,
         color: SCColors.color_F6F6F6,
-        child: SCServiceListView(appList: state.appList,),
+        child: SCServiceListView(
+          appList: state.appList,
+          itemTapAction: (title){
+           /// 应用点击跳转
+            log('应用点击跳转');
+            String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+            String token = SCScaffoldManager.instance.user.token ?? "";
+            String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
+            String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
+            SCRouterHelper.codePage(20000, {"title" : title, "url" : url});
+        },),
       );
     });
   }
@@ -63,6 +79,6 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
 
   loadData() {
     SCServiceController state = Get.find<SCServiceController>();
-    state.loadAppListData();
+    //state.loadAppListData();
   }
 }

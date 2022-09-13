@@ -40,13 +40,16 @@ class SCCommunityItem extends StatelessWidget {
             const SizedBox(
               height: 6,
             ),
-            Text(
-              model.address ?? '',
-              textAlign: TextAlign.left,
-              style: const TextStyle(
-                  fontSize: SCFonts.f14,
-                  fontWeight: FontWeight.w400,
-                  color: SCColors.color_8D8E99),
+            Container(
+              padding: const EdgeInsets.only(right: 11.0),
+              child: Text(
+                model.address ?? '',
+                textAlign: TextAlign.left,
+                style: const TextStyle(
+                    fontSize: SCFonts.f14,
+                    fontWeight: FontWeight.w400,
+                    color: SCColors.color_8D8E99),
+              ),
             ),
             const SizedBox(
               height: 10,

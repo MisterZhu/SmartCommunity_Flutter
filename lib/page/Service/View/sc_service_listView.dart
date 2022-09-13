@@ -7,9 +7,13 @@ import 'package:smartcommunity/page/Service/View/sc_service_cell_item.dart';
 
 class SCServiceListView extends StatelessWidget {
 
-  SCServiceListView({Key? key, this.appList}) : super(key: key);
-
   final List<SCServiceModuleModel>? appList;
+
+  /// 按钮点击事件
+  final Function(String title)? itemTapAction;
+
+  SCServiceListView({Key? key, this.appList, this.itemTapAction}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,11 @@ class SCServiceListView extends StatelessWidget {
           return SCServiceCellItem(
             section: index,
             moduleModel: moduleModel,
-            isShowEditBtn: moduleModel.module?.id == 0 ? true : false, /// 如果是常用应用显示右边的编辑
+            tapAction: (title){
+              if (itemTapAction != null) {
+                itemTapAction?.call(title);
+              }
+            },
           );
         },
         separatorBuilder: (BuildContext context, int index) {

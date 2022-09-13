@@ -16,17 +16,18 @@ import '../Model/sc_service_module_model.dart';
 class SCServiceCellItem extends StatelessWidget {
 
   final int section;
-  /// 是否显示编辑按钮
-  final bool isShowEditBtn;
 
   final SCServiceModuleModel moduleModel;
+
+  /// 按钮点击事件
+  final Function(String title)? tapAction;
 
   SCServiceCellItem(
       {
         Key? key,
         this.section = 0,
         required this.moduleModel,
-        this.isShowEditBtn = false,
+        this.tapAction,
       }) : super(key: key);
 
   @override
@@ -95,7 +96,7 @@ class SCServiceCellItem extends StatelessWidget {
   Widget headerRightContainer() {
     return GetBuilder<SCServiceController>(builder: (state){
       return Offstage(
-        offstage: !isShowEditBtn,
+        offstage: moduleModel.module?.id == '0' ? false : true, /// 如果是常用应用显示右边的编辑
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -137,28 +138,35 @@ class SCServiceCellItem extends StatelessWidget {
 
   /// cell
   Widget itemsCell() {
-    List<Applets>?list = moduleModel.applets;
-    return StaggeredGridView.countBuilder(
-        padding: const EdgeInsets.only(left: 5.5, right: 5.5, top: 3.0, bottom: 2.0),
-        mainAxisSpacing: 12,
-        crossAxisSpacing: 8,
-        crossAxisCount: 5,
-        shrinkWrap: true,
-        itemCount: list?.length ?? 0,
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) {
-          Applets model = list![index];
-          return gridItem(model);
-        },
-        staggeredTileBuilder: (int index) {
-          return const StaggeredTile.fit(1);
-        });
+    List<Applets>?list = [];
+    return GetBuilder<SCServiceController>(builder: (state){
+      if (section == 0) {
+        list = state.regularAppList;
+      } else {
+        list = moduleModel.applets;
+      }
+      return StaggeredGridView.countBuilder(
+          padding: const EdgeInsets.only(left: 5.5, right: 5.5, top: 3.0, bottom: 2.0),
+          mainAxisSpacing: 12,
+          crossAxisSpacing: 8,
+          crossAxisCount: 5,
+          shrinkWrap: true,
+          itemCount: list?.length ?? 0,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            Applets model = list![index];
+            return gridItem(model);
+          },
+          staggeredTileBuilder: (int index) {
+            return const StaggeredTile.fit(1);
+          });
+    });
   }
 
   Widget gridItem(Applets applets) {
     SCServiceController state = Get.find<SCServiceController>();
     bool hide = true;
-    if (moduleModel.module?.id == 0) {
+    if (moduleModel.module?.id == '0') {
       /// 如果是常用应用
       hide = state.isEditing ? false : true;
     } else {
@@ -175,6 +183,11 @@ class SCServiceCellItem extends StatelessWidget {
           } else {
             log('应用添加');
             state.addRegularApp(applets);
+          }
+        }
+        if (!state.isEditing) {
+          if (tapAction != null) {
+            tapAction?.call(applets.name ?? '');
           }
         }
       },
@@ -211,8 +224,8 @@ class SCServiceCellItem extends StatelessWidget {
           height: 42,
           color: Colors.transparent,
           alignment: Alignment.center,
-          child: Image.network(
-              url,
+          child: Image.asset(
+              model.icon?.name ?? '',
               width: 36,
               height: 36,
           )),
