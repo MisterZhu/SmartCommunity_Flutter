@@ -86,6 +86,7 @@ class SCHomeSkin1 extends StatelessWidget {
     return GetBuilder<SCHomeController1>(builder: (state) {
       return SCHomeNavigation1(
         roomTitle: state.communityName,
+        titleMaxLength: state.titleMaxLength,
         opacity: state.opacity,
         backgroundColor: state.navigationBackgroundColor,
         isSticky: state.navigationSticky,

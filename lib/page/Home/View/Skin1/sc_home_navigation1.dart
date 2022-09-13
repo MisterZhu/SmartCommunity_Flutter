@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/utils/sc_utils.dart';
 
 class SCHomeNavigation1 extends StatelessWidget {
-
   /// 透明度
   final double? opacity;
 
@@ -32,6 +32,9 @@ class SCHomeNavigation1 extends StatelessWidget {
   /// 切换房号
   final Function? changeHouseAction;
 
+  /// 房号文本数字数量
+  final int? titleMaxLength;
+
   SCHomeNavigation1(
       {Key? key,
       this.backgroundColor = Colors.transparent,
@@ -42,54 +45,74 @@ class SCHomeNavigation1 extends StatelessWidget {
       this.changeHouseAction,
       this.searchTitle = '搜索应用、商品、资讯',
       this.opacity = 1.0,
-      })
+      this.titleMaxLength = 10})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(opacity: opacity ?? 1.0, child: Container(
-      padding: EdgeInsets.only(
-          top: MediaQuery.of(context).padding.top,
-          bottom: 20.0,
-          left: 16.0,
-          right: 16.0),
-      decoration: BoxDecoration(color: getBackgroundColor()),
-      child: body(),
-    ),);
+    return Opacity(
+      opacity: opacity ?? 1.0,
+      child: Container(
+        padding: EdgeInsets.only(
+            top: MediaQuery.of(context).padding.top,
+            bottom: 20.0,
+            left: 16.0,
+            right: 16.0),
+        decoration: BoxDecoration(color: getBackgroundColor()),
+        child: body(context),
+      ),
+    );
   }
 
   /// body
-  Widget body() {
+  Widget body(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        scanItem(),
+        scanItem(context),
         searchItem(),
       ],
     );
   }
 
   /// 房号、扫一扫、消息item
-  Widget scanItem() {
+  Widget scanItem(BuildContext context) {
     return Container(
       height: 44.0,
       color: Colors.transparent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [houseItem(), rightActionsItem()],
+        children: [houseItem(context), rightActionsItem()],
       ),
     );
   }
 
   /// 房号Widget
-  Widget houseItem() {
-    return Expanded(
-        child: GestureDetector(
+  Widget houseItem(BuildContext context) {
+    TextStyle style = TextStyle(
+        fontSize: SCFonts.f14,
+        color: isSticky == true ? stickyColor : normalColor,
+        decoration: TextDecoration.none,
+        fontWeight: FontWeight.normal);
+    String roomString = roomTitle ?? '';
+    String title = "";
+    int maxLength = titleMaxLength ?? 10;
+
+    if (roomString.length > maxLength) {
+      /// 最多展示10个字
+      title = '${roomString.substring(0, maxLength)}...';
+    } else {
+      title = roomString;
+    }
+
+    double width = SCUtils.boundingTextSize(context, title, style).width;
+    return GestureDetector(
       onTap: () {
         changeHouse();
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset(
             SCAsset.iconLocation,
@@ -101,9 +124,9 @@ class SCHomeNavigation1 extends StatelessWidget {
             width: 8.0,
           ),
           SizedBox(
-            width: titleMaxWidth,
+            width: width,
             child: Text(
-              '$roomTitle',
+              title,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               style: TextStyle(
@@ -124,12 +147,14 @@ class SCHomeNavigation1 extends StatelessWidget {
           ),
         ],
       ),
-    ));
+    );
   }
 
   /// Navigation-右侧按钮
   Widget rightActionsItem() {
-    return Row(
+    return Expanded(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Image.asset(
           SCAsset.iconScan,
@@ -147,7 +172,7 @@ class SCHomeNavigation1 extends StatelessWidget {
           color: isSticky == true ? stickyColor : normalColor,
         ),
       ],
-    );
+    ));
   }
 
   /// 搜索框item
@@ -171,16 +196,19 @@ class SCHomeNavigation1 extends StatelessWidget {
             width: 5.0,
           ),
           Expanded(
-              child: Opacity(opacity: 0.6, child: Text(
-                searchTitle ?? '',
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                style: const TextStyle(
-                    color: Colors.white,
-                    decoration: TextDecoration.none,
-                    fontSize: SCFonts.f12,
-                    fontWeight: FontWeight.normal),
-              ),))
+              child: Opacity(
+            opacity: 0.6,
+            child: Text(
+              searchTitle ?? '',
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: const TextStyle(
+                  color: Colors.white,
+                  decoration: TextDecoration.none,
+                  fontSize: SCFonts.f12,
+                  fontWeight: FontWeight.normal),
+            ),
+          ))
         ],
       ),
     );

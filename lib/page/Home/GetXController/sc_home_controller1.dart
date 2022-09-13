@@ -43,6 +43,9 @@ class SCHomeController1 extends GetxController {
   /// 项目名称
   String communityName = "请登录";
 
+  /// 房号文本数字数量
+  int titleMaxLength = 10;
+
   EasyRefreshController refreshController = EasyRefreshController();
 
   /// 所有应用

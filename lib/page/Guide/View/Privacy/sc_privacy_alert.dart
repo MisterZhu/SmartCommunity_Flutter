@@ -20,6 +20,7 @@ class SCBasicPrivacyAlert extends StatelessWidget {
       this.isAgree = false,
       this.titleString = '',
       this.contentString = '',
+      this.descriptionString = '',
       this.cancelAction,
       this.sureAction,
       this.agreementDetailAction,
@@ -36,6 +37,9 @@ class SCBasicPrivacyAlert extends StatelessWidget {
 
   /// 正文
   final String contentString;
+
+  /// 描述
+  final String descriptionString;
 
   /// 取消
   final Function? cancelAction;
@@ -250,7 +254,7 @@ class SCBasicPrivacyAlert extends StatelessWidget {
 
   /// 描述
   Widget descriptionItem() {
-    String title = '邑生活APP用户协议和隐私协议已于202邑生活APP用户协议和隐私协议已于2022';
+    String title = descriptionString;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Text(

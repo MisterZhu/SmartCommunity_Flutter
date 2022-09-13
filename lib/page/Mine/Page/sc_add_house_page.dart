@@ -415,7 +415,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
           scUser.communityId = communityId;
           scUser.communityName = valueList?[0];
           scUser.housingId = houseId;
-          SCScaffoldManager.instance.cacheUserData(scUser);
+          SCScaffoldManager.instance.cacheUserData(scUser.toJson());
 
           /// 3.栈
           if (type == SCSelectHouseLogicType.login) {
