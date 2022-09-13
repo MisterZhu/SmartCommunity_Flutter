@@ -19,7 +19,7 @@ class SCMyHouseController extends GetxController {
   String? housingId = SCScaffoldManager.instance.user.housingId;
 
   /// 更新当前的房号id
-  updateCurrentHousingId (String? id) {
+  updateCurrentHousingId(String? id) {
     housingId = id;
     update();
   }
@@ -30,21 +30,20 @@ class SCMyHouseController extends GetxController {
     update();
   }
 
-
   loadData() {
     SCLoadingUtils.show();
     SCHttpManager.instance.get(
         url: SCUrl.kMyHouseUrl,
         success: (value) {
-          log('我的房号列表===$value');
           dataList = List<SCMyHouseModel>.from(value.map((e) => SCMyHouseModel.fromJson(e)).toList());
           updateHouseList(list: dataList);
         },
         failure: (value) {
-          String message = value['message'];
-          SCToast.showTip(message);
+          if (value['message'] != null) {
+            String message = value['message'];
+            SCToast.showTip(message);
+          }
         });
   }
-
 
 }

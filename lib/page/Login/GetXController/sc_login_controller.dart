@@ -48,8 +48,10 @@ class SCLoginController extends GetxController {
           resultHandler(true);
         },
         failure: (value) {
-          String message = value['message'];
-          SCToast.showTip(message);
+          if (value['message'] != null) {
+            String message = value['message'];
+            SCToast.showTip(message);
+          }
           resultHandler(false);
         });
   }
@@ -66,8 +68,10 @@ class SCLoginController extends GetxController {
         },
         failure: (value) {
           log('登陆失败===$value');
-          String message = value['message'];
-          SCToast.showTip(message);
+          if (value['message'] != null) {
+            String message = value['message'];
+            SCToast.showTip(message);
+          }
         });
   }
 }
