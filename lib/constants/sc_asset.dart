@@ -257,9 +257,9 @@ class SCAsset {
   /// 应用icon-测试gif
   static const String iconServiceTiger = 'images/appList/ic_service_tiger.gif';
 
-  /************* 全部应用 *************/
+/************* 全部应用 *************/
 
-  /************* 我的-切换房屋 *************/
+/************* 我的-切换房屋 *************/
 
   /// 我的-切换房号-添加房号icon
   static const String iconMineHouseAdd = 'images/mine/ic_mine_house_add.png';

@@ -40,6 +40,9 @@ class SCHomeController1 extends GetxController {
   /// banner当前index
   int bannerCurrentIndex = 0;
 
+  /// 项目名称
+  String communityName = "请登录";
+
   EasyRefreshController refreshController = EasyRefreshController();
 
   /// 所有应用
@@ -135,8 +138,30 @@ class SCHomeController1 extends GetxController {
     update();
   }
 
+  /// 修改项目名称
+  changeCommunityName({required String name}) {
+    if (name.isEmpty) {
+      communityName = "请登录";
+    } else {
+      communityName = name;
+    }
+    update();
+  }
+
   /// 裁剪图片
   void croperImage() {
 
+  }
+
+  /// 重置数据
+  void resetAllData() {
+    opacity = 1;
+    navigationBackgroundColor = SCColors.color_FE8947;
+    navigationSticky = false;
+    navigationStickyColor = Colors.white;
+    navigationNormalColor = Colors.white;
+    isRefreshing = false;
+    bannerCurrentIndex = 0;
+    update();
   }
 }

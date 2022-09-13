@@ -60,7 +60,7 @@ class SCHomeActivityItem extends StatelessWidget {
   /// title
   Widget titleItem() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 6.0),
+      padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 6.0),
       child: SizedBox(
         height: titleHeight(),
         child: Text(
@@ -83,7 +83,7 @@ class SCHomeActivityItem extends StatelessWidget {
       height: cellHeight(),
       child: ListView.separated(
           scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.only(left: 6.0, right: 0, top: 0, bottom: 0),
+          padding: const EdgeInsets.only(left: 6.0, right: 0, top: 0, bottom: 0),
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
             return activityCell(index);

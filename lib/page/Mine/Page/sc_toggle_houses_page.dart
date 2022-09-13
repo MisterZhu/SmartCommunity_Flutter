@@ -12,6 +12,7 @@ import 'package:smartcommunity/utils/sc_utils.dart';
 
 import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_colors.dart';
+import '../../../constants/sc_enum.dart';
 import '../../../constants/sc_fonts.dart';
 import '../GetXController/sc_current_house_controller.dart';
 import '../GetXController/sc_my_house_controller.dart';
@@ -325,4 +326,5 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
     SCCurrentHouseController state = Get.find<SCCurrentHouseController>();
     state.loadData();
   }
+
 }

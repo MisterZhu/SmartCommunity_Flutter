@@ -117,6 +117,7 @@ class SCDialogUtils {
       required List<SCBottomSheetModel> dataList,
       bool? isShowCancel,
       SCBottomSheetModel? cancelModel,
+      bool? isCloseDialog,
       Function(int index, BuildContext context)? onTap,
       Function(BuildContext context)? onCancelTap}) {
     showModalBottomSheet(
@@ -131,6 +132,7 @@ class SCDialogUtils {
             dataList: dataList,
             isShowCancel: isShowCancel,
             customCancelModel: cancelModel,
+            isCloseDialog: isCloseDialog,
             onTap: (int index, BuildContext context) {
               if (onTap != null) {
                 onTap?.call(index, context);

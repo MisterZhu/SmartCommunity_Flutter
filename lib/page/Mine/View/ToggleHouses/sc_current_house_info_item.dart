@@ -1,3 +1,9 @@
+
+import 'dart:math';
+import 'dart:developer';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smartcommunity/page/Mine/Model/Sc_current_house_info_data_model.dart';
@@ -6,6 +12,7 @@ import 'package:smartcommunity/page/Mine/View/ToggleHouses/sc_mine_house_tag_ite
 import '../../../../constants/sc_asset.dart';
 import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_fonts.dart';
+import '../../Model/sc_current_house_info_model.dart';
 
 /// 当前房屋-房屋信息cell
 class SCCurrentHouseInfoItem extends StatelessWidget {

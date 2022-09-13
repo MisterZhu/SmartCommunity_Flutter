@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smartcommunity/constants/sc_default_value.dart';
+import 'package:smartcommunity/constants/sc_h5.dart';
 import 'package:smartcommunity/constants/sc_skin_value.dart';
 import 'package:smartcommunity/constants/sc_type_define.dart';
 import 'package:smartcommunity/page/Mine/Model/sc_property_model.dart';
@@ -8,6 +10,10 @@ import 'package:smartcommunity/page/Mine/View/sc_mine_property_item.dart';
 import 'package:smartcommunity/page/Mine/View/sc_mine_score_item.dart';
 import 'package:smartcommunity/page/Mine/View/sc_mine_service_item.dart';
 import 'package:smartcommunity/page/Mine/View/sc_mine_wallet_item.dart';
+import 'package:smartcommunity/skin/Model/sc_user.dart';
+import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
+import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
+import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 
 /// 我的-listview
 
@@ -79,19 +85,33 @@ class SCMineListView extends StatelessWidget {
 
   /// header-cell
   Widget headerCell() {
-    return SCMineHeaderItem();
+    return SCMineHeaderItem(
+      settingTap: (){
+        SCRouterHelper.codePage(5003, null);
+      },
+    );
   }
 
   /// 切换房号-cell
   Widget changeAddressCell(BuildContext context) {
     return SCMineChangeAddressItem(
-      onTap: () {},
+      onTap: () {
+        SCRouterHelper.codePage(5001, null);
+      },
     );
   }
 
   /// 积分、红包-cell
   Widget scoreCell() {
-    return SCMineScoreItem();
+    return SCMineScoreItem(
+      onTap: (int index) {
+        String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+        String token = SCScaffoldManager.instance.user.token ?? "";
+        String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
+        String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
+        SCRouterHelper.codePage(20000, {"title" : "工单", "url" : url});
+      },
+    );
   }
 
   /// 我的钱包-cell
@@ -115,9 +135,8 @@ class SCMineListView extends StatelessWidget {
 
   /// 测试-cell
   Widget testCell() {
-    return Container(
-      color: Colors.yellowAccent,
-      height: 200,
+    return const SizedBox(
+      height: 20.0,
     );
   }
 

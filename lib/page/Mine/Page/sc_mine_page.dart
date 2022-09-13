@@ -59,10 +59,6 @@ class SCMineState extends State<SCMinePage> {
       SCTypeDefine.SC_MINE_TYPE_PROPERTY,
       SCTypeDefine.SC_MINE_TYPE_SERVICE,
       10001,
-      10001,
-      10001,
-      10001,
-      10001,
     ];
     return GetBuilder<SCMineController>(builder: (state){
       return SCMineListView(

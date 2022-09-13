@@ -1,3 +1,4 @@
+
 import 'dart:developer';
 
 import 'package:get/get.dart';
@@ -43,7 +44,7 @@ class SCLoginController extends GetxController {
         url: SCUrl.kSendCodeUrl,
         params: {'mobileNum' : phone},
         success: (value) {
-          SCToast.showTip('验证码发送成功');
+          SCLoadingUtils.success(text:'验证码发送成功');
           resultHandler(true);
         },
         failure: (value) {
@@ -57,15 +58,11 @@ class SCLoginController extends GetxController {
     SCLoadingUtils.show();
     SCHttpManager.instance.post(
         url: SCUrl.kPhoneCodeLoginUrl,
-        params: {'mobileNum': phone, 'code': code},
+        params: {'mobileNum' : phone, 'code' : code},
         success: (value) {
           SCUser user = SCScaffoldManager.instance.getUserData();
           log('登陆成功获取用户token=====${user.token}===用户昵称：${user.userName}');
-          // SCRouterHelper.pathPage(SCRouterPath.tabPath, null);
-
-          /// todo wangtao 测试数据
-          var params = {'type': SCSelectHouseLogicType.login};
-          SCRouterHelper.codePage(9003, params);
+          SCRouterHelper.pathPage(SCRouterPath.selectCommunityPath, {"type" : SCSelectHouseLogicType.login});
         },
         failure: (value) {
           log('登陆失败===$value');

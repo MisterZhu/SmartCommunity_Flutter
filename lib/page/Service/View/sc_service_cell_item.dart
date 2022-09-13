@@ -8,27 +8,25 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_colors.dart';
+import '../../../network/sc_config.dart';
 import '../GetXController/sc_service_controller.dart';
-import '../Model/sc_service_model.dart';
+import '../Model/sc_service_module_model.dart';
 
 /// 全部应用cell
 class SCServiceCellItem extends StatelessWidget {
 
   final int section;
-  /// 头部标题
-  final String? headerTitle;
   /// 是否显示编辑按钮
   final bool isShowEditBtn;
 
-  final List<SCServiceModel>? list;
+  final SCServiceModuleModel moduleModel;
 
   SCServiceCellItem(
       {
         Key? key,
         this.section = 0,
-        this.headerTitle = '',
-        this.isShowEditBtn = true,
-        this.list,
+        required this.moduleModel,
+        this.isShowEditBtn = false,
       }) : super(key: key);
 
   @override
@@ -79,7 +77,7 @@ class SCServiceCellItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(child: Text(
-            headerTitle ?? '',
+            moduleModel.module?.name ?? '',
             textAlign: TextAlign.start,
             style: const TextStyle(
               fontSize: 16,
@@ -122,7 +120,6 @@ class SCServiceCellItem extends StatelessWidget {
             const SizedBox(width: 4.0,),
             GestureDetector(
                 onTap: (){
-                  log('首页应用收起展开=======${state.isExpansion}');
                   state.updateExpansionStatus();
                 },
                 child: Container(
@@ -140,22 +137,17 @@ class SCServiceCellItem extends StatelessWidget {
 
   /// cell
   Widget itemsCell() {
-    SCServiceController state = Get.find<SCServiceController>();
+    List<Applets>?list = moduleModel.applets;
     return StaggeredGridView.countBuilder(
         padding: const EdgeInsets.only(left: 5.5, right: 5.5, top: 3.0, bottom: 2.0),
         mainAxisSpacing: 12,
         crossAxisSpacing: 8,
         crossAxisCount: 5,
         shrinkWrap: true,
-        itemCount: section == 0 ? state.homeAppList.length : list?.length ?? 0,
+        itemCount: list?.length ?? 0,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          SCServiceModel model;
-          if (section == 0) {
-            model = state.homeAppList![index];
-          } else {
-            model = list![index];
-          }
+          Applets model = list![index];
           return gridItem(model);
         },
         staggeredTileBuilder: (int index) {
@@ -163,25 +155,26 @@ class SCServiceCellItem extends StatelessWidget {
         });
   }
 
-  Widget gridItem(SCServiceModel model) {
+  Widget gridItem(Applets applets) {
     SCServiceController state = Get.find<SCServiceController>();
     bool hide = true;
-    if (section == 0) {
+    if (moduleModel.module?.id == 0) {
+      /// 如果是常用应用
       hide = state.isEditing ? false : true;
     } else {
       if (state.isEditing) {
-        hide = state.homeAppList.any((element) => model.id == element.id);
+        hide = state.regularAppList.any((element) => applets.id == element.id);
       }
     }
     return GestureDetector(
       onTap: (){
         if (!hide) {
           if (section == 0) {
-            log('首页应用删除');
-            state.deleteHomeApp(model);
+            log('常用应用删除');
+            state.deleteRegularApp(applets);
           } else {
             log('应用添加');
-            state.addHomeApp(model);
+            state.addRegularApp(applets);
           }
         }
       },
@@ -191,12 +184,12 @@ class SCServiceCellItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            topIconItem(model, hide),
+            topIconItem(applets, hide),
             const SizedBox(
               height: 4,
             ),
             Text(
-              model.name ?? '',
+              applets.name ?? '',
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -208,7 +201,8 @@ class SCServiceCellItem extends StatelessWidget {
     );
   }
 
-  Widget topIconItem(SCServiceModel model, bool hide) {
+  Widget topIconItem(Applets model, bool hide) {
+    String url = SCConfig.getImageUrl(model.icon?.fileKey ?? '');
     return Stack(
       alignment: Alignment.topRight,
       children: [
@@ -217,8 +211,8 @@ class SCServiceCellItem extends StatelessWidget {
           height: 42,
           color: Colors.transparent,
           alignment: Alignment.center,
-          child: Image.asset(
-              model.icon ?? '',
+          child: Image.network(
+              url,
               width: 36,
               height: 36,
           )),
@@ -228,7 +222,7 @@ class SCServiceCellItem extends StatelessWidget {
   }
 
   /// 右上角的+/-图标
-  Widget addOrDeleteIconItem(SCServiceModel model, bool hide) {
+  Widget addOrDeleteIconItem(Applets model, bool hide) {
     return Offstage(
       /// offstage = true（隐藏）
       offstage: hide,

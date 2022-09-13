@@ -25,6 +25,8 @@ void startApp() async {
   /// 路由的basePath
   String basePath = await SCScaffoldManager.instance.getRouterBasePath();
 
+  RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+
   // Android设备设置沉浸式
   if(Platform.isAndroid) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -43,7 +45,14 @@ void startApp() async {
     getPages: SCRouterPages.getPages,
     initialRoute: basePath,
     initialBinding: SCAllBinding(),
-    builder: EasyLoading.init(),
+    builder: EasyLoading.init(builder: (context, widget) {
+      return MediaQuery(
+        //设置文字大小不随系统设置改变
+        data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+        child: widget ?? const SizedBox(),
+      );
+    },),
+    navigatorObservers: [routeObserver],
   ));
 }
 

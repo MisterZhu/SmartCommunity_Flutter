@@ -50,7 +50,7 @@ class SCBasicPrivacyAlert extends StatelessWidget {
   final String? privacyPolicyUrl;
 
   /// 协议详情
-  final Function(String url)? agreementDetailAction;
+  final Function(String url, String? title)? agreementDetailAction;
 
   /// 勾选协议
   final Function? agreeAction;
@@ -207,7 +207,7 @@ class SCBasicPrivacyAlert extends StatelessWidget {
         style: TextStyle(fontSize: SCFonts.f14, color: color),
         recognizer: TapGestureRecognizer()
           ..onTap = () {
-            agreementDetail(url: url);
+            agreementDetail(url: url, title: title);
           });
   }
 
@@ -337,9 +337,9 @@ class SCBasicPrivacyAlert extends StatelessWidget {
   }
 
   /// 协议详情
-  agreementDetail({required String url}) {
+  agreementDetail({required String url, String? title}) {
     if (agreementDetailAction != null) {
-      agreementDetailAction?.call(url);
+      agreementDetailAction?.call(url, title);
     }
   }
 

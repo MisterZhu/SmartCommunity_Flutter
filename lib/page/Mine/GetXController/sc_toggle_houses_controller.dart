@@ -6,7 +6,6 @@ class SCToggleHousesController extends GetxController {
   int selectIndex = 0;
 
   updateSelectIndex(int index) {
-    log('当前index========$index');
     selectIndex = index;
     update();
   }

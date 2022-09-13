@@ -30,7 +30,7 @@ class SCHomeNavigation1 extends StatelessWidget {
   final String? searchTitle;
 
   /// 切换房号
-  final Function? changeRoomAction;
+  final Function? changeHouseAction;
 
   SCHomeNavigation1(
       {Key? key,
@@ -39,7 +39,7 @@ class SCHomeNavigation1 extends StatelessWidget {
       this.stickyColor = Colors.black,
       this.isSticky = false,
       this.roomTitle = '慧享生活馆慧享生活馆慧享生活馆慧享生活馆慧享生活馆慧享生活馆慧享生活馆',
-      this.changeRoomAction,
+      this.changeHouseAction,
       this.searchTitle = '搜索应用、商品、资讯',
       this.opacity = 1.0,
       })
@@ -76,16 +76,18 @@ class SCHomeNavigation1 extends StatelessWidget {
       color: Colors.transparent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [roomItem(), rightActionsItem()],
+        children: [houseItem(), rightActionsItem()],
       ),
     );
   }
 
   /// 房号Widget
-  Widget roomItem() {
+  Widget houseItem() {
     return Expanded(
         child: GestureDetector(
-      onTap: () {},
+      onTap: () {
+        changeHouse();
+      },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -203,7 +205,7 @@ class SCHomeNavigation1 extends StatelessWidget {
   }
 
   /// 切换房号
-  void changeRoom() {
-    changeRoomAction?.call();
+  void changeHouse() {
+    changeHouseAction?.call();
   }
 }

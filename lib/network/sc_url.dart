@@ -22,7 +22,7 @@ class SCUrl {
  /************************* 服务 *************************/
 
   /// 应用列表url
-  static const String kServiceAppListUrl = '/api/applet/tenant/list';
+  static const String kServiceAppListUrl = '/api/applet/user/list';
 
   /************************* 我的 *************************/
 
@@ -38,10 +38,8 @@ class SCUrl {
   /// 解除绑定房号接口url
   static const String kUnbindHouseUrl = '/api/space/resident/user/unbind';
 
-
   /// 通过项目Id获取房号数据url
   static const String kGetSpaceNodesUrl = '/api/space/space/getSpaceNodes';
-
 
   /// 获取用户身份
   static const String kResidentUserIdentity = '/api/space/resident/user/community/identity';

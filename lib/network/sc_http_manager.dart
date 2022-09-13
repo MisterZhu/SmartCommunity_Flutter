@@ -3,11 +3,13 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:smartcommunity/constants/sc_default_value.dart';
 import 'package:smartcommunity/network/sc_config.dart';
 import 'package:smartcommunity/network/sc_url.dart';
 import 'package:smartcommunity/skin/Model/sc_user.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
+import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 
 import '../constants/sc_key.dart';
 import '../utils/Loading/sc_loading_utils.dart';
@@ -69,9 +71,10 @@ class SCHttpManager {
   }
 
   /// 更新headers
-  static updateHeaders({required Map<String, dynamic> headers}) {
+  updateHeaders({required Map<String, dynamic> headers}) {
     SCHttpManager.instance._headers = headers;
     SCHttpManager.instance._baseOptions?.headers = headers;
+    SCHttpManager.instance._dio!.options = SCHttpManager.instance._baseOptions!;
   }
 
   /// 获取实例
@@ -161,6 +164,7 @@ class SCHttpManager {
     }
   }
 
+  /// 校验登录
   checkLogin({required String url, dynamic headers, dynamic data}) {
     if (url == SCUrl.kPhoneCodeLoginUrl) {
       String token = '';
@@ -228,7 +232,7 @@ doError(e) {
         break;
         case 401: {
           /// 登录失效
-          updateUserData();
+          accountExpired();
         }
         break;
         case 403: {
@@ -253,10 +257,10 @@ doError(e) {
   return params;
 }
 
-updateUserData() {
-  log('登陆已失效，清空token，刷新本地缓存用户数据');
-  SCUser user = SCScaffoldManager.instance.getUserData();
-  user.token = '';
+/// token失效
+accountExpired() {
+  log('登陆已失效，清空用户数据，刷新本地缓存用户数据');
+  SCLoadingUtils.failure(text: SCDefaultValue.accountExpiredMessage);
   SCScaffoldManager.instance.cacheUserIsLogin(false);
-  SCScaffoldManager.instance.cacheUserData(user);
+  SCScaffoldManager.instance.logout(isAfterTip: true);
 }

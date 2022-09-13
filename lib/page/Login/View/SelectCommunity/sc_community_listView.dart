@@ -15,7 +15,6 @@ import '../../Model/sc_community_model.dart';
 /// 园区列表
 
 class SCCommunityListView extends StatelessWidget {
-
   SCCommunityListView({Key? key, this.communityList, this.type = SCSelectHouseLogicType.login}) : super(key: key);
 
   final List<SCCommunityModel>? communityList;
@@ -31,7 +30,6 @@ class SCCommunityListView extends StatelessWidget {
 
   /// body
   Widget body() {
-
     return Container(
       color: SCColors.color_FFFFFF,
       child: EasyRefresh(
@@ -62,7 +60,7 @@ class SCCommunityListView extends StatelessWidget {
             // 加载完成显示的文字
             loadedText: '加载完成',
           ),
-          emptyWidget: communityList!.length > 0 ? null : emptyView(),
+          emptyWidget: communityList!.isNotEmpty ? null : emptyView(),
           onLoad: onLoadMore,
           onRefresh: onRefresh,
           controller: communityController.refreshController,

@@ -51,7 +51,9 @@ class SCCommunityItem extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Container(height: 0.5, color: SCColors.color_EDEDF0)
+            Container(
+                height: 0.5,
+                color: SCColors.color_EDEDF0)
           ],
         ),
       ),

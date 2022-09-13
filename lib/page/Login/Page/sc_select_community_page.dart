@@ -112,8 +112,8 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
         cancelAction: () {
           cancelAction();
         },
-        valueChangedAction: (String value) {
-          valueChangedAction(value);
+        searchAction: (String value) {
+          searchAction(value);
         },
         selectCityAction: () {
           openSelectCityPage();
@@ -138,16 +138,15 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
     return GetBuilder<SCSelectCommunityController>(builder: (state) {
       if (state.isShowResult) {
         return SCCommunitySearchResultListView(
-          communityList: state.searchList,
           type: type,
+          communityList: state.searchList,
           selectCommunityHandler: (SCCommunityModel model) {
-            state.updateSelectCommunity(model: model);
-          },
-        );
+          state.updateSelectCommunity(model: model);
+        });
       } else {
         return SCCommunityListView(
-          communityList: state.communityList,
           type: type,
+          communityList: state.communityList,
         );
       }
     });
@@ -164,25 +163,29 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
     searchState.updateCancelButtonStatus(status: false);
   }
 
-  /// 文本框内容改变
-  valueChangedAction(String value) {
+  /// 搜索
+  searchAction(String value) {
     SCSelectCommunityController state = Get.find<SCSelectCommunityController>();
+    state.updateKeyword(value);
+    /// 请求接口搜索
+    state.loadSearchResultData(isLoadMore: false);
 
-    if (value.isNotEmpty) {
-      List<SCCommunityModel> list = [];
-      if (state.communityList.length > 0) {
-        for (int i = 0; i < state.communityList.length; i++) {
-          SCCommunityModel communityModel = state.communityList[i];
-          String name = communityModel?.name ?? '';
-          if (name.contains(value)) {
-            list.add(communityModel);
-          }
-        }
-        state.updateSearchList(list: list);
-      }
-    } else {
-      state.updateSearchList(list: []);
-    }
+    // 本地搜索
+    // if (value.isNotEmpty) {
+    //   List<SCCommunityModel> list = [];
+    //   if (state.communityList.isNotEmpty) {
+    //     for (int i = 0; i < state.communityList.length; i++) {
+    //       SCCommunityModel communityModel = state.communityList[i];
+    //       String name = communityModel?.name ?? '';
+    //       if (name.contains(value)) {
+    //         list.add(communityModel);
+    //       }
+    //     }
+    //     state.updateSearchList(list: list);
+    //   }
+    // } else {
+    //   state.updateSearchList(list: []);
+    // }
   }
 
   /// 定位
@@ -205,22 +208,21 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
   }
 
   /// 逆地理编码
-  reGeoCode({required Position position}) async {
-    await SCLocationUtils.reGeoCode(
-        position: position,
-        success: (value) {
-          SCLocationModel model = value;
-          log('城市:${model.addressComponent?.city ?? ''}');
-          SCSearchCommunityController searchState =
-              Get.find<SCSearchCommunityController>();
-          searchState.updateLocationCity(
-              city: model.addressComponent?.city ?? '',
-              code: model.addressComponent?.citycode ?? '',
-              lati: position.latitude,
-              long: position.longitude);
-          loadData();
-        },
-        failure: (value) {});
+  reGeoCode({required Position position}) async{
+    await SCLocationUtils.reGeoCode(position: position, success: (value){
+      SCLocationModel model = value;
+      log('城市:${model.addressComponent?.city ?? ''}');
+      SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
+      searchState.updateLocationCity(
+        city: model.addressComponent?.city ?? '',
+        code: model.addressComponent?.citycode ?? '',
+        lati: position.latitude,
+        long: position.longitude
+      );
+      loadData();
+    }, failure: (value){
+
+    });
   }
 
   ///  选择城市
@@ -248,4 +250,5 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
     SCSelectCommunityController state = Get.find<SCSelectCommunityController>();
     state.loadCommunityData();
   }
+
 }

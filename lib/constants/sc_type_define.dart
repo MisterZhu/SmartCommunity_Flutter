@@ -52,4 +52,9 @@ class SCTypeDefine {
   /// 协议
   static const int SC_LOGIN_TYPE_AGREEMENT = 3;
   /************************* 登录页面-cellType *************************/
+
+  /// 皮肤类型1
+  static const int SC_SKIN_TYPE1 = 1;
+  /// 皮肤类型2
+  static const int SC_SKIN_TYPE2 = 2;
 }

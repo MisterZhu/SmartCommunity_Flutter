@@ -36,6 +36,9 @@ class SCHomeController2 extends GetxController {
   /// 未置顶颜色,默认白色
   Color navigationNormalColor = Colors.white;
 
+  /// 项目名称
+  String communityName = "请登录";
+
   /// 所有应用
   List allItemsList = [];
 
@@ -87,6 +90,27 @@ class SCHomeController2 extends GetxController {
       navigationSticky = false;
     }
 
+    update();
+  }
+
+  /// 重置数据
+  void resetAllData() {
+    opacity = 1.0;
+    navigationOffset = 64.0;
+    navigationBackgroundColor = SCColors.color_FE8947;
+    navigationSticky = false;
+    navigationStickyColor = Colors.white;
+    navigationNormalColor = Colors.white;
+    update();
+  }
+
+  /// 修改项目名称
+  changeCommunityName({required String name}) {
+    if (name.isEmpty) {
+      communityName = "请登录";
+    } else {
+      communityName = name;
+    }
     update();
   }
 }

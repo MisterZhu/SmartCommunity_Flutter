@@ -68,21 +68,16 @@ class SCMineChangeAddressItem extends StatelessWidget {
 
   /// 切换item
   Widget changeItem() {
-    return GestureDetector(
-      onTap: (){
-        SCRouterHelper.codePage(5001, null);
-      },
-      child: Row(
-        children: [
-          const Text('切换房屋', maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.left, style: TextStyle(
-            fontSize: SCFonts.f12,
-            fontWeight: FontWeight.w400,
-            color: SCColors.color_5E5F66,
-          ),),
-          const SizedBox(width: 4.0,),
-          Image.asset(SCAsset.iconMineDetailGrey, width: 12.0, height: 12.0, fit: BoxFit.cover,),
-        ],
-      ),
+    return Row(
+      children: [
+        const Text('切换房屋', maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.left, style: TextStyle(
+          fontSize: SCFonts.f12,
+          fontWeight: FontWeight.w400,
+          color: SCColors.color_5E5F66,
+        ),),
+        const SizedBox(width: 4.0,),
+        Image.asset(SCAsset.iconMineDetailGrey, width: 12.0, height: 12.0, fit: BoxFit.cover,),
+      ],
     );
   }
 

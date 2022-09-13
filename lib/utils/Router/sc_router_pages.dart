@@ -11,6 +11,7 @@ import 'package:smartcommunity/page/Webview/Page/sc_webview_page.dart';
 
 import '../../page/Login/Page/sc_select_city_page.dart';
 import '../../page/Login/Page/sc_select_community_page.dart';
+import '../../page/Mine/Page/sc_setting_page.dart';
 import '../../page/Service/Page/sc_service_page.dart';
 import 'sc_router_path.dart';
 
@@ -28,6 +29,8 @@ class SCRouterPages {
     GetPage(name: SCRouterPath.guidePath, page: () => SCGuidePage()),
     /*首次的用户协议和隐私政策弹窗*/
     GetPage(name: SCRouterPath.basePrivacyPath, page: () => SCBasePrivacyPage()),
+    /*webView*/
+    GetPage(name: SCRouterPath.webViewPath, page: () => SCWebViewPage()),
     /*城市选择*/
     GetPage(name: SCRouterPath.selectCityPath, page: () => SCSelectCityPage()),
     /*社区选择*/
@@ -42,7 +45,8 @@ class SCRouterPages {
     GetPage(name: SCRouterPath.toggleHousesPagePath, page: () => SCToggleHousesPage()),
     /*新增房号*/
     GetPage(name: SCRouterPath.addHousePagePath, page: () => SCAddHousePage()),
-
+    /*设置*/
+    GetPage(name: SCRouterPath.settingPath, page: () => SCSettingPage()),
   ];
 
   /*根据code使用路由*/
@@ -61,6 +65,14 @@ class SCRouterPages {
     10000 : SCRouterPath.tabPath,
     /*首页*/
     10001 : SCRouterPath.homePath,
+    /*全部应用*/
+    10011 : SCRouterPath.servicePagePath,
+    /*切换房屋*/
+    5001 : SCRouterPath.toggleHousesPagePath,
+    /*新增房号*/
+    5002 : SCRouterPath.addHousePagePath,
+    /*设置*/
+    5003 : SCRouterPath.settingPath,
     /*webView*/
     20000 : SCRouterPath.webViewPath,
     /*房号选择*/

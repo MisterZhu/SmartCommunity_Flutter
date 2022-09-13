@@ -38,16 +38,15 @@ dependencies:
   flutter_staggered_grid_view: ^0.4.1
   get: ^4.6.1
   shared_preferences: ^2.0.6
-  #  wechat_assets_picker: ^7.3.0
-  #  flutter_inappwebview: ^5.4.3+7
-  #  url_launcher: ^6.0.20
+#  wechat_assets_picker: ^7.3.0
+#  flutter_inappwebview: ^5.4.3+7
+#  url_launcher: ^6.0.20
   flutter_swiper_null_safety: ^1.0.2
   # picker选择器 https://pub.dev/packages/flutter_picker/install
-  #  flutter_picker: ^2.0.3
+#  flutter_picker: ^2.0.3
   # 刷新控件 https://pub.flutter-io.cn/packages/flutter_easyrefresh
   flutter_easyrefresh: ^2.2.1
   # 图片裁剪 https://pub.flutter-io.cn/packages/image_cropper/install
-  #  image_cropper: ^2.0.3
   # image_cropper: ^2.0.3
   # toast组件 https://pub.flutter-io.cn/packages/fluttertoast/install
   fluttertoast: ^8.0.9

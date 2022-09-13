@@ -1,6 +1,9 @@
 import 'dart:developer';
 
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'dart:developer';
+
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:smartcommunity/page/Mine/Model/Sc_current_house_info_data_model.dart';
 import 'package:smartcommunity/skin/Model/sc_user.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
@@ -23,16 +26,6 @@ class SCCurrentHouseController extends GetxController {
   @override
   onInit() {
     super.onInit();
-    var info = {
-      'id': '0',
-      'houseNumber': '慧享生活馆-小邑苑-11幢-1单元-101室',
-      'houseType': 1,
-      'owner': '张三',
-      'identity': 1,
-      'endDate': '2033-5-11',
-    };
-
-    // infoModel = SCCurrentHouseInfoModel.fromJson(info);
 
     var testList = [
       {

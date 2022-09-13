@@ -128,7 +128,7 @@ class SCHomeLife extends StatelessWidget {
           fontSize: SCFonts.f14,
           fontWeight: FontWeight.w500,
           color: SCColors.color_1B1D33,
-        ),),
+      ),),
     );
   }
 
