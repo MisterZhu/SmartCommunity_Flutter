@@ -92,8 +92,10 @@ class SCSelectCommunityController extends GetxController {
               updateCommunityList(list: communityList);
             },
             failure: (value) {
-              String message = value['message'];
-              SCToast.showTip(message);
+              if (value['message'] != null) {
+                String message = value['message'];
+                SCToast.showTip(message);
+              }
               updateCommunityList(list: []);
             });
       } else {
