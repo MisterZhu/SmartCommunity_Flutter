@@ -66,7 +66,7 @@ class SCServiceCellItem extends StatelessWidget {
   /// header
   Widget headerItem() {
     return Container(
-      padding: const EdgeInsets.only(left: 12, right: 10, top: 12, bottom: 12),
+      padding: const EdgeInsets.only(left: 12.0, right: 10.0, top: 12.0, bottom: 12.0),
       width: double.infinity,
       height: 48,
       decoration: BoxDecoration(

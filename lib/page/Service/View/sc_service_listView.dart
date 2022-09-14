@@ -22,7 +22,7 @@ class SCServiceListView extends StatelessWidget {
 
   Widget body() {
     return ListView.separated(
-        padding: const EdgeInsets.only(top: 8, left: 0, right: 0, bottom: 34),
+        padding: const EdgeInsets.only(top: 10, left: 0, right: 0, bottom: 34),
         itemBuilder: (BuildContext context, int index) {
           SCServiceModuleModel moduleModel = appList![index];
           return SCServiceCellItem(
