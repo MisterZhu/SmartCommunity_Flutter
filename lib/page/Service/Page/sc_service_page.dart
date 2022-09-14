@@ -52,8 +52,7 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
         child: SCServiceListView(
           appList: state.appList,
           itemTapAction: (title){
-           /// 应用点击跳转
-            log('应用点击跳转');
+            /// 应用点击跳转
             String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
             String token = SCScaffoldManager.instance.user.token ?? "";
             String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();

@@ -26,13 +26,15 @@ class SCScaffoldManager {
 
   static SCScaffoldManager get instance => _instance;
 
-  static SCScaffoldManager _instance = SCScaffoldManager._internal();
+  static final SCScaffoldManager _instance = SCScaffoldManager._internal();
 
   static late SCScaffoldModel _scaffoldModel;
 
   static late SCUser _user;
 
   static bool _isLogin = false;
+
+  static late SharedPreferences _preferences;
 
   SCScaffoldManager._internal() {
     _scaffoldModel = SCScaffoldModel();
@@ -45,6 +47,8 @@ class SCScaffoldManager {
 
   bool get isLogin => _isLogin;
 
+  SharedPreferences get preferences => _preferences;
+
   /// 初始化
   void initBase() {
     Get.put(SCCustomScaffoldController());
@@ -53,24 +57,24 @@ class SCScaffoldManager {
 
   /// 初始化scaffold数据
   Future initScaffold() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    _preferences = await SharedPreferences.getInstance();
 
     bool hasScaffoldKey =
-        sharedPreferences.containsKey(SkinDefaultKey.scaffold_key);
+    _preferences.containsKey(SkinDefaultKey.scaffold_key);
 
     /// 引导页key
-    bool hasGuideKey = sharedPreferences.containsKey(SCKey.isShowGuide);
+    bool hasGuideKey = _preferences.containsKey(SCKey.isShowGuide);
 
     if (hasScaffoldKey) {
       String? scaffolfJsonString =
-          sharedPreferences.getString(SkinDefaultKey.scaffold_key);
+      _preferences.getString(SkinDefaultKey.scaffold_key);
       var localJson = jsonDecode(scaffolfJsonString ?? '');
       _scaffoldModel = SCScaffoldModel.fromJson(localJson);
       log('皮肤数据:${SCScaffoldManager.instance.scaffoldModel.toJson()}');
       log('皮肤已设置完成');
     } else {
       _scaffoldModel = SCScaffoldModel.fromJson(scaffoldJson);
-      sharedPreferences.setString(
+      _preferences.setString(
           SkinDefaultKey.scaffold_key, jsonEncode(scaffoldJson));
       log('设置皮肤完成');
     }
@@ -81,7 +85,9 @@ class SCScaffoldManager {
     state.setPrimaryColor(color);
     state.setTitleColor(
         SCHexColor(_scaffoldModel.titleColor ?? scaffoldJson['titleColor']));
-    return sharedPreferences;
+
+    getUserData();
+    return _preferences;
   }
 
   /// 获取Router的BasePath
@@ -178,6 +184,7 @@ class SCScaffoldManager {
     if (contains == true) {
       var data = SCSpUtil.getMap(SCKey.kUserData);
       _user = SCUser.fromJson(data);
+      print('本地数据：${_user.toJson()}');
       return _user;
     }
   }

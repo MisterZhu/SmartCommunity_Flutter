@@ -16,8 +16,6 @@ import 'package:smartcommunity/utils/sc_sp_utils.dart';
 void startApp() async {
   SCScaffoldManager.instance.initBase();
 
-  SCSpUtil.getInstance();
-
   SCLoadingUtils.initLoading();
 
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

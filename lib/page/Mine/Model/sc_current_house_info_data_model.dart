@@ -53,6 +53,8 @@ class ScCurrentHouseInfoDataModel {
 
   Housing? get housing => _housing;
 
+  String? get spaceType => _spaceType;
+
   List<AdoptMembers>? get underReviewMembers => _underReviewMembers;
 
   Map<String, dynamic> toJson() {
@@ -351,7 +353,7 @@ class ResidenceCertificate {
 /// gmtLiveEnd : ""
 /// gmtLiveStart : ""
 /// identity : ""
-/// identityId : ""
+/// identityId :
 /// name : ""
 /// phone : ""
 /// relation : 0

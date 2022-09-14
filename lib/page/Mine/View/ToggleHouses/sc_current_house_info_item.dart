@@ -70,10 +70,9 @@ class SCCurrentHouseInfoItem extends StatelessWidget {
   Widget contentListView() {
     List valueList = [
       infoModel.housing?.spaceName,
-      // infoModel.houseType == 0 ? '' : '',
-      // infoModel.owner,
-      // infoModel.identity == 1 ? '业主' : '租户', /// 测试数据
-      // infoModel.endDate
+      infoModel.spaceType,
+      "户主",
+      infoModel.housing?.identity
     ];
 
     return Column(
@@ -87,14 +86,7 @@ class SCCurrentHouseInfoItem extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               String name = nameList[index];
               int? type = 0;
-              // String content = valueList[index];
-              String content = '';
-              if (name == '房屋类型') {
-                // type = infoModel.houseType as int?;
-                content = '住宅';
-
-                ///  测试数据
-              }
+              String content = valueList[index];
               return contentCellItem(type!, name, content);
             },
             separatorBuilder: (BuildContext context, int index) {
@@ -102,7 +94,7 @@ class SCCurrentHouseInfoItem extends StatelessWidget {
                 height: 16,
               );
             },
-            itemCount: 1 == 1 ? 4 : 5)
+            itemCount: 4)
       ],
     );
   }

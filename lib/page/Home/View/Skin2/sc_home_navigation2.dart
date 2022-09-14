@@ -5,7 +5,6 @@ import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
 class SCHomeNavigation2 extends StatelessWidget {
-
   /// 背景颜色
   final Color? backgroundColor;
 
@@ -19,7 +18,7 @@ class SCHomeNavigation2 extends StatelessWidget {
   final bool isSticky;
 
   /// 房号文本数字数量
-  int titleMaxLength = 12;
+  final int? titleMaxLength;
 
   /// 房号
   final String? roomTitle;
@@ -30,17 +29,17 @@ class SCHomeNavigation2 extends StatelessWidget {
   /// 切换房号
   final Function? changeHouseAction;
 
-  SCHomeNavigation2(
-      {Key? key,
-        this.backgroundColor = Colors.transparent,
-        this.normalColor = Colors.white,
-        this.stickyColor = Colors.white,
-        this.isSticky = false,
-        this.roomTitle = '慧享生活馆',
-        this.changeHouseAction,
-        this.searchTitle = '搜索应用、商品、资讯',
-      })
-      : super(key: key);
+  SCHomeNavigation2({
+    Key? key,
+    this.backgroundColor = Colors.transparent,
+    this.normalColor = Colors.white,
+    this.stickyColor = Colors.white,
+    this.isSticky = false,
+    this.roomTitle = '慧享生活馆',
+    this.titleMaxLength = 10,
+    this.changeHouseAction,
+    this.searchTitle = '搜索应用、商品、资讯',
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,12 +73,22 @@ class SCHomeNavigation2 extends StatelessWidget {
 
   /// 房号Widget
   Widget roomItem() {
-    String title = roomTitle ?? '';
-    if (title.isNotEmpty && title != '') {
-      if (title.length > titleMaxLength) {
-        title = '${title.substring(0, titleMaxLength)}...';
-      }
+    TextStyle style = TextStyle(
+        fontSize: SCFonts.f14,
+        color: isSticky == true ? stickyColor : normalColor,
+        decoration: TextDecoration.none,
+        fontWeight: FontWeight.normal);
+    String roomString = roomTitle ?? '';
+    String title = "";
+    int maxLength = titleMaxLength ?? 10;
+
+    if (roomString.length > maxLength) {
+      /// 最多展示10个字
+      title = '${roomString.substring(0, maxLength)}...';
+    } else {
+      title = roomString;
     }
+
     return GestureDetector(
       onTap: () {
         changeHouse();
@@ -91,11 +100,7 @@ class SCHomeNavigation2 extends StatelessWidget {
             title,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
-            style: TextStyle(
-                fontSize: SCFonts.f14,
-                color: isSticky == true ? stickyColor : normalColor,
-                decoration: TextDecoration.none,
-                fontWeight: FontWeight.normal),
+            style: style,
           ),
           const SizedBox(
             width: 5.0,
@@ -113,34 +118,36 @@ class SCHomeNavigation2 extends StatelessWidget {
 
   /// Navigation-右侧按钮
   Widget rightActionsItem() {
-    return Row(
-      children: [
-        Image.asset(
-          SCAsset.iconNavSearchWhite,
-          width: 22.0,
-          height: 22.0,
-          color: isSticky == true ? stickyColor : normalColor,
-        ),
-        const SizedBox(
-          width: 16.0,
-        ),
-        Image.asset(
-          SCAsset.iconMessage,
-          width: 22.0,
-          height: 22.0,
-          color: isSticky == true ? stickyColor : normalColor,
-        ),
-        const SizedBox(
-          width: 16.0,
-        ),
-        Image.asset(
-          SCAsset.iconScan,
-          width: 22.0,
-          height: 22.0,
-          color: isSticky == true ? stickyColor : normalColor,
-        ),
-      ],
-    );
+    return Expanded(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Image.asset(
+              SCAsset.iconNavSearchWhite,
+              width: 22.0,
+              height: 22.0,
+              color: isSticky == true ? stickyColor : normalColor,
+            ),
+            const SizedBox(
+              width: 16.0,
+            ),
+            Image.asset(
+              SCAsset.iconMessage,
+              width: 22.0,
+              height: 22.0,
+              color: isSticky == true ? stickyColor : normalColor,
+            ),
+            const SizedBox(
+              width: 16.0,
+            ),
+            Image.asset(
+              SCAsset.iconScan,
+              width: 22.0,
+              height: 22.0,
+              color: isSticky == true ? stickyColor : normalColor,
+            ),
+          ],
+        ));
   }
 
   /// 背景颜色

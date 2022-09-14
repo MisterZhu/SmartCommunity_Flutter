@@ -1,9 +1,6 @@
 import 'dart:developer';
 
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'dart:developer';
-
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:smartcommunity/page/Mine/Model/Sc_current_house_info_data_model.dart';
 import 'package:smartcommunity/skin/Model/sc_user.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
@@ -26,6 +23,16 @@ class SCCurrentHouseController extends GetxController {
   @override
   onInit() {
     super.onInit();
+    var info = {
+      'id': '0',
+      'houseNumber': '慧享生活馆-小邑苑-11幢-1单元-101室',
+      'houseType': 1,
+      'owner': '张三',
+      'identity': 1,
+      'endDate': '2033-5-11',
+    };
+
+    // infoModel = SCCurrentHouseInfoModel.fromJson(info);
 
     var testList = [
       {
@@ -104,23 +111,219 @@ class SCCurrentHouseController extends GetxController {
 
   loadData() {
     SCLoadingUtils.show();
-    SCHttpManager.instance.get(
-        url: SCUrl.kCurrentHouseInfoUrl,
-        success: (value) {
-          log('当前房屋详情===$value');
-        },
-        failure: (value) {
-          String message = value['message'];
-        });
     // 取当前房号Id
     // todo wangtao 测试数据 待删除
-    var params = {'housingId': 112111271725101};
+    var params = {
+      'housingId': 112111271725101
+    };
     SCHttpManager.instance.get(
         url: SCUrl.kCurrentHouseInfoUrl,
         params: params,
         success: (value) {
-          infoModel = ScCurrentHouseInfoDataModel.fromJson(value);
+          log('当前房屋详情===$value');
+          var json = {
+            "adoptMembers": [
+              {
+                "examineStatus": 0,
+                "gmtLiveEnd": "2025-01-01",
+                "gmtLiveStart": "2022-01-01",
+                "housingId": "111",
+                "identity": "房东",
+                "identityId": "1",
+                "name": "小王",
+                "phone": "18700001111",
+                "relation": 0,
+                "residentId": ""
+              },
+              {
+                "examineStatus": 0,
+                "gmtLiveEnd": "2025-01-01",
+                "gmtLiveStart": "2022-01-01",
+                "housingId": "111",
+                "identity": "代理人",
+                "identityId": "2",
+                "name": "xiaoli",
+                "phone": "18710001111",
+                "relation": 0,
+                "residentId": ""
+              },
+              {
+                "examineStatus": 0,
+                "gmtLiveEnd": "2025-01-01",
+                "gmtLiveStart": "2022-01-01",
+                "housingId": "111",
+                "identity": "租客",
+                "identityId": "3",
+                "name": "xiaozhu",
+                "phone": "18710001111",
+                "relation": 0,
+                "residentId": ""
+              },
+              {
+                "examineStatus": 0,
+                "gmtLiveEnd": "2025-01-01",
+                "gmtLiveStart": "2022-01-01",
+                "housingId": "111",
+                "identity": "业主",
+                "identityId": "4",
+                "name": "xiaozhu",
+                "phone": "18710001111",
+                "relation": 0,
+                "residentId": ""
+              },
+              {
+                "examineStatus": 0,
+                "gmtLiveEnd": "2025-01-01",
+                "gmtLiveStart": "2022-01-01",
+                "housingId": "111",
+                "identity": "家属",
+                "identityId": "5",
+                "name": "xiaozhu",
+                "phone": "18710001111",
+                "relation": 0,
+                "residentId": ""
+              },
+              {
+                "examineStatus": 0,
+                "gmtLiveEnd": "2025-01-01",
+                "gmtLiveStart": "2022-01-01",
+                "housingId": "111",
+                "identity": "其他",
+                "identityId": "6",
+                "name": "xiaozhu",
+                "phone": "18710001111",
+                "relation": 0,
+                "residentId": ""
+              }
+            ],
+            "householders": [],
+            "housing": {
+              "id": "112111271725101",
+              "residentId": "112034494947101",
+              "communityId": "38f258cd-89c7-11ea-bf80-005056b167dc",
+              "communityName": null,
+              "spaceId": 110001674,
+              "spaceName": "海滨项目->测苑->1幢->1单元->101室",
+              "identityId": "107969136049704",
+              "identity": "",
+              "relation": 9,
+              "isPayer": 2,
+              "residenceCertificate": {
+                "fileKey": null,
+                "name": null,
+                "suffix": null,
+                "size": null,
+                "type": 1
+              },
+              "gmtJoin": null,
+              "gmtCheckIn": null,
+              "gmtDecorate": null,
+              "gmtQuit": null,
+              "gmtLiveStart": null,
+              "gmtLiveEnd": null,
+              "enterprise": null
+            },
+            "spaceType": "普通住房23",
+            "underReviewMembers": [
+              {
+                "examineStatus": 0,
+                "gmtLiveEnd": "2025-01-01",
+                "gmtLiveStart": "2022-01-01",
+                "housingId": "111",
+                "identity": "房东",
+                "identityId": "1",
+                "name": "小王",
+                "phone": "18700001111",
+                "relation": 0,
+                "residentId": ""
+              },
+              {
+                "examineStatus": 0,
+                "gmtLiveEnd": "2025-01-01",
+                "gmtLiveStart": "2022-01-01",
+                "housingId": "111",
+                "identity": "代理人",
+                "identityId": "2",
+                "name": "xiaoli",
+                "phone": "18710001111",
+                "relation": 0,
+                "residentId": ""
+              },
+              {
+                "examineStatus": 0,
+                "gmtLiveEnd": "2025-01-01",
+                "gmtLiveStart": "2022-01-01",
+                "housingId": "111",
+                "identity": "租客",
+                "identityId": "3",
+                "name": "xiaozhu",
+                "phone": "18710001111",
+                "relation": 0,
+                "residentId": ""
+              },
+              {
+                "examineStatus": 0,
+                "gmtLiveEnd": "2025-01-01",
+                "gmtLiveStart": "2022-01-01",
+                "housingId": "111",
+                "identity": "业主",
+                "identityId": "4",
+                "name": "xiaozhu",
+                "phone": "18710001111",
+                "relation": 0,
+                "residentId": ""
+              },
+              {
+                "examineStatus": 0,
+                "gmtLiveEnd": "2025-01-01",
+                "gmtLiveStart": "2022-01-01",
+                "housingId": "111",
+                "identity": "家属",
+                "identityId": "5",
+                "name": "xiaozhu",
+                "phone": "18710001111",
+                "relation": 0,
+                "residentId": ""
+              },
+              {
+                "examineStatus": 0,
+                "gmtLiveEnd": "2025-01-01",
+                "gmtLiveStart": "2022-01-01",
+                "housingId": "111",
+                "identity": "其他",
+                "identityId": "6",
+                "name": "xiaozhu",
+                "phone": "18710001111",
+                "relation": 0,
+                "residentId": ""
+              }
+            ]
+          };
+          infoModel = ScCurrentHouseInfoDataModel.fromJson(json);
+          // infoModel = ScCurrentHouseInfoDataModel.fromJson(value);
         },
+        failure: (value) {
+          String message = value['message'];
+        });
+  }
+
+  /// 确认通过
+  confirmPass(){
+    SCHttpManager.instance.put(
+        url: SCUrl.kExaminePass,
+        params: {'housingId': ''},
+        success: (value) {},
+        failure: (value) {
+          String message = value['message'];
+        });
+  }
+
+  /// 确认拒绝
+  confirmReject(){
+    SCHttpManager.instance.put(
+        url: SCUrl.kExamineReject,
+        params: {'housingId': ''},
+        success: (value) {},
         failure: (value) {
           String message = value['message'];
         });

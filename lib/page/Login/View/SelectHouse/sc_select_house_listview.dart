@@ -324,15 +324,10 @@ class _SCSelectHouseListViewState
       SCRouterHelper.codePage(5002, params);
     } else if (widget.type == SCSelectHouseLogicType.addHouse) {
       var params = {
-        'communityId': '${navigatorList[0].communityId}',
         'houseId': houseId,
-        'valueList': valueList,
-        'type': widget.type
+        'houseName': houseName,
       };
-
-      /// todo wangtao 处理栈
-      String? path = SCRouterPages.pageCode[5002];
-      Get.offNamedUntil(path!, (route) => true, arguments: params);
+      SCRouterHelper.back(params);
     }
   }
 

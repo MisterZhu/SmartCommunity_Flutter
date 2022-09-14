@@ -62,6 +62,7 @@ class SCBasePrivacyState extends State<SCBasePrivacyPage> {
         isAgree: state.isAgree,
         titleString: state.title,
         contentString: state.content,
+        descriptionString: state.description,
         userAgreementUrl: SCAgreement.userAgreementUrl,
         privacyPolicyUrl: SCAgreement.privacyProtocolUrl,
         cancelAction: (){
