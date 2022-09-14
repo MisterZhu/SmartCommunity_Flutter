@@ -28,7 +28,7 @@ class SCServiceController extends GetxController {
   @override
   onInit() {
     super.onInit();
-    //addRegularAppData();
+    testData();
   }
 
   addRegularAppData() {
@@ -56,17 +56,39 @@ class SCServiceController extends GetxController {
       }
     ];
 
-    var regularData = {"module": {"id": "0", "name": "常用应用"}, "applets": homeTestList};
+    regularAppList = homeTestList.map((e) => Applets.fromJson(e)).toList();
+
+    var regularData = {"module": {"id": "0", "name": "常用应用"}, "applets": []};
     SCServiceModuleModel regularModel = SCServiceModuleModel.fromJson(regularData);
     appList.insert(0, regularModel);
 
   }
-
   testData() {
 
     var testList = [
       {
         "applets": [
+          {
+            "icon": {
+              "fileKey": "",
+              "name": SCAsset.iconServiceQrCode,
+              "size": 0,
+              "suffix": "",
+              "type": 0
+            },
+            "id": "1",
+            "name": "业主二维码"
+          },{
+            "icon": {
+              "fileKey": "",
+              "name": SCAsset.iconServiceCar,
+              "size": 0,
+              "suffix": "",
+              "type": 0
+            },
+            "id": "2",
+            "name": "公务用车"
+          },
           {
             "icon": {
               "fileKey": "",
@@ -159,7 +181,7 @@ class SCServiceController extends GetxController {
     ];
 
     appList = testList.map((e) => SCServiceModuleModel.fromJson(e)).toList();
-
+    addRegularAppData();
   }
 
   /// 获取应用列表数据
