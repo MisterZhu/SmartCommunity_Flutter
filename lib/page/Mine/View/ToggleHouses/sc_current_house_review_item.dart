@@ -313,7 +313,8 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
       context: context,
       dataList: dataList,
       isShowCancel: true,
-      onTap: (index, context) {
+      isCloseDialog: true,
+      onTap: (index, subContext) {
         if (index == 0 || index == 1) {
           showConfirmDialog(context, index);
         } else if (index == 2) {

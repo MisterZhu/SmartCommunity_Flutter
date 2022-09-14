@@ -120,6 +120,10 @@ class SCDialogUtils {
       bool? isCloseDialog,
       Function(int index, BuildContext context)? onTap,
       Function(BuildContext context)? onCancelTap}) {
+    /// -1为取消
+    int currentIndex = -1;
+    BuildContext currentContext;
+
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
@@ -134,16 +138,23 @@ class SCDialogUtils {
             customCancelModel: cancelModel,
             isCloseDialog: isCloseDialog,
             onTap: (int index, BuildContext context) {
-              if (onTap != null) {
-                onTap?.call(index, context);
-              }
+              currentIndex = index;
+              currentContext = context;
             },
             onCancelTap: (BuildContext context) {
-              if (onCancelTap != null) {
-                onCancelTap?.call(context);
-              }
+              currentContext = context;
             },
           );
-        });
+        }).then((value) {
+          if (currentIndex == -1) {// 取消
+            if (onCancelTap != null) {
+              onCancelTap?.call(context);
+            }
+          } else {// 其他
+            if (onTap != null) {
+              onTap?.call(currentIndex, context);
+            }
+          }
+    });
   }
 }
