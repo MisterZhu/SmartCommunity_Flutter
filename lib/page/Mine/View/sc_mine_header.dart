@@ -21,14 +21,22 @@ class SCMineHeaderItem extends StatelessWidget {
   /// 用户名
   final String userName = '李莉莉';
 
-  /// 设置
+  /// 点击设置
   final Function? settingTap;
+
+  /// 点击头像
+  final Function? headerTap;
+
+  /// 点击会员
+  final Function? membershipTap;
 
   const SCMineHeaderItem(
       {Key? key,
       this.backgroundImageUrl = SCAsset.iconMineBackground,
       this.backgroundImageScale = 750.0 / 380.0,
-      this.settingTap
+      this.settingTap,
+      this.headerTap,
+      this.membershipTap
       })
       : super(key: key);
 
@@ -82,25 +90,35 @@ class SCMineHeaderItem extends StatelessWidget {
         height: 48.0,
         child: Row(
           children: [
-            Image.asset(
-              SCAsset.iconMineUserHead,
-              width: 48.0,
-              height: 48.0,
-              fit: BoxFit.cover,
+            GestureDetector(
+              onTap: (){
+                headerAction();
+              },
+              child: Image.asset(
+                SCAsset.iconMineUserHead,
+                width: 48.0,
+                height: 48.0,
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(
               width: 12.0,
             ),
             Expanded(
-              child: Text(
-                userName,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.left,
-                style: const TextStyle(
-                  fontSize: SCFonts.f16,
-                  color: SCColors.color_1B1D33,
-                  fontWeight: FontWeight.w500,
+              child: GestureDetector(
+                onTap: () {
+                  headerAction();
+                },
+                child: Text(
+                  userName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                    fontSize: SCFonts.f16,
+                    color: SCColors.color_1B1D33,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ),
@@ -139,11 +157,16 @@ class SCMineHeaderItem extends StatelessWidget {
   Widget memberInfoBackgroundImageItem() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.0),
-      child: AspectRatio(
-        aspectRatio: memberBackgroundImageScale,
-        child: Image.asset(
-          SCAsset.iconMineMemberBackground,
-          fit: BoxFit.cover,
+      child: GestureDetector(
+        onTap: (){
+          membershipAction();
+        },
+        child: AspectRatio(
+          aspectRatio: memberBackgroundImageScale,
+          child: Image.asset(
+            SCAsset.iconMineMemberBackground,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );
@@ -232,10 +255,24 @@ class SCMineHeaderItem extends StatelessWidget {
         ));
   }
 
-  /// 设置
+  /// 点击设置
   settingAction() {
     if (settingTap != null) {
       settingTap?.call();
+    }
+  }
+
+  /// 点击头像
+  headerAction() {
+    if (headerTap != null) {
+      headerTap?.call();
+    }
+  }
+
+  /// 点击会员
+  membershipAction() {
+    if (membershipTap != null) {
+      membershipTap?.call();
     }
   }
 }

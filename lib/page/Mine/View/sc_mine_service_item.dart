@@ -13,6 +13,11 @@ class SCMineServiceItem extends StatelessWidget {
     {'iconUrl': SCAsset.iconMineAddress, 'title': '我的地址'},
   ];
 
+  /// 点击
+  final Function(int index)? onTap;
+
+  SCMineServiceItem({Key? key, this.onTap}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return body();
@@ -21,7 +26,7 @@ class SCMineServiceItem extends StatelessWidget {
   /// body
   Widget body() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -44,6 +49,7 @@ class SCMineServiceItem extends StatelessWidget {
             return titleItem(title: dataList[index]['title']);
           } else {
             return contentItem(
+              index: index - 1,
                 title: dataList[index]['title'],
                 iconUrl: dataList[index]['iconUrl']);
           }
@@ -73,42 +79,47 @@ class SCMineServiceItem extends StatelessWidget {
   }
 
   /// 内容item
-  Widget contentItem({required String title, required String iconUrl}) {
-    return Container(
-      alignment: Alignment.centerLeft,
-      height: 40.0,
-      child: Row(
-        children: [
-          Image.asset(
-            iconUrl,
-            width: 16.0,
-            height: 16.0,
-            fit: BoxFit.contain,
-          ),
-          const SizedBox(
-            width: 9.0,
-          ),
-          Expanded(
-              child: Text(
-            title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.left,
-            style: const TextStyle(
-                fontSize: SCFonts.f16,
-                fontWeight: FontWeight.w400,
-                color: SCColors.color_1B1D33),
-          )),
-          const SizedBox(
-            width: 9.0,
-          ),
-          Image.asset(
-            SCAsset.iconMineDetailGrey,
-            width: 16.0,
-            height: 16.0,
-            fit: BoxFit.cover,
-          ),
-        ],
+  Widget contentItem({required String title, required String iconUrl, required int index}) {
+    return GestureDetector(
+      onTap: () {
+        detailAction(index: index);
+      },
+      child: Container(
+        alignment: Alignment.centerLeft,
+        height: 40.0,
+        child: Row(
+          children: [
+            Image.asset(
+              iconUrl,
+              width: 16.0,
+              height: 16.0,
+              fit: BoxFit.contain,
+            ),
+            const SizedBox(
+              width: 9.0,
+            ),
+            Expanded(
+                child: Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                      fontSize: SCFonts.f16,
+                      fontWeight: FontWeight.w400,
+                      color: SCColors.color_1B1D33),
+                )),
+            const SizedBox(
+              width: 9.0,
+            ),
+            Image.asset(
+              SCAsset.iconMineDetailGrey,
+              width: 16.0,
+              height: 16.0,
+              fit: BoxFit.cover,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -116,5 +127,12 @@ class SCMineServiceItem extends StatelessWidget {
   /// separator
   Widget separatorItem() {
     return const SizedBox();
+  }
+
+  /// 详情
+  detailAction({required int index}) {
+    if (onTap != null) {
+      onTap?.call(index);
+    }
   }
 }

@@ -13,8 +13,6 @@ import '../View/Skin1/sc_home_skin1.dart';
 import '../View/Skin2/sc_home_skin2.dart';
 
 class SCHomePage extends StatefulWidget {
-  const SCHomePage({Key? key}) : super(key: key);
-
   @override
   SCHomeState createState() => SCHomeState();
 }

@@ -89,6 +89,12 @@ class SCMineListView extends StatelessWidget {
       settingTap: (){
         SCRouterHelper.codePage(5003, null);
       },
+      headerTap: () {
+        workOrder();
+      },
+      membershipTap: () {
+        workOrder();
+      },
     );
   }
 
@@ -105,18 +111,18 @@ class SCMineListView extends StatelessWidget {
   Widget scoreCell() {
     return SCMineScoreItem(
       onTap: (int index) {
-        String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
-        String token = SCScaffoldManager.instance.user.token ?? "";
-        String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
-        String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
-        SCRouterHelper.codePage(20000, {"title" : "工单", "url" : url});
+        workOrder();
       },
     );
   }
 
   /// 我的钱包-cell
   Widget walletCell() {
-    return SCMineWalletItem();
+    return SCMineWalletItem(
+      onTap: () {
+        workOrder();
+      },
+    );
   }
 
   /// 我的资产-cell
@@ -130,7 +136,11 @@ class SCMineListView extends StatelessWidget {
 
   /// 我的服务-cell
   Widget serviceCell() {
-    return SCMineServiceItem();
+    return SCMineServiceItem(
+      onTap: (int index) {
+        workOrder();
+      },
+    );
   }
 
   /// 测试-cell
@@ -152,5 +162,14 @@ class SCMineListView extends StatelessWidget {
     scrollController.addListener(() {
       scrollFunction?.call(scrollController.offset);
     });
+  }
+
+  /// 测试数据-工单
+  workOrder() {
+    String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+    String token = SCScaffoldManager.instance.user.token ?? "";
+    String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
+    String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
+    SCRouterHelper.codePage(20000, {"title" : "工单", "url" : url});
   }
 }

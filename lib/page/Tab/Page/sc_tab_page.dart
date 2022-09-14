@@ -24,7 +24,7 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
   List<Widget> pageList = [
     SCHomePage(),
     SCServicePage(),
-    SCFindPage(),
+    // SCFindPage(),
     SCMinePage()
   ];
   List<BottomNavigationBarItem> tabbarItems = [
@@ -38,11 +38,11 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
       activeIcon: Image.asset(SCAsset.iconSelectedService),
       label: '服务',
     ),
-    BottomNavigationBarItem(
-      icon: Image.asset(SCAsset.iconNormalFind),
-      activeIcon: Image.asset(SCAsset.iconSelectedFind),
-      label: '发现',
-    ),
+    // BottomNavigationBarItem(
+    //   icon: Image.asset(SCAsset.iconNormalFind),
+    //   activeIcon: Image.asset(SCAsset.iconSelectedFind),
+    //   label: '发现',
+    // ),
     BottomNavigationBarItem(
       icon: Image.asset(SCAsset.iconNormalMine),
       activeIcon: Image.asset(SCAsset.iconSelectedMine),
@@ -72,8 +72,8 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
     return Scaffold(
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
-        controller: this.pageController,
-        children: this.pageList,
+        controller: pageController,
+        children: pageList,
       ),
       bottomNavigationBar: Theme(
           data: ThemeData(
@@ -83,8 +83,8 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
           child: CupertinoTabBar(
             activeColor: SCColors.color_1B1C33,
             inactiveColor: SCColors.color_8A8A8A,
-            items: this.tabbarItems,
-            currentIndex: this.currentIndex,
+            items: tabbarItems,
+            currentIndex: currentIndex,
             backgroundColor: Colors.white,
             onTap: tabbarTap,
           )),
@@ -114,7 +114,7 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
     } else if (index == 1) {
       SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.dark);
     } else if (index == 2) {
-      SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.light);
+      SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.dark);
     } else {
       SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.dark);
     }

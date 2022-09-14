@@ -22,6 +22,11 @@ class SCMineWalletItem extends StatelessWidget {
   /// 进入钱包按钮标题
   final String gotoWalletTitle = '进入钱包';
 
+  /// 点击
+  final Function? onTap;
+
+  SCMineWalletItem({Key? key, this.onTap}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return body();
@@ -33,20 +38,25 @@ class SCMineWalletItem extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(4.0),
-        ),
-        child: Column(
-          children: [
-            titleItem(),
-            SizedBox(
-              height: isDataEmpty ? 0.0 : 16.0,
-            ),
-            contentItem(),
-          ],
+      child: GestureDetector(
+        onTap: () {
+          gotoWalletAction();
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 12.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(4.0),
+          ),
+          child: Column(
+            children: [
+              titleItem(),
+              SizedBox(
+                height: isDataEmpty ? 0.0 : 16.0,
+              ),
+              contentItem(),
+            ],
+          ),
         ),
       ),
     );
@@ -198,5 +208,12 @@ class SCMineWalletItem extends StatelessWidget {
           color: SCColors.color_5E5F66,
           fontWeight: FontWeight.w400),
     );
+  }
+
+  /// 进入钱包
+  gotoWalletAction() {
+    if (onTap != null) {
+      onTap?.call();
+    }
   }
 }
