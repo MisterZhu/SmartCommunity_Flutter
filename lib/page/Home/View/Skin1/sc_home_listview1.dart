@@ -14,19 +14,22 @@ import 'package:smartcommunity/page/Home/View/sc_home_news_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_swiper.dart';
 import 'package:smartcommunity/widgets/Refresh/sc_refresh_footer.dart';
 import 'package:smartcommunity/widgets/Refresh/sc_refresh_header.dart';
+import '../../../../constants/sc_default_value.dart';
+import '../../../../constants/sc_h5.dart';
+import '../../../../skin/Tools/sc_scaffold_manager.dart';
+import '../../../../utils/Router/sc_router_helper.dart';
 import '../sc_home_feature_item.dart';
 
 class SCHomeListView1 extends StatelessWidget {
   SCHomeListView1(
       {Key? key,
-        this.scrollFunction,
-        required this.dataList,
-        required this.bannerList,
-        this.bannerBGScale = 750.0 / 544.0,
-        this.bannerScale = 686.0 / 280.0,
-        this.bannerCurrentIndex = 0,
-        this.bannerBackgroundImageUrl = SCAsset.homeBannerBG1
-      })
+      this.scrollFunction,
+      required this.dataList,
+      required this.bannerList,
+      this.bannerBGScale = 750.0 / 544.0,
+      this.bannerScale = 686.0 / 280.0,
+      this.bannerCurrentIndex = 0,
+      this.bannerBackgroundImageUrl = SCAsset.homeBannerBG1})
       : super(key: key);
 
   /// listView数据源
@@ -127,6 +130,9 @@ class SCHomeListView1 extends StatelessWidget {
       bannerList: bannerList,
       backgroundImageUrl: bannerBackgroundImageUrl,
       currentIndex: bannerCurrentIndex,
+      onTap: (int index) {
+        workOrder();
+      },
     );
     // return GetBuilder<SCHomeController>(builder: (state) {
     //   String url = state.allBannerBGList.isEmpty
@@ -144,25 +150,45 @@ class SCHomeListView1 extends StatelessWidget {
 
   /// 应用列表-cell
   Widget itemsCell() {
-    return SCHomeAllItem(itemList: state.allItemsList);
+    return SCHomeAllItem(
+      itemList: state.allItemsList,
+      onTap: (int index) {
+        workOrder();
+      },
+    );
   }
 
   /// 活动列表-cell
   Widget activityCell() {
     return SCHomeActivityItem(
       activityList: state.allActivityImageList,
+      onTap: (int index) {
+        workOrder();
+      },
     );
   }
 
   /// 精选商家-cell
   Widget featureCell() {
-    return SCHomeFeatureItem(cell1Style: state.homeFeatureStyle1, cell2Style: state.homeFeatureStyle2,);
+    return SCHomeFeatureItem(
+      cell1Style: state.homeFeatureStyle1,
+      cell2Style: state.homeFeatureStyle2,
+      firstTap: (int index){
+        workOrder();
+      },
+      secondTap: (int index){
+        workOrder();
+      },
+    );
   }
 
   /// 资讯-cell
   Widget newsCell() {
     return SCHomeNewsItem(
       newsList: state.allNewsList,
+      onTap: (int index){
+        workOrder();
+      },
     );
   }
 
@@ -170,7 +196,11 @@ class SCHomeListView1 extends StatelessWidget {
   Widget imageCell() {
     return SCHomeImageItem(
       onTap: (int index) {},
-      imageList: [SCAsset.homeBanner1, SCAsset.homeBanner1, SCAsset.homeBanner1],
+      imageList: [
+        SCAsset.homeBanner1,
+        SCAsset.homeBanner1,
+        SCAsset.homeBanner1
+      ],
       imageWidth: 686.0,
       imageHeight: 220.0,
       bigImageLeft: false,
@@ -181,7 +211,12 @@ class SCHomeListView1 extends StatelessWidget {
   Widget gridImageCell() {
     return SCHomeGridImageItem(
       onTap: (int index) {},
-      imageList: [SCAsset.homeBanner1, SCAsset.homeBanner1, SCAsset.homeBanner1, SCAsset.homeBanner1],
+      imageList: [
+        SCAsset.homeBanner1,
+        SCAsset.homeBanner1,
+        SCAsset.homeBanner1,
+        SCAsset.homeBanner1
+      ],
       imageWidth: 686.0,
       imageHeight: 220.0,
     );
@@ -196,7 +231,9 @@ class SCHomeListView1 extends StatelessWidget {
       imageList: state.allBannerBGList,
       normalColor: state.swiper_normal_color,
       activeColor: state.swiper_active_color,
-      onTap: (int index) {},
+      onTap: (int index) {
+        workOrder();
+      },
     );
   }
 
@@ -244,5 +281,23 @@ class SCHomeListView1 extends StatelessWidget {
     Future.delayed(Duration(seconds: 3), () {
       state.refreshController.finishLoad(success: true);
     });
+  }
+
+  /// 测试数据-工单
+  workOrder() {
+    String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+    String token = SCScaffoldManager.instance.user.token ?? "";
+    String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
+    String url = SCH5.workOrderUrl +
+        "?" +
+        "defCommunityId=" +
+        defCommunityId +
+        "&Authorization=" +
+        token +
+        "&defRoomId=" +
+        defRoomId +
+        "&client=" +
+        SCDefaultValue.client;
+    SCRouterHelper.codePage(20000, {"title": "工单", "url": url});
   }
 }

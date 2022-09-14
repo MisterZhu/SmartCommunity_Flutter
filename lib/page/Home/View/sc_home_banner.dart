@@ -16,7 +16,9 @@ class SCHomeBanner extends StatelessWidget {
       required this.bannerScale,
       required this.bannerList,
       required this.backgroundImageUrl,
-      required this.currentIndex})
+      required this.currentIndex,
+      this.onTap
+      })
       : super(key: key);
 
   /// banner背景图片比例
@@ -34,14 +36,22 @@ class SCHomeBanner extends StatelessWidget {
   /// banner当前Index
   final int currentIndex;
 
+  /// 点击回调
+  final Function(int index)? onTap;
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        backgroundImage(),
-        bottomRadiusBar(context),
-        banner(context),
-      ],
+    return GestureDetector(
+      onTap: () {
+        bannerTap();
+      },
+      child: Stack(
+        children: [
+          backgroundImage(),
+          bottomRadiusBar(context),
+          banner(context),
+        ],
+      ),
     );
   }
 
@@ -110,5 +120,13 @@ class SCHomeBanner extends StatelessWidget {
   void changeIndex({int? index}) {
     SCHomeController1 state = Get.find<SCHomeController1>();
     state.changeBannerIndex(index: index ?? 0);
+  }
+
+  /// banner点击
+  bannerTap() {
+    if (onTap != null) {
+      SCHomeController1 state = Get.find<SCHomeController1>();
+      onTap?.call(state.bannerCurrentIndex);
+    }
   }
 }

@@ -11,7 +11,9 @@ class SCHomeNewsItem extends StatefulWidget {
 
   List<SCHomeNewsModel>? newsList;
 
-  SCHomeNewsItem({Key? key, required this.newsList}) : super(key: key);
+  final Function(int index)? onTap;
+
+  SCHomeNewsItem({Key? key, required this.newsList, this.onTap}) : super(key: key);
 
   @override
   SCHomeNewsItemState createState() => SCHomeNewsItemState();
@@ -123,7 +125,7 @@ class SCHomeNewsItemState extends State<SCHomeNewsItem>
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             SCHomeNewsModel model = widget.newsList![index];
-            return gridCellItem(model: model);
+            return gridCellItem(model: model, index: index);
           },
           staggeredTileBuilder: (int index) {
             return const StaggeredTile.fit(1);
@@ -132,28 +134,35 @@ class SCHomeNewsItemState extends State<SCHomeNewsItem>
   }
 
   /// 资讯-网格cellItem
-  Widget gridCellItem({SCHomeNewsModel? model}) {
-    return Container(
-      padding: EdgeInsets.only(bottom: 14.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(6.0),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          imageItem(model: model),
-          SizedBox(
-            height: 8.0,
-          ),
-          titleItem(model: model),
-          SizedBox(
-            height: 6.0,
-          ),
-          pubTimeItem(model: model)
-        ],
+  Widget gridCellItem({SCHomeNewsModel? model, required int index}) {
+    return GestureDetector(
+      onTap: () {
+        if (widget.onTap != null) {
+          widget.onTap?.call(index);
+        }
+      },
+      child: Container(
+        padding: EdgeInsets.only(bottom: 14.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(6.0),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            imageItem(model: model),
+            SizedBox(
+              height: 8.0,
+            ),
+            titleItem(model: model),
+            SizedBox(
+              height: 6.0,
+            ),
+            pubTimeItem(model: model)
+          ],
+        ),
       ),
     );
   }

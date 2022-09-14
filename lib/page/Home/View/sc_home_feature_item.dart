@@ -11,7 +11,10 @@ class SCHomeFeatureItem extends StatelessWidget {
   SCHomeFeatureItem(
       {Key? key,
       this.cell1Style = SCHomeFeatureStyle.featureStyle1,
-      this.cell2Style = SCHomeFeatureStyle.featureStyle2})
+      this.cell2Style = SCHomeFeatureStyle.featureStyle2,
+      this.firstTap,
+      this.secondTap
+      })
       : super(key: key);
 
   /// 标题字体大小
@@ -28,6 +31,12 @@ class SCHomeFeatureItem extends StatelessWidget {
 
   /// 第二个cell的style
   final SCHomeFeatureStyle cell2Style;
+
+  /// 第一个cell的点击
+  final Function(int index)? firstTap;
+
+  /// 第二个cell的点击
+  final Function(int index)? secondTap;
 
   @override
   Widget build(BuildContext context) {
@@ -62,21 +71,21 @@ class SCHomeFeatureItem extends StatelessWidget {
   Widget getCell(int index) {
     if (index == 0) {
       if (cell1Style == SCHomeFeatureStyle.featureStyle1) {
-        return cellStyle1();
+        return cellStyle1(index);
       } else {
-        return cellStyle2();
+        return cellStyle2(index);
       }
     } else {
       if (cell2Style == SCHomeFeatureStyle.featureStyle1) {
-        return cellStyle1();
+        return cellStyle1(index);
       } else {
-        return cellStyle2();
+        return cellStyle2(index);
       }
     }
   }
 
   /// 第一种样式cell
-  Widget cellStyle1() {
+  Widget cellStyle1(int index) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 6.0),
       decoration: BoxDecoration(
@@ -93,14 +102,24 @@ class SCHomeFeatureItem extends StatelessWidget {
           SizedBox(
             height: 6.0,
           ),
-          cellStyle1ImageWidget(url: SCAsset.homeMerchant)
+          cellStyle1ImageWidget(url: SCAsset.homeMerchant, onTap: (){
+            if (index == 0) {
+              if (firstTap != null) {
+                firstTap?.call(0);
+              }
+            } else {
+              if (secondTap != null) {
+                secondTap?.call(0);
+              }
+            }
+          })
         ],
       ),
     );
   }
 
   /// 第二种样式cell
-  Widget cellStyle2() {
+  Widget cellStyle2(int index) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 6.0),
       decoration: BoxDecoration(
@@ -114,11 +133,21 @@ class SCHomeFeatureItem extends StatelessWidget {
               tag: '今日超低价',
               tagTextColor: Colors.white,
               tagBackgroundColor: SCColors.color_FF6C00),
-          SizedBox(
+          const SizedBox(
             height: 6.0,
           ),
           cellStyle2ImageWidget(
-              imageList: [SCAsset.homeDiscount1, SCAsset.homeDiscount2])
+              imageList: [SCAsset.homeDiscount1, SCAsset.homeDiscount2], onTap: (int subIndex){
+            if (index == 0) {
+              if (firstTap != null) {
+                firstTap?.call(subIndex);
+              }
+            } else {
+              if (secondTap != null) {
+                secondTap?.call(subIndex);
+              }
+            }
+          })
         ],
       ),
     );
@@ -145,20 +174,27 @@ class SCHomeFeatureItem extends StatelessWidget {
   }
 
   /// 第一种样式cell-image
-  Widget cellStyle1ImageWidget({String url = ''}) {
+  Widget cellStyle1ImageWidget({String url = '', Function? onTap}) {
     /// 图片比例
     double imageScale = 311.0 / 156.0;
 
-    return AspectRatio(
-        aspectRatio: imageScale,
-        child: Image.asset(
-          url,
-          fit: BoxFit.cover,
-        ));
+    return GestureDetector(
+      onTap: (){
+        if (onTap != null) {
+          onTap?.call();
+        }
+      },
+      child: AspectRatio(
+          aspectRatio: imageScale,
+          child: Image.asset(
+            url,
+            fit: BoxFit.cover,
+          )),
+    );
   }
 
   /// 第二种样式cell-image
-  Widget cellStyle2ImageWidget({List? imageList}) {
+  Widget cellStyle2ImageWidget({List? imageList, Function(int index)? onTap}) {
     /// 图片比例
     double imageScale = 150.0 / 156.0;
 
@@ -171,12 +207,17 @@ class SCHomeFeatureItem extends StatelessWidget {
         itemCount: imageList?.length,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          return AspectRatio(
-              aspectRatio: imageScale,
-              child: Image.asset(
-                imageList?[index],
-                fit: BoxFit.cover,
-              ));
+          return GestureDetector(
+            onTap: (){
+              onTap?.call(index);
+            },
+            child: AspectRatio(
+                aspectRatio: imageScale,
+                child: Image.asset(
+                  imageList?[index],
+                  fit: BoxFit.cover,
+                )),
+          );
         },
         staggeredTileBuilder: (int index) {
           return const StaggeredTile.fit(1);

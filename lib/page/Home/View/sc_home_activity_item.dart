@@ -31,7 +31,10 @@ class SCHomeActivityItem extends StatelessWidget {
   /// listview-separator宽度
   final double separatorSize = 5.0;
 
-  const SCHomeActivityItem({Key? key, required this.activityList}) : super(key: key);
+  /// 点击回调
+  final Function(int index)? onTap;
+
+  const SCHomeActivityItem({Key? key, required this.activityList, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -99,18 +102,23 @@ class SCHomeActivityItem extends StatelessWidget {
 
   /// cell
   Widget activityCell(int index) {
-    return Container(
-      width: imageSize,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          activityImageItem(index),
-          SizedBox(
-            height: activityTitleTopSpace,
-          ),
-          activityTitleItem(),
-          activityContentItem(),
-        ],
+    return GestureDetector(
+      onTap: () {
+        itemTap(index: index);
+      },
+      child: SizedBox(
+        width: imageSize,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            activityImageItem(index),
+            SizedBox(
+              height: activityTitleTopSpace,
+            ),
+            activityTitleItem(),
+            activityContentItem(),
+          ],
+        ),
       ),
     );
   }
@@ -166,5 +174,12 @@ class SCHomeActivityItem extends StatelessWidget {
   /// 活动内容文本高度
   double activityContentHeight() {
     return (activityContentFont + 6) * scale;
+  }
+
+  /// item点击
+  itemTap({required int index}) {
+    if (onTap != null) {
+      onTap?.call(index);
+    }
   }
 }
