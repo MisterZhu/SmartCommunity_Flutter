@@ -86,4 +86,8 @@ class SCUser {
     return map;
   }
 
+  @override
+  String toString() {
+    return 'SCUser{id: $id, account: $account, userName: $userName, nickName: $nickName, mobileNum: $mobileNum, state: $state, gender: $gender, birthday: $birthday, creatorName: $creatorName, gmtCreate: $gmtCreate, operatorName: $operatorName, gmtModify: $gmtModify, token: $token, communityId: $communityId, communityName: $communityName, housingId: $housingId, spaceId: $spaceId, spaceName: $spaceName, identityId: $identityId}';
+  }
 }
