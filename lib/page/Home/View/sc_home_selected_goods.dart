@@ -36,6 +36,11 @@ class SCHomeSelectedGoodsItem extends StatelessWidget {
     {'imageUrl' : SCAsset.homeGoods4, 'tagImageUrl' : SCAsset.homeGoodsTag2, 'price' : '456'},
   ];
 
+  /// cell点击事件
+  final Function(int index)? tapAction;
+
+  SCHomeSelectedGoodsItem({Key? key, this.tapAction}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return body();
@@ -163,24 +168,31 @@ class SCHomeSelectedGoodsItem extends StatelessWidget {
   /// 商品cell
   Widget shoppingCell({required int index}) {
     var model = dataList[index];
-    return Container(
-      width: 76.0,
-      color: Colors.white,
-      child: Column(
-        children: [
-          goodsImage(url: model['imageUrl']),
-          const SizedBox(
-            height: 6.0,
-          ),
-          goodsTagImage(url: model['tagImageUrl']),
-          const SizedBox(
-            height: 6.0,
-          ),
-          goodsPriceText(price: model['price']),
-          const SizedBox(
-            height: 6.0,
-          ),
-        ],
+    return GestureDetector(
+      onTap: () {
+        if (tapAction != null) {
+          tapAction?.call(index);
+        }
+      },
+      child: Container(
+        width: 76.0,
+        color: Colors.white,
+        child: Column(
+          children: [
+            goodsImage(url: model['imageUrl']),
+            const SizedBox(
+              height: 6.0,
+            ),
+            goodsTagImage(url: model['tagImageUrl']),
+            const SizedBox(
+              height: 6.0,
+            ),
+            goodsPriceText(price: model['price']),
+            const SizedBox(
+              height: 6.0,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -12,11 +12,16 @@ class SCHomeCommunityActivity extends StatelessWidget {
 
   final List activityList;
 
+  /// cell点击事件
+  final Function(int index)? tapAction;
+
   /// 图片宽度
   final double imageWidth = (SCUtils().getScreenWidth() - 56.0) / 3.0;
 
-  SCHomeCommunityActivity({Key? key, required this.activityList})
-      : super(key: key);
+  SCHomeCommunityActivity({Key? key,
+    required this.activityList,
+    this.tapAction
+  }): super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -86,46 +91,53 @@ class SCHomeCommunityActivity extends StatelessWidget {
 
   /// cell
   Widget activityCell(int index) {
-    return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(2.0)),
-      width: imageWidth,
-      height: cellHeight(),
-      child: Stack(
-        alignment: Alignment.bottomLeft,
-        children: [
-          activityImageItem(index),
-          Padding(
-            padding: const EdgeInsets.only(right: 1),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(2.0),
-                gradient: const LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color.fromRGBO(0, 0, 0, 0),
-                    Color.fromRGBO(0, 0, 0, 0.6),
-                  ],
+    return GestureDetector(
+      onTap: () {
+        if (tapAction != null) {
+          tapAction?.call(index);
+        }
+      },
+      child: Container(
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(2.0)),
+        width: imageWidth,
+        height: cellHeight(),
+        child: Stack(
+          alignment: Alignment.bottomLeft,
+          children: [
+            activityImageItem(index),
+            Padding(
+              padding: const EdgeInsets.only(right: 1),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(2.0),
+                  gradient: const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color.fromRGBO(0, 0, 0, 0),
+                      Color.fromRGBO(0, 0, 0, 0.6),
+                    ],
+                  ),
+                ),
+                height: 30.0,
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+              child: Text(
+                '',
+                textAlign: TextAlign.left,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: TextStyle(
+                  color: SCColors.color_FFFFFF,
+                  fontSize: SCFonts.f12,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-              height: 30.0,
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
-            child: Text(
-              '',
-              textAlign: TextAlign.left,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style: TextStyle(
-                color: SCColors.color_FFFFFF,
-                fontSize: SCFonts.f12,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

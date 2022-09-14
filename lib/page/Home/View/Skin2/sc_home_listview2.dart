@@ -6,7 +6,11 @@ import 'package:smartcommunity/page/Home/View/sc_home_life.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_selected_goods.dart';
 
 import '../../../../constants/sc_asset.dart';
+import '../../../../constants/sc_default_value.dart';
+import '../../../../constants/sc_h5.dart';
 import '../../../../constants/sc_type_define.dart';
+import '../../../../skin/Tools/sc_scaffold_manager.dart';
+import '../../../../utils/Router/sc_router_helper.dart';
 import '../../../../widgets/Refresh/sc_refresh_footer.dart';
 import '../../../../widgets/Refresh/sc_refresh_header.dart';
 import '../../GetXController/sc_home_controller2.dart';
@@ -113,21 +117,42 @@ class SCHomeListView2 extends StatelessWidget {
       SCAsset.homeActivity4,
       SCAsset.homeActivity5,
       SCAsset.homeActivity6
-    ],);
+    ],tapAction: (index) {
+      /// cell点击跳转
+      String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+      String token = SCScaffoldManager.instance.user.token ?? "";
+      String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
+      String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
+      SCRouterHelper.codePage(20000, {"title" : '园区活动', "url" : url});
+    },);
   }
 
   /// 美好生活
   Widget lifeCell() {
-    return const SCHomeLife(dataList: [
+    return SCHomeLife(dataList: [
       SCAsset.homeLife1,
       SCAsset.homeLife2,
       SCAsset.homeLife1,
-    ]);
+    ], tapAction: (index) {
+      /// cell点击跳转
+      String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+      String token = SCScaffoldManager.instance.user.token ?? "";
+      String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
+      String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
+      SCRouterHelper.codePage(20000, {"title" : '美好生活', "url" : url});
+    },);
   }
 
   /// 精选商品cell
   Widget goodsCell() {
-    return SCHomeSelectedGoodsItem();
+    return SCHomeSelectedGoodsItem(tapAction: (index) {
+      /// cell点击跳转
+      String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+      String token = SCScaffoldManager.instance.user.token ?? "";
+      String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
+      String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
+      SCRouterHelper.codePage(20000, {"title" : '精选商品', "url" : url});
+    },);
   }
 
   /// 测试-cell

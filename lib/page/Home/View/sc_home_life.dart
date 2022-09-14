@@ -15,7 +15,10 @@ class SCHomeLife extends StatelessWidget {
 
   final double imageHeight = 78.0;
 
-  const SCHomeLife({Key? key, required this.dataList}) : super(key: key);
+  /// cell点击事件
+  final Function(int index)? tapAction;
+
+  const SCHomeLife({Key? key, required this.dataList, this.tapAction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -82,22 +85,29 @@ class SCHomeLife extends StatelessWidget {
 
   /// cell
   Widget activityCell(int index) {
-    return Container(
-      width: 156.0,
-      height: 114.0,
-      color: SCColors.color_FFFFFF,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          activityImageItem(index),
-          const SizedBox(
-            height: 4.0,
-          ),
-          activityTitleItem(),
-          const SizedBox(
-            height: 12.0,
-          ),
-        ],
+    return GestureDetector(
+      onTap: () {
+        if (tapAction != null) {
+          tapAction?.call(index);
+        }
+      },
+      child: Container(
+        width: 156.0,
+        height: 114.0,
+        color: SCColors.color_FFFFFF,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            activityImageItem(index),
+            const SizedBox(
+              height: 4.0,
+            ),
+            activityTitleItem(),
+            const SizedBox(
+              height: 12.0,
+            ),
+          ],
+        ),
       ),
     );
   }
