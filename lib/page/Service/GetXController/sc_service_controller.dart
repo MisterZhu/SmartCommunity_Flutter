@@ -63,8 +63,8 @@ class SCServiceController extends GetxController {
     appList.insert(0, regularModel);
 
   }
-  testData() {
 
+  testData() {
     var testList = [
       {
         "applets": [
