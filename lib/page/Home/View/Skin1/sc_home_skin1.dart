@@ -38,8 +38,8 @@ class SCHomeSkin1 extends StatelessWidget {
       /// 应用列表
       {'type': SCTypeDefine.SC_HOME_TYPE_ALLITEMS, 'data': []},
 
-      /// 图片
-      {'type': SCTypeDefine.SC_HOME_TYPE_IMAGE, 'data': []},
+      // /// 图片
+      // {'type': SCTypeDefine.SC_HOME_TYPE_IMAGE, 'data': []},
 
       /// 热门活动
       {'type': SCTypeDefine.SC_HOME_TYPE_ACTIVITY, 'data': []},
@@ -47,17 +47,17 @@ class SCHomeSkin1 extends StatelessWidget {
       /// 精选商家
       {'type': SCTypeDefine.SC_HOME_TYPE_FEATURE, 'data': []},
 
-      /// 网格图片
-      {'type': SCTypeDefine.SC_HOME_TYPE_GRID, 'data': []},
+      // /// 网格图片
+      // {'type': SCTypeDefine.SC_HOME_TYPE_GRID, 'data': []},
 
-      /// swiper广告图
-      {'type': SCTypeDefine.SC_HOME_TYPE_SWIPER, 'data': []},
+      // /// swiper广告图
+      // {'type': SCTypeDefine.SC_HOME_TYPE_SWIPER, 'data': []},
+      //
+      // /// swiper广告图
+      // {'type': SCTypeDefine.SC_HOME_TYPE_SWIPER, 'data': []},
 
-      /// swiper广告图
-      {'type': SCTypeDefine.SC_HOME_TYPE_SWIPER, 'data': []},
-
-      /// 精选商家
-      {'type': SCTypeDefine.SC_HOME_TYPE_FEATURE, 'data': []},
+      // /// 精选商家
+      // {'type': SCTypeDefine.SC_HOME_TYPE_FEATURE, 'data': []},
 
       /// 精选资讯
       {'type': SCTypeDefine.SC_HOME_TYPE_NEWS, 'data': []},

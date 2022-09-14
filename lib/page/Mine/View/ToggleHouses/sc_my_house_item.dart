@@ -16,7 +16,10 @@ class SCMyHouseItem extends StatelessWidget {
 
   final SCMyHouseModel model;
 
-  const SCMyHouseItem({Key? key, required this.model}) : super(key: key);
+  /// 切换
+  final Function? changeAction;
+
+  const SCMyHouseItem({Key? key, required this.model, this.changeAction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -119,16 +122,9 @@ class SCMyHouseItem extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          /// 切换,把项目id存在用户信息里
-          SCUser user = SCScaffoldManager.instance.getUserData();
-          user.housingId = model.id;
-          user.communityId = model.communityId;
-          user.communityName = model.communityName;
-          user.spaceId = model.spaceId;
-          user.spaceName = model.spaceName;
-          user.identityId = model.identityId;
-          SCScaffoldManager.instance.cacheUserData(user.toJson());
-          state.updateCurrentHousingId(model.id);
+          if (changeAction != null) {
+            changeAction?.call();
+          }
         },
       );
     });

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
+import 'package:smartcommunity/page/Home/GetXController/sc_home_controller.dart';
 import 'package:smartcommunity/page/Mine/View/ToggleHouses/sc_my_house_item.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
@@ -14,6 +15,8 @@ import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_enum.dart';
 import '../../../constants/sc_fonts.dart';
+import '../../../skin/Model/sc_user.dart';
+import '../../../skin/Tools/sc_scaffold_manager.dart';
 import '../GetXController/sc_current_house_controller.dart';
 import '../GetXController/sc_my_house_controller.dart';
 import '../GetXController/sc_toggle_houses_controller.dart';
@@ -209,7 +212,9 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
           padding: const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 0),
           itemBuilder: (BuildContext context, int index) {
             SCMyHouseModel model = state.dataList[index];
-            return SCMyHouseItem(model: model,);
+            return SCMyHouseItem(model: model,changeAction: () {
+              changeHouseAction(model: model);
+            },);
           },
           separatorBuilder: (BuildContext context, int index) {
             return const SizedBox(height: 0.5,);
@@ -325,6 +330,23 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
   loadCurrentHouseBasicData(){
     SCCurrentHouseController state = Get.find<SCCurrentHouseController>();
     state.loadData();
+  }
+
+  /// 切换房屋
+  changeHouseAction({required SCMyHouseModel model}) {
+    SCMyHouseController state = Get.find<SCMyHouseController>();
+    SCHomeController homeController = Get.find<SCHomeController>();
+    /// 切换,把项目id存在用户信息里
+    SCUser user = SCScaffoldManager.instance.getUserData();
+    user.housingId = model.id;
+    user.communityId = model.communityId;
+    user.communityName = model.communityName;
+    user.spaceId = model.spaceId;
+    user.spaceName = model.spaceName;
+    user.identityId = model.identityId;
+    SCScaffoldManager.instance.cacheUserData(user.toJson());
+    state.updateCurrentHousingId(model.id);
+    homeController.changeHouse(model: model);
   }
 
 }
