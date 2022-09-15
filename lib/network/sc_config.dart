@@ -11,11 +11,11 @@ class SCConfig {
       case SCEnvironment.develop:
         return "https://jmdev.wisharetec.com";
       case SCEnvironment.pretest:
-        return "https://shushuapitest.4001113900.com:10020";
+        return "https://jmdev.wisharetec.com";
       case SCEnvironment.production:
-        return "https://saasprod.4001113900.com:10020";
+        return "https://jmdev.wisharetec.com";
       default:
-        return "https://yshk8s.lcfw.co";
+        return "https://jmdev.wisharetec.com";
     }
   }
 
