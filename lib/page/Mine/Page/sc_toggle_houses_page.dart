@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
@@ -10,6 +9,8 @@ import 'package:smartcommunity/page/Home/GetXController/sc_home_controller.dart'
 import 'package:smartcommunity/page/Mine/View/ToggleHouses/sc_my_house_item.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
+import 'package:smartcommunity/widgets/Dialog/sc_base_dialog.dart';
+import 'package:smartcommunity/widgets/Dialog/sc_dialog_utils.dart';
 
 import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_colors.dart';
@@ -314,7 +315,7 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
                   ),
               ),
               onPressed: () {
-
+                showConfirmDialog();
               }),
         ),
       ),
@@ -347,6 +348,35 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
     SCScaffoldManager.instance.cacheUserData(user.toJson());
     state.updateCurrentHousingId(model.id);
     homeController.changeHouse(model: model);
+  }
+
+  /// 确认弹窗
+  showConfirmDialog() {
+    SCDialogUtils.instance.showMiddleDialog(
+      context: context,
+      title: '解除绑定',
+      content: '是否解绑当前房号？',
+      isNeedCloseDiaLog: true,
+      customWidgetButtons: [
+        defaultCustomButton(context,
+            text: '取消',
+            textColor: SCColors.color_1B1C33,
+            fontWeight: FontWeight.w400),
+        TextButton(
+            onPressed: () {
+              unbindHouse();
+            },
+            child: const Text('确定',
+                style: TextStyle(
+                    color: SCColors.color_FF6C00, fontSize: SCFonts.f16)))
+      ],
+    );
+  }
+
+  /// 解绑房屋
+  unbindHouse() {
+    SCCurrentHouseController state = Get.find<SCCurrentHouseController>();
+    state.unBindHouse();
   }
 
 }

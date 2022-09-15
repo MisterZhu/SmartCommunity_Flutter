@@ -112,9 +112,11 @@ class SCCurrentHouseController extends GetxController {
   loadData() {
     SCLoadingUtils.show();
     // 取当前房号Id
-    // todo wangtao 测试数据 待删除
+   SCUser scUser = SCScaffoldManager.instance.getUserData();
+   String? housingId = scUser.housingId;
+   log('housingId  $housingId');
     var params = {
-      'housingId': 112111271725101
+      'housingId': housingId
     };
     SCHttpManager.instance.get(
         url: SCUrl.kCurrentHouseInfoUrl,

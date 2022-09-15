@@ -38,7 +38,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
   List nameList = ['所居住小区', '房号', '身份'];
   List? valueList = [];
   String? communityId = '';
-  String? houseId = '';
+  String? spaceId = '';
   String? identityId = '';
 
   SCSelectHouseLogicType type = SCSelectHouseLogicType.login;
@@ -52,12 +52,12 @@ class SCAddHouseState extends State<SCAddHousePage> {
     if (params != null) {
       valueList = params['valueList'];
       communityId = params['communityId'];
-      houseId = params['houseId'];
+      spaceId = params['houseId'];
       type = params['type'];
 
       print('print--> valueList: ${valueList}');
       print('print--> communityId: ${communityId}');
-      print('print--> houseId: ${houseId}');
+      print('print--> houseId: ${spaceId}');
 
       if (communityId != '') {
         // 获取身份信息
@@ -158,7 +158,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
                 valueList?[0] = value['communityName'];
 
                 /// 选好了之后置空其余选择
-                houseId = '';
+                spaceId = '';
                 valueList?[1] = '';
                 identityId = '';
                 valueList?[2] = '';
@@ -179,7 +179,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
             };
             SCRouterHelper.codePage(20001, params)?.then((value) {
               if (value != null) {
-                houseId = value['houseId'];
+                spaceId = value['houseId'];
                 valueList?[1] = value['houseName'];
                 setState(() {});
               }
@@ -402,27 +402,30 @@ class SCAddHouseState extends State<SCAddHousePage> {
         params: {
           'communityId': communityId,
           'identityId': identityId,
-          'spaceId': houseId
+          'spaceId': spaceId
         },
         success: (value) {
+          log('返回值 $value');
+
           /// 1.toast 提示成功
           SCToast.showTip('提交成功 我们会尽快为您审核');
 
           /// 2.存储数据到SCUser
-          log('SCScaffoldManager.instance.getUserData()--> ${SCScaffoldManager.instance.getUserData()}');
           SCUser scUser = SCScaffoldManager.instance.getUserData();
-          log('SCUser--> ${scUser}');
           scUser.communityId = communityId;
           scUser.communityName = valueList?[0];
-          scUser.housingId = houseId;
+          scUser.spaceId = int.parse(spaceId!);
+          scUser.housingId = value;
           SCScaffoldManager.instance.cacheUserData(scUser.toJson());
 
+          log('type: ${type}');
           /// 3.栈
           if (type == SCSelectHouseLogicType.login) {
             // 如果是从登录进入，就直接进入主页
             SCRouterHelper.codeOffAllPage(10000, null);
           } else {
             // todo wangtao 是否是登录逻辑
+            SCRouterHelper.back(null);
           }
         },
         failure: (value) {

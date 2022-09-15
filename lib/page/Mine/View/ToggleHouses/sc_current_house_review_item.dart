@@ -66,7 +66,6 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 state.updateSelectIndex(0);
-                log('点击了已审核');
               },
               child: Padding(
                 padding:
@@ -91,7 +90,6 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 state.updateSelectIndex(1);
-                log('点击了未审核');
               },
               child: Text(
                 '未审核',
@@ -288,6 +286,7 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
     );
   }
 
+  /// 底部弹窗
   showBottomDialog(BuildContext context) {
     List<SCBottomSheetModel> dataList = [];
     SCBottomSheetModel scBottomSheetModel1 = SCBottomSheetModel(
@@ -326,7 +325,7 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
 
   /// 确认弹窗
   showConfirmDialog(BuildContext context, int index) {
-    print('${index == 0 ? '审核通过' : '拒绝'}');
+    log(index == 0 ? '通过' : '拒绝');
     SCDialogUtils.instance.showMiddleDialog(
       context: context,
       title: index == 0 ? '审核通过' : '拒绝',
@@ -339,12 +338,12 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
         TextButton(
             onPressed: () {
               if (index == 0) {
-                SCToast.showTip('通过');
+                confirmPass();
               } else {
-                SCToast.showTip('拒绝');
+                confirmReject();
               }
             },
-            child: Text('确定',
+            child: const Text('确定',
                 style: TextStyle(
                     color: SCColors.color_FF6C00, fontSize: SCFonts.f16)))
       ],
