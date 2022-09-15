@@ -214,7 +214,7 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
           itemBuilder: (BuildContext context, int index) {
             SCMyHouseModel model = state.dataList[index];
             return SCMyHouseItem(model: model,changeAction: () {
-              changeHouseAction(model: model);
+              showToggleConfirmDialog(model: model);
             },);
           },
           separatorBuilder: (BuildContext context, int index) {
@@ -331,6 +331,32 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
   loadCurrentHouseBasicData(){
     SCCurrentHouseController state = Get.find<SCCurrentHouseController>();
     state.loadData();
+  }
+
+  /// 切换房屋确认弹窗
+  showToggleConfirmDialog({required SCMyHouseModel model}) {
+    SCDialogUtils.instance.showMiddleDialog(
+      context: context,
+      title: '是否切换至',
+      content: model.spaceName,
+      isNeedCloseDiaLog: true,
+      customWidgetButtons: [
+        defaultCustomButton(context,
+            text: '取消',
+            textColor: SCColors.color_1B1C33,
+            fontWeight: FontWeight.w400),
+        TextButton(
+            onPressed: () {
+              changeHouseAction(model: model);
+              Navigator.of(context).pop();
+            },
+            child: const Text(
+                '确定',
+                style: TextStyle(
+                    color: SCColors.color_FF6C00,
+                    fontSize: SCFonts.f16)))
+      ],
+    );
   }
 
   /// 切换房屋

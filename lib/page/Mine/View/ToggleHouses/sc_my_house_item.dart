@@ -7,10 +7,9 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import '../../../../constants/sc_asset.dart';
 import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_fonts.dart';
-import '../../../../skin/Model/sc_user.dart';
-import '../../../../skin/Tools/sc_scaffold_manager.dart';
 import '../../GetXController/sc_my_house_controller.dart';
 import '../../Model/sc_my_house_model.dart';
+
 /// 我的房号cell
 class SCMyHouseItem extends StatelessWidget {
 
@@ -30,7 +29,7 @@ class SCMyHouseItem extends StatelessWidget {
   Widget body() {
     return Container(
       color: SCColors.color_FFFFFF,
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
@@ -38,8 +37,8 @@ class SCMyHouseItem extends StatelessWidget {
           Expanded(child: leftItem()),
           const SizedBox(width: 24.0,),
           rightItem()
-      ],
-    )
+       ],
+      )
     );
   }
 
