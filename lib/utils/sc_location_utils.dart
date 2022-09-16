@@ -51,19 +51,13 @@ class SCLocationUtils {
         var data = response['regeocode'];
         SCLocationModel model = SCLocationModel.fromJson(data);
 
-        if (success != null) {
-          success?.call(model);
-        }
+        success?.call(model);
       } else {
-        if (failure != null) {
-          failure?.call(SCDefaultValue.errorMessage);
-        }
+        failure?.call(SCDefaultValue.errorMessage);
       }
     }, failure: (error) {
       log('位置失败:$error');
-      if (failure != null) {
-        failure?.call(SCDefaultValue.errorMessage);
-      }
+      failure?.call(SCDefaultValue.errorMessage);
     });
   }
 }

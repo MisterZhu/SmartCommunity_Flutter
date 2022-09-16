@@ -1,5 +1,5 @@
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
@@ -30,53 +30,31 @@ class SCCommunityListView extends StatelessWidget {
 
   /// body
   Widget body() {
-    return Container(
+    return communityList!.isNotEmpty ? Container(
       color: SCColors.color_FFFFFF,
       child: EasyRefresh(
-          header: ClassicalHeader(
-            refreshText: '下拉刷新',
-            refreshReadyText: '释放刷新',
-            refreshingText: '刷新中...',
-            refreshedText: '刷新完成',
-            refreshFailedText: '刷新失败',
-            noMoreText: '没有更多',
+          header: const CupertinoHeader(
+              userWaterDrop: false
           ),
-          footer: ClassicalFooter(
-            bgColor: Colors.transparent,
-            //  更多信息文字颜色
-            infoColor: SCColors.color_1B1C33,
-            // 字体颜色
-            textColor: SCColors.color_1B1C33,
-            // 加载失败时显示的文字
-            loadText: '加载失败',
-            // 没有更多时显示的文字
-            noMoreText: '',
-            // 是否显示提示信息
-            showInfo: false,
-            // 正在加载时的文字
-            loadingText: '加载中...',
-            // 准备加载时显示的文字
-            loadReadyText: '上拉加载更多',
-            // 加载完成显示的文字
-            loadedText: '加载完成',
+          footer: const CupertinoFooter(
+
           ),
-          emptyWidget: communityList!.isNotEmpty ? null : emptyView(),
           onLoad: onLoadMore,
           onRefresh: onRefresh,
           controller: communityController.refreshController,
           child: ListView.separated(
-            shrinkWrap: true,
-            itemBuilder: (BuildContext context, int index) {
-              SCCommunityModel model = communityList![index];
-              return getCell(model: model);
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return const SizedBox();
-            },
-            itemCount: communityList?.length ?? 0)
+              shrinkWrap: true,
+              padding: EdgeInsets.zero,
+              itemBuilder: (BuildContext context, int index) {
+                SCCommunityModel model = communityList![index];
+                return getCell(model: model);
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox();
+              },
+              itemCount: communityList?.length ?? 0)
       ),
-    );
-
+    ) : emptyView();
   }
 
   Widget emptyView() {
@@ -105,6 +83,7 @@ class SCCommunityListView extends StatelessWidget {
   }
 
   Future onRefresh() async{
+    communityController.refreshController.finishLoad();
     communityController.loadCommunityData(isLoadMore: false);
   }
 

@@ -242,13 +242,18 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
     log('返回的参数:$backParams');
     String city = backParams['selectCity'] ?? '';
     String cityCode = backParams['selectCityCode'] ?? '';
-    searchState.updateSelectCity(city: city ?? '', code: cityCode ?? '');
+    searchState.updateSelectCity(city: city, code: cityCode);
     loadData();
   }
 
+  /// 加载数据
   loadData() {
     SCSelectCommunityController state = Get.find<SCSelectCommunityController>();
-    state.loadCommunityData();
+    if (state.communityList.isEmpty) {
+      state.loadCommunityData();
+    } else {
+      state.refreshController.callRefresh();
+    }
   }
 
 }

@@ -202,8 +202,8 @@ class SCSelectCityState extends State<SCSelectCityPage> with WidgetsBindingObser
         for(int i=0; i < state.cityList!.length; i++) {
           SCCityModel cityModel = state.cityList![i];
           String name = cityModel.name;
-          String namePinYin = cityModel?.namePinyin ?? '';
-          String tagIndex = cityModel?.tagIndex ?? '';
+          // String namePinYin = cityModel?.namePinyin ?? '';
+          // String tagIndex = cityModel?.tagIndex ?? '';
           if (name.contains(value)) {
             list.add(cityModel);
           }

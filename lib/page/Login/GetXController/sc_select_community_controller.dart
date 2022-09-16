@@ -1,8 +1,7 @@
-
 import 'dart:developer';
 
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_search_community_controller.dart';
 import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
@@ -29,7 +28,11 @@ class SCSelectCommunityController extends GetxController {
   /// 选择的社区
   SCCommunityModel? selectCommunityModel;
 
-  EasyRefreshController refreshController = EasyRefreshController();
+  /// 园区范围，默认5000米
+  int range = 5000;
+
+  EasyRefreshController refreshController = EasyRefreshController(
+      controlFinishLoad: true, controlFinishRefresh: true);
 
   int currentPage = 1;
   int pageSize = 100;
@@ -40,6 +43,7 @@ class SCSelectCommunityController extends GetxController {
 
   updateKeyword(String value) {
     keyword = value;
+
     /// 先清空之前的数据，再请求数据
     searchList = [];
     update();
@@ -70,11 +74,13 @@ class SCSelectCommunityController extends GetxController {
     update();
   }
 
-  loadCommunityData({bool isLoadMore = false}) async{
+  /// 选择城市后获取园区数据
+  loadCommunityData({bool isLoadMore = false}) async {
     if (isLoadMore == false) {
       SCLoadingUtils.show();
     }
-    SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
+    SCSearchCommunityController searchState =
+        Get.find<SCSearchCommunityController>();
 
     if (searchState.selectCity == '' && searchState.latitude == 0.0) {
       /// 没定位也没选择的城市，页面不请求数据
@@ -86,12 +92,23 @@ class SCSelectCommunityController extends GetxController {
               'latitude': searchState.latitude,
               'longitude': searchState.longitude,
               'city': searchState.locationCity,
-              'range': 5000},
+              'range': range
+            },
             success: (value) {
-              communityList = List<SCCommunityModel>.from(value.map((e) => SCCommunityModel.fromJson(e)).toList());
+              communityList = List<SCCommunityModel>.from(
+                  value.map((e) => SCCommunityModel.fromJson(e)).toList());
+              if (communityList.isEmpty) {
+                refreshController.finishRefresh(IndicatorResult.success);
+                refreshController.finishLoad(IndicatorResult.noMore);
+              } else {
+                refreshController.finishRefresh(IndicatorResult.success);
+                refreshController.finishLoad(IndicatorResult.noMore);
+              }
               updateCommunityList(list: communityList);
             },
             failure: (value) {
+              refreshController.finishRefresh(IndicatorResult.success);
+              refreshController.finishLoad(IndicatorResult.noMore);
               if (value['message'] != null) {
                 String message = value['message'];
                 SCToast.showTip(message);
@@ -107,35 +124,47 @@ class SCSelectCommunityController extends GetxController {
         }
 
         SCHttpManager.instance.post(
-          url: SCUrl.kSearchCommunityByCityUrl,
-          params: {'conditions': {'city': searchState.selectCity}, 'pageNum':curPage, 'pageSize': pageSize},
-          success: (value) {
-            log('通过城市获取项目数据===$value');
-            var data = value['records'];
-            List<SCCommunityModel> dataList = List<SCCommunityModel>.from(data.map((e) => SCCommunityModel.fromJson(e)).toList());
-            if (isLoadMore) {
-              if (dataList.isNotEmpty) {
-                communityList.addAll(dataList!);
-                currentPage++;
+            url: SCUrl.kSearchCommunityByCityUrl,
+            params: {
+              'conditions': {'city': searchState.selectCity},
+              'pageNum': curPage,
+              'pageSize': pageSize
+            },
+            success: (value) {
+              log('通过城市获取项目数据===$value');
+              var data = value['records'];
+              List<SCCommunityModel> dataList = List<SCCommunityModel>.from(
+                  data.map((e) => SCCommunityModel.fromJson(e)).toList());
+              if (isLoadMore) {
+                if (dataList.isNotEmpty) {
+                  communityList.addAll(dataList);
+                  currentPage++;
+                  refreshController.finishLoad(IndicatorResult.success);
+                } else {
+                  refreshController.finishLoad(IndicatorResult.noMore);
+                }
+              } else {
+                communityList = dataList;
+                refreshController.finishRefresh(IndicatorResult.none);
+                refreshController.resetFooter();
               }
-            } else {
-              communityList = dataList;
-            }
-            refreshController.finishRefresh(success: true);
-            updateCommunityList(list: communityList);
-          },
-          failure: (value) {
-            log('请求失败=====$value');
-            if (value['message'] != null) {
-              String message = value['message'];
-              SCToast.showTip(message);
-            }
-            updateCommunityList(list: []);
-          });
+              updateCommunityList(list: communityList);
+            },
+            failure: (value) {
+              log('请求失败=====$value');
+              refreshController.finishRefresh(IndicatorResult.success);
+              refreshController.finishLoad(IndicatorResult.success);
+              if (value['message'] != null) {
+                String message = value['message'];
+                SCToast.showTip(message);
+              }
+              updateCommunityList(list: []);
+            });
       }
     }
   }
 
+  /// 搜索园区数据
   loadSearchResultData({bool isLoadMore = false}) {
     if (isLoadMore == false) {
       SCLoadingUtils.show();
@@ -146,7 +175,8 @@ class SCSelectCommunityController extends GetxController {
     } else {
       currentPage = 1;
     }
-    SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
+    SCSearchCommunityController searchState =
+        Get.find<SCSearchCommunityController>();
 
     String city = searchState.selectCity;
     if (searchState.selectCity == '') {
@@ -154,23 +184,34 @@ class SCSelectCommunityController extends GetxController {
     }
     SCHttpManager.instance.post(
         url: SCUrl.kSearchCommunityByCityUrl,
-        params: {'conditions': {'city': city, 'name': keyword}, 'pageNum': curPage, 'pageSize': pageSize},
+        params: {
+          'conditions': {'city': city, 'name': keyword},
+          'pageNum': curPage,
+          'pageSize': pageSize
+        },
         success: (value) {
           var data = value['records'];
           //log('搜索结果data===$data');
-          List<SCCommunityModel> dataList = List<SCCommunityModel>.from(data.map((e) => SCCommunityModel.fromJson(e)).toList());
+          List<SCCommunityModel> dataList = List<SCCommunityModel>.from(
+              data.map((e) => SCCommunityModel.fromJson(e)).toList());
           if (isLoadMore) {
             if (dataList.isNotEmpty) {
-              communityList.addAll(dataList!);
+              communityList.addAll(dataList);
               currentPage++;
+              refreshController.finishLoad(IndicatorResult.success);
+            } else {
+              refreshController.finishLoad(IndicatorResult.noMore);
             }
           } else {
             communityList = dataList;
+            refreshController.finishRefresh(IndicatorResult.success);
+            refreshController.resetFooter();
           }
-          refreshController.finishRefresh(success: true);
           updateSearchList(list: communityList);
         },
         failure: (value) {
+          refreshController.finishRefresh(IndicatorResult.success);
+          refreshController.resetFooter();
           log('请求失败=====$value');
           if (value['message'] != null) {
             String message = value['message'];
@@ -178,5 +219,11 @@ class SCSelectCommunityController extends GetxController {
           }
           updateSearchList(list: []);
         });
+  }
+
+  @override
+  onClose() {
+    super.onClose();
+    refreshController.dispose();
   }
 }

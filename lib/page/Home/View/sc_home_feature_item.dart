@@ -180,9 +180,7 @@ class SCHomeFeatureItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: (){
-        if (onTap != null) {
-          onTap?.call();
-        }
+        onTap?.call();
       },
       child: AspectRatio(
           aspectRatio: imageScale,

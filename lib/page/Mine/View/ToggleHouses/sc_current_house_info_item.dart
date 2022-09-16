@@ -87,7 +87,7 @@ class SCCurrentHouseInfoItem extends StatelessWidget {
               String name = nameList[index];
               int? type = 0;
               String content = valueList[index];
-              return contentCellItem(type!, name, content);
+              return contentCellItem(type, name, content);
             },
             separatorBuilder: (BuildContext context, int index) {
               return const SizedBox(

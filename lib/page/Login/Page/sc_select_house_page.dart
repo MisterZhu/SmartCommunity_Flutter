@@ -113,9 +113,7 @@ class _SCSelectHousePageState extends State<SCSelectHousePage> {
             return _navigatorItem(state.navigatorList[index], index,
                 (state.navigatorList.length - 1) == index);
           },
-          itemCount: (state.navigatorList?.length != null)
-              ? (state.navigatorList.length)
-              : 0,
+          itemCount: state.navigatorList.length,
         ),
       );
     });

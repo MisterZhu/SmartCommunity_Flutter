@@ -1,6 +1,6 @@
 /// 首页第一套皮肤-listview
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_type_define.dart';
@@ -12,8 +12,6 @@ import 'package:smartcommunity/page/Home/View/sc_home_image_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_items.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_news_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_swiper.dart';
-import 'package:smartcommunity/widgets/Refresh/sc_refresh_footer.dart';
-import 'package:smartcommunity/widgets/Refresh/sc_refresh_header.dart';
 import '../../../../constants/sc_default_value.dart';
 import '../../../../constants/sc_h5.dart';
 import '../../../../skin/Tools/sc_scaffold_manager.dart';
@@ -64,10 +62,12 @@ class SCHomeListView1 extends StatelessWidget {
         controller: state.refreshController,
         onLoad: onLoad,
         onRefresh: onRefresh,
-        scrollController: scrollController,
-        header: SCRefreshHeader(),
-        footer: SCRefreshFooter(),
+        header: const CupertinoHeader(
+            userWaterDrop: false,
+        ),
+        footer: const CupertinoFooter(),
         child: ListView.separated(
+          controller: scrollController,
             padding: EdgeInsets.zero,
             shrinkWrap: true,
             itemBuilder: (BuildContext context, int index) {
@@ -118,6 +118,7 @@ class SCHomeListView1 extends StatelessWidget {
   /// 监听滑动
   void scrollNotify() {
     scrollController.addListener(() {
+      print("滑动:${scrollController.offset}");
       scrollFunction?.call(scrollController.offset);
     });
   }
@@ -266,20 +267,23 @@ class SCHomeListView1 extends StatelessWidget {
     //   });
     // });
     /// 当网络请求时间不超过2秒
-    Future.delayed(Duration(milliseconds: 100), () {
-      state.refreshController.finishRefresh(success: true);
-      Future.delayed(Duration(milliseconds: 1800), () {
-        state.isRefreshing = false;
-        state.changeNavigationState(offset: 0.0);
-      });
-    });
+    state.refreshController.finishRefresh(IndicatorResult.success);
+    state.isRefreshing = false;
+    state.changeNavigationState(offset: 0.0);
+    // Future.delayed(Duration(milliseconds: 100), () {
+    //   state.refreshController.finishRefresh(IndicatorResult.success);
+    //   Future.delayed(Duration(milliseconds: 1800), () {
+    //     state.isRefreshing = false;
+    //     state.changeNavigationState(offset: 0.0);
+    //   });
+    // });
   }
 
   /// 上拉加载
   Future onLoad() async {
     print('加载');
     Future.delayed(Duration(seconds: 3), () {
-      state.refreshController.finishLoad(success: true);
+      state.refreshController.finishLoad();
     });
   }
 

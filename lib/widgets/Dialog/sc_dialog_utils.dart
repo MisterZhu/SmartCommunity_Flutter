@@ -147,13 +147,9 @@ class SCDialogUtils {
           );
         }).then((value) {
           if (currentIndex == -1) {// 取消
-            if (onCancelTap != null) {
-              onCancelTap?.call(context);
-            }
+            onCancelTap?.call(context);
           } else {// 其他
-            if (onTap != null) {
-              onTap?.call(currentIndex, context);
-            }
+            onTap?.call(currentIndex, context);
           }
     });
   }

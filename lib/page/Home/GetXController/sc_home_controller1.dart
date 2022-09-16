@@ -1,8 +1,8 @@
 /// 首页皮肤1-GetxController
 import 'dart:developer';
 
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
@@ -46,7 +46,8 @@ class SCHomeController1 extends GetxController {
   /// 房号文本数字数量
   int titleMaxLength = 10;
 
-  EasyRefreshController refreshController = EasyRefreshController();
+  EasyRefreshController refreshController = EasyRefreshController(controlFinishRefresh: true,
+    controlFinishLoad: true,);
 
   /// 所有应用
   List allItemsList = [
@@ -166,5 +167,11 @@ class SCHomeController1 extends GetxController {
     isRefreshing = false;
     bannerCurrentIndex = 0;
     update();
+  }
+
+  @override
+  onClose() {
+    super.onClose();
+    refreshController.dispose();
   }
 }

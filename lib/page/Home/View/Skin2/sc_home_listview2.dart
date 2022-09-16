@@ -1,5 +1,5 @@
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_life.dart';
@@ -11,8 +11,6 @@ import '../../../../constants/sc_h5.dart';
 import '../../../../constants/sc_type_define.dart';
 import '../../../../skin/Tools/sc_scaffold_manager.dart';
 import '../../../../utils/Router/sc_router_helper.dart';
-import '../../../../widgets/Refresh/sc_refresh_footer.dart';
-import '../../../../widgets/Refresh/sc_refresh_header.dart';
 import '../../GetXController/sc_home_controller2.dart';
 import '../sc_home_community_activity.dart';
 import '../sc_home_items.dart';
@@ -46,8 +44,10 @@ class SCHomeListView2 extends StatelessWidget {
         onLoad: onLoad,
         onRefresh: onRefresh,
         scrollController: scrollController,
-        header: SCRefreshHeader(),
-        footer: SCRefreshFooter(),
+        header: const CupertinoHeader(
+            userWaterDrop: false
+        ),
+        footer: const CupertinoFooter(),
         child: ListView.separated(
             shrinkWrap: true,
             padding: EdgeInsets.zero,
