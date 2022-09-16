@@ -282,8 +282,8 @@ class SCHomeListView1 extends StatelessWidget {
   /// 上拉加载
   Future onLoad() async {
     print('加载');
-    Future.delayed(Duration(seconds: 3), () {
-      state.refreshController.finishLoad();
+    Future.delayed(const Duration(seconds: 3), () {
+      state.refreshController.finishLoad(IndicatorResult.noMore);
     });
   }
 

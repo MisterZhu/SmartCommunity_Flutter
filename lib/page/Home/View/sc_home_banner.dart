@@ -96,9 +96,10 @@ class SCHomeBanner extends StatelessWidget {
           opacity: 1.0,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(3.0),
-            child: Container(
+            child: SizedBox(
               height: height,
               child: Swiper(
+                index: currentIndex,
                 autoplay: false,
                 itemBuilder: (BuildContext context, int index) {
                   return Image.asset(

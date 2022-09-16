@@ -68,7 +68,9 @@ class SCMineHeaderItem extends StatelessWidget {
 
   /// content
   Widget contentItem() {
-    return Column(
+    return Positioned(
+      left: 0, right: 0, bottom: 0,
+        child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         userInfoItem(),
@@ -77,64 +79,60 @@ class SCMineHeaderItem extends StatelessWidget {
         ),
         memberInfoBackgroundImageItem(),
       ],
-    );
+    ));
   }
 
   /// 用户头像等信息
   Widget userInfoItem() {
-    return Padding(
-      padding: EdgeInsets.only(
-          top: MediaQueryData.fromWindow(window).padding.top + 44.0),
-      child: Container(
-        padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 0.0),
-        height: 48.0,
-        child: Row(
-          children: [
-            GestureDetector(
-              onTap: (){
+    return Container(
+      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 0.0),
+      height: 48.0,
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: (){
+              headerAction();
+            },
+            child: Image.asset(
+              SCAsset.iconMineUserHead,
+              width: 48.0,
+              height: 48.0,
+              fit: BoxFit.cover,
+            ),
+          ),
+          const SizedBox(
+            width: 12.0,
+          ),
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
                 headerAction();
               },
-              child: Image.asset(
-                SCAsset.iconMineUserHead,
-                width: 48.0,
-                height: 48.0,
-                fit: BoxFit.cover,
-              ),
-            ),
-            const SizedBox(
-              width: 12.0,
-            ),
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  headerAction();
-                },
-                child: Text(
-                  userName,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.left,
-                  style: const TextStyle(
-                    fontSize: SCFonts.f16,
-                    color: SCColors.color_1B1D33,
-                    fontWeight: FontWeight.w500,
-                  ),
+              child: Text(
+                userName,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.left,
+                style: const TextStyle(
+                  fontSize: SCFonts.f16,
+                  color: SCColors.color_1B1D33,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),
-            GestureDetector(
-              child: Image.asset(
-                SCAsset.iconSettingBlack,
-                width: 20.0,
-                height: 20.0,
-                fit: BoxFit.cover,
-              ),
-              onTap: () {
-                settingAction();
-              },
-            )
-          ],
-        ),
+          ),
+          GestureDetector(
+            child: Image.asset(
+              SCAsset.iconSettingBlack,
+              width: 20.0,
+              height: 20.0,
+              fit: BoxFit.cover,
+            ),
+            onTap: () {
+              settingAction();
+            },
+          )
+        ],
       ),
     );
   }
