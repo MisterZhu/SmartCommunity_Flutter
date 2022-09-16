@@ -8,7 +8,6 @@ import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller2.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
-
 import '../View/Skin1/sc_home_skin1.dart';
 import '../View/Skin2/sc_home_skin2.dart';
 
@@ -31,6 +30,11 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
   bool get wantKeepAlive => true;
 
   @override
+  dispose() {
+    super.dispose();
+  }
+
+  @override
   initState() {
     super.initState();
     SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.light);
@@ -40,14 +44,14 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
 
   /// body
   Widget body() {
-    return Scaffold(
+    return AnnotatedRegion(value: SystemUiOverlayStyle.light, child: Scaffold(
       body: Container(
         color: SCColors.color_F5F5F5,
         width: double.infinity,
         height: double.infinity,
         child: skin(),
       ),
-    );
+    ));
   }
 
   Widget skin() {
