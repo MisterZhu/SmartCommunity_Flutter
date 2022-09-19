@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
-import 'package:smartcommunity/page/Home/View/sc_home_life.dart';
+import 'package:smartcommunity/page/Home/View/sc_home_life_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_selected_goods.dart';
 
 import '../../../../constants/sc_asset.dart';
@@ -149,10 +149,12 @@ class SCHomeListView2 extends StatelessWidget {
 
   /// 美好生活
   Widget lifeCell() {
-    return SCHomeLife(dataList: [
-      SCAsset.homeLife1,
-      SCAsset.homeLife2,
-      SCAsset.homeLife1,
+    return SCHomeLifeItem(
+      cellType: 2,
+      dataList: [
+        SCAsset.homeLife1,
+        SCAsset.homeLife2,
+        SCAsset.homeLife1,
     ], tapAction: (index) {
       workOrder();
     },);

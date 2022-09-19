@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../constants/sc_fonts.dart';
 
@@ -46,7 +47,7 @@ class SCHomeTagItem extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
         strutStyle: StrutStyle(
           fontSize: tagFont * scale,
-          height: 1.0,
+          height: 1.1,
           forceStrutHeight: true,
         ),
         style: TextStyle(

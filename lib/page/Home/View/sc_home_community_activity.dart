@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_activity_bottom_content.dart';
+import 'package:smartcommunity/page/Home/View/sc_home_activity_bottom_tag.dart';
+import 'package:smartcommunity/page/Home/View/sc_home_activity_image_tag.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_activity_top_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_tag_item.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
@@ -23,6 +25,9 @@ class SCHomeCommunityActivity extends StatelessWidget {
 
   /// 图片宽度
   final double imageWidth = (SCUtils().getScreenWidth() - 56.0) / 3.0;
+
+  /// 图片下面内容的高度
+  final double bottomContentHeight = 46.0;
 
   SCHomeCommunityActivity({Key? key,
     required this.cellType,
@@ -117,44 +122,29 @@ class SCHomeCommunityActivity extends StatelessWidget {
   /// 上面的图片、标签
   Widget topItem(int index) {
     return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(2.0)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(4.0)),
       width: imageWidth,
       height: imageHeight(),
       child: Stack(
-        alignment: Alignment.bottomLeft,
         children: [
-          activityImageItem(index),
-          Padding(
-            padding: const EdgeInsets.only(right: 1),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(2.0),
-                gradient: const LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color.fromRGBO(0, 0, 0, 0),
-                    Color.fromRGBO(0, 0, 0, 0.6),
-                  ],
-                ),
-              ),
-              height: 30.0,
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
-            child: Text(
-              '',
-              textAlign: TextAlign.left,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style: TextStyle(
-                color: SCColors.color_FFFFFF,
-                fontSize: SCFonts.f12,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          )
+          Positioned(
+            top: 0.0,
+            left: 0.0,
+            bottom: 0.0,
+            right: 0.0,
+            child: activityImageItem(index)),
+          Positioned(
+            top: 0.0,
+            right: 5.5,
+            child: Offstage(
+              offstage: index == 0 ? false : true,
+              child: SCHomeActivityImageTag(title: '图片标签'),
+          )),
+          Positioned(
+            left: 0.0,
+            bottom: 0.0,
+            right: 0.0,
+            child: SCHomeActivityBottomTag(title: '图片底部的标签')),
         ],
       ),
     );
@@ -163,7 +153,7 @@ class SCHomeCommunityActivity extends StatelessWidget {
   /// 活动-image
   Widget activityImageItem(int index) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(2.0),
+      borderRadius: BorderRadius.circular(4.0),
       child: Image.asset(
         activityList[index],
         fit: BoxFit.cover,
@@ -178,7 +168,7 @@ class SCHomeCommunityActivity extends StatelessWidget {
     } else if (cellType == 2){
       return SizedBox(
           width: imageWidth,
-          height: 46,
+          height: bottomContentHeight,
           child: SCHomeActivityBottomContent(
             title: '标题名称名称',
             content: '标题内容内容内容',
@@ -197,9 +187,9 @@ class SCHomeCommunityActivity extends StatelessWidget {
   /// cell高度
   double cellHeight() {
     if (cellType == 1) {
-      return imageHeight() + 8;
+      return imageHeight() + 8; /// 这里的8是cell上下的间距
     } else if (cellType == 2) {
-      return imageHeight() + 54;
+      return imageHeight() + bottomContentHeight + 8;
     }
     return imageHeight() + 8;
   }

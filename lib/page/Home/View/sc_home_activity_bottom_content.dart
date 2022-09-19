@@ -5,7 +5,8 @@ import 'package:flutter/cupertino.dart';
 import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_fonts.dart';
 
-/// 活动cell图片下面的标题和内容
+/// 活动cell图片下面的标题和内容，高度46
+
 class SCHomeActivityBottomContent extends StatelessWidget {
 
   String title;
