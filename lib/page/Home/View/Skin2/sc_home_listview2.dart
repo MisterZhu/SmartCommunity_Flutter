@@ -113,8 +113,11 @@ class SCHomeListView2 extends StatelessWidget {
 
   /// 应用列表-cell
   Widget itemsCell() {
-    return SCHomeAllItem(itemList: state.allItemsList, onTap: (int index){
-      workOrder();
+    return SCHomeAllItem(
+      itemList: state.allItemsList,
+      bgColor: SCColors.color_F5F5F5,
+      onTap: (int index){
+        workOrder();
     },);
   }
 

@@ -14,6 +14,7 @@ import 'package:smartcommunity/page/Home/View/sc_home_news_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_swiper.dart';
 import 'package:smartcommunity/widgets/Refresh/sc_refresh_footer.dart';
 import 'package:smartcommunity/widgets/Refresh/sc_refresh_header.dart';
+import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_default_value.dart';
 import '../../../../constants/sc_h5.dart';
 import '../../../../skin/Tools/sc_scaffold_manager.dart';
@@ -152,6 +153,7 @@ class SCHomeListView1 extends StatelessWidget {
   Widget itemsCell() {
     return SCHomeAllItem(
       itemList: state.allItemsList,
+      bgColor: SCColors.color_F5F5F5,
       onTap: (int index) {
         workOrder();
       },
