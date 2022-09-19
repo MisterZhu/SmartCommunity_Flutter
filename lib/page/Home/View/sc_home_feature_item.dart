@@ -4,6 +4,7 @@ import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/page/Home/View/sc_home_activity_bottom_tag.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_tag_item.dart';
 
 /// 首页-精选item
@@ -168,8 +169,8 @@ class SCHomeFeatureItem extends StatelessWidget {
         ),
         SCHomeTagItem(
             title: tag,
-            tagFont: SCFonts.f10,
             height: 16.0,
+            tagFont: SCFonts.f10,
             textColor: tagTextColor,
             backgroundColor: tagBackgroundColor)
       ],
@@ -187,12 +188,24 @@ class SCHomeFeatureItem extends StatelessWidget {
           onTap?.call();
         }
       },
-      child: AspectRatio(
-          aspectRatio: imageScale,
-          child: Image.asset(
-            url,
-            fit: BoxFit.cover,
-          )),
+      child: Stack(
+        children: [
+          AspectRatio(
+              aspectRatio: imageScale,
+              child: Image.asset(
+                url,
+                fit: BoxFit.cover,
+              )),
+          Positioned(
+              left: 0.0,
+              right: 0.0,
+              bottom: 0.0,
+              child: Offstage(
+                offstage: false,
+                child:SCHomeActivityBottomTag(title: '图片底部的标签'))
+          ),
+        ],
+      ),
     );
   }
 

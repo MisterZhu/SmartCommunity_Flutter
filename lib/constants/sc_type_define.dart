@@ -18,14 +18,16 @@ class SCTypeDefine {
   static const int SC_HOME_TYPE_SWIPER = 6;
   /// 网格图片
   static const int SC_HOME_TYPE_GRID = 7;
-  /// 园区活动
+  /// 园区活动1
   static const int SC_HOME_TYPE_COMMUNITY1 = 8;
-  /// 园区活动
+  /// 园区活动2
   static const int SC_HOME_TYPE_COMMUNITY2 = 9;
-  /// 美好生活
-  static const int SC_HOME_TYPE_LIFE = 10;
+  /// 美好生活1
+  static const int SC_HOME_TYPE_LIFE1 = 10;
+  /// 美好生活2
+  static const int SC_HOME_TYPE_LIFE2 = 11;
   /// 精选商品
-  static const int SC_HOME_TYPE_GOODS = 11;
+  static const int SC_HOME_TYPE_GOODS = 12;
 
   /************************* 首页-cellType *************************/
 

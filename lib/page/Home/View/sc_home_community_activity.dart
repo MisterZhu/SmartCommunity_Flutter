@@ -4,10 +4,8 @@ import 'package:smartcommunity/page/Home/View/sc_home_activity_bottom_content.da
 import 'package:smartcommunity/page/Home/View/sc_home_activity_bottom_tag.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_activity_image_tag.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_activity_top_item.dart';
-import 'package:smartcommunity/page/Home/View/sc_home_tag_item.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
-import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_fonts.dart';
 
@@ -16,7 +14,7 @@ import '../../../constants/sc_fonts.dart';
 class SCHomeCommunityActivity extends StatelessWidget {
   final String title = '园区活动';
   /// cell样式类型，1=图片下面没有标题，2=图片下面有标题内容
-  late int cellType;
+  final int cellType;
 
   final List activityList;
 
@@ -68,7 +66,7 @@ class SCHomeCommunityActivity extends StatelessWidget {
         iconType: 0,
         icon: '',
         title: title,
-        tagType: 2,
+        tagType: 1,
         tagText: '标签名称',
         tagFont: SCFonts.f10,
         tagHeight: 16.0,

@@ -9,21 +9,25 @@ import '../../../constants/sc_fonts.dart';
 
 class SCHomeTagItem extends StatelessWidget {
 
-  SCHomeTagItem({Key? key,
+  /// 标签最大宽度,默认80.0
+  final double maxWidth;
+
+  final String title;
+  final double tagFont;
+  final double height;
+  final Color backgroundColor;
+  final Color textColor;
+  /// scale
+  final double scale = 1.0;
+
+  const SCHomeTagItem({Key? key,
     required this.title,
-    required this.tagFont,
-    required this.height,
+    this.maxWidth = 100.0,
+    this.height = 16.0,
+    this.tagFont = SCFonts.f10,
     required this.backgroundColor,
     required this.textColor})
       : super(key: key);
-
-  String title;
-  double tagFont = SCFonts.f10;
-  double height = 16.0;
-  Color backgroundColor;
-  Color textColor;
-  /// scale
-  final double scale = 1.0;
 
   @override
   Widget build(BuildContext context) {
@@ -40,20 +44,23 @@ class SCHomeTagItem extends StatelessWidget {
       decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(2.0)),
-      child: Text(
-        text,
-        textAlign: TextAlign.center,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        strutStyle: StrutStyle(
-          fontSize: tagFont * scale,
-          height: 1.1,
-          forceStrutHeight: true,
-        ),
-        style: TextStyle(
+      child: LimitedBox(
+        maxWidth: maxWidth,
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          strutStyle: StrutStyle(
             fontSize: tagFont * scale,
-            color: textColor,
-            fontWeight: FontWeight.w500),
+            height: 1.1,
+            forceStrutHeight: true,
+          ),
+          style: TextStyle(
+              fontSize: tagFont * scale,
+              color: textColor,
+              fontWeight: FontWeight.w500),
+        ),
       ),
     );
   }

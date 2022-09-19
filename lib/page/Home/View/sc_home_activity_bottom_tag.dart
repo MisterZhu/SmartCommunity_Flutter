@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_fonts.dart';
@@ -9,9 +10,9 @@ import '../../../constants/sc_fonts.dart';
 
 class SCHomeActivityBottomTag extends StatelessWidget {
 
-  String title;
+  final String title;
 
-  SCHomeActivityBottomTag({Key? key, required this.title,}) : super(key: key);
+  const SCHomeActivityBottomTag({Key? key, required this.title,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,7 @@ class SCHomeActivityBottomTag extends StatelessWidget {
 
   Widget body() {
     return Container(
+      height: 30.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(2.0),
         gradient: const LinearGradient(
@@ -31,7 +33,6 @@ class SCHomeActivityBottomTag extends StatelessWidget {
           ],
         ),
       ),
-      height: 30.0,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 6.0),
         child: Text(

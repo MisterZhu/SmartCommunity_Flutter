@@ -12,28 +12,28 @@ import '../../../constants/sc_fonts.dart';
 class SCHomeActivityTopItem extends StatelessWidget {
 
   /// icon样式类型，0=标题左边没有icon，1=标题左边有icon，
-  late int iconType;
+  final int iconType;
   /// tag标签样式类型，0=没有tag标签，1=tag标签在标题后面，2=tag标签在右侧
-  late int tagType;
+  final int tagType;
 
-  String title;
-  String? icon;
-  String tagText;
-  double tagFont = SCFonts.f10;
-  double tagHeight = 16.0;
-  Color tagBgColor;
-  Color tagTextColor;
+  final String title;
+  final String? icon;
+  final String tagText;
+  final double tagFont;
+  final double tagHeight;
+  final Color tagBgColor;
+  final Color tagTextColor;
 
-  SCHomeActivityTopItem({Key? key,
+  const SCHomeActivityTopItem({Key? key,
     required this.iconType,
     required this.icon,
     required this.title,
     required this.tagType,
     required this.tagText,
-    required this.tagFont,
-    required this.tagHeight,
+    this.tagHeight = 16.0,
+    this.tagFont = SCFonts.f10,
     required this.tagBgColor,
-    required this.tagTextColor})
+    required this.tagTextColor,})
       : super(key: key);
 
   @override

@@ -9,9 +9,9 @@ import '../../../constants/sc_fonts.dart';
 
 class SCHomeActivityImageTag extends StatelessWidget {
 
-  String title;
+  final String title;
 
-  SCHomeActivityImageTag({Key? key, required this.title,}) : super(key: key);
+  const SCHomeActivityImageTag({Key? key, required this.title,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

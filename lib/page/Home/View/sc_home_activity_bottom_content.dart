@@ -9,10 +9,10 @@ import '../../../constants/sc_fonts.dart';
 
 class SCHomeActivityBottomContent extends StatelessWidget {
 
-  String title;
-  String content;
+  final String title;
+  final String content;
 
-  SCHomeActivityBottomContent({Key? key,
+  const SCHomeActivityBottomContent({Key? key,
     required this.title,
     required this.content})
       : super(key: key);

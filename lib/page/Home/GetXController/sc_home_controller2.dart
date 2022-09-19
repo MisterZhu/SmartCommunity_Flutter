@@ -72,9 +72,10 @@ class SCHomeController2 extends GetxController {
       /// 园区活动2
       {'type': SCTypeDefine.SC_HOME_TYPE_COMMUNITY2, 'data': []},
 
-      /// 热门活动
-      {'type': SCTypeDefine.SC_HOME_TYPE_LIFE, 'data': []},
-
+      /// 热门活动1
+      {'type': SCTypeDefine.SC_HOME_TYPE_LIFE1, 'data': []},
+      /// 热门活动2
+      {'type': SCTypeDefine.SC_HOME_TYPE_LIFE2, 'data': []},
       /// 精选商品
       {'type': SCTypeDefine.SC_HOME_TYPE_GOODS, 'data': []},
     ];
