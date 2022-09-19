@@ -19,11 +19,13 @@ class SCTypeDefine {
   /// 网格图片
   static const int SC_HOME_TYPE_GRID = 7;
   /// 园区活动
-  static const int SC_HOME_TYPE_COMMUNITY = 8;
+  static const int SC_HOME_TYPE_COMMUNITY1 = 8;
+  /// 园区活动
+  static const int SC_HOME_TYPE_COMMUNITY2 = 9;
   /// 美好生活
-  static const int SC_HOME_TYPE_LIFE = 9;
+  static const int SC_HOME_TYPE_LIFE = 10;
   /// 精选商品
-  static const int SC_HOME_TYPE_GOODS = 10;
+  static const int SC_HOME_TYPE_GOODS = 11;
 
   /************************* 首页-cellType *************************/
 

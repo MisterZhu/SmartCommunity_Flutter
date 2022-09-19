@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/page/Home/View/sc_home_activity_top_item.dart';
 
 /// 首页-热门活动
 
@@ -44,9 +45,9 @@ class SCHomeActivityItem extends StatelessWidget {
   /// body
   Widget body(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Container(
-        padding: EdgeInsets.only(bottom: 6.0),
+        padding: const EdgeInsets.only(bottom: 6.0),
         decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(6.0)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,18 +65,16 @@ class SCHomeActivityItem extends StatelessWidget {
   Widget titleItem() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 6.0),
-      child: SizedBox(
-        height: titleHeight(),
-        child: Text(
-          title,
-          textAlign: TextAlign.left,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 1,
-          style: TextStyle(
-              fontSize: titleFont * scale,
-              fontWeight: FontWeight.w500,
-              color: SCColors.color_1B1D33),
-        ),
+      child: SCHomeActivityTopItem(
+        iconType: 0,
+        icon: '',
+        title: title,
+        tagType: 0,
+        tagText: '标签名称',
+        tagFont: SCFonts.f10,
+        tagHeight: 16.0,
+        tagBgColor: SCColors.color_FF6C00,
+        tagTextColor: SCColors.color_FFFFFF,
       ),
     );
   }

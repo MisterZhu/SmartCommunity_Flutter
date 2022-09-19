@@ -4,8 +4,9 @@ import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/page/Home/View/sc_home_tag_item.dart';
 
-//// 首页-精选item
+/// 首页-精选item
 
 class SCHomeFeatureItem extends StatelessWidget {
   SCHomeFeatureItem(
@@ -99,7 +100,7 @@ class SCHomeFeatureItem extends StatelessWidget {
               tag: '好口碑',
               tagTextColor: Colors.white,
               tagBackgroundColor: SCColors.color_4DA6FF),
-          SizedBox(
+          const SizedBox(
             height: 6.0,
           ),
           cellStyle1ImageWidget(url: SCAsset.homeMerchant, onTap: (){
@@ -165,8 +166,10 @@ class SCHomeFeatureItem extends StatelessWidget {
         const SizedBox(
           width: 10.0,
         ),
-        tagItem(
+        SCHomeTagItem(
             title: tag,
+            tagFont: SCFonts.f10,
+            height: 16.0,
             textColor: tagTextColor,
             backgroundColor: tagBackgroundColor)
       ],
@@ -240,34 +243,6 @@ class SCHomeFeatureItem extends StatelessWidget {
             color: SCColors.color_1B1D33),
       ),
     ));
-  }
-
-  /// 标签
-  Widget tagItem(
-      {String title = '',
-      Color textColor = Colors.white,
-      Color backgroundColor = SCColors.color_4285F4}) {
-    return Container(
-      alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
-      decoration: BoxDecoration(
-          color: backgroundColor, borderRadius: BorderRadius.circular(2.0)),
-      child: Text(
-        title,
-        textAlign: TextAlign.center,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        strutStyle: StrutStyle(
-          fontSize: tagFont * scale,
-          height: 1.0,
-          forceStrutHeight: true,
-        ),
-        style: TextStyle(
-            fontSize: tagFont * scale,
-            color: textColor,
-            fontWeight: FontWeight.w500),
-      ),
-    );
   }
 
   /// 标题文本高度

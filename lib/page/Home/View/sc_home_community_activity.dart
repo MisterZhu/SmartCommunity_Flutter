@@ -1,14 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:smartcommunity/page/Home/View/sc_home_activity_bottom_content.dart';
+import 'package:smartcommunity/page/Home/View/sc_home_activity_top_item.dart';
+import 'package:smartcommunity/page/Home/View/sc_home_tag_item.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
+import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_fonts.dart';
 
-/// 首页-园区活动cell
+/// 首页-园区活动cell，图片大小106*102
 
 class SCHomeCommunityActivity extends StatelessWidget {
   final String title = '园区活动';
+  /// cell样式类型，1=图片下面没有标题，2=图片下面有标题内容
+  late int cellType;
 
   final List activityList;
 
@@ -19,6 +25,7 @@ class SCHomeCommunityActivity extends StatelessWidget {
   final double imageWidth = (SCUtils().getScreenWidth() - 56.0) / 3.0;
 
   SCHomeCommunityActivity({Key? key,
+    required this.cellType,
     required this.activityList,
     this.tapAction
   }): super(key: key);
@@ -52,18 +59,16 @@ class SCHomeCommunityActivity extends StatelessWidget {
   Widget titleItem() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 6.0),
-      child: SizedBox(
-        height: titleHeight(),
-        child: Text(
-          title,
-          textAlign: TextAlign.left,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 1,
-          style: const TextStyle(
-              fontSize: SCFonts.f14,
-              fontWeight: FontWeight.w500,
-              color: SCColors.color_1B1D33),
-        ),
+      child: SCHomeActivityTopItem(
+        iconType: 0,
+        icon: '',
+        title: title,
+        tagType: 2,
+        tagText: '标签名称',
+        tagFont: SCFonts.f10,
+        tagHeight: 16.0,
+        tagBgColor: SCColors.color_FF6C00,
+        tagTextColor: SCColors.color_FFFFFF,
       ),
     );
   }
@@ -71,11 +76,11 @@ class SCHomeCommunityActivity extends StatelessWidget {
   /// 活动列表
   Widget activityListView() {
     return SizedBox(
-      height: cellHeight() + 8,
+      height: cellHeight(),
       child: ListView.separated(
           scrollDirection: Axis.horizontal,
           padding:
-              const EdgeInsets.only(left: 6.0, right: 6, top: 2, bottom: 6),
+          const EdgeInsets.only(left: 6.0, right: 6, top: 2, bottom: 6),
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
             return activityCell(index);
@@ -97,47 +102,60 @@ class SCHomeCommunityActivity extends StatelessWidget {
           tapAction?.call(index);
         }
       },
-      child: Container(
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(2.0)),
-        width: imageWidth,
-        height: cellHeight(),
-        child: Stack(
-          alignment: Alignment.bottomLeft,
-          children: [
-            activityImageItem(index),
-            Padding(
-              padding: const EdgeInsets.only(right: 1),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(2.0),
-                  gradient: const LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color.fromRGBO(0, 0, 0, 0),
-                      Color.fromRGBO(0, 0, 0, 0.6),
-                    ],
-                  ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          topItem(index),
+          bottomItem(),
+        ],
+      ),
+    );
+  }
+
+  /// 上面的图片、标签
+  Widget topItem(int index) {
+    return Container(
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(2.0)),
+      width: imageWidth,
+      height: imageHeight(),
+      child: Stack(
+        alignment: Alignment.bottomLeft,
+        children: [
+          activityImageItem(index),
+          Padding(
+            padding: const EdgeInsets.only(right: 1),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(2.0),
+                gradient: const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color.fromRGBO(0, 0, 0, 0),
+                    Color.fromRGBO(0, 0, 0, 0.6),
+                  ],
                 ),
-                height: 30.0,
+              ),
+              height: 30.0,
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+            child: Text(
+              '',
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: TextStyle(
+                color: SCColors.color_FFFFFF,
+                fontSize: SCFonts.f12,
+                fontWeight: FontWeight.w500,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
-              child: Text(
-                '',
-                textAlign: TextAlign.left,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                style: TextStyle(
-                  color: SCColors.color_FFFFFF,
-                  fontSize: SCFonts.f12,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
@@ -153,13 +171,36 @@ class SCHomeCommunityActivity extends StatelessWidget {
     );
   }
 
-  /// 标题文本高度
-  double titleHeight() {
-    return 22;
+  /// 底部的标题、内容
+  bottomItem() {
+    if (cellType == 1) {
+      return Container();
+    } else if (cellType == 2){
+      return SizedBox(
+          width: imageWidth,
+          height: 46,
+          child: SCHomeActivityBottomContent(
+            title: '标题名称名称',
+            content: '标题内容内容内容',
+          )
+      );
+    } else {
+      return Container();
+    }
+  }
+
+  /// 图片的高度
+  double imageHeight() {
+    return imageWidth * 102.0 / 107.0;
   }
 
   /// cell高度
   double cellHeight() {
-    return imageWidth * 102.0 / 107.0;
+    if (cellType == 1) {
+      return imageHeight() + 8;
+    } else if (cellType == 2) {
+      return imageHeight() + 54;
+    }
+    return imageHeight() + 8;
   }
 }

@@ -69,9 +69,12 @@ class SCHomeListView2 extends StatelessWidget {
     } else if (type == SCTypeDefine.SC_HOME_TYPE_ALLITEMS) {
       // 应用列表
       return itemsCell();
-    } else if (type == SCTypeDefine.SC_HOME_TYPE_COMMUNITY) {
+    } else if (type == SCTypeDefine.SC_HOME_TYPE_COMMUNITY1) {
       // 园区活动
-      return communityCell();
+      return communityCell1();
+    } else if (type == SCTypeDefine.SC_HOME_TYPE_COMMUNITY2) {
+      // 园区活动2
+      return communityCell2();
     } else if (type == SCTypeDefine.SC_HOME_TYPE_LIFE) {
       // 美好生活
       return lifeCell();
@@ -116,12 +119,27 @@ class SCHomeListView2 extends StatelessWidget {
   }
 
   /// 园区活动cell
-  Widget communityCell() {
-    return SCHomeCommunityActivity(activityList: const [
+  Widget communityCell1() {
+    return SCHomeCommunityActivity(
+      cellType: 1,
+      activityList: const [
       SCAsset.homeActivity4,
       SCAsset.homeActivity5,
       SCAsset.homeActivity6
     ],tapAction: (index) {
+      workOrder();
+    },);
+  }
+
+  /// 园区活动cell2
+  Widget communityCell2() {
+    return SCHomeCommunityActivity(
+      cellType: 2,
+      activityList: const [
+        SCAsset.homeActivity4,
+        SCAsset.homeActivity5,
+        SCAsset.homeActivity6
+      ],tapAction: (index) {
       workOrder();
     },);
   }
