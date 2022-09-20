@@ -10,12 +10,15 @@ import 'package:smartcommunity/constants/sc_fonts.dart';
 class SCHomeFeatureItem extends StatelessWidget {
   SCHomeFeatureItem(
       {Key? key,
+      this.maxWidth = 100.0,
       this.cell1Style = SCHomeFeatureStyle.featureStyle1,
       this.cell2Style = SCHomeFeatureStyle.featureStyle2,
       this.firstTap,
-      this.secondTap
-      })
+      this.secondTap})
       : super(key: key);
+
+  /// 组件最大宽度，默认100
+  final double maxWidth;
 
   /// 标题字体大小
   final double titleFont = SCFonts.f14;
@@ -102,17 +105,19 @@ class SCHomeFeatureItem extends StatelessWidget {
           SizedBox(
             height: 6.0,
           ),
-          cellStyle1ImageWidget(url: SCAsset.homeMerchant, onTap: (){
-            if (index == 0) {
-              if (firstTap != null) {
-                firstTap?.call(0);
-              }
-            } else {
-              if (secondTap != null) {
-                secondTap?.call(0);
-              }
-            }
-          })
+          cellStyle1ImageWidget(
+              url: SCAsset.homeMerchant,
+              onTap: () {
+                if (index == 0) {
+                  if (firstTap != null) {
+                    firstTap?.call(0);
+                  }
+                } else {
+                  if (secondTap != null) {
+                    secondTap?.call(0);
+                  }
+                }
+              })
         ],
       ),
     );
@@ -130,24 +135,25 @@ class SCHomeFeatureItem extends StatelessWidget {
         children: [
           cellHeaderWidget(
               title: '天天特惠价格',
-              tag: '今日超低价',
+              tag: '今日超低价今日超低价今日超低价今日超低价今日超低价今日超低价',
               tagTextColor: Colors.white,
               tagBackgroundColor: SCColors.color_FF6C00),
           const SizedBox(
             height: 6.0,
           ),
           cellStyle2ImageWidget(
-              imageList: [SCAsset.homeDiscount1, SCAsset.homeDiscount2], onTap: (int subIndex){
-            if (index == 0) {
-              if (firstTap != null) {
-                firstTap?.call(subIndex);
-              }
-            } else {
-              if (secondTap != null) {
-                secondTap?.call(subIndex);
-              }
-            }
-          })
+              imageList: [SCAsset.homeDiscount1, SCAsset.homeDiscount2],
+              onTap: (int subIndex) {
+                if (index == 0) {
+                  if (firstTap != null) {
+                    firstTap?.call(subIndex);
+                  }
+                } else {
+                  if (secondTap != null) {
+                    secondTap?.call(subIndex);
+                  }
+                }
+              })
         ],
       ),
     );
@@ -179,7 +185,7 @@ class SCHomeFeatureItem extends StatelessWidget {
     double imageScale = 311.0 / 156.0;
 
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         onTap?.call();
       },
       child: AspectRatio(
@@ -206,7 +212,7 @@ class SCHomeFeatureItem extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: (){
+            onTap: () {
               onTap?.call(index);
             },
             child: AspectRatio(
@@ -245,25 +251,28 @@ class SCHomeFeatureItem extends StatelessWidget {
       {String title = '',
       Color textColor = Colors.white,
       Color backgroundColor = SCColors.color_4285F4}) {
-    return Container(
-      alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
-      decoration: BoxDecoration(
-          color: backgroundColor, borderRadius: BorderRadius.circular(2.0)),
-      child: Text(
-        title,
-        textAlign: TextAlign.center,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        strutStyle: StrutStyle(
-          fontSize: tagFont * scale,
-          height: 1.0,
-          forceStrutHeight: true,
-        ),
-        style: TextStyle(
-            fontSize: tagFont * scale,
-            color: textColor,
-            fontWeight: FontWeight.w500),
+    return LimitedBox(
+      maxWidth: maxWidth / 2.0,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+            color: backgroundColor, borderRadius: BorderRadius.circular(2.0)),
+        child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              strutStyle: StrutStyle(
+                fontSize: tagFont * scale,
+                height: 1.1,
+                forceStrutHeight: true,
+              ),
+              style: TextStyle(
+                  fontSize: tagFont * scale,
+                  color: textColor,
+                  fontWeight: FontWeight.w500),
+            )),
       ),
     );
   }

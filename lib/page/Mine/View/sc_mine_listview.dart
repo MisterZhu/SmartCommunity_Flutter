@@ -111,7 +111,11 @@ class SCMineListView extends StatelessWidget {
   Widget scoreCell() {
     return SCMineScoreItem(
       onTap: (int index) {
-        workOrder();
+        if (index == 0) {// 积分
+          integral();
+        } else {// 红包
+          redPacket();
+        }
       },
     );
   }
@@ -166,6 +170,24 @@ class SCMineListView extends StatelessWidget {
 
   /// 测试数据-工单
   workOrder() {
+    String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+    String token = SCScaffoldManager.instance.user.token ?? "";
+    String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
+    String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
+    SCRouterHelper.codePage(20000, {"title" : "工单", "url" : url});
+  }
+
+  /// 积分
+  integral() {
+    String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+    String token = SCScaffoldManager.instance.user.token ?? "";
+    String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
+    String url = SCH5.integralUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
+    SCRouterHelper.codePage(20000, {"title" : "积分", "url" : url});
+  }
+
+  /// 红包
+  redPacket() {
     String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
     String token = SCScaffoldManager.instance.user.token ?? "";
     String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();

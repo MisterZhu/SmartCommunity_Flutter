@@ -12,6 +12,7 @@ import 'package:smartcommunity/page/Home/View/sc_home_image_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_items.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_news_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_swiper.dart';
+import 'package:smartcommunity/utils/sc_utils.dart';
 import '../../../../constants/sc_default_value.dart';
 import '../../../../constants/sc_h5.dart';
 import '../../../../skin/Tools/sc_scaffold_manager.dart';
@@ -171,7 +172,9 @@ class SCHomeListView1 extends StatelessWidget {
 
   /// 精选商家-cell
   Widget featureCell() {
+    double width = (SCUtils().getScreenWidth() - 64.0) / 2.0;
     return SCHomeFeatureItem(
+      maxWidth: width,
       cell1Style: state.homeFeatureStyle1,
       cell2Style: state.homeFeatureStyle2,
       firstTap: (int index){
