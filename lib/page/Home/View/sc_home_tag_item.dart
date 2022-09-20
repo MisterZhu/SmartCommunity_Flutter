@@ -52,9 +52,9 @@ class SCHomeTagItem extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           strutStyle: StrutStyle(
-            fontSize: tagFont * scale,
-            height: 1.1,
-            forceStrutHeight: true,
+              fontSize: tagFont * scale,
+              height: 1.1,
+              forceStrutHeight: true,
           ),
           style: TextStyle(
               fontSize: tagFont * scale,

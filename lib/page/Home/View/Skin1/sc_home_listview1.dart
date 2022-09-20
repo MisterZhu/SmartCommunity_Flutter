@@ -7,6 +7,7 @@ import 'package:smartcommunity/constants/sc_type_define.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_activity_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_banner.dart';
+import 'package:smartcommunity/page/Home/View/sc_home_grid_image_group.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_grid_image_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_image_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_items.dart';
@@ -110,7 +111,10 @@ class SCHomeListView1 extends StatelessWidget {
     } else if (type == SCTypeDefine.SC_HOME_TYPE_GRID) {
       // 网格图片
       return gridImageCell();
-    } else {
+    } else if (type == SCTypeDefine.SC_HOME_TYPE_GRID_GROUP) {
+      // 应用列表
+      return gridImageGroupCell();
+    }  else {
       // 测试
       return testCell();
     }
@@ -199,12 +203,11 @@ class SCHomeListView1 extends StatelessWidget {
     return SCHomeImageItem(
       onTap: (int index) {},
       imageList: [
-        SCAsset.homeBanner1,
-        SCAsset.homeBanner1,
-        SCAsset.homeBanner1
+        SCAsset.homeGrid5,
+        SCAsset.homeGrid5,
       ],
-      imageWidth: 686.0,
-      imageHeight: 220.0,
+      imageWidth: 336.0,
+      imageHeight: 252.0,
       bigImageLeft: false,
     );
   }
@@ -214,13 +217,29 @@ class SCHomeListView1 extends StatelessWidget {
     return SCHomeGridImageItem(
       onTap: (int index) {},
       imageList: [
-        SCAsset.homeBanner1,
-        SCAsset.homeBanner1,
-        SCAsset.homeBanner1,
-        SCAsset.homeBanner1
+        SCAsset.homeGrid1,
+        SCAsset.homeGrid2,
+        SCAsset.homeGrid3,
+        SCAsset.homeGrid4,
       ],
-      imageWidth: 686.0,
-      imageHeight: 220.0,
+      cellType: 2,
+      imageWidth: 160.0,
+      imageHeight: 160.0,
+    );
+  }
+
+  Widget gridImageGroupCell() {
+    return SCHomeGridImageGroup(
+      onTap: (int index) {},
+      title: '组件名称',
+      imageList: [
+        SCAsset.homeGrid5,
+        SCAsset.homeBanner2,
+        SCAsset.homeBanner3,
+        SCAsset.homeGrid5,
+      ],
+      imageWidth: 324.0,
+      imageHeight: 120.0,
     );
   }
 

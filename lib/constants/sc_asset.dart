@@ -178,6 +178,18 @@ class SCAsset {
   /// 首页-精选商品-标签3
   static const String homeGoodsTag3 = 'images/goods/icon_goods_tag3.png';
 
+  /// 首页-运营位1
+  static const String homeGrid1 = 'images/icon_grid1.png';
+  /// 首页-运营位2
+  static const String homeGrid2 = 'images/icon_grid2.png';
+  /// 首页-运营位3
+  static const String homeGrid3 = 'images/icon_grid3.png';
+  /// 首页-运营位4
+  static const String homeGrid4 = 'images/icon_grid4.png';
+
+  /// 首页-运营位5，宽高比4：3
+  static const String homeGrid5 = 'images/icon_grid5.png';
+
   /************* 测试用的数据 *************/
 
   /************* 引导页图片 *************/

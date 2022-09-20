@@ -7,7 +7,7 @@ import '../../Mine/Model/sc_my_house_model.dart';
 
 class SCHomeController extends GetxController {
   /// 皮肤样式,默认第一套
-  int skinStyle = 0;
+  int skinStyle = 1;
 
   /// 切换皮肤
   changeSkin({required int style}) {

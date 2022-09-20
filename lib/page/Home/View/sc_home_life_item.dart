@@ -101,17 +101,12 @@ class SCHomeLifeItem extends StatelessWidget {
           tapAction?.call(index);
         }
       },
-      child: Container(
-        width: 156.0,
-        height: 114.0,
-        color: SCColors.color_FFFFFF,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            topItem(index),
-            bottomItem(),
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          topItem(index),
+          bottomItem(),
+        ],
       ),
     );
   }
@@ -144,11 +139,15 @@ class SCHomeLifeItem extends StatelessWidget {
 
   /// 活动-image
   Widget activityImageItem(int index) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(4.0),
-      child: Image.asset(
-        dataList[index],
-        fit: BoxFit.cover,
+    double imageScale = imageWidth / imageHeight;
+    return AspectRatio(
+      aspectRatio: imageScale,
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(4.0),
+          child: Image.asset(
+            dataList[index],
+            fit: BoxFit.cover,
+          ),
       ),
     );
   }

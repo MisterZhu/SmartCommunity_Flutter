@@ -61,7 +61,7 @@ class SCHomeImageItem extends StatelessWidget {
     return AspectRatio(
       aspectRatio: imageScale,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(6.0),
+        borderRadius: BorderRadius.circular(4.0),
         child: GestureDetector(
           onTap: () {
             onTap?.call(index);

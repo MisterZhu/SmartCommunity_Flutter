@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-/// 首页-网格图片item
+import '../../../constants/sc_colors.dart';
+import '../../../constants/sc_fonts.dart';
+
+/// 首页-网格图片item，4等分，宽高1：1，1行
 
 class SCHomeGridImageItem extends StatelessWidget {
 
-  /// 图片list,最多三张图片
+  /// cell样式类型，1=图片下面没有标题，2=图片下面有标题内容
+  final int cellType;
+
+  /// 图片list，最多4个
   final List imageList;
 
   /// 图片点击回调
@@ -18,7 +24,12 @@ class SCHomeGridImageItem extends StatelessWidget {
   final double imageHeight;
 
   SCHomeGridImageItem(
-      {Key? key, this.imageWidth = 686.0, this.imageHeight = 148.0, required this.imageList, this.onTap})
+      {Key? key,
+        this.imageWidth = 160.0,
+        this.imageHeight = 160.0,
+        this.cellType = 1,
+        required this.imageList,
+        this.onTap})
       : super(key: key);
 
   @override
@@ -28,26 +39,38 @@ class SCHomeGridImageItem extends StatelessWidget {
 
   /// body
   Widget body(BuildContext context) {
-    int crossAxisCount = 1;
-    if (imageList.length <= 1) {
-      crossAxisCount = 1;
-    } else {
-      crossAxisCount = 2;
-    }
     return StaggeredGridView.countBuilder(
         padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 0.0, bottom: 0.0),
-        mainAxisSpacing: 8.0,
+        mainAxisSpacing: 0.0,
         crossAxisSpacing: 8.0,
-        crossAxisCount: crossAxisCount,
+        crossAxisCount: 4,
         shrinkWrap: true,
-        itemCount: imageList.length,
+        itemCount: imageList.length > 4 ? 4 : imageList.length,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          return gridItem(url: imageList[index], index: index);
+          return gridCell(url: imageList[index], index: index);
         },
         staggeredTileBuilder: (int index) {
           return const StaggeredTile.fit(1);
         });
+  }
+
+  /// cell
+  Widget gridCell({required String url, required int index}) {
+    return GestureDetector(
+      onTap: () {
+        onTap?.call(index);
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          gridItem(url: imageList[index], index: index),
+          bottomItem(),
+        ],
+      ),
+    );
   }
 
   /// 网格item
@@ -56,7 +79,7 @@ class SCHomeGridImageItem extends StatelessWidget {
     return AspectRatio(
       aspectRatio: imageScale,
       child: ClipRRect(
-          borderRadius: BorderRadius.circular(6.0),
+          borderRadius: BorderRadius.circular(4.0),
           child: GestureDetector(
             onTap: () {
               onTap?.call(index);
@@ -69,4 +92,28 @@ class SCHomeGridImageItem extends StatelessWidget {
       ),
     );
   }
+
+  /// 底部的标题、内容
+  bottomItem() {
+    if (cellType == 1) {
+      return Container();
+    } else if (cellType == 2){
+      return const Padding(
+        padding: EdgeInsets.only(top: 4.0, left: 4.0, bottom: 0.0),
+        child: Text(
+          '标题标题',
+          textAlign: TextAlign.left,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+          style: TextStyle(
+              fontSize: SCFonts.f14,
+              fontWeight: FontWeight.w500,
+              color: SCColors.color_1B1D33),
+        ),
+      );
+    } else {
+      return Container();
+    }
+  }
+
 }
