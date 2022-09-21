@@ -1,5 +1,4 @@
 
-
 import 'dart:developer';
 
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
@@ -24,6 +23,8 @@ class SCServiceController extends GetxController {
   /// 应用列表
   List<SCServiceModuleModel> appList = [];
 
+  /// 皮肤样式,默认第一套
+  int skinStyle = 0;
 
   @override
   onInit() {
@@ -230,6 +231,12 @@ class SCServiceController extends GetxController {
   /// 添加常用应用
   addRegularApp(Applets model) {
     regularAppList.add(model);
+    update();
+  }
+
+  /// 切换皮肤
+  changeSkin({required int style}) {
+    skinStyle = style;
     update();
   }
 

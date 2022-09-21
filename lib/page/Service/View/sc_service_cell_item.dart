@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:smartcommunity/page/Service/View/sc_service_app_item.dart';
 
 import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_colors.dart';
@@ -38,14 +39,20 @@ class SCServiceCellItem extends StatelessWidget {
   /// body
   Widget body() {
     return GetBuilder<SCServiceController>(builder: (state) {
+      double leftSpace = 16.0;
+      double radius = 4.0;
+      if (state.skinStyle == 1) {
+        leftSpace = 0.0;
+        radius = 0.0;
+      }
       return Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: EdgeInsets.symmetric(horizontal: leftSpace),
             child: Container(
               decoration: BoxDecoration(
                   color: SCColors.color_FFFFFF,
-                  borderRadius: BorderRadius.circular(4.0)),
+                  borderRadius: BorderRadius.circular(radius)),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -139,6 +146,8 @@ class SCServiceCellItem extends StatelessWidget {
   /// cell
   Widget itemsCell() {
     List<Applets>?list = [];
+    /// 是否是常用应用，暂定id=0为常用应用，后面根据接口返回的数据再定
+    bool isRegularApp = moduleModel.module?.id == '0' ? true : false;
     return GetBuilder<SCServiceController>(builder: (state){
       if (section == 0) {
         list = state.regularAppList;
@@ -154,8 +163,17 @@ class SCServiceCellItem extends StatelessWidget {
           itemCount: list?.length ?? 0,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            Applets model = list![index];
-            return gridItem(model);
+            Applets applets = list![index];
+            return SCServiceAppItem(
+              isRegularApp: isRegularApp,
+              section: section,
+              applets: applets,
+              appTapAction: (title) {
+                if (tapAction != null) {
+                  tapAction?.call(title ?? '');
+                }
+              },
+            );
           },
           staggeredTileBuilder: (int index) {
             return const StaggeredTile.fit(1);
