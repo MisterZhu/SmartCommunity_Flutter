@@ -1,9 +1,7 @@
 /// 首页皮肤1-GetxController
-import 'dart:developer';
-
-import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
@@ -46,8 +44,7 @@ class SCHomeController1 extends GetxController {
   /// 房号文本数字数量
   int titleMaxLength = 10;
 
-  EasyRefreshController refreshController = EasyRefreshController(controlFinishRefresh: true,
-    controlFinishLoad: true,);
+  RefreshController refreshController = RefreshController(initialRefresh: false);
 
   /// 所有应用
   List allItemsList = [
@@ -98,15 +95,15 @@ class SCHomeController1 extends GetxController {
   /// 精选商家cell样式1
   late SCHomeFeatureStyle homeFeatureStyle2;
 
-  /// siper-水平间距
+  /// swiper-水平间距
   double swiper_horizontalPadding = 16.0;
-  /// siper-圆角
+  /// swiper-圆角
   double swiper_radius = 6.0;
-  /// siper-imageScale
+  /// swiper-imageScale
   double swiper_scale = 686.0 / 260.0;
-  /// siper-pagenation默认颜色
+  /// swiper-pagenation默认颜色
   Color swiper_normal_color = Colors.grey;
-  /// siper-pagenation选中颜色
+  /// swiper-pagenation选中颜色
   Color swiper_active_color = Colors.orange;
 
   @override

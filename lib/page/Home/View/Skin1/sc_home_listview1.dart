@@ -1,7 +1,7 @@
 /// 首页第一套皮肤-listview
-import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_type_define.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart';
@@ -13,6 +13,7 @@ import 'package:smartcommunity/page/Home/View/sc_home_items.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_news_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_swiper.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
+import 'package:smartcommunity/widgets/Refresh/sc_custom_header.dart';
 import '../../../../constants/sc_default_value.dart';
 import '../../../../constants/sc_h5.dart';
 import '../../../../skin/Tools/sc_scaffold_manager.dart';
@@ -59,30 +60,32 @@ class SCHomeListView1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     scrollNotify();
-    return EasyRefresh(
-        controller: state.refreshController,
-        onLoad: onLoad,
-        onRefresh: onRefresh,
-        header: const CupertinoHeader(
-            userWaterDrop: false,
-        ),
-        footer: const CupertinoFooter(),
-        child: ListView.separated(
+    return SmartRefresher(
+      controller: state.refreshController,
+      onRefresh: () {
+        onRefresh();
+      },
+      onLoading: () {
+        onLoad();
+      },
+      header: const SCCustomHeader(style: SCCustomHeaderStyle.noNavigation,),
+      child: ListView.separated(
           controller: scrollController,
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            itemBuilder: (BuildContext context, int index) {
-              int type = dataList[index]['type'];
-              return getCell(type: type);
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              if (dataList[index] == SCTypeDefine.SC_HOME_TYPE_GRID) {
-                return const SizedBox();
-              } else {
-                return lineWidget();
-              }
-            },
-            itemCount: dataList.length));
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          itemBuilder: (BuildContext context, int index) {
+            int type = dataList[index]['type'];
+            return getCell(type: type);
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            if (dataList[index] == SCTypeDefine.SC_HOME_TYPE_GRID) {
+              return const SizedBox();
+            } else {
+              return lineWidget();
+            }
+          },
+          itemCount: dataList.length),
+    );
   }
 
   Widget getCell({required int type}) {
@@ -119,7 +122,6 @@ class SCHomeListView1 extends StatelessWidget {
   /// 监听滑动
   void scrollNotify() {
     scrollController.addListener(() {
-      print("滑动:${scrollController.offset}");
       scrollFunction?.call(scrollController.offset);
     });
   }
@@ -177,10 +179,10 @@ class SCHomeListView1 extends StatelessWidget {
       maxWidth: width,
       cell1Style: state.homeFeatureStyle1,
       cell2Style: state.homeFeatureStyle2,
-      firstTap: (int index){
+      firstTap: (int index) {
         workOrder();
       },
-      secondTap: (int index){
+      secondTap: (int index) {
         workOrder();
       },
     );
@@ -190,7 +192,7 @@ class SCHomeListView1 extends StatelessWidget {
   Widget newsCell() {
     return SCHomeNewsItem(
       newsList: state.allNewsList,
-      onTap: (int index){
+      onTap: (int index) {
         workOrder();
       },
     );
@@ -200,7 +202,7 @@ class SCHomeListView1 extends StatelessWidget {
   Widget imageCell() {
     return SCHomeImageItem(
       onTap: (int index) {},
-      imageList: [
+      imageList: const [
         SCAsset.homeBanner1,
         SCAsset.homeBanner1,
         SCAsset.homeBanner1
@@ -215,7 +217,7 @@ class SCHomeListView1 extends StatelessWidget {
   Widget gridImageCell() {
     return SCHomeGridImageItem(
       onTap: (int index) {},
-      imageList: [
+      imageList: const [
         SCAsset.homeBanner1,
         SCAsset.homeBanner1,
         SCAsset.homeBanner1,
@@ -260,6 +262,14 @@ class SCHomeListView1 extends StatelessWidget {
   Future onRefresh() async {
     print('刷新');
     state.isRefreshing = true;
+    state.changeNavigationState(offset: 0.0);
+    Future.delayed(const Duration(milliseconds: 1500), () {
+      state.refreshController.refreshCompleted();
+      Future.delayed(const Duration(milliseconds: 1000), () {
+        state.isRefreshing = false;
+        state.changeNavigationState(offset: 0.0);
+      });
+    });
 
     /// 当网络请求时间超过2秒
     // Future.delayed(Duration(milliseconds: 2000), () {
@@ -270,9 +280,9 @@ class SCHomeListView1 extends StatelessWidget {
     //   });
     // });
     /// 当网络请求时间不超过2秒
-    state.refreshController.finishRefresh(IndicatorResult.success);
-    state.isRefreshing = false;
-    state.changeNavigationState(offset: 0.0);
+    // state.refreshController.finishRefresh(IndicatorResult.success);
+    // state.isRefreshing = false;
+    // state.changeNavigationState(offset: 0.0);
     // Future.delayed(Duration(milliseconds: 100), () {
     //   state.refreshController.finishRefresh(IndicatorResult.success);
     //   Future.delayed(Duration(milliseconds: 1800), () {
@@ -285,9 +295,9 @@ class SCHomeListView1 extends StatelessWidget {
   /// 上拉加载
   Future onLoad() async {
     print('加载');
-    Future.delayed(const Duration(seconds: 3), () {
-      state.refreshController.finishLoad(IndicatorResult.noMore);
-    });
+    // Future.delayed(const Duration(seconds: 3), () {
+    //   state.refreshController.finishLoad(IndicatorResult.noMore);
+    // });
   }
 
   /// 测试数据-工单
@@ -295,16 +305,7 @@ class SCHomeListView1 extends StatelessWidget {
     String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
     String token = SCScaffoldManager.instance.user.token ?? "";
     String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
-    String url = SCH5.workOrderUrl +
-        "?" +
-        "defCommunityId=" +
-        defCommunityId +
-        "&Authorization=" +
-        token +
-        "&defRoomId=" +
-        defRoomId +
-        "&client=" +
-        SCDefaultValue.client;
+    String url = "${SCH5.workOrderUrl}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
     SCRouterHelper.codePage(20000, {"title": "工单", "url": url});
   }
 }

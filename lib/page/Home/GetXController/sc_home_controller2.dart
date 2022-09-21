@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
@@ -43,6 +44,8 @@ class SCHomeController2 extends GetxController {
 
   /// listView数据
   List listViewData = [];
+
+  RefreshController refreshController = RefreshController(initialRefresh: false);
 
   @override
   void onInit() {
@@ -111,6 +114,12 @@ class SCHomeController2 extends GetxController {
       communityName = name;
     }
     update();
+  }
+
+  @override
+  onClose() {
+    super.onClose();
+    refreshController.dispose();
   }
 
 }

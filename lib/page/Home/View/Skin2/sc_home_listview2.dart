@@ -1,6 +1,7 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_life.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_selected_goods.dart';
@@ -11,6 +12,7 @@ import '../../../../constants/sc_h5.dart';
 import '../../../../constants/sc_type_define.dart';
 import '../../../../skin/Tools/sc_scaffold_manager.dart';
 import '../../../../utils/Router/sc_router_helper.dart';
+import '../../../../widgets/Refresh/sc_custom_header.dart';
 import '../../GetXController/sc_home_controller2.dart';
 import '../sc_home_community_activity.dart';
 import '../sc_home_items.dart';
@@ -19,7 +21,6 @@ import '../sc_home_swiper.dart';
 /// 首页第二套皮肤-listview
 
 class SCHomeListView2 extends StatelessWidget {
-
   /// listView数据源
   final List dataList;
 
@@ -30,7 +31,8 @@ class SCHomeListView2 extends StatelessWidget {
 
   SCHomeController2 state = Get.find<SCHomeController2>();
 
-  SCHomeListView2({Key? key, this.scrollFunction, required this.dataList}) : super(key: key);
+  SCHomeListView2({Key? key, this.scrollFunction, required this.dataList})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,25 +42,29 @@ class SCHomeListView2 extends StatelessWidget {
   /// body
   Widget body() {
     scrollNotify();
-    return EasyRefresh(
-        onLoad: onLoad,
-        onRefresh: onRefresh,
-        scrollController: scrollController,
-        header: const CupertinoHeader(
-            userWaterDrop: false
-        ),
-        footer: const CupertinoFooter(),
-        child: ListView.separated(
-            shrinkWrap: true,
-            padding: EdgeInsets.zero,
-            itemBuilder: (BuildContext context, int index) {
-              int type = dataList[index]['type'];
-              return getCell(type: type);
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return lineWidget();
-            },
-            itemCount: dataList.length));
+    return SmartRefresher(
+      onRefresh: () {
+        onRefresh();
+      },
+      onLoading: () {
+        onLoad();
+      },
+      controller: state.refreshController,
+      enablePullUp: true,
+      header: const SCCustomHeader(),
+      child: ListView.separated(
+          controller: scrollController,
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
+          itemBuilder: (BuildContext context, int index) {
+            int type = dataList[index]['type'];
+            return getCell(type: type);
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return lineWidget();
+          },
+          itemCount: dataList.length),
+    );
   }
 
   /// 获取cell
@@ -110,38 +116,49 @@ class SCHomeListView2 extends StatelessWidget {
 
   /// 应用列表-cell
   Widget itemsCell() {
-    return SCHomeAllItem(itemList: state.allItemsList, onTap: (int index){
-      workOrder();
-    },);
+    return SCHomeAllItem(
+      itemList: state.allItemsList,
+      onTap: (int index) {
+        workOrder();
+      },
+    );
   }
 
   /// 园区活动cell
   Widget communityCell() {
-    return SCHomeCommunityActivity(activityList: const [
-      SCAsset.homeActivity4,
-      SCAsset.homeActivity5,
-      SCAsset.homeActivity6
-    ],tapAction: (index) {
-      workOrder();
-    },);
+    return SCHomeCommunityActivity(
+      activityList: const [
+        SCAsset.homeActivity4,
+        SCAsset.homeActivity5,
+        SCAsset.homeActivity6
+      ],
+      tapAction: (index) {
+        workOrder();
+      },
+    );
   }
 
   /// 美好生活
   Widget lifeCell() {
-    return SCHomeLife(dataList: [
-      SCAsset.homeLife1,
-      SCAsset.homeLife2,
-      SCAsset.homeLife1,
-    ], tapAction: (index) {
-      workOrder();
-    },);
+    return SCHomeLife(
+      dataList: const [
+        SCAsset.homeLife1,
+        SCAsset.homeLife2,
+        SCAsset.homeLife1,
+      ],
+      tapAction: (index) {
+        workOrder();
+      },
+    );
   }
 
   /// 精选商品cell
   Widget goodsCell() {
-    return SCHomeSelectedGoodsItem(tapAction: (index) {
-      workOrder();
-    },);
+    return SCHomeSelectedGoodsItem(
+      tapAction: (index) {
+        workOrder();
+      },
+    );
   }
 
   /// 测试-cell
@@ -159,9 +176,15 @@ class SCHomeListView2 extends StatelessWidget {
     });
   }
 
+  /// 加载更多
   Future onLoad() async {}
 
-  Future onRefresh() async {}
+  /// 刷新
+  Future onRefresh() async {
+    Future.delayed(const Duration(milliseconds: 1500), () {
+      state.refreshController.refreshCompleted();
+    });
+  }
 
   /// 测试数据-工单
   workOrder() {

@@ -46,6 +46,8 @@ dependencies:
 #  flutter_picker: ^2.0.3
   # 刷新控件 https://pub.flutter-io.cn/packages/easy_refresh
   easy_refresh: ^3.0.4+2
+  # 刷新空间 https://pub.flutter-io.cn/packages/pull_to_refresh/install
+  pull_to_refresh: ^2.0.0
   # 图片裁剪 https://pub.flutter-io.cn/packages/image_cropper/install
   # image_cropper: ^2.0.3
   # toast组件 https://pub.flutter-io.cn/packages/fluttertoast/install
