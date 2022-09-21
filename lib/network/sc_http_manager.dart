@@ -88,17 +88,24 @@ class SCHttpManager {
     Options options = Options(
         headers: headers
     );
+    late Response response;
+    late Object exception;
+    bool status = false;
 
     try {
-      Response response = await _dio!.get(url, queryParameters: params, options: headers == null ? null : options);
-      var data = doResponse(response);
-      success?.call(data);
-      return data;
+      response = await _dio!.get(url, queryParameters: params, options: headers == null ? null : options);
+      status = true;
     } catch (e) {
-      failure?.call(doError(e));
-      return doError(e);
+      status = false;
+      exception = e;
     } finally {
-
+      if (status) {
+        var data = doResponse(response);
+        success?.call(data);
+      } else {
+        var data = doError(exception);
+        failure?.call(data);
+      }
     }
   }
 
@@ -107,20 +114,25 @@ class SCHttpManager {
     Options options = Options(
         headers: headers
     );
+    late Response response;
+    late Object exception;
+    bool status = false;
 
     try {
-      Response response = await _dio!.post(url, queryParameters: params, data: params, options: headers == null ? null : options);
-      var data = doResponse(response);
-      //log('data=====$data');
-      checkLogin(url: url, headers: response.headers.map, data: data);
-      success?.call(data);
-      return data;
+      response = await _dio!.post(url, queryParameters: params, data: params, options: headers == null ? null : options);
+      status = true;
     } catch (e) {
-      var data = doError(e);
-      failure?.call(data);
-      return data;
+      status = false;
+      exception = e;
     } finally {
-
+      if (status) {
+        var data = doResponse(response);
+        checkLogin(url: url, headers: response.headers.map, data: data);
+        success?.call(data);
+      } else {
+        var data = doError(exception);
+        failure?.call(data);
+      }
     }
   }
 
@@ -129,18 +141,24 @@ class SCHttpManager {
     Options options = Options(
         headers: headers
     );
+    late Response response;
+    late Object exception;
+    bool status = false;
 
     try {
-      Response response = await _dio!.put(url, queryParameters: params, data: params, options: headers == null ? null : options);
-      var data = doResponse(response);
-      success?.call(data);
-      return data;
+      response = await _dio!.put(url, queryParameters: params, data: params, options: headers == null ? null : options);
+      status = true;
     } catch (e) {
-      var data = doError(e);
-      failure?.call(data);
-      return data;
+      status = false;
+      exception = e;
     } finally {
-
+      if (status) {
+        var data = doResponse(response);
+        success?.call(data);
+      } else {
+        var data = doError(exception);
+        failure?.call(data);
+      }
     }
   }
 
@@ -149,18 +167,24 @@ class SCHttpManager {
     Options options = Options(
         headers: headers
     );
+    late Response response;
+    late Object exception;
+    bool status = false;
 
     try {
-      Response response = await _dio!.delete(url, queryParameters: params, data: params, options: headers == null ? null : options);
-      var data = doResponse(response);
-      success?.call(data);
-      return data;
+      response = await _dio!.delete(url, queryParameters: params, data: params, options: headers == null ? null : options);
+      status = true;
     } catch (e) {
-      var data = doError(e);
-      failure?.call(data);
-      return data;
+      status = false;
+      exception = e;
     } finally {
-
+      if (status) {
+        var data = doResponse(response);
+        success?.call(data);
+      } else {
+        var data = doError(exception);
+        failure?.call(data);
+      }
     }
   }
 
