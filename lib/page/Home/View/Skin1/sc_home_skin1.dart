@@ -39,7 +39,7 @@ class SCHomeSkin1 extends StatelessWidget {
       {'type': SCTypeDefine.SC_HOME_TYPE_ALLITEMS, 'data': []},
 
       // /// 图片
-      // {'type': SCTypeDefine.SC_HOME_TYPE_IMAGE, 'data': []},
+       {'type': SCTypeDefine.SC_HOME_TYPE_IMAGE, 'data': []},
 
       /// 热门活动
       {'type': SCTypeDefine.SC_HOME_TYPE_ACTIVITY, 'data': []},
@@ -47,11 +47,13 @@ class SCHomeSkin1 extends StatelessWidget {
       /// 精选商家
       {'type': SCTypeDefine.SC_HOME_TYPE_FEATURE, 'data': []},
 
-      // /// 网格图片
-      // {'type': SCTypeDefine.SC_HOME_TYPE_GRID, 'data': []},
+      // /// 网格图片 宽高1:1，1行
+      {'type': SCTypeDefine.SC_HOME_TYPE_GRID, 'data': []},
+
+      {'type': SCTypeDefine.SC_HOME_TYPE_GRID_GROUP, 'data': []},
 
       // /// swiper广告图
-      // {'type': SCTypeDefine.SC_HOME_TYPE_SWIPER, 'data': []},
+       {'type': SCTypeDefine.SC_HOME_TYPE_SWIPER, 'data': []},
       //
       // /// swiper广告图
       // {'type': SCTypeDefine.SC_HOME_TYPE_SWIPER, 'data': []},

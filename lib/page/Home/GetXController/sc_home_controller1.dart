@@ -35,6 +35,15 @@ class SCHomeController1 extends GetxController {
   /// banner比例
   double bannerScale = 686 / 280.0;
 
+  /// 单张运营位比例
+  double bannerScale1 = 686 / 172.0;
+
+  /// 2张运营位比例，2等分
+  double bannerScale2 = 336 / 252.0;
+
+  /// 4张运营位比例，4等分
+  double bannerScale3 = 160 / 160.0;
+
   /// banner当前index
   int bannerCurrentIndex = 0;
 

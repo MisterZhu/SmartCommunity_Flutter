@@ -4,8 +4,10 @@ import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/page/Home/View/sc_home_activity_bottom_tag.dart';
+import 'package:smartcommunity/page/Home/View/sc_home_tag_item.dart';
 
-//// 首页-精选item
+/// 首页-精选item
 
 class SCHomeFeatureItem extends StatelessWidget {
   SCHomeFeatureItem(
@@ -102,7 +104,7 @@ class SCHomeFeatureItem extends StatelessWidget {
               tag: '好口碑',
               tagTextColor: Colors.white,
               tagBackgroundColor: SCColors.color_4DA6FF),
-          SizedBox(
+          const SizedBox(
             height: 6.0,
           ),
           cellStyle1ImageWidget(
@@ -171,8 +173,10 @@ class SCHomeFeatureItem extends StatelessWidget {
         const SizedBox(
           width: 10.0,
         ),
-        tagItem(
+        SCHomeTagItem(
             title: tag,
+            height: 16.0,
+            tagFont: SCFonts.f10,
             textColor: tagTextColor,
             backgroundColor: tagBackgroundColor)
       ],
@@ -188,12 +192,24 @@ class SCHomeFeatureItem extends StatelessWidget {
       onTap: () {
         onTap?.call();
       },
-      child: AspectRatio(
-          aspectRatio: imageScale,
-          child: Image.asset(
-            url,
-            fit: BoxFit.cover,
-          )),
+      child: Stack(
+        children: [
+          AspectRatio(
+              aspectRatio: imageScale,
+              child: Image.asset(
+                url,
+                fit: BoxFit.cover,
+              )),
+          Positioned(
+              left: 0.0,
+              right: 0.0,
+              bottom: 0.0,
+              child: Offstage(
+                offstage: false,
+                child:SCHomeActivityBottomTag(title: '图片底部的标签'))
+          ),
+        ],
+      ),
     );
   }
 
@@ -244,37 +260,6 @@ class SCHomeFeatureItem extends StatelessWidget {
             color: SCColors.color_1B1D33),
       ),
     ));
-  }
-
-  /// 标签
-  Widget tagItem(
-      {String title = '',
-      Color textColor = Colors.white,
-      Color backgroundColor = SCColors.color_4285F4}) {
-    return LimitedBox(
-      maxWidth: maxWidth / 2.0,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-            color: backgroundColor, borderRadius: BorderRadius.circular(2.0)),
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              strutStyle: StrutStyle(
-                fontSize: tagFont * scale,
-                height: 1.1,
-                forceStrutHeight: true,
-              ),
-              style: TextStyle(
-                  fontSize: tagFont * scale,
-                  color: textColor,
-                  fontWeight: FontWeight.w500),
-            )),
-      ),
-    );
   }
 
   /// 标题文本高度

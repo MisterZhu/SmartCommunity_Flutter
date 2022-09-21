@@ -8,6 +8,7 @@ import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller2.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
+import '../../Service/GetXController/sc_service_controller.dart';
 import '../View/Skin1/sc_home_skin1.dart';
 import '../View/Skin2/sc_home_skin2.dart';
 
@@ -20,6 +21,7 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
   SCHomeController state = Get.put(SCHomeController());
   SCHomeController1 state1 = Get.put(SCHomeController1());
   SCHomeController2 state2 = Get.put(SCHomeController2());
+  SCServiceController service = Get.put(SCServiceController());
 
   @override
   Widget build(BuildContext context) {

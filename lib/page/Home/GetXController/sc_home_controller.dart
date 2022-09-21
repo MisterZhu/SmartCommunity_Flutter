@@ -4,13 +4,16 @@ import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller2.dart';
 
 import '../../Mine/Model/sc_my_house_model.dart';
+import '../../Service/GetXController/sc_service_controller.dart';
 
 class SCHomeController extends GetxController {
   /// 皮肤样式,默认第一套
-  int skinStyle = 0;
+  int skinStyle = 1;
 
   /// 切换皮肤
   changeSkin({required int style}) {
+    SCServiceController serviceState = Get.find<SCServiceController>();
+    serviceState.changeSkin(style: style);
     skinStyle = style;
     if (style == 0) {
       SCHomeController1 state = Get.find<SCHomeController1>();

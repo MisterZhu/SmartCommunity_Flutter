@@ -7,14 +7,14 @@ import 'package:smartcommunity/constants/sc_fonts.dart';
 /// 首页-应用列表item
 
 class SCHomeAllItem extends StatelessWidget {
-  SCHomeAllItem({Key? key, required this.itemList, this.onTap})
+  SCHomeAllItem({Key? key, required this.itemList, required this.bgColor, this.onTap,})
       : super(key: key);
-
   final List itemList;
 
   /// 列
   final int crossAxisCount = 5;
 
+  Color bgColor = SCColors.color_F5F5F5;
   /// 点击回调
   final Function(int index)? onTap;
 
@@ -25,25 +25,29 @@ class SCHomeAllItem extends StatelessWidget {
 
   /// body
   Widget body(BuildContext context) {
-    return DecoratedBox(
-      decoration: const BoxDecoration(
-        color: SCColors.color_F5F5F5,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: bgColor,
+            borderRadius: BorderRadius.circular(6.0),
+          ),
+        child: StaggeredGridView.countBuilder(
+            padding: const EdgeInsets.only(
+                left: 5.0, right: 5.0, top: 10.0, bottom: 2.0),
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 8,
+            crossAxisCount: crossAxisCount,
+            shrinkWrap: true,
+            itemCount: itemList.length,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return gridItem(context, index);
+            },
+            staggeredTileBuilder: (int index) {
+              return StaggeredTile.fit(1);
+            }),
       ),
-      child: StaggeredGridView.countBuilder(
-          padding: const EdgeInsets.only(
-              left: 16.0, right: 16.0, top: 0.0, bottom: 0.0),
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
-          crossAxisCount: crossAxisCount,
-          shrinkWrap: true,
-          itemCount: itemList.length,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return gridItem(context, index);
-          },
-          staggeredTileBuilder: (int index) {
-            return StaggeredTile.fit(1);
-          }),
     );
   }
 

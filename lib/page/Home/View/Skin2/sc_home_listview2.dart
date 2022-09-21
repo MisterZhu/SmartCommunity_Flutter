@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
-import 'package:smartcommunity/page/Home/View/sc_home_life.dart';
+import 'package:smartcommunity/page/Home/View/sc_home_life_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_selected_goods.dart';
 
 import '../../../../constants/sc_asset.dart';
@@ -75,12 +75,18 @@ class SCHomeListView2 extends StatelessWidget {
     } else if (type == SCTypeDefine.SC_HOME_TYPE_ALLITEMS) {
       // 应用列表
       return itemsCell();
-    } else if (type == SCTypeDefine.SC_HOME_TYPE_COMMUNITY) {
+    } else if (type == SCTypeDefine.SC_HOME_TYPE_COMMUNITY1) {
       // 园区活动
-      return communityCell();
-    } else if (type == SCTypeDefine.SC_HOME_TYPE_LIFE) {
+      return communityCell1();
+    } else if (type == SCTypeDefine.SC_HOME_TYPE_COMMUNITY2) {
+      // 园区活动2
+      return communityCell2();
+    } else if (type == SCTypeDefine.SC_HOME_TYPE_LIFE1) {
       // 美好生活
-      return lifeCell();
+      return lifeCell1();
+    } else if (type == SCTypeDefine.SC_HOME_TYPE_LIFE2) {
+      // 美好生活
+      return lifeCell2();
     } else if (type == SCTypeDefine.SC_HOME_TYPE_GOODS) {
       // 精选商品
       return goodsCell();
@@ -120,7 +126,7 @@ class SCHomeListView2 extends StatelessWidget {
       itemList: state.allItemsList,
       onTap: (int index) {
         workOrder();
-      },
+      }, bgColor: SCColors.color_F5F5F5,
     );
   }
 
@@ -134,22 +140,60 @@ class SCHomeListView2 extends StatelessWidget {
       ],
       tapAction: (index) {
         workOrder();
-      },
+      }, cellType: 1,
     );
   }
 
+  /// 园区活动cell
+  Widget communityCell1() {
+    return SCHomeCommunityActivity(
+      cellType: 1,
+      activityList: const [
+      SCAsset.homeActivity4,
+      SCAsset.homeActivity5,
+      SCAsset.homeActivity6
+    ],tapAction: (index) {
+      workOrder();
+    },);
+  }
+
+  /// 园区活动cell2
+  Widget communityCell2() {
+    return SCHomeCommunityActivity(
+      cellType: 2,
+      activityList: const [
+        SCAsset.homeActivity4,
+        SCAsset.homeActivity5,
+        SCAsset.homeActivity6
+      ],tapAction: (index) {
+      workOrder();
+    },);
+  }
+
   /// 美好生活
-  Widget lifeCell() {
-    return SCHomeLife(
-      dataList: const [
+  Widget lifeCell1() {
+    return SCHomeLifeItem(
+      cellType: 1,
+      dataList: [
         SCAsset.homeLife1,
         SCAsset.homeLife2,
         SCAsset.homeLife1,
-      ],
-      tapAction: (index) {
-        workOrder();
-      },
-    );
+    ], tapAction: (index) {
+      workOrder();
+    },);
+  }
+
+  /// 美好生活
+  Widget lifeCell2() {
+    return SCHomeLifeItem(
+      cellType: 2,
+      dataList: [
+        SCAsset.homeLife1,
+        SCAsset.homeLife2,
+        SCAsset.homeLife1,
+      ], tapAction: (index) {
+      workOrder();
+    },);
   }
 
   /// 精选商品cell
