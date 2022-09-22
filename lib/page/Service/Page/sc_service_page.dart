@@ -79,10 +79,8 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
 
   /// skin1
   Widget skin1() {
-    List<SCServiceModuleModel>? list = state.appList;
-    list.insert(0, state.regularModuleModel);
     return SCServiceListView1(
-      appList: list,
+      appList: state.moduleList,
       itemTapAction: (title){
         /// 应用icon点击跳转
         String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
@@ -95,9 +93,14 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
 
   /// skin2
   Widget skin2() {
+    /// list数组要用深拷贝List.from，再处理数组，否则会影响state.list里的数据
+    List<SCServiceModuleModel> list = List.from(state.moduleList);
+    if (list.contains(state.regularModuleModel)) {
+      list.remove(state.regularModuleModel);
+    }
     return SCServiceListView2(
       regularModuleModel: state.regularModuleModel,
-      appList: state.appList,
+      appList: list,
       itemTapAction: (title){
         /// 应用icon点击跳转
         String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
@@ -117,5 +120,6 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
   loadData() {
     SCServiceController state = Get.find<SCServiceController>();
     //state.loadAppListData();
+    state.loadTestData();
   }
 }

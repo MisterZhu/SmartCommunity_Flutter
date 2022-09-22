@@ -30,18 +30,7 @@ class SCServiceListView2 extends StatefulWidget {
   SCServiceListView2State createState() => SCServiceListView2State();
 }
 
-
 class SCServiceListView2State extends State<SCServiceListView2> with SingleTickerProviderStateMixin {
-
-  double rightHeight = SCUtils().getScreenHeight();
-
-  late TabController tabController;
-
-  @override
-  initState() {
-    super.initState();
-    tabController = TabController(length: widget.appList!.length, vsync: this);
-  }
 
   @override
   Widget build(BuildContext context) {
