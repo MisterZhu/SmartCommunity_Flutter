@@ -12,7 +12,7 @@ class SCServiceListView1 extends StatelessWidget {
   /// 按钮点击事件
   final Function(String title)? itemTapAction;
 
-  SCServiceListView1({Key? key, this.appList, this.itemTapAction}) : super(key: key);
+  SCServiceListView1({Key? key, required this.appList, this.itemTapAction}) : super(key: key);
 
 
   @override

@@ -10,6 +10,7 @@ import '../../../constants/sc_fonts.dart';
 import '../../../constants/sc_h5.dart';
 import '../../../skin/Tools/sc_scaffold_manager.dart';
 import '../../../utils/Router/sc_router_helper.dart';
+import '../Model/sc_service_module_model.dart';
 import '../View/sc_service_listView1.dart';
 import '../View/sc_service_listView2.dart';
 
@@ -78,31 +79,32 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
 
   /// skin1
   Widget skin1() {
+    List<SCServiceModuleModel>? list = state.appList;
+    list.insert(0, state.regularModuleModel);
     return SCServiceListView1(
-      appList: state.appList,
+      appList: list,
       itemTapAction: (title){
-        /// 应用点击跳转
+        /// 应用icon点击跳转
         String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
         String token = SCScaffoldManager.instance.user.token ?? "";
         String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
         String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
-        SCRouterHelper.codePage(20000, {"title" : title, "url" : url});
-        },
+        SCRouterHelper.codePage(20000, {"title" : title, "url" : url});},
     );
-
   }
 
   /// skin2
   Widget skin2() {
     return SCServiceListView2(
-        appList: state.appList,
-        itemTapAction: (title){
-          /// 应用点击跳转
-          String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
-          String token = SCScaffoldManager.instance.user.token ?? "";
-          String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
-          String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
-          SCRouterHelper.codePage(20000, {"title" : title, "url" : url});
+      regularModuleModel: state.regularModuleModel,
+      appList: state.appList,
+      itemTapAction: (title){
+        /// 应用icon点击跳转
+        String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+        String token = SCScaffoldManager.instance.user.token ?? "";
+        String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
+        String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
+        SCRouterHelper.codePage(20000, {"title" : title, "url" : url});
       },
     );
   }

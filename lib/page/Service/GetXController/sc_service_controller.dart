@@ -19,12 +19,12 @@ class SCServiceController extends GetxController {
   bool isEditing = false;
 
   /// 常用应用列表
-  List<Applets> regularAppList = [];
+  late SCServiceModuleModel regularModuleModel;
   /// 应用列表
   List<SCServiceModuleModel> appList = [];
 
   /// 皮肤样式,默认第一套
-  int skinStyle = 0;
+  int skinStyle = 1;
 
   @override
   onInit() {
@@ -34,151 +34,81 @@ class SCServiceController extends GetxController {
 
   addRegularAppData() {
     var homeTestList = [
-      {
-        "icon": {
-          "fileKey": "",
-          "name": SCAsset.iconServiceQrCode,
-          "size": 0,
-          "suffix": "",
-          "type": 0
-        },
-        "id": "1",
-        "name": "业主二维码"
-      },{
-        "icon": {
-          "fileKey": "",
-          "name": SCAsset.iconServiceCar,
-          "size": 0,
-          "suffix": "",
-          "type": 0
-        },
-        "id": "2",
-        "name": "公务用车"
-      }
+      {"icon": {"fileKey": "", "name": SCAsset.iconServiceQrCode}, "id": "1", "name": "业主二维码"},
+      {"icon": {"fileKey": "", "name": SCAsset.iconServiceCar}, "id": "2", "name": "公务用车"}
     ];
 
-    regularAppList = homeTestList.map((e) => Applets.fromJson(e)).toList();
+    //regularAppList = homeTestList.map((e) => Applets.fromJson(e)).toList();
 
-    var regularData = {"module": {"id": "0", "name": "常用应用"}, "applets": []};
-    SCServiceModuleModel regularModel = SCServiceModuleModel.fromJson(regularData);
-    appList.insert(0, regularModel);
-
+    var regularData = {"module": {"id": "0", "name": "常用应用"}, "applets": homeTestList};
+    regularModuleModel = SCServiceModuleModel.fromJson(regularData);
   }
 
   testData() {
     var testList = [
-      {
-        "applets": [
-          {
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServiceQrCode,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "1",
-            "name": "业主二维码"
-          },{
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServiceCar,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "2",
-            "name": "公务用车"
-          },
-          {
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServiceSchedule,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "3",
-            "name": "工单调度"
-          },{
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServiceDiscount,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "4",
-            "name": "权益优惠"
-          },
-          {
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServiceSurrounding,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "5",
-            "name": "周边楼盘"
-          }
-        ],
-        "module": {
-          "id": "1",
-          "name": "物业管家"
-        }
+      {"applets": [
+        {"icon": {"fileKey": "", "name": SCAsset.iconServiceQrCode},"id": "1","name": "业主二维码"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCar},"id": "2","name": "公务用车"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceSchedule,},"id": "3","name": "工单调度"},
+        {"icon": {"fileKey": "", "name": SCAsset.iconServiceDiscount},"id": "4","name": "权益优惠"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceSurrounding},"id": "5","name": "周边楼盘"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceSchedule,},"id": "3","name": "物业缴费"},
+      ],"module": {"id": "1", "name": "物业管家"}
       },
-      {
-        "applets": [
-          {
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServiceReport,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "6",
-            "name": "报事报修"
-          },{
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServicePay,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "7",
-            "name": "小区缴费"
-          },
-          {
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServiceFinance,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "8",
-            "name": "家庭理财"
-          },
-          {
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServiceCommunity,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "9",
-            "name": "社区社群"
-          }
-        ],
-        "module": {
-          "id": "2",
-          "name": "智慧应用"
-        }
-      }
+      {"applets": [
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceIntegral},"id": "6","name": "积分管理1"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceReport},"id": "6","name": "报事报修2"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServicePay},"id": "7","name": "小区缴费3"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceFinance},"id": "8","name": "家庭理财4"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "社区社群5"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧社区6"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧街道7"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧园区8"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧手机9"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧游玩11"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧出行12"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧党群13"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceIntegral},"id": "6","name": "积分管理14"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceReport},"id": "6","name": "报事报修15"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServicePay},"id": "7","name": "小区缴费16"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceFinance},"id": "8","name": "家庭理财17"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "社区社群18"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧社区19"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧街道20"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧园区21"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧手机22"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧游玩23"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧出行24"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧党群25"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceIntegral},"id": "6","name": "积分管理26"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceReport},"id": "6","name": "报事报修27"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServicePay},"id": "7","name": "小区缴费28"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceFinance},"id": "8","name": "家庭理财29"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "社区社群30"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧社区31"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧街道32"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧园区33"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧手机34"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧游玩35"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧出行36"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧党群37"},
+      ],"module": {"id": "2","name": "智慧应用"}
+      },
+      {"applets": [
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceReport},"id": "6","name": "企业周报"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServicePay},"id": "7","name": "企业年报"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceFinance},"id": "8","name": "企业周年"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "企业工会"}
+      ],"module": {"id": "2","name": "企业服务"}
+      },
+      {"applets": [
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceReport},"id": "6","name": "校园宽带"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServicePay},"id": "7","name": "校园缴费"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceFinance},"id": "8","name": "校园食堂"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "校园教师"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "校园借书"}
+      ],"module": {"id": "2","name": "校园服务"}
+      },
     ];
 
     appList = testList.map((e) => SCServiceModuleModel.fromJson(e)).toList();
@@ -224,13 +154,13 @@ class SCServiceController extends GetxController {
 
   /// 移除首页应用
   deleteRegularApp(Applets model) {
-    regularAppList.remove(model);
+    regularModuleModel.applets?.remove(model);
     update();
   }
 
   /// 添加常用应用
   addRegularApp(Applets model) {
-    regularAppList.add(model);
+    regularModuleModel.applets?.add(model);
     update();
   }
 
