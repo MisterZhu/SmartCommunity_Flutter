@@ -1,6 +1,6 @@
 
 import 'dart:developer';
-
+import 'dart:convert' as convert;
 import 'package:get/get.dart';
 
 import '../../../constants/sc_enum.dart';
@@ -62,9 +62,35 @@ class SCLoginController extends GetxController {
         url: SCUrl.kPhoneCodeLoginUrl,
         params: {'mobileNum' : phone, 'code' : code},
         success: (value) {
-          SCUser user = SCScaffoldManager.instance.getUserData();
-          log('登陆成功获取用户token=====${user.token}===用户昵称：${user.userName}');
-          SCRouterHelper.pathPage(SCRouterPath.selectCommunityPath, {"type" : SCSelectHouseLogicType.login});
+          // SCUser user = SCScaffoldManager.instance.getUserData();
+          // log('登陆成功获取用户token=====${user.token}===用户昵称：${user.userName}');
+          var userParams = value['userInfoV'];
+          List defaultConfigList = userParams['defaultConfigList'];
+          SCUser user = SCUser.fromJson(userParams);
+
+          if (defaultConfigList.isNotEmpty) {
+            var defaultParams = defaultConfigList.first;
+            num? defaultConfigId = defaultParams['id'];
+            var jsonValue = defaultParams['jsonValue'];
+            var jsonParams = convert.jsonDecode(jsonValue);
+            user.defaultConfigId = defaultConfigId;
+            user.communityId = jsonParams['communityId'];
+            user.communityName = jsonParams['communityName'];
+            user.spaceId = jsonParams['spaceId'];
+            user.spaceName = jsonParams['spaceName'];
+            user.identityId = jsonParams['identityId'];
+            user.identityName = jsonParams['identityName'];
+            user.housingId = jsonParams['housingId'];
+          }
+
+          SCScaffoldManager.instance.user = user;
+          SCScaffoldManager.instance.isLogin = true;
+
+          if (user.communityId == null || user.communityId == '') {
+            SCRouterHelper.pathPage(SCRouterPath.selectCommunityPath, {"type" : SCSelectHouseLogicType.login});
+          } else {
+            SCRouterHelper.pathPage(SCRouterPath.tabPath, null);
+          }
         },
         failure: (value) {
           log('登陆失败===$value');

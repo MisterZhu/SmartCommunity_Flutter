@@ -18,7 +18,9 @@ class SCUser {
       this.housingId,
       this.spaceId,
       this.spaceName,
-      this.identityId
+      this.identityId,
+      this.identityName,
+      this.defaultConfigId
   });
 
   SCUser.fromJson(dynamic json) {
@@ -41,6 +43,8 @@ class SCUser {
     spaceId = json['spaceId'];
     spaceName = json['spaceName'];
     identityId = json['identityId'];
+    identityName = json['identityName'];
+    defaultConfigId = json['defaultConfigId'];
   }
   String? id;
   String? account;
@@ -61,6 +65,8 @@ class SCUser {
   num? spaceId;
   String? spaceName;
   String? identityId;
+  String? identityName;
+  num? defaultConfigId;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -83,11 +89,13 @@ class SCUser {
     map['spaceId'] = spaceId;
     map['spaceName'] = spaceName;
     map['identityId'] = identityId;
+    map['identityName'] = identityName;
+    map['defaultConfigId'] = defaultConfigId;
     return map;
   }
 
   @override
   String toString() {
-    return 'SCUser{id: $id, account: $account, userName: $userName, nickName: $nickName, mobileNum: $mobileNum, state: $state, gender: $gender, birthday: $birthday, creatorName: $creatorName, gmtCreate: $gmtCreate, operatorName: $operatorName, gmtModify: $gmtModify, token: $token, communityId: $communityId, communityName: $communityName, housingId: $housingId, spaceId: $spaceId, spaceName: $spaceName, identityId: $identityId}';
+    return 'SCUser{id: $id, account: $account, userName: $userName, nickName: $nickName, mobileNum: $mobileNum, state: $state, gender: $gender, birthday: $birthday, creatorName: $creatorName, gmtCreate: $gmtCreate, operatorName: $operatorName, gmtModify: $gmtModify, token: $token, communityId: $communityId, communityName: $communityName, housingId: $housingId, spaceId: $spaceId, spaceName: $spaceName, identityId: $identityId, identityName: $identityName, defaultConfigId: $defaultConfigId}';
   }
 }

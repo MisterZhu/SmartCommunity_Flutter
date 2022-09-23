@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'dart:convert' as convert;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -406,24 +406,11 @@ class SCAddHouseState extends State<SCAddHousePage> {
         },
         success: (value) {
           log('返回值 $value');
-
-          /// 1.toast 提示成功
-          SCToast.showTip('提交成功 我们会尽快为您审核');
-
-          /// 2.存储数据到SCUser
-          SCUser scUser = SCScaffoldManager.instance.getUserData();
-          scUser.communityId = communityId;
-          scUser.communityName = valueList?[0];
-          scUser.spaceId = int.parse(spaceId!);
-          scUser.housingId = value;
-          SCScaffoldManager.instance.cacheUserData(scUser.toJson());
-
-          log('type: ${type}');
           /// 3.栈
           if (type == SCSelectHouseLogicType.login) {
-            // 如果是从登录进入，就直接进入主页
-            SCRouterHelper.codeOffAllPage(10000, null);
+            userDefaultConfig(housingId: value);
           } else {
+            SCToast.showTip('提交成功 我们会尽快为您审核');
             // todo wangtao 是否是登录逻辑
             SCRouterHelper.back(null);
           }
@@ -434,5 +421,54 @@ class SCAddHouseState extends State<SCAddHousePage> {
             SCToast.showTip(message);
           }
         });
+  }
+
+  /// 用户默认配置信息
+  userDefaultConfig({required String housingId}) {
+    var defaultParams = {
+      "communityId" : communityId,
+      "communityName" : valueList?[0],
+      "spaceId" : int.parse(spaceId!),
+      "spaceName" : valueList?[1],
+      "identityId" : identityId,
+      "identityName" : valueList?[2],
+      "housingId" : housingId
+    };
+    var params = {
+      "jsonValue": convert.jsonEncode(defaultParams),
+      "priority": 0,
+      "type": "1"
+    };
+
+    if (SCScaffoldManager.instance.user.defaultConfigId != null && SCScaffoldManager.instance.user.defaultConfigId != 0) {
+      num defaultConfigId = SCScaffoldManager.instance?.user?.defaultConfigId ?? 0;
+      params['id'] = defaultConfigId;
+    }
+
+    SCHttpManager.instance.post(url: SCUrl.kUserDefaultConfigUrl, params: params, success: (value){
+      /// 1.toast 提示成功
+      SCToast.showTip('提交成功 我们会尽快为您审核');
+
+      /// 2.存储数据到SCUser
+      SCUser scUser = SCScaffoldManager.instance.getUserData();
+      scUser.communityId = communityId;
+      scUser.communityName = valueList?[0];
+      scUser.spaceId = int.parse(spaceId!);
+      scUser.spaceName = valueList?[1];
+      scUser.identityId = identityId;
+      scUser.identityName = valueList?[2];
+      scUser.housingId = value;
+      log('用户信息:${scUser.toJson()}');
+      SCScaffoldManager.instance.cacheUserData(scUser.toJson());
+
+      log('type: ${type}');
+      // 从登录进入，直接进入主页
+      SCRouterHelper.codeOffAllPage(10000, null);
+    }, failure: (value){
+      if (value['message'] != null) {
+        String message = value['message'];
+        SCToast.showTip(message);
+      }
+    });
   }
 }

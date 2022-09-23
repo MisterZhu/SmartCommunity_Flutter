@@ -55,6 +55,20 @@ class SCScaffoldManager {
     SCScaffoldManager.instance.initScaffold();
   }
 
+  /// set user
+  set user(SCUser user) {
+    // TODO: implement user=
+    _user = user;
+    cacheUserData(user.toJson());
+  }
+
+  /// set user
+  set isLogin(bool isLogin) {
+    // TODO: implement user=
+    _isLogin = isLogin;
+    cacheUserIsLogin(isLogin);
+  }
+
   /// 初始化scaffold数据
   Future initScaffold() async {
     _preferences = await SharedPreferences.getInstance();
