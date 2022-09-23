@@ -1,18 +1,21 @@
-
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/page/Service/View/sc_service_app_item.dart';
 
+import '../GetXController/sc_service_controller.dart';
 import '../Model/sc_service_module_model.dart';
 
 class SCServiceRightListView extends StatefulWidget {
-
-  SCServiceRightListView({Key? key,
-    this.section = 0,
-    required this.list,
-    this.pageChanged,
-    this.appTapAction})
+  SCServiceRightListView(
+      {Key? key,
+      this.section = 0,
+      required this.list,
+      this.pageChanged,
+      this.appTapAction})
       : super(key: key);
 
   final int section;
@@ -27,38 +30,36 @@ class SCServiceRightListView extends StatefulWidget {
 
   @override
   SCServiceRightListViewState createState() => SCServiceRightListViewState();
-
 }
 
 class SCServiceRightListViewState extends State<SCServiceRightListView> {
-  late ScrollController scrollController;
-  int currentPage = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    scrollController = ScrollController();
-  }
 
   @override
   Widget build(BuildContext context) {
+    SCServiceController state = Get.find<SCServiceController>();
     return PageView(
         scrollDirection: Axis.vertical,
-        physics: RangeMaintainingScrollPhysics(),
-        children: listView(),
+        physics: const RangeMaintainingScrollPhysics(),
+        children: gridViews(),
+        onPageChanged: (index) {
+          if (widget.pageChanged != null) {
+            widget.pageChanged?.call(index);
+          }
+          state.updateCurrentIndex(index: index);
+        }
     );
   }
 
-  listView() {
+  gridViews() {
     List<Widget> list = [];
     for (var i = 0; i < widget.list!.length; i++) {
-      list.add(gridViewItem(i));
+      SCServiceModuleModel moduleModel = widget.list![i];
+      list.add(gridViewItem(moduleModel));
     }
     return list;
   }
 
-  Widget gridViewItem(section) {
-    SCServiceModuleModel moduleModel = widget.list![section];
+  Widget gridViewItem(SCServiceModuleModel moduleModel) {
     return StaggeredGridView.countBuilder(
         padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 14.0, bottom: 100.0),
         mainAxisSpacing: 16.0,

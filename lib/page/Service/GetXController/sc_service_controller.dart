@@ -26,6 +26,8 @@ class SCServiceController extends GetxController {
   /// 皮肤样式,默认第一套
   int skinStyle = 1;
 
+  int currentIndex = 0;
+
   @override
   onInit() {
     super.onInit();
@@ -170,7 +172,14 @@ class SCServiceController extends GetxController {
   /// 切换皮肤
   changeSkin({required int style}) {
     skinStyle = style;
+    isEditing = false;
     update();
   }
+
+  updateCurrentIndex({required int index}) {
+    currentIndex = index;
+    update();
+  }
+
 
 }

@@ -94,7 +94,7 @@ class SCServiceListView2State extends State<SCServiceListView2> with SingleTicke
     return Container(
       width: 99.0,
       color: SCColors.color_F6F6F6,
-      child: SCServiceLeftListView(list: tabList, itemTapAction: (index) {
+      child: SCServiceLeftListView(list: tabList, leftItemTap: (index) {
 
       },),
     );

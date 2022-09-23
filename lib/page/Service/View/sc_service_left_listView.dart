@@ -1,21 +1,24 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 
 import '../../../constants/sc_colors.dart';
+import '../GetXController/sc_service_controller.dart';
 
 class SCServiceLeftListView extends StatefulWidget {
   SCServiceLeftListView({
       Key? key,
       required this.list,
       this.itemHeight = 60.0,
-      this.itemTapAction})
+      this.leftItemTap})
   : super(key: key);
 
   final List<String> list;
   final double itemHeight;
-  final Function(int index)? itemTapAction;
+  final Function(int index)? leftItemTap;
 
   @override
   SCServiceLeftListViewState createState() => SCServiceLeftListViewState();
@@ -122,10 +125,12 @@ class SCServiceLeftListViewState extends State<SCServiceLeftListView> with Singl
   }
 
   itemTaped(int index) {
-    if (widget.itemTapAction != null) {
-      widget.itemTapAction?.call(index);
+    SCServiceController state = Get.find<SCServiceController>();
+    if (widget.leftItemTap != null) {
+      widget.leftItemTap?.call(index);
     }
     moveToItem(index);
+    state.updateCurrentIndex(index: index);
   }
 
   moveToItem(int index) {
