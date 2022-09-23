@@ -7,14 +7,18 @@ import 'package:smartcommunity/constants/sc_fonts.dart';
 /// 首页-应用列表item
 
 class SCHomeAllItem extends StatelessWidget {
-  SCHomeAllItem({Key? key, required this.itemList, required this.bgColor, this.onTap,})
-      : super(key: key);
-  final List itemList;
 
   /// 列
-  final int crossAxisCount = 5;
+  int crossAxisCount = 5;
 
-  Color bgColor = SCColors.color_F5F5F5;
+  SCHomeAllItem({Key? key,
+    required this.itemList,
+    this.bgColor = SCColors.color_F5F5F5,
+    this.onTap,}) : super(key: key);
+
+  final List itemList;
+
+  final Color bgColor ;
   /// 点击回调
   final Function(int index)? onTap;
 

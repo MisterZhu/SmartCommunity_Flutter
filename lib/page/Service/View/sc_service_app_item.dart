@@ -40,18 +40,19 @@ class SCServiceAppItem extends StatelessWidget {
   /// body
   Widget body() {
     SCServiceController state = Get.find<SCServiceController>();
-    bool hide = true;
+    bool? hide = true;
     if (isRegularApp) {
       /// 如果是常用应用
       hide = state.isEditing ? false : true;
     } else {
       if (state.isEditing) {
-        hide = state.regularAppList.any((element) => applets.id == element.id);
+        List<Applets>? regularApplets = state.regularModuleModel.applets;
+        hide = regularApplets?.any((element) => applets.id == element.id);
       }
     }
     return GestureDetector(
       onTap: (){
-        if (!hide) {
+        if (!hide!) {
           if (section == 0) {
             log('常用应用删除');
             state.deleteRegularApp(applets);
@@ -72,7 +73,7 @@ class SCServiceAppItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            topIconItem(applets, hide),
+            topIconItem(applets, hide!),
             const SizedBox(
               height: 4,
             ),

@@ -42,8 +42,14 @@ class SCServiceCellItem extends StatelessWidget {
       double leftSpace = 16.0;
       double radius = 4.0;
       if (state.skinStyle == 1) {
-        leftSpace = 0.0;
+        leftSpace = 4.0;
         radius = 0.0;
+      }
+      bool showItems = true;
+      /// 是否是常用应用，暂定id=0为常用应用，后面根据接口返回的数据再定
+      bool isRegularApp = moduleModel.module?.id == '0' ? true : false;
+      if (isRegularApp && !state.isExpansion) {
+        showItems = false;
       }
       return Column(
         children: [
@@ -58,7 +64,7 @@ class SCServiceCellItem extends StatelessWidget {
                 children: [
                   headerItem(),
                   Offstage(
-                    offstage: section == 0 ? !state.isExpansion : false,
+                    offstage: !showItems,
                     child: itemsCell(),
                   ),
                 ],
@@ -149,8 +155,8 @@ class SCServiceCellItem extends StatelessWidget {
     /// 是否是常用应用，暂定id=0为常用应用，后面根据接口返回的数据再定
     bool isRegularApp = moduleModel.module?.id == '0' ? true : false;
     return GetBuilder<SCServiceController>(builder: (state){
-      if (section == 0) {
-        list = state.regularAppList;
+      if (isRegularApp) {
+        list = state.regularModuleModel.applets;
       } else {
         list = moduleModel.applets;
       }
@@ -183,18 +189,19 @@ class SCServiceCellItem extends StatelessWidget {
 
   Widget gridItem(Applets applets) {
     SCServiceController state = Get.find<SCServiceController>();
-    bool hide = true;
+    bool? hide = true;
     if (moduleModel.module?.id == '0') {
       /// 如果是常用应用
       hide = state.isEditing ? false : true;
     } else {
       if (state.isEditing) {
-        hide = state.regularAppList.any((element) => applets.id == element.id);
+        List<Applets>? regularApplets = state.regularModuleModel.applets;
+        hide = regularApplets?.any((element) => applets.id == element.id);
       }
     }
     return GestureDetector(
       onTap: (){
-        if (!hide) {
+        if (!hide!) {
           if (section == 0) {
             log('常用应用删除');
             state.deleteRegularApp(applets);
@@ -215,7 +222,7 @@ class SCServiceCellItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            topIconItem(applets, hide),
+            topIconItem(applets, hide!),
             const SizedBox(
               height: 4,
             ),

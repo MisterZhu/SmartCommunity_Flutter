@@ -124,15 +124,17 @@ class SCHomeListView2 extends StatelessWidget {
   Widget itemsCell() {
     return SCHomeAllItem(
       itemList: state.allItemsList,
+      bgColor: SCColors.color_F5F5F5,
       onTap: (int index) {
         workOrder();
-      }, bgColor: SCColors.color_F5F5F5,
+      },
     );
   }
 
   /// 园区活动cell
   Widget communityCell() {
     return SCHomeCommunityActivity(
+      cellType: 1,
       activityList: const [
         SCAsset.homeActivity4,
         SCAsset.homeActivity5,
@@ -140,11 +142,11 @@ class SCHomeListView2 extends StatelessWidget {
       ],
       tapAction: (index) {
         workOrder();
-      }, cellType: 1,
+      },
     );
   }
 
-  /// 园区活动cell
+  /// 园区活动cell1
   Widget communityCell1() {
     return SCHomeCommunityActivity(
       cellType: 1,

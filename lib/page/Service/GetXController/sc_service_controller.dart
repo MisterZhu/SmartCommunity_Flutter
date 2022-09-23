@@ -19,174 +19,109 @@ class SCServiceController extends GetxController {
   bool isEditing = false;
 
   /// 常用应用列表
-  List<Applets> regularAppList = [];
-  /// 应用列表
-  List<SCServiceModuleModel> appList = [];
+  late SCServiceModuleModel regularModuleModel;
+  /// 数据
+  List<SCServiceModuleModel> moduleList = [];
 
   /// 皮肤样式,默认第一套
-  int skinStyle = 0;
+  int skinStyle = 1;
+
+  int currentIndex = 0;
 
   @override
   onInit() {
     super.onInit();
+  }
+
+  loadTestData() {
     testData();
   }
 
   addRegularAppData() {
     var homeTestList = [
-      {
-        "icon": {
-          "fileKey": "",
-          "name": SCAsset.iconServiceQrCode,
-          "size": 0,
-          "suffix": "",
-          "type": 0
-        },
-        "id": "1",
-        "name": "业主二维码"
-      },{
-        "icon": {
-          "fileKey": "",
-          "name": SCAsset.iconServiceCar,
-          "size": 0,
-          "suffix": "",
-          "type": 0
-        },
-        "id": "2",
-        "name": "公务用车"
-      }
+      {"icon": {"fileKey": "", "name": SCAsset.iconServiceQrCode}, "id": "1", "name": "业主二维码"},
+      {"icon": {"fileKey": "", "name": SCAsset.iconServiceCar}, "id": "2", "name": "公务用车"}
     ];
-
-    regularAppList = homeTestList.map((e) => Applets.fromJson(e)).toList();
-
-    var regularData = {"module": {"id": "0", "name": "常用应用"}, "applets": []};
-    SCServiceModuleModel regularModel = SCServiceModuleModel.fromJson(regularData);
-    appList.insert(0, regularModel);
-
+    var regularData = {"module": {"id": "0", "name": "常用应用"}, "applets": homeTestList};
+    regularModuleModel = SCServiceModuleModel.fromJson(regularData);
+    moduleList.insert(0, regularModuleModel);
   }
 
   testData() {
-    var testList = [
-      {
-        "applets": [
-          {
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServiceQrCode,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "1",
-            "name": "业主二维码"
-          },{
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServiceCar,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "2",
-            "name": "公务用车"
-          },
-          {
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServiceSchedule,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "3",
-            "name": "工单调度"
-          },{
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServiceDiscount,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "4",
-            "name": "权益优惠"
-          },
-          {
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServiceSurrounding,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "5",
-            "name": "周边楼盘"
-          }
-        ],
-        "module": {
-          "id": "1",
-          "name": "物业管家"
-        }
-      },
-      {
-        "applets": [
-          {
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServiceReport,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "6",
-            "name": "报事报修"
-          },{
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServicePay,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "7",
-            "name": "小区缴费"
-          },
-          {
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServiceFinance,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "8",
-            "name": "家庭理财"
-          },
-          {
-            "icon": {
-              "fileKey": "",
-              "name": SCAsset.iconServiceCommunity,
-              "size": 0,
-              "suffix": "",
-              "type": 0
-            },
-            "id": "9",
-            "name": "社区社群"
-          }
-        ],
-        "module": {
-          "id": "2",
-          "name": "智慧应用"
-        }
-      }
-    ];
+    moduleList = [];
 
-    appList = testList.map((e) => SCServiceModuleModel.fromJson(e)).toList();
+    var testList = [
+      {"applets": [
+        {"icon": {"fileKey": "", "name": SCAsset.iconServiceQrCode},"id": "1","name": "业主二维码"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCar},"id": "2","name": "公务用车"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceSchedule,},"id": "3","name": "工单调度"},
+        {"icon": {"fileKey": "", "name": SCAsset.iconServiceDiscount},"id": "4","name": "权益优惠"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceSurrounding},"id": "5","name": "周边楼盘"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceSchedule,},"id": "6","name": "物业缴费"},
+      ],"module": {"id": "1", "name": "物业管家"}
+      },
+      {"applets": [
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceIntegral},"id": "61","name": "积分管理1"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceReport},"id": "62","name": "报事报修2"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServicePay},"id": "63","name": "小区缴费3"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceFinance},"id": "64","name": "家庭理财4"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "65","name": "社区社群5"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "66","name": "智慧社区6"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "67","name": "智慧街道7"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "7","name": "智慧园区8"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "8","name": "智慧手机9"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "9","name": "智慧游玩11"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "10","name": "智慧出行12"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "11","name": "智慧党群13"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceIntegral},"id": "12","name": "积分管理14"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceReport},"id": "13","name": "报事报修15"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServicePay},"id": "14","name": "小区缴费16"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceFinance},"id": "15","name": "家庭理财17"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "16","name": "社区社群18"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "17","name": "智慧社区19"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "18","name": "智慧街道20"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "19","name": "智慧园区21"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "20","name": "智慧手机22"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "21","name": "智慧游玩23"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "22","name": "智慧出行24"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "23","name": "智慧党群25"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceIntegral},"id": "24","name": "积分管理26"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceReport},"id": "25","name": "报事报修27"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServicePay},"id": "26","name": "小区缴费28"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceFinance},"id": "27","name": "家庭理财29"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "28","name": "社区社群30"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "29","name": "智慧社区31"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "30","name": "智慧街道32"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "31","name": "智慧园区33"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "32","name": "智慧手机34"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "33","name": "智慧游玩35"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "34","name": "智慧出行36"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "35","name": "智慧党群37"},
+      ],"module": {"id": "2","name": "智慧应用"}
+      },
+      {"applets": [
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceReport},"id": "36","name": "企业周报"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServicePay},"id": "37","name": "企业年报"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceFinance},"id": "38","name": "企业周年"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "39","name": "企业工会"}
+      ],"module": {"id": "2","name": "企业服务"}
+      },
+      {"applets": [
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceReport},"id": "46","name": "校园宽带"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServicePay},"id": "47","name": "校园缴费"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceFinance},"id": "48","name": "校园食堂"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "49","name": "校园教师"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "50","name": "校园借书"}
+      ],"module": {"id": "2","name": "校园服务"}
+      },
+    ];
+    moduleList = testList.map((e) => SCServiceModuleModel.fromJson(e)).toList();
     addRegularAppData();
   }
 
   /// 获取应用列表数据
   loadAppListData() {
+    moduleList = [];
     SCUser user = SCScaffoldManager.instance.getUserData();
     String? housingId = user.housingId;
     SCHttpManager.instance.get(
@@ -196,7 +131,7 @@ class SCServiceController extends GetxController {
         },
         success: (value) {
           List<SCServiceModuleModel> dataList = List<SCServiceModuleModel>.from(value.map((e) => SCServiceModuleModel.fromJson(e)).toList());
-          updateAppList(list: dataList);
+          updateModuleList(list: dataList);
         },
         failure: (value) {
           log('appList失败===$value');
@@ -205,8 +140,8 @@ class SCServiceController extends GetxController {
   }
 
   /// 更新数据源
-  updateAppList({required List<SCServiceModuleModel> list}) {
-    appList = list;
+  updateModuleList({required List<SCServiceModuleModel> list}) {
+    moduleList = list;
     update();
   }
 
@@ -224,20 +159,27 @@ class SCServiceController extends GetxController {
 
   /// 移除首页应用
   deleteRegularApp(Applets model) {
-    regularAppList.remove(model);
+    regularModuleModel.applets?.remove(model);
     update();
   }
 
   /// 添加常用应用
   addRegularApp(Applets model) {
-    regularAppList.add(model);
+    regularModuleModel.applets?.add(model);
     update();
   }
 
   /// 切换皮肤
   changeSkin({required int style}) {
     skinStyle = style;
+    isEditing = false;
     update();
   }
+
+  updateCurrentIndex({required int index}) {
+    currentIndex = index;
+    update();
+  }
+
 
 }
