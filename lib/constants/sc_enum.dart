@@ -37,3 +37,11 @@ enum SCSelectHouseLogicType {
   /// 新增房号  去绑定房号
   addHouse,
 }
+
+// 首页cell样式类型
+enum SCHomeCellBottomContentType {
+  // 图片下面没有标题
+  noBottomContent,
+  // 图片下面有标题内容
+  bottomContent,
+}

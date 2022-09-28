@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../../constants/sc_colors.dart';
+import '../../../constants/sc_enum.dart';
 import '../../../constants/sc_fonts.dart';
 
 /// 首页-网格图片item，4等分，宽高1：1，1行
 
 class SCHomeGridImageItem extends StatelessWidget {
 
-  /// cell样式类型，1=图片下面没有标题，2=图片下面有标题内容
-  final int cellType;
+  /// cell样式类型
+  final SCHomeCellBottomContentType cellType;
 
   /// 图片list，最多4个
   final List imageList;
@@ -27,7 +28,7 @@ class SCHomeGridImageItem extends StatelessWidget {
       {Key? key,
         this.imageWidth = 160.0,
         this.imageHeight = 160.0,
-        this.cellType = 1,
+        this.cellType = SCHomeCellBottomContentType.noBottomContent,
         required this.imageList,
         this.onTap})
       : super(key: key);
@@ -95,9 +96,7 @@ class SCHomeGridImageItem extends StatelessWidget {
 
   /// 底部的标题、内容
   bottomItem() {
-    if (cellType == 1) {
-      return Container();
-    } else if (cellType == 2){
+    if (cellType == SCHomeCellBottomContentType.bottomContent){
       return const Padding(
         padding: EdgeInsets.only(top: 4.0, left: 4.0, bottom: 0.0),
         child: Text(

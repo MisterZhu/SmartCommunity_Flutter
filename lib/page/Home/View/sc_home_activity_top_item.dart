@@ -8,13 +8,30 @@ import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_fonts.dart';
 
 /// 顶部的icon、标题、tag标签
+// icon样式
+enum IconStyle {
+  // 标题左边没有icon
+  none,
+  // 标题左边有icon
+  left,
+}
+
+// tag标签样式
+enum TagStyle {
+  // 没有tag标签
+  none,
+  // tag标签在标题后面
+  left,
+  // tag标签在右侧
+  right,
+}
 
 class SCHomeActivityTopItem extends StatelessWidget {
 
-  /// icon样式类型，0=标题左边没有icon，1=标题左边有icon，
-  final int iconType;
-  /// tag标签样式类型，0=没有tag标签，1=tag标签在标题后面，2=tag标签在右侧
-  final int tagType;
+  /// icon样式
+  final IconStyle iconStyle;
+  /// 标签样式
+  final TagStyle tagStyle;
 
   final String title;
   final String? icon;
@@ -25,10 +42,10 @@ class SCHomeActivityTopItem extends StatelessWidget {
   final Color tagTextColor;
 
   const SCHomeActivityTopItem({Key? key,
-    required this.iconType,
+    required this.iconStyle,
     required this.icon,
     required this.title,
-    required this.tagType,
+    required this.tagStyle,
     required this.tagText,
     this.tagHeight = 16.0,
     this.tagFont = SCFonts.f10,
@@ -49,31 +66,28 @@ class SCHomeActivityTopItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Offstage(
-            offstage: iconType == 0 ? true : false,
-            child: Padding(
-                padding: const EdgeInsets.only(right: 6.0,),
-                child: Image.asset(SCAsset.iconScan, width: 22.0, height: 22.0, color: SCColors.color_FCD6AD,)),
-          ),
+          iconItem(),
           titleItem(),
           const SizedBox(width: 8.0,),
-          Offstage(
-            offstage: tagType == 0 ? true : false,
-            child: SCHomeTagItem(
-                title: tagText,
-                tagFont: tagFont,
-                height: tagHeight,
-                textColor: tagTextColor,
-                backgroundColor: tagBgColor),
-          )
+          tagItem(),
         ],
       ),
     );
   }
 
+  /// 标题前面的icon
+  Widget iconItem() {
+    return Offstage(
+      offstage: iconStyle == IconStyle.none ? true : false,
+      child: Padding(
+          padding: const EdgeInsets.only(right: 6.0,),
+          child: Image.asset(SCAsset.iconScan, width: 22.0, height: 22.0, color: SCColors.color_FCD6AD,)),
+    );
+  }
+
   /// 标题
   Widget titleItem() {
-    if (tagType == 1) {
+    if (tagStyle == TagStyle.left) {
       return textItem();
     } else {
       return Expanded(child: textItem());
@@ -92,6 +106,19 @@ class SCHomeActivityTopItem extends StatelessWidget {
           fontSize: SCFonts.f14,
           fontWeight: FontWeight.w500,
           color: SCColors.color_1B1D33),
+    );
+  }
+
+  /// 标签item
+  Widget tagItem() {
+    return Offstage(
+      offstage: tagStyle == TagStyle.none ? true : false,
+      child: SCHomeTagItem(
+          title: tagText,
+          tagFont: tagFont,
+          height: tagHeight,
+          textColor: tagTextColor,
+          backgroundColor: tagBgColor),
     );
   }
 }

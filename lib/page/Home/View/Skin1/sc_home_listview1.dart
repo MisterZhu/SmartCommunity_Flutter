@@ -17,6 +17,7 @@ import 'package:smartcommunity/utils/sc_utils.dart';
 import 'package:smartcommunity/widgets/Refresh/sc_custom_header.dart';
 import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_default_value.dart';
+import '../../../../constants/sc_enum.dart';
 import '../../../../constants/sc_h5.dart';
 import '../../../../skin/Tools/sc_scaffold_manager.dart';
 import '../../../../utils/Router/sc_router_helper.dart';
@@ -228,7 +229,7 @@ class SCHomeListView1 extends StatelessWidget {
         SCAsset.homeGrid3,
         SCAsset.homeGrid4,
       ],
-      cellType: 2,
+      cellType: SCHomeCellBottomContentType.bottomContent,
       imageWidth: 160.0,
       imageHeight: 160.0,
     );

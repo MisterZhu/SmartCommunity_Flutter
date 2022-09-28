@@ -8,6 +8,7 @@ import 'package:smartcommunity/page/Home/View/sc_home_selected_goods.dart';
 
 import '../../../../constants/sc_asset.dart';
 import '../../../../constants/sc_default_value.dart';
+import '../../../../constants/sc_enum.dart';
 import '../../../../constants/sc_h5.dart';
 import '../../../../constants/sc_type_define.dart';
 import '../../../../skin/Tools/sc_scaffold_manager.dart';
@@ -131,25 +132,10 @@ class SCHomeListView2 extends StatelessWidget {
     );
   }
 
-  /// 园区活动cell
-  Widget communityCell() {
-    return SCHomeCommunityActivity(
-      cellType: 1,
-      activityList: const [
-        SCAsset.homeActivity4,
-        SCAsset.homeActivity5,
-        SCAsset.homeActivity6
-      ],
-      tapAction: (index) {
-        workOrder();
-      },
-    );
-  }
-
   /// 园区活动cell1
   Widget communityCell1() {
     return SCHomeCommunityActivity(
-      cellType: 1,
+      cellType: SCHomeCellBottomContentType.noBottomContent,
       activityList: const [
       SCAsset.homeActivity4,
       SCAsset.homeActivity5,
@@ -162,7 +148,7 @@ class SCHomeListView2 extends StatelessWidget {
   /// 园区活动cell2
   Widget communityCell2() {
     return SCHomeCommunityActivity(
-      cellType: 2,
+      cellType: SCHomeCellBottomContentType.bottomContent,
       activityList: const [
         SCAsset.homeActivity4,
         SCAsset.homeActivity5,
@@ -175,7 +161,7 @@ class SCHomeListView2 extends StatelessWidget {
   /// 美好生活
   Widget lifeCell1() {
     return SCHomeLifeItem(
-      cellType: 1,
+      cellType: SCHomeCellBottomContentType.noBottomContent,
       dataList: [
         SCAsset.homeLife1,
         SCAsset.homeLife2,
@@ -188,7 +174,7 @@ class SCHomeListView2 extends StatelessWidget {
   /// 美好生活
   Widget lifeCell2() {
     return SCHomeLifeItem(
-      cellType: 2,
+      cellType: SCHomeCellBottomContentType.bottomContent,
       dataList: [
         SCAsset.homeLife1,
         SCAsset.homeLife2,
