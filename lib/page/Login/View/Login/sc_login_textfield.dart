@@ -30,28 +30,14 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
   /// 手机号focusNode
   FocusNode phoneNode = FocusNode();
 
-  /// 验证码controller
-  TextEditingController codeController = TextEditingController();
-
-  /// 验证码focusNode
-  FocusNode codeNode = FocusNode();
-
   /// 手机号输入长度
   int inputLength = 0;
 
   /// 是否显示手机号删除按钮
   bool isShowPhoneClear = false;
 
-  /// 验证码定时器
-  Timer? codeTimer;
   /// 验证码按钮是否可以点击
   bool isCodeBtnEnable = false;
-  /// 验证码按钮text
-  String codeText = "获取验证码";
-  /// 倒计时
-  int codeTime = 60;
-  /// 验证码按钮背景颜色
-  Color codeBGColor = SCColors.color_FFC59B;
 
   /// 手机号长度，因为中间有两个空格，所以是13
   final int phoneLength = 13;
@@ -68,22 +54,20 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
   initState() {
     super.initState();
     phoneController.addListener(phoneControllerNotify);
-    codeController.addListener(codeControllerNotify);
     phoneNode.addListener(phoneFocusChange);
   }
 
   /// body
   Widget body() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 57.0),
       child: Container(
         decoration: BoxDecoration(
-            color: SCColors.color_FFFFFF,
-            borderRadius: BorderRadius.circular(4.0)),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [phoneItem(), line(), codeItem()],
+          color: SCColors.color_F2F3F5,
+          borderRadius: BorderRadius.circular(8.0),
+          border: Border.all(color: SCColors.color_CBCBCB, width: 0.5)
         ),
+        child: phoneItem(),
       ),
     );
   }
@@ -91,7 +75,7 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
   /// 手机号容器
   Widget phoneItem() {
     return Container(
-      height: 46.0,
+      height: 48.0,
       padding: const EdgeInsets.only(left: 12.0),
       alignment: Alignment.centerLeft,
       child: Row(
@@ -122,7 +106,7 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
       ],
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 0),
-        hintText: "请输入11位手机号",
+        hintText: "请输入手机号",
         hintStyle: TextStyle(fontSize: 14, color: SCColors.color_B0B1B8),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(width: 0, color: Colors.transparent)),
@@ -143,6 +127,7 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
     );
   }
 
+  /// 格式化手机号
   TextInputFormatter phoneInputFormatter() {
     return TextInputFormatter.withFunction((oldValue, newValue) {
       String text = newValue.text;
@@ -177,7 +162,6 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
         }
         string += text[i];
       }
-
       return TextEditingValue(
         text: string,
         selection: TextSelection.fromPosition(TextPosition(offset: position, affinity: TextAffinity.upstream)),
@@ -191,10 +175,9 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
       return GestureDetector(
         child: Container(
           padding: const EdgeInsets.only(right: 12.0),
-          width: 36,
+          width: 40,
           height: 40,
           alignment: Alignment.centerRight,
-          color: Colors.white,
           child: Image.asset(SCAsset.iconGreyDelete, width: 18.0, height: 18.0),
         ),
         onTap: () {
@@ -206,114 +189,12 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
     }
   }
 
-  /// 横线
-  Widget line() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      child: Container(
-        height: 0.5,
-        color: SCColors.color_EDEDF0,
-      ),
-    );
-  }
-
-  /// 验证码容器
-  Widget codeItem() {
-    return Container(
-      height: 46.0,
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      alignment: Alignment.centerLeft,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(child: codeTextField()),
-          const SizedBox(
-            width: 10.0,
-          ),
-          sendCodeItem()
-        ],
-      ),
-    );
-  }
-
-  /// 验证码输入框
-  Widget codeTextField() {
-    return TextField(
-      controller: codeController,
-      maxLines: 1,
-      cursorColor: SCColors.color_1B1C33,
-      cursorWidth: 2,
-      focusNode: codeNode,
-      inputFormatters: [
-        LengthLimitingTextInputFormatter(6),
-      ],
-      decoration: const InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 0),
-        hintText: "请输入短信验证码",
-        hintStyle: TextStyle(fontSize: SCFonts.f14, color: SCColors.color_B0B1B8),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(width: 0, color: Colors.transparent)),
-        disabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(width: 0, color: Colors.transparent)),
-        enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(width: 0, color: Colors.transparent)),
-        border: OutlineInputBorder(
-            borderSide: BorderSide(width: 0, color: Colors.transparent)),
-        isCollapsed: true,
-      ),
-      onChanged: (value) {},
-      keyboardType: TextInputType.number,
-      keyboardAppearance: Brightness.light,
-      textInputAction: TextInputAction.next,
-    );
-  }
-
-  /// 获取验证码item
-  Widget sendCodeItem() {
-    if (codeTime < 60 && codeTime > 0) {
-      return Text(
-        codeText,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-            fontSize: SCFonts.f14,
-            fontWeight: FontWeight.normal,
-            color: SCColors.color_FF6C00),
-      );
-    } else {
-      return GestureDetector(
-        onTap: (){
-          if (isCodeBtnEnable == true) {
-            /// 发送验证码
-            sendCode();
-          }
-        },
-        child: Container(
-          width: 100.0,
-          height: 28.0,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-              color: SCColors.color_FFFFFF,
-              borderRadius: BorderRadius.circular(14.0),
-              border: Border.all(color: codeBGColor, width: 0.5)),
-          child: Text(
-            codeText,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: SCFonts.f14,
-                fontWeight: FontWeight.normal,
-                color: codeBGColor),
-          ),
-        ),
-      );
-    }
-  }
-
   /// 监听手机号controller
   phoneControllerNotify() {
     SCLoginController state = Get.find<SCLoginController>();
     bool status = false;
     state.phone = phoneController.text.removeAllWhitespace;
-    updateLoginButtonState();
+    updateCodeButtonState();
 
     if (phoneController.text.isEmpty) {
       status = false;
@@ -328,14 +209,13 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
     }
   }
 
-  /// 登录按钮是否可以点击
-  updateLoginButtonState() {
+  /// 验证码按钮是否可以点击
+  updateCodeButtonState() {
     SCLoginController state = Get.find<SCLoginController>();
-
-    if (state.phone.length == 11 && state.code.length == 6) {
-      state.updateLoginButtonState(enable: true);
+    if (state.phone.length == 11) {
+      state.updateCodeButtonState(enable: true);
     } else {
-      state.updateLoginButtonState(enable: false);
+      state.updateCodeButtonState(enable: false);
     }
   }
 
@@ -361,19 +241,16 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
 
   /// 手机号格式化
   formatPhoneNumber(String text) {
-
     if (text.length == phoneLength) {
       if (mounted) {
         setState(() {
           isCodeBtnEnable = true;
-          codeBGColor = SCColors.color_FF6C00;
         });
       }
     } else {
       if (mounted) {
         setState(() {
           isCodeBtnEnable = false;
-          codeBGColor = SCColors.color_FFC59B;
         });
       }
     }
@@ -381,64 +258,15 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
   /// 输入的文本内容长度为13，且光标在文本最后，cursorPosition=11时，焦点自动跳到验证码输入框
   if (text.length == phoneLength && cursorPosition == phoneLength - 2) {
       phoneNode.unfocus();
-      codeNode.requestFocus();
     }
 
     inputLength = text.length;
-  }
-
-  /// 监听验证码controller
-  codeControllerNotify() {
-    SCLoginController state = Get.find<SCLoginController>();
-    state.code = codeController.text;
-    updateLoginButtonState();
-  }
-
-  /// 初始化定时器
-  void initTimer() {
-    isCodeBtnEnable = false;
-    codeTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      codeTime--;
-      if (mounted) {
-        setState(() {
-          if (codeTime <= 0) {
-            codeTime = 60;
-            codeBGColor = phoneController.text.length == phoneLength ? SCColors.color_FF6C00 : SCColors.color_FFC59B;
-            isCodeBtnEnable = phoneController.text.length == phoneLength ? true : false;
-            codeText = "获取验证码";
-            disposeTimer();
-          } else {
-            codeText = '${codeTime}s';
-            codeBGColor = SCColors.color_FF6C00;
-          }
-        });
-      }
-    });
-  }
-
-  /*销毁定时器*/
-  void disposeTimer() {
-    codeTimer?.cancel();
-    codeTimer = null;
-  }
-  
-  sendCode() {
-    log('请求发送验证码接口');
-    SCLoginController state = Get.find<SCLoginController>();
-    state.sendCode(resultHandler: (status){
-      if (status == true) {
-        initTimer();
-      }
-    });
   }
 
   @override
   dispose() {
     super.dispose();
     phoneNode.dispose();
-    codeNode.dispose();
     phoneController.dispose();
-    codeController.dispose();
-    disposeTimer();
   }
 }

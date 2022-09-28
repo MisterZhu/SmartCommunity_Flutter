@@ -4,6 +4,7 @@ import 'package:smartcommunity/page/Guide/Page/sc_guide_page.dart';
 import 'package:smartcommunity/page/Home/Page/sc_home_page.dart';
 import 'package:smartcommunity/page/Login/Page/sc_select_house_page.dart';
 import 'package:smartcommunity/page/Login/Page/sc_login_page.dart';
+import 'package:smartcommunity/page/Login/View/Login/sc_login_code_view.dart';
 import 'package:smartcommunity/page/Mine/Page/sc_add_house_page.dart';
 import 'package:smartcommunity/page/Mine/Page/sc_toggle_houses_page.dart';
 import 'package:smartcommunity/page/Tab/Page/sc_tab_page.dart';
@@ -55,7 +56,7 @@ class SCRouterPages {
     8000 : SCRouterPath.basePrivacyPath,
     /*引导页*/
     9000 : SCRouterPath.guidePath,
-    /*验证码登录*/
+    /*验证码登录-输入手机号*/
     9001 : SCRouterPath.codeLoginPath,
     /*城市选择*/
     9002 : SCRouterPath.selectCityPath,
@@ -77,11 +78,5 @@ class SCRouterPages {
     20000 : SCRouterPath.webViewPath,
     /*房号选择*/
     20001 : SCRouterPath.selectHousePath,
-    /*全部应用*/
-    10011 : SCRouterPath.servicePagePath,
-    /*切换房屋*/
-    5001 : SCRouterPath.toggleHousesPagePath,
-    /*新增房号*/
-    5002 : SCRouterPath.addHousePagePath,
   };
 }

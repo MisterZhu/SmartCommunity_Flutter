@@ -1,4 +1,5 @@
 
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:get/get.dart';
@@ -23,8 +24,14 @@ class SCLoginController extends GetxController {
   /// 验证码
   String code = '';
 
-  /// 登录按钮是否可以点击
-  bool loginBtnEnable = false;
+  /// 获取验证码按钮是否可以点击
+  bool codeBtnEnable = false;
+
+  /// 获取验证码按钮是否可以点击
+  updateCodeButtonState({required bool enable}) {
+    codeBtnEnable = enable;
+    update();
+  }
 
   /// 更新勾选协议状态
   updateAgreementState() {
@@ -32,12 +39,7 @@ class SCLoginController extends GetxController {
     update();
   }
 
-  /// 登录按钮是否可以点击
-  updateLoginButtonState({required bool enable}) {
-    loginBtnEnable = enable;
-    update();
-  }
-
+  /// 发送验证码
   sendCode({required Function(bool success) resultHandler}) {
     SCLoadingUtils.show();
     SCHttpManager.instance.post(
@@ -56,6 +58,7 @@ class SCLoginController extends GetxController {
         });
   }
 
+  /// 请求登录接口
   login() {
     SCLoadingUtils.show();
     SCHttpManager.instance.post(

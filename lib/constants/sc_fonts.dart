@@ -9,4 +9,6 @@ class SCFonts {
   static const double f18 = 18;
   static const double f20 = 20;
   static const double f22 = 22;
+  static const double f24 = 24;
+  static const double f28 = 28;
 }

@@ -219,6 +219,15 @@ class SCAsset {
   /************* logo *************/
 
   /************* 登录 *************/
+  /// 登录页面背景图
+  static const String iconLoginTopBg = 'images/login/icon_login_bg.png';
+
+  static const String iconLoginBottomBg = 'images/login/icon_login_bottom_bg.png';
+  /// 数字键盘上的删除按钮
+  static const String iconLoginCodeClose = 'images/login/icon_login_code_close.png';
+
+  /// 关闭
+  static const String iconLoginNumberDelete = 'images/login/icon_login_number_delete.png';
   /// 删除
   static const String iconGreyDelete = 'images/login/icon_delete_gray.png';
   /// 选择城市-重新定位
