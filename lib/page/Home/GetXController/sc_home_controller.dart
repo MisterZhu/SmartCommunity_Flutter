@@ -26,11 +26,11 @@ class SCHomeController extends GetxController {
   }
 
   /// 切换房屋
-  changeHouse({required SCMyHouseModel model}) {
+  changeHouse({required SCMyHouseModel? model}) {
     SCHomeController1 state1 = Get.find<SCHomeController1>();
     SCHomeController2 state2 = Get.find<SCHomeController2>();
 
-    state1.changeCommunityName(name: model.communityName ?? '');
-    state2.changeCommunityName(name: model.communityName ?? '');
+    state1.changeCommunityName(name: model?.communityName ?? '');
+    state2.changeCommunityName(name: model?.communityName ?? '');
   }
 }

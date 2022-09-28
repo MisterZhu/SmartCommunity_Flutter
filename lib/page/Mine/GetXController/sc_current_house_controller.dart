@@ -8,12 +8,12 @@ import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import '../../../network/sc_http_manager.dart';
 import '../../../network/sc_url.dart';
 import '../../../utils/Loading/sc_loading_utils.dart';
+import '../../../utils/Toast/sc_toast.dart';
 import '../Model/sc_current_house_info_model.dart';
 import '../Model/sc_current_house_review_model.dart';
 
 class SCCurrentHouseController extends GetxController {
   int selectReviewIndex = 0;
-
   List<SCCurrentHouseReviewModel>? reviewList = [];
 
   List<SCCurrentHouseReviewModel>? notReviewList = [];
@@ -109,7 +109,7 @@ class SCCurrentHouseController extends GetxController {
     update();
   }
 
-  loadData() {
+  loadCurrentHouseData() {
     SCLoadingUtils.show();
     // 取当前房号Id
    SCUser scUser = SCScaffoldManager.instance.getUserData();
@@ -332,13 +332,24 @@ class SCCurrentHouseController extends GetxController {
   }
 
   /// 解除绑定房号接口
-  unBindHouse() {
+    unBindHouse({required Function(bool success) resultHandler}) {
+    SCUser scUser = SCScaffoldManager.instance.getUserData();
+    String? housingId = scUser.housingId;
     SCHttpManager.instance.delete(
         url: SCUrl.kUnbindHouseUrl,
-        params: {'housingId': ''},
-        success: (value) {},
+        params: {'housingId': housingId},
+        success: (value) {
+          SCToast.showTip('解绑成功');
+          update();
+          resultHandler(true);
+        },
         failure: (value) {
-          String message = value['message'];
+          String? message = value['message'];
+          if (message != null) {
+            String message = value['message'];
+            SCToast.showTip(message);
+          }
+          resultHandler(false);
         });
   }
 }
