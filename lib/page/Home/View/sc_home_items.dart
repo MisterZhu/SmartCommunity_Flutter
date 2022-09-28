@@ -58,6 +58,11 @@ class SCHomeAllItem extends StatelessWidget {
   /// item
   Widget gridItem(BuildContext context, int index) {
     double scale = MediaQuery.of(context).size.width / 375.0;
+    var data = itemList[index];
+    /// icon
+    String iconUrl = data['iconUrl'];
+    /// title
+    String titleString = data['title'];
 
     /// icon宽度
     double icon_size = 40.0 * scale;
@@ -72,22 +77,22 @@ class SCHomeAllItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
-              itemList[index],
+              iconUrl,
               width: icon_size,
               height: icon_size,
             ),
             const SizedBox(
               height: 4.0,
             ),
-            const SizedBox(
+            SizedBox(
               height: 18.0,
               width: double.infinity,
               child: Text(
-                '业主维码',
+                titleString,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: SCFonts.f12,
                     fontWeight: FontWeight.normal,
                     color: SCColors.color_5E5F66),

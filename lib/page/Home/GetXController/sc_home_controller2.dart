@@ -7,6 +7,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
+import 'package:smartcommunity/constants/sc_h5.dart';
 import 'package:smartcommunity/constants/sc_skin_value.dart';
 import 'package:smartcommunity/page/Home/Model/sc_home_news_model.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
@@ -51,16 +52,16 @@ class SCHomeController2 extends GetxController {
   void onInit() {
     super.onInit();
     allItemsList = [
-      SCAsset.iconItem1,
-      SCAsset.iconItem2,
-      SCAsset.iconItem3,
-      SCAsset.iconItem4,
-      SCAsset.iconItem5,
-      SCAsset.iconItem6,
-      SCAsset.iconItem7,
-      SCAsset.iconItem8,
-      SCAsset.iconItem9,
-      SCAsset.iconItem10
+      {"iconUrl" : SCAsset.iconItem1, "title" : "园区缴费", "subUrl" : SCH5.communityPayUrl},
+      {"iconUrl" : SCAsset.iconItem2, "title" : "预缴账户", "subUrl" : SCH5.prepayUrl},
+      {"iconUrl" : SCAsset.iconItem3, "title" : "项目入驻", "subUrl" : SCH5.projectEnterUrl},
+      {"iconUrl" : SCAsset.iconItem4, "title" : "公共缴费", "subUrl" : SCH5.publicPayUrl},
+      {"iconUrl" : SCAsset.iconItem5, "title" : "问卷调查", "subUrl" : SCH5.questionnaireSurveyUrl},
+      {"iconUrl" : SCAsset.iconItem6, "title" : "访客通行", "subUrl" : SCH5.visitorUrl},
+      {"iconUrl" : SCAsset.iconItem7, "title" : "入伙验房", "subUrl" : SCH5.houseInspectionManagementUrl},
+      {"iconUrl" : SCAsset.iconItem8, "title" : "园区停车", "subUrl" : SCH5.communityParkUrl},
+      {"iconUrl" : SCAsset.iconItem9, "title" : "垃圾分类", "subUrl" : SCH5.garbageSortUrl},
+      {"iconUrl" : SCAsset.iconItem10, "title" : "政策服务", "subUrl" : SCH5.policyServiceUrl}
     ];
     listViewData =  [
       /// banner

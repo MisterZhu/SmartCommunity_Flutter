@@ -1,6 +1,7 @@
 
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../../constants/sc_asset.dart';
@@ -24,9 +25,12 @@ class SCServiceController extends GetxController {
   List<SCServiceModuleModel> moduleList = [];
 
   /// 皮肤样式,默认第一套
-  int skinStyle = 1;
+  int skinStyle = 0;
 
   int currentIndex = 0;
+
+  /// 第二套皮肤的pageController
+  PageController pageController = PageController();
 
   @override
   onInit() {

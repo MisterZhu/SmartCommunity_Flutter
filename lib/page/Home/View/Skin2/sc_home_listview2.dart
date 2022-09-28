@@ -126,7 +126,7 @@ class SCHomeListView2 extends StatelessWidget {
       itemList: state.allItemsList,
       bgColor: SCColors.color_F5F5F5,
       onTap: (int index) {
-        workOrder();
+        itemDetail(index);
       },
     );
   }
@@ -248,5 +248,14 @@ class SCHomeListView2 extends StatelessWidget {
         "&client=" +
         SCDefaultValue.client;
     SCRouterHelper.codePage(20000, {"title": "工单", "url": url});
+  }
+
+  /// 测试数据-应用详情
+  itemDetail(int index) {
+    SCHomeController2 controller = Get.find<SCHomeController2>();
+    var data = controller.allItemsList[index];
+    String title = data['title'];
+    String url = data['subUrl'];
+    SCRouterHelper.codePage(20000, {"title": title, "url": url});
   }
 }

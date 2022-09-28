@@ -441,7 +441,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
     };
 
     if (SCScaffoldManager.instance.user.defaultConfigId != null && SCScaffoldManager.instance.user.defaultConfigId != 0) {
-      num defaultConfigId = SCScaffoldManager.instance?.user?.defaultConfigId ?? 0;
+      num defaultConfigId = SCScaffoldManager.instance.user.defaultConfigId ?? 0;
       params['id'] = defaultConfigId;
     }
 

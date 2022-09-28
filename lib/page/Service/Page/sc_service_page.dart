@@ -25,6 +25,10 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
   SCServiceController state = Get.put(SCServiceController());
 
   @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
+
+  @override
   void initState() {
     super.initState();
     loadData();
@@ -81,13 +85,10 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
   Widget skin1() {
     return SCServiceListView1(
       appList: state.moduleList,
-      itemTapAction: (title){
+      itemTapAction: (title) {
         /// 应用icon点击跳转
-        String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
-        String token = SCScaffoldManager.instance.user.token ?? "";
-        String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
-        String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
-        SCRouterHelper.codePage(20000, {"title" : title, "url" : url});},
+        itemDetail(title);
+      }
     );
   }
 
@@ -99,27 +100,28 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
       list.remove(state.regularModuleModel);
     }
     return SCServiceListView2(
-      regularModuleModel: state.regularModuleModel,
+      model: state.regularModuleModel,
       appList: list,
       itemTapAction: (title){
         /// 应用icon点击跳转
-        String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
-        String token = SCScaffoldManager.instance.user.token ?? "";
-        String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
-        String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
-        SCRouterHelper.codePage(20000, {"title" : title, "url" : url});
+        itemDetail(title);
       },
     );
   }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 
   /// 获取数据，接口没返回数据，暂时用本地测试数据
   loadData() {
     SCServiceController state = Get.find<SCServiceController>();
     //state.loadAppListData();
     state.loadTestData();
+  }
+
+  /// 应用详情
+  itemDetail(String title) {
+    String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+    String token = SCScaffoldManager.instance.user.token ?? "";
+    String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
+    String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
+    SCRouterHelper.codePage(20000, {"title" : title, "url" : url});
   }
 }

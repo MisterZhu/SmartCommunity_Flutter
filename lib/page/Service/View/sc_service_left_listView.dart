@@ -13,47 +13,38 @@ class SCServiceLeftListView extends StatefulWidget {
       Key? key,
       required this.list,
       this.itemHeight = 60.0,
+      this.currentItemIndex = 0,
       this.leftItemTap})
   : super(key: key);
 
   final List<String> list;
   final double itemHeight;
   final Function(int index)? leftItemTap;
+  final int currentItemIndex;
 
   @override
   SCServiceLeftListViewState createState() => SCServiceLeftListViewState();
 }
 
 class SCServiceLeftListViewState extends State<SCServiceLeftListView> with SingleTickerProviderStateMixin{
-  late Animation<double> animation;
-  late AnimationController animationController;
+
   int currentItemIndex = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 150));
-    animation = Tween(begin: 0.0, end: 0.0).animate(animationController);
-    animationController.addListener(() {
-      if (mounted) {
-        setState(() {
-
-        });
-      }
-    });
-    animationController.forward();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    animationController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    currentItemIndex = widget.currentItemIndex;
     // TODO: implement build
     return Container(
       alignment: Alignment.topCenter,
@@ -129,19 +120,10 @@ class SCServiceLeftListViewState extends State<SCServiceLeftListView> with Singl
     if (widget.leftItemTap != null) {
       widget.leftItemTap?.call(index);
     }
-    moveToItem(index);
-    state.updateCurrentIndex(index: index);
+    if (index != state.currentIndex) {
+      state.pageController.jumpToPage(index);
+      state.updateCurrentIndex(index: index);
+    }
   }
 
-  moveToItem(int index) {
-    double begin = currentItemIndex * widget.itemHeight;
-    double end = index *widget.itemHeight;
-    animation = Tween(begin: begin, end: end).animate(CurvedAnimation(parent: animationController, curve: Curves.linear));
-    animationController.addStatusListener((status) {
-      if (AnimationStatus.completed == status) {
-        currentItemIndex = index;
-      }
-    });
-    animationController.forward(from: 0.0);
-  }
 }

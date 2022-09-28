@@ -103,11 +103,12 @@ class SCMineHeaderItem extends StatelessWidget {
           const SizedBox(
             width: 12.0,
           ),
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                headerAction();
-              },
+          GestureDetector(
+            onTap: () {
+              headerAction();
+            },
+            child: LimitedBox(
+              maxWidth: 100.0,
               child: Text(
                 userName,
                 maxLines: 1,
@@ -120,6 +121,9 @@ class SCMineHeaderItem extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+          Expanded(
+            child:SizedBox(),
           ),
           GestureDetector(
             child: Image.asset(

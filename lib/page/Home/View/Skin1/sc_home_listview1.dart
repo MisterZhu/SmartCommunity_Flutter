@@ -20,6 +20,7 @@ import '../../../../constants/sc_default_value.dart';
 import '../../../../constants/sc_h5.dart';
 import '../../../../skin/Tools/sc_scaffold_manager.dart';
 import '../../../../utils/Router/sc_router_helper.dart';
+import '../../GetXController/sc_home_controller2.dart';
 import '../sc_home_feature_item.dart';
 
 class SCHomeListView1 extends StatelessWidget {
@@ -163,7 +164,7 @@ class SCHomeListView1 extends StatelessWidget {
       itemList: state.allItemsList,
       bgColor: SCColors.color_F5F5F5,
       onTap: (int index) {
-        workOrder();
+        itemDetail(index);
       },
     );
   }
@@ -328,5 +329,14 @@ class SCHomeListView1 extends StatelessWidget {
     String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
     String url = "${SCH5.workOrderUrl}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
     SCRouterHelper.codePage(20000, {"title": "工单", "url": url});
+  }
+
+  /// 测试数据-应用详情
+  itemDetail(int index) {
+    SCHomeController2 controller = Get.find<SCHomeController2>();
+    var data = controller.allItemsList[index];
+    String title = data['title'];
+    String url = data['subUrl'];
+    SCRouterHelper.codePage(20000, {"title": title, "url": url});
   }
 }
