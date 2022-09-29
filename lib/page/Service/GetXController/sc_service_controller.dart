@@ -56,8 +56,8 @@ class SCServiceController extends GetxController {
 
     var testList = [
       {"applets": [
-        {"icon": {"fileKey": "", "name": SCAsset.iconServiceQrCode},"id": "10","name": "业主二维码"},
-        {"icon": {"fileKey": "","name": SCAsset.iconServiceCar},"id": "11","name": "公务用车"},
+        {"icon": {"fileKey": "", "name": SCAsset.iconServiceQrCode},"id": "1","name": "业主二维码"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCar},"id": "2","name": "公务用车"},
         {"icon": {"fileKey": "","name": SCAsset.iconServiceSchedule,},"id": "12","name": "工单调度"},
         {"icon": {"fileKey": "", "name": SCAsset.iconServiceDiscount},"id": "13","name": "权益优惠"},
         {"icon": {"fileKey": "","name": SCAsset.iconServiceSurrounding},"id": "14","name": "周边楼盘"},

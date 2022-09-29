@@ -11,7 +11,7 @@ import '../../../network/sc_config.dart';
 import '../GetXController/sc_service_controller.dart';
 import '../Model/sc_service_module_model.dart';
 
-/// 单个appitem
+/// 单个appItem
 
 class SCServiceAppItem extends StatelessWidget {
 
@@ -67,51 +67,46 @@ class SCServiceAppItem extends StatelessWidget {
           }
         }
       },
-      child: Container(
-        color: SCColors.color_FFFFFF,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            topIconItem(applets, hide!),
-            const SizedBox(
-              height: 4,
-            ),
-            Text(
-              applets.name ?? '',
-              textAlign: TextAlign.center,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontSize: 12, color: SCColors.color_5E5F66),
-            )
-          ],
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          topIconItem(hide!),
+          const SizedBox(height: 4),
+          nameItem(),
+        ],
       ),
     );
   }
 
-  Widget topIconItem(Applets model, bool hide) {
-    String url = SCConfig.getImageUrl(model.icon?.fileKey ?? '');
+  /// 上面的图标和加号
+  Widget topIconItem(bool hide) {
+    String url = SCConfig.getImageUrl(applets.icon?.fileKey ?? '');
     return Stack(
       alignment: Alignment.topRight,
       children: [
-        Container(
-            width: 42,
-            height: 42,
-            color: Colors.transparent,
-            alignment: Alignment.center,
-            child: Image.asset(
-              model.icon?.name ?? '',
-              width: 36,
-              height: 36,
-            )),
-        addOrDeleteIconItem(model, hide),
+        iconItem(),
+        addOrDeleteIconItem(hide),
       ],
     );
   }
 
+  /// 应用图标icon
+  Widget iconItem() {
+    return Container(
+        width: 42,
+        height: 42,
+        color: Colors.transparent,
+        alignment: Alignment.center,
+        child: Image.asset(
+          applets.icon?.name ?? '',
+          width: 36,
+          height: 36,
+        ));
+  }
+
   /// 右上角的+/-图标
-  Widget addOrDeleteIconItem(Applets model, bool hide) {
+  Widget addOrDeleteIconItem(bool hide) {
     return Offstage(
       /// offstage = true（隐藏）
       offstage: hide,
@@ -121,6 +116,17 @@ class SCServiceAppItem extends StatelessWidget {
         color: Colors.transparent,
         child: Image.asset(section == 0 ? SCAsset.iconEditAppDelete : SCAsset.iconEditAppAdd, width: 16.0, height: 16.0,),
       ),
+    );
+  }
+
+  /// 应用名称item
+  Widget nameItem() {
+    return Text(
+      applets.name ?? '',
+      textAlign: TextAlign.center,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: const TextStyle(fontSize: 12, color: SCColors.color_5E5F66),
     );
   }
 }

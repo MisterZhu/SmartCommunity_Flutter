@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:smartcommunity/page/Service/Model/sc_service_module_model.dart';
 import 'package:smartcommunity/page/Service/View/sc_service_cell_item.dart';
-
+/// 应用列表-第一套皮肤
 class SCServiceListView1 extends StatelessWidget {
 
   final List<SCServiceModuleModel>? appList;

@@ -70,7 +70,7 @@ class SCServiceLeftListViewState extends State<SCServiceLeftListView> with Singl
         });
   }
 
-  /*未选中的item*/
+  /// 未选中的item
   Widget normalItem(int index) {
     return Container(
       color: SCColors.color_F5F5F5,
@@ -87,7 +87,7 @@ class SCServiceLeftListViewState extends State<SCServiceLeftListView> with Singl
     );
   }
 
-  /*选中的item*/
+  /// 选中的item
   Widget selectedItem(int index) {
     return Container(
       color: SCColors.color_FFFFFF,
@@ -115,6 +115,7 @@ class SCServiceLeftListViewState extends State<SCServiceLeftListView> with Singl
     );
   }
 
+  /// 点击
   itemTaped(int index) {
     SCServiceController state = Get.find<SCServiceController>();
     if (widget.leftItemTap != null) {
