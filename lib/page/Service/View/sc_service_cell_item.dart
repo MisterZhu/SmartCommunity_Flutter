@@ -4,12 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/page/Service/View/sc_service_app_item.dart';
-
 import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_colors.dart';
-import '../../../network/sc_config.dart';
 import '../GetXController/sc_service_controller.dart';
 import '../Model/sc_service_module_model.dart';
 

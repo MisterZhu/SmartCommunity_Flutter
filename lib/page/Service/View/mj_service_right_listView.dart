@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/page/Service/View/sc_service_app_item.dart';
-
 import '../GetXController/sc_service_controller.dart';
 import '../Model/sc_service_module_model.dart';
 
@@ -16,7 +14,6 @@ class SCServiceRightListView extends StatelessWidget {
       {Key? key,
         required this.list,
         this.section = 0,
-        this.pageChanged,
         this.appTapAction})
       : super(key: key);
 
@@ -27,9 +24,6 @@ class SCServiceRightListView extends StatelessWidget {
   /// icon按钮点击事件
   final Function(String title)? appTapAction;
 
-  /// 页面切换
-  final Function(int index)? pageChanged;
-
   SCServiceController state = Get.find<SCServiceController>();
 
   @override
@@ -39,7 +33,6 @@ class SCServiceRightListView extends StatelessWidget {
         scrollDirection: Axis.vertical,
         children: gridViews(),
         onPageChanged: (index) {
-          pageChanged?.call(index);
           state.updateCurrentIndex(index: index);
         });
   }

@@ -1,10 +1,8 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
-
 import '../../../constants/sc_colors.dart';
 import '../GetXController/sc_service_controller.dart';
 

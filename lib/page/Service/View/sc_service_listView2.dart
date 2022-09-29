@@ -91,12 +91,14 @@ class SCServiceListView2 extends StatelessWidget {
   /// 底部组件-右侧应用列表
   Widget rightItem() {
     return Expanded(
-        child: Container(
+      child: Container(
       alignment: Alignment.topLeft,
       child: SCServiceRightListView(
         list: appList,
-        pageChanged: (int index) {
-
+        appTapAction: (title) {
+          if (itemTapAction != null) {
+            itemTapAction?.call(title);
+          }
         },
       ),
     ));

@@ -1,10 +1,8 @@
 
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
 import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_colors.dart';
 import '../../../network/sc_config.dart';
