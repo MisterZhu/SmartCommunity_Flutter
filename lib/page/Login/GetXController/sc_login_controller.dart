@@ -89,7 +89,7 @@ class SCLoginController extends GetxController {
           if (user.communityId == null || user.communityId == '') {
             SCRouterHelper.pathPage(SCRouterPath.selectCommunityPath, {"type" : SCSelectHouseLogicType.login});
           } else {
-            SCRouterHelper.pathPage(SCRouterPath.tabPath, null);
+            SCRouterHelper.codeOffAllPage(10000, null);
           }
         },
         failure: (value) {

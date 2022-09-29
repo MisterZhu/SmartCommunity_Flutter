@@ -77,11 +77,5 @@ class SCRouterPages {
     20000 : SCRouterPath.webViewPath,
     /*房号选择*/
     20001 : SCRouterPath.selectHousePath,
-    /*全部应用*/
-    10011 : SCRouterPath.servicePagePath,
-    /*切换房屋*/
-    5001 : SCRouterPath.toggleHousesPagePath,
-    /*新增房号*/
-    5002 : SCRouterPath.addHousePagePath,
   };
 }
