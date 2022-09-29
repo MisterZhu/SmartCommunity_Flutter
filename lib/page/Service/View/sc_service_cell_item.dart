@@ -97,6 +97,7 @@ class SCServiceCellItem extends StatelessWidget {
     );
   }
 
+  /// header-left
   Widget headerLeftContainer() {
     return Expanded(
       child: Text(
@@ -110,7 +111,7 @@ class SCServiceCellItem extends StatelessWidget {
     ));
   }
 
-  /// header-Right
+  /// header-right
   Widget headerRightContainer() {
     return GetBuilder<SCServiceController>(builder: (state){
       return Offstage(

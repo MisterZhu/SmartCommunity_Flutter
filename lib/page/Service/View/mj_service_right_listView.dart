@@ -9,6 +9,7 @@ import 'package:smartcommunity/page/Service/View/sc_service_app_item.dart';
 import '../GetXController/sc_service_controller.dart';
 import '../Model/sc_service_module_model.dart';
 
+/// 应用列表第二套皮肤-右侧的应用列表
 class SCServiceRightListView extends StatelessWidget {
 
   SCServiceRightListView(

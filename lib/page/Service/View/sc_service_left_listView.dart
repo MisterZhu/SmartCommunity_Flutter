@@ -8,7 +8,9 @@ import 'package:smartcommunity/constants/sc_fonts.dart';
 import '../../../constants/sc_colors.dart';
 import '../GetXController/sc_service_controller.dart';
 
-class SCServiceLeftListView extends StatefulWidget {
+/// 应用列表第二套皮肤-左侧的标题列表
+
+class SCServiceLeftListView extends StatelessWidget{
   SCServiceLeftListView({
       Key? key,
       required this.list,
@@ -23,28 +25,7 @@ class SCServiceLeftListView extends StatefulWidget {
   final int currentItemIndex;
 
   @override
-  SCServiceLeftListViewState createState() => SCServiceLeftListViewState();
-}
-
-class SCServiceLeftListViewState extends State<SCServiceLeftListView> with SingleTickerProviderStateMixin{
-
-  int currentItemIndex = 0;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    currentItemIndex = widget.currentItemIndex;
     // TODO: implement build
     return Container(
       alignment: Alignment.topCenter,
@@ -53,16 +34,17 @@ class SCServiceLeftListViewState extends State<SCServiceLeftListView> with Singl
     );
   }
 
+  /// 标题列表
   Widget listView() {
     return ListView.builder(
         physics: BouncingScrollPhysics(),
         shrinkWrap: true,
-        itemCount: widget.list.length,
+        itemCount: list.length,
         itemBuilder: (BuildContext context, int index) {
           return InkWell(
             onTap: () =>  itemTaped(index),
             child: Container(
-              height: widget.itemHeight,
+              height: itemHeight,
               alignment: Alignment.center,
               child: currentItemIndex == index ? selectedItem(index) : normalItem(index),
             ),
@@ -76,7 +58,7 @@ class SCServiceLeftListViewState extends State<SCServiceLeftListView> with Singl
       color: SCColors.color_F5F5F5,
       alignment: Alignment.center,
       child: Text(
-        widget.list[index],
+        list[index],
         textAlign: TextAlign.center,
         style: const TextStyle(
           fontSize: SCFonts.f14,
@@ -95,7 +77,7 @@ class SCServiceLeftListViewState extends State<SCServiceLeftListView> with Singl
       child: Row(
         children: [
           Expanded(child: Text(
-            widget.list[index],
+            list[index],
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: SCFonts.f14,
@@ -118,8 +100,8 @@ class SCServiceLeftListViewState extends State<SCServiceLeftListView> with Singl
   /// 点击
   itemTaped(int index) {
     SCServiceController state = Get.find<SCServiceController>();
-    if (widget.leftItemTap != null) {
-      widget.leftItemTap?.call(index);
+    if (leftItemTap != null) {
+      leftItemTap?.call(index);
     }
     if (index != state.currentIndex) {
       state.pageController.jumpToPage(index);
