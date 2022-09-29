@@ -1,31 +1,52 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_agreement.dart';
 import 'package:smartcommunity/constants/sc_type_define.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_login_controller.dart';
-import 'package:smartcommunity/page/Login/View/Login/sc_login_btn.dart';
-import 'package:smartcommunity/page/Login/View/Login/sc_login_logo.dart';
+import 'package:smartcommunity/page/Login/View/Login/sc_login_btn_item.dart';
+import 'package:smartcommunity/page/Login/View/Login/sc_login_code_btn.dart';
+import 'package:smartcommunity/page/Login/View/Login/sc_login_code_view.dart';
+import 'package:smartcommunity/page/Login/View/Login/sc_login_header.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_login_textfield.dart';
-import 'package:smartcommunity/page/Webview/Page/sc_webview_page.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
+import '../../../../widgets/Dialog/sc_dialog_utils.dart';
+import '../../GetXController/sc_login_code_controller.dart';
 import 'sc_login_agreement.dart';
 
 /// 登录页listview
 
 class SCLoginListView extends StatelessWidget {
+
+  late final BuildContext currentContext;
+
   @override
   Widget build(BuildContext context) {
+    currentContext = context;
     return body();
   }
 
   /// body
   Widget body() {
-    return ListView.separated(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        listView(),
+        agreementItem(),
+      ],
+    );
+  }
+
+  Widget listView() {
+    return Expanded(child: ListView.separated(
+        physics: const NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.zero,
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
@@ -34,19 +55,19 @@ class SCLoginListView extends StatelessWidget {
         separatorBuilder: (BuildContext context, int index) {
           return getSeparateItem(index: index);
         },
-        itemCount: 5);
+        itemCount: 4));
   }
 
   /// cell
   Widget getCell({required int index}) {
     if (index == SCTypeDefine.SC_LOGIN_TYPE_LOGO) {
-      return logoItem();
+      return headerItem();
     } else if (index == SCTypeDefine.SC_LOGIN_TYPE_TEXTFIELD) {
       return textFieldItem();
-    } else if (index == SCTypeDefine.SC_LOGIN_TYPE_BUTTON) {
-      return loginBtnItem();
-    } else if (index == SCTypeDefine.SC_LOGIN_TYPE_AGREEMENT) {
-      return agreementItem();
+    } else if (index == SCTypeDefine.SC_LOGIN_TYPE_CODE_BUTTON) {
+      return codeBtnItem();
+    } else if (index == SCTypeDefine.SC_LOGIN_TYPE_SKIP_BUTTON) {
+      return skipBtnItem();
     } else {
       return const SizedBox();
     }
@@ -56,13 +77,13 @@ class SCLoginListView extends StatelessWidget {
   Widget getSeparateItem({required int index}) {
     if (index == SCTypeDefine.SC_LOGIN_TYPE_LOGO) {
       return const SizedBox(
-        height: 0,
+        height: 50.0,
       );
     } else if (index == SCTypeDefine.SC_LOGIN_TYPE_TEXTFIELD) {
       return const SizedBox(
-        height: 32.0,
+        height: 25.0,
       );
-    } else if (index == SCTypeDefine.SC_LOGIN_TYPE_BUTTON) {
+    } else if (index == SCTypeDefine.SC_LOGIN_TYPE_CODE_BUTTON) {
       return const SizedBox(
         height: 10.0,
       );
@@ -71,9 +92,9 @@ class SCLoginListView extends StatelessWidget {
     }
   }
 
-  /// logo
-  Widget logoItem() {
-    return const SCLoginLogo();
+  /// header
+  Widget headerItem() {
+    return const SCLoginHeader();
   }
 
   /// 手机号验证码输入框
@@ -83,48 +104,39 @@ class SCLoginListView extends StatelessWidget {
     });
   }
 
-  /// 登录按钮
-  Widget loginBtnItem() {
+  /// 获取验证码按钮
+  Widget codeBtnItem() {
     return GetBuilder<SCLoginController>(builder: (state) {
-      return SCLoginBtn(
-        enable: state.loginBtnEnable,
+      return SCLoginCodeBtn(
+        enable: state.codeBtnEnable,
         onPressed: () {
           SCLoginController state = Get.find<SCLoginController>();
-
-          if (state.loginBtnEnable == false) {
+          if (state.codeBtnEnable == false) {
             return;
           }
 
           if (SCUtils().checkPhone(phone: state.phone) == false) {
-            SCToast.showTip('请输入正确的手机号');
+            SCToast.showTipWithGravity(msg: '请输入正确的手机号', gravity: ToastGravity.BOTTOM);
             return;
           }
 
           if (state.isAgree == false) {
-            SCToast.showTip('请同意用户服务协议和隐私协议');
+            SCToast.showTipWithGravity(msg: '请同意用户服务协议和隐私协议', gravity: ToastGravity.BOTTOM);
             return;
           }
-          // if (state.phone.isEmpty) {
-          //   SCToast.showTip('请输入手机号');
-          //   return;
-          // } else if (state.phone.length != 11) {
-          //   SCToast.showTip('请输入正确的手机号');
-          //   return;
-          // }
-          //
-          // if (state.code.isEmpty) {
-          //   SCToast.showTip('请输入验证码');
-          //   return;
-          // } else if (state.code.length != 6) {
-          //   SCToast.showTip('请输入正确的验证码');
-          //   return;
-          // }
-          log('请求验证码登陆接口');
-          state.login();
-
+          sendCode();
         },
       );
     });
+  }
+
+  /// 游客模式按钮
+  Widget skipBtnItem() {
+    return SCLoginBtnItem(skipTapAction: () {
+      //SCRouterHelper.codeOffAllPage(10000, null);
+    }, register: () {
+
+    },);
   }
 
   /// 用户协议和隐私政策
@@ -144,4 +156,26 @@ class SCLoginListView extends StatelessWidget {
       );
     });
   }
+
+  /// 请求发送验证码接口
+  sendCode() {
+    SCLoginController state = Get.find<SCLoginController>();
+    state.sendCode(resultHandler: (status) {
+      if (status == true) {
+        /// 发送验证码成功弹出输入验证码页面
+        showCodeView();
+      }
+    });
+  }
+
+  /// 输入验证码页面
+  showCodeView() {
+    SCLoginCodeController state = Get.put(SCLoginCodeController());
+    state.initTimer();
+    Widget widget = GetBuilder<SCLoginCodeController>(builder: (state){
+      return SCLoginCodeView();
+    });
+    SCDialogUtils().showCustomBottomDialog(context: currentContext, widget: widget);
+  }
+
 }

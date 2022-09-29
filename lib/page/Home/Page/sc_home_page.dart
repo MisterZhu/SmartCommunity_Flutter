@@ -40,8 +40,18 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
   initState() {
     super.initState();
     SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.light);
-    state1.communityName = SCScaffoldManager.instance.user.communityName ?? "请登录";
-    state2.communityName = SCScaffoldManager.instance.user.communityName ?? "请登录";
+    if (SCScaffoldManager.instance.user.communityName != null) {
+      state1.communityName = SCScaffoldManager.instance.user.communityName!;
+      state2.communityName = SCScaffoldManager.instance.user.communityName!;
+    } else {
+      if (SCScaffoldManager.instance.user.token != null) {
+        state1.communityName = '请选择项目';
+        state2.communityName = '请选择项目';
+      } else {
+        state1.communityName = '请登录';
+        state2.communityName = '请登录';
+      }
+    }
   }
 
   /// body

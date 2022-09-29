@@ -12,4 +12,15 @@ class SCToast {
       gravity: ToastGravity.CENTER
     );
   }
+
+  /// 自定义tip位置
+  static void showTipWithGravity({String? msg, ToastGravity? gravity}) {
+    String message = msg ?? '';
+    Fluttertoast.cancel();
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: gravity
+    );
+  }
 }

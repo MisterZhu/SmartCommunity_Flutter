@@ -9,7 +9,7 @@ import '../../../constants/sc_fonts.dart';
 
 class SCHomeTagItem extends StatelessWidget {
 
-  /// 标签最大宽度,默认80.0
+  /// 标签最大宽度,默认100.0
   final double maxWidth;
 
   final String title;

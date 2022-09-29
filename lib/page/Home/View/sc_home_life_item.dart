@@ -6,12 +6,14 @@ import 'package:smartcommunity/page/Home/View/sc_home_activity_bottom_content.da
 import 'package:smartcommunity/page/Home/View/sc_home_activity_image_tag.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_activity_top_item.dart';
 
+import '../../../constants/sc_enum.dart';
+
 /// 首页-美好生活cell
 
 class SCHomeLifeItem extends StatelessWidget {
 
-  /// cell样式类型，1=图片下面没有标题，2=图片下面有标题内容
-  late int cellType;
+  /// cell样式类型
+  final SCHomeCellBottomContentType cellType;
 
   final String title = '美好生活就是时尚';
 
@@ -59,10 +61,10 @@ class SCHomeLifeItem extends StatelessWidget {
       child: SizedBox(
         height: 22.0,
         child: SCHomeActivityTopItem(
-          iconType: 0,
+          iconStyle: IconStyle.left,
           icon: '',
           title: title,
-          tagType: 1,
+          tagStyle: TagStyle.left,
           tagText: '标签名称',
           tagFont: SCFonts.f10,
           tagHeight: 16.0,
@@ -172,9 +174,7 @@ class SCHomeLifeItem extends StatelessWidget {
 
   /// 底部的标题、内容
   bottomItem() {
-    if (cellType == 1) {
-      return Container();
-    } else if (cellType == 2){
+    if (cellType == SCHomeCellBottomContentType.bottomContent){
       return SizedBox(
           width: imageWidth,
           height: bottomContentHeight,
@@ -190,12 +190,11 @@ class SCHomeLifeItem extends StatelessWidget {
 
   /// cell高度
   double cellHeight() {
-    if (cellType == 1) {
-      return imageHeight + 8; /// 这里的14是cell上下的间距
-    } else if (cellType == 2) {
+    if (cellType == SCHomeCellBottomContentType.bottomContent) {
       return imageHeight + bottomContentHeight + 8;
+    } else {
+      return imageHeight + 8;
     }
-    return imageHeight + 8;
   }
 
 }

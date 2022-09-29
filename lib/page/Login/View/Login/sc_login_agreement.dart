@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../constants/sc_asset.dart';
@@ -66,31 +67,38 @@ class SCLoginAgreement extends StatelessWidget {
       },
       {
         'type': richTextTypeText,
-        'title': '点击登录即代表您已阅读并同意',
+        'title': '我已阅读并同意',
         'imageUrl': '',
         'url': '',
         'color': SCHexColor.colorToString(SCColors.color_1B1C33)
       },
       {
         'type': richTextTypeText,
-        'title': '用户服务协议',
+        'title': '《用户服务协议》',
         'imageUrl': '',
         'url': userAgreementUrl,
         'color': SCHexColor.colorToString(SCColors.color_FF6C00)
       },
       {
         'type': richTextTypeText,
-        'title': '、',
+        'title': '',
         'imageUrl': '',
         'url': '',
         'color': SCHexColor.colorToString(SCColors.color_FF6C00)
       },
       {
         'type': richTextTypeText,
-        'title': '隐私协议',
+        'title': '《隐私协议》',
         'imageUrl': '',
         'url': privacyPolicyUrl,
         'color': SCHexColor.colorToString(SCColors.color_FF6C00)
+      },
+      {
+        'type': richTextTypeText,
+        'title': '并使用本机号码登录',
+        'imageUrl': '',
+        'url': '',
+        'color': SCHexColor.colorToString(SCColors.color_1B1C33)
       },
     ];
 
@@ -109,13 +117,31 @@ class SCLoginAgreement extends StatelessWidget {
 
   /// body
   Widget body() {
-    return privacyItem();
+    return Stack(
+      alignment: Alignment.centerLeft,
+      children: [
+        bgImageItem(),
+        privacyItem()
+      ],
+    );
+  }
+
+  /// 背景图片
+  Widget bgImageItem() {
+    double imageScale = 750 / 320.0;
+    return AspectRatio(
+      aspectRatio: imageScale,
+      child: Image.asset(
+        SCAsset.iconLoginBottomBg,
+        fit: BoxFit.cover,
+      ),
+    );
   }
 
   /// 用户协议和隐私政策
   Widget privacyItem() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 40.0),
       child: RichText(
           textAlign: TextAlign.left,
           text: TextSpan(text: "", children: richTextList)),
@@ -127,15 +153,11 @@ class SCLoginAgreement extends StatelessWidget {
     return WidgetSpan(
         alignment: PlaceholderAlignment.middle,
         child: GestureDetector(
-          child: Container(
-              width: 22.0,
-              height: 22.0,
-              alignment: Alignment.centerLeft,
-              child: Image.asset(
-                isAgree ? SCAsset.iconAgree : SCAsset.iconNotAgree,
-                width: 22,
-                height: 22,
-              )),
+          child: Image.asset(
+            isAgree ? SCAsset.iconAgree : SCAsset.iconNotAgree,
+            width: 22,
+            height: 22,
+          ),
           onTap: () {
             if (agreeAction != null) {
               agreeAction?.call();
@@ -153,7 +175,7 @@ class SCLoginAgreement extends StatelessWidget {
         text: title,
         style: TextStyle(fontSize: SCFonts.f12, color: color),
         recognizer: TapGestureRecognizer()..onTap = () {
-          if (agreementDetailAction != null) {
+          if (agreementDetailAction != null && url.isNotEmpty) {
             agreementDetailAction?.call(title, url);
           }
         });

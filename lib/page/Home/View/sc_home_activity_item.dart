@@ -66,10 +66,10 @@ class SCHomeActivityItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 6.0),
       child: SCHomeActivityTopItem(
-        iconType: 0,
+        iconStyle: IconStyle.left,
         icon: '',
         title: title,
-        tagType: 0,
+        tagStyle: TagStyle.right,
         tagText: '标签名称',
         tagFont: SCFonts.f10,
         tagHeight: 16.0,

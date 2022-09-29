@@ -6,7 +6,10 @@ import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_login_controller.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_login_listview.dart';
 
+import '../../../constants/sc_agreement.dart';
+import '../../../utils/Router/sc_router_helper.dart';
 import '../../../utils/sc_utils.dart';
+import '../View/Login/sc_login_agreement.dart';
 
 /// 登录page
 class SCLoginPage extends StatefulWidget {
@@ -24,12 +27,7 @@ class SCLoginState extends State<SCLoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: titleItem(),
-        backgroundColor: SCColors.color_F6F6F6,
-        elevation: 0,
-      ),
+      resizeToAvoidBottomInset: false,
       body: body(),
     );
   }
@@ -43,18 +41,10 @@ class SCLoginState extends State<SCLoginPage> {
       child: Container(
         width: double.infinity,
         height: double.infinity,
-        color: SCColors.color_F6F6F6,
+        color: SCColors.color_F2F3F5,
         child: SCLoginListView(),
       ),
     );
   }
 
-  /// title
-  Widget titleItem() {
-    return const Text('登录', style: TextStyle(
-      fontSize: SCFonts.f16,
-      fontWeight: FontWeight.bold,
-      color: SCColors.color_1B1C33
-    ),);
-  }
 }

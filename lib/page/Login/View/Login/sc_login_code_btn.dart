@@ -2,12 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
-/// 登录按钮
+import '../../../../constants/sc_fonts.dart';
 
-class SCLoginBtn extends StatelessWidget {
+/// 获取验证码按钮
 
-  const SCLoginBtn({Key? key, this.onPressed, this.enable = false}) : super(key: key);
+class SCLoginCodeBtn extends StatelessWidget {
 
+  const SCLoginCodeBtn({Key? key, this.onPressed, this.enable = false}) : super(key: key);
+
+  /// 按钮点击
   final Function? onPressed;
 
   /// 是否可以点击
@@ -21,19 +24,19 @@ class SCLoginBtn extends StatelessWidget {
   /// body
   Widget body(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 57.0),
       child: Container(
-        height: 44.0,
+        height: 48.0,
         decoration: BoxDecoration(
-            color: enable == true ? SCColors.color_FF6C00 : SCColors.color_FFC59B,
-            borderRadius: BorderRadius.circular(4.0)),
+            color: enable == true ? SCColors.color_1B1D33 : SCColors.color_B0B1B8,
+            borderRadius: BorderRadius.circular(8.0)),
         child: CupertinoButton(
             padding: EdgeInsets.zero,
             child: const Text(
-              '登录',
+              '获取验证码',
               style: TextStyle(
-                fontSize: 16.0,
-                fontWeight: FontWeight.normal,
+                fontSize: SCFonts.f16,
+                fontWeight: FontWeight.w500,
                 color: SCColors.color_FFFFFF,
               ),
             ),

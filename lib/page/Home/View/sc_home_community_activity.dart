@@ -8,6 +8,7 @@ import 'package:smartcommunity/page/Home/View/sc_home_activity_top_item.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
 import '../../../constants/sc_colors.dart';
+import '../../../constants/sc_enum.dart';
 import '../../../constants/sc_fonts.dart';
 
 /// 首页-园区活动cell，最多3个，图片大小107*102
@@ -16,8 +17,8 @@ class SCHomeCommunityActivity extends StatelessWidget {
 
   final String title = '园区活动';
 
-  /// cell样式类型，1=图片下面没有标题，2=图片下面有标题内容
-  final int cellType;
+  /// cell样式类型
+  final SCHomeCellBottomContentType cellType;
 
   final List activityList;
 
@@ -71,10 +72,10 @@ class SCHomeCommunityActivity extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 6.0),
       child: SCHomeActivityTopItem(
-        iconType: 0,
+        iconStyle: IconStyle.none,
         icon: '',
         title: title,
-        tagType: 1,
+        tagStyle: TagStyle.right,
         tagText: '标签名称',
         tagFont: SCFonts.f10,
         tagHeight: 16.0,
@@ -169,9 +170,7 @@ class SCHomeCommunityActivity extends StatelessWidget {
 
   /// 底部的标题、内容
   bottomItem() {
-    if (cellType == 1) {
-      return Container();
-    } else if (cellType == 2){
+    if (cellType == SCHomeCellBottomContentType.bottomContent){
       return SCHomeActivityBottomContent(
         title: '标题名称名称',
         content: '标题内容内容内容',

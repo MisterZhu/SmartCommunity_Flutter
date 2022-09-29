@@ -52,12 +52,14 @@ class SCTypeDefine {
   /************************* 登录页面-cellType *************************/
   /// logo
   static const int SC_LOGIN_TYPE_LOGO = 0;
-  /// 手机号验证码输入框
+  /// 手机号输入框
   static const int SC_LOGIN_TYPE_TEXTFIELD = 1;
-  /// 登录按钮
-  static const int SC_LOGIN_TYPE_BUTTON = 2;
+  /// 发送验证码按钮
+  static const int SC_LOGIN_TYPE_CODE_BUTTON = 2;
+  /// 游客按钮
+  static const int SC_LOGIN_TYPE_SKIP_BUTTON = 3;
   /// 协议
-  static const int SC_LOGIN_TYPE_AGREEMENT = 3;
+  static const int SC_LOGIN_TYPE_AGREEMENT = 4;
   /************************* 登录页面-cellType *************************/
 
   /// 皮肤类型1

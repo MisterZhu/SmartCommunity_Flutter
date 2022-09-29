@@ -6,13 +6,11 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller.dart';
-import 'package:smartcommunity/page/Mine/View/ToggleHouses/sc_my_house_item.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 import 'package:smartcommunity/widgets/Dialog/sc_base_dialog.dart';
 import 'package:smartcommunity/widgets/Dialog/sc_dialog_utils.dart';
 
-import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_enum.dart';
 import '../../../constants/sc_fonts.dart';
@@ -22,9 +20,9 @@ import '../GetXController/sc_current_house_controller.dart';
 import '../GetXController/sc_my_house_controller.dart';
 import '../GetXController/sc_toggle_houses_controller.dart';
 import '../Model/sc_my_house_model.dart';
-import '../View/ToggleHouses/sc_current_house_info_item.dart';
-import '../View/ToggleHouses/sc_current_house_review_item.dart';
+import '../View/ToggleHouses/sc_current_house_view.dart';
 import '../View/ToggleHouses/sc_message_tab.dart';
+import '../View/ToggleHouses/sc_my_house_view.dart';
 import '../View/ToggleHouses/sc_normal_tab.dart';
 import '../View/ToggleHouses/sc_tab_indicator.dart';
 
@@ -39,7 +37,7 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
     with SingleTickerProviderStateMixin {
   SCToggleHousesController toggleHouseState = Get.put(SCToggleHousesController());
 
-  SCMyHouseController myRoomNumberState = Get.put(SCMyHouseController());
+  SCMyHouseController myHouseState = Get.put(SCMyHouseController());
   SCCurrentHouseController currentHouseState = Get.put(SCCurrentHouseController());
 
   double tabItemWidth = 140;
@@ -116,18 +114,8 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
           Expanded(child: TabBarView(
               controller: tabController,
               children: [
-                Column(
-                  children: [
-                    Expanded(child: myHouseListView()),
-                    myRoomNumberBottomItem()
-                  ],
-                ),
-                Column(
-                  children: [
-                    Expanded(child: currentHouseListView()),
-                    currentHouseBottomItem()
-                  ],
-                ),
+                myHouseView(),
+                currentHouseView(),
               ])
           ),
           Container(
@@ -136,6 +124,34 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
           )
         ],
       ),
+    );
+  }
+
+  /// 我的房号页面
+  Widget myHouseView() {
+    return SCMyHouseView(
+      changeHouseAction : (model) {
+        showToggleConfirmDialog(model: model);
+      },
+      addHouseAction: () {
+        /// 去新增房号
+        var params = {
+          'communityId': '',
+          'houseId': '',
+          'valueList': ['', '', '', ''],
+          'type': SCSelectHouseLogicType.addHouse
+        };
+        SCRouterHelper.codePage(5002, params);
+      },
+    );
+  }
+
+  /// 当前房屋页面
+  Widget currentHouseView() {
+    return SCCurrentHouseView(
+      unbindHouse : () {
+        showUnbindConfirmDialog();
+      },
     );
   }
 
@@ -201,136 +217,19 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
         height: tabItemHeight,
         textStyle: textStyle,
         circleColor: SCColors.color_FF4040,
-        numberColor: Colors.white,
+        numberColor: SCColors.color_FFFFFF,
         numberText: number > 99 ? '99+' : number.toString(),);
     });
   }
 
-  /// 我的房号listView
-  Widget myHouseListView() {
-    return GetBuilder<SCMyHouseController>(builder: (state) {
-      return ListView.separated(
-          padding: const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 0),
-          itemBuilder: (BuildContext context, int index) {
-            SCMyHouseModel model = state.dataList[index];
-            return SCMyHouseItem(model: model,changeAction: () {
-              showToggleConfirmDialog(model: model);
-            },);
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return const SizedBox(height: 0.5,);
-          },
-          itemCount: state.dataList.length);
-    });
-  }
-
-  /// 底部新增房号按钮
-  Widget myRoomNumberBottomItem() {
-    return Container(
-      color: SCColors.color_FFFFFF,
-      width: double.infinity,
-      height: 54.0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 7.0),
-        child: Container(
-          height: 40.0,
-          decoration: BoxDecoration(
-              color: SCColors.color_FF6C00,
-              borderRadius: BorderRadius.circular(4.0)),
-          child: CupertinoButton(
-              padding: EdgeInsets.zero,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(SCAsset.iconMineHouseAdd, width: 14.0, height: 14.0,),
-                  const SizedBox(width: 10.0,),
-                  const Text(
-                    '新增房号',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w500,
-                      color: SCColors.color_FFFFFF,
-                    ),
-                  ),
-                ],
-              ),
-              onPressed: () {
-                /// 去新增房号
-                var params = {
-                  'communityId': '',
-                  'houseId': '',
-                  'valueList': ['', '', '', ''],
-                  'type': SCSelectHouseLogicType.addHouse
-                };
-                SCRouterHelper.codePage(5002, params);
-              }),
-        ),
-      ),
-    );
-  }
-
-  /// 当前房屋listView
-  Widget currentHouseListView() {
-    return GetBuilder<SCCurrentHouseController>(builder: (state) {
-      return ListView.separated(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
-          itemBuilder: (BuildContext context, int index) {
-            if (index == 0) {
-              return SCCurrentHouseInfoItem(infoModel: state.infoModel);
-            } else {
-              return SCCurrentHouseReviewItem(reviewList: state.selectReviewIndex == 0 ? state.infoModel.adoptMembers : state.infoModel.underReviewMembers);
-            }
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return const SizedBox(
-              height: 12,
-            );
-          },
-          itemCount: 2);
-    });
-  }
-
-  /// 当前房屋底部解除绑定按钮
-  Widget currentHouseBottomItem() {
-    return Container(
-      color: SCColors.color_FFFFFF,
-      width: double.infinity,
-      height: 54.0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 7.0),
-        child: Container(
-          height: 40.0,
-          decoration: BoxDecoration(
-              color: SCColors.color_FF6C00,
-              borderRadius: BorderRadius.circular(4.0)),
-          child: CupertinoButton(
-              padding: EdgeInsets.zero,
-              child: const Text(
-                  '解除绑定',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w500,
-                    color: SCColors.color_FFFFFF,
-                  ),
-              ),
-              onPressed: () {
-                showConfirmDialog();
-              }),
-        ),
-      ),
-    );
-  }
-
+  /// 加载我的房号列表数据
   loadMyHouseData() {
-    SCMyHouseController state = Get.find<SCMyHouseController>();
-    state.loadData();
+    myHouseState.loadMyHouseData();
   }
 
   /// 加载当前房屋 房屋信息
   loadCurrentHouseBasicData(){
-    SCCurrentHouseController state = Get.find<SCCurrentHouseController>();
-    state.loadData();
+    currentHouseState.loadCurrentHouseData();
   }
 
   /// 切换房屋确认弹窗
@@ -341,7 +240,8 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
       content: model.spaceName,
       isNeedCloseDiaLog: true,
       customWidgetButtons: [
-        defaultCustomButton(context,
+        defaultCustomButton(
+            context,
             text: '取消',
             textColor: SCColors.color_1B1C33,
             fontWeight: FontWeight.w400),
@@ -361,8 +261,6 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
 
   /// 切换房屋
   changeHouseAction({required SCMyHouseModel model}) {
-    SCMyHouseController state = Get.find<SCMyHouseController>();
-    SCHomeController homeController = Get.find<SCHomeController>();
     /// 切换,把项目id存在用户信息里
     SCUser user = SCScaffoldManager.instance.getUserData();
     user.housingId = model.id;
@@ -372,25 +270,31 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
     user.spaceName = model.spaceName;
     user.identityId = model.identityId;
     SCScaffoldManager.instance.cacheUserData(user.toJson());
-    state.updateCurrentHousingId(model.id);
+    myHouseState.updateCurrentHousingId(model.id);
+    /// 当前房号的信息也要重新获取
+    loadCurrentHouseBasicData();
+    /// 刷新首页房号信息
+    SCHomeController homeController = Get.find<SCHomeController>();
     homeController.changeHouse(model: model);
   }
 
-  /// 确认弹窗
-  showConfirmDialog() {
+  /// 解绑房号确认弹窗
+  showUnbindConfirmDialog() {
     SCDialogUtils.instance.showMiddleDialog(
       context: context,
       title: '解除绑定',
       content: '是否解绑当前房号？',
       isNeedCloseDiaLog: true,
       customWidgetButtons: [
-        defaultCustomButton(context,
+        defaultCustomButton(
+            context,
             text: '取消',
             textColor: SCColors.color_1B1C33,
             fontWeight: FontWeight.w400),
         TextButton(
             onPressed: () {
               unbindHouse();
+              Navigator.of(context).pop();
             },
             child: const Text('确定',
                 style: TextStyle(
@@ -401,8 +305,29 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
 
   /// 解绑房屋
   unbindHouse() {
-    SCCurrentHouseController state = Get.find<SCCurrentHouseController>();
-    state.unBindHouse();
+    currentHouseState.unBindHouse(resultHandler: (status) {
+      if (status == true) {
+        /// 切换,把项目id存在用户信息里
+        SCUser user = SCScaffoldManager.instance.getUserData();
+        user.housingId = '';
+        user.communityId = '';
+        user.communityName = '';
+        user.spaceId = 0;
+        user.spaceName = '';
+        user.identityId = '';
+        SCScaffoldManager.instance.cacheUserData(user.toJson());
+        /// 解绑房屋成功，刷新我的房号列表
+        myHouseState.loadMyHouseData();
+        myHouseState.updateCurrentHousingId('');
+        /// 当前房号的信息也要重新获取
+        loadCurrentHouseBasicData();
+        /// 清空首页房号信息
+        SCMyHouseModel model = SCMyHouseModel();
+        SCHomeController homeController = Get.find<SCHomeController>();
+        homeController.changeHouse(model: model);
+        navigator?.pop();
+      }
+    });
   }
 
 }

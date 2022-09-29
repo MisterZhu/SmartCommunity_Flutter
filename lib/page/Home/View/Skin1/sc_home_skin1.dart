@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../constants/sc_asset.dart';
 import '../../../../constants/sc_type_define.dart';
+import '../../../../skin/Tools/sc_scaffold_manager.dart';
 import '../../../../utils/Router/sc_router_helper.dart';
 import '../../GetXController/sc_home_controller1.dart';
 import 'sc_home_listview1.dart';
@@ -95,7 +96,11 @@ class SCHomeSkin1 extends StatelessWidget {
         stickyColor: state.navigationStickyColor,
         normalColor: state.navigationNormalColor,
         changeHouseAction: () {
-          SCRouterHelper.codePage(5001, null);
+          if (SCScaffoldManager.instance.user.token != null) {
+            SCRouterHelper.codePage(5001, null);
+          } else {
+            SCRouterHelper.codeOffAllPage(9001, null);
+          }
         },
       );
     });

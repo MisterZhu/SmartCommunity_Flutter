@@ -63,10 +63,10 @@ class SCHomeGridImageGroup extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 6.0),
         child: SCHomeActivityTopItem(
-          iconType: 1,
+          iconStyle: IconStyle.left,
           icon: '',
           title: title,
-          tagType: 1,
+          tagStyle: TagStyle.left,
           tagText: '标签名称',
           tagFont: SCFonts.f10,
           tagHeight: 16.0,

@@ -169,7 +169,7 @@ class SCCurrentHouseReviewItem extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(4.0)),
       child: Padding(
-        padding: const EdgeInsets.only(left: 0, top: 14, bottom: 14, right: 28),
+        padding: const EdgeInsets.only(left: 0, top: 14, bottom: 14, right: 16),
         child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,

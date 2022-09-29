@@ -153,4 +153,19 @@ class SCDialogUtils {
           }
     });
   }
+
+  /// 自定义底部弹窗，弹出验证码输入页面
+  showCustomBottomDialog(
+      {required BuildContext context, required Widget widget}) {
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.transparent,
+        barrierColor: Colors.black.withOpacity(0.5),
+        isScrollControlled: true,
+        enableDrag: false,
+        isDismissible: false,
+        builder: (BuildContext context) {
+          return widget;
+        });
+  }
 }

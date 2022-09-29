@@ -30,7 +30,7 @@ class SCMyHouseController extends GetxController {
     update();
   }
 
-  loadData() {
+  loadMyHouseData() {
     SCLoadingUtils.show();
     SCHttpManager.instance.get(
         url: SCUrl.kMyHouseUrl,
