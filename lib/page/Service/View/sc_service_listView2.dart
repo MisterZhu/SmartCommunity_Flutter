@@ -37,9 +37,7 @@ class SCServiceListView2 extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         topItem(),
-        const SizedBox(
-          height: 8.0,
-        ),
+        const SizedBox(height: 8.0),
         bottomItem(),
       ],
     );
@@ -59,22 +57,24 @@ class SCServiceListView2 extends StatelessWidget {
   /// 底部组件
   Widget bottomItem() {
     return Expanded(
-        child: Container(
-          color: SCColors.color_FFFFFF,
-          child: Row(
-            children: [leftTitleItem(), rightItem()],
-          ),
-        ));
+      child: Container(
+        color: SCColors.color_FFFFFF,
+        child: Row(
+          children: [
+            leftTitleItem(),
+            rightItem()
+          ],
+        ),
+      ));
   }
 
-  /// 底部组件-左侧标题
+  /// 底部组件-左侧标题列表
   Widget leftTitleItem() {
     List<String> tabList = [];
     for (var element in appList) {
       // element 为list内的每个元素
       tabList.add(element.module?.name ?? '');
     }
-    // widget.appList!.map((moduleModule) => moduleModule.module?.name).toList();
     return Container(
       width: 99.0,
       color: SCColors.color_F6F6F6,
@@ -82,7 +82,6 @@ class SCServiceListView2 extends StatelessWidget {
         return SCServiceLeftListView(
           currentItemIndex: state.currentIndex,
           list: tabList,
-          leftItemTap: (index) {},
         );
       }),
     );

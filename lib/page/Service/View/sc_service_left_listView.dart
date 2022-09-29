@@ -14,12 +14,10 @@ class SCServiceLeftListView extends StatelessWidget{
       required this.list,
       this.itemHeight = 60.0,
       this.currentItemIndex = 0,
-      this.leftItemTap})
-  : super(key: key);
+  }) : super(key: key);
 
   final List<String> list;
   final double itemHeight;
-  final Function(int index)? leftItemTap;
   final int currentItemIndex;
 
   @override
@@ -98,9 +96,6 @@ class SCServiceLeftListView extends StatelessWidget{
   /// 点击
   itemTaped(int index) {
     SCServiceController state = Get.find<SCServiceController>();
-    if (leftItemTap != null) {
-      leftItemTap?.call(index);
-    }
     if (index != state.currentIndex) {
       state.pageController.jumpToPage(index);
       state.updateCurrentIndex(index: index);
