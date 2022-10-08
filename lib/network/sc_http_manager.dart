@@ -104,7 +104,10 @@ class SCHttpManager {
         success?.call(data);
       } else {
         var data = doError(exception);
-        failure?.call(data);
+        var code = data['code'];
+        if (code != 401) {
+          failure?.call(data);
+        }
       }
     }
   }
@@ -131,7 +134,10 @@ class SCHttpManager {
         success?.call(data);
       } else {
         var data = doError(exception);
-        failure?.call(data);
+        var code = data['code'];
+        if (code != 401) {
+          failure?.call(data);
+        }
       }
     }
   }
@@ -157,7 +163,10 @@ class SCHttpManager {
         success?.call(data);
       } else {
         var data = doError(exception);
-        failure?.call(data);
+        var code = data['code'];
+        if (code != 401) {
+          failure?.call(data);
+        }
       }
     }
   }
@@ -183,7 +192,10 @@ class SCHttpManager {
         success?.call(data);
       } else {
         var data = doError(exception);
-        failure?.call(data);
+        var code = data['code'];
+        if (code != 401) {
+          failure?.call(data);
+        }
       }
     }
   }
@@ -231,7 +243,7 @@ doError(e) {
   /// 错误码
   int code = 0;
   /// message
-  String message = '';
+  String message = SCDefaultValue.errorMessage;
 
   if (e is DioError) {
     DioError error = e;
@@ -240,33 +252,39 @@ doError(e) {
       code = 500;
       message = SCDefaultValue.netErrorMessage;
     } else {
-      code = error.response?.statusCode ?? 0;
-
-      if (error.response?.data is Map) {
-        var errorData = error.response?.data;
-        message = errorData['msg'] ?? SCDefaultValue.errorMessage;
-      } else {
-        message = error.response?.data.toString() ?? SCDefaultValue.errorMessage;
-      }
-
+      code = error.response?.statusCode ?? 500;
       switch(error.response?.statusCode) {
         case 201: {
 
         }
         break;
+
         case 401: {
           /// 登录失效
           accountExpired();
         }
         break;
+
         case 403: {
 
         }
         break;
+
         case 404: {
 
         }
         break;
+
+        case 500: {
+          if (error.response?.data is Map) {
+            var errorData = error.response?.data;
+            message = errorData['msg'] ?? SCDefaultValue.errorMessage;
+          } else {
+            message = error.response?.data.toString() ?? SCDefaultValue.errorMessage;
+          }
+        }
+        break;
+
       }
     }
   } else {
