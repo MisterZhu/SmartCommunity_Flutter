@@ -18,7 +18,7 @@ class SCSettingCell extends StatelessWidget {
   /// onTap
   final Function? onTap;
 
-  const SCSettingCell({Key? key, this.title = '', this.content = '', this.onTap}) : super(key: key);
+  SCSettingCell({Key? key, this.title = '', this.content = '', this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

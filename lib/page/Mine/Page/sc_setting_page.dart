@@ -3,6 +3,12 @@ import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/page/Mine/View/Setting/sc_setting_listview.dart';
 import 'package:smartcommunity/skin/View/sc_custom_scaffold.dart';
 
+import '../../../constants/sc_fonts.dart';
+import '../../../utils/Router/sc_router_helper.dart';
+import '../../../utils/Router/sc_router_path.dart';
+import '../../../widgets/Dialog/sc_base_dialog.dart';
+import '../../../widgets/Dialog/sc_dialog_utils.dart';
+
 /// 设置page
 
 class SCSettingPage extends StatefulWidget {
@@ -22,7 +28,39 @@ class SCSettingState extends State<SCSettingPage> {
       width: double.infinity,
       height: double.infinity,
       color: SCColors.color_FFFFFF,
-      child: SCSettingListView(),
+      child: SCSettingListView(logoff: () {
+        showLogoffConfirmDialog();
+      },),
     );
   }
+
+  showLogoffConfirmDialog() {
+    SCDialogUtils.instance.showMiddleDialog(
+      context: context,
+      title: '申请注销账户',
+      content: '正在请求注销钱包账户，注销后将无法使用',
+      isNeedCloseDiaLog: true,
+      customWidgetButtons: [
+        defaultCustomButton(
+            context,
+            text: '取消',
+            textColor: SCColors.color_1B1C33,
+            fontWeight: FontWeight.w400),
+        TextButton(
+            onPressed: () {
+              print('账户注销==============');
+              Navigator.of(context).pop();
+
+              /// 跳转到注销账户页面
+              SCRouterHelper.pathPage(SCRouterPath.applyLogoffPath, null);
+            },
+            child: const Text(
+                '确认注销',
+                style: TextStyle(
+                    color: SCColors.color_FF6C00,
+                    fontSize: SCFonts.f16)))
+      ],
+    );
+  }
+
 }

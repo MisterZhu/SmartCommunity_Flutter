@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
@@ -5,12 +6,16 @@ import 'package:smartcommunity/page/Mine/View/Setting/sc_logout_cell.dart';
 import 'package:smartcommunity/page/Mine/View/Setting/sc_setting_cell.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
-
 import '../../../Home/GetXController/sc_home_controller.dart';
 
 /// 设置listview
 
 class SCSettingListView extends StatelessWidget {
+
+  final Function? logoff;
+
+  const SCSettingListView({Key? key, this.logoff}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return body();
@@ -27,7 +32,7 @@ class SCSettingListView extends StatelessWidget {
         separatorBuilder: (BuildContext context, int index) {
           return getLine(index);
         },
-        itemCount: 3);
+        itemCount: 4);
   }
   
   Widget getCell(int index) {
@@ -35,13 +40,15 @@ class SCSettingListView extends StatelessWidget {
       return normalCell();
     } else if(index == 1) {
       return normalCell();
-    } else {
+    } else if(index == 2) {
+      return logoffCell();
+    }  else {
       return logoutCell();
     }
   }
   
   Widget getLine(int index) {
-    if (index == 0) {
+    if (index == 0 || index == 1) {
       return line();
     } else {
       return line10();
@@ -60,7 +67,16 @@ class SCSettingListView extends StatelessWidget {
       SCRouterHelper.back(null);
     },);
   }
-  
+
+  /// 注销
+  Widget logoffCell() {
+    return SCSettingCell(title: '注销账户',onTap: (){
+      if (logoff != null) {
+        logoff?.call();
+      }
+    },);
+  }
+
   /// 退出
   Widget logoutCell() {
     return SCLogOutCell(onTap: (){

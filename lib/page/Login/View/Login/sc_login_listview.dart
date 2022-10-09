@@ -15,6 +15,9 @@ import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
+import '../../../../constants/sc_asset.dart';
+import '../../../../constants/sc_colors.dart';
+import '../../../../utils/Colors/sc_color_hex.dart';
 import '../../../../widgets/Dialog/sc_dialog_utils.dart';
 import '../../GetXController/sc_login_code_controller.dart';
 import 'sc_login_agreement.dart';
@@ -141,11 +144,54 @@ class SCLoginListView extends StatelessWidget {
 
   /// 用户协议和隐私政策
   Widget agreementItem() {
+    List<dynamic> list = [
+      {
+        'type': SCTypeDefine.richTextTypeImage,
+        'title': '',
+        'imageUrl': SCAsset.iconNotAgree,
+        'url': '',
+        'color': SCHexColor.colorToString(SCColors.color_FFFFFF)
+      },
+      {
+        'type': SCTypeDefine.richTextTypeText,
+        'title': '我已阅读并同意',
+        'imageUrl': '',
+        'url': '',
+        'color': SCHexColor.colorToString(SCColors.color_1B1C33)
+      },
+      {
+        'type': SCTypeDefine.richTextTypeText,
+        'title': '《用户服务协议》',
+        'imageUrl': '',
+        'url': SCAgreement.userAgreementUrl,
+        'color': SCHexColor.colorToString(SCColors.color_FF6C00)
+      },
+      {
+        'type': SCTypeDefine.richTextTypeText,
+        'title': '',
+        'imageUrl': '',
+        'url': '',
+        'color': SCHexColor.colorToString(SCColors.color_FF6C00)
+      },
+      {
+        'type': SCTypeDefine.richTextTypeText,
+        'title': '《隐私协议》',
+        'imageUrl': '',
+        'url': SCAgreement.privacyProtocolUrl,
+        'color': SCHexColor.colorToString(SCColors.color_FF6C00)
+      },
+      {
+        'type': SCTypeDefine.richTextTypeText,
+        'title': '并使用本机号码登录',
+        'imageUrl': '',
+        'url': '',
+        'color': SCHexColor.colorToString(SCColors.color_1B1C33)
+      },
+    ];
     return GetBuilder<SCLoginController>(builder: (state) {
       return SCLoginAgreement(
+        list: list,
         isAgree: state.isAgree,
-        userAgreementUrl: SCAgreement.userAgreementUrl,
-        privacyPolicyUrl: SCAgreement.privacyProtocolUrl,
         agreeAction: () {
           state.updateAgreementState();
         },

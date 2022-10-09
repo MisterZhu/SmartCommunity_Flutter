@@ -6,12 +6,14 @@ import 'package:smartcommunity/page/Login/Page/sc_select_house_page.dart';
 import 'package:smartcommunity/page/Login/Page/sc_login_page.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_login_code_view.dart';
 import 'package:smartcommunity/page/Mine/Page/sc_add_house_page.dart';
+import 'package:smartcommunity/page/Mine/Page/sc_logoff_page.dart';
 import 'package:smartcommunity/page/Mine/Page/sc_toggle_houses_page.dart';
 import 'package:smartcommunity/page/Tab/Page/sc_tab_page.dart';
 import 'package:smartcommunity/page/Webview/Page/sc_webview_page.dart';
 
 import '../../page/Login/Page/sc_select_city_page.dart';
 import '../../page/Login/Page/sc_select_community_page.dart';
+import '../../page/Mine/Page/sc_apply_logoff_page.dart';
 import '../../page/Mine/Page/sc_setting_page.dart';
 import '../../page/Service/Page/sc_service_page.dart';
 import 'sc_router_path.dart';
@@ -48,6 +50,10 @@ class SCRouterPages {
     GetPage(name: SCRouterPath.addHousePagePath, page: () => SCAddHousePage()),
     /*设置*/
     GetPage(name: SCRouterPath.settingPath, page: () => SCSettingPage()),
+    /*申请注销账户*/
+    GetPage(name: SCRouterPath.applyLogoffPath, page: () => SCApplyLogoffPage()),
+    /*注销账户*/
+    GetPage(name: SCRouterPath.logoffPath, page: () => SCLogoffPage()),
   ];
 
   /*根据code使用路由*/

@@ -105,9 +105,9 @@ class SCLoginTextFieldState extends State<SCLoginTextField> {
         LengthLimitingTextInputFormatter(phoneLength),
       ],
       decoration: const InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 0),
+        contentPadding: EdgeInsets.symmetric(vertical: 10),
         hintText: "请输入手机号",
-        hintStyle: TextStyle(fontSize: 14, color: SCColors.color_B0B1B8),
+        hintStyle: TextStyle(fontSize: 16, color: SCColors.color_B0B1B8),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(width: 0, color: Colors.transparent)),
         disabledBorder: OutlineInputBorder(

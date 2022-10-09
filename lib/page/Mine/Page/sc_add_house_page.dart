@@ -387,7 +387,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
             onPressed: () {
               commit();
             },
-            child: Text('确定',
+            child: const Text('确定',
                 style: TextStyle(
                     color: SCColors.color_FF6C00, fontSize: SCFonts.f16)))
       ],
