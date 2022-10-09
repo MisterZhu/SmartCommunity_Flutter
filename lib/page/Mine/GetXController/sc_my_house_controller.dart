@@ -1,9 +1,6 @@
 
-
 import 'dart:developer';
-
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-
 import '../../../network/sc_http_manager.dart';
 import '../../../network/sc_url.dart';
 import '../../../skin/Tools/sc_scaffold_manager.dart';
@@ -30,13 +27,14 @@ class SCMyHouseController extends GetxController {
     update();
   }
 
+  /// 加载数据
   loadMyHouseData() {
     SCLoadingUtils.show();
     SCHttpManager.instance.get(
         url: SCUrl.kMyHouseUrl,
         success: (value) {
           dataList = List<SCMyHouseModel>.from(value.map((e) => SCMyHouseModel.fromJson(e)).toList());
-          updateHouseList(list: dataList);
+          update();
         },
         failure: (value) {
           if (value['message'] != null) {

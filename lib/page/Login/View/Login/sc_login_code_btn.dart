@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
-
 import '../../../../constants/sc_fonts.dart';
 
 /// 获取验证码按钮

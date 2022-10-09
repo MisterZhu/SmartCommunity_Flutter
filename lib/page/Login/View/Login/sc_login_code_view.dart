@@ -9,7 +9,6 @@ import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_login_code_item.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_number_keyboard_item.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
-
 import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_fonts.dart';
 import '../../GetXController/sc_login_code_controller.dart';

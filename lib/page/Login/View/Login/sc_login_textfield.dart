@@ -1,19 +1,12 @@
 
 import 'dart:async';
-import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
-import 'package:smartcommunity/constants/sc_fonts.dart';
-import 'package:smartcommunity/network/sc_url.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_login_controller.dart';
-
-import '../../../../network/sc_http_manager.dart';
-import '../../../../utils/Loading/sc_loading_utils.dart';
-import '../../../../utils/Toast/sc_toast.dart';
 
 /// 手机号和验证码输入框
 

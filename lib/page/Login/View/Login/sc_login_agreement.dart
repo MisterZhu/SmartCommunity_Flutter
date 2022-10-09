@@ -1,15 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartcommunity/constants/sc_type_define.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_agreement_item.dart';
-
 import '../../../../constants/sc_asset.dart';
-import '../../../../constants/sc_colors.dart';
-import '../../../../constants/sc_fonts.dart';
-import '../../../../utils/Colors/sc_color_hex.dart';
-import '../../../Guide/Model/sc_privacy_richtext_model.dart';
 
 /// 登录-协议item
 
@@ -20,8 +13,7 @@ class SCLoginAgreement extends StatelessWidget {
       this.isAgree = false,
       this.agreementDetailAction,
       this.agreeAction,
-      })
-      : super(key: key);
+      }) : super(key: key);
 
   final List list;
 
@@ -65,7 +57,7 @@ class SCLoginAgreement extends StatelessWidget {
   /// 用户协议和隐私政策
   Widget privacyItem() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40.0),
+      padding: const EdgeInsets.symmetric(horizontal: 50.0),
       child: SCAgreementItem(
         list: list,
         isAgree: isAgree,

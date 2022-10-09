@@ -1,9 +1,6 @@
 
-
 import 'dart:async';
-
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-
 import '../../../network/sc_http_manager.dart';
 import '../../../network/sc_url.dart';
 import '../../../skin/Tools/sc_scaffold_manager.dart';
@@ -36,7 +33,6 @@ class SCLogoffController extends GetxController {
 
   /// 确认按钮是否可以点击
   bool isSureBtnEnable = false;
-
 
   /// 获取验证码按钮是否可以点击
   updateCodeButtonState({required bool enable}) {

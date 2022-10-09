@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/page/Mine/View/Setting/sc_setting_listview.dart';
 import 'package:smartcommunity/skin/View/sc_custom_scaffold.dart';
-
 import '../../../constants/sc_fonts.dart';
 import '../../../utils/Router/sc_router_helper.dart';
 import '../../../utils/Router/sc_router_path.dart';
@@ -48,11 +47,9 @@ class SCSettingState extends State<SCSettingPage> {
             fontWeight: FontWeight.w400),
         TextButton(
             onPressed: () {
-              print('账户注销==============');
-              Navigator.of(context).pop();
-
-              /// 跳转到注销账户页面
-              SCRouterHelper.pathPage(SCRouterPath.applyLogoffPath, null);
+                Navigator.of(context).pop();
+                /// 跳转到注销账户页面
+                SCRouterHelper.pathPage(SCRouterPath.applyLogoffPath, null);
             },
             child: const Text(
                 '确认注销',

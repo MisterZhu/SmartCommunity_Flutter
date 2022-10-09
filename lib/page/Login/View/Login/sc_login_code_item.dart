@@ -1,8 +1,6 @@
 
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
-
 import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_fonts.dart';
 

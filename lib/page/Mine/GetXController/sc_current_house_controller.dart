@@ -1,10 +1,8 @@
 import 'dart:developer';
-
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:smartcommunity/page/Mine/Model/Sc_current_house_info_data_model.dart';
 import 'package:smartcommunity/skin/Model/sc_user.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
-
 import '../../../network/sc_http_manager.dart';
 import '../../../network/sc_url.dart';
 import '../../../utils/Loading/sc_loading_utils.dart';
@@ -20,6 +18,7 @@ class SCCurrentHouseController extends GetxController {
 
   late ScCurrentHouseInfoDataModel infoModel;
 
+  late bool hadData = false;
   @override
   onInit() {
     super.onInit();
@@ -109,6 +108,11 @@ class SCCurrentHouseController extends GetxController {
     update();
   }
 
+  updateHadData(bool status) {
+    hadData = status;
+    update();
+  }
+
   loadCurrentHouseData() {
     SCLoadingUtils.show();
     // 取当前房号Id
@@ -122,6 +126,7 @@ class SCCurrentHouseController extends GetxController {
         url: SCUrl.kCurrentHouseInfoUrl,
         params: params,
         success: (value) {
+          updateHadData(true);
           log('当前房屋详情===$value');
           var json = {
             "adoptMembers": [
