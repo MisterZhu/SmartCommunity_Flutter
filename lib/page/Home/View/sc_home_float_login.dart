@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_default_value.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 

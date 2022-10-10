@@ -70,7 +70,7 @@ class SCLoginHeader extends StatelessWidget {
 
   Widget closeItem() {
     return Offstage(
-      offstage: true,
+      offstage: !showClose,
       child: CupertinoButton(
         padding: EdgeInsets.zero,
         child: Container(

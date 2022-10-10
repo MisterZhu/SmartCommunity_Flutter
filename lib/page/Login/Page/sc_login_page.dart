@@ -1,15 +1,12 @@
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
-import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_login_controller.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_login_listview.dart';
-
-import '../../../constants/sc_agreement.dart';
-import '../../../utils/Router/sc_router_helper.dart';
 import '../../../utils/sc_utils.dart';
-import '../View/Login/sc_login_agreement.dart';
 
 /// 登录page
 class SCLoginPage extends StatefulWidget {
@@ -29,10 +26,12 @@ class SCLoginState extends State<SCLoginPage> {
   initState() {
     super.initState();
 
-    var params = Get.arguments;
-    if (params != null) {
+    if (Get.arguments != null && Get.arguments != {}) {
+      print('1111111111111111====${Get.arguments}');
+      var params = Get.arguments;
       showCloseBtn = params['showClose'];
-      print('showCloseBtn=====$showCloseBtn');
+
+      print('showCloseBtn======$showCloseBtn');
     }
   }
   @override
@@ -53,7 +52,7 @@ class SCLoginState extends State<SCLoginPage> {
         width: double.infinity,
         height: double.infinity,
         color: SCColors.color_F2F3F5,
-        child: SCLoginListView(showClose: showCloseBtn,),
+        child: SCLoginListView(showClose: showCloseBtn),
       ),
     );
   }
