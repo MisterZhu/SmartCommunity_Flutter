@@ -1,6 +1,4 @@
 
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
@@ -25,15 +23,12 @@ class SCLoginState extends State<SCLoginPage> {
   @override
   initState() {
     super.initState();
-
-    if (Get.arguments != null && Get.arguments != {}) {
-      print('1111111111111111====${Get.arguments}');
-      var params = Get.arguments;
+    var params = Get.arguments;
+    if (params != null && params != '') {
       showCloseBtn = params['showClose'];
-
-      print('showCloseBtn======$showCloseBtn');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

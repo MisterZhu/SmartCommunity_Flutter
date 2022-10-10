@@ -45,6 +45,7 @@ class SCHomeFloatLogin extends StatelessWidget {
     );
   }
 
+  /// icon
   Widget iconItem() {
     return Container(
       width: 40.0,
@@ -56,6 +57,7 @@ class SCHomeFloatLogin extends StatelessWidget {
     );
   }
 
+  /// content
   Widget contentItem() {
     return Expanded(
       child: Column(
@@ -89,6 +91,7 @@ class SCHomeFloatLogin extends StatelessWidget {
     );
   }
 
+  /// 登录按钮
   Widget loginBtnItem() {
     return Container(
       width: 80.0,
