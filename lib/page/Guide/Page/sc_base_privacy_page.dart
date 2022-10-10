@@ -70,7 +70,7 @@ class SCBasePrivacyState extends State<SCBasePrivacyPage> {
           if (state.isAgree == true) {
             SharedPreferences preference = await SharedPreferences.getInstance();
             preference.setBool(SCKey.isShowPrivacyAlert, false);
-            SCRouterHelper.codeOffAllPage(9001, null);
+            SCRouterHelper.codeOffAllPage(9001, {'showClose' : false});
           } else {
             SCToast.showTip(SCDefaultValue.agreeUserAgreementMessage);
           }

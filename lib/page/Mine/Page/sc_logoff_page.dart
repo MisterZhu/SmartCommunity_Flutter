@@ -251,7 +251,7 @@ class SCLogoffState extends State<SCLogoffPage> {
             onPressed: () {
                 if (state.isCodeBtnEnable) {
                   print('发送验证码');
-                  /// state.sendCode();
+                  // state.sendCode();
                   /// 测试
                   state.initTimer();
 
@@ -345,25 +345,15 @@ class SCLogoffState extends State<SCLogoffPage> {
   /// 分割线
   Widget getSeparateItem({required int index}) {
     if (index == 0) {
-      return const SizedBox(
-        height: 12.0,
-      );
+      return const SizedBox(height: 12.0,);
     } else if (index == 1) {
-      return const SizedBox(
-        height: 35.0,
-      );
+      return const SizedBox(height: 35.0,);
     } else if (index == 2) {
-      return const SizedBox(
-        height: 12.0,
-      );
+      return const SizedBox(height: 12.0,);
     } else if (index == 3) {
-      return const SizedBox(
-        height: 18.0,
-      );
+      return const SizedBox(height: 18.0,);
     } else if (index == 4) {
-      return const SizedBox(
-        height: 43.0,
-      );
+      return const SizedBox(height: 43.0,);
     } else {
       return const SizedBox();
     }

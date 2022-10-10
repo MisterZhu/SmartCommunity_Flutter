@@ -27,6 +27,9 @@ import 'sc_login_agreement.dart';
 class SCLoginListView extends StatelessWidget {
 
   late final BuildContext currentContext;
+  final bool showClose;
+
+  SCLoginListView({Key? key, this.showClose = true,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +100,7 @@ class SCLoginListView extends StatelessWidget {
 
   /// header
   Widget headerItem() {
-    return const SCLoginHeader();
+    return SCLoginHeader(showClose: showClose);
   }
 
   /// 手机号验证码输入框
@@ -136,7 +139,7 @@ class SCLoginListView extends StatelessWidget {
   /// 游客模式按钮
   Widget skipBtnItem() {
     return SCLoginBtnItem(skipTapAction: () {
-      //SCRouterHelper.codeOffAllPage(10000, null);
+      SCRouterHelper.codeOffAllPage(10000, null);
     }, register: () {
 
     },);
