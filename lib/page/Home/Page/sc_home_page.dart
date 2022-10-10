@@ -6,6 +6,7 @@ import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller2.dart';
+import 'package:smartcommunity/page/Home/View/sc_home_float_login.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 import '../../Service/GetXController/sc_service_controller.dart';
@@ -61,7 +62,13 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
         color: SCColors.color_F5F5F5,
         width: double.infinity,
         height: double.infinity,
-        child: skin(),
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            skin(),
+            SCHomeFloatLogin(),
+          ],
+        ),
       ),
     ));
   }

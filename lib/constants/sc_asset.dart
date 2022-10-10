@@ -210,6 +210,7 @@ class SCAsset {
   /************* logo *************/
   /// logo_56
   static const String iconLogo56 = 'images/logo/icon_logo_56.png';
+  static const String iconLogo60 = 'images/logo/icon_logo_60.png';
   /// logo_168
   static const String iconLogo168 = 'images/logo/icon_logo_168.png';
   /// logo_180
@@ -223,6 +224,8 @@ class SCAsset {
   static const String iconLoginTopBg = 'images/login/icon_login_bg.png';
 
   static const String iconLoginBottomBg = 'images/login/icon_login_bottom_bg.png';
+  /// 登录页面关闭
+  static const String iconLoginClose = 'images/login/icon_login_close.png';
   /// 数字键盘上的删除按钮
   static const String iconLoginCodeClose = 'images/login/icon_login_code_close.png';
 

@@ -24,6 +24,17 @@ class SCLoginState extends State<SCLoginPage> {
 
   SCLoginController state = Get.put(SCLoginController());
 
+  late bool showCloseBtn = true;
+  @override
+  initState() {
+    super.initState();
+
+    var params = Get.arguments;
+    if (params != null) {
+      showCloseBtn = params['showClose'];
+      print('showCloseBtn=====$showCloseBtn');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +53,7 @@ class SCLoginState extends State<SCLoginPage> {
         width: double.infinity,
         height: double.infinity,
         color: SCColors.color_F2F3F5,
-        child: SCLoginListView(),
+        child: SCLoginListView(showClose: showCloseBtn,),
       ),
     );
   }

@@ -1,47 +1,24 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:smartcommunity/page/Login/View/Login/sc_agreement_item.dart';
 import '../../../../constants/sc_asset.dart';
-import '../../../../constants/sc_colors.dart';
-import '../../../../constants/sc_fonts.dart';
-import '../../../../utils/Colors/sc_color_hex.dart';
-import '../../../Guide/Model/sc_privacy_richtext_model.dart';
 
 /// 登录-协议item
 
 class SCLoginAgreement extends StatelessWidget {
   SCLoginAgreement(
       {Key? key,
+      required this.list,
       this.isAgree = false,
       this.agreementDetailAction,
       this.agreeAction,
-      this.userAgreementUrl = '',
-      this.privacyPolicyUrl = ''})
-      : super(key: key);
+      }) : super(key: key);
 
-  /// 协议富文本
-  late List<InlineSpan> richTextList;
-
-  /// 协议富文本类型, 0-间隔,1-image,2-普通文本
-  /// 0-间隔(sizeBox)
-  static const int richTextType = 0;
-
-  /// 1-图片
-  static const int richTextTypeImage = 1;
-
-  /// 2-文本
-  static const int richTextTypeText = 2;
+  final List list;
 
   /// 是否同意用户协议和隐私政策
   final bool isAgree;
-
-  /// 用户协议url
-  final String? userAgreementUrl;
-
-  /// 隐私政策url
-  final String? privacyPolicyUrl;
 
   /// 协议详情
   final Function(String title,String url)? agreementDetailAction;
@@ -51,68 +28,7 @@ class SCLoginAgreement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    initData();
     return body();
-  }
-
-  /// 设置数据
-  initData() {
-    List<dynamic> list = [
-      {
-        'type': richTextTypeImage,
-        'title': '',
-        'imageUrl': isAgree ? SCAsset.iconAgree : SCAsset.iconNotAgree,
-        'url': '',
-        'color': SCHexColor.colorToString(SCColors.color_FFFFFF)
-      },
-      {
-        'type': richTextTypeText,
-        'title': '我已阅读并同意',
-        'imageUrl': '',
-        'url': '',
-        'color': SCHexColor.colorToString(SCColors.color_1B1C33)
-      },
-      {
-        'type': richTextTypeText,
-        'title': '《用户服务协议》',
-        'imageUrl': '',
-        'url': userAgreementUrl,
-        'color': SCHexColor.colorToString(SCColors.color_FF6C00)
-      },
-      {
-        'type': richTextTypeText,
-        'title': '',
-        'imageUrl': '',
-        'url': '',
-        'color': SCHexColor.colorToString(SCColors.color_FF6C00)
-      },
-      {
-        'type': richTextTypeText,
-        'title': '《隐私协议》',
-        'imageUrl': '',
-        'url': privacyPolicyUrl,
-        'color': SCHexColor.colorToString(SCColors.color_FF6C00)
-      },
-      {
-        'type': richTextTypeText,
-        'title': '并使用本机号码登录',
-        'imageUrl': '',
-        'url': '',
-        'color': SCHexColor.colorToString(SCColors.color_1B1C33)
-      },
-    ];
-
-    richTextList = list.map((e) {
-      SCPrivacyRichTextModel model = SCPrivacyRichTextModel.fromJson(e);
-      if (model.type == richTextTypeImage) {
-        return selectItem();
-      } else {
-        return agreementItem(
-            title: model.title ?? '',
-            url: model.url ?? '',
-            color: SCHexColor(model.color ?? ''));
-      }
-    }).toList();
   }
 
   /// body
@@ -141,43 +57,21 @@ class SCLoginAgreement extends StatelessWidget {
   /// 用户协议和隐私政策
   Widget privacyItem() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40.0),
-      child: RichText(
-          textAlign: TextAlign.left,
-          text: TextSpan(text: "", children: richTextList)),
-    );
-  }
-
-  /// 勾选框
-  WidgetSpan selectItem() {
-    return WidgetSpan(
-        alignment: PlaceholderAlignment.middle,
-        child: GestureDetector(
-          child: Image.asset(
-            isAgree ? SCAsset.iconAgree : SCAsset.iconNotAgree,
-            width: 22,
-            height: 22,
-          ),
-          onTap: () {
-            if (agreeAction != null) {
-              agreeAction?.call();
-            }
-          },
-        ));
-  }
-
-  /// 协议文本
-  TextSpan agreementItem(
-      {String title = '',
-      String url = '',
-      Color color = SCColors.color_1B1C33}) {
-    return TextSpan(
-        text: title,
-        style: TextStyle(fontSize: SCFonts.f12, color: color),
-        recognizer: TapGestureRecognizer()..onTap = () {
+      padding: const EdgeInsets.symmetric(horizontal: 50.0),
+      child: SCAgreementItem(
+        list: list,
+        isAgree: isAgree,
+        agreeAction: () {
+          if (agreeAction != null) {
+            agreeAction?.call();
+          }
+        },
+        agreementDetailAction: (title, url) {
           if (agreementDetailAction != null && url.isNotEmpty) {
             agreementDetailAction?.call(title, url);
           }
-        });
+        },
+      ));
   }
+
 }

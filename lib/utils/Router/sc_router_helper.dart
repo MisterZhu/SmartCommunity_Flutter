@@ -30,6 +30,12 @@ class SCRouterHelper {
     return Get.toNamed(path, arguments: params);
   }
 
+  /*通过path跳转页面,关闭所有页面*/
+  static Future? pathOffAllPage(String path, dynamic params) {
+    params ??= '';
+    return Get.offAllNamed(path, arguments: params);
+  }
+
   /*返回上一页*/
   static void back(dynamic params) {
     params ??= '';

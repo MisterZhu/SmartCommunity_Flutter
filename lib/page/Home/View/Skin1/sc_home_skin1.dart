@@ -99,7 +99,7 @@ class SCHomeSkin1 extends StatelessWidget {
           if (SCScaffoldManager.instance.user.token != null) {
             SCRouterHelper.codePage(5001, null);
           } else {
-            SCRouterHelper.codeOffAllPage(9001, null);
+            SCRouterHelper.codePage(9001, null);
           }
         },
       );

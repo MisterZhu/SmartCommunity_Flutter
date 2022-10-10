@@ -66,4 +66,17 @@ class SCTypeDefine {
   static const int SC_SKIN_TYPE1 = 1;
   /// 皮肤类型2
   static const int SC_SKIN_TYPE2 = 2;
+
+/************************* 用户协议、隐私政策富文本类型 *************************/
+
+  /// 0-间隔,1-image,2-普通文本
+  /// 0-间隔(sizeBox)
+  static const int richTextTypeSpace = 0;
+
+  /// 1-图片
+  static const int richTextTypeImage = 1;
+
+  /// 2-文本
+  static const int richTextTypeText = 2;
+
 }

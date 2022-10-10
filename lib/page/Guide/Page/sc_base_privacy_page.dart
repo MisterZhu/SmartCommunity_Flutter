@@ -63,8 +63,6 @@ class SCBasePrivacyState extends State<SCBasePrivacyPage> {
         titleString: state.title,
         contentString: state.content,
         descriptionString: state.description,
-        userAgreementUrl: SCAgreement.userAgreementUrl,
-        privacyPolicyUrl: SCAgreement.privacyProtocolUrl,
         cancelAction: (){
           SCToast.showTip(SCDefaultValue.canUseAppMessage);
         },
@@ -72,8 +70,7 @@ class SCBasePrivacyState extends State<SCBasePrivacyPage> {
           if (state.isAgree == true) {
             SharedPreferences preference = await SharedPreferences.getInstance();
             preference.setBool(SCKey.isShowPrivacyAlert, false);
-            //SCRouterHelper.codeOffAllPage(10000, null);
-            SCRouterHelper.codeOffAllPage(9001, null);
+            SCRouterHelper.codeOffAllPage(9001, {'showClose' : false});
           } else {
             SCToast.showTip(SCDefaultValue.agreeUserAgreementMessage);
           }
@@ -81,8 +78,8 @@ class SCBasePrivacyState extends State<SCBasePrivacyPage> {
         agreeAction: () {
           state.updateAgreementState();
         },
-        agreementDetailAction: (String url, String? title) {
-          SCRouterHelper.codePage(20000, {"url" : url, "title" : title});
+        agreementDetailAction: (String? title, String url) {
+          SCRouterHelper.codePage(20000, {"title" : title, "url" : url});
         },
       );
     });

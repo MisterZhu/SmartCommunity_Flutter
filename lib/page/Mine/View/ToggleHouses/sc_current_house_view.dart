@@ -42,21 +42,25 @@ class SCCurrentHouseView extends StatelessWidget {
   /// 当前房屋listView
   Widget currentHouseListView() {
     return GetBuilder<SCCurrentHouseController>(builder: (state) {
-      return ListView.separated(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
-          itemBuilder: (BuildContext context, int index) {
-            if (index == 0) {
-              return SCCurrentHouseInfoItem(infoModel: state.infoModel);
-            } else {
-              return SCCurrentHouseReviewItem(reviewList: state.selectReviewIndex == 0 ? state.infoModel.adoptMembers : state.infoModel.underReviewMembers);
-            }
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return const SizedBox(
-              height: 12,
-            );
-          },
-          itemCount: 2);
+      if (state.hadData) {
+        return ListView.separated(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
+            itemBuilder: (BuildContext context, int index) {
+              if (index == 0) {
+                return SCCurrentHouseInfoItem(infoModel: state.infoModel);
+              } else {
+                return SCCurrentHouseReviewItem(reviewList: state.selectReviewIndex == 0 ? state.infoModel.adoptMembers : state.infoModel.underReviewMembers);
+              }
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return const SizedBox(
+                height: 12,
+              );
+            },
+            itemCount: 2);
+      } else {
+        return Container();
+      }
     });
   }
 

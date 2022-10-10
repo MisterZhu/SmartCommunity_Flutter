@@ -1,10 +1,9 @@
 
-
 import 'package:flutter/cupertino.dart';
-
 import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_fonts.dart';
 import '../../../../utils/sc_utils.dart';
+
 /// 游客模式、邀请码注册按钮
 class SCLoginBtnItem extends StatelessWidget {
 

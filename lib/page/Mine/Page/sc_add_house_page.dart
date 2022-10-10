@@ -17,7 +17,6 @@ import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 import 'package:smartcommunity/widgets/Dialog/sc_base_dialog.dart';
 import 'package:smartcommunity/widgets/Dialog/sc_bottom_sheet_model.dart';
 import 'package:smartcommunity/widgets/Dialog/sc_dialog_utils.dart';
-
 import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_fonts.dart';
@@ -387,7 +386,7 @@ class SCAddHouseState extends State<SCAddHousePage> {
             onPressed: () {
               commit();
             },
-            child: Text('确定',
+            child: const Text('确定',
                 style: TextStyle(
                     color: SCColors.color_FF6C00, fontSize: SCFonts.f16)))
       ],

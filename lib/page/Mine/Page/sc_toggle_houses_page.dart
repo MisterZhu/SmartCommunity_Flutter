@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +9,6 @@ import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 import 'package:smartcommunity/widgets/Dialog/sc_base_dialog.dart';
 import 'package:smartcommunity/widgets/Dialog/sc_dialog_utils.dart';
-
 import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_enum.dart';
 import '../../../constants/sc_fonts.dart';
@@ -49,6 +47,8 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
 
   late TabController tabController;
 
+  late bool hadLoadCurrentHouseData = false;
+
   @override
   initState() {
     super.initState();
@@ -64,10 +64,12 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
     tabController.addListener(() {
       int currentIndex = tabController.index;
       state.updateSelectIndex(currentIndex);
+      if (currentIndex == 1 && hadLoadCurrentHouseData == false) {
+        loadCurrentHouseBasicData();
+        hadLoadCurrentHouseData = true;
+      }
     });
-
     loadMyHouseData();
-    loadCurrentHouseBasicData();
   }
 
   @override
