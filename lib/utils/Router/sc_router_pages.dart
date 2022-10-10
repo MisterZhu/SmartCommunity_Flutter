@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:smartcommunity/page/Base/Scan/Page/sc_scan_page.dart';
 import 'package:smartcommunity/page/Guide/Page/sc_base_privacy_page.dart';
 import 'package:smartcommunity/page/Guide/Page/sc_guide_page.dart';
 import 'package:smartcommunity/page/Home/Page/sc_home_page.dart';
@@ -28,6 +29,8 @@ class SCRouterPages {
     GetPage(name: SCRouterPath.codeLoginPath, page: () => SCLoginPage()),
     /*首页*/
     GetPage(name: SCRouterPath.homePath, page: () => SCHomePage()),
+    /*扫一扫*/
+    GetPage(name: SCRouterPath.scanPath, page: () => SCScanPage()),
     /*引导页*/
     GetPage(name: SCRouterPath.guidePath, page: () => SCGuidePage()),
     /*首次的用户协议和隐私政策弹窗*/
@@ -72,6 +75,8 @@ class SCRouterPages {
     10000 : SCRouterPath.tabPath,
     /*首页*/
     10001 : SCRouterPath.homePath,
+    /*扫一扫*/
+    10002 : SCRouterPath.scanPath,
     /*全部应用*/
     10011 : SCRouterPath.servicePagePath,
     /*切换房屋*/

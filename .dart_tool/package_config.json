@@ -362,6 +362,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "qr_code_scanner",
+      "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/qr_code_scanner-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "rxdart",
       "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.4",
       "packageUri": "lib/",
@@ -542,7 +548,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-10-08T06:08:08.564124Z",
+  "generated": "2022-10-10T07:25:05.423092Z",
   "generator": "pub",
   "generatorVersion": "2.17.1"
 }
