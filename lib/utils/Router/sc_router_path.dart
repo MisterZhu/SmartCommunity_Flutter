@@ -26,6 +26,8 @@ class SCRouterPath {
   /***************************** 首页 ******************************/
   /// 首页
   static String homePath = "/home/HomePage";
+  /// 扫一扫
+  static String scanPath = "/base/scan/SCScanPage";
 
   /***************************** 通用页 ******************************/
   /// webView

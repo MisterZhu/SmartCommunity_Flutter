@@ -7,6 +7,7 @@ import 'package:smartcommunity/page/Home/GetXController/sc_home_controller.dart'
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller2.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_float_login.dart';
+import 'package:smartcommunity/skin/Model/sc_user.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 import '../../Service/GetXController/sc_service_controller.dart';
@@ -57,27 +58,30 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
 
   /// body
   Widget body() {
-    return AnnotatedRegion(value: SystemUiOverlayStyle.light, child: Scaffold(
-      body: Container(
-        color: SCColors.color_F5F5F5,
-        width: double.infinity,
-        height: double.infinity,
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            skin(),
-            SCHomeFloatLogin(),
-          ],
-        ),
-      ),
-    ));
+    return AnnotatedRegion(
+        value: SystemUiOverlayStyle.light,
+        child: Scaffold(
+          body: Container(
+            color: SCColors.color_F5F5F5,
+            width: double.infinity,
+            height: double.infinity,
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                skin(),
+                floatLoginWidget(),
+              ],
+            ),
+          ),
+        ));
   }
 
+  /// 皮肤
   Widget skin() {
-    return GetBuilder<SCHomeController>(builder: (state){
+    return GetBuilder<SCHomeController>(builder: (state) {
       if (state.skinStyle == 0) {
         return skin1();
-      } else if(state.skinStyle == 1) {
+      } else if (state.skinStyle == 1) {
         return skin2();
       } else {
         return skin1();
@@ -95,4 +99,8 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
     return SCHomeSkin2();
   }
 
+  /// 登录悬浮窗
+  Widget floatLoginWidget() {
+    return Visibility(visible: !SCScaffoldManager.instance.isLogin, child: SCHomeFloatLogin());
+  }
 }
