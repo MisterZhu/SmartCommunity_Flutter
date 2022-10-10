@@ -103,6 +103,9 @@ class SCHomeSkin1 extends StatelessWidget {
             SCRouterHelper.pathPage(SCRouterPath.codeLoginPath, null);
           }
         },
+        scanAction: () {
+          SCRouterHelper.pathPage(SCRouterPath.scanPath, null);
+        },
       );
     });
   }

@@ -32,6 +32,12 @@ class SCHomeNavigation1 extends StatelessWidget {
   /// 切换房号
   final Function? changeHouseAction;
 
+  /// 扫一扫
+  final Function? scanAction;
+
+  /// 消息详情
+  final Function? messageAction;
+
   /// 房号文本数字数量
   final int? titleMaxLength;
 
@@ -43,6 +49,8 @@ class SCHomeNavigation1 extends StatelessWidget {
       this.isSticky = false,
       this.roomTitle = '慧享生活馆慧享生活馆慧享生活馆慧享生活馆慧享生活馆慧享生活馆慧享生活馆',
       this.changeHouseAction,
+      this.scanAction,
+      this.messageAction,
       this.searchTitle = '搜索应用、商品、资讯',
       this.opacity = 1.0,
       this.titleMaxLength = 10})
@@ -156,20 +164,30 @@ class SCHomeNavigation1 extends StatelessWidget {
         child: Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Image.asset(
-          SCAsset.iconScan,
-          width: 22.0,
-          height: 22.0,
-          color: isSticky == true ? stickyColor : normalColor,
+        GestureDetector(
+          child: Image.asset(
+            SCAsset.iconScan,
+            width: 22.0,
+            height: 22.0,
+            color: isSticky == true ? stickyColor : normalColor,
+          ),
+          onTap: () {
+            scan();
+          },
         ),
         const SizedBox(
           width: 16.0,
         ),
-        Image.asset(
-          SCAsset.iconMessage,
-          width: 22.0,
-          height: 22.0,
-          color: isSticky == true ? stickyColor : normalColor,
+        GestureDetector(
+          child: Image.asset(
+            SCAsset.iconMessage,
+            width: 22.0,
+            height: 22.0,
+            color: isSticky == true ? stickyColor : normalColor,
+          ),
+          onTap: () {
+            message();
+          },
         ),
       ],
     ));
@@ -235,5 +253,15 @@ class SCHomeNavigation1 extends StatelessWidget {
   /// 切换房号
   void changeHouse() {
     changeHouseAction?.call();
+  }
+
+  /// 扫一扫
+  void scan() {
+    scanAction?.call();
+  }
+
+  /// 消息详情
+  void message() {
+    messageAction?.call();
   }
 }

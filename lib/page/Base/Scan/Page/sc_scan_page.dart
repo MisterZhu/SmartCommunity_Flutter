@@ -35,35 +35,23 @@ class SCScanState extends State<SCScanPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 5,
-            child: QRView(
-              key: qrKey,
-              onQRViewCreated: _onQRViewCreated,
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Center(
-              child: (result != null)
-                  ? Text(
-                  'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-                  : const Text('Scan a code'),
-            ),
-          )
-        ],
+      body: QRView(
+        key: qrKey,
+        onQRViewCreated: _onQRViewCreated,
+        overlay: QrScannerOverlayShape(),
       ),
     );
   }
 
+  /// 扫描结果
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-      });
+      print("扫描结果:${scanData.code}");
+      // setState(() {
+      //   result = scanData;
+      //   //'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
+      // });
     });
   }
 
