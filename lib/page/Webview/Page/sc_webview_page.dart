@@ -78,7 +78,7 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
   /// leading
   Widget _leading() {
     return Container(
-      padding: EdgeInsets.only(left: 16),
+      padding: const EdgeInsets.only(left: 16),
       child: Row(
         children: <Widget>[
           SizedBox(
@@ -91,7 +91,7 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
                   height: 24.0,
                 ),
                 onTap: () {
-                  SCRouterHelper.back(null);
+                  goBack();
                 },
               )),
           const SizedBox(
@@ -107,7 +107,7 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
                   height: 24.0,
                 ),
                 onTap: () {
-                  goBack();
+                  SCRouterHelper.back(null);
                 },
               )),
         ],
