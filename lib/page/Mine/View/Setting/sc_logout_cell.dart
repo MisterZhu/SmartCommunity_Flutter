@@ -26,12 +26,12 @@ class SCLogOutCell extends StatelessWidget {
         color: SCColors.color_FFFFFF,
         borderRadius: const BorderRadius.all(Radius.circular(0.0)),
         child: const Text(
-            "退出登录",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: SCFonts.f16,
-                fontWeight: FontWeight.w500,
-                color: SCColors.color_1B1C33),
+          "退出登录",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: SCFonts.f16,
+            fontWeight: FontWeight.w500,
+            color: SCColors.color_1B1C33),
           ),
           onPressed: () {
             logout();

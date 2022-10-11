@@ -21,7 +21,6 @@ enum SCSettingCellType {
   switchType,
 }
 
-
 class SCSettingCell extends StatelessWidget {
 
   /// title
@@ -30,9 +29,12 @@ class SCSettingCell extends StatelessWidget {
   /// content
   final String? content;
 
+  /// cell样式
   final SCSettingCellType cellType;
 
+  /// 开关index
   final int switchIndex;
+
   /// onTap
   final Function? onTap;
 
@@ -103,6 +105,7 @@ class SCSettingCell extends StatelessWidget {
     ),);
   }
 
+  /// 右边的组件
   Widget rightWidget() {
     if (cellType == SCSettingCellType.contentType) {
       return contentWidget();
@@ -137,7 +140,7 @@ class SCSettingCell extends StatelessWidget {
     ),);
   }
   
-  /// arrow
+  /// 箭头icon
   Widget arrowIcon() {
     return Image.asset(SCAsset.iconMineDetailGrey, width: 22.0, height: 22.0,);
   }

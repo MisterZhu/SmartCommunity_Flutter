@@ -31,11 +31,11 @@ class SCSettingListView extends StatelessWidget {
           return getCell(index);
         },
         separatorBuilder: (BuildContext context, int index) {
-          bool line = true;
+          bool isLine = true;
           if (index == 3 || index == 7 || index == 11) {
-              line = false;
+            isLine = false;
           }
-          return getLine(line);
+          return getLine(isLine);
         },
         itemCount: 13);
   }
@@ -109,9 +109,9 @@ class SCSettingListView extends StatelessWidget {
     }
   }
   
-  Widget getLine(bool line) {
-    if (line) {
-      return line1();
+  Widget getLine(bool isLine) {
+    if (isLine) {
+      return line();
     } else {
       return line10();
     }
@@ -134,7 +134,7 @@ class SCSettingListView extends StatelessWidget {
   }
 
   /// line
-  Widget line1() {
+  Widget line() {
     return Container(
       color: SCColors.color_FFFFFF,
       padding: const EdgeInsets.only(left: 12.0),
