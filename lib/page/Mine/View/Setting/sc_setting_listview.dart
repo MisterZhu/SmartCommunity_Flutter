@@ -6,6 +6,7 @@ import 'package:smartcommunity/page/Mine/View/Setting/sc_logout_cell.dart';
 import 'package:smartcommunity/page/Mine/View/Setting/sc_setting_cell.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
+import '../../../../constants/sc_default_value.dart';
 import '../../../Home/GetXController/sc_home_controller.dart';
 
 /// 设置listview
@@ -30,42 +31,90 @@ class SCSettingListView extends StatelessWidget {
           return getCell(index);
         },
         separatorBuilder: (BuildContext context, int index) {
-          return getLine(index);
+          bool line = true;
+          if (index == 3 || index == 7 || index == 11) {
+              line = false;
+          }
+          return getLine(line);
         },
-        itemCount: 4);
+        itemCount: 13);
   }
   
   Widget getCell(int index) {
     if (index == 0) {
-      return normalCell();
+      return SCSettingCell(title: '切换皮肤',onTap: (){
+        SCHomeController state = Get.find<SCHomeController>();
+        if (state.skinStyle == 0) {
+          state.changeSkin(style: 1);
+        } else {
+          state.changeSkin(style: 0);
+        }
+        SCRouterHelper.back(null);
+      },);
     } else if(index == 1) {
-      return normalCell();
-    } else if(index == 2) {
       return logoffCell();
-    }  else {
+    } else if(index == 2) {
+      return SCSettingCell(
+        title: '是否接收评论提醒',
+        switchIndex: 0,
+        cellType: SCSettingCellType.switchType,);
+    } else if(index == 3) {
+      return SCSettingCell(
+        title: '接受新消息通知',
+        switchIndex: 1,
+        cellType: SCSettingCellType.switchType,);
+    } else if(index == 4) {
+      return SCSettingCell(
+        title: '关于${SCDefaultValue.appName}',
+        content: '当前版本：1.2.0',
+        cellType: SCSettingCellType.contentArrowType,
+        onTap: (){
+
+        },
+      );
+    } else if(index == 5) {
+      return SCSettingCell(title: '隐私政策',onTap: (){
+
+      },);
+    } else if(index == 6) {
+      return SCSettingCell(title: '个人信息搜集清单',onTap: (){
+
+      },);
+    } else if(index == 7) {
+      return SCSettingCell(title: '应用权限说明',onTap: (){
+
+      },);
+    } else if(index == 8) {
+      return SCSettingCell(
+        title: '清除缓存',
+        content: '12.0KB',
+        cellType: SCSettingCellType.contentType,
+        onTap: (){
+
+      },);
+    } else if(index == 9) {
+      return SCSettingCell(title: '帮助',onTap: (){
+
+      },);
+    } else if(index == 10) {
+      return SCSettingCell(title: '意见反馈',onTap: (){
+
+      },);
+    } else if(index == 11) {
+      return SCSettingCell(title: '给我们评价',onTap: (){
+
+      },);
+    } else {
       return logoutCell();
     }
   }
   
-  Widget getLine(int index) {
-    if (index == 0 || index == 1) {
-      return line();
+  Widget getLine(bool line) {
+    if (line) {
+      return line1();
     } else {
       return line10();
     }
-  }
-
-  /// cell
-  Widget normalCell() {
-    return SCSettingCell(title: '切换皮肤',onTap: (){
-      SCHomeController state = Get.find<SCHomeController>();
-      if (state.skinStyle == 0) {
-        state.changeSkin(style: 1);
-      } else {
-        state.changeSkin(style: 0);
-      }
-      SCRouterHelper.back(null);
-    },);
   }
 
   /// 注销
@@ -85,10 +134,16 @@ class SCSettingListView extends StatelessWidget {
   }
 
   /// line
-  Widget line() {
-    return const Divider(
-      height: 0.5,
-      color: SCColors.color_EDEDF0,
+  Widget line1() {
+    return Container(
+      color: SCColors.color_FFFFFF,
+      padding: const EdgeInsets.only(left: 12.0),
+      child: Container(
+        height: 0.5,
+        width: double.infinity,
+        color: SCColors.color_EDEDF0,
+      ),
+
     );
   }
   
@@ -96,7 +151,7 @@ class SCSettingListView extends StatelessWidget {
     return Container(
       height: 10.0,
       width: double.infinity,
-      color: SCColors.color_EDEDF0,
+      color: SCColors.color_F5F5F5,
     );
   }
 }
