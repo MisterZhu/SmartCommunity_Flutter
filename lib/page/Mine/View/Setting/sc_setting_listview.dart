@@ -42,7 +42,7 @@ class SCSettingListView extends StatelessWidget {
   
   Widget getCell(int index) {
     if (index == 0) {
-      return SCSettingCell(title: '切换皮肤',onTap: (){
+      return SCSettingCell(title: '切换皮肤', onTap: (){
         SCHomeController state = Get.find<SCHomeController>();
         if (state.skinStyle == 0) {
           state.changeSkin(style: 1);
@@ -73,15 +73,15 @@ class SCSettingListView extends StatelessWidget {
         },
       );
     } else if(index == 5) {
-      return SCSettingCell(title: '隐私政策',onTap: (){
+      return SCSettingCell(title: '隐私政策', onTap: (){
 
       },);
     } else if(index == 6) {
-      return SCSettingCell(title: '个人信息搜集清单',onTap: (){
+      return SCSettingCell(title: '个人信息搜集清单', onTap: (){
 
       },);
     } else if(index == 7) {
-      return SCSettingCell(title: '应用权限说明',onTap: (){
+      return SCSettingCell(title: '应用权限说明', onTap: (){
 
       },);
     } else if(index == 8) {
@@ -93,15 +93,15 @@ class SCSettingListView extends StatelessWidget {
 
       },);
     } else if(index == 9) {
-      return SCSettingCell(title: '帮助',onTap: (){
+      return SCSettingCell(title: '帮助', onTap: (){
 
       },);
     } else if(index == 10) {
-      return SCSettingCell(title: '意见反馈',onTap: (){
+      return SCSettingCell(title: '意见反馈', onTap: (){
 
       },);
     } else if(index == 11) {
-      return SCSettingCell(title: '给我们评价',onTap: (){
+      return SCSettingCell(title: '给我们评价', onTap: (){
 
       },);
     } else {
@@ -126,7 +126,7 @@ class SCSettingListView extends StatelessWidget {
     },);
   }
 
-  /// 退出
+  /// 退出登录
   Widget logoutCell() {
     return SCLogOutCell(onTap: (){
       SCScaffoldManager.instance.logout();
