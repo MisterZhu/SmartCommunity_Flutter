@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
@@ -19,7 +20,10 @@ class SCMineHeaderItem extends StatelessWidget {
   final double memberBackgroundImageScale = 686.0 / 103.0;
 
   /// 用户名
-  final String userName = '李莉莉';
+  final String? userName;
+
+  /// 用户头像
+  final String? userPic;
 
   /// 点击设置
   final Function? settingTap;
@@ -36,7 +40,9 @@ class SCMineHeaderItem extends StatelessWidget {
       this.backgroundImageScale = 750.0 / 380.0,
       this.settingTap,
       this.headerTap,
-      this.membershipTap
+      this.membershipTap,
+      this.userName = "",
+      this.userPic
       })
       : super(key: key);
 
@@ -84,6 +90,8 @@ class SCMineHeaderItem extends StatelessWidget {
 
   /// 用户头像等信息
   Widget userInfoItem() {
+    String name = userName ?? '';
+    String iconUrl = userPic ?? '';
     return Container(
       padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 0.0),
       height: 48.0,
@@ -93,12 +101,12 @@ class SCMineHeaderItem extends StatelessWidget {
             onTap: (){
               headerAction();
             },
-            child: Image.asset(
-              SCAsset.iconMineUserHead,
-              width: 48.0,
-              height: 48.0,
-              fit: BoxFit.cover,
-            ),
+            child: userPic != null ? CachedNetworkImage(imageUrl: iconUrl, width: 48.0, height: 48.0, fit: BoxFit.cover,) : Image.asset(
+      SCAsset.iconMineUserHead,
+      width: 48.0,
+      height: 48.0,
+      fit: BoxFit.cover,
+    ),
           ),
           const SizedBox(
             width: 12.0,
@@ -110,7 +118,7 @@ class SCMineHeaderItem extends StatelessWidget {
             child: LimitedBox(
               maxWidth: 100.0,
               child: Text(
-                userName,
+                name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.left,

@@ -48,6 +48,8 @@ class SCHomeController2 extends GetxController {
 
   RefreshController refreshController = RefreshController(initialRefresh: false);
 
+  ScrollController scrollController = ScrollController();
+
   @override
   void onInit() {
     super.onInit();
@@ -124,6 +126,8 @@ class SCHomeController2 extends GetxController {
   onClose() {
     super.onClose();
     refreshController.dispose();
+    scrollController.removeListener(() { });
+    scrollController.dispose();
   }
 
 }

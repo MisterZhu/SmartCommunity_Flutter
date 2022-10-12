@@ -90,8 +90,12 @@ class SCHomeSkin1 extends StatelessWidget {
   /// navigation
   Widget navigation() {
     return GetBuilder<SCHomeController1>(builder: (state) {
+      String communityName = '';
+      if (SCScaffoldManager.instance.user.communityName != null) {
+        communityName = SCScaffoldManager.instance.user.communityName ?? '';
+      }
       return SCHomeNavigation1(
-        roomTitle: state.communityName,
+        roomTitle: communityName,
         titleMaxLength: state.titleMaxLength,
         opacity: state.opacity,
         backgroundColor: state.navigationBackgroundColor,

@@ -7,6 +7,9 @@ import 'package:smartcommunity/page/Find/Page/sc_find_page.dart';
 import 'package:smartcommunity/page/Home/Page/sc_home_page.dart';
 import 'package:smartcommunity/page/Mine/Page/sc_mine_page.dart';
 import 'package:smartcommunity/page/Service/Page/sc_service_page.dart';
+import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
+import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
+import 'package:smartcommunity/utils/Router/sc_router_path.dart';
 
 import '../../../utils/sc_utils.dart';
 
@@ -96,6 +99,12 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
     updateStatusBar(index);
 
     if (currentIndex != index) {
+
+      if (!SCScaffoldManager.instance.isLogin) {
+        SCRouterHelper.pathPage(SCRouterPath.codeLoginPath, null);
+        return;
+      }
+
       setState(() {
         currentIndex = index;
         pageController.jumpToPage(index);

@@ -7,6 +7,7 @@ import 'package:smartcommunity/page/Login/GetXController/sc_select_house_data_co
 import 'package:smartcommunity/page/Login/Model/SelectHouse/sc_select_house_block_model.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/Router/sc_router_pages.dart';
+import 'package:smartcommunity/utils/Router/sc_router_path.dart';
 import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 
 import '../../GetXController/sc_select_house_search_status_controller.dart.dart';
@@ -321,7 +322,7 @@ class _SCSelectHouseListViewState
         'valueList': valueList,
         'type': widget.type
       };
-      SCRouterHelper.codePage(5002, params);
+      SCRouterHelper.pathPage(SCRouterPath.addHousePagePath, params);
     } else if (widget.type == SCSelectHouseLogicType.addHouse) {
       var params = {
         'houseId': houseId,

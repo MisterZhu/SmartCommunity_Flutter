@@ -7,6 +7,7 @@ import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/constants/sc_skin_value.dart';
 import 'package:smartcommunity/page/Home/Model/sc_home_news_model.dart';
+import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 
 import '../../../constants/sc_h5.dart';
 // import 'package:image_cropper/image_cropper.dart';
@@ -56,6 +57,8 @@ class SCHomeController1 extends GetxController {
   int titleMaxLength = 10;
 
   RefreshController refreshController = RefreshController(initialRefresh: false);
+
+  ScrollController scrollController = ScrollController();
 
   /// 所有应用
   List allItemsList = [
@@ -181,5 +184,7 @@ class SCHomeController1 extends GetxController {
   onClose() {
     super.onClose();
     refreshController.dispose();
+    scrollController.removeListener(() { });
+    scrollController.dispose();
   }
 }

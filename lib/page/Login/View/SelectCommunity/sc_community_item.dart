@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/page/Login/Model/sc_community_model.dart';
+import 'package:smartcommunity/utils/Router/sc_router_path.dart';
 
 import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_fonts.dart';
@@ -72,7 +73,7 @@ class SCCommunityItem extends StatelessWidget {
             'communityName': model.name,
             'type': type
           };
-          SCRouterHelper.codePage(20001, params);
+          SCRouterHelper.pathPage(SCRouterPath.selectHousePath, params);
         } else {
           var params = {
             'communityId': model.id,

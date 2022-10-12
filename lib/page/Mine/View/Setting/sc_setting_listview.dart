@@ -8,6 +8,7 @@ import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import '../../../../constants/sc_agreement.dart';
 import '../../../../constants/sc_default_value.dart';
+import '../../../../utils/Router/sc_router_path.dart';
 import '../../../Home/GetXController/sc_home_controller.dart';
 
 /// 设置listview
@@ -76,7 +77,7 @@ class SCSettingListView extends StatelessWidget {
     } else if (index == 5) {
       return SCSettingCell(title: '隐私政策', onTap: (){
         var params = {'title' : '隐私政策', 'url' : SCAgreement.privacyProtocolUrl};
-        SCRouterHelper.codePage(20000, params);
+        SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
       },);
     } else if (index == 6) {
       return SCSettingCell(title: '个人信息搜集清单', onTap: (){

@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_agreement.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
+import 'package:smartcommunity/utils/Router/sc_router_path.dart';
 import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_fonts.dart';
 import '../../../constants/sc_type_define.dart';
@@ -303,7 +304,7 @@ class SCLogoffState extends State<SCLogoffPage> {
         },
         agreementDetailAction: (String title, String url) {
           var params = {'title' : title, 'url' : url};
-          SCRouterHelper.codePage(20000, params);
+          SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
         },
       );
     });

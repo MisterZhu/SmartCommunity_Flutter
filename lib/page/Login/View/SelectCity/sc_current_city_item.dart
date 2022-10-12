@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/utils/Router/sc_router_path.dart';
 import 'package:smartcommunity/utils/sc_location_utils.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
@@ -85,7 +86,7 @@ class SCCurrentCityItem extends StatelessWidget {
         child: CupertinoButton(
           onPressed: () {
             /// 去选择城市页面
-            SCRouterHelper.codePage(9002, null);
+            SCRouterHelper.pathPage(SCRouterPath.selectCityPath, null);
           },
           padding: EdgeInsets.zero,
           child: const Text(

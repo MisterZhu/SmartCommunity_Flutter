@@ -14,6 +14,7 @@ import '../../../constants/sc_enum.dart';
 import '../../../constants/sc_fonts.dart';
 import '../../../skin/Model/sc_user.dart';
 import '../../../skin/Tools/sc_scaffold_manager.dart';
+import '../../../utils/Router/sc_router_path.dart';
 import '../GetXController/sc_current_house_controller.dart';
 import '../GetXController/sc_my_house_controller.dart';
 import '../GetXController/sc_toggle_houses_controller.dart';
@@ -143,7 +144,7 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
           'valueList': ['', '', '', ''],
           'type': SCSelectHouseLogicType.addHouse
         };
-        SCRouterHelper.codePage(5002, params);
+        SCRouterHelper.pathPage(SCRouterPath.addHousePagePath, params);
       },
     );
   }

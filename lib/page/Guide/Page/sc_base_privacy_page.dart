@@ -10,6 +10,7 @@ import 'package:smartcommunity/constants/sc_default_value.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_key.dart';
+import '../../../utils/Router/sc_router_path.dart';
 import '../../../utils/Toast/sc_toast.dart';
 import '../GetXController/sc_base_privacy_controller.dart';
 import '../View/Privacy/sc_privacy_alert.dart';
@@ -79,7 +80,7 @@ class SCBasePrivacyState extends State<SCBasePrivacyPage> {
           state.updateAgreementState();
         },
         agreementDetailAction: (String? title, String url) {
-          SCRouterHelper.codePage(20000, {"title" : title, "url" : url});
+          SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : title, "url" : url, "removeLoginCheck" : true});
         },
       );
     });

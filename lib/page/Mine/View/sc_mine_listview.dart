@@ -24,7 +24,9 @@ class SCMineListView extends StatelessWidget {
       {Key? key,
       this.scrollFunction,
       required this.dataList,
-      this.propertCurrentIndex = 0})
+      this.propertCurrentIndex = 0,
+      this.user
+      })
       : super(key: key);
 
   /// listView数据源
@@ -35,6 +37,8 @@ class SCMineListView extends StatelessWidget {
 
   /// 滑动回调
   Function(double offset)? scrollFunction;
+
+  final SCUser? user;
 
   ScrollController scrollController = ScrollController();
 
@@ -88,6 +92,7 @@ class SCMineListView extends StatelessWidget {
   /// header-cell
   Widget headerCell() {
     return SCMineHeaderItem(
+      userName: user?.userName,
       settingTap: () {
         if (SCScaffoldManager.instance.user.token != null) {
           SCRouterHelper.pathPage(SCRouterPath.settingPath, null);
@@ -110,9 +115,16 @@ class SCMineListView extends StatelessWidget {
 
   /// 切换房号-cell
   Widget changeAddressCell(BuildContext context) {
+    String houseName = '';
+    String userName = user?.userName ?? '';
+    if (userName.isNotEmpty) {
+      houseName = "$userName的家庭";
+    }
     return SCMineChangeAddressItem(
+      houseName: houseName,
+      address: user?.spaceName,
       onTap: () {
-        SCRouterHelper.codePage(5001, null);
+        SCRouterHelper.pathPage(SCRouterPath.toggleHousesPagePath, null);
       },
     );
   }
@@ -184,7 +196,7 @@ class SCMineListView extends StatelessWidget {
     String token = SCScaffoldManager.instance.user.token ?? "";
     String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
     String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
-    SCRouterHelper.codePage(20000, {"title" : "工单", "url" : url});
+    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "工单", "url" : url});
   }
 
   /// 积分
@@ -193,7 +205,7 @@ class SCMineListView extends StatelessWidget {
     String token = SCScaffoldManager.instance.user.token ?? "";
     String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
     String url = SCH5.integralUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
-    SCRouterHelper.codePage(20000, {"title" : "积分", "url" : url});
+    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "积分", "url" : url});
   }
 
   /// 红包
@@ -202,6 +214,6 @@ class SCMineListView extends StatelessWidget {
     String token = SCScaffoldManager.instance.user.token ?? "";
     String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
     String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
-    SCRouterHelper.codePage(20000, {"title" : "工单", "url" : url});
+    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "工单", "url" : url});
   }
 }

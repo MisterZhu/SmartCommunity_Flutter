@@ -6,6 +6,7 @@ import 'package:smartcommunity/constants/sc_type_define.dart';
 import 'package:smartcommunity/page/Mine/GetXController/sc_mine_controller.dart';
 import 'package:smartcommunity/page/Mine/View/sc_mine_listview.dart';
 import 'package:smartcommunity/page/Mine/View/sc_mine_navigation.dart';
+import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 
 /// 我的-page
 
@@ -62,6 +63,7 @@ class SCMineState extends State<SCMinePage> {
     ];
     return GetBuilder<SCMineController>(builder: (state){
       return SCMineListView(
+        user: SCScaffoldManager.instance.user,
         propertCurrentIndex: state.propertyCurrentIndex,
         dataList: dataList,
         scrollFunction: (double offset) {

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/utils/Router/sc_router_path.dart';
 import 'package:smartcommunity/utils/sc_location_utils.dart';
 
 import '../../../constants/sc_asset.dart';
@@ -234,7 +235,7 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
       'locationStatus': searchState.locationStatus,
       'cityCode': searchState.cityCode,
     };
-    var backParams = await SCRouterHelper.codePage(9002, params);
+    var backParams = await SCRouterHelper.pathPage(SCRouterPath.selectCityPath, params);
 
     /// 当在搜索结果页面输入时点击选择城市跳转要收起键盘，调用cancelAction方法
     cancelAction();

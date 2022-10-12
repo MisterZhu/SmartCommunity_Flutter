@@ -99,6 +99,7 @@ class SCLoginController extends GetxController {
 
           if (showCloseBtn) {
             SCRouterHelper.back(null);
+            Get.forceAppUpdate();
           } else {
             if (user.communityId == null || user.communityId == '') {
               SCRouterHelper.pathPage(SCRouterPath.selectCommunityPath, {"type" : SCSelectHouseLogicType.login});

@@ -9,9 +9,14 @@ import '../../../utils/Router/sc_router_helper.dart';
 
 class SCMineChangeAddressItem extends StatelessWidget {
 
+  /// 家庭名称
+  final String? houseName;
+  /// 具体房号地址
+  final String? address;
+
   Function? onTap;
 
-  SCMineChangeAddressItem({Key? key, this.onTap}) : super(key: key);
+  SCMineChangeAddressItem({Key? key, this.onTap, this.houseName, this.address}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,7 @@ class SCMineChangeAddressItem extends StatelessWidget {
       },
       child: Padding(padding: EdgeInsets.symmetric(horizontal: 16.0), child: Container(
         height: 70.0,
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(4.0),
@@ -36,7 +41,7 @@ class SCMineChangeAddressItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(child: houseItem()),
-            SizedBox(width: 30.0,),
+            const SizedBox(width: 30.0,),
             changeItem(),
           ],
         ),
@@ -46,18 +51,20 @@ class SCMineChangeAddressItem extends StatelessWidget {
 
   /// 房号item
   Widget houseItem() {
+    String houseNameString = houseName ?? '';
+    String addressString = address ?? '';
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('李某某的家庭', maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.left, style: TextStyle(
+        Text(houseNameString, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.left, style: const TextStyle(
           fontSize: SCFonts.f14,
           fontWeight: FontWeight.w500,
           color: SCColors.color_1B1D33,
         ),),
-        SizedBox(height: 6.0,),
-        Text('慧享生活馆1幢-1单元-201慧享生活馆1幢-1单元-201慧享生活馆1幢-1单元-201慧享生活馆1幢-1单元-201慧享生活馆1幢-1单元-201慧享生活馆1幢-1单元-201', maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.left, style: TextStyle(
+        const SizedBox(height: 6.0,),
+        Text(addressString, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.left, style: const TextStyle(
           fontSize: SCFonts.f12,
           fontWeight: FontWeight.w400,
           color: SCColors.color_1B1D33,

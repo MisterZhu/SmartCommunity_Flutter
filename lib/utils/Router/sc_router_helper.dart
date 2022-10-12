@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/Router/sc_router_pages.dart';
 import 'package:smartcommunity/utils/Router/sc_router_path.dart';
 import 'package:smartcommunity/widgets/Dialog/sc_dialog_utils.dart';
@@ -31,9 +32,37 @@ class SCRouterHelper {
     return Get.offAllNamed(path!, arguments: params);
   }
 
-  /*通过path跳转页面*/
+  /*通过path跳转页面
+  * 默认页面跳转都需要做登录验证
+  * 如果页面需要去掉登录验证，params需要传参removeLoginCheck=true
+  */
   static Future? pathPage(String path, dynamic params) {
     params ??= '';
+    List<String> noLoginPathList = [
+      SCRouterPath.codeLoginPath,
+    ];
+
+    /// 是否去掉登录验证
+    if (params is Map) {
+      var removeLoginCheck = params["removeLoginCheck"];
+      if (removeLoginCheck == true) {
+        noLoginPathList.add(path);
+      }
+    }
+
+    /// 是否需要登录，默认需要
+    bool isNeedLogin = true;
+    for (String subPath in noLoginPathList) {
+      if (path == subPath) {
+        isNeedLogin = false;
+        break;
+      }
+    }
+    if (isNeedLogin == true && SCScaffoldManager.instance.isLogin == false) {
+      SCRouterHelper.pathPage(SCRouterPath.codeLoginPath,  {'showClose' : true});
+      return null;
+    }
+
     return Get.toNamed(path, arguments: params);
   }
 

@@ -5,6 +5,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_life_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_selected_goods.dart';
+import 'package:smartcommunity/utils/Router/sc_router_path.dart';
 
 import '../../../../constants/sc_asset.dart';
 import '../../../../constants/sc_default_value.dart';
@@ -27,8 +28,6 @@ class SCHomeListView2 extends StatelessWidget {
 
   /// 滑动回调
   Function(double offset)? scrollFunction;
-
-  ScrollController scrollController = ScrollController();
 
   SCHomeController2 state = Get.find<SCHomeController2>();
 
@@ -54,7 +53,7 @@ class SCHomeListView2 extends StatelessWidget {
       enablePullUp: true,
       header: const SCCustomHeader(),
       child: ListView.separated(
-          controller: scrollController,
+          controller: state.scrollController,
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           itemBuilder: (BuildContext context, int index) {
@@ -203,8 +202,8 @@ class SCHomeListView2 extends StatelessWidget {
 
   /// 监听滑动
   void scrollNotify() {
-    scrollController.addListener(() {
-      scrollFunction?.call(scrollController.offset);
+    state.scrollController.addListener(() {
+      scrollFunction?.call(state.scrollController.offset);
     });
   }
 
@@ -233,7 +232,7 @@ class SCHomeListView2 extends StatelessWidget {
         defRoomId +
         "&client=" +
         SCDefaultValue.client;
-    SCRouterHelper.codePage(20000, {"title": "工单", "url": url});
+    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title": "工单", "url": url});
   }
 
   /// 测试数据-应用详情
@@ -242,6 +241,6 @@ class SCHomeListView2 extends StatelessWidget {
     var data = controller.allItemsList[index];
     String title = data['title'];
     String url = data['subUrl'];
-    SCRouterHelper.codePage(20000, {"title": title, "url": url});
+    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title": title, "url": url});
   }
 }

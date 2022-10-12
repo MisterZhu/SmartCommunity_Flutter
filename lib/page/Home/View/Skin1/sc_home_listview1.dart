@@ -21,6 +21,7 @@ import '../../../../constants/sc_enum.dart';
 import '../../../../constants/sc_h5.dart';
 import '../../../../skin/Tools/sc_scaffold_manager.dart';
 import '../../../../utils/Router/sc_router_helper.dart';
+import '../../../../utils/Router/sc_router_path.dart';
 import '../../GetXController/sc_home_controller2.dart';
 import '../sc_home_feature_item.dart';
 
@@ -38,8 +39,6 @@ class SCHomeListView1 extends StatelessWidget {
 
   /// listView数据源
   final List dataList;
-
-  ScrollController scrollController = ScrollController();
 
   /// 滑动回调
   Function(double offset)? scrollFunction;
@@ -74,7 +73,7 @@ class SCHomeListView1 extends StatelessWidget {
       },
       header: const SCCustomHeader(style: SCCustomHeaderStyle.noNavigation,),
       child: ListView.separated(
-          controller: scrollController,
+          controller: state.scrollController,
           padding: EdgeInsets.zero,
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
@@ -128,8 +127,8 @@ class SCHomeListView1 extends StatelessWidget {
 
   /// 监听滑动
   void scrollNotify() {
-    scrollController.addListener(() {
-      scrollFunction?.call(scrollController.offset);
+    state.scrollController.addListener(() {
+      scrollFunction?.call( state.scrollController.offset);
     });
   }
 
@@ -329,7 +328,8 @@ class SCHomeListView1 extends StatelessWidget {
     String token = SCScaffoldManager.instance.user.token ?? "";
     String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
     String url = "${SCH5.workOrderUrl}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
-    SCRouterHelper.codePage(20000, {"title": "工单", "url": url});
+    var params = {"title": "工单", "url": url};
+    SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
   }
 
   /// 测试数据-应用详情
@@ -338,6 +338,7 @@ class SCHomeListView1 extends StatelessWidget {
     var data = controller.allItemsList[index];
     String title = data['title'];
     String url = data['subUrl'];
-    SCRouterHelper.codePage(20000, {"title": title, "url": url});
+    var params = {"title": title, "url": url};
+    SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
   }
 }

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/page/Service/GetXController/sc_service_controller.dart';
+import 'package:smartcommunity/utils/Router/sc_router_path.dart';
 
 import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_default_value.dart';
@@ -122,6 +123,6 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
     String token = SCScaffoldManager.instance.user.token ?? "";
     String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
     String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
-    SCRouterHelper.codePage(20000, {"title" : title, "url" : url});
+    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : title, "url" : url});
   }
 }

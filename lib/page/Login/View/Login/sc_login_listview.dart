@@ -12,6 +12,7 @@ import 'package:smartcommunity/page/Login/View/Login/sc_login_code_view.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_login_header.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_login_textfield.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
+import 'package:smartcommunity/utils/Router/sc_router_path.dart';
 import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
@@ -139,7 +140,11 @@ class SCLoginListView extends StatelessWidget {
   /// 游客模式按钮
   Widget skipBtnItem() {
     return SCLoginBtnItem(skipTapAction: () {
-      SCRouterHelper.codeOffAllPage(10000, null);
+      if (showClose) {
+        SCRouterHelper.back(null);
+      } else {
+        SCRouterHelper.pathOffAllPage(SCRouterPath.tabPath, null);
+      }
     }, register: () {
 
     },);
@@ -199,8 +204,8 @@ class SCLoginListView extends StatelessWidget {
           state.updateAgreementState();
         },
         agreementDetailAction: (String title, String url) {
-          var params = {'title' : title, 'url' : url};
-          SCRouterHelper.codePage(20000, params);
+          var params = {'title' : title, 'url' : url,'removeLoginCheck' : true};
+          SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
         },
       );
     });
