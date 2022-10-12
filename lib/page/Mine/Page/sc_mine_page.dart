@@ -79,6 +79,9 @@ class SCMineState extends State<SCMinePage> {
         backgroundColor: state.navigationBackgroundColor,
         isSticky: state.navigationSticky,
         itemColor: state.itemColor,
+        settingAction: () {
+
+        },
       );
     });
   }

@@ -200,11 +200,11 @@ BusinessAreas copyWith({  String? location,
 
 class StreetNumber {
   StreetNumber({
-      String? number, 
-      String? location, 
-      String? direction, 
-      String? distance, 
-      String? street,}){
+      List? number,
+      String? location,
+      List? direction,
+      List? distance,
+      List? street,}){
     _number = number;
     _location = location;
     _direction = direction;
@@ -219,27 +219,27 @@ class StreetNumber {
     _distance = json['distance'];
     _street = json['street'];
   }
-  String? _number;
+  List? _number;
   String? _location;
-  String? _direction;
-  String? _distance;
-  String? _street;
-StreetNumber copyWith({  String? number,
+  List? _direction;
+  List? _distance;
+  List? _street;
+StreetNumber copyWith({  List? number,
   String? location,
-  String? direction,
-  String? distance,
-  String? street,
+  List? direction,
+  List? distance,
+  List? street,
 }) => StreetNumber(  number: number ?? _number,
   location: location ?? _location,
   direction: direction ?? _direction,
   distance: distance ?? _distance,
   street: street ?? _street,
 );
-  String? get number => _number;
+  List? get number => _number;
   String? get location => _location;
-  String? get direction => _direction;
-  String? get distance => _distance;
-  String? get street => _street;
+  List? get direction => _direction;
+  List? get distance => _distance;
+  List? get street => _street;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
