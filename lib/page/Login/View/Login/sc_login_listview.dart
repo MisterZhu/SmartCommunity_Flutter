@@ -29,7 +29,7 @@ class SCLoginListView extends StatelessWidget {
   late final BuildContext currentContext;
   final bool showClose;
 
-  SCLoginListView({Key? key, this.showClose = true,}) : super(key: key);
+  SCLoginListView({Key? key, this.showClose = false,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -110,7 +110,7 @@ class SCHomeFloatLogin extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            SCRouterHelper.pathPage(SCRouterPath.codeLoginPath, null);
+            SCRouterHelper.pathPage(SCRouterPath.codeLoginPath,  {'showClose' : true});
           }),
     );
   }
