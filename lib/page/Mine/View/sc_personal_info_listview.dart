@@ -34,13 +34,16 @@ class SCPersonalInfoListView extends StatelessWidget {
 
   Widget getCell(int index) {
     if (index == 0) {
-      return SCSettingCell(title: '头像', onTap: (){
+      return SCSettingCell(
+        title: '头像',
+        cellType: SCSettingCellType.imageArrowType,
+        onTap: (){
 
       },);
     } else if (index == 1) {
       return SCSettingCell(
         title: '姓名',
-        content: '',
+        content: '未实名',
         cellType: SCSettingCellType.contentArrowType,
         onTap: (){
 

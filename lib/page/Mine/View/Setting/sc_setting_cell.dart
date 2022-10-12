@@ -15,8 +15,10 @@ enum SCSettingCellType {
   arrowType,
   // 右边是标题
   contentType,
-  // 右边是标题
+  // 右边是标题箭头
   contentArrowType,
+  // 右边是图片箭头
+  imageArrowType,
   // 右边是开关
   switchType,
 }
@@ -28,6 +30,9 @@ class SCSettingCell extends StatelessWidget {
 
   /// content
   final String? content;
+
+  /// image
+  final String imageUrl;
 
   /// cell样式
   final SCSettingCellType cellType;
@@ -41,6 +46,7 @@ class SCSettingCell extends StatelessWidget {
   SCSettingCell({Key? key,
     this.title = '',
     this.content = '',
+    this.imageUrl = SCAsset.iconMineUserDefault,
     this.cellType = SCSettingCellType.arrowType,
     this.switchIndex = 0,
     this.onTap,
@@ -118,6 +124,15 @@ class SCSettingCell extends StatelessWidget {
           arrowIcon()
         ],
       );
+    } else if (cellType == SCSettingCellType.imageArrowType) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          imageWidget(),
+          arrowIcon()
+        ],
+      );
     } else if (cellType == SCSettingCellType.switchType) {
       return switchWidget();
     } else {
@@ -138,6 +153,10 @@ class SCSettingCell extends StatelessWidget {
         fontWeight: FontWeight.w400,
         color: SCColors.color_5E5E66
     ),);
+  }
+
+  Widget imageWidget() {
+    return Image.asset(imageUrl, width: 40.0, height: 40.0, fit: BoxFit.cover,);
   }
   
   /// 箭头icon
