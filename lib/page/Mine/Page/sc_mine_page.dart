@@ -7,6 +7,10 @@ import 'package:smartcommunity/page/Mine/GetXController/sc_mine_controller.dart'
 import 'package:smartcommunity/page/Mine/View/sc_mine_listview.dart';
 import 'package:smartcommunity/page/Mine/View/sc_mine_navigation.dart';
 
+import '../../../skin/Tools/sc_scaffold_manager.dart';
+import '../../../utils/Router/sc_router_helper.dart';
+import '../../../utils/Router/sc_router_path.dart';
+
 /// 我的-page
 
 class SCMinePage extends StatefulWidget {
@@ -79,6 +83,13 @@ class SCMineState extends State<SCMinePage> {
         backgroundColor: state.navigationBackgroundColor,
         isSticky: state.navigationSticky,
         itemColor: state.itemColor,
+        settingAction: () {
+          if (SCScaffoldManager.instance.user.token != null) {
+            SCRouterHelper.pathPage(SCRouterPath.settingPath, null);
+          } else {
+            SCRouterHelper.pathPage(SCRouterPath.codeLoginPath,  {'showClose' : true});
+          }
+        },
       );
     });
   }
