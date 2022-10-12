@@ -311,14 +311,13 @@ class SCLogoffState extends State<SCLogoffPage> {
 
   /// 确定按钮
   Widget btnItem() {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 40.0,
-      decoration: BoxDecoration(
-          color: SCColors.color_FF6C00,
-          borderRadius: BorderRadius.circular(4.0)),
       child: CupertinoButton(
           padding: EdgeInsets.zero,
+          color: SCColors.color_FF6C00,
+          borderRadius: BorderRadius.circular(4.0),
           child: const Text(
             '确定',
             style: TextStyle(

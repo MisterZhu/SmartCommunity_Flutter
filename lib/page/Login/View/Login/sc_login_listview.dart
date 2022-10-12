@@ -29,7 +29,7 @@ class SCLoginListView extends StatelessWidget {
   late final BuildContext currentContext;
   final bool showClose;
 
-  SCLoginListView({Key? key, this.showClose = true,}) : super(key: key);
+  SCLoginListView({Key? key, this.showClose = false,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -208,13 +208,15 @@ class SCLoginListView extends StatelessWidget {
 
   /// 请求发送验证码接口
   sendCode() {
-    SCLoginController state = Get.find<SCLoginController>();
-    state.sendCode(resultHandler: (status) {
-      if (status == true) {
-        /// 发送验证码成功弹出输入验证码页面
-        showCodeView();
-      }
-    });
+    showCodeView();
+
+    // SCLoginController state = Get.find<SCLoginController>();
+    // state.sendCode(resultHandler: (status) {
+    //   if (status == true) {
+    //     /// 发送验证码成功弹出输入验证码页面
+    //     showCodeView();
+    //   }
+    // });
   }
 
   /// 输入验证码页面

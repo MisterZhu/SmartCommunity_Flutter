@@ -8,6 +8,8 @@ import 'package:smartcommunity/page/Login/Page/sc_login_page.dart';
 import 'package:smartcommunity/page/Login/View/Login/sc_login_code_view.dart';
 import 'package:smartcommunity/page/Mine/Page/sc_add_house_page.dart';
 import 'package:smartcommunity/page/Mine/Page/sc_logoff_page.dart';
+import 'package:smartcommunity/page/Mine/Page/sc_personal_info_page.dart';
+import 'package:smartcommunity/page/Mine/Page/sc_real_name_verify_page.dart';
 import 'package:smartcommunity/page/Mine/Page/sc_toggle_houses_page.dart';
 import 'package:smartcommunity/page/Tab/Page/sc_tab_page.dart';
 import 'package:smartcommunity/page/Webview/Page/sc_webview_page.dart';
@@ -57,6 +59,10 @@ class SCRouterPages {
     GetPage(name: SCRouterPath.applyLogoffPath, page: () => SCApplyLogoffPage()),
     /*注销账户*/
     GetPage(name: SCRouterPath.logoffPath, page: () => SCLogoffPage()),
+    /*个人资料*/
+    GetPage(name: SCRouterPath.personalInfoPath, page: () => SCPersonalInfoPage()),
+    /*实名认证*/
+    GetPage(name: SCRouterPath.realNameVerifyPath, page: () => SCRealNameVerifyPage()),
   ];
 
   /*根据code使用路由*/
@@ -85,6 +91,10 @@ class SCRouterPages {
     5002 : SCRouterPath.addHousePagePath,
     /*设置*/
     5003 : SCRouterPath.settingPath,
+    /*个人资料*/
+    5004 : SCRouterPath.personalInfoPath,
+    /*实名认证*/
+    5005 : SCRouterPath.realNameVerifyPath,
     /*webView*/
     20000 : SCRouterPath.webViewPath,
     /*房号选择*/

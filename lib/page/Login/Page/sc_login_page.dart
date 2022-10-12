@@ -19,13 +19,14 @@ class SCLoginState extends State<SCLoginPage> {
 
   SCLoginController state = Get.put(SCLoginController());
 
-  late bool showCloseBtn = true;
+  late bool showCloseBtn = false;
   @override
   initState() {
     super.initState();
     var params = Get.arguments;
     if (params != null && params != '') {
       showCloseBtn = params['showClose'];
+      state.updateShowCloseBtnState(show: showCloseBtn);
     }
   }
 

@@ -12,9 +12,10 @@ import '../../../../utils/sc_utils.dart';
 
 class SCLoginHeader extends StatelessWidget {
 
+  /// 是否显示关闭按钮，默认不显示
   final bool showClose;
 
-  SCLoginHeader({Key? key, this.showClose = true,}) : super(key: key);
+  SCLoginHeader({Key? key, this.showClose = false,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

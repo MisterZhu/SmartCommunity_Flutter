@@ -58,6 +58,8 @@ class SCAsset {
   static const String iconMineBackground = 'images/icon_mine_background.png';
   /// 用户头像
   static const String iconMineUserHead = 'images/icon_user_head.png';
+  /// 默认用户头像
+  static const String iconMineUserDefault = 'images/icon_user_default.png';
   /// 会员背景图片
   static const String iconMineMemberBackground = 'images/icon_member_background.png';
   /// 钻石会员

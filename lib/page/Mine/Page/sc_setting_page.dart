@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/page/Mine/View/Setting/sc_setting_listview.dart';
 import 'package:smartcommunity/skin/View/sc_custom_scaffold.dart';
@@ -7,6 +9,7 @@ import '../../../utils/Router/sc_router_helper.dart';
 import '../../../utils/Router/sc_router_path.dart';
 import '../../../widgets/Dialog/sc_base_dialog.dart';
 import '../../../widgets/Dialog/sc_dialog_utils.dart';
+import '../GetXController/sc_setting_controller.dart';
 
 /// 设置page
 
@@ -16,6 +19,9 @@ class SCSettingPage extends StatefulWidget {
 }
 
 class SCSettingState extends State<SCSettingPage> {
+
+  SCSettingController state = Get.put(SCSettingController());
+
   @override
   Widget build(BuildContext context) {
     return SCCustomScaffold(title: "设置", centerTitle: true, elevation: 0, body: body());
@@ -26,7 +32,7 @@ class SCSettingState extends State<SCSettingPage> {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      color: SCColors.color_FFFFFF,
+      color: SCColors.color_F5F5F5,
       child: SCSettingListView(logoff: () {
         showLogoffConfirmDialog();
       },),

@@ -24,13 +24,13 @@ class SCLoginCodeBtn extends StatelessWidget {
   Widget body(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 57.0),
-      child: Container(
+      child: SizedBox(
+        width: double.infinity,
         height: 48.0,
-        decoration: BoxDecoration(
-            color: enable == true ? SCColors.color_1B1D33 : SCColors.color_B0B1B8,
-            borderRadius: BorderRadius.circular(8.0)),
         child: CupertinoButton(
             padding: EdgeInsets.zero,
+            color: enable == true ? SCColors.color_1B1D33 : SCColors.color_B0B1B8,
+            borderRadius: BorderRadius.circular(8.0),
             child: const Text(
               '获取验证码',
               style: TextStyle(

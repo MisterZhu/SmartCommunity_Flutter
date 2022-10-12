@@ -15,6 +15,8 @@ import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 
+import '../../../utils/Router/sc_router_path.dart';
+
 /// 我的-listview
 
 class SCMineListView extends StatelessWidget {
@@ -86,11 +88,19 @@ class SCMineListView extends StatelessWidget {
   /// header-cell
   Widget headerCell() {
     return SCMineHeaderItem(
-      settingTap: (){
-        SCRouterHelper.codePage(5003, null);
+      settingTap: () {
+        if (SCScaffoldManager.instance.user.token != null) {
+          SCRouterHelper.pathPage(SCRouterPath.settingPath, null);
+        } else {
+          SCRouterHelper.pathPage(SCRouterPath.codeLoginPath,  {'showClose' : true});
+        }
       },
       headerTap: () {
-        workOrder();
+        if (SCScaffoldManager.instance.user.token != null) {
+          SCRouterHelper.pathPage(SCRouterPath.personalInfoPath, null);
+        } else {
+          SCRouterHelper.pathPage(SCRouterPath.codeLoginPath,  {'showClose' : true});
+        }
       },
       membershipTap: () {
         workOrder();

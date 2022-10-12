@@ -93,14 +93,13 @@ class SCHomeFloatLogin extends StatelessWidget {
 
   /// 登录按钮
   Widget loginBtnItem() {
-    return Container(
+    return SizedBox(
       width: 80.0,
       height: 30.0,
-      decoration: BoxDecoration(
-          color: SCColors.color_00C365,
-          borderRadius: BorderRadius.circular(15.0)),
       child: CupertinoButton(
           padding: EdgeInsets.zero,
+          color: SCColors.color_00C365,
+          borderRadius: BorderRadius.circular(15.0),
           child: const Text(
             '马上登录',
             style: TextStyle(
@@ -110,7 +109,7 @@ class SCHomeFloatLogin extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            SCRouterHelper.pathPage(SCRouterPath.codeLoginPath, null);
+            SCRouterHelper.pathPage(SCRouterPath.codeLoginPath,  {'showClose' : true});
           }),
     );
   }
