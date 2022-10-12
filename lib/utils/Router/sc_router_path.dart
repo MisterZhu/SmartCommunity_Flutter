@@ -47,6 +47,9 @@ class SCRouterPath {
   /// 设置
   static String settingPath = "/root/Mine/sc_setting_page";
 
+  /// 设置
+  static String realNameVerifyPath = "/root/Mine/sc_real_name_verify_page";
+
   /// 个人资料
   static String personalInfoPath = "/root/Mine/sc_personal_info_page";
 

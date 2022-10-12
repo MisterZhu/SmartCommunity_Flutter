@@ -97,11 +97,11 @@ class SCLoginController extends GetxController {
           SCScaffoldManager.instance.user = user;
           SCScaffoldManager.instance.isLogin = true;
 
-          if (user.communityId == null || user.communityId == '') {
-            SCRouterHelper.pathPage(SCRouterPath.selectCommunityPath, {"type" : SCSelectHouseLogicType.login});
+          if (showCloseBtn) {
+            SCRouterHelper.back(null);
           } else {
-            if (showCloseBtn) {
-              SCRouterHelper.back(null);
+            if (user.communityId == null || user.communityId == '') {
+              SCRouterHelper.pathPage(SCRouterPath.selectCommunityPath, {"type" : SCSelectHouseLogicType.login});
             } else {
               SCRouterHelper.codeOffAllPage(10000, null);
             }

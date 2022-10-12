@@ -24,7 +24,7 @@ class SCLogOutCell extends StatelessWidget {
       child: CupertinoButton(
         padding: EdgeInsets.zero,
         color: SCColors.color_FFFFFF,
-        borderRadius: const BorderRadius.all(Radius.circular(0.0)),
+        borderRadius: BorderRadius.circular(0.0),
         child: const Text(
           "退出登录",
           textAlign: TextAlign.center,

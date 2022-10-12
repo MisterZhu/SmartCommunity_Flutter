@@ -4,6 +4,9 @@ import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/page/Mine/View/Setting/sc_setting_cell.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
+import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
+
+import '../../../utils/Router/sc_router_path.dart';
 
 /// 设置listview
 
@@ -46,7 +49,7 @@ class SCPersonalInfoListView extends StatelessWidget {
         content: '未实名',
         cellType: SCSettingCellType.contentArrowType,
         onTap: (){
-
+          SCRouterHelper.pathPage(SCRouterPath.realNameVerifyPath, null);
         },
       );
     } else if (index == 2) {
