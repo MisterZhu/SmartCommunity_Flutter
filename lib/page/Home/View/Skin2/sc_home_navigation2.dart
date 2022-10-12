@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
 class SCHomeNavigation2 extends StatelessWidget {
@@ -29,6 +30,15 @@ class SCHomeNavigation2 extends StatelessWidget {
   /// 切换房号
   final Function? changeHouseAction;
 
+  /// 扫一扫
+  final Function? scanAction;
+
+  /// 搜索
+  final Function? searchAction;
+
+  /// 消息
+  final Function? messageAction;
+
   SCHomeNavigation2({
     Key? key,
     this.backgroundColor = Colors.transparent,
@@ -38,6 +48,9 @@ class SCHomeNavigation2 extends StatelessWidget {
     this.roomTitle = '慧享生活馆',
     this.titleMaxLength = 10,
     this.changeHouseAction,
+    this.searchAction,
+    this.scanAction,
+    this.messageAction,
     this.searchTitle = '搜索应用、商品、资讯',
   }) : super(key: key);
 
@@ -89,65 +102,76 @@ class SCHomeNavigation2 extends StatelessWidget {
       title = roomString;
     }
 
-    return GestureDetector(
-      onTap: () {
-        changeHouse();
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: style,
+    return Visibility(
+        visible: SCScaffoldManager.instance.isLogin,
+        child: GestureDetector(
+          onTap: () {
+            changeHouse();
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: style,
+              ),
+              const SizedBox(
+                width: 5.0,
+              ),
+            ],
           ),
-          const SizedBox(
-            width: 5.0,
-          ),
-          Image.asset(
-            SCAsset.iconArrowDown,
-            width: 14.0,
-            height: 14.0,
-            color: isSticky == true ? stickyColor : normalColor,
-          ),
-        ],
-      ),
-    );
+        ));
   }
 
   /// Navigation-右侧按钮
   Widget rightActionsItem() {
     return Expanded(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Image.asset(
-              SCAsset.iconNavSearchWhite,
-              width: 22.0,
-              height: 22.0,
-              color: isSticky == true ? stickyColor : normalColor,
-            ),
-            const SizedBox(
-              width: 16.0,
-            ),
-            Image.asset(
-              SCAsset.iconMessage,
-              width: 22.0,
-              height: 22.0,
-              color: isSticky == true ? stickyColor : normalColor,
-            ),
-            const SizedBox(
-              width: 16.0,
-            ),
-            Image.asset(
-              SCAsset.iconScan,
-              width: 22.0,
-              height: 22.0,
-              color: isSticky == true ? stickyColor : normalColor,
-            ),
-          ],
-        ));
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        GestureDetector(
+          onTap: () {
+            searchAction?.call();
+          },
+          child: Image.asset(
+            SCAsset.iconNavSearchWhite,
+            width: 22.0,
+            height: 22.0,
+            color: isSticky == true ? stickyColor : normalColor,
+          ),
+        ),
+        const SizedBox(
+          width: 16.0,
+        ),
+        GestureDetector(
+          onTap: () {
+            messageAction?.call();
+          },
+          child: Image.asset(
+            SCAsset.iconMessage,
+            width: 22.0,
+            height: 22.0,
+            color: isSticky == true ? stickyColor : normalColor,
+          ),
+        ),
+        const SizedBox(
+          width: 16.0,
+        ),
+        GestureDetector(
+          onTap: () {
+            messageAction?.call();
+          },
+          child: Image.asset(
+            SCAsset.iconScan,
+            width: 22.0,
+            height: 22.0,
+            color: isSticky == true ? stickyColor : normalColor,
+          ),
+        ),
+      ],
+    ));
   }
 
   /// 背景颜色

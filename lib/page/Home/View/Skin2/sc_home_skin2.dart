@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller2.dart';
 import 'package:smartcommunity/page/Home/View/Skin2/sc_home_listview2.dart';
 import 'package:smartcommunity/page/Home/View/Skin2/sc_home_navigation2.dart';
+import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
+import 'package:smartcommunity/utils/Router/sc_router_path.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
 import '../../../../constants/sc_asset.dart';
@@ -53,8 +55,14 @@ class SCHomeSkin2 extends StatelessWidget {
             roomTitle: state.communityName,
             isSticky: state.navigationSticky,
             backgroundColor: state.navigationBackgroundColor,
-            changeHouseAction: () {
-              SCRouterHelper.codePage(5001, null);
+            searchAction: () {
+              SCLoadingUtils.developing();
+            },
+            scanAction: () {
+              SCRouterHelper.pathPage(SCRouterPath.scanPath, null);
+            },
+            messageAction: () {
+              SCLoadingUtils.developing();
             },
           );
         }));

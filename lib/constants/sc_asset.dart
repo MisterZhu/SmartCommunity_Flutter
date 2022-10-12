@@ -157,6 +157,14 @@ class SCAsset {
   static const String homeIconNews5 = 'images/icon_news5.png';
   /// 首页-资讯6
   static const String homeIconNews6 = 'images/icon_news6.png';
+  /// 扫码-返回
+  static const String scanIconBack = 'images/scan/icon_return_butoon.png';
+  /// 扫码-灰色闪光灯
+  static const String scanIconGreyFlash = 'images/scan/icon_flashlight_butoon.png';
+  /// 扫码-橙色闪光灯
+  static const String scanIconOrangeFlash = 'images/scan/icon_flashlight_button_orange.png';
+  /// 扫码-相册
+  static const String scanIconAlbum = 'images/scan/icon_album_butoon.png';
 
   /// 首页-皮肤2-顶部背景图
   static const String homeSkin2TopBG = 'images/skin/skin2_home_top_bg.png';

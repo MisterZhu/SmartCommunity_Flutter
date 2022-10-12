@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
+import 'package:smartcommunity/utils/Permission/sc_permission_utils.dart';
 
 import '../../../../constants/sc_asset.dart';
 import '../../../../constants/sc_type_define.dart';
@@ -96,15 +98,14 @@ class SCHomeSkin1 extends StatelessWidget {
         isSticky: state.navigationSticky,
         stickyColor: state.navigationStickyColor,
         normalColor: state.navigationNormalColor,
-        changeHouseAction: () {
-          if (SCScaffoldManager.instance.user.token != null) {
-            SCRouterHelper.pathPage(SCRouterPath.toggleHousesPagePath, null);
-          } else {
-            SCRouterHelper.pathPage(SCRouterPath.codeLoginPath, null);
-          }
-        },
         scanAction: () {
-          SCRouterHelper.pathPage(SCRouterPath.scanPath, null);
+          SCPermissionUtils.scanCode();
+        },
+        messageAction: () {
+          SCLoadingUtils.developing();
+        },
+        searchAction: () {
+          SCLoadingUtils.developing();
         },
       );
     });

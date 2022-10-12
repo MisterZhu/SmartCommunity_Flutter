@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:smartcommunity/page/Base/Scan/Controller/sc_scan_controller.dart';
 import 'package:smartcommunity/page/Guide/GetXController/sc_base_privacy_controller.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_city_controller.dart';
@@ -31,5 +32,6 @@ class SCAllBinding extends Bindings {
     Get.lazyPut<SCServiceController>(() => SCServiceController());
     Get.lazyPut<SCSelectHouseSearchStatusController>(() => SCSelectHouseSearchStatusController());
     Get.lazyPut<SCSelectHouseDataController>(() => SCSelectHouseDataController());
+    Get.lazyPut<SCScanController>(() => SCScanController());
   }
 }

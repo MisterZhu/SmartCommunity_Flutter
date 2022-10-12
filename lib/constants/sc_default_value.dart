@@ -36,6 +36,12 @@ class SCDefaultValue {
   /// 账户过期
   static const String accountExpiredMessage = '账户已过期,请重新登录!';
 
+  /// 扫码权限弹窗提示内容
+  static const String scanAlertMessage = "允许“${appName}”访问您的相机权限，用于您在提交工单、使用报事报修、参与活动、扫一扫功能";
+
+  /// 相机无权限提示
+  static const String noCameraPermissionMessage = "相机权限受限，请在设置中开启相机权限";
+
   /// 图片路径
   static const files = "/files/";
 }

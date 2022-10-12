@@ -8,4 +8,6 @@ class SCKey {
   static const String kUserData = 'kUserData';
   /// 用户是否已登录key
   static const String kIsLogin = 'kIsLogin';
+  /// 是否显示扫码权限提示弹窗
+  static const String kIsShowScanCodeAlert = "kIsShowScanCodeAlert";
 }

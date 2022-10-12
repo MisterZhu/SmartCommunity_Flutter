@@ -13,12 +13,12 @@ import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/utils/Router/sc_router_pages.dart';
 import 'package:smartcommunity/utils/sc_sp_utils.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 void startApp() async {
   SCScaffoldManager.instance.initBase();
 
   SCLoadingUtils.initLoading();
-
-  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   /// 路由的basePath
   String basePath = await SCScaffoldManager.instance.getRouterBasePath();

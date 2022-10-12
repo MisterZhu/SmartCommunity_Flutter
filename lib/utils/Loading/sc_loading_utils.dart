@@ -57,6 +57,10 @@ class SCLoadingUtils {
     });
   }
 
+  /// 功能开发中
+  static developing () {
+    failure(text: "功能开发中");
+  }
   /// 初始化loading配置
   static initLoading() {
     EasyLoading.instance.toastPosition = EasyLoadingToastPosition.center;

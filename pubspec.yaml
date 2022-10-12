@@ -68,6 +68,8 @@ dependencies:
   webview_flutter: ^3.0.4
   # 二维码扫描 https://pub.flutter-io.cn/packages/qr_code_scanner/install
   qr_code_scanner: ^1.0.1
+  #权限 https://pub.flutter-io.cn/packages/permission_handler/install
+  permission_handler: ^10.1.0
 
 dev_dependencies:
   flutter_test:
@@ -101,6 +103,7 @@ flutter:
     - images/goods/
     - images/skin/
     - images/loading/
+    - images/scan/
     - json/
 
   # To add assets to your application, add an assets section, like this:

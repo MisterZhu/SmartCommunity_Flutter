@@ -1,5 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:smartcommunity/utils/Router/sc_router_pages.dart';
+import 'package:smartcommunity/utils/Router/sc_router_path.dart';
+import 'package:smartcommunity/widgets/Dialog/sc_dialog_utils.dart';
+
+import '../../constants/sc_colors.dart';
+import '../../widgets/Dialog/sc_base_dialog.dart';
 
 /// 路由-工具管理
 class SCRouterHelper {

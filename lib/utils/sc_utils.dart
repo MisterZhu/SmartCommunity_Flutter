@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:smartcommunity/constants/sc_default_value.dart';
 
+import '../sc_app.dart';
+
 /// 工具类
 
 class SCUtils {
@@ -60,4 +62,13 @@ class SCUtils {
   changeStatusBarStyle({required SystemUiOverlayStyle style}) {
     SystemChrome.setSystemUIOverlayStyle(style);
   }
+
+  /*获取当前context*/
+  static getCurrentContext({Function(BuildContext context)? completionHandler}) {
+    Future.delayed(const Duration(seconds: 0), () async {
+      BuildContext context = navigatorKey.currentState!.overlay!.context;
+      completionHandler?.call(context);
+    });
+  }
+
 }

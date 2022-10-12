@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
 class SCHomeNavigation1 extends StatelessWidget {
@@ -38,6 +39,9 @@ class SCHomeNavigation1 extends StatelessWidget {
   /// 消息详情
   final Function? messageAction;
 
+  /// 搜索
+  final Function? searchAction;
+
   /// 房号文本数字数量
   final int? titleMaxLength;
 
@@ -51,6 +55,7 @@ class SCHomeNavigation1 extends StatelessWidget {
       this.changeHouseAction,
       this.scanAction,
       this.messageAction,
+      this.searchAction,
       this.searchTitle = '搜索应用、商品、资讯',
       this.opacity = 1.0,
       this.titleMaxLength = 10})
@@ -114,48 +119,44 @@ class SCHomeNavigation1 extends StatelessWidget {
     }
 
     double width = SCUtils.boundingTextSize(context, title, style).width;
-    return GestureDetector(
-      onTap: () {
-        changeHouse();
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset(
-            SCAsset.iconLocation,
-            width: 12.0,
-            height: 14.0,
-            color: isSticky == true ? stickyColor : normalColor,
+    return Visibility(
+        visible: SCScaffoldManager.instance.isLogin,
+        child: GestureDetector(
+          onTap: () {
+            changeHouse();
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                SCAsset.iconLocation,
+                width: 12.0,
+                height: 14.0,
+                color: isSticky == true ? stickyColor : normalColor,
+              ),
+              const SizedBox(
+                width: 8.0,
+              ),
+              SizedBox(
+                width: width,
+                child: Text(
+                  title,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: TextStyle(
+                      fontSize: SCFonts.f14,
+                      color: isSticky == true ? stickyColor : normalColor,
+                      decoration: TextDecoration.none,
+                      fontWeight: FontWeight.normal),
+                ),
+              ),
+              const SizedBox(
+                width: 5.0,
+              )
+            ],
           ),
-          const SizedBox(
-            width: 8.0,
-          ),
-          SizedBox(
-            width: width,
-            child: Text(
-              title,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style: TextStyle(
-                  fontSize: SCFonts.f14,
-                  color: isSticky == true ? stickyColor : normalColor,
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.normal),
-            ),
-          ),
-          const SizedBox(
-            width: 5.0,
-          ),
-          Image.asset(
-            SCAsset.iconArrowDown,
-            width: 14.0,
-            height: 14.0,
-            color: isSticky == true ? stickyColor : normalColor,
-          ),
-        ],
-      ),
-    );
+        ));
   }
 
   /// Navigation-右侧按钮
@@ -195,39 +196,44 @@ class SCHomeNavigation1 extends StatelessWidget {
 
   /// 搜索框item
   Widget searchItem() {
-    return Container(
-      height: 30.0,
-      padding: const EdgeInsets.symmetric(horizontal: 19.0),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.2),
-        borderRadius: const BorderRadius.all(Radius.circular(15.0)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            SCAsset.iconWhiteSearch,
-            width: 15.0,
-            height: 15.0,
-          ),
-          const SizedBox(
-            width: 5.0,
-          ),
-          Expanded(
-              child: Opacity(
-            opacity: 0.6,
-            child: Text(
-              searchTitle ?? '',
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style: const TextStyle(
-                  color: Colors.white,
-                  decoration: TextDecoration.none,
-                  fontSize: SCFonts.f12,
-                  fontWeight: FontWeight.normal),
+    return GestureDetector(
+      onTap: () {
+        searchAction?.call();
+      },
+      child: Container(
+        height: 30.0,
+        padding: const EdgeInsets.symmetric(horizontal: 19.0),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.2),
+          borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              SCAsset.iconWhiteSearch,
+              width: 15.0,
+              height: 15.0,
             ),
-          ))
-        ],
+            const SizedBox(
+              width: 5.0,
+            ),
+            Expanded(
+                child: Opacity(
+                  opacity: 0.6,
+                  child: Text(
+                    searchTitle ?? '',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        decoration: TextDecoration.none,
+                        fontSize: SCFonts.f12,
+                        fontWeight: FontWeight.normal),
+                  ),
+                ))
+          ],
+        ),
       ),
     );
   }
