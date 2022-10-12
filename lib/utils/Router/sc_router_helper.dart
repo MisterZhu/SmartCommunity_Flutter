@@ -48,4 +48,30 @@ class SCRouterHelper {
     params ??= '';
     Get.back(result: params);
   }
+
+  /*跳转到下一个页面，下一个页面返回到指定页面*/
+  static void offUntil(Widget page, String routeName, Map arguments, String backRouteName) {
+    Get.offUntil(
+        GetPageRoute(
+            page: () => page,
+            routeName: routeName,
+            settings: RouteSettings(arguments: arguments)),
+            (Route<dynamic> route) {
+          GetPageRoute currentRoute = route as GetPageRoute;
+          if (currentRoute.routeName == null) {
+            RouteSettings settings = route.settings;
+            if (settings.name == backRouteName) {
+              return true;
+            } else {
+              return false;
+            }
+          } else {
+            if (currentRoute.routeName == backRouteName) {
+              return true;
+            } else {
+              return false;
+            }
+          }
+        });
+  }
 }
