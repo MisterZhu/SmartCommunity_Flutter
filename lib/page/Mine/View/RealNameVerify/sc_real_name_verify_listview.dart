@@ -53,9 +53,12 @@ class SCRealNameVerifyListView extends StatelessWidget {
 
   Widget getCell(int index) {
     if (index == 0) {
-      return SCRealNamePhotoItem(deleteAction: (index){
+      return SCRealNamePhotoItem(
+        tapPhotoAction: (index){
 
-      },);
+        }, deletePhotoAction: (index){
+
+        },);
     } else if (index == 1) {
       return explainItem();
     } else if (index == 2) {
