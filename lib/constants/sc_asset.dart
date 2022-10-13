@@ -305,6 +305,14 @@ class SCAsset {
   /// 我的-我的房号-当前房屋-背景图
   static const String iconMineHouseBg = 'images/mine/ic_mine_house_bg.png';
 
+  /// 我的-实名认证-身份证-正面
+  static const String iconRealNameVerifyCardFront = 'images/mine/ic_real_name_card_front.png';
+  /// 我的-实名认证-身份证-背面
+    static const String iconRealNameVerifyCardBack = 'images/mine/ic_real_name_card_back.png';
+  /// 我的-实名认证-身份证-删除
+  static const String iconRealNameVerifyCardDelete = 'images/mine/ic_real_name_card_delete.png';
+  /// 我的-实名认证-身份证-水印
+  static const String iconRealNameVerifyCardWatermark = 'images/mine/ic_real_name_watermark.png';
 
 /************* 我的-切换房屋 *************/
 

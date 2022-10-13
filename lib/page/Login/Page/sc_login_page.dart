@@ -33,7 +33,7 @@ class SCLoginState extends State<SCLoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false,///页面不会随着键盘上移
       body: body(),
     );
   }

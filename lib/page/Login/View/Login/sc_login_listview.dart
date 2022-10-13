@@ -14,7 +14,6 @@ import 'package:smartcommunity/page/Login/View/Login/sc_login_textfield.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/Toast/sc_toast.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
-
 import '../../../../constants/sc_asset.dart';
 import '../../../../constants/sc_colors.dart';
 import '../../../../utils/Colors/sc_color_hex.dart';
