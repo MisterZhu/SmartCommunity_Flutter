@@ -72,7 +72,11 @@ class SCMineNavigation extends StatelessWidget {
   /// 设置icon
   Widget settingItem() {
     return GestureDetector(
-      onTap: (){},
+      onTap: (){
+        if (settingAction != null) {
+          settingAction?.call();
+        }
+      },
       child: Image.asset(
         SCAsset.iconSettingBlack,
         width: 22.0,

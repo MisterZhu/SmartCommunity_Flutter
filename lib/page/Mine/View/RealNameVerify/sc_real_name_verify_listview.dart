@@ -2,8 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../constants/sc_colors.dart';
-import '../../../constants/sc_fonts.dart';
+import '../../../../constants/sc_colors.dart';
+import '../../../../constants/sc_fonts.dart';
 
 /// 实名认证listview
 

@@ -8,6 +8,10 @@ import 'package:smartcommunity/page/Mine/View/sc_mine_listview.dart';
 import 'package:smartcommunity/page/Mine/View/sc_mine_navigation.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 
+import '../../../skin/Tools/sc_scaffold_manager.dart';
+import '../../../utils/Router/sc_router_helper.dart';
+import '../../../utils/Router/sc_router_path.dart';
+
 /// 我的-page
 
 class SCMinePage extends StatefulWidget {
@@ -15,7 +19,7 @@ class SCMinePage extends StatefulWidget {
   SCMineState createState() => SCMineState();
 }
 
-class SCMineState extends State<SCMinePage> {
+class SCMineState extends State<SCMinePage> with AutomaticKeepAliveClientMixin{
   SCMineController state = Get.put(SCMineController());
 
   @override
@@ -82,9 +86,17 @@ class SCMineState extends State<SCMinePage> {
         isSticky: state.navigationSticky,
         itemColor: state.itemColor,
         settingAction: () {
-
+          if (SCScaffoldManager.instance.user.token != null) {
+            SCRouterHelper.pathPage(SCRouterPath.settingPath, null);
+          } else {
+            SCRouterHelper.pathPage(SCRouterPath.codeLoginPath,  {'showClose' : true});
+          }
         },
       );
     });
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
