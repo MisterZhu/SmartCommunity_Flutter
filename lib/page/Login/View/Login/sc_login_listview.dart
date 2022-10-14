@@ -148,13 +148,6 @@ class SCLoginListView extends StatelessWidget {
   Widget agreementItem() {
     List<dynamic> list = [
       {
-        'type': SCTypeDefine.richTextTypeImage,
-        'title': '',
-        'imageUrl': SCAsset.iconNotAgree,
-        'url': '',
-        'color': SCHexColor.colorToString(SCColors.color_FFFFFF)
-      },
-      {
         'type': SCTypeDefine.richTextTypeText,
         'title': '我已阅读并同意',
         'imageUrl': '',
