@@ -58,20 +58,56 @@ class SCLoginAgreement extends StatelessWidget {
   Widget privacyItem() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50.0),
-      child: SCAgreementItem(
-        list: list,
-        isAgree: isAgree,
-        agreeAction: () {
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          selectItem(),
+          agreementItem()
+        ],
+      )
+    );
+  }
+
+  Widget selectItem() {
+    return Padding(padding: EdgeInsets.only(top: 0.0),
+      child: GestureDetector(
+        onTap: () {
           if (agreeAction != null) {
             agreeAction?.call();
           }
         },
-        agreementDetailAction: (title, url) {
-          if (agreementDetailAction != null && url.isNotEmpty) {
-            agreementDetailAction?.call(title, url);
-          }
-        },
-      ));
+        child: Container(
+          width: 32,
+          height: 32,
+          alignment: Alignment.topCenter,
+          color: Colors.transparent,
+          child: Image.asset(
+            isAgree ? SCAsset.iconAgree : SCAsset.iconNotAgree,
+            width: 22.0,
+            height: 22.0,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget agreementItem() {
+    return Expanded(child: SCAgreementItem(
+      list: list,
+      isAgree: isAgree,
+      agreeAction: () {
+        if (agreeAction != null) {
+          agreeAction?.call();
+        }
+      },
+      agreementDetailAction: (title, url) {
+        if (agreementDetailAction != null && url.isNotEmpty) {
+          agreementDetailAction?.call(title, url);
+        }
+      },
+    ));
   }
 
 }
