@@ -2,8 +2,10 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smartcommunity/constants/sc_key.dart';
 import 'package:smartcommunity/page/Service/GetXController/sc_service_controller.dart';
 import 'package:smartcommunity/utils/Router/sc_router_path.dart';
+import 'package:smartcommunity/utils/sc_sp_utils.dart';
 
 import '../../../constants/sc_colors.dart';
 import '../../../constants/sc_default_value.dart';
@@ -119,10 +121,17 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
 
   /// 应用详情
   itemDetail(String title) {
-    String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
-    String token = SCScaffoldManager.instance.user.token ?? "";
-    String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
-    String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
-    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : title, "url" : url});
+    if (title.contains('建信')) {// 建信租房
+      String token = SCSpUtil.getString(SCKey.kJianXinRentingToken);
+      String url = "";
+      url = "${SCH5.jxRentingHomeUrl}?token=$token";
+      SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : title, "url" : url});
+    } else {
+      String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+      String token = SCScaffoldManager.instance.user.token ?? "";
+      String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
+      String url = "${SCH5.workOrderUrl}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
+      SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : title, "url" : url});
+    }
   }
 }

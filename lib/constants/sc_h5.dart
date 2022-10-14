@@ -28,4 +28,6 @@ class SCH5 {
   static const String policyServiceUrl = "https://saasprod.4001113900.com:10020/h5new/user/index.html#/policyServe?defCommunityId=fe38ad0a-beaa-11eb-bdca-005056b13afd&appVersion=3.11.3&token=3ef603e5-bfdb-4f41-97e8-8d670eeda051&defRoomId=2759511&defOrgId=2678533";
   /// 预缴账户
   static const String prepayAccountUrl = "https://saasprod.4001113900.com:10020/h5new/newUser/index.html#/home/prepayAccount?defCommunityId=fe38ad0a-beaa-11eb-bdca-005056b13afd&appVersion=3.11.3&token=3ef603e5-bfdb-4f41-97e8-8d670eeda051&defRoomId=2759511&defOrgId=2678533";
+  /// 建信长租房-首页
+  static const String jxRentingHomeUrl = "https://hxzfczt.wisharetec.com/h5new/#/publishRentalHouse/tenant/index";
 }

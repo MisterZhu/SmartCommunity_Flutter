@@ -44,7 +44,8 @@ class SCServiceController extends GetxController {
   addRegularAppData() {
     var homeTestList = [
       {"icon": {"fileKey": "", "name": SCAsset.iconServiceQrCode}, "id": "1", "name": "业主二维码"},
-      {"icon": {"fileKey": "", "name": SCAsset.iconServiceCar}, "id": "2", "name": "公务用车"}
+      {"icon": {"fileKey": "", "name": SCAsset.iconServiceCar}, "id": "2", "name": "公务用车"},
+      {"icon": {"fileKey": "", "name": SCAsset.iconServiceCar}, "id": "101", "name": "建信租房"}
     ];
     var regularData = {"module": {"id": "0", "name": "常用应用"}, "applets": homeTestList};
     regularModuleModel = SCServiceModuleModel.fromJson(regularData);

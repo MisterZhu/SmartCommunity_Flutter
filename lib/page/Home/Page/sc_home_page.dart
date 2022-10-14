@@ -10,6 +10,8 @@ import 'package:smartcommunity/page/Home/View/sc_home_float_login.dart';
 import 'package:smartcommunity/skin/Model/sc_user.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
+import '../../../utils/Router/sc_router_helper.dart';
+import '../../../utils/Router/sc_router_path.dart';
 import '../../Service/GetXController/sc_service_controller.dart';
 import '../View/Skin1/sc_home_skin1.dart';
 import '../View/Skin2/sc_home_skin2.dart';
@@ -45,14 +47,6 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
     if (SCScaffoldManager.instance.user.communityName != null) {
       state1.communityName = SCScaffoldManager.instance.user.communityName!;
       state2.communityName = SCScaffoldManager.instance.user.communityName!;
-    } else {
-      if (SCScaffoldManager.instance.user.token != null) {
-        state1.communityName = '请选择项目';
-        state2.communityName = '请选择项目';
-      } else {
-        state1.communityName = '请登录';
-        state2.communityName = '请登录';
-      }
     }
   }
 
@@ -101,6 +95,10 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
 
   /// 登录悬浮窗
   Widget floatLoginWidget() {
-    return Visibility(visible: !SCScaffoldManager.instance.isLogin, child: SCHomeFloatLogin());
+    return Visibility(visible: !SCScaffoldManager.instance.isLogin, child: SCHomeFloatLogin(
+      onTap: (){
+        SCRouterHelper.pathPage(SCRouterPath.codeLoginPath,  {'showClose' : true});
+      },
+    ));
   }
 }

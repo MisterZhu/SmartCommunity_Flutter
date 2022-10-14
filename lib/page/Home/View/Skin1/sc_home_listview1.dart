@@ -71,7 +71,9 @@ class SCHomeListView1 extends StatelessWidget {
       onLoading: () {
         onLoad();
       },
-      header: const SCCustomHeader(style: SCCustomHeaderStyle.noNavigation,),
+      header: const SCCustomHeader(
+        style: SCCustomHeaderStyle.noNavigation,
+      ),
       child: ListView.separated(
           controller: state.scrollController,
           padding: EdgeInsets.zero,
@@ -119,7 +121,7 @@ class SCHomeListView1 extends StatelessWidget {
     } else if (type == SCTypeDefine.SC_HOME_TYPE_GRID_GROUP) {
       // 应用列表
       return gridImageGroupCell();
-    }  else {
+    } else {
       // 测试
       return testCell();
     }
@@ -128,7 +130,7 @@ class SCHomeListView1 extends StatelessWidget {
   /// 监听滑动
   void scrollNotify() {
     state.scrollController.addListener(() {
-      scrollFunction?.call( state.scrollController.offset);
+      scrollFunction?.call(state.scrollController.offset);
     });
   }
 
@@ -327,7 +329,8 @@ class SCHomeListView1 extends StatelessWidget {
     String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
     String token = SCScaffoldManager.instance.user.token ?? "";
     String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
-    String url = "${SCH5.workOrderUrl}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
+    String url =
+        "${SCH5.workOrderUrl}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
     var params = {"title": "工单", "url": url};
     SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
   }

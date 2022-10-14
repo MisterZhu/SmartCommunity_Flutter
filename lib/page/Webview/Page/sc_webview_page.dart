@@ -32,6 +32,7 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
 
   /// webView title
   String _title = "";
+
   /// webView url
   String _url = "";
 
@@ -53,7 +54,6 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
         ? params!["richText"]
         : "";
     _isLocalUrl = params?["isLocalUrl"] ?? false;
-
   }
 
   @override
@@ -133,12 +133,14 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
               )
             : WebView(
                 initialUrl: _isLocalUrl ? "" : _url,
-                //是否开启JS
+
+                /// 是否开启JS
                 javascriptMode: JavascriptMode.unrestricted,
 
-                javascriptChannels: <JavascriptChannel>[
-                  /// 跟H5交互的方法到此处处理
-                ].toSet(),
+                /// 跟H5交互的方法到此处处理
+                javascriptChannels: <JavascriptChannel>{
+                  _jxTokenChannel(context)
+                },
 
                 ///WebView创建
                 onWebViewCreated: _onWebViewCreated,
@@ -201,4 +203,11 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
       SCRouterHelper.back(null);
     }
   }
+
+  /// 建信租房token
+  JavascriptChannel _jxTokenChannel(BuildContext context) => JavascriptChannel(
+      name: '_app_callback_token',
+      onMessageReceived: (JavascriptMessage message) {
+        print("get message from JS, message is: ${message.message}");
+      });
 }

@@ -14,6 +14,12 @@ import '../../../utils/Router/sc_router_path.dart';
 /// 首页悬浮登录
 
 class SCHomeFloatLogin extends StatelessWidget {
+
+  /// 点击回调
+  final Function? onTap;
+
+  const SCHomeFloatLogin({Key? key, this.onTap}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return body(context);
@@ -109,7 +115,7 @@ class SCHomeFloatLogin extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            SCRouterHelper.pathPage(SCRouterPath.codeLoginPath,  {'showClose' : true});
+            onTap?.call();
           }),
     );
   }

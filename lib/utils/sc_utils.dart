@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_default_value.dart';
 
 import '../sc_app.dart';

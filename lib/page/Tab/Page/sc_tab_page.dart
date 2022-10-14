@@ -101,7 +101,7 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
     if (currentIndex != index) {
 
       if (!SCScaffoldManager.instance.isLogin) {
-        SCRouterHelper.pathPage(SCRouterPath.codeLoginPath, null);
+        SCRouterHelper.pathPage(SCRouterPath.codeLoginPath, {'showClose' : true});
         return;
       }
 
