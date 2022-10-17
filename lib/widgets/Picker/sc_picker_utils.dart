@@ -4,7 +4,6 @@ import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/widgets/Picker/sc_picker_header.dart';
-import 'package:smartcommunity/widgets/Refresh/sc_custom_header.dart';
 
 import '../../utils/sc_utils.dart';
 
@@ -38,6 +37,7 @@ class SCPickerUtils {
         child: Container(width: 0, height: itemExtent, color: selectColor),
       );
       Picker picker = Picker(
+        height: 260.0,
         adapter: PickerDataAdapter<String>(pickerdata: pickerData),
         changeToFirst: false,
         textAlign: TextAlign.center,
@@ -89,23 +89,8 @@ class SCPickerUtils {
   showDatePicker() {
     SCUtils.getCurrentContext(completionHandler: (context) async {
       double itemExtent = 42.0;
-      Color bgColor = Colors.white;
-      Color txtColor = SCColors.color_5E5F66;
-      TextStyle txtStyle = TextStyle(color: txtColor, fontSize: SCFonts.f16);
-      Color selectColor = SCColors.color_1B1C33;
-      TextStyle selectStyle =
-          TextStyle(color: selectColor, fontSize: SCFonts.f18);
-      TextStyle titleStyle =
-          const TextStyle(fontSize: SCFonts.f12, color: SCColors.color_5E5F66);
-      TextStyle cancelTextStyle =
-          const TextStyle(fontSize: 16.0, color: SCColors.color_FF571A);
-      TextStyle sureTextStyle =
-          const TextStyle(fontSize: 16.0, color: SCColors.color_FF571A);
-      final delimiterChild = Align(
-        alignment: Alignment.center,
-        child: Container(width: 0, height: itemExtent, color: selectColor),
-      );
       Picker picker = Picker(
+        height: 260.0,
         adapter: DateTimePickerAdapter(
             type: PickerDateTimeType.kYMD, isNumberMonth: true),
         changeToFirst: false,
