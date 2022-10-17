@@ -39,8 +39,17 @@ class SCDefaultValue {
   /// 扫码权限弹窗提示内容
   static const String scanAlertMessage = "允许“${appName}”访问您的相机权限，用于您在提交工单、使用报事报修、参与活动、扫一扫功能";
 
+  /// 相册权限弹窗提示内容
+  static const String photoAlertMessage = "允许“${appName}”访问您的相册权限，用于您在提交工单、使用报事报修、参与活动、修改头像";
+
+  /// 相机权限弹窗提示内容
+  static const String cameraAlertMessage = "允许“${appName}”访问您的相机权限，用于您在提交工单、使用报事报修、参与活动、修改头像";
+
   /// 相机无权限提示
   static const String noCameraPermissionMessage = "相机权限受限，请在设置中开启相机权限";
+
+  /// 相册无权限提示
+  static const String noPhotoPermissionMessage = "相册权限受限，请在设置中开启相册权限";
 
   /// 图片路径
   static const files = "/files/";

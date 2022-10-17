@@ -72,6 +72,10 @@ dependencies:
   permission_handler: ^10.1.0
   # 相册选择照片或拍照 https://pub.flutter-io.cn/packages/image_picker/install
   image_picker: ^0.8.6
+  # 相册选择照片 https://pub.dev/packages/wechat_assets_picker/install
+  wechat_assets_picker: ^8.1.3
+  # picker https://pub.dev/packages/flutter_picker/install
+  flutter_picker: ^2.0.5
 
 dev_dependencies:
   flutter_test:

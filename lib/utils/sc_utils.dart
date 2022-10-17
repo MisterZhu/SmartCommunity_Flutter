@@ -1,10 +1,12 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_default_value.dart';
 
+import '../constants/sc_asset.dart';
 import '../sc_app.dart';
 
 /// 工具类
@@ -70,6 +72,20 @@ class SCUtils {
       BuildContext context = navigatorKey.currentState!.overlay!.context;
       completionHandler?.call(context);
     });
+  }
+
+  /*图片展示widget*/
+  static Widget headImageWidget({required String url, double? width, double? height, BoxFit? fit}) {
+    if (url.contains('http')) {
+      return CachedNetworkImage(imageUrl: url, width: width, height: height, fit: fit,);
+    } else {
+      return Image.asset(
+        url.isEmpty ? SCAsset.iconMineUserHead : url,
+        width: width,
+        height: height,
+        fit: fit,
+      );
+    }
   }
 
 }

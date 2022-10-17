@@ -6,6 +6,7 @@ import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
+import 'package:smartcommunity/utils/sc_utils.dart';
 
 /// 我的页面-header
 
@@ -101,12 +102,7 @@ class SCMineHeaderItem extends StatelessWidget {
             onTap: (){
               headerAction();
             },
-            child: userPic != null ? CachedNetworkImage(imageUrl: iconUrl, width: 48.0, height: 48.0, fit: BoxFit.cover,) : Image.asset(
-      SCAsset.iconMineUserHead,
-      width: 48.0,
-      height: 48.0,
-      fit: BoxFit.cover,
-    ),
+            child: SCUtils.headImageWidget(url: userPic ?? '', width: 48.0, height: 48.0, fit: BoxFit.cover),
           ),
           const SizedBox(
             width: 12.0,

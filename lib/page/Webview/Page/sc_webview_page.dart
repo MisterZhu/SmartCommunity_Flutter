@@ -138,9 +138,7 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
                 javascriptMode: JavascriptMode.unrestricted,
 
                 /// 跟H5交互的方法到此处处理
-                javascriptChannels: <JavascriptChannel>{
-                  _jxTokenChannel(context)
-                },
+                javascriptChannels: [_jxTokenChannel(context)].toSet(),
 
                 ///WebView创建
                 onWebViewCreated: _onWebViewCreated,

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 
+import '../../../constants/sc_asset.dart';
+
 /// 我的-GetXController
 
 class SCMineController extends GetxController {
@@ -17,6 +19,9 @@ class SCMineController extends GetxController {
 
   /// 我的资产-资产类型-选中index，默认0
   int propertyCurrentIndex = 0;
+
+  /// 用户头像
+  String headPicUrl = SCAsset.iconMineUserHead;
 
   /// 修改导航栏透状态
   void changeNavigationState({double offset = 0.0}) {
@@ -34,6 +39,12 @@ class SCMineController extends GetxController {
   /// 改变选中的资产类型index
   void changePropertyIndex({int index = 0}) {
     propertyCurrentIndex = index;
+    update();
+  }
+
+  /// 更换用户头像
+  changeUserHeadPic({required String url}) {
+    headPicUrl = url;
     update();
   }
 }

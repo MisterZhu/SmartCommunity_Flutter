@@ -10,6 +10,10 @@ class SCKey {
   static const String kIsLogin = 'kIsLogin';
   /// 是否显示扫码权限提示弹窗
   static const String kIsShowScanCodeAlert = "kIsShowScanCodeAlert";
+  /// 是否显示相册权限提示弹窗
+  static const String kIsShowPhotoAlert = "kIsShowPhotoAlert";
+  /// 是否显示相机权限提示弹窗
+  static const String kIsShowCameraAlert = "kIsShowCameraAlert";
   /// 建信租房应用token
   static const String kJianXinRentingToken = "kJianXinRentingToken";
 }
