@@ -20,32 +20,17 @@ class SCPickerUtils {
   showPicker() {
     SCUtils.getCurrentContext(completionHandler: (context) async {
       double itemExtent = 42.0;
-      Color bgColor = Colors.white;
-      Color txtColor = SCColors.color_5E5F66;
-      TextStyle txtStyle = TextStyle(color: txtColor, fontSize: SCFonts.f16);
-      Color selectColor = SCColors.color_1B1C33;
-      TextStyle selectStyle =
-          TextStyle(color: selectColor, fontSize: SCFonts.f18);
-      TextStyle titleStyle =
-          const TextStyle(fontSize: SCFonts.f12, color: SCColors.color_5E5F66);
-      TextStyle cancelTextStyle =
-          const TextStyle(fontSize: 16.0, color: SCColors.color_FF571A);
-      TextStyle sureTextStyle =
-          const TextStyle(fontSize: 16.0, color: SCColors.color_FF571A);
-      final delimiterChild = Align(
-        alignment: Alignment.center,
-        child: Container(width: 0, height: itemExtent, color: selectColor),
-      );
+      TextStyle textStyle = const TextStyle(
+          color: SCColors.color_B0B1B8, fontSize: SCFonts.f16);
+      TextStyle selectStyle = const TextStyle(
+          color: SCColors.color_1B1C33, fontSize: SCFonts.f18);
       Picker picker = Picker(
         height: 260.0,
         adapter: PickerDataAdapter<String>(pickerdata: pickerData),
         changeToFirst: false,
         textAlign: TextAlign.center,
-        textStyle: const TextStyle(
-            color: SCColors.color_B0B1B8, fontSize: SCFonts.f16),
-        selectedTextStyle: const TextStyle(
-            color: SCColors.color_1B1C33, fontSize: SCFonts.f18),
-        columnPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+        textStyle: textStyle,
+        selectedTextStyle: selectStyle,
         selectionOverlay: Container(
           height: itemExtent,
           color: Colors.transparent,
@@ -63,10 +48,6 @@ class SCPickerUtils {
             ],
           ),
         ),
-        delimiter: [
-          PickerDelimiter(column: 0, child: delimiterChild),
-          PickerDelimiter(column: 2, child: delimiterChild),
-        ],
         builderHeader: (BuildContext context) {
           return SCPickerHeader(
             sureText: '确定',
@@ -86,20 +67,23 @@ class SCPickerUtils {
   }
 
   /// 日历picker
-  showDatePicker() {
+  showDatePicker({required int dateType, List<int>? columnFlex}) {
+    double itemExtent = 42.0;
+    TextStyle textStyle = const TextStyle(
+        color: SCColors.color_B0B1B8, fontSize: SCFonts.f16);
+    TextStyle selectStyle = const TextStyle(
+        color: SCColors.color_1B1C33, fontSize: SCFonts.f18);
     SCUtils.getCurrentContext(completionHandler: (context) async {
-      double itemExtent = 42.0;
       Picker picker = Picker(
         height: 260.0,
+        columnPadding: EdgeInsets.zero,
+        columnFlex: columnFlex,
         adapter: DateTimePickerAdapter(
-            type: PickerDateTimeType.kYMD, isNumberMonth: true),
+            type: dateType, isNumberMonth: true, yearSuffix: '年', monthSuffix: '月', daySuffix: '日'),
         changeToFirst: false,
         textAlign: TextAlign.center,
-        textStyle: const TextStyle(
-            color: SCColors.color_B0B1B8, fontSize: SCFonts.f16),
-        selectedTextStyle: const TextStyle(
-            color: SCColors.color_1B1C33, fontSize: SCFonts.f18),
-        columnPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+        textStyle: textStyle,
+        selectedTextStyle: selectStyle,
         selectionOverlay: Container(
           height: itemExtent,
           color: Colors.transparent,

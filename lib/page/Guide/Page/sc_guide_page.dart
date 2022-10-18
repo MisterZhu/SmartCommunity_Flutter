@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_key.dart';
+import 'package:smartcommunity/page/Guide/GetXController/sc_guide_controller.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 
 import '../../../utils/Router/sc_router_path.dart';
@@ -20,10 +21,13 @@ class SCGuideState extends State <SCGuidePage> {
   List imageList = [SCAsset.guide1, SCAsset.guide2, SCAsset.guide3, SCAsset.guide4, SCAsset.guide5];
   late PageController pageController;
 
+  SCGuideController state = Get.put(SCGuideController());
+
   @override
   void initState() {
     super.initState();
     pageController = PageController();
+    state.getVersion();
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_picker/Picker.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/page/Mine/GetXController/sc_mine_controller.dart';
@@ -193,6 +194,6 @@ class SCPersonalInfoListView extends StatelessWidget {
       print('数据11:${selectedValues}');
       print('数据22:${selecteds}');
     };
-    pickerUtils.showDatePicker();
+    pickerUtils.showDatePicker(dateType: PickerDateTimeType.kYMD, columnFlex: [1, 1, 1]);
   }
 }
