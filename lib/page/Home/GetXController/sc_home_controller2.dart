@@ -12,7 +12,10 @@ import 'package:smartcommunity/constants/sc_skin_value.dart';
 import 'package:smartcommunity/page/Home/Model/sc_home_news_model.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 
+import '../../../constants/sc_default_value.dart';
 import '../../../constants/sc_type_define.dart';
+import '../../../network/sc_config.dart';
+import '../../../skin/Tools/sc_scaffold_manager.dart';
 // import 'package:image_cropper/image_cropper.dart';
 
 class SCHomeController2 extends GetxController {
@@ -53,7 +56,13 @@ class SCHomeController2 extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    /// 新工单
+    String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+    String token = SCScaffoldManager.instance.user.token ?? "";
+    String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
+    String workOrderUrl = "${SCConfig.getH5Url(SCH5.workOrderUrl)}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
     allItemsList = [
+      {"iconUrl" : SCAsset.iconItem10, "title" : "新工单", "subUrl" : workOrderUrl},
       {"iconUrl" : SCAsset.iconItem1, "title" : "园区缴费", "subUrl" : SCH5.communityPayUrl},
       {"iconUrl" : SCAsset.iconItem2, "title" : "预缴账户", "subUrl" : SCH5.prepayUrl},
       {"iconUrl" : SCAsset.iconItem3, "title" : "项目入驻", "subUrl" : SCH5.projectEnterUrl},
@@ -63,7 +72,6 @@ class SCHomeController2 extends GetxController {
       {"iconUrl" : SCAsset.iconItem7, "title" : "入伙验房", "subUrl" : SCH5.houseInspectionManagementUrl},
       {"iconUrl" : SCAsset.iconItem8, "title" : "园区停车", "subUrl" : SCH5.communityParkUrl},
       {"iconUrl" : SCAsset.iconItem9, "title" : "垃圾分类", "subUrl" : SCH5.garbageSortUrl},
-      {"iconUrl" : SCAsset.iconItem10, "title" : "政策服务", "subUrl" : SCH5.policyServiceUrl}
     ];
     listViewData =  [
       /// banner

@@ -55,4 +55,7 @@ class SCUrl {
 
   /// 居民档案审核拒绝
   static const String kExamineReject = '/api/space/archive/examine/refuse';
+
+  /// 上传头像
+  static const String kUploadHeadPicUrl = "/api/user/upload/headPic";
 }

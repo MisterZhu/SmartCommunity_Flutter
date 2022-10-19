@@ -7,6 +7,7 @@ import 'package:smartcommunity/page/Mine/View/Setting/sc_setting_cell.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/Permission/sc_permission_utils.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
+import 'package:smartcommunity/utils/Upload/sc_upload_utils.dart';
 import 'package:smartcommunity/widgets/Dialog/sc_dialog_utils.dart';
 import 'package:smartcommunity/widgets/Picker/sc_picker_utils.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
@@ -159,8 +160,9 @@ class SCPersonalInfoListView extends StatelessWidget {
 
   /// 选择头像
   selectHeadPicAction() {
-    SCPermissionUtils.showImagePicker(completionHandler: (){
-
+    SCPermissionUtils.showImagePicker(completionHandler: (imagePath){
+      print("图片路径:$imagePath");
+      SCUploadUtils.uploadHeadPic(imagePath: imagePath);
     });
     // SCPermissionUtils.photoPicker(
     //     maxLength: 1,

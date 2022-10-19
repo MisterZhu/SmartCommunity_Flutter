@@ -122,7 +122,7 @@ class SCHttpManager {
     bool status = false;
 
     try {
-      response = await _dio!.post(url, queryParameters: params, data: params, options: headers == null ? null : options);
+      response = await _dio!.post(url, queryParameters: params is Map<String, dynamic> ? params : {}, data: params, options: headers == null ? null : options);
       status = true;
     } catch (e) {
       status = false;
@@ -239,6 +239,7 @@ doResponse(Response response) {
 
 /// 处理dio请求异常
 doError(e) {
+  print('报错数据:$e');
   SCLoadingUtils.hide();
   /// 错误码
   int code = 0;

@@ -6,9 +6,11 @@ import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/constants/sc_skin_value.dart';
+import 'package:smartcommunity/network/sc_config.dart';
 import 'package:smartcommunity/page/Home/Model/sc_home_news_model.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 
+import '../../../constants/sc_default_value.dart';
 import '../../../constants/sc_h5.dart';
 // import 'package:image_cropper/image_cropper.dart';
 
@@ -61,18 +63,8 @@ class SCHomeController1 extends GetxController {
   ScrollController scrollController = ScrollController();
 
   /// 所有应用
-  List allItemsList = [
-    {"iconUrl" : SCAsset.iconItem1, "title" : "园区缴费", "subUrl" : SCH5.communityPayUrl},
-    {"iconUrl" : SCAsset.iconItem2, "title" : "预缴账户", "subUrl" : SCH5.prepayUrl},
-    {"iconUrl" : SCAsset.iconItem3, "title" : "项目入驻", "subUrl" : SCH5.projectEnterUrl},
-    {"iconUrl" : SCAsset.iconItem4, "title" : "公共缴费", "subUrl" : SCH5.publicPayUrl},
-    {"iconUrl" : SCAsset.iconItem5, "title" : "问卷调查", "subUrl" : SCH5.questionnaireSurveyUrl},
-    {"iconUrl" : SCAsset.iconItem6, "title" : "访客通行", "subUrl" : SCH5.visitorUrl},
-    {"iconUrl" : SCAsset.iconItem7, "title" : "入伙验房", "subUrl" : SCH5.houseInspectionManagementUrl},
-    {"iconUrl" : SCAsset.iconItem8, "title" : "园区停车", "subUrl" : SCH5.communityParkUrl},
-    {"iconUrl" : SCAsset.iconItem9, "title" : "垃圾分类", "subUrl" : SCH5.garbageSortUrl},
-    {"iconUrl" : SCAsset.iconItem10, "title" : "政策服务", "subUrl" : SCH5.policyServiceUrl}
-  ];
+  late List allItemsList;
+
   /// 所有banner
   List allBannerList = [
     SCAsset.homeBanner1,
@@ -126,6 +118,24 @@ class SCHomeController1 extends GetxController {
     allNewsList = List.from(homeNewsList).map((e) => SCHomeNewsModel.fromJson(e)).toList();
     homeFeatureStyle1 = SCHomeFeatureStyle.featureStyle1;
     homeFeatureStyle2 = SCHomeFeatureStyle.featureStyle2;
+
+    /// 新工单
+    String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+    String token = SCScaffoldManager.instance.user.token ?? "";
+    String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
+    String workOrderUrl = "${SCConfig.getH5Url(SCH5.workOrderUrl)}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
+    allItemsList = [
+      {"iconUrl" : SCAsset.iconItem10, "title" : "新工单", "subUrl" : workOrderUrl},
+      {"iconUrl" : SCAsset.iconItem1, "title" : "园区缴费", "subUrl" : SCH5.communityPayUrl},
+      {"iconUrl" : SCAsset.iconItem2, "title" : "预缴账户", "subUrl" : SCH5.prepayUrl},
+      {"iconUrl" : SCAsset.iconItem3, "title" : "项目入驻", "subUrl" : SCH5.projectEnterUrl},
+      {"iconUrl" : SCAsset.iconItem4, "title" : "公共缴费", "subUrl" : SCH5.publicPayUrl},
+      {"iconUrl" : SCAsset.iconItem5, "title" : "问卷调查", "subUrl" : SCH5.questionnaireSurveyUrl},
+      {"iconUrl" : SCAsset.iconItem6, "title" : "访客通行", "subUrl" : SCH5.visitorUrl},
+      {"iconUrl" : SCAsset.iconItem7, "title" : "入伙验房", "subUrl" : SCH5.houseInspectionManagementUrl},
+      {"iconUrl" : SCAsset.iconItem8, "title" : "园区停车", "subUrl" : SCH5.communityParkUrl},
+      {"iconUrl" : SCAsset.iconItem9, "title" : "垃圾分类", "subUrl" : SCH5.garbageSortUrl},
+    ];
   }
 
   /// 修改导航栏透状态

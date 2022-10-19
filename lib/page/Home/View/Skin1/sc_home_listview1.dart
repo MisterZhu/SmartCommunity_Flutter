@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_type_define.dart';
+import 'package:smartcommunity/network/sc_config.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_activity_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_banner.dart';
@@ -330,7 +331,7 @@ class SCHomeListView1 extends StatelessWidget {
     String token = SCScaffoldManager.instance.user.token ?? "";
     String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
     String url =
-        "${SCH5.workOrderUrl}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
+        "${SCConfig.getH5Url(SCH5.workOrderUrl)}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
     var params = {"title": "工单", "url": url};
     SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
   }

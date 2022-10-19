@@ -15,6 +15,7 @@ import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 
+import '../../../network/sc_config.dart';
 import '../../../utils/Router/sc_router_path.dart';
 
 /// 我的-listview
@@ -195,7 +196,7 @@ class SCMineListView extends StatelessWidget {
     String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
     String token = SCScaffoldManager.instance.user.token ?? "";
     String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
-    String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
+    String url = "${SCConfig.getH5Url(SCH5.workOrderUrl)}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
     SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "工单", "url" : url});
   }
 
@@ -204,7 +205,7 @@ class SCMineListView extends StatelessWidget {
     String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
     String token = SCScaffoldManager.instance.user.token ?? "";
     String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
-    String url = SCH5.integralUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
+    String url = SCConfig.getH5Url(SCH5.integralUrl) + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
     SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "积分", "url" : url});
   }
 
@@ -213,7 +214,7 @@ class SCMineListView extends StatelessWidget {
     String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
     String token = SCScaffoldManager.instance.user.token ?? "";
     String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
-    String url = SCH5.workOrderUrl + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
+    String url = SCConfig.getH5Url(SCH5.workOrderUrl) + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
     SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "工单", "url" : url});
   }
 }

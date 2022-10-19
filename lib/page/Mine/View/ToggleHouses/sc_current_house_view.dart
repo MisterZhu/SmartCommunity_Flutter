@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/page/Mine/View/ToggleHouses/sc_current_house_info_item.dart';
 import 'package:smartcommunity/page/Mine/View/ToggleHouses/sc_current_house_review_item.dart';
 
@@ -82,7 +83,7 @@ class SCCurrentHouseView extends StatelessWidget {
               child: const Text(
                 '解除绑定',
                 style: TextStyle(
-                  fontSize: 16.0,
+                  fontSize: SCFonts.f16,
                   fontWeight: FontWeight.w500,
                   color: SCColors.color_FFFFFF,
                 ),

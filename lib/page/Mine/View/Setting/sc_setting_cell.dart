@@ -21,6 +21,8 @@ enum SCSettingCellType {
   imageArrowType,
   // 右边是开关
   switchType,
+  // 右边是标签标题箭头
+  contentArrowTagType,
 }
 
 class SCSettingCell extends StatelessWidget {
