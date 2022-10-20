@@ -11,11 +11,13 @@ import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/utils/Router/sc_router_pages.dart';
+import 'package:smartcommunity/utils/WeChat/sc_wechat_utils.dart';
 import 'package:smartcommunity/utils/sc_sp_utils.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void startApp() async {
+
   SCScaffoldManager.instance.initBase();
 
   SCLoadingUtils.initLoading();
@@ -45,13 +47,15 @@ void startApp() async {
     initialBinding: SCAllBinding(),
     builder: EasyLoading.init(builder: (context, widget) {
       return MediaQuery(
-        //设置文字大小不随系统设置改变
+        // 设置文字大小不随系统设置改变
         data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
         child: widget ?? const SizedBox(),
       );
     },),
     navigatorObservers: [routeObserver],
   ));
+
+  SCWeChatUtils.init();
 }
 
 class MyApp extends StatelessWidget {

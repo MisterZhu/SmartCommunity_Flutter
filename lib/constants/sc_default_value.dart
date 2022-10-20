@@ -15,6 +15,15 @@ class SCDefaultValue {
   /// 高德web key
   static const String kAMapWebKey = 'fb48becc7b7a077d4da585a977d39ed2';
 
+  /// 微信appId
+  static const String kWeChatAppId = "wx37e729dfef38aad2";
+
+  /// 微信appKey
+  static const String kWeChatAppKey = "9c43d236e8df615e5cf2501f189d0cd1";
+
+  /// 微信universalLink
+  static const String kWeChatUniversalLink = "https://90ebce5254556de5a7c4db4334ced558.share2dlink.com/";
+
   /// 网络超时时间
   static const int timeOut = 30000;
 
