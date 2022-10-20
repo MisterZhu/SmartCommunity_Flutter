@@ -22,7 +22,7 @@ enum SCSettingCellType {
   // 右边是开关
   switchType,
   // 右边是标签标题箭头
-  contentArrowTagType,
+  tagContentArrowType,
 }
 
 class SCSettingCell extends StatelessWidget {
@@ -42,6 +42,9 @@ class SCSettingCell extends StatelessWidget {
   /// 开关index
   final int switchIndex;
 
+  /// tag状态
+  final int tagStatus;
+
   /// onTap
   final Function? onTap;
 
@@ -51,6 +54,7 @@ class SCSettingCell extends StatelessWidget {
     this.imageUrl = SCAsset.iconMineUserDefault,
     this.cellType = SCSettingCellType.arrowType,
     this.switchIndex = 0,
+    this.tagStatus = 0,
     this.onTap,
   }) : super(key: key);
 
@@ -137,7 +141,9 @@ class SCSettingCell extends StatelessWidget {
       );
     } else if (cellType == SCSettingCellType.switchType) {
       return switchWidget();
-    } else {
+    } else if (cellType == SCSettingCellType.tagContentArrowType) {
+      return tagContentWidget();
+    }  else {
       return arrowIcon();
     }
   }
@@ -179,4 +185,43 @@ class SCSettingCell extends StatelessWidget {
     });
   }
 
+  /// 标签组件
+  Widget tagContentWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        tagItem(status: tagStatus),
+        const SizedBox(width: 8.0,),
+        contentWidget(),
+        arrowIcon()
+      ],
+    );
+  }
+
+  /// 审核状态标签, status:0未实名，1已实名，2审核中，3未通过
+  Widget tagItem({required int status}) {
+    List textList = ['未实名', '已实名', '审核中', '未通过'];
+    List bgColorList = [SCColors.color_F2F3F5, SCColors.color_E7F1FF, SCColors.color_FFEBEC, SCColors.color_FFEBEC];
+    List textColorList = [SCColors.color_8D8E99, SCColors.color_1677FF, SCColors.color_FF1D32, SCColors.color_FF1D32];
+    return Container(
+      height: 22.0,
+      alignment: Alignment.center,
+      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+      decoration: BoxDecoration(
+          color: bgColorList[status],
+          borderRadius: BorderRadius.circular(2.0)
+      ),
+      child: Text(
+      textList[status],
+      textAlign: TextAlign.center,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontSize: SCFonts.f12,
+        fontWeight: FontWeight.w500,
+        color: textColorList[status]),
+      )
+    );
+  }
 }

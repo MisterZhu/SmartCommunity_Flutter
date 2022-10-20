@@ -14,6 +14,7 @@ import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_fonts.dart';
+import '../../../constants/sc_type_define.dart';
 import '../../../utils/Router/sc_router_path.dart';
 import '../../../widgets/Dialog/sc_bottom_sheet_model.dart';
 
@@ -67,8 +68,9 @@ class SCPersonalInfoListView extends StatelessWidget {
     } else if (index == 1) {
       return SCSettingCell(
         title: '姓名',
-        content: '未实名',
-        cellType: SCSettingCellType.contentArrowType,
+        content: '真实姓名',
+        tagStatus: SCTypeDefine.realNameVerifyStatusSuccess,
+        cellType: SCSettingCellType.tagContentArrowType,
         onTap: () {
           SCRouterHelper.pathPage(SCRouterPath.realNameVerifyPath, null);
         },

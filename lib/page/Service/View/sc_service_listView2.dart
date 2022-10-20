@@ -7,7 +7,7 @@ import 'package:smartcommunity/page/Service/GetXController/sc_service_controller
 import 'package:smartcommunity/page/Service/Model/sc_service_module_model.dart';
 import 'package:smartcommunity/page/Service/View/sc_service_cell_item.dart';
 import 'package:smartcommunity/page/Service/View/sc_service_left_listView.dart';
-import 'mj_service_right_listView.dart';
+import 'sc_service_right_listView.dart';
 
 /// 应用列表-第二套皮肤
 class SCServiceListView2 extends StatelessWidget {
