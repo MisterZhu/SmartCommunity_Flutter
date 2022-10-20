@@ -43,8 +43,7 @@ class SCMineHeaderItem extends StatelessWidget {
       this.headerTap,
       this.membershipTap,
       this.userName = "",
-      this.userPic
-      })
+      this.userPic})
       : super(key: key);
 
   @override
@@ -76,33 +75,41 @@ class SCMineHeaderItem extends StatelessWidget {
   /// content
   Widget contentItem() {
     return Positioned(
-      left: 0, right: 0, bottom: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
         child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        userInfoItem(),
-        const SizedBox(
-          height: 20.0,
-        ),
-        memberInfoBackgroundImageItem(),
-      ],
-    ));
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            userInfoItem(),
+            const SizedBox(
+              height: 20.0,
+            ),
+            memberInfoBackgroundImageItem(),
+          ],
+        ));
   }
 
   /// 用户头像等信息
   Widget userInfoItem() {
     String name = userName ?? '';
-    String iconUrl = userPic ?? '';
     return Container(
       padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 0.0),
       height: 48.0,
       child: Row(
         children: [
           GestureDetector(
-            onTap: (){
+            onTap: () {
               headerAction();
             },
-            child: SCUtils.headImageWidget(url: userPic ?? '', width: 48.0, height: 48.0, fit: BoxFit.cover),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(24.0),
+              child: SCUtils.imageWidget(
+                  url: userPic ?? '',
+                  width: 48.0,
+                  height: 48.0,
+                  fit: BoxFit.cover),
+            ),
           ),
           const SizedBox(
             width: 12.0,
@@ -127,7 +134,7 @@ class SCMineHeaderItem extends StatelessWidget {
             ),
           ),
           Expanded(
-            child:SizedBox(),
+            child: SizedBox(),
           ),
           GestureDetector(
             child: Image.asset(
@@ -164,7 +171,7 @@ class SCMineHeaderItem extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.0),
       child: GestureDetector(
-        onTap: (){
+        onTap: () {
           membershipAction();
         },
         child: AspectRatio(
@@ -187,8 +194,8 @@ class SCMineHeaderItem extends StatelessWidget {
         bottom: 0,
         child: Row(
           children: [
-            Image.asset(
-              SCAsset.iconMineDiamond,
+            SCUtils.imageWidget(
+              url: userPic ?? SCAsset.iconMineUserDefault,
               width: 13.0,
               height: 13.0,
               fit: BoxFit.cover,

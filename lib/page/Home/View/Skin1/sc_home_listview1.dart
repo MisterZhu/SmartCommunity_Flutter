@@ -23,6 +23,7 @@ import '../../../../constants/sc_h5.dart';
 import '../../../../skin/Tools/sc_scaffold_manager.dart';
 import '../../../../utils/Router/sc_router_helper.dart';
 import '../../../../utils/Router/sc_router_path.dart';
+import '../../GetXController/sc_home_controller.dart';
 import '../../GetXController/sc_home_controller2.dart';
 import '../sc_home_feature_item.dart';
 
@@ -293,6 +294,7 @@ class SCHomeListView1 extends StatelessWidget {
       Future.delayed(const Duration(milliseconds: 1000), () {
         state.isRefreshing = false;
         state.changeNavigationState(offset: 0.0);
+        changeSkin();
       });
     });
 
@@ -344,5 +346,15 @@ class SCHomeListView1 extends StatelessWidget {
     String url = data['subUrl'];
     var params = {"title": title, "url": url};
     SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
+  }
+
+  /// 切换皮肤
+  changeSkin() {
+    SCHomeController controller = Get.find<SCHomeController>();
+    if (controller.skinStyle == 0) {
+      controller.changeSkin(style: 1);
+    } else {
+      controller.changeSkin(style: 0);
+    }
   }
 }

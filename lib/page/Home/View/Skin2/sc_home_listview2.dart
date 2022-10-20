@@ -16,6 +16,7 @@ import '../../../../network/sc_config.dart';
 import '../../../../skin/Tools/sc_scaffold_manager.dart';
 import '../../../../utils/Router/sc_router_helper.dart';
 import '../../../../widgets/Refresh/sc_custom_header.dart';
+import '../../GetXController/sc_home_controller.dart';
 import '../../GetXController/sc_home_controller2.dart';
 import '../sc_home_community_activity.dart';
 import '../sc_home_items.dart';
@@ -215,6 +216,7 @@ class SCHomeListView2 extends StatelessWidget {
   Future onRefresh() async {
     Future.delayed(const Duration(milliseconds: 1500), () {
       state.refreshController.refreshCompleted();
+      changeSkin();
     });
   }
 
@@ -234,5 +236,15 @@ class SCHomeListView2 extends StatelessWidget {
     String title = data['title'];
     String url = data['subUrl'];
     SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title": title, "url": url});
+  }
+
+  /// 切换皮肤
+  changeSkin() {
+    SCHomeController controller = Get.find<SCHomeController>();
+    if (controller.skinStyle == 0) {
+      controller.changeSkin(style: 1);
+    } else {
+      controller.changeSkin(style: 0);
+    }
   }
 }

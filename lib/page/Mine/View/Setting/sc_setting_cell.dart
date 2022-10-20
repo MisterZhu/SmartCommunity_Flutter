@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
+import 'package:smartcommunity/utils/sc_utils.dart';
 
 import '../../GetXController/sc_setting_controller.dart';
 
@@ -158,7 +159,10 @@ class SCSettingCell extends StatelessWidget {
   }
 
   Widget imageWidget() {
-    return Image.asset(imageUrl, width: 40.0, height: 40.0, fit: BoxFit.cover,);
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20.0),
+      child: SCUtils.imageWidget(url: imageUrl, width: 40.0, height: 40.0, fit: BoxFit.cover),
+    );
   }
   
   /// 箭头icon

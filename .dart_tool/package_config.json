@@ -92,6 +92,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "date_format",
+      "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/date_format-2.0.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "dio",
       "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/dio-4.0.6",
       "packageUri": "lib/",
@@ -710,7 +716,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-10-18T07:38:41.647312Z",
+  "generated": "2022-10-20T01:56:18.180093Z",
   "generator": "pub",
   "generatorVersion": "2.17.1"
 }

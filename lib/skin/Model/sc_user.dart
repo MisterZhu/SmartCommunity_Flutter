@@ -1,3 +1,8 @@
+import 'package:smartcommunity/network/sc_config.dart';
+import 'package:smartcommunity/page/Mine/Model/sc_upload_headpic_model.dart';
+
+import '../../constants/sc_asset.dart';
+
 class SCUser {
   SCUser({
       this.id, 
@@ -20,7 +25,8 @@ class SCUser {
       this.spaceName,
       this.identityId,
       this.identityName,
-      this.defaultConfigId
+      this.defaultConfigId,
+      this.headPicUri
   });
 
   SCUser.fromJson(dynamic json) {
@@ -45,6 +51,9 @@ class SCUser {
     identityId = json['identityId'];
     identityName = json['identityName'];
     defaultConfigId = json['defaultConfigId'];
+    headPicUri = json['headPicUri'] != null
+        ? SCUploadHeadPicModel.fromJson(json['headPicUri'])
+        : null;
   }
   String? id;
   String? account;
@@ -67,6 +76,7 @@ class SCUser {
   String? identityId;
   String? identityName;
   num? defaultConfigId;
+  SCUploadHeadPicModel? headPicUri;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -91,11 +101,24 @@ class SCUser {
     map['identityId'] = identityId;
     map['identityName'] = identityName;
     map['defaultConfigId'] = defaultConfigId;
+    if (headPicUri != null) {
+      map['headPicUri'] = headPicUri?.toJson();
+    }
     return map;
   }
 
   @override
   String toString() {
     return 'SCUser{id: $id, account: $account, userName: $userName, nickName: $nickName, mobileNum: $mobileNum, state: $state, gender: $gender, birthday: $birthday, creatorName: $creatorName, gmtCreate: $gmtCreate, operatorName: $operatorName, gmtModify: $gmtModify, token: $token, communityId: $communityId, communityName: $communityName, housingId: $housingId, spaceId: $spaceId, spaceName: $spaceName, identityId: $identityId, identityName: $identityName, defaultConfigId: $defaultConfigId}';
+  }
+
+  /// 获取头像url
+  String getHeadPicUrl() {
+    if (headPicUri == null) {
+      return SCAsset.iconMineUserDefault;
+    } else {
+      String fileKey = headPicUri?.fileKey ?? '';
+      return SCConfig.getImageUrl(fileKey);
+    }
   }
 }

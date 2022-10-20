@@ -38,10 +38,18 @@ enum SCSelectHouseLogicType {
   addHouse,
 }
 
-// 首页cell样式类型
+/// 首页cell样式类型
 enum SCHomeCellBottomContentType {
   // 图片下面没有标题
   noBottomContent,
   // 图片下面有标题内容
   bottomContent,
+}
+
+/// picker类型
+enum SCPickerType {
+  // 普通的picker
+  normal,
+  // 日期picker
+  date
 }

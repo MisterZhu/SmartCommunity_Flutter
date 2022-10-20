@@ -2,30 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_picker/Picker.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
-import 'package:smartcommunity/page/Mine/GetXController/sc_mine_controller.dart';
+import 'package:smartcommunity/page/Mine/GetXController/sc_personal_info_controller.dart';
+import 'package:smartcommunity/page/Mine/Model/sc_upload_headpic_model.dart';
 import 'package:smartcommunity/page/Mine/View/Setting/sc_setting_cell.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
+import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/utils/Permission/sc_permission_utils.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/Upload/sc_upload_utils.dart';
-import 'package:smartcommunity/widgets/Dialog/sc_dialog_utils.dart';
+import 'package:smartcommunity/utils/sc_utils.dart';
 import 'package:smartcommunity/widgets/Picker/sc_picker_utils.dart';
-import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 import '../../../constants/sc_asset.dart';
-import '../../../constants/sc_fonts.dart';
+import '../../../constants/sc_default_value.dart';
+import '../../../constants/sc_enum.dart';
+import '../../../utils/Date/sc_date_utils.dart';
 import '../../../utils/Router/sc_router_path.dart';
-import '../../../widgets/Dialog/sc_bottom_sheet_model.dart';
 
 /// 设置listview
 
 class SCPersonalInfoListView extends StatelessWidget {
   const SCPersonalInfoListView(
-      {Key? key, this.userHeadPicUrl = SCAsset.iconMineUserDefault})
+      {Key? key, this.userHeadPicUrl = SCAsset.iconMineUserDefault, this.genderString, this.birthdayString})
       : super(key: key);
 
   /// 用户头像
   final String? userHeadPicUrl;
+
+  /// 性别
+  final String? genderString;
+
+  /// 出生日期
+  final String? birthdayString;
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +100,7 @@ class SCPersonalInfoListView extends StatelessWidget {
     } else if (index == 4) {
       return SCSettingCell(
         title: '性别',
-        content: '女',
+        content: genderString,
         cellType: SCSettingCellType.contentArrowType,
         onTap: () {
           selectSexAction();
@@ -101,7 +109,7 @@ class SCPersonalInfoListView extends StatelessWidget {
     } else if (index == 5) {
       return SCSettingCell(
         title: '出生日期',
-        content: '请选择',
+        content: birthdayString ?? '请选择',
         cellType: SCSettingCellType.contentArrowType,
         onTap: () {
           selectBirthdayAction();
@@ -161,41 +169,77 @@ class SCPersonalInfoListView extends StatelessWidget {
   /// 选择头像
   selectHeadPicAction() {
     SCPermissionUtils.showImagePicker(completionHandler: (imagePath){
-      print("图片路径:$imagePath");
-      SCUploadUtils.uploadHeadPic(imagePath: imagePath);
+      SCLoadingUtils.show(text: SCDefaultValue.loadingMessage);
+      SCUploadUtils.uploadHeadPic(imagePath: imagePath, successHandler: (value) {
+        SCLoadingUtils.hide();
+        SCUploadHeadPicModel model = SCUploadHeadPicModel.fromJson(value);
+        changeUserHeadPic(model);
+      }, failureHandler: (value) {
+        SCLoadingUtils.failure(text: value['message']);
+      });
     });
-    // SCPermissionUtils.photoPicker(
-    //     maxLength: 1,
-    //     requestType: RequestType.image,
-    //     completionHandler: (value) {
-    //       List<AssetEntity> imageList = value;
-    //       if (imageList.isNotEmpty) {
-    //         AssetEntity assetEntity = imageList.first;
-    //         String path = assetEntity.relativePath ?? SCAsset.iconMineUserHead;
-    //         SCMineController controller = Get.find<SCMineController>();
-    //         controller.changeUserHeadPic(url: path);
-    //       }
-    //     });
   }
 
   /// 选择性别
   selectSexAction() {
-    SCPickerUtils pickerUtils = SCPickerUtils();
-    pickerUtils.pickerData = ['男', '女'];
+    SCPickerUtils pickerUtils = SCPickerUtils(pickerType: SCPickerType.normal, pickerData: ['男', '女']);
     pickerUtils.completionHandler = (selectedValues, selecteds) {
-      print('数据11:${selectedValues}');
-      print('数据22:${selecteds}');
+      String genderString = '男';
+      int gender = 1;
+
+      if (selectedValues.isNotEmpty) {
+        genderString = selectedValues.first;
+      }
+
+      gender = SCUtils.getGenderNumber(genderString: genderString);
+      changeGender(gender: gender);
     };
     pickerUtils.showPicker();
   }
 
   /// 选择出生日期
   selectBirthdayAction() {
-    SCPickerUtils pickerUtils = SCPickerUtils();
+    SCPickerUtils pickerUtils = SCPickerUtils(pickerType: SCPickerType.date);
     pickerUtils.completionHandler = (selectedValues, selecteds) {
-      print('数据11:${selectedValues}');
-      print('数据22:${selecteds}');
+      String dateString = SCDateUtils.transformDate(dateTime: selectedValues.first, formats: ['yyyy', '-' , 'mm', '-', 'dd']);
+      changeBirthday(birthday: dateString);
     };
     pickerUtils.showDatePicker(dateType: PickerDateTimeType.kYMD, columnFlex: [1, 1, 1]);
+  }
+
+  /// 修改用户头像
+  changeUserHeadPic(SCUploadHeadPicModel model) {
+    var params = {
+      "id" : SCScaffoldManager.instance.user.id,
+      "headPicUri": {
+        "fileKey": model.fileKey,
+        "name": model.name,
+        "size": model.size,
+        "suffix": model.suffix,
+        "type": model.type
+      },
+    };
+    SCPersonalInfoController state = Get.find<SCPersonalInfoController>();
+    state.changeUserInfo(params: params);
+  }
+
+  /// 修改性别
+  changeGender({required int gender}) {
+    var params = {
+      "id" : SCScaffoldManager.instance.user.id,
+      "gender": gender,
+    };
+    SCPersonalInfoController state = Get.find<SCPersonalInfoController>();
+    state.changeUserInfo(params: params);
+  }
+
+  /// 修改出生日期
+  changeBirthday({required String birthday}) {
+    var params = {
+      "id" : SCScaffoldManager.instance.user.id,
+      "birthday": birthday,
+    };
+    SCPersonalInfoController state = Get.find<SCPersonalInfoController>();
+    state.changeUserInfo(params: params);
   }
 }

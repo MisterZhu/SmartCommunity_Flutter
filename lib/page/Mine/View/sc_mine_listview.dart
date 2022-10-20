@@ -94,6 +94,7 @@ class SCMineListView extends StatelessWidget {
   Widget headerCell() {
     return SCMineHeaderItem(
       userName: user?.userName,
+      userPic: user?.getHeadPicUrl(),
       settingTap: () {
         if (SCScaffoldManager.instance.user.token != null) {
           SCRouterHelper.pathPage(SCRouterPath.settingPath, null);

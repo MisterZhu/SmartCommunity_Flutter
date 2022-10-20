@@ -3,6 +3,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/page/Mine/GetXController/sc_personal_info_controller.dart';
+import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
+import 'package:smartcommunity/utils/sc_utils.dart';
 
 import '../../../constants/sc_colors.dart';
 import '../../../skin/View/sc_custom_scaffold.dart';
@@ -16,8 +18,6 @@ class SCPersonalInfoPage extends StatefulWidget {
 }
 
 class SCPersonalInfoPageState extends State<SCPersonalInfoPage> {
-
-  SCPersonalInfoController state = Get.put(SCPersonalInfoController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,10 @@ class SCPersonalInfoPageState extends State<SCPersonalInfoPage> {
       color: SCColors.color_F5F5F5,
       child: GetBuilder<SCPersonalInfoController>(builder: (state){
         return SCPersonalInfoListView(
-          userHeadPicUrl: state.userHeadPicUrl,
+          birthdayString: SCScaffoldManager.instance.user.birthday,
+          userHeadPicUrl: SCScaffoldManager.instance.user.getHeadPicUrl(),
+          genderString: SCUtils.getGenderString(gender: SCScaffoldManager.instance.user.gender ?? 1,
+          ),
         );
       }),
     );

@@ -76,6 +76,8 @@ dependencies:
   wechat_assets_picker: ^8.1.3
   # picker https://pub.dev/packages/flutter_picker/install
   flutter_picker: ^2.0.5
+  # 日期格式转换 https://pub.flutter-io.cn/packages/date_format/install
+  date_format: ^2.0.7
 
 dev_dependencies:
   flutter_test:

@@ -75,16 +75,34 @@ class SCUtils {
   }
 
   /*图片展示widget*/
-  static Widget headImageWidget({required String url, double? width, double? height, BoxFit? fit}) {
+  static Widget imageWidget({required String url, double? width, double? height, BoxFit? fit}) {
     if (url.contains('http')) {
       return CachedNetworkImage(imageUrl: url, width: width, height: height, fit: fit,);
     } else {
       return Image.asset(
-        url.isEmpty ? SCAsset.iconMineUserHead : url,
+        url.isEmpty ? SCAsset.iconMineUserDefault : url,
         width: width,
         height: height,
         fit: fit,
       );
+    }
+  }
+
+  /*获取性别num*/
+  static int getGenderNumber({required String genderString}) {
+    if (genderString == '男') {
+      return 1;
+    } else {
+      return 2;
+    }
+  }
+
+  /*获取性别string*/
+  static String getGenderString({required int gender}) {
+    if (gender == 1) {
+      return '男';
+    } else {
+      return '女';
     }
   }
 

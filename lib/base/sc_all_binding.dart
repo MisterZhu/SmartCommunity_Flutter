@@ -9,6 +9,7 @@ import 'package:smartcommunity/page/Login/GetXController/sc_select_community_con
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_data_controller.dart';
 import 'package:smartcommunity/page/Login/GetXController/sc_select_house_search_status_controller.dart.dart';
 import 'package:smartcommunity/page/Mine/GetXController/sc_mine_controller.dart';
+import 'package:smartcommunity/page/Mine/GetXController/sc_personal_info_controller.dart';
 import 'package:smartcommunity/page/Service/GetXController/sc_service_controller.dart';
 
 import '../page/Guide/GetXController/sc_guide_controller.dart';
@@ -35,5 +36,6 @@ class SCAllBinding extends Bindings {
     Get.lazyPut<SCSelectHouseSearchStatusController>(() => SCSelectHouseSearchStatusController());
     Get.lazyPut<SCSelectHouseDataController>(() => SCSelectHouseDataController());
     Get.lazyPut<SCScanController>(() => SCScanController());
+    Get.lazyPut<SCPersonalInfoController>(() => SCPersonalInfoController());
   }
 }

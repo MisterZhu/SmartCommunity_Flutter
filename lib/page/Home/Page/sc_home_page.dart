@@ -7,6 +7,7 @@ import 'package:smartcommunity/page/Home/GetXController/sc_home_controller.dart'
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller2.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_float_login.dart';
+import 'package:smartcommunity/page/Mine/GetXController/sc_personal_info_controller.dart';
 import 'package:smartcommunity/skin/Model/sc_user.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
@@ -26,6 +27,7 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
   SCHomeController1 state1 = Get.put(SCHomeController1());
   SCHomeController2 state2 = Get.put(SCHomeController2());
   SCServiceController service = Get.put(SCServiceController());
+  SCPersonalInfoController personalInfoController = Get.put(SCPersonalInfoController());
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,8 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
       state1.communityName = SCScaffoldManager.instance.user.communityName!;
       state2.communityName = SCScaffoldManager.instance.user.communityName!;
     }
+    /// 获取用户信息
+    getUserInfo();
   }
 
   /// body
@@ -100,5 +104,14 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
         SCRouterHelper.pathPage(SCRouterPath.codeLoginPath,  {'showClose' : true});
       },
     ));
+  }
+
+  /// 获取用户信息
+  getUserInfo() {
+    if (SCScaffoldManager.instance.isLogin) {
+      personalInfoController.getUserInfo(updateAll: false, successHandler: (){
+        state.update();
+      });
+    }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
+import 'package:smartcommunity/constants/sc_enum.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/widgets/Picker/sc_picker_header.dart';
@@ -10,11 +11,18 @@ import '../../utils/sc_utils.dart';
 /// picker
 
 class SCPickerUtils {
-  late List pickerData;
+
+  SCPickerUtils({
+    this.pickerType,
+    this.pickerData
+});
+  List? pickerData;
 
   Function(List selectedValues, List selecteds)? completionHandler;
 
-  late final Picker _picker;
+  late Picker _picker;
+
+  SCPickerType? pickerType;
 
   /// 普通picker
   showPicker() {
@@ -122,7 +130,11 @@ class SCPickerUtils {
   /// 确定
   confirmAction() {
     SCRouterHelper.back(null);
-    completionHandler?.call(_picker.getSelectedValues(), _picker.selecteds);
+    if(pickerType ==  SCPickerType.date) {
+      completionHandler?.call([(_picker.adapter as DateTimePickerAdapter).value], _picker.selecteds);
+    } else {
+      completionHandler?.call(_picker.getSelectedValues(), _picker.selecteds);
+    }
   }
 
   /// 取消
