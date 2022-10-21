@@ -12,12 +12,11 @@ import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/Upload/sc_upload_utils.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 import 'package:smartcommunity/widgets/Picker/sc_picker_utils.dart';
-import 'package:wechat_assets_picker/wechat_assets_picker.dart';
-
 import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_default_value.dart';
 import '../../../constants/sc_enum.dart';
 import '../../../utils/Date/sc_date_utils.dart';
+import '../../../constants/sc_type_define.dart';
 import '../../../utils/Router/sc_router_path.dart';
 
 /// 设置listview
@@ -76,8 +75,9 @@ class SCPersonalInfoListView extends StatelessWidget {
     } else if (index == 1) {
       return SCSettingCell(
         title: '姓名',
-        content: '未实名',
-        cellType: SCSettingCellType.contentArrowType,
+        content: '真实姓名',
+        tagStatus: SCTypeDefine.realNameVerifyStatusSuccess,
+        cellType: SCSettingCellType.tagContentArrowType,
         onTap: () {
           SCRouterHelper.pathPage(SCRouterPath.realNameVerifyPath, null);
         },
@@ -172,7 +172,6 @@ class SCPersonalInfoListView extends StatelessWidget {
     SCPermissionUtils.showImagePicker(completionHandler: (result){
       List<String> imagePathList = result;
       String imagePath = imagePathList.first;
-      print('相册图片路径:$imagePath');
       if (imagePath != '' && imagePath.isNotEmpty) {
         SCLoadingUtils.show(text: SCDefaultValue.loadingMessage);
         SCUploadUtils.uploadHeadPic(imagePath: imagePath, successHandler: (value) {

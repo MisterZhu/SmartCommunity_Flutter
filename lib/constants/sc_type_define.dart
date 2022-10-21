@@ -79,4 +79,18 @@ class SCTypeDefine {
   /// 2-文本
   static const int richTextTypeText = 2;
 
+/************************* 用户实名认证状态 *************************/
+
+  /// 0-未实名
+  static const int realNameVerifyStatusNo = 0;
+
+  /// 1-已实名
+  static const int realNameVerifyStatusSuccess = 1;
+
+  /// 2-审核中
+  static const int realNameVerifyStatusReview = 2;
+
+  /// 3-未通过
+  static const int realNameVerifyStatusFailed = 3;
+
 }
