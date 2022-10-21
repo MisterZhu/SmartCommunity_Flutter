@@ -8,6 +8,7 @@ import 'package:smartcommunity/constants/sc_default_value.dart';
 
 import '../constants/sc_asset.dart';
 import '../sc_app.dart';
+import 'Toast/sc_toast.dart';
 
 /// 工具类
 
@@ -46,6 +47,44 @@ class SCUtils {
   /*验证手机号*/
   bool checkPhone({required String phone}) {
     return RegExp(SCDefaultValue.phoneReg).hasMatch(phone);
+  }
+
+  /*验证姓名*/
+  bool checkName({required String name, bool? isShowTip}) {
+    bool showTip = isShowTip ?? false;
+    if (name.isEmpty) {
+      if (showTip) {
+        SCToast.showTip(SCDefaultValue.inputNameTip);
+      }
+      return false;
+    }
+    if (name.trim().length < 2) {
+      if (showTip) {
+        SCToast.showTip(SCDefaultValue.inputNameErrorTip);
+      }
+      return false;
+    }
+    return true;
+  }
+
+  /*验证身份证*/
+  checkIDCard({required String idNumber, bool? isShowTip}) {
+    bool showTip = isShowTip ?? false;
+    if (idNumber.isEmpty) {
+      if (showTip) {
+        SCToast.showTip(SCDefaultValue.inputIDCardTip);
+      }
+      return false;
+    }
+
+    RegExp cardReg = RegExp(SCDefaultValue.idCardReg);
+    if (!cardReg.hasMatch(idNumber)) {
+      if (showTip) {
+        SCToast.showTip(SCDefaultValue.inputIDCardErrorTip);
+      }
+      return false;
+    }
+    return true;
   }
 
   /*计算文字宽宽高*/

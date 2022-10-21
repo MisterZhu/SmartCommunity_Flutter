@@ -3,8 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:smartcommunity/constants/sc_default_value.dart';
 import 'package:smartcommunity/page/Mine/View/RealNameVerify/sc_real_name_photo_item.dart';
 import 'package:smartcommunity/page/Mine/View/RealNameVerify/sc_real_name_verify_textfield.dart';
+import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
+import 'package:smartcommunity/utils/Toast/sc_toast.dart';
+import 'package:smartcommunity/utils/sc_utils.dart';
 
 import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_fonts.dart';
@@ -26,7 +30,7 @@ class SCRealNameVerifyListView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         listView(),
-        btnItem(),
+        bottomButtonItem(),
       ],
     );
   }
@@ -51,6 +55,7 @@ class SCRealNameVerifyListView extends StatelessWidget {
         itemCount: 3));
   }
 
+  /// 获取cell
   Widget getCell(int index) {
     if (index == 0) {
       return SCRealNamePhotoItem(
@@ -68,6 +73,7 @@ class SCRealNameVerifyListView extends StatelessWidget {
     }
   }
 
+  /// 说明
   Widget explainItem() {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -97,9 +103,10 @@ class SCRealNameVerifyListView extends StatelessWidget {
       ),);
   }
 
-  Widget btnItem() {
+  /// 底部按钮
+  Widget bottomButtonItem() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
+      padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 30.0, bottom: SCUtils().getBottomSafeArea() + 10.0),
       child: SizedBox(
         width: double.infinity,
         height: 48.0,
@@ -117,7 +124,14 @@ class SCRealNameVerifyListView extends StatelessWidget {
             ),
             onPressed: () {
               SCRealNameVerifyController state = Get.find<SCRealNameVerifyController>();
-              print('name===${state.name},number===${state.number}');
+              bool nameStatus = SCUtils().checkName(name: state.name, isShowTip: true);
+              if (!nameStatus) {
+                return;
+              }
+              bool idcardStatus = SCUtils().checkIDCard(idNumber: state.number, isShowTip: true);
+              if (!idcardStatus) {
+                return;
+              }
             }),
       ),
     );

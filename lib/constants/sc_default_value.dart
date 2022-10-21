@@ -30,6 +30,9 @@ class SCDefaultValue {
   /// 手机号正则表达式
   static const String phoneReg = r"^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$";
 
+  /// 身份证正则表达式
+  static const String idCardReg = r'^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$';
+
   /// 网络加载中
   static const String loadingMessage = '加载中...';
 
@@ -62,6 +65,18 @@ class SCDefaultValue {
 
   /// 相册无权限提示
   static const String noPhotoPermissionMessage = "相册权限受限，请在设置中开启相册权限";
+
+  /// 输入姓名提示
+  static const String inputNameTip = "请输入姓名";
+
+  /// 姓名格式错误提示
+  static const String inputNameErrorTip = "请输入正确的姓名";
+
+  /// 输入证件号码提示
+  static const String inputIDCardTip = "请输入证件号码";
+
+  /// 证件号码格式错误提示
+  static const String inputIDCardErrorTip = "请输入正确的证件号码";
 
   /// 图片路径
   static const files = "/files/";

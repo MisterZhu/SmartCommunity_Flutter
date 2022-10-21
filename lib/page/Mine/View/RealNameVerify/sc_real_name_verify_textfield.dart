@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:smartcommunity/page/Mine/View/RealNameVerify/sc_input_formatter.dart';
 
 import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_fonts.dart';
@@ -125,7 +126,7 @@ class SCRealNameVerifyTextFieldState extends State<SCRealNameVerifyTextField> {
       },
       keyboardType: TextInputType.text,
       keyboardAppearance: Brightness.light,
-      textInputAction: TextInputAction.next,
+      textInputAction: TextInputAction.done,
     );
   }
 
@@ -171,6 +172,7 @@ class SCRealNameVerifyTextFieldState extends State<SCRealNameVerifyTextField> {
       textAlign: TextAlign.right,
       inputFormatters: [
         LengthLimitingTextInputFormatter(18),
+        SCInputFormatter(RegExp("^[A-Za-z0-9]")),
       ],
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 10),
@@ -191,7 +193,7 @@ class SCRealNameVerifyTextFieldState extends State<SCRealNameVerifyTextField> {
       },
       keyboardType: TextInputType.text,
       keyboardAppearance: Brightness.light,
-      textInputAction: TextInputAction.next,
+      textInputAction: TextInputAction.done,
     );
   }
 
@@ -206,5 +208,11 @@ class SCRealNameVerifyTextFieldState extends State<SCRealNameVerifyTextField> {
     );
   }
 
+  @override
+  dispose() {
+    super.dispose();
+    nameController.dispose();
+    numberController.dispose();
+  }
 
 }

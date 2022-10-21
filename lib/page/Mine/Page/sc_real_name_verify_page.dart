@@ -23,6 +23,13 @@ class SCRealNameVerifyPageState extends State<SCRealNameVerifyPage> {
 
   @override
   Widget build(BuildContext context) {
+    return SCCustomScaffold(
+      resizeToAvoidBottomInset: false,
+      title: "实名认证",
+        centerTitle: true,
+        elevation: 0,
+        body: body(),
+    );
     return Scaffold(
       resizeToAvoidBottomInset: false,///页面不会随着键盘上移
       appBar: AppBar(

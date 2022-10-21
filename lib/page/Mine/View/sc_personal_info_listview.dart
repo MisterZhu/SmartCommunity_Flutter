@@ -23,7 +23,11 @@ import '../../../utils/Router/sc_router_path.dart';
 
 class SCPersonalInfoListView extends StatelessWidget {
   const SCPersonalInfoListView(
-      {Key? key, this.userHeadPicUrl = SCAsset.iconMineUserDefault, this.genderString, this.birthdayString})
+      {Key? key,
+      this.userHeadPicUrl = SCAsset.iconMineUserDefault,
+      this.genderString,
+      this.birthdayString,
+      this.userNameString})
       : super(key: key);
 
   /// 用户头像
@@ -34,6 +38,9 @@ class SCPersonalInfoListView extends StatelessWidget {
 
   /// 出生日期
   final String? birthdayString;
+
+  /// 用户名
+  final String? userNameString;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +82,7 @@ class SCPersonalInfoListView extends StatelessWidget {
     } else if (index == 1) {
       return SCSettingCell(
         title: '姓名',
-        content: '真实姓名',
+        content: userNameString,
         tagStatus: SCTypeDefine.realNameVerifyStatusSuccess,
         cellType: SCSettingCellType.tagContentArrowType,
         onTap: () {
@@ -169,25 +176,29 @@ class SCPersonalInfoListView extends StatelessWidget {
 
   /// 选择头像
   selectHeadPicAction() {
-    SCPermissionUtils.showImagePicker(completionHandler: (result){
+    SCPermissionUtils.showImagePicker(completionHandler: (result) {
       List<String> imagePathList = result;
       String imagePath = imagePathList.first;
       if (imagePath != '' && imagePath.isNotEmpty) {
         SCLoadingUtils.show(text: SCDefaultValue.loadingMessage);
-        SCUploadUtils.uploadHeadPic(imagePath: imagePath, successHandler: (value) {
-          SCLoadingUtils.hide();
-          SCUploadHeadPicModel model = SCUploadHeadPicModel.fromJson(value);
-          changeUserHeadPic(model);
-        }, failureHandler: (value) {
-          SCLoadingUtils.failure(text: value['message']);
-        });
+        SCUploadUtils.uploadHeadPic(
+            imagePath: imagePath,
+            successHandler: (value) {
+              SCLoadingUtils.hide();
+              SCUploadHeadPicModel model = SCUploadHeadPicModel.fromJson(value);
+              changeUserHeadPic(model);
+            },
+            failureHandler: (value) {
+              SCLoadingUtils.failure(text: value['message']);
+            });
       }
     });
   }
 
   /// 选择性别
   selectSexAction() {
-    SCPickerUtils pickerUtils = SCPickerUtils(pickerType: SCPickerType.normal, pickerData: ['男', '女']);
+    SCPickerUtils pickerUtils =
+        SCPickerUtils(pickerType: SCPickerType.normal, pickerData: ['男', '女']);
     pickerUtils.completionHandler = (selectedValues, selecteds) {
       String genderString = '男';
       int gender = 1;
@@ -206,16 +217,19 @@ class SCPersonalInfoListView extends StatelessWidget {
   selectBirthdayAction() {
     SCPickerUtils pickerUtils = SCPickerUtils(pickerType: SCPickerType.date);
     pickerUtils.completionHandler = (selectedValues, selecteds) {
-      String dateString = SCDateUtils.transformDate(dateTime: selectedValues.first, formats: ['yyyy', '-' , 'mm', '-', 'dd']);
+      String dateString = SCDateUtils.transformDate(
+          dateTime: selectedValues.first,
+          formats: ['yyyy', '-', 'mm', '-', 'dd']);
       changeBirthday(birthday: dateString);
     };
-    pickerUtils.showDatePicker(dateType: PickerDateTimeType.kYMD, columnFlex: [1, 1, 1]);
+    pickerUtils.showDatePicker(
+        dateType: PickerDateTimeType.kYMD, columnFlex: [1, 1, 1]);
   }
 
   /// 修改用户头像
   changeUserHeadPic(SCUploadHeadPicModel model) {
     var params = {
-      "id" : SCScaffoldManager.instance.user.id,
+      "id": SCScaffoldManager.instance.user.id,
       "headPicUri": {
         "fileKey": model.fileKey,
         "name": model.name,
@@ -231,7 +245,7 @@ class SCPersonalInfoListView extends StatelessWidget {
   /// 修改性别
   changeGender({required int gender}) {
     var params = {
-      "id" : SCScaffoldManager.instance.user.id,
+      "id": SCScaffoldManager.instance.user.id,
       "gender": gender,
     };
     SCPersonalInfoController state = Get.find<SCPersonalInfoController>();
@@ -241,7 +255,7 @@ class SCPersonalInfoListView extends StatelessWidget {
   /// 修改出生日期
   changeBirthday({required String birthday}) {
     var params = {
-      "id" : SCScaffoldManager.instance.user.id,
+      "id": SCScaffoldManager.instance.user.id,
       "birthday": birthday,
     };
     SCPersonalInfoController state = Get.find<SCPersonalInfoController>();

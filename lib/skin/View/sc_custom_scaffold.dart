@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,23 +42,29 @@ class SCCustomScaffold extends StatelessWidget {
   /*leading宽度 默认56*/
   double? leadingWidth;
 
+  /*导航栏右侧*/
   List<Widget>? actions;
+
+  /*页面是否随着键盘上移*/
+  bool? resizeToAvoidBottomInset;
 
   SCCustomScaffold(
       {Key? key,
-        required this.body,
-        this.showBackIcon = true,
-        this.title = '',
-        this.centerTitle = true,
-        this.showBackgroundImage = false,
-        this.backgroundImageUrl = '',
-        this.navBackgroundColor,
-        this.textStyle,
-        this.leading,
-        this.elevation = 0,
-        this.leadingWidth,
-        this.actions,
-        this.customTitleWidget})
+      required this.body,
+      this.showBackIcon = true,
+      this.title = '',
+      this.centerTitle = true,
+      this.showBackgroundImage = false,
+      this.backgroundImageUrl = '',
+      this.navBackgroundColor,
+      this.textStyle,
+      this.leading,
+      this.elevation = 0,
+      this.leadingWidth,
+      this.actions,
+      this.customTitleWidget,
+      this.resizeToAvoidBottomInset
+      })
       : super(key: key);
 
   final state = Get.find<SCCustomScaffoldController>();
@@ -69,6 +74,7 @@ class SCCustomScaffold extends StatelessWidget {
     // TODO: implement build
     return GetBuilder<SCCustomScaffoldController>(builder: (state) {
       return Scaffold(
+        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
         appBar: AppBar(
           title: getTitleWidget(),
           centerTitle: centerTitle,
@@ -94,18 +100,18 @@ class SCCustomScaffold extends StatelessWidget {
   Widget getNavBackgroundImage() {
     return showBackgroundImage
         ? (backgroundImageUrl.contains('http')
-        ? CachedNetworkImage(
-      imageUrl: backgroundImageUrl,
-      width: double.infinity,
-      height: double.infinity,
-      fit: BoxFit.fill,
-    )
-        : Image.asset(
-      backgroundImageUrl,
-      width: double.infinity,
-      height: double.infinity,
-      fit: BoxFit.cover,
-    ))
+            ? CachedNetworkImage(
+                imageUrl: backgroundImageUrl,
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.fill,
+              )
+            : Image.asset(
+                backgroundImageUrl,
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.cover,
+              ))
         : const SizedBox();
   }
 

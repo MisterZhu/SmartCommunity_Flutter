@@ -33,6 +33,7 @@ class SCPersonalInfoPageState extends State<SCPersonalInfoPage> {
       color: SCColors.color_F5F5F5,
       child: GetBuilder<SCPersonalInfoController>(builder: (state){
         return SCPersonalInfoListView(
+          userNameString: SCScaffoldManager.instance.user.userName,
           birthdayString: SCScaffoldManager.instance.user.birthday,
           userHeadPicUrl: SCScaffoldManager.instance.user.getHeadPicUrl(),
           genderString: SCUtils.getGenderString(gender: SCScaffoldManager.instance.user.gender ?? 1,
