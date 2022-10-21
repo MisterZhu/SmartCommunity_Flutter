@@ -721,6 +721,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.9"
+  tobias:
+    dependency: "direct main"
+    description:
+      name: tobias
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.4.1"
   typed_data:
     dependency: transitive
     description:
