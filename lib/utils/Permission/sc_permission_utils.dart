@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -130,7 +132,7 @@ class SCPermissionUtils {
                   await Permission.photos.request();
               if (permissionStatus == PermissionStatus.granted) {
                 SCUtils.getCurrentContext(completionHandler: (context) async {
-                  final List<AssetEntity>? result =
+                  List<AssetEntity>? result =
                       await AssetPicker.pickAssets(
                     context,
                     pickerConfig: AssetPickerConfig(
@@ -139,7 +141,15 @@ class SCPermissionUtils {
                         requestType: requestType ?? RequestType.common,
                         textDelegate: const AssetPickerTextDelegate()),
                   );
-                  completionHandler?.call(result);
+                  if (result != null) {
+                    List<String> imagesPathList = [];
+                    //遍历
+                    for(var entity in result){
+                      File? imgFile = await entity.file;
+                      if(imgFile != null) imagesPathList.add(imgFile.path);
+                    }
+                    completionHandler?.call(imagesPathList);
+                  }
                 });
               } else {
                 noPermissionAlert(SCDefaultValue.noPhotoPermissionMessage);
@@ -151,7 +161,7 @@ class SCPermissionUtils {
         PermissionStatus permissionStatus = await Permission.photos.request();
         if (permissionStatus == PermissionStatus.granted) {
           SCUtils.getCurrentContext(completionHandler: (context) async {
-            final List<AssetEntity>? result = await AssetPicker.pickAssets(
+            List<AssetEntity>? result = await AssetPicker.pickAssets(
               context,
               pickerConfig: AssetPickerConfig(
                   maxAssets: maxCount,
@@ -159,7 +169,15 @@ class SCPermissionUtils {
                   requestType: requestType ?? RequestType.common,
                   textDelegate: const AssetPickerTextDelegate()),
             );
-            completionHandler?.call(result);
+            if (result != null) {
+              List<String> imagesPathList = [];
+              //遍历
+              for(var entity in result){
+                File? imgFile = await entity.file;
+                if(imgFile != null) imagesPathList.add(imgFile.path);
+              }
+              completionHandler?.call(imagesPathList);
+            }
           });
         } else {
           noPermissionAlert(SCDefaultValue.noPhotoPermissionMessage);
