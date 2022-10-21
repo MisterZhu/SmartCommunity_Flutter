@@ -80,7 +80,7 @@ dependencies:
   date_format: ^2.0.7
   # 微信sdk https://pub.dev/packages/fluwx/install
   fluwx: 3.8.4
-  # 支付宝sdk https://pub.flutter-io.cn/packages/alipay_kit/install
+  # 支付宝sdk https://pub.flutter-io.cn/packages/tobias/install
   tobias: ^2.4.1
 
 dev_dependencies:
