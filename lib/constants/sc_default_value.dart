@@ -78,6 +78,9 @@ class SCDefaultValue {
   /// 证件号码格式错误提示
   static const String inputIDCardErrorTip = "请输入正确的证件号码";
 
+  /// 未安装微信
+  static const String unInstalWeChatTip = "请安装微信";
+
   /// 图片路径
   static const files = "/files/";
 }
