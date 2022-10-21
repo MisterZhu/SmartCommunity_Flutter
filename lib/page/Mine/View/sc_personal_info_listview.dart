@@ -83,7 +83,7 @@ class SCPersonalInfoListView extends StatelessWidget {
       return SCSettingCell(
         title: '姓名',
         content: userNameString,
-        tagStatus: SCTypeDefine.realNameVerifyStatusSuccess,
+        tagType: SCTypeDefine.realNameVerifyStatusNo,
         cellType: SCSettingCellType.tagContentArrowType,
         onTap: () {
           SCRouterHelper.pathPage(SCRouterPath.realNameVerifyPath, null);

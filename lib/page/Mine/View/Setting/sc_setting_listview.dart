@@ -10,6 +10,7 @@ import '../../../../constants/sc_agreement.dart';
 import '../../../../constants/sc_default_value.dart';
 import '../../../../utils/Router/sc_router_path.dart';
 import '../../../Home/GetXController/sc_home_controller.dart';
+import '../../GetXController/sc_setting_controller.dart';
 
 /// 设置listview
 
@@ -131,11 +132,21 @@ class SCSettingListView extends StatelessWidget {
     },);
   }
 
-  /// 退出登录
+  /// 退出登录cell
   Widget logoutCell() {
     return SCLogOutCell(onTap: (){
-      SCScaffoldManager.instance.logout();
+      logout();
     },);
+  }
+
+  /// 退出登录
+  logout() {
+    SCSettingController state = Get.find<SCSettingController>();
+    state.logout(resultHandler: (status) {
+      if (status == true) {
+        SCScaffoldManager.instance.logout();
+      }
+    });
   }
 
   /// line
@@ -148,7 +159,6 @@ class SCSettingListView extends StatelessWidget {
         width: double.infinity,
         color: SCColors.color_EDEDF0,
       ),
-
     );
   }
   

@@ -5,12 +5,12 @@ class SCUrl {
   static const String kReGeoCodeUrl = 'https://restapi.amap.com/v3/geocode/regeo';
 
 
-  /************************* 登陆 *************************/
+  /************************* 登录 *************************/
 
   /// 发送验证码url
   static const String kSendCodeUrl = '/api/user/sms';
 
-  /// 验证码登陆url
+  /// 验证码登录url
   static const String kPhoneCodeLoginUrl = '/api/user/loginByCode';
 
   /// 通过坐标经纬度查询项目url
@@ -21,6 +21,9 @@ class SCUrl {
 
   /// 用户默认配置信息url
   static const String kUserDefaultConfigUrl = "/api/user/defaultConfig";
+
+  /// 退出登录url
+  static const String kLogoutUrl = '/api/user/loginOut';
 
  /************************* 服务 *************************/
 
