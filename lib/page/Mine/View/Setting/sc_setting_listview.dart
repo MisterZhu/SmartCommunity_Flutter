@@ -159,7 +159,6 @@ class SCSettingListView extends StatelessWidget {
         width: double.infinity,
         color: SCColors.color_EDEDF0,
       ),
-
     );
   }
   

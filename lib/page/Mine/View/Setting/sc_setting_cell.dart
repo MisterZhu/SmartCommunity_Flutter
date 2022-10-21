@@ -5,6 +5,7 @@ import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/constants/sc_fonts.dart';
 
+import '../../../../constants/sc_type_define.dart';
 import '../../GetXController/sc_setting_controller.dart';
 
 /// 设置页面cell
@@ -42,11 +43,36 @@ class SCSettingCell extends StatelessWidget {
   /// 开关index
   final int switchIndex;
 
-  /// tag状态
-  final int tagStatus;
+  /// tag类型
+  final int tagType;
 
   /// onTap
   final Function? onTap;
+
+  late List tagDataList = [
+    {
+      'tagType' : SCTypeDefine.realNameVerifyStatusNo,
+      'tagText' : '未实名',
+      'tagBgColor' : SCColors.color_F2F3F5,
+      'tagTextColor' : SCColors.color_8D8E99,},
+    {
+      'tagType' : SCTypeDefine.realNameVerifyStatusSuccess,
+      'tagText' : '已实名',
+      'tagBgColor' : SCColors.color_E7F1FF,
+      'tagTextColor' : SCColors.color_1677FF,},
+    {
+      'tagType' : SCTypeDefine.realNameVerifyStatusReview,
+      'tagText' : '审核中',
+      'tagBgColor' : SCColors.color_FFEBEC,
+      'tagTextColor' : SCColors.color_FF1D32,},
+    {
+      'tagType' : SCTypeDefine.realNameVerifyStatusFailed,
+      'tagText' : '未通过',
+      'tagBgColor' : SCColors.color_FFEBEC,
+      'tagTextColor' : SCColors.color_FF1D32,},
+  ];
+  
+  late var tagData = tagDataList[0];
 
   SCSettingCell({Key? key,
     this.title = '',
@@ -54,12 +80,18 @@ class SCSettingCell extends StatelessWidget {
     this.imageUrl = SCAsset.iconMineUserDefault,
     this.cellType = SCSettingCellType.arrowType,
     this.switchIndex = 0,
-    this.tagStatus = 0,
+    this.tagType = SCTypeDefine.realNameVerifyStatusNo,
     this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (cellType == SCSettingCellType.tagContentArrowType) {
+      int index = tagDataList.indexWhere((e) => e['tagType'] == tagType);
+      if (index >= 0 && index < tagDataList.length) {
+        tagData = tagDataList[index];
+      }
+    }
     return body();
   }
 
@@ -179,7 +211,6 @@ class SCSettingCell extends StatelessWidget {
           activeColor: SCColors.color_FF6C00,
           value: state.switchStatusList[switchIndex],
           onChanged: (value) {
-            print('index====$switchIndex,value====$value');
             state.updateSwitchStatus(index: switchIndex, enable: value);
           });
     });
@@ -191,7 +222,7 @@ class SCSettingCell extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        tagItem(status: tagStatus),
+        tagItem(status: tagType),
         const SizedBox(width: 8.0,),
         contentWidget(),
         arrowIcon()
@@ -201,26 +232,23 @@ class SCSettingCell extends StatelessWidget {
 
   /// 审核状态标签, status:0未实名，1已实名，2审核中，3未通过
   Widget tagItem({required int status}) {
-    List textList = ['未实名', '已实名', '审核中', '未通过'];
-    List bgColorList = [SCColors.color_F2F3F5, SCColors.color_E7F1FF, SCColors.color_FFEBEC, SCColors.color_FFEBEC];
-    List textColorList = [SCColors.color_8D8E99, SCColors.color_1677FF, SCColors.color_FF1D32, SCColors.color_FF1D32];
     return Container(
       height: 22.0,
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
       decoration: BoxDecoration(
-          color: bgColorList[status],
+          color: tagData['tagBgColor'],
           borderRadius: BorderRadius.circular(2.0)
       ),
       child: Text(
-      textList[status],
+      tagData['tagText'],
       textAlign: TextAlign.center,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         fontSize: SCFonts.f12,
         fontWeight: FontWeight.w500,
-        color: textColorList[status]),
+        color: tagData['tagTextColor']),
       )
     );
   }
