@@ -15,6 +15,7 @@ import 'package:smartcommunity/widgets/Picker/sc_picker_utils.dart';
 import '../../../constants/sc_asset.dart';
 import '../../../constants/sc_default_value.dart';
 import '../../../constants/sc_enum.dart';
+import '../../../utils/AliPay/sc_alipay_utils.dart';
 import '../../../utils/Date/sc_date_utils.dart';
 import '../../../constants/sc_type_define.dart';
 import '../../../utils/Router/sc_router_path.dart';
@@ -125,8 +126,10 @@ class SCPersonalInfoListView extends StatelessWidget {
       );
     } else if (index == 6) {
       return SCSettingCell(
-        title: '个性标签',
-        onTap: () {},
+        title: '支付宝支付',
+        onTap: () {
+          SCAliPayUtils.aliPay();
+        },
       );
     } else if (index == 7) {
       return SCSettingCell(
