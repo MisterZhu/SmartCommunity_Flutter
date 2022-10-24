@@ -79,13 +79,13 @@ class SCDefaultValue {
   static const String inputIDCardErrorTip = "请输入正确的证件号码";
 
   /// 未安装支付宝提示
-  static const String noAliPayMessage = "请安装支付宝";
-
-  /// 未安装微信提示
-  static const String noWechatMessage = "请安装微信";
+  static const String unInstallAliPayTip = "请安装支付宝";
 
   /// 支付成功提示
-  static const String paySuccessMessage = "支付成功";
+  static const String paySuccessTip = "支付成功";
+
+  /// 未安装微信
+  static const String unInstallWeChatTip = "请安装微信";
 
   /// 图片路径
   static const files = "/files/";
