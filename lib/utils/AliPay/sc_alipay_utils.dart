@@ -13,13 +13,13 @@ class SCAliPayUtils {
     if (isInstalled) {
       tobias.aliPay(test).then((payResult) {
         if (payResult['resultStatus'] == '9000' || payResult['resultStatus'] == 9000) {
-          SCToast.showTip(SCDefaultValue.paySuccessMessage);
+          SCToast.showTip(SCDefaultValue.paySuccessTip);
         } else {
           SCToast.showTip(payResult['memo']);
         }
       });
     } else {
-      SCToast.showTip(SCDefaultValue.noAliPayMessage);
+      SCToast.showTip(SCDefaultValue.unInstallAliPayTip);
     }
   }
 }

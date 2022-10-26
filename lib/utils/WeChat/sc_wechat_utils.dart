@@ -26,7 +26,7 @@ class SCWeChatUtils {
       WXMiniProgramType miniProgramType = WXMiniProgramType.RELEASE}) async{
     bool installWechat = await installed();
     if (!installWechat) {
-      SCToast.showTip(SCDefaultValue.unInstalWeChatTip);
+      SCToast.showTip(SCDefaultValue.unInstallWeChatTip);
       return Future.value(false);
     }
     return launchWeChatMiniProgram(
@@ -37,7 +37,7 @@ class SCWeChatUtils {
   static void shareBinaryImage(Uint8List source) async{
     bool installWechat = await installed();
     if (!installWechat) {
-      SCToast.showTip(SCDefaultValue.unInstalWeChatTip);
+      SCToast.showTip(SCDefaultValue.unInstallWeChatTip);
       return;
     }
     shareToWeChat(WeChatShareImageModel(WeChatImage.binary(source),
@@ -48,7 +48,7 @@ class SCWeChatUtils {
   static void shareAssetImage(String source) async{
     bool installWechat = await installed();
     if (!installWechat) {
-      SCToast.showTip(SCDefaultValue.unInstalWeChatTip);
+      SCToast.showTip(SCDefaultValue.unInstallWeChatTip);
       return;
     }
     shareToWeChat(WeChatShareImageModel(WeChatImage.asset(source),
@@ -59,7 +59,7 @@ class SCWeChatUtils {
   static void shareFileImage(File source) async{
     bool installWechat = await installed();
     if (!installWechat) {
-      SCToast.showTip(SCDefaultValue.unInstalWeChatTip);
+      SCToast.showTip(SCDefaultValue.unInstallWeChatTip);
       return;
     }
     shareToWeChat(WeChatShareImageModel(WeChatImage.file(source),
@@ -70,7 +70,7 @@ class SCWeChatUtils {
   static void shareNetWorkImage(String source) async{
     bool installWechat = await installed();
     if (!installWechat) {
-      SCToast.showTip(SCDefaultValue.unInstalWeChatTip);
+      SCToast.showTip(SCDefaultValue.unInstallWeChatTip);
       return;
     }
     shareToWeChat(WeChatShareImageModel(WeChatImage.network(source),
@@ -81,7 +81,7 @@ class SCWeChatUtils {
   static void shareText(String source) async{
     bool installWechat = await installed();
     if (!installWechat) {
-      SCToast.showTip(SCDefaultValue.unInstalWeChatTip);
+      SCToast.showTip(SCDefaultValue.unInstallWeChatTip);
       return;
     }
     shareToWeChat(WeChatShareTextModel(source, scene: WeChatScene.SESSION));
@@ -95,7 +95,7 @@ class SCWeChatUtils {
       WeChatImage? image}) async{
     bool installWechat = await installed();
     if (!installWechat) {
-      SCToast.showTip(SCDefaultValue.unInstalWeChatTip);
+      SCToast.showTip(SCDefaultValue.unInstallWeChatTip);
       return Future.value(false);
     }
     return shareToWeChat(
@@ -126,7 +126,7 @@ class SCWeChatUtils {
 
     bool installWechat = await installed();
     if (!installWechat) {
-      SCToast.showTip(SCDefaultValue.unInstalWeChatTip);
+      SCToast.showTip(SCDefaultValue.unInstallWeChatTip);
       return;
     }
 
