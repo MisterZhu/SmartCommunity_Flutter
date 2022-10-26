@@ -13,7 +13,6 @@ import 'Toast/sc_toast.dart';
 /// 工具类
 
 class SCUtils {
-
   /*获取状态栏高度*/
   double getStatusBarHeight() {
     return MediaQueryData.fromWindow(window).padding.top;
@@ -88,14 +87,17 @@ class SCUtils {
   }
 
   /*计算文字宽宽高*/
-  static Size boundingTextSize(BuildContext context, String text, TextStyle style,  {int maxLines = 2^31, double maxWidth = double.infinity}) {
+  static Size boundingTextSize(
+      BuildContext context, String text, TextStyle style,
+      {int maxLines = 2 ^ 31, double maxWidth = double.infinity}) {
     if (text == null || text.isEmpty) {
       return Size.zero;
     }
     final TextPainter textPainter = TextPainter(
         textDirection: TextDirection.ltr,
         locale: Localizations.localeOf(context),
-        text: TextSpan(text: text, style: style), maxLines: maxLines)
+        text: TextSpan(text: text, style: style),
+        maxLines: maxLines)
       ..layout(maxWidth: maxWidth);
     return textPainter.size;
   }
@@ -106,7 +108,8 @@ class SCUtils {
   }
 
   /*获取当前context*/
-  static getCurrentContext({Function(BuildContext context)? completionHandler}) {
+  static getCurrentContext(
+      {Function(BuildContext context)? completionHandler}) {
     Future.delayed(const Duration(seconds: 0), () async {
       BuildContext context = navigatorKey.currentState!.overlay!.context;
       completionHandler?.call(context);
@@ -114,9 +117,16 @@ class SCUtils {
   }
 
   /*图片展示widget*/
-  static Widget imageWidget({required String url, double? width, double? height, BoxFit? fit}) {
+  static Widget imageWidget(
+      {required String url, double? width, double? height, BoxFit? fit, Widget? placeholder}) {
     if (url.contains('http')) {
-      return CachedNetworkImage(imageUrl: url, width: width, height: height, fit: fit,);
+      return CachedNetworkImage(
+          imageUrl: url,
+          width: width,
+          height: height,
+          fit: fit,
+          placeholder: (context, url) => placeholder ?? const SizedBox(),
+          errorWidget: (context, url, error) => const Icon(Icons.error));
     } else {
       return Image.asset(
         url.isEmpty ? SCAsset.iconMineUserDefault : url,
@@ -144,5 +154,4 @@ class SCUtils {
       return '女';
     }
   }
-
 }

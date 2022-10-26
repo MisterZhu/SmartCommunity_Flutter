@@ -124,8 +124,7 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
   itemDetail(String title) {
     if (title.contains('建信')) {// 建信租房
       String token = SCSpUtil.getString(SCKey.kJianXinRentingToken);
-      String url = "";
-      url = "${SCH5.jxRentingHomeUrl}?token=$token";
+      String url = "${SCH5.jxRentingHomeUrl}?token=$token";
       SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : title, "url" : url});
     } else {
       String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";

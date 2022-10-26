@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smartcommunity/constants/sc_key.dart';
 import 'package:smartcommunity/skin/View/sc_custom_scaffold.dart';
+import 'package:smartcommunity/utils/sc_sp_utils.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../constants/sc_asset.dart';
@@ -138,7 +141,7 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
                 javascriptMode: JavascriptMode.unrestricted,
 
                 /// 跟H5交互的方法到此处处理
-                javascriptChannels: [_jxTokenChannel(context)].toSet(),
+                javascriptChannels: {_jxTokenChannel(context)},
 
                 ///WebView创建
                 onWebViewCreated: _onWebViewCreated,
@@ -206,6 +209,12 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
   JavascriptChannel _jxTokenChannel(BuildContext context) => JavascriptChannel(
       name: '_app_callback_token',
       onMessageReceived: (JavascriptMessage message) {
-        print("get message from JS, message is: ${message.message}");
+        String token = jsonDecode(message.message);
+        cacheJXToken(token);
       });
+
+  /// 缓存建信租房token
+  cacheJXToken(String token) {
+    SCSpUtil.setString(SCKey.kJianXinRentingToken, token);
+  }
 }
