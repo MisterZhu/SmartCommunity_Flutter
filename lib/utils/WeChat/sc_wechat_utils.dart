@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -121,7 +122,7 @@ class SCWeChatUtils {
     required String packageValue, // 微信要求的标识字符串
     required String nonceStr, // 随机字符串
     required String sign, // 计算好的签名
-    Function? payResult
+    Function(bool result)? payResult
   }) async{
 
     bool installWechat = await installed();
@@ -131,10 +132,30 @@ class SCWeChatUtils {
     }
 
     int timestamp = SCDateUtils.timestamp();
-    payWithWeChat(appId: SCDefaultValue.kWeChatAppId, partnerId: partnerId, prepayId: prepayId, packageValue: packageValue, nonceStr: nonceStr, timeStamp: timestamp, sign: sign);
+    payWithWeChat(
+        appId: SCDefaultValue.kWeChatAppId,
+        partnerId: partnerId,
+        prepayId: prepayId,
+        packageValue: packageValue,
+        nonceStr: nonceStr,
+        timeStamp: timestamp,
+        sign: sign);
 
-    weChatResponseEventHandler.listen((event) async {
-      payResult?.call(event);
+    StreamSubscription? wxPay;
+    wxPay?.cancel();
+    wxPay = weChatResponseEventHandler.listen((event) async {
+      wxPay?.cancel();
+      if (event.errCode == 0) {
+        payResult?.call(true);
+        SCToast.showTip(SCDefaultValue.paySuccessTip);
+      } else {
+        payResult?.call(false);
+        if (event.errStr == null || event.errStr == '' || event.errStr == ' ') {
+          SCToast.showTip(SCDefaultValue.payFailureTip);
+        } else {
+          SCToast.showTip(event.errStr!);
+        }
+      }
     });
   }
 }

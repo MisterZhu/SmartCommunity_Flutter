@@ -10,6 +10,7 @@ import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/utils/Permission/sc_permission_utils.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/utils/Upload/sc_upload_utils.dart';
+import 'package:smartcommunity/utils/WeChat/sc_wechat_utils.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
 import 'package:smartcommunity/widgets/Picker/sc_picker_utils.dart';
 import '../../../constants/sc_asset.dart';
@@ -133,13 +134,26 @@ class SCPersonalInfoListView extends StatelessWidget {
       );
     } else if (index == 7) {
       return SCSettingCell(
-        title: '服务要求',
-        onTap: () {},
+        title: '微信支付',
+        onTap: () {
+          SCWeChatUtils.wechatPay(
+            partnerId: 'partnerId',
+            prepayId: 'prepayId',
+            packageValue: 'packageValue',
+            nonceStr: 'nonceStr',
+            sign: 'sign',
+            payResult: (result) {
+
+            }
+          );
+        },
       );
     } else if (index == 8) {
       return SCSettingCell(
-        title: '登录密码',
-        onTap: () {},
+        title: '微信分享',
+        onTap: () {
+          SCWeChatUtils.shareWeb(url: 'https://www.baidu.com');
+        },
       );
     } else {
       return const SizedBox(
