@@ -14,7 +14,6 @@ import 'package:smartcommunity/skin/Model/sc_user.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
-
 import '../../../network/sc_config.dart';
 import '../../../utils/Router/sc_router_path.dart';
 
@@ -96,18 +95,10 @@ class SCMineListView extends StatelessWidget {
       userName: user?.userName,
       userPic: user?.getHeadPicUrl(),
       settingTap: () {
-        if (SCScaffoldManager.instance.user.token != null) {
           SCRouterHelper.pathPage(SCRouterPath.settingPath, null);
-        } else {
-          SCRouterHelper.pathPage(SCRouterPath.codeLoginPath,  {'showClose' : true});
-        }
       },
       headerTap: () {
-        if (SCScaffoldManager.instance.user.token != null) {
           SCRouterHelper.pathPage(SCRouterPath.personalInfoPath, null);
-        } else {
-          SCRouterHelper.pathPage(SCRouterPath.codeLoginPath,  {'showClose' : true});
-        }
       },
       membershipTap: () {
         workOrder();

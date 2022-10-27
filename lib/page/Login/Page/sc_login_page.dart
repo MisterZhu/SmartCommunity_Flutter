@@ -9,7 +9,9 @@ import '../../../utils/sc_utils.dart';
 /// 登录page
 class SCLoginPage extends StatefulWidget {
 
-  const SCLoginPage({Key? key}) : super(key: key);
+  late bool showCloseBtn;
+
+  SCLoginPage({Key? key, this.showCloseBtn = false}) : super(key: key);
 
   @override
   SCLoginState createState() => SCLoginState();
@@ -19,15 +21,14 @@ class SCLoginState extends State<SCLoginPage> {
 
   SCLoginController state = Get.put(SCLoginController());
 
-  late bool showCloseBtn = false;
   @override
   initState() {
     super.initState();
     var params = Get.arguments;
     if (params != null && params != '') {
-      showCloseBtn = params['showClose'];
-      state.updateShowCloseBtnState(show: showCloseBtn);
+      widget.showCloseBtn = params['showClose'];
     }
+    state.showCloseBtn = widget.showCloseBtn;
   }
 
   @override
@@ -48,7 +49,7 @@ class SCLoginState extends State<SCLoginPage> {
         width: double.infinity,
         height: double.infinity,
         color: SCColors.color_F2F3F5,
-        child: SCLoginListView(showClose: showCloseBtn),
+        child: SCLoginListView(showClose: widget.showCloseBtn),
       ),
     );
   }

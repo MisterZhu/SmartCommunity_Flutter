@@ -86,11 +86,7 @@ class SCMineState extends State<SCMinePage> with AutomaticKeepAliveClientMixin{
         isSticky: state.navigationSticky,
         itemColor: state.itemColor,
         settingAction: () {
-          if (SCScaffoldManager.instance.user.token != null) {
             SCRouterHelper.pathPage(SCRouterPath.settingPath, null);
-          } else {
-            SCRouterHelper.pathPage(SCRouterPath.codeLoginPath,  {'showClose' : true});
-          }
         },
       );
     });

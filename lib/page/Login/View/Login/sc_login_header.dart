@@ -15,7 +15,10 @@ class SCLoginHeader extends StatelessWidget {
   /// 是否显示关闭按钮，默认不显示
   final bool showClose;
 
-  SCLoginHeader({Key? key, this.showClose = false,}) : super(key: key);
+  /// 关闭按钮点击
+  final Function? closeAction;
+
+  SCLoginHeader({Key? key, this.showClose = false, this.closeAction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +88,9 @@ class SCLoginHeader extends StatelessWidget {
           ),
       ),
       onPressed: () {
-        SCRouterHelper.back(null);
+        if (closeAction != null) {
+          closeAction?.call();
+        }
       })
     );
   }
