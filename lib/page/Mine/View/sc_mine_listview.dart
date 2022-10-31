@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smartcommunity/constants/sc_default_value.dart';
 import 'package:smartcommunity/constants/sc_h5.dart';
 import 'package:smartcommunity/constants/sc_skin_value.dart';
@@ -16,6 +18,7 @@ import 'package:smartcommunity/utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/utils/Router/sc_router_helper.dart';
 import '../../../network/sc_config.dart';
 import '../../../utils/Router/sc_router_path.dart';
+import '../../../utils/Toast/sc_toast.dart';
 
 /// 我的-listview
 
@@ -104,6 +107,40 @@ class SCMineListView extends StatelessWidget {
         workOrder();
       },
     );
+  }
+
+  /// 原生调flutter
+  nativeToFlutter() {
+    MethodChannel channel1 = const MethodChannel('channel1');
+    // 接收 ios _channel_1 的调用, 并返回给 ios 一个数据回调
+    channel1.setMethodCallHandler((call) {
+       // 此处一个 channel 可以调用很多 method,
+        if (call.method == 'one') {
+          print(call.arguments);
+          SCToast.showTip(call.arguments);
+
+        }
+        return Future.value('_channel_1: flutter 响应 ios 后, 回调给 ios 的数据 111');
+    });
+
+  }
+
+  /// flutter调用原生
+  testFlutterToNative() async {
+    var futureValue = await runNativeMethod();
+    SCToast.showTipWithGravity(msg: futureValue, gravity: ToastGravity.BOTTOM);
+  }
+
+  // 调用原生方法
+  Future runNativeMethod() async {
+    const platform = MethodChannel('flutter_to_native');
+    try {
+      // 发送消息
+      var result = await platform.invokeMethod('test2');
+      return Future.value(result);
+    } on PlatformException catch (e) {
+      return Future.error(e.toString());
+    }
   }
 
   /// 切换房号-cell
