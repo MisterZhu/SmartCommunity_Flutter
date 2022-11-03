@@ -1,11 +1,15 @@
 /// 首页第一套皮肤-listview
+import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:pull_to_refresh_notification/pull_to_refresh_notification.dart';
 import 'package:smartcommunity/constants/sc_asset.dart';
 import 'package:smartcommunity/constants/sc_type_define.dart';
 import 'package:smartcommunity/network/sc_config.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart';
+import 'package:smartcommunity/page/Home/View/Skin1/data/sc_home_news_repository.dart';
+import 'package:smartcommunity/page/Home/View/Skin1/common/sc_home_sub_tabview.dart';
+import 'package:smartcommunity/page/Home/View/Skin1/common/sc_home_tabbar.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_activity_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_banner.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_grid_image_group.dart';
@@ -14,25 +18,30 @@ import 'package:smartcommunity/page/Home/View/sc_home_image_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_items.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_news_item.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_swiper.dart';
+import 'package:smartcommunity/page/Login/GetXController/sc_login_controller.dart';
 import 'package:smartcommunity/utils/sc_utils.dart';
-import 'package:smartcommunity/widgets/Refresh/sc_custom_header.dart';
 import '../../../../constants/sc_colors.dart';
 import '../../../../constants/sc_default_value.dart';
 import '../../../../constants/sc_enum.dart';
 import '../../../../constants/sc_h5.dart';
+import '../../../../delegate/sc_sticky_tabbar_delegate.dart';
 import '../../../../skin/Tools/sc_scaffold_manager.dart';
 import '../../../../utils/Router/sc_router_helper.dart';
 import '../../../../utils/Router/sc_router_path.dart';
 import '../../GetXController/sc_home_controller.dart';
 import '../../GetXController/sc_home_controller2.dart';
+import '../../GetXController/sc_home_nav1_controller.dart';
 import '../sc_home_feature_item.dart';
+import 'common/sc_home_refresh_header.dart';
 
-class SCHomeListView1 extends StatelessWidget {
+class SCHomeListView1 extends StatefulWidget {
   SCHomeListView1(
       {Key? key,
       this.scrollFunction,
       required this.dataList,
       required this.bannerList,
+      required this.navigationHeight,
+      required this.tabTitleList,
       this.bannerBGScale = 750.0 / 544.0,
       this.bannerScale = 686.0 / 280.0,
       this.bannerCurrentIndex = 0,
@@ -44,8 +53,6 @@ class SCHomeListView1 extends StatelessWidget {
 
   /// 滑动回调
   Function(double offset)? scrollFunction;
-
-  SCHomeController1 state = Get.find<SCHomeController1>();
 
   /// banner背景大图比例
   final double bannerBGScale;
@@ -62,39 +69,151 @@ class SCHomeListView1 extends StatelessWidget {
   /// banner默认背景图
   String bannerBackgroundImageUrl;
 
+  /// 导航栏高度
+  final double navigationHeight;
+
+  /// tab数据源
+  final List tabTitleList;
+
+  @override
+  SCHomeListView1State createState() => SCHomeListView1State();
+}
+
+class SCHomeListView1State extends State<SCHomeListView1>
+    with SingleTickerProviderStateMixin {
+  SCHomeController1 state = Get.find<SCHomeController1>();
+
+  SCHomeNav1Controller nav1State = Get.find<SCHomeNav1Controller>();
+
+  /// tabController
+  late final TabController tabController;
+
+  /// 源
+  late List<SCHomeNewsRespority> repositoryList = [];
+
+  /// tabView-list
+  late List<Widget> tabViewList = [];
+
+  /// tabBar高度
+  final tabBarHeight = 44.0;
+
+  final GlobalKey headerKey = GlobalKey();
+
+  ScrollController scrollController = ScrollController();
+
+  @override
+  initState() {
+    for (String title in widget.tabTitleList) {
+      SCHomeNewsRespority respority = SCHomeNewsRespority();
+      repositoryList.add(respority);
+      SCHomeSubTabView tabView = SCHomeSubTabView(respority);
+      tabViewList.add(tabView);
+    }
+    tabController =
+        TabController(length: widget.tabTitleList.length, vsync: this);
+    scrollNotify();
+    super.initState();
+  }
+
+  @override
+  dispose() {
+    for (SCHomeNewsRespority respority in repositoryList) {
+      respority.dispose();
+    }
+    tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    scrollNotify();
-    return SmartRefresher(
-      controller: state.refreshController,
-      onRefresh: () {
-        onRefresh();
+    return PullToRefreshNotification(
+        color: Colors.blue,
+        onRefresh: onRefresh,
+        maxDragOffset: SCUtils().getTopSafeArea() + 40,
+        pullBackOnRefresh: false,
+        reachToRefreshOffset: SCUtils().getTopSafeArea() + 60,
+        child: ExtendedNestedScrollView(
+            controller: scrollController,
+            physics: const NeverScrollableScrollPhysics(),
+            onlyOneScrollInBody: true,
+            pinnedHeaderSliverHeightBuilder: () {
+              return widget.navigationHeight;
+            },
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                pullToRefreshContainer(),
+                scrollHeader(),
+                stickyTabBar(),
+              ];
+            },
+            body: TabBarView(
+              controller: tabController,
+              children: tabViewList,
+            )));
+  }
+
+  /// 下拉刷新容器
+  Widget pullToRefreshContainer() {
+    return PullToRefreshContainer(
+      (PullToRefreshScrollNotificationInfo? info) {
+        Future.delayed(const Duration(milliseconds: 1), () {
+          double offset = info?.dragOffset ?? 0;
+          SCHomeNav1Controller nav1State = Get.find<SCHomeNav1Controller>();
+          nav1State.hiddenNav(isHidden: offset > 0);
+        });
+        return SliverToBoxAdapter(
+          child: SCHomeRefreshHeader(headerKey, info, DateTime.now()),
+        );
       },
-      onLoading: () {
-        onLoad();
-      },
-      header: const SCCustomHeader(
-        style: SCCustomHeaderStyle.noNavigation,
-      ),
-      child: ListView.separated(
-          controller: state.scrollController,
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          itemBuilder: (BuildContext context, int index) {
-            int type = dataList[index]['type'];
-            return getCell(type: type);
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            if (dataList[index] == SCTypeDefine.SC_HOME_TYPE_GRID) {
-              return const SizedBox();
-            } else {
-              return lineWidget();
-            }
-          },
-          itemCount: dataList.length),
     );
   }
 
+  /// NestedScrollView - header
+  Widget scrollHeader() {
+    return SliverToBoxAdapter(
+      child: listView(),
+    );
+  }
+
+  /// 吸顶tabBar
+  Widget stickyTabBar() {
+    return SliverPersistentHeader(
+        pinned: true,
+        floating: false,
+        delegate: SCStickyTabBarDelegate(child: tabBarItem(), height: 44.0));
+  }
+
+  /// tabBar
+  Widget tabBarItem() {
+    return SCHomeTabBar(
+        tabController: tabController,
+        titleList: widget.tabTitleList,
+        height: tabBarHeight,
+    );
+  }
+
+  /// listView
+  Widget listView() {
+    return ListView.separated(
+        padding: EdgeInsets.zero,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (BuildContext context, int index) {
+          int type = widget.dataList[index]['type'];
+          return getCell(type: type);
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          if (widget.dataList[index] == SCTypeDefine.SC_HOME_TYPE_GRID) {
+            return const SizedBox();
+          } else {
+            return lineWidget();
+          }
+        },
+        itemCount: widget.dataList.length);
+  }
+
+  /// 获取cell
   Widget getCell({required int type}) {
     if (type == SCTypeDefine.SC_HOME_TYPE_BANNER) {
       // banner
@@ -131,35 +250,23 @@ class SCHomeListView1 extends StatelessWidget {
 
   /// 监听滑动
   void scrollNotify() {
-    state.scrollController.addListener(() {
-      scrollFunction?.call(state.scrollController.offset);
+    scrollController.addListener(() {
+      widget.scrollFunction?.call(scrollController.offset);
     });
   }
 
   /// banner-cell
   Widget bannerCell() {
     return SCHomeBanner(
-      bannerBGScale: bannerBGScale,
-      bannerScale: bannerScale,
-      bannerList: bannerList,
-      backgroundImageUrl: bannerBackgroundImageUrl,
-      currentIndex: bannerCurrentIndex,
+      bannerBGScale: widget.bannerBGScale,
+      bannerScale: widget.bannerScale,
+      bannerList: widget.bannerList,
+      backgroundImageUrl: widget.bannerBackgroundImageUrl,
+      currentIndex: widget.bannerCurrentIndex,
       onTap: (int index) {
         workOrder();
       },
     );
-    // return GetBuilder<SCHomeController>(builder: (state) {
-    //   String url = state.allBannerBGList.isEmpty
-    //       ? SCAsset.homeBannerBG1
-    //       : state.allBannerBGList[state.bannerCurrentIndex];
-    //   return SCHomeBanner(
-    //     bannerBGScale: state.bannerBGScale,
-    //     bannerScale: state.bannerScale,
-    //     bannerList: state.allBannerList,
-    //     backgroundImageUrl: url,
-    //     currentIndex: state.bannerCurrentIndex,
-    //   );
-    // });
   }
 
   /// 应用列表-cell
@@ -202,6 +309,8 @@ class SCHomeListView1 extends StatelessWidget {
   /// 资讯-cell
   Widget newsCell() {
     return SCHomeNewsItem(
+      tabTitleList: widget.tabTitleList,
+      tabController: tabController,
       newsList: state.allNewsList,
       onTap: (int index) {
         workOrder();
@@ -213,7 +322,7 @@ class SCHomeListView1 extends StatelessWidget {
   Widget imageCell() {
     return SCHomeImageItem(
       onTap: (int index) {},
-      imageList: [
+      imageList: const [
         SCAsset.homeGrid5,
         SCAsset.homeGrid5,
       ],
@@ -227,7 +336,7 @@ class SCHomeListView1 extends StatelessWidget {
   Widget gridImageCell() {
     return SCHomeGridImageItem(
       onTap: (int index) {},
-      imageList: [
+      imageList: const [
         SCAsset.homeGrid1,
         SCAsset.homeGrid2,
         SCAsset.homeGrid3,
@@ -243,7 +352,7 @@ class SCHomeListView1 extends StatelessWidget {
     return SCHomeGridImageGroup(
       onTap: (int index) {},
       title: '组件名称',
-      imageList: [
+      imageList: const [
         SCAsset.homeGrid5,
         SCAsset.homeBanner2,
         SCAsset.homeBanner3,
@@ -285,46 +394,14 @@ class SCHomeListView1 extends StatelessWidget {
   }
 
   /// 下拉刷新
-  Future onRefresh() async {
-    print('刷新');
-    state.isRefreshing = true;
-    state.changeNavigationState(offset: 0.0);
-    Future.delayed(const Duration(milliseconds: 1500), () {
-      state.refreshController.refreshCompleted();
-      Future.delayed(const Duration(milliseconds: 1000), () {
-        state.isRefreshing = false;
-        state.changeNavigationState(offset: 0.0);
-        changeSkin();
-      });
+  Future<bool> onRefresh() async {
+    return await Future.delayed(const Duration(milliseconds: 500), () {
+      // if (tabController.index == 0) {
+      //   SCHomeNewsRespority respority = repositoryList.first;
+      //   return respority.refresh(false);
+      // }
+      return true;
     });
-
-    /// 当网络请求时间超过2秒
-    // Future.delayed(Duration(milliseconds: 2000), () {
-    //   state.refreshController.finishRefresh(success: true);
-    //   Future.delayed(Duration(milliseconds: 800), (){
-    //     state.isRefreshing = false;
-    //     state.changeNavigationState(offset: 0.0);
-    //   });
-    // });
-    /// 当网络请求时间不超过2秒
-    // state.refreshController.finishRefresh(IndicatorResult.success);
-    // state.isRefreshing = false;
-    // state.changeNavigationState(offset: 0.0);
-    // Future.delayed(Duration(milliseconds: 100), () {
-    //   state.refreshController.finishRefresh(IndicatorResult.success);
-    //   Future.delayed(Duration(milliseconds: 1800), () {
-    //     state.isRefreshing = false;
-    //     state.changeNavigationState(offset: 0.0);
-    //   });
-    // });
-  }
-
-  /// 上拉加载
-  Future onLoad() async {
-    print('加载');
-    // Future.delayed(const Duration(seconds: 3), () {
-    //   state.refreshController.finishLoad(IndicatorResult.noMore);
-    // });
   }
 
   /// 测试数据-工单

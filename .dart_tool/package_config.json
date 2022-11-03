@@ -92,6 +92,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "custom_refresh_indicator",
+      "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/custom_refresh_indicator-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "date_format",
       "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/date_format-2.0.7",
       "packageUri": "lib/",
@@ -120,6 +126,24 @@
       "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/extended_image_library-3.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "extended_list",
+      "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/extended_list-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "extended_list_library",
+      "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/extended_list_library-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "extended_nested_scroll_view",
+      "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/extended_nested_scroll_view-5.1.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "fake_async",
@@ -320,6 +344,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "intl",
+      "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "js",
       "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/js-0.6.4",
       "packageUri": "lib/",
@@ -330,6 +360,18 @@
       "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/lints-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "loading_more_list",
+      "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/loading_more_list-5.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "loading_more_list_library",
+      "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/loading_more_list_library-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "lpinyin",
@@ -496,6 +538,12 @@
     {
       "name": "pull_to_refresh",
       "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/pull_to_refresh-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "pull_to_refresh_notification",
+      "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/pull_to_refresh_notification-2.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -680,6 +728,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "visibility_detector",
+      "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/visibility_detector-0.3.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "waterfall_flow",
+      "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/waterfall_flow-3.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "webview_flutter",
       "rootUri": "file:///Users/hxkj/Desktop/my/software/flutter-2.2.3/.pub-cache/hosted/pub.dartlang.org/webview_flutter-3.0.4",
       "packageUri": "lib/",
@@ -728,7 +788,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-10-21T09:40:54.079025Z",
+  "generated": "2022-11-03T01:33:47.772745Z",
   "generator": "pub",
   "generatorVersion": "2.17.1"
 }

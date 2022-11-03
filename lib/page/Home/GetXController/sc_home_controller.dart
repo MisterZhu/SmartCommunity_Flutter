@@ -2,6 +2,7 @@
 import 'package:get/get.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller2.dart';
+import 'package:smartcommunity/page/Home/GetXController/sc_home_nav1_controller.dart';
 
 import '../../Mine/Model/sc_my_house_model.dart';
 import '../../Service/GetXController/sc_service_controller.dart';
@@ -29,8 +30,10 @@ class SCHomeController extends GetxController {
   changeHouse({required SCMyHouseModel? model}) {
     SCHomeController1 state1 = Get.find<SCHomeController1>();
     SCHomeController2 state2 = Get.find<SCHomeController2>();
+    SCHomeNav1Controller nav1State = Get.find<SCHomeNav1Controller>();
 
-    state1.changeCommunityName(name: model?.communityName ?? '');
+    state1.update();
     state2.changeCommunityName(name: model?.communityName ?? '');
+    nav1State.changeCommunityName(name: model?.communityName ?? '');
   }
 }

@@ -6,6 +6,8 @@ import 'package:smartcommunity/constants/sc_colors.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller1.dart';
 import 'package:smartcommunity/page/Home/GetXController/sc_home_controller2.dart';
+import 'package:smartcommunity/page/Home/GetXController/sc_home_nav1_controller.dart';
+import 'package:smartcommunity/page/Home/View/Skin2/sc_home_navigation2.dart';
 import 'package:smartcommunity/page/Home/View/sc_home_float_login.dart';
 import 'package:smartcommunity/page/Mine/GetXController/sc_personal_info_controller.dart';
 import 'package:smartcommunity/skin/Model/sc_user.dart';
@@ -23,12 +25,13 @@ class SCHomePage extends StatefulWidget {
   SCHomeState createState() => SCHomeState();
 }
 
-class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
+class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
   SCHomeController state = Get.put(SCHomeController());
   SCHomeController1 state1 = Get.put(SCHomeController1());
   SCHomeController2 state2 = Get.put(SCHomeController2());
   SCServiceController service = Get.put(SCServiceController());
   SCPersonalInfoController personalInfoController = Get.put(SCPersonalInfoController());
+  SCHomeNav1Controller nav1State = Get.put(SCHomeNav1Controller());
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +51,8 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
     super.initState();
     SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.light);
     if (SCScaffoldManager.instance.user.communityName != null) {
-      state1.communityName = SCScaffoldManager.instance.user.communityName!;
       state2.communityName = SCScaffoldManager.instance.user.communityName!;
+      nav1State.communityName = SCScaffoldManager.instance.user.communityName!;
     }
     /// 获取用户信息
     getUserInfo();
@@ -90,7 +93,7 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin {
 
   /// skin1
   Widget skin1() {
-    return const SCHomeSkin1();
+    return SCHomeSkin1();
   }
 
   /// skin2

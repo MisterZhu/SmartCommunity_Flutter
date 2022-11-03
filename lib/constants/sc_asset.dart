@@ -17,6 +17,8 @@ class SCAsset {
   static const String iconLoadingSuccess = 'images/loading/icon_success_white.png';
   /// loading-失败
   static const String iconLoadingFailed = 'images/loading/icon_failed_white.png';
+  /// 无数据
+  static const String iconLoadingEmpty = 'images/loading/icon_empty.jpeg';
 
   /// 白色定位icon
   static const String iconLocation = 'images/icon_location_white.png';

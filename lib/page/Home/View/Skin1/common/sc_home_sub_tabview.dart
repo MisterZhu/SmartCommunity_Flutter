@@ -1,104 +1,70 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:loading_more_list/loading_more_list.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:smartcommunity/constants/sc_asset.dart';
-import 'package:smartcommunity/constants/sc_colors.dart';
-import 'package:smartcommunity/constants/sc_fonts.dart';
 import 'package:smartcommunity/page/Home/Model/sc_home_news_model.dart';
 import 'package:smartcommunity/page/Home/View/Skin1/data/sc_home_news_repository.dart';
+import 'package:smartcommunity/page/Home/View/Skin1/common/sc_home_loadmore_footer.dart';
 
-/// 首页-新闻资讯item
+import '../../../../../constants/sc_asset.dart';
+import '../../../../../constants/sc_colors.dart';
+import '../../../../../constants/sc_fonts.dart';
 
-class SCHomeNewsItem extends StatefulWidget {
+/// 首页第一套皮肤TabView的子widget
+class SCHomeSubTabView extends StatefulWidget {
+  const SCHomeSubTabView(this.repository);
 
-  final List tabTitleList;
-
-  List<SCHomeNewsModel>? newsList;
-
-  final Function(int index)? onTap;
-
-  final TabController tabController;
-
-  SCHomeNewsItem({Key? key, required this.tabController, required this.newsList, required this.tabTitleList, this.onTap}) : super(key: key);
+  final SCHomeNewsRespority? repository;
 
   @override
-  SCHomeNewsItemState createState() => SCHomeNewsItemState();
+  SCHomeSubTabViewState createState() => SCHomeSubTabViewState();
 }
 
-class SCHomeNewsItemState extends State<SCHomeNewsItem>
+class SCHomeSubTabViewState extends State<SCHomeSubTabView>
     with AutomaticKeepAliveClientMixin {
-
-  /// scale
-  final double scale = 1.0;
-
   @override
   Widget build(BuildContext context) {
-    return body(context);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  dispose() {
-    super.dispose();
-  }
-
-  /// body
-  Widget body(BuildContext context) {
-    List<Widget> list = [];
-    for (String title in widget.tabTitleList) {
-      list.add(gridItems());
-    }
-    return TabBarView(
-      // physics: NeverScrollableScrollPhysics(),
-      controller: widget.tabController,
-        children: list);
-  }
-
-  /// 资讯网格item
-  Widget gridItems() {
-    ScrollController scrollController = ScrollController(keepScrollOffset: true);
-    int? count = widget.newsList?.length;
-    return LoadingMoreCustomScrollView();
-    return SmartRefresher(controller: RefreshController(), enablePullDown: false, enablePullUp: true,child: DecoratedBox(
-      decoration: const BoxDecoration(
-        color: SCColors.color_F5F5F5,
+    super.build(context);
+    return Padding(
+      padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 6.0),
+      child: LoadingMoreCustomScrollView(
+        showGlowLeading: false,
+        physics: const ClampingScrollPhysics(),
+        slivers: <Widget>[
+          LoadingMoreSliverList<SCHomeNewsModel>(
+              SliverListConfig<SCHomeNewsModel>(
+            lastChildLayoutType: LastChildLayoutType.foot,
+            itemBuilder: itemBuilder,
+            indicatorBuilder: indicatorBuilder,
+            sourceList: widget.repository!,
+            extendedListDelegate:
+                const SliverWaterfallFlowDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 300,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 16,
+            ),
+            //isLastOne: false
+          ))
+        ],
       ),
-      child: StaggeredGridView.countBuilder(
-          controller: scrollController,
-          padding: const EdgeInsets.only(
-              left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
-          mainAxisSpacing: 16,
-          crossAxisSpacing: 12,
-          crossAxisCount: 2,
-          shrinkWrap: true,
-          itemCount: count,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            SCHomeNewsModel model = widget.newsList![index];
-            return gridCellItem(model: model, index: index);
-          },
-          staggeredTileBuilder: (int index) {
-            return const StaggeredTile.fit(1);
-          }),
-    ),);
+    );
+  }
+
+  /// item
+  Widget itemBuilder(BuildContext context, SCHomeNewsModel item, int index) {
+    return gridCellItem(model: item, index: index);
+  }
+
+  /// indicator
+  Widget indicatorBuilder(BuildContext context, IndicatorStatus status) {
+    return SCHomeLoadMoreFooter(status: status, isSliver: true,);
   }
 
   /// 资讯-网格cellItem
   Widget gridCellItem({SCHomeNewsModel? model, required int index}) {
     return GestureDetector(
-      onTap: () {
-        if (widget.onTap != null) {
-          widget.onTap?.call(index);
-        }
-      },
+      onTap: () {},
       child: Container(
-        padding: EdgeInsets.only(bottom: 14.0),
+        padding: const EdgeInsets.only(bottom: 14.0),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(6.0),
@@ -109,11 +75,11 @@ class SCHomeNewsItemState extends State<SCHomeNewsItem>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             imageItem(model: model),
-            SizedBox(
+            const SizedBox(
               height: 8.0,
             ),
             titleItem(model: model),
-            SizedBox(
+            const SizedBox(
               height: 6.0,
             ),
             pubTimeItem(model: model)
@@ -145,14 +111,14 @@ class SCHomeNewsItemState extends State<SCHomeNewsItem>
   Widget titleItem({SCHomeNewsModel? model}) {
     String title = model?.title ?? '';
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 6.0),
+      padding: const EdgeInsets.symmetric(horizontal: 6.0),
       child: Text(
         title,
         textAlign: TextAlign.left,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          fontSize: SCFonts.f14 * scale,
+        style: const TextStyle(
+          fontSize: SCFonts.f14,
           color: SCColors.color_1B1D33,
           fontWeight: FontWeight.w500,
         ),
@@ -171,7 +137,7 @@ class SCHomeNewsItemState extends State<SCHomeNewsItem>
       iconUrl = SCAsset.iconSelectedLike;
     }
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 6.0),
+      padding: const EdgeInsets.symmetric(horizontal: 6.0),
       child: Row(
         children: [
           Expanded(
@@ -180,13 +146,13 @@ class SCHomeNewsItemState extends State<SCHomeNewsItem>
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
-            style: TextStyle(
-              fontSize: SCFonts.f12 * scale,
+            style: const TextStyle(
+              fontSize: SCFonts.f12,
               color: SCColors.color_8D8E99,
               fontWeight: FontWeight.w400,
             ),
           )),
-          SizedBox(
+          const SizedBox(
             width: 16.0,
           ),
           Row(
@@ -196,15 +162,15 @@ class SCHomeNewsItemState extends State<SCHomeNewsItem>
                 width: 14.0,
                 height: 14.0,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 4.0,
               ),
               Text(
                 likeCount,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: SCFonts.f12 * scale,
+                style: const TextStyle(
+                  fontSize: SCFonts.f12,
                   color: SCColors.color_8D8E99,
                   fontWeight: FontWeight.w400,
                 ),
@@ -217,6 +183,5 @@ class SCHomeNewsItemState extends State<SCHomeNewsItem>
   }
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }

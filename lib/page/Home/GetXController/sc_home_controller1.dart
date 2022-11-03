@@ -12,27 +12,10 @@ import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 
 import '../../../constants/sc_default_value.dart';
 import '../../../constants/sc_h5.dart';
+import '../../../utils/sc_utils.dart';
 // import 'package:image_cropper/image_cropper.dart';
 
 class SCHomeController1 extends GetxController {
-
-  /// 导航栏不透明度
-  double opacity = 1.0;
-
-  /// 导航栏默认offset
-  final double navigationOffset = 120.0;
-
-  /// 导航栏背景颜色,默认白色
-  Color navigationBackgroundColor = SCColors.color_FE8947;
-  /// 导航栏状态，是否置顶
-  bool navigationSticky = false;
-  /// 导航栏置顶颜色,默认黑色
-  Color navigationStickyColor = Colors.white;
-  /// 未置顶颜色,默认白色
-  Color navigationNormalColor = Colors.white;
-
-  /// 是否在下拉刷新中
-  bool isRefreshing = false;
 
   /// banner背景大图比例
   double bannerBGScale = 750.0 / 544.0;
@@ -52,15 +35,6 @@ class SCHomeController1 extends GetxController {
   /// banner当前index
   int bannerCurrentIndex = 0;
 
-  /// 项目名称
-  String communityName = "请登录";
-
-  /// 房号文本数字数量
-  int titleMaxLength = 10;
-
-  RefreshController refreshController = RefreshController(initialRefresh: false);
-
-  ScrollController scrollController = ScrollController();
 
   /// 所有应用
   late List allItemsList;
@@ -112,6 +86,9 @@ class SCHomeController1 extends GetxController {
   /// swiper-pagenation选中颜色
   Color swiper_active_color = Colors.orange;
 
+  /// tab标题数据源
+  List tabTitleList = ["第一页", "第二页", "第三页", "第四页", "第五页", "第六页"];
+
   @override
   void onInit() {
     super.onInit();
@@ -138,38 +115,9 @@ class SCHomeController1 extends GetxController {
     ];
   }
 
-  /// 修改导航栏透状态
-  void changeNavigationState({double offset = 0.0}) {
-    if (isRefreshing) {
-      opacity = 0;
-    }else {
-      if (offset < 0.0) {
-        opacity = 0;
-      } else {
-        opacity = 1.0;
-      }
-    }
-    if (offset > navigationOffset) {
-      navigationSticky = true;
-    }else {
-      navigationSticky = false;
-    }
-    update();
-  }
-
   /// 修改bannerIndex
   void changeBannerIndex({int index = 0}) {
     bannerCurrentIndex = index;
-    update();
-  }
-
-  /// 修改项目名称
-  changeCommunityName({required String name}) {
-    if (name.isEmpty) {
-      communityName = "请登录";
-    } else {
-      communityName = name;
-    }
     update();
   }
 
@@ -180,12 +128,6 @@ class SCHomeController1 extends GetxController {
 
   /// 重置数据
   void resetAllData() {
-    opacity = 1;
-    navigationBackgroundColor = SCColors.color_FE8947;
-    navigationSticky = false;
-    navigationStickyColor = Colors.white;
-    navigationNormalColor = Colors.white;
-    isRefreshing = false;
     bannerCurrentIndex = 0;
     update();
   }
@@ -193,8 +135,5 @@ class SCHomeController1 extends GetxController {
   @override
   onClose() {
     super.onClose();
-    refreshController.dispose();
-    scrollController.removeListener(() { });
-    scrollController.dispose();
   }
 }
