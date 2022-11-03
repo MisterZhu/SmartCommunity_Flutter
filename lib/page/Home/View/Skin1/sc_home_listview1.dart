@@ -121,6 +121,7 @@ class SCHomeListView1State extends State<SCHomeListView1>
       respority.dispose();
     }
     tabController.dispose();
+    scrollController.dispose();
     super.dispose();
   }
 
