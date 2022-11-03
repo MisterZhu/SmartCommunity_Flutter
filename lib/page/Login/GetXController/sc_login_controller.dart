@@ -30,11 +30,6 @@ class SCLoginController extends GetxController {
   /// 是否显示关闭按钮，默认不显示
   late bool showCloseBtn = false;
 
-  updateShowCloseBtnState({required bool show}) {
-    showCloseBtn = show;
-    update();
-  }
-
   /// 获取验证码按钮是否可以点击
   updateCodeButtonState({required bool enable}) {
     codeBtnEnable = enable;

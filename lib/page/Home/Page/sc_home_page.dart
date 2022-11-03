@@ -1,4 +1,4 @@
-/// 首页-page
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -19,6 +19,8 @@ import '../../../utils/Router/sc_router_path.dart';
 import '../../Service/GetXController/sc_service_controller.dart';
 import '../View/Skin1/sc_home_skin1.dart';
 import '../View/Skin2/sc_home_skin2.dart';
+
+/// 首页-page
 
 class SCHomePage extends StatefulWidget {
   @override
@@ -103,9 +105,11 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
 
   /// 登录悬浮窗
   Widget floatLoginWidget() {
-    return Visibility(visible: !SCScaffoldManager.instance.isLogin, child: SCHomeFloatLogin(
-      onTap: (){
-        SCRouterHelper.pathPage(SCRouterPath.codeLoginPath,  {'showClose' : true});
+    return Visibility(
+      visible: !SCScaffoldManager.instance.isLogin,
+      child: SCHomeFloatLogin(
+        onTap: (){
+          SCRouterHelper.presentLoginPage();
       },
     ));
   }

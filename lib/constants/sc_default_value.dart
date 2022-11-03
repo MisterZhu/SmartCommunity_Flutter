@@ -89,6 +89,9 @@ class SCDefaultValue {
 
   static const String paySuccessTip = "支付成功";
 
+  /// 支付失败提示
+  static const String payFailureTip = "支付失败";
+
   /// 未安装微信
   static const String unInstallWeChatTip = "请安装微信";
 

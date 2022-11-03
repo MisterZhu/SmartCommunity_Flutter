@@ -100,7 +100,11 @@ class SCLoginListView extends StatelessWidget {
 
   /// header
   Widget headerItem() {
-    return SCLoginHeader(showClose: showClose);
+    return SCLoginHeader(
+      showClose: showClose,
+      closeAction: () {
+        SCRouterHelper.back(null);
+    },);
   }
 
   /// 手机号验证码输入框

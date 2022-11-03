@@ -4,10 +4,9 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:smartcommunity/skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/utils/Router/sc_router_pages.dart';
 import 'package:smartcommunity/utils/Router/sc_router_path.dart';
-import 'package:smartcommunity/widgets/Dialog/sc_dialog_utils.dart';
-
+import 'package:smartcommunity/utils/sc_utils.dart';
 import '../../constants/sc_colors.dart';
-import '../../widgets/Dialog/sc_base_dialog.dart';
+import '../../page/Login/Page/sc_login_page.dart';
 
 /// 路由-工具管理
 class SCRouterHelper {
@@ -59,7 +58,7 @@ class SCRouterHelper {
       }
     }
     if (isNeedLogin == true && SCScaffoldManager.instance.isLogin == false) {
-      SCRouterHelper.pathPage(SCRouterPath.codeLoginPath,  {'showClose' : true});
+      presentLoginPage();
       return null;
     }
 
@@ -70,6 +69,18 @@ class SCRouterHelper {
   static Future? pathOffAllPage(String path, dynamic params) {
     params ??= '';
     return Get.offAllNamed(path, arguments: params);
+  }
+
+  /*present方式打开登录页面*/
+  static void presentLoginPage() {
+    SCUtils.getCurrentContext(completionHandler: (context) async {
+      Navigator.push(context, MaterialPageRoute(
+          fullscreenDialog: true,
+          builder: (BuildContext context) {
+            return SCLoginPage(showCloseBtn: true);
+          }),
+      );
+    });
   }
 
   /*返回上一页*/
