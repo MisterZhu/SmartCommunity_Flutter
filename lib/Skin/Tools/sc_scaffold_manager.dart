@@ -36,6 +36,8 @@ class SCScaffoldManager {
 
   static late SharedPreferences _preferences;
 
+  static late List _getXTagList;
+
   SCScaffoldManager._internal() {
     _scaffoldModel = SCScaffoldModel();
     _user = SCUser();
@@ -48,6 +50,8 @@ class SCScaffoldManager {
   bool get isLogin => _isLogin;
 
   SharedPreferences get preferences => _preferences;
+
+  List get getXTagList => _getXTagList;
 
   /// 初始化
   void initBase() {
@@ -71,6 +75,7 @@ class SCScaffoldManager {
 
   /// 初始化scaffold数据
   Future initScaffold() async {
+    _getXTagList = [];
     _preferences = await SharedPreferences.getInstance();
 
     bool hasScaffoldKey =
@@ -201,5 +206,71 @@ class SCScaffoldManager {
       print('本地数据：${_user.toJson()}');
       return _user;
     }
+  }
+
+  /// 获取GetXController-tag
+  String getXControllerTag(String pageName) {
+    bool isContainPage = false;
+    int pageIndex = 0;
+    String tag = "$pageName$pageIndex";
+    for (int i=0; i<getXTagList.length; i++) {
+      var json = getXTagList[i];
+      String subPageName = json['pageName'];
+      if (subPageName == pageName) {
+        isContainPage = true;
+        pageIndex = i;
+        break;
+      }
+    }
+
+    if (isContainPage) {/// page已存在
+      var json = getXTagList[pageIndex];
+      int index = json['index'];
+      List tagList = json['tagList'];
+      index+=1;
+      tag = "$pageName$index";
+      tagList.add(tag);
+      json['index'] = index;
+      json['tagList'] = tagList;
+      getXTagList[pageIndex] = json;
+    } else {/// page不存在
+      var json = {
+        "pageName" : pageName,
+        "index" : 0,
+        "tagList" : [tag]
+      };
+      getXTagList.add(json);
+    }
+    return tag;
+  }
+
+  /// 删除GetXController-tag
+  bool deleteGetXControllerTag(String pageName, String tag) {
+    bool success = false;
+    bool isContainPage = false;
+    int pageIndex = 0;
+    for (int i=0; i<getXTagList.length; i++) {
+      var json = getXTagList[i];
+      String subPageName = json['pageName'];
+      if (subPageName == pageName) {
+        isContainPage = true;
+        pageIndex = i;
+        break;
+      }
+    }
+
+    if (isContainPage) {
+      var json = getXTagList[pageIndex];
+      int index = json['index'];
+      List list = json['tagList'];
+      success = list.remove(tag);
+      if (success) {
+        index -= 1;
+      }
+      json['tagList'] = list;
+      json['index'] = index;
+      getXTagList[pageIndex] = json;
+    }
+    return success;
   }
 }
