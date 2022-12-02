@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +13,7 @@ import 'package:smartcommunity/Page/Login/View/SelectCity/sc_city_listview.dart'
 import 'package:smartcommunity/Page/Login/View/SelectCity/sc_city_search_result_listview.dart';
 
 import '../../../Constants/sc_enum.dart';
+import '../../../Skin/Tools/sc_scaffold_manager.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
 import '../../../Utils/sc_location_utils.dart';
 import '../../../Utils/sc_utils.dart';
@@ -34,13 +34,24 @@ class SCSelectCityState extends State<SCSelectCityPage> with WidgetsBindingObser
   String locationCity = '';
   SCLocationStatus locationStatus = SCLocationStatus.failure;
 
-  SCSelectCityController state = Get.put(SCSelectCityController());
-  SCSearchCityController searchState = Get.put(SCSearchCityController());
+  late SCSelectCityController selectState;
 
+  late SCSearchCityController searchState;
+
+  String tag = '';
 
   @override
   void initState() {
     super.initState();
+    String pageName = (SCSelectCityPage).toString();
+    tag = SCScaffoldManager.instance.getXControllerTag(pageName);
+    selectState = Get.put(SCSelectCityController(), tag: tag);
+    selectState.tag = tag;
+    selectState.pageName = pageName;
+    searchState = Get.put(SCSearchCityController(), tag: tag);
+    searchState.tag = tag;
+    searchState.pageName = pageName;
+
     var params = Get.arguments;
     log('上个页面传过来的参数:$params');
     cityCode = params['cityCode'];
@@ -67,6 +78,8 @@ class SCSelectCityState extends State<SCSelectCityPage> with WidgetsBindingObser
     super.dispose();
     /// 销毁观察者
     WidgetsBinding.instance.removeObserver(this);
+    SCScaffoldManager.instance.deleteGetXControllerTag(selectState.pageName, selectState.tag);
+    SCScaffoldManager.instance.deleteGetXControllerTag(searchState.pageName, searchState.tag);
   }
 
   void loadData() async {
@@ -100,7 +113,7 @@ class SCSelectCityState extends State<SCSelectCityPage> with WidgetsBindingObser
     // show sus tag.
     SuspensionUtil.setShowSuspensionStatus(cityList);
 
-    state.updateCityList(list: cityList);
+    selectState.updateCityList(list: cityList);
   }
 
   @override
@@ -132,11 +145,16 @@ class SCSelectCityState extends State<SCSelectCityPage> with WidgetsBindingObser
 
   /// header
   Widget header() {
-    return GetBuilder<SCSearchCityController>(builder: (state){
+    return GetBuilder<SCSearchCityController>(
+        init: searchState,
+        tag: tag,
+        builder: (value){
       return SCCitySearchHeader(
+        selectState: selectState,
+        searchState: searchState,
         locationStatus: locationStatus,
         locationCity: locationCity,
-        isShowCancel: state.isShowCancel,
+        isShowCancel: searchState.isShowCancel,
         cancelAction: (){
         cancelAction();
       }, valueChangedAction: (String value) {
@@ -156,11 +174,15 @@ class SCSelectCityState extends State<SCSelectCityPage> with WidgetsBindingObser
 
   /// 城市列表
   Widget cityListView() {
-    return GetBuilder<SCSelectCityController>(builder: (state){
-      if (state.isShowResult) {
-        return SCCitySearchResultListView(cityList: state.searchList,
+    return GetBuilder<SCSelectCityController>(
+        init: selectState,
+        tag: tag,
+        builder: (value) {
+      if (selectState.isShowResult) {
+        return SCCitySearchResultListView(
+          cityList: selectState.searchList,
           selectCityHandler: (SCCityModel model) {
-            state.updateSelectCity(model: model);
+            selectState.updateSelectCity(model: model);
             var params = {
               'selectCity' : model.name,
               'selectCityCode' : model.cityCode,
@@ -169,8 +191,8 @@ class SCSelectCityState extends State<SCSelectCityPage> with WidgetsBindingObser
             SCRouterHelper.back(params);
         },);
       } else {
-        return SCCityListView(cityList: state.cityList, selectCityHandler: (SCCityModel model) {
-          state.updateSelectCity(model: model);
+        return SCCityListView(cityList: selectState.cityList, selectCityHandler: (SCCityModel model) {
+          selectState.updateSelectCity(model: model);
           var params = {
             'selectCity' : model.name,
             'selectCityCode' : model.cityCode,
@@ -184,23 +206,19 @@ class SCSelectCityState extends State<SCSelectCityPage> with WidgetsBindingObser
 
   /// 取消
   cancelAction() {
-    SCSelectCityController state = Get.find<SCSelectCityController>();
-    state.updateSearchResult(status: false);
-    state.updateSearchList(list: []);
+    selectState.updateSearchResult(status: false);
+    selectState.updateSearchList(list: []);
 
-    SCSearchCityController searchState = Get.find<SCSearchCityController>();
     searchState.updateCancelButtonStatus(status: false);
   }
 
   /// 文本框内容改变
   valueChangedAction(String value) {
-    SCSelectCityController state = Get.find<SCSelectCityController>();
-
     if (value.isNotEmpty) {
       List<SCCityModel> list = [];
-      if (state.cityList != null) {
-        for(int i=0; i < state.cityList!.length; i++) {
-          SCCityModel cityModel = state.cityList![i];
+      if (selectState.cityList != null) {
+        for(int i=0; i < selectState.cityList!.length; i++) {
+          SCCityModel cityModel = selectState.cityList![i];
           String name = cityModel.name;
           // String namePinYin = cityModel?.namePinyin ?? '';
           // String tagIndex = cityModel?.tagIndex ?? '';
@@ -208,17 +226,16 @@ class SCSelectCityState extends State<SCSelectCityPage> with WidgetsBindingObser
             list.add(cityModel);
           }
         }
-        state.updateSearchList(list: list);
+        selectState.updateSearchList(list: list);
       }
     } else {
-      state.updateSearchList(list: []);
+      selectState.updateSearchList(list: []);
     }
   }
 
   /// 定位
   startLocation() async{
     LocationPermission permission = await SCLocationUtils.requestPermission();
-    SCSearchCityController searchState = Get.find<SCSearchCityController>();
     searchState.updateLocationPermission(permission: permission);
     if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
       /// 定位被拒绝，无权限
@@ -236,7 +253,6 @@ class SCSelectCityState extends State<SCSelectCityPage> with WidgetsBindingObser
     await SCLocationUtils.reGeoCode(position: position, success: (value){
       SCLocationModel model = value;
       log('城市:${model.addressComponent?.city ?? ''}');
-      SCSearchCityController searchState = Get.find<SCSearchCityController>();
       searchState.updateLocationCity(
           city: model.addressComponent?.city ?? '',
           code: model.addressComponent?.citycode ?? '',

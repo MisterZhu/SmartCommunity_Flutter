@@ -7,7 +7,6 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/Constants/sc_enum.dart';
 import 'package:smartcommunity/Page/Login/Model/sc_community_model.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_path.dart';
-
 import '../../../../Constants/sc_colors.dart';
 import '../../../../Constants/sc_fonts.dart';
 import '../../../../Utils/Router/sc_router_helper.dart';
@@ -18,9 +17,13 @@ import '../../GetXController/sc_search_community_controller.dart';
 class SCCommunityItem extends StatelessWidget {
   final SCCommunityModel model;
   final SCSelectHouseLogicType type;
+  final SCSearchCommunityController searchState;
 
-  const SCCommunityItem({Key? key, required this.model, required this.type})
-      : super(key: key);
+  SCCommunityItem({Key? key,
+    required this.searchState,
+    required this.model,
+    required this.type
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +65,7 @@ class SCCommunityItem extends StatelessWidget {
         ),
       ),
       onTap: () {
-        SCSearchCommunityController state =
-            Get.find<SCSearchCommunityController>();
-        state.hideKeyboard();
+        searchState.hideKeyboard();
 
         if (type == SCSelectHouseLogicType.login) {
           /// 去选房号

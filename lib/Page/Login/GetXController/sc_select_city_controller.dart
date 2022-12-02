@@ -1,5 +1,5 @@
+import 'dart:developer';
 import 'package:get/get.dart';
-
 import '../Model/sc_city_model.dart';
 
 /// 选择城市-Controller
@@ -17,9 +17,14 @@ class SCSelectCityController extends GetxController {
   /// 选择的城市
   SCCityModel? selectCityModel;
 
+  String pageName = '';
+
+  String tag = '';
+
   @override
   onInit() {
     super.onInit();
+    getCurrentTag();
   }
 
   /// 更新城市列表数据源

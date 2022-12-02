@@ -1,9 +1,7 @@
 
-
+import 'dart:developer';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:smartcommunity/Page/Login/GetXController/sc_search_community_controller.dart';
-
 import '../../../Constants/sc_enum.dart';
 
 class SCSearchCityController extends GetxController {
@@ -29,9 +27,14 @@ class SCSearchCityController extends GetxController {
   /// 定位状态，默认失败
   SCLocationStatus locationStatus = SCLocationStatus.failure;
 
+  String pageName = '';
+
+  String tag = '';
+
   @override
   onInit() {
     super.onInit();
+    getCurrentTag();
   }
 
   /// 是否显示取消按钮

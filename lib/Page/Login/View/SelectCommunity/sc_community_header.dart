@@ -3,6 +3,9 @@ import 'package:smartcommunity/Constants/sc_enum.dart';
 import 'package:smartcommunity/Page/Login/View/SelectCommunity/sc_community_search_item.dart';
 import 'package:smartcommunity/Page/Login/View/SelectCity/sc_current_city_item.dart';
 
+import '../../../../Page/Login/GetXController/sc_search_community_controller.dart';
+import '../../../../Page/Login/GetXController/sc_select_community_controller.dart';
+
 /// 搜索社区header
 
 class SCCommunityHeader extends StatelessWidget {
@@ -23,9 +26,14 @@ class SCCommunityHeader extends StatelessWidget {
   /// 选择的城市
   final String? selectCity;
 
+  final SCSearchCommunityController searchState;
+  final SCSelectCommunityController selectState;
+
   SCCommunityHeader(
       {
         Key? key,
+        required this.selectState,
+        required this.searchState,
         this.locationStatus = SCLocationStatus.failure,
         this.locationCity = '',
         this.selectCity = '',
@@ -50,6 +58,8 @@ class SCCommunityHeader extends StatelessWidget {
     return Column(
       children: [
         SCCommunitySearchItem(
+          selectState: selectState,
+          searchState: searchState,
           selectCity: city ?? '请选择',
           node: node,
           isShowCancel: isShowCancel,

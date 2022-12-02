@@ -4,7 +4,7 @@ import 'package:smartcommunity/Constants/sc_colors.dart';
 import 'package:smartcommunity/Constants/sc_enum.dart';
 import 'package:smartcommunity/Constants/sc_fonts.dart';
 import 'package:smartcommunity/Page/Login/GetXController/sc_select_house_data_controller.dart';
-import 'package:smartcommunity/Page/Login/GetXController/sc_select_house_search_status_controller.dart.dart';
+import 'package:smartcommunity/Page/Login/GetXController/sc_select_house_search_status_controller.dart';
 import 'package:smartcommunity/Page/Login/Model/SelectHouse/sc_select_house_block_model.dart';
 import 'package:smartcommunity/Page/Login/View/SelectHouse/sc_select_house_listview.dart';
 import 'package:smartcommunity/Page/Login/View/SelectHouse/sc_select_house_search_dynamic_view.dart';

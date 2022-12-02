@@ -10,7 +10,7 @@ import 'package:smartcommunity/Utils/Router/sc_router_pages.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_path.dart';
 import 'package:smartcommunity/Utils/Toast/sc_toast.dart';
 
-import '../../GetXController/sc_select_house_search_status_controller.dart.dart';
+import '../../GetXController/sc_select_house_search_status_controller.dart';
 
 /// Copyright (c), 浙江慧享信息科技有限公司
 /// FileName: sc_select_house_community_listview

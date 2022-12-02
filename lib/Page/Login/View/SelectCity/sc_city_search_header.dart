@@ -3,6 +3,9 @@ import 'package:smartcommunity/Constants/sc_enum.dart';
 import 'package:smartcommunity/Page/Login/View/SelectCity/sc_city_search_item.dart';
 import 'package:smartcommunity/Page/Login/View/SelectCity/sc_current_city_item.dart';
 
+import '../../../../Page/Login/GetXController/sc_search_city_controller.dart';
+import '../../../../Page/Login/GetXController/sc_select_city_controller.dart';
+
 /// 搜索城市header
 
 class SCCitySearchHeader extends StatelessWidget {
@@ -17,8 +20,13 @@ class SCCitySearchHeader extends StatelessWidget {
   /// 定位状态，默认未知
   SCLocationStatus locationStatus;
 
+  final SCSelectCityController selectState;
+  final SCSearchCityController searchState;
+
   SCCitySearchHeader(
       { Key? key,
+        required this.selectState,
+        required this.searchState,
         this.locationStatus = SCLocationStatus.failure,
         this.locationCity = '',
         this.isShowCancel = false,
@@ -36,6 +44,8 @@ class SCCitySearchHeader extends StatelessWidget {
     return Column(
       children: [
         SCCitySearchItem(
+          selectState: selectState,
+          searchState: searchState,
           isShowCancel: isShowCancel,
           cancelAction: (){
           if (cancelAction != null) {

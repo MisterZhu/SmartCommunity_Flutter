@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -8,7 +7,6 @@ import 'package:smartcommunity/Constants/sc_fonts.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_path.dart';
 import 'package:smartcommunity/Utils/sc_location_utils.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
-
 import '../../../../Constants/sc_asset.dart';
 import '../../../../Constants/sc_colors.dart';
 import '../../../../Utils/Router/sc_router_helper.dart';

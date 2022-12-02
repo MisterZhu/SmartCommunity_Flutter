@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:smartcommunity/Constants/sc_asset.dart';
 import 'package:smartcommunity/Constants/sc_colors.dart';
 import 'package:smartcommunity/Constants/sc_fonts.dart';
-import 'package:smartcommunity/Page/Login/GetXController/sc_select_house_search_status_controller.dart.dart';
+import 'package:smartcommunity/Page/Login/GetXController/sc_select_house_search_status_controller.dart';
 
 
 /// Copyright (c), 浙江慧享信息科技有限公司

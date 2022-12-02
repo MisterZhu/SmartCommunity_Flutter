@@ -15,13 +15,20 @@ import '../../Model/sc_community_model.dart';
 /// 园区列表
 
 class SCCommunityListView extends StatelessWidget {
-  SCCommunityListView({Key? key, this.communityList, this.type = SCSelectHouseLogicType.login}) : super(key: key);
+  SCCommunityListView({Key? key,
+    required this.selectState,
+    required this.searchState,
+    this.communityList,
+    this.type = SCSelectHouseLogicType.login
+  }) : super(key: key);
 
   final List<SCCommunityModel>? communityList;
 
   SCSelectHouseLogicType type;
 
-  SCSelectCommunityController communityController = Get.find<SCSelectCommunityController>();
+  final SCSelectCommunityController selectState;
+
+  final SCSearchCommunityController searchState;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +48,7 @@ class SCCommunityListView extends StatelessWidget {
           ),
           onLoad: onLoadMore,
           onRefresh: onRefresh,
-          controller: communityController.refreshController,
+          controller: selectState.refreshController,
           child: ListView.separated(
               shrinkWrap: true,
               padding: EdgeInsets.zero,
@@ -58,9 +65,6 @@ class SCCommunityListView extends StatelessWidget {
   }
 
   Widget emptyView() {
-    SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
-    SCSelectCommunityController selectState = Get.find<SCSelectCommunityController>();
-
     bool showButton = false;
     if (searchState.selectCity != '' && !selectState.isShowResult) {
       showButton = true;
@@ -79,20 +83,20 @@ class SCCommunityListView extends StatelessWidget {
   }
 
   Widget getCell({required SCCommunityModel model}) {
-    return SCCommunityItem(model: model,type: type,);
+    return SCCommunityItem(searchState: searchState, model: model, type: type,);
   }
 
   Future onRefresh() async{
-    communityController.refreshController.finishLoad();
-    communityController.loadCommunityData(isLoadMore: false);
+    selectState.refreshController.finishLoad();
+    selectState.loadCommunityData(isLoadMore: false);
   }
 
   Future onLoadMore() async{
-    communityController.loadCommunityData(isLoadMore: true);
+    selectState.loadCommunityData(isLoadMore: true);
   }
 
   reload() {
-    communityController.loadCommunityData(isLoadMore: false);
+    selectState.loadCommunityData(isLoadMore: false);
   }
 
 }

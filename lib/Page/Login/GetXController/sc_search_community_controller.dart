@@ -1,9 +1,8 @@
 
-
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-
 import '../../../Constants/sc_enum.dart';
 
 class SCSearchCommunityController extends GetxController {
@@ -38,9 +37,14 @@ class SCSearchCommunityController extends GetxController {
   /// 用户选择城市的编码
   String selectCityCode = '';
 
+  String pageName = '';
+
+  String tag = '';
+
   @override
   onInit() {
     super.onInit();
+    getCurrentTag();
   }
 
   /// 是否显示取消按钮

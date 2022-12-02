@@ -10,7 +10,6 @@ import 'package:smartcommunity/Constants/sc_asset.dart';
 import 'package:smartcommunity/Constants/sc_colors.dart';
 import 'package:smartcommunity/Page/Login/View/SelectCity/sc_city_search_view.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
-
 import '../../../../Constants/sc_fonts.dart';
 import '../../GetXController/sc_search_city_controller.dart';
 import '../../GetXController/sc_select_city_controller.dart';
@@ -25,7 +24,15 @@ class SCCitySearchItem extends StatelessWidget {
   /// 文本框内容改变
   final Function(String value)? valueChangedAction;
 
-  SCCitySearchItem({Key? key, this.isShowCancel = false, this.cancelAction, this.valueChangedAction}) : super(key: key);
+  final SCSelectCityController selectState;
+  final SCSearchCityController searchState;
+
+  SCCitySearchItem({Key? key,
+    required this.selectState,
+    required this.searchState,
+    this.isShowCancel = false,
+    this.cancelAction,
+    this.valueChangedAction}) : super(key: key);
 
   // controller
   final TextEditingController controller = TextEditingController();
@@ -61,11 +68,8 @@ class SCCitySearchItem extends StatelessWidget {
   }
 
   showCancelButton() {
-    SCSearchCityController searchState = Get.find<SCSearchCityController>();
     searchState.updateCancelButtonStatus(status: true);
-
-    SCSelectCityController state = Get.find<SCSelectCityController>();
-    state.updateSearchResult(status: true);
+    selectState.updateSearchResult(status: true);
   }
 
   showKeyboard(BuildContext context) {

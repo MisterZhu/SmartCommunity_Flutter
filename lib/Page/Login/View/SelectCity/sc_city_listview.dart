@@ -1,6 +1,5 @@
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../Constants/sc_colors.dart';
 import '../../../../Constants/sc_fonts.dart';
 import '../../Model/sc_city_model.dart';

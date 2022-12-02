@@ -1,11 +1,8 @@
 import 'dart:developer';
-
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/Page/Login/GetXController/sc_search_community_controller.dart';
 import 'package:smartcommunity/Utils/Loading/sc_loading_utils.dart';
-
 import '../../../Network/sc_http_manager.dart';
 import '../../../Network/sc_url.dart';
 import '../../../Utils/Toast/sc_toast.dart';
@@ -36,9 +33,22 @@ class SCSelectCommunityController extends GetxController {
 
   int currentPage = 1;
   int pageSize = 100;
+
+  String pageName = '';
+
+  String tag = '';
+
+  late SCSearchCommunityController searchState;
+
   @override
   onInit() {
     super.onInit();
+    getCurrentTag();
+  }
+
+  updateSearchState() {
+    searchState = Get.put(SCSearchCommunityController(), tag: tag);
+    update();
   }
 
   updateKeyword(String value) {
@@ -79,8 +89,6 @@ class SCSelectCommunityController extends GetxController {
     if (isLoadMore == false) {
       SCLoadingUtils.show();
     }
-    SCSearchCommunityController searchState =
-        Get.find<SCSearchCommunityController>();
 
     if (searchState.selectCity == '' && searchState.latitude == 0.0) {
       /// 没定位也没选择的城市，页面不请求数据
@@ -175,8 +183,6 @@ class SCSelectCommunityController extends GetxController {
     } else {
       currentPage = 1;
     }
-    SCSearchCommunityController searchState =
-        Get.find<SCSearchCommunityController>();
 
     String city = searchState.selectCity;
     if (searchState.selectCity == '') {

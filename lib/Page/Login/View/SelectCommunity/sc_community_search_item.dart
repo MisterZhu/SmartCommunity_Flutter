@@ -28,9 +28,14 @@ class SCCommunitySearchItem extends StatelessWidget {
   /// 选择的城市
   final String? selectCity;
 
+  final SCSearchCommunityController searchState;
+  final SCSelectCommunityController selectState;
+
   SCCommunitySearchItem(
       {
         Key? key,
+        required this.selectState,
+        required this.searchState,
         this.selectCity = '请选择',
         this.isShowCancel = false,
         this.cancelAction,
@@ -83,11 +88,8 @@ class SCCommunitySearchItem extends StatelessWidget {
   }
 
   showCancelButton() {
-    SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
     searchState.updateCancelButtonStatus(status: true);
-
-    SCSelectCommunityController state = Get.find<SCSelectCommunityController>();
-    state.updateSearchResult(status: true);
+    selectState.updateSearchResult(status: true);
   }
 
   showKeyboard(BuildContext context) {

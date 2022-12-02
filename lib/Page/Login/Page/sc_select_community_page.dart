@@ -11,6 +11,7 @@ import 'package:smartcommunity/Utils/sc_location_utils.dart';
 
 import '../../../Constants/sc_asset.dart';
 import '../../../Constants/sc_colors.dart';
+import '../../../Skin/Tools/sc_scaffold_manager.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
 import '../GetXController/sc_search_community_controller.dart';
 import '../GetXController/sc_select_community_controller.dart';
@@ -33,18 +34,30 @@ class SCSelectCommunityPage extends StatefulWidget {
 
 class SCSelectCommunityState extends State<SCSelectCommunityPage>
     with WidgetsBindingObserver {
-  SCSearchCommunityController searchState =
-      Get.put(SCSearchCommunityController());
-
-  SCSelectCommunityController selectState =
-      Get.put(SCSelectCommunityController());
 
   // 默认是登录成功后直接进来选则房号
   SCSelectHouseLogicType type = SCSelectHouseLogicType.login;
 
+  late SCSelectCommunityController selectState;
+
+  late SCSearchCommunityController searchState;
+
+  String tag = '';
+
   @override
   initState() {
     super.initState();
+    String pageName = (SCSelectCommunityPage).toString();
+    tag = SCScaffoldManager.instance.getXControllerTag(pageName);
+    searchState = Get.put(SCSearchCommunityController(), tag: tag);
+    searchState.tag = tag;
+    searchState.pageName = pageName;
+
+    selectState = Get.put(SCSelectCommunityController(), tag: tag);
+    selectState.tag = tag;
+    selectState.pageName = pageName;
+    selectState.updateSearchState();
+
     startLocation();
     WidgetsBinding.instance.addObserver(this);
 
@@ -69,9 +82,10 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
   @override
   dispose() {
     super.dispose();
-
     /// 销毁观察者
     WidgetsBinding.instance.removeObserver(this);
+    SCScaffoldManager.instance.deleteGetXControllerTag(selectState.pageName, selectState.tag);
+    SCScaffoldManager.instance.deleteGetXControllerTag(searchState.pageName, searchState.tag);
   }
 
   @override
@@ -103,13 +117,18 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
 
   /// header
   Widget header() {
-    return GetBuilder<SCSearchCommunityController>(builder: (state) {
+    return GetBuilder<SCSearchCommunityController>(
+        init: searchState,
+        tag: tag,
+        builder: (value) {
       return SCCommunityHeader(
-        locationStatus: state.locationStatus,
-        locationCity: state.locationCity,
-        selectCity: state.selectCity,
-        node: state.node,
-        isShowCancel: state.isShowCancel,
+        selectState: selectState,
+        searchState: searchState,
+        locationStatus: searchState.locationStatus,
+        locationCity: searchState.locationCity,
+        selectCity: searchState.selectCity,
+        node: searchState.node,
+        isShowCancel: searchState.isShowCancel,
         cancelAction: () {
           cancelAction();
         },
@@ -136,18 +155,25 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
 
   /// 社区列表
   Widget communityListView() {
-    return GetBuilder<SCSelectCommunityController>(builder: (state) {
-      if (state.isShowResult) {
+    return GetBuilder<SCSelectCommunityController>(
+        init: selectState,
+        tag: tag,
+        builder: (value) {
+      if (selectState.isShowResult) {
         return SCCommunitySearchResultListView(
+          selectState: selectState,
+          searchState: searchState,
           type: type,
-          communityList: state.searchList,
+          communityList: selectState.searchList,
           selectCommunityHandler: (SCCommunityModel model) {
-          state.updateSelectCommunity(model: model);
+            selectState.updateSelectCommunity(model: model);
         });
       } else {
         return SCCommunityListView(
+          selectState: selectState,
+          searchState: searchState,
           type: type,
-          communityList: state.communityList,
+          communityList: selectState.communityList,
         );
       }
     });
@@ -155,21 +181,17 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
 
   /// 取消
   cancelAction() {
-    SCSelectCommunityController state = Get.find<SCSelectCommunityController>();
-    state.updateSearchResult(status: false);
-    state.updateSearchList(list: []);
+    selectState.updateSearchResult(status: false);
+    selectState.updateSearchList(list: []);
 
-    SCSearchCommunityController searchState =
-        Get.find<SCSearchCommunityController>();
     searchState.updateCancelButtonStatus(status: false);
   }
 
   /// 搜索
   searchAction(String value) {
-    SCSelectCommunityController state = Get.find<SCSelectCommunityController>();
-    state.updateKeyword(value);
+    selectState.updateKeyword(value);
     /// 请求接口搜索
-    state.loadSearchResultData(isLoadMore: false);
+    selectState.loadSearchResultData(isLoadMore: false);
 
     // 本地搜索
     // if (value.isNotEmpty) {
@@ -192,8 +214,6 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
   /// 定位
   startLocation() async {
     LocationPermission permission = await SCLocationUtils.requestPermission();
-    SCSearchCommunityController searchState =
-        Get.find<SCSearchCommunityController>();
     searchState.updateLocationPermission(permission: permission);
     if (permission == LocationPermission.denied ||
         permission == LocationPermission.deniedForever) {
@@ -213,7 +233,6 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
     await SCLocationUtils.reGeoCode(position: position, success: (value){
       SCLocationModel model = value;
       log('城市:${model.addressComponent?.city ?? ''}');
-      SCSearchCommunityController searchState = Get.find<SCSearchCommunityController>();
       searchState.updateLocationCity(
         city: model.addressComponent?.city ?? '',
         code: model.addressComponent?.citycode ?? '',
@@ -228,8 +247,6 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
 
   ///  选择城市
   openSelectCityPage() async {
-    SCSearchCommunityController searchState =
-        Get.find<SCSearchCommunityController>();
     var params = {
       'locationCity': searchState.locationCity,
       'locationStatus': searchState.locationStatus,
@@ -249,11 +266,10 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
 
   /// 加载数据
   loadData() {
-    SCSelectCommunityController state = Get.find<SCSelectCommunityController>();
-    if (state.communityList.isEmpty) {
-      state.loadCommunityData();
+    if (selectState.communityList.isEmpty) {
+      selectState.loadCommunityData();
     } else {
-      state.refreshController.callRefresh();
+      selectState.refreshController.callRefresh();
     }
   }
 
