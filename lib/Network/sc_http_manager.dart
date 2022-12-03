@@ -113,7 +113,7 @@ class SCHttpManager {
   }
 
   /// 通用的POST请求
-  post({required String url, dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
+  Future post({required String url, dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
     Options options = Options(
         headers: headers
     );
@@ -140,6 +140,7 @@ class SCHttpManager {
         }
       }
     }
+    return Future(() => status);
   }
 
   /// 通用的PUT请求
