@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:smartcommunity/Constants/sc_asset.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
 import 'package:smartcommunity/Constants/sc_enum.dart';
 import 'package:smartcommunity/Constants/sc_skin_value.dart';
 import 'package:smartcommunity/Network/sc_config.dart';

@@ -7,10 +7,9 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/Constants/sc_asset.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
 import 'package:smartcommunity/Page/Login/View/SelectCity/sc_city_search_view.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
-import '../../../../Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import '../../GetXController/sc_search_city_controller.dart';
 import '../../GetXController/sc_select_city_controller.dart';
 

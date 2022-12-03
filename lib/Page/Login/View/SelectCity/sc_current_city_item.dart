@@ -3,12 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:smartcommunity/Constants/sc_enum.dart';
-import 'package:smartcommunity/Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_path.dart';
 import 'package:smartcommunity/Utils/sc_location_utils.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
 import '../../../../Constants/sc_asset.dart';
-import '../../../../Constants/sc_colors.dart';
 import '../../../../Utils/Router/sc_router_helper.dart';
 
 /// 当前城市item

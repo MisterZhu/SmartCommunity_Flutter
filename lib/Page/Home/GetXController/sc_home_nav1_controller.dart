@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../Constants/sc_colors.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import '../../../Utils/sc_utils.dart';
 
 /// 第一套皮肤的导航栏

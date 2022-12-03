@@ -46,7 +46,7 @@ dependencies:
 #  flutter_picker: ^2.0.3
   # 刷新控件 https://pub.flutter-io.cn/packages/easy_refresh
   easy_refresh: ^3.0.4+2
-  # 刷新空间 https://pub.flutter-io.cn/packages/pull_to_refresh/install
+  # 刷新 https://pub.flutter-io.cn/packages/pull_to_refresh/install
   pull_to_refresh: ^2.0.0
   # 图片裁剪 https://pub.flutter-io.cn/packages/image_cropper/install
   # image_cropper: ^2.0.3
@@ -92,6 +92,11 @@ dependencies:
   pull_to_refresh_notification: any
   # intl https://pub.flutter-io.cn/packages/intl/install
   intl: any
+  # 私有UI库
+  sc_uikit:
+    git:
+      url: http://10.100.10.22/jizuo-flutter/flutter_library/sc_uikit.git
+      ref: '0.0.1'
 
 dev_dependencies:
   flutter_test:

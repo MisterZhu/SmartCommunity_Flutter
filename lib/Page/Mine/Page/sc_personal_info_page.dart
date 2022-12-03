@@ -2,11 +2,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Mine/GetXController/sc_personal_info_controller.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
-
-import '../../../Constants/sc_colors.dart';
 import '../../../Skin/View/sc_custom_scaffold.dart';
 import '../View/sc_personal_info_listview.dart';
 

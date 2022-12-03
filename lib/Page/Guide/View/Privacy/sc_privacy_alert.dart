@@ -2,12 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 
 import '../../../../Constants/sc_agreement.dart';
 import '../../../../Constants/sc_asset.dart';
-import '../../../../Constants/sc_colors.dart';
 import '../../../../Constants/sc_default_value.dart';
-import '../../../../Constants/sc_fonts.dart';
 import '../../../../Constants/sc_type_define.dart';
 import '../../../../Utils/Colors/sc_color_hex.dart';
 import '../../../../Utils/sc_utils.dart';

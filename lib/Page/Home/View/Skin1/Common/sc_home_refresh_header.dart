@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh_notification/pull_to_refresh_notification.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 
 double get maxDragOffset => 100;
 double hideHeight = maxDragOffset / 2.3;

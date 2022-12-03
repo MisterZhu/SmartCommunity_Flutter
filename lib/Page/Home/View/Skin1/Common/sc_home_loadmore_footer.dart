@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_more_list/loading_more_list.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 
 /// 首页第一套皮肤-加载更多widget
 

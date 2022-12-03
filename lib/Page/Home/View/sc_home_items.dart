@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
-import 'package:smartcommunity/Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 
 /// 首页-应用列表item
 

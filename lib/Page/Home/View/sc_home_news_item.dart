@@ -3,9 +3,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:loading_more_list/loading_more_list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_asset.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
-import 'package:smartcommunity/Constants/sc_fonts.dart';
 import 'package:smartcommunity/Page/Home/Model/sc_home_news_model.dart';
 import 'package:smartcommunity/Page/Home/View/Skin1/Data/sc_home_news_repository.dart';
 

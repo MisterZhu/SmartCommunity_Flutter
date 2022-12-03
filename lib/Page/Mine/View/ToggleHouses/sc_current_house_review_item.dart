@@ -3,16 +3,12 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
 import 'package:smartcommunity/Page/Mine/Model/Sc_current_house_info_data_model.dart';
 import 'package:smartcommunity/Page/Mine/View/ToggleHouses/sc_mine_house_tag_item.dart';
 import 'package:smartcommunity/Utils/Toast/sc_toast.dart';
-import 'package:smartcommunity/Widgets/Dialog/sc_base_dialog.dart';
-import 'package:smartcommunity/Widgets/Dialog/sc_bottom_sheet_model.dart';
-import 'package:smartcommunity/Widgets/Dialog/sc_dialog_utils.dart';
 
 import '../../../../Constants/sc_asset.dart';
-import '../../../../Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import '../../GetXController/sc_current_house_controller.dart';
 import '../../Model/sc_current_house_review_model.dart';
 

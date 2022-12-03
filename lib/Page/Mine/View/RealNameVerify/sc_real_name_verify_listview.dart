@@ -9,9 +9,7 @@ import 'package:smartcommunity/Page/Mine/View/RealNameVerify/sc_real_name_verify
 import 'package:smartcommunity/Utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/Utils/Toast/sc_toast.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
-
-import '../../../../Constants/sc_colors.dart';
-import '../../../../Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import '../../GetXController/sc_real_name_verify_controller.dart';
 
 /// 实名认证listview

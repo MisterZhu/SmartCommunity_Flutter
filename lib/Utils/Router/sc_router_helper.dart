@@ -5,7 +5,6 @@ import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_pages.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_path.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
-import '../../Constants/sc_colors.dart';
 import '../../Page/Login/Page/sc_login_page.dart';
 
 /// 路由-工具管理

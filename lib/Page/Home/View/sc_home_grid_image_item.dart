@@ -2,10 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
-import '../../../Constants/sc_colors.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import '../../../Constants/sc_enum.dart';
-import '../../../Constants/sc_fonts.dart';
 
 /// 首页-网格图片item，4等分，宽高1：1，1行
 

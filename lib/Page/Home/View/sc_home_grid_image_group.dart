@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Home/View/sc_home_activity_top_item.dart';
-
-import '../../../Constants/sc_colors.dart';
-import '../../../Constants/sc_fonts.dart';
 
 /// 首页-网格图片，2等分，多行
 

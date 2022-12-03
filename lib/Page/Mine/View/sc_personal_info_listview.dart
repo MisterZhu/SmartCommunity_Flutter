@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/Picker.dart';
 import 'package:get/get.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Mine/GetXController/sc_personal_info_controller.dart';
 import 'package:smartcommunity/Page/Mine/Model/sc_upload_headpic_model.dart';
 import 'package:smartcommunity/Page/Mine/View/Setting/sc_setting_cell.dart';
@@ -12,10 +12,8 @@ import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/Utils/Upload/sc_upload_utils.dart';
 import 'package:smartcommunity/Utils/WeChat/sc_wechat_utils.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
-import 'package:smartcommunity/Widgets/Picker/sc_picker_utils.dart';
 import '../../../Constants/sc_asset.dart';
 import '../../../Constants/sc_default_value.dart';
-import '../../../Constants/sc_enum.dart';
 import '../../../Utils/AliPay/sc_alipay_utils.dart';
 import '../../../Utils/Date/sc_date_utils.dart';
 import '../../../Constants/sc_type_define.dart';
@@ -113,7 +111,7 @@ class SCPersonalInfoListView extends StatelessWidget {
         content: genderString,
         cellType: SCSettingCellType.contentArrowType,
         onTap: () {
-          selectSexAction();
+          selectSexAction(context);
         },
       );
     } else if (index == 5) {
@@ -122,7 +120,7 @@ class SCPersonalInfoListView extends StatelessWidget {
         content: birthdayString ?? '请选择',
         cellType: SCSettingCellType.contentArrowType,
         onTap: () {
-          selectBirthdayAction();
+          selectBirthdayAction(context);
         },
       );
     } else if (index == 6) {
@@ -213,7 +211,7 @@ class SCPersonalInfoListView extends StatelessWidget {
   }
 
   /// 选择性别
-  selectSexAction() {
+  selectSexAction(BuildContext context) {
     SCPickerUtils pickerUtils =
         SCPickerUtils(pickerType: SCPickerType.normal, pickerData: ['男', '女']);
     pickerUtils.completionHandler = (selectedValues, selecteds) {
@@ -227,11 +225,11 @@ class SCPersonalInfoListView extends StatelessWidget {
       gender = SCUtils.getGenderNumber(genderString: genderString);
       changeGender(gender: gender);
     };
-    pickerUtils.showPicker();
+    pickerUtils.showPicker(context);
   }
 
   /// 选择出生日期
-  selectBirthdayAction() {
+  selectBirthdayAction(BuildContext context) {
     SCPickerUtils pickerUtils = SCPickerUtils(pickerType: SCPickerType.date);
     pickerUtils.completionHandler = (selectedValues, selecteds) {
       String dateString = SCDateUtils.transformDate(
@@ -239,8 +237,7 @@ class SCPersonalInfoListView extends StatelessWidget {
           formats: ['yyyy', '-', 'mm', '-', 'dd']);
       changeBirthday(birthday: dateString);
     };
-    pickerUtils.showDatePicker(
-        dateType: PickerDateTimeType.kYMD, columnFlex: [1, 1, 1]);
+    pickerUtils.showDatePicker(context: context ,dateType: PickerDateTimeType.kYMD, columnFlex: [1, 1, 1]);
   }
 
   /// 修改用户头像

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_asset.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
 import 'package:smartcommunity/Page/Find/Page/sc_find_page.dart';
 import 'package:smartcommunity/Page/Home/Page/sc_home_page.dart';
 import 'package:smartcommunity/Page/Mine/Page/sc_mine_page.dart';

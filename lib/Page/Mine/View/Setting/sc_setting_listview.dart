@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Mine/View/Setting/sc_logout_cell.dart';
 import 'package:smartcommunity/Page/Mine/View/Setting/sc_setting_cell.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';

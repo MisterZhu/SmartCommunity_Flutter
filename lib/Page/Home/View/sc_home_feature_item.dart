@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_asset.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
 import 'package:smartcommunity/Constants/sc_enum.dart';
-import 'package:smartcommunity/Constants/sc_fonts.dart';
 import 'package:smartcommunity/Page/Home/View/sc_home_activity_bottom_tag.dart';
 import 'package:smartcommunity/Page/Home/View/sc_home_tag_item.dart';
 

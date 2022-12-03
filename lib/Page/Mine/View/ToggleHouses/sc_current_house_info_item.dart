@@ -10,8 +10,7 @@ import 'package:smartcommunity/Page/Mine/Model/Sc_current_house_info_data_model.
 import 'package:smartcommunity/Page/Mine/View/ToggleHouses/sc_mine_house_tag_item.dart';
 
 import '../../../../Constants/sc_asset.dart';
-import '../../../../Constants/sc_colors.dart';
-import '../../../../Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import '../../Model/sc_current_house_info_model.dart';
 
 /// 当前房屋-房屋信息cell

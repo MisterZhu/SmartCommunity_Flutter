@@ -2,8 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:smartcommunity/Constants/sc_fonts.dart';
-import '../../../Constants/sc_colors.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import '../GetXController/sc_service_controller.dart';
 
 /// 应用列表第二套皮肤-左侧的标题列表

@@ -3,11 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:smartcommunity/Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Mine/View/ToggleHouses/sc_current_house_info_item.dart';
 import 'package:smartcommunity/Page/Mine/View/ToggleHouses/sc_current_house_review_item.dart';
-
-import '../../../../Constants/sc_colors.dart';
 import '../../../../Skin/Model/sc_user.dart';
 import '../../../../Skin/Tools/sc_scaffold_manager.dart';
 import '../../GetXController/sc_current_house_controller.dart';

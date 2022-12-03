@@ -1,11 +1,9 @@
 
 
 import 'package:flutter/cupertino.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Home/View/sc_home_tag_item.dart';
-
 import '../../../Constants/sc_asset.dart';
-import '../../../Constants/sc_colors.dart';
-import '../../../Constants/sc_fonts.dart';
 
 /// 顶部的icon、标题、tag标签
 // icon样式
