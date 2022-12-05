@@ -92,6 +92,8 @@ dependencies:
   pull_to_refresh_notification: any
   # intl https://pub.flutter-io.cn/packages/intl/install
   intl: any
+  # 日志 https://pub.flutter-io.cn/packages/logger/install
+  logger: ^1.1.0
   # 私有UI库
   sc_uikit:
     git:
