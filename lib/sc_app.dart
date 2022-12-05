@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Base/sc_all_binding.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
-import 'package:smartcommunity/Utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_pages.dart';
 import 'package:smartcommunity/Utils/WeChat/sc_wechat_utils.dart';
 import 'package:smartcommunity/Utils/sc_sp_utils.dart';

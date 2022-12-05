@@ -3,13 +3,13 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:convert' as convert;
 import 'package:get/get.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 
 import '../../../Constants/sc_enum.dart';
 import '../../../Network/sc_http_manager.dart';
 import '../../../Network/sc_url.dart';
 import '../../../Skin/Model/sc_user.dart';
 import '../../../Skin/Tools/sc_scaffold_manager.dart';
-import '../../../Utils/Loading/sc_loading_utils.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
 import '../../../Utils/Router/sc_router_path.dart';
 import '../../../Utils/Toast/sc_toast.dart';

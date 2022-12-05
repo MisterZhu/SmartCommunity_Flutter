@@ -4,7 +4,6 @@ import 'package:http_parser/http_parser.dart';
 import 'package:smartcommunity/Constants/sc_default_value.dart';
 import 'package:smartcommunity/Network/sc_http_manager.dart';
 import 'package:smartcommunity/Network/sc_url.dart';
-import 'package:smartcommunity/Utils/Loading/sc_loading_utils.dart';
 
 class SCUploadUtils {
   static uploadHeadPic(

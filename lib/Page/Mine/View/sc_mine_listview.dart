@@ -14,7 +14,6 @@ import 'package:smartcommunity/Page/Mine/View/sc_mine_service_item.dart';
 import 'package:smartcommunity/Page/Mine/View/sc_mine_wallet_item.dart';
 import 'package:smartcommunity/Skin/Model/sc_user.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
-import 'package:smartcommunity/Utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
 import '../../../Network/sc_config.dart';
 import '../../../Utils/Router/sc_router_path.dart';

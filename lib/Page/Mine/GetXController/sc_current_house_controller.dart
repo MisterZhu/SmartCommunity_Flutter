@@ -1,13 +1,12 @@
 import 'dart:developer';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Mine/Model/Sc_current_house_info_data_model.dart';
 import 'package:smartcommunity/Skin/Model/sc_user.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import '../../../Network/sc_http_manager.dart';
 import '../../../Network/sc_url.dart';
-import '../../../Utils/Loading/sc_loading_utils.dart';
 import '../../../Utils/Toast/sc_toast.dart';
-import '../Model/sc_current_house_info_model.dart';
 import '../Model/sc_current_house_review_model.dart';
 
 class SCCurrentHouseController extends GetxController {

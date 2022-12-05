@@ -3,15 +3,12 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_default_value.dart';
 import 'package:smartcommunity/Network/sc_config.dart';
 import 'package:smartcommunity/Network/sc_url.dart';
 import 'package:smartcommunity/Skin/Model/sc_user.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
-
-import '../Constants/sc_key.dart';
-import '../Utils/Loading/sc_loading_utils.dart';
-import '../Utils/sc_sp_utils.dart';
 
 class SCHttpManager {
   factory SCHttpManager() => _getInstance();

@@ -6,7 +6,6 @@ import 'package:smartcommunity/Page/Mine/GetXController/sc_personal_info_control
 import 'package:smartcommunity/Page/Mine/Model/sc_upload_headpic_model.dart';
 import 'package:smartcommunity/Page/Mine/View/Setting/sc_setting_cell.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
-import 'package:smartcommunity/Utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/Utils/Permission/sc_permission_utils.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/Utils/Upload/sc_upload_utils.dart';

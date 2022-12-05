@@ -7,8 +7,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Base/Scan/View/sc_scan_navigation.dart';
-import 'package:smartcommunity/Skin/View/sc_custom_scaffold.dart';
-import 'package:smartcommunity/Utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
 import '../../../../Constants/sc_default_value.dart';
 import '../../../../Utils/sc_utils.dart';

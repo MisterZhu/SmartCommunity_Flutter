@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:get/get.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Login/GetXController/sc_search_community_controller.dart';
-import 'package:smartcommunity/Utils/Loading/sc_loading_utils.dart';
 import '../../../Network/sc_http_manager.dart';
 import '../../../Network/sc_url.dart';
 import '../../../Utils/Toast/sc_toast.dart';

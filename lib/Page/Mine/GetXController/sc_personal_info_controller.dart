@@ -1,13 +1,11 @@
 import 'package:get/get.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_default_value.dart';
 import 'package:smartcommunity/Network/sc_http_manager.dart';
 import 'package:smartcommunity/Network/sc_url.dart';
 import 'package:smartcommunity/Page/Mine/GetXController/sc_mine_controller.dart';
-import 'package:smartcommunity/Page/Mine/Model/sc_upload_headpic_model.dart';
 import 'package:smartcommunity/Page/Mine/Model/sc_user_info_model.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
-import 'package:smartcommunity/Utils/Loading/sc_loading_utils.dart';
-
 import '../../../Constants/sc_asset.dart';
 import '../../../Skin/Model/sc_user.dart';
 

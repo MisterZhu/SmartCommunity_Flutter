@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:smartcommunity/Utils/Loading/sc_loading_utils.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Utils/Permission/sc_permission_utils.dart';
-import 'package:smartcommunity/Utils/sc_utils.dart';
-
 import '../../../../Constants/sc_asset.dart';
 import '../../../../Constants/sc_type_define.dart';
 import '../../../../Skin/Tools/sc_scaffold_manager.dart';
-import '../../../../Utils/Router/sc_router_helper.dart';
-import '../../../../Utils/Router/sc_router_path.dart';
 import '../../GetXController/sc_home_controller1.dart';
 import '../../GetXController/sc_home_nav1_controller.dart';
 import 'sc_home_listview1.dart';
