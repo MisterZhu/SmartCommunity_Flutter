@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -153,5 +154,11 @@ class SCUtils {
     } else {
       return '女';
     }
+  }
+
+  /*flutter调用h5*/
+  String flutterCallH5({required String h5Name, required var params}) {
+    var jsonParams = jsonEncode(params);
+    return "$h5Name('$jsonParams')";
   }
 }

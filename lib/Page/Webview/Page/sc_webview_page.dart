@@ -2,12 +2,19 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_key.dart';
+import 'package:smartcommunity/Page/Login/Model/SelectCommunity/sc_location_model.dart';
+import 'package:smartcommunity/Page/Webview/Constant/sc_flutter_h5_key.dart';
+import 'package:smartcommunity/Page/Webview/Constant/sc_h5_flutter_key.dart';
 import 'package:smartcommunity/Skin/View/sc_custom_scaffold.dart';
+import 'package:smartcommunity/Utils/sc_location_utils.dart';
 import 'package:smartcommunity/Utils/sc_sp_utils.dart';
+import 'package:smartcommunity/Utils/sc_utils.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../Constants/sc_asset.dart';
@@ -89,34 +96,38 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
       child: Row(
         children: <Widget>[
           SizedBox(
-              width: 24,
-              height: 24,
-              child: GestureDetector(
+            width: 24,
+            height: 44,
+            child: CupertinoButton(
+                padding: EdgeInsets.zero,
+                minSize: 44.0,
                 child: Image.asset(
                   SCAsset.iconNavigationBack,
                   width: 24.0,
                   height: 24.0,
                 ),
-                onTap: () {
+                onPressed: () {
                   goBack();
-                },
-              )),
+                }),
+          ),
           const SizedBox(
             width: 10,
           ),
           SizedBox(
-              width: 24,
-              height: 24,
-              child: GestureDetector(
+            width: 24,
+            height: 44,
+            child: CupertinoButton(
+                padding: EdgeInsets.zero,
+                minSize: 44.0,
                 child: Image.asset(
                   SCAsset.iconNavigationClose,
                   width: 24.0,
                   height: 24.0,
                 ),
-                onTap: () {
+                onPressed: () {
                   SCRouterHelper.back(null);
-                },
-              )),
+                }),
+          ),
         ],
       ),
     );
@@ -160,7 +171,7 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
       javascriptMode: JavascriptMode.unrestricted,
 
       /// 跟H5交互的方法到此处处理
-      javascriptChannels: {_jxTokenChannel(context)},
+      javascriptChannels: {jxTokenChannel(context)},
 
       ///WebView创建
       onWebViewCreated: _onWebViewCreated,
@@ -245,13 +256,78 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
     }
   }
 
-  /// 建信租房token
-  JavascriptChannel _jxTokenChannel(BuildContext context) => JavascriptChannel(
-      name: '_app_callback_token',
+  /// 建信租房token-channel
+  JavascriptChannel jxTokenChannel(BuildContext context) => JavascriptChannel(
+      name: SCH5FlutterKey.jxToken,
       onMessageReceived: (JavascriptMessage message) {
         String token = jsonDecode(message.message);
         cacheJXToken(token);
       });
+
+  ///  获取定位-channel
+  JavascriptChannel getLocationChannel(BuildContext context) =>
+      JavascriptChannel(
+          name: SCH5FlutterKey.location,
+          onMessageReceived: (JavascriptMessage message) {
+            startLocation();
+          });
+
+  /// 定位
+  startLocation() async {
+    LocationPermission permission = await SCLocationUtils.requestPermission();
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      /// 定位被拒绝，无权限
+      var params = {
+        "status": 2,
+      };
+      webViewController?.runJavascript(SCUtils()
+          .flutterCallH5(h5Name: SCFlutterH5Key.location, params: params));
+    } else if (permission == LocationPermission.whileInUse ||
+        permission == LocationPermission.always) {
+      /// 已获取定位权限
+      Position position = await SCLocationUtils.location();
+      reGeoCode(position: position);
+    } else {
+      /// 权限无法确定
+      var params = {
+        "status": 0,
+      };
+      webViewController?.runJavascript(SCUtils()
+          .flutterCallH5(h5Name: SCFlutterH5Key.location, params: params));
+    }
+  }
+
+  /// 逆地理编码
+  reGeoCode({required Position position}) async {
+    await SCLocationUtils.reGeoCode(
+        position: position,
+        success: (value) {
+          SCLocationModel model = value;
+          var params = {
+            "status": 1,
+            "data": {
+              "longitude": position.longitude,
+              "latitude": position.latitude,
+              "city": model.addressComponent?.city,
+              "cityCode": model.addressComponent?.citycode
+            }
+          };
+          webViewController?.runJavascript(SCUtils()
+              .flutterCallH5(h5Name: SCFlutterH5Key.location, params: params));
+        },
+        failure: (value) {
+          var params = {
+            "status": 1,
+            "data": {
+              "longitude": position.longitude,
+              "latitude": position.latitude,
+            }
+          };
+          webViewController?.runJavascript(SCUtils()
+              .flutterCallH5(h5Name: SCFlutterH5Key.location, params: params));
+        });
+  }
 
   /// 缓存建信租房token
   cacheJXToken(String token) {
