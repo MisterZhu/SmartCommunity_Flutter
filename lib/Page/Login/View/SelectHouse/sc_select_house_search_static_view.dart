@@ -4,7 +4,6 @@ import 'package:smartcommunity/Constants/sc_asset.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Login/GetXController/sc_select_house_search_status_controller.dart';
 
-
 /// Copyright (c), 浙江慧享信息科技有限公司
 /// FileName: sc_select_house_search_header
 /// Author: wang tao
@@ -13,7 +12,9 @@ import 'package:smartcommunity/Page/Login/GetXController/sc_select_house_search_
 /// Description: 选择房号搜索框 - 不可输入
 class SCSelectHouseSearchStaticView extends StatelessWidget {
 
-  const SCSelectHouseSearchStaticView({Key? key}) : super(key: key);
+  final SCSelectHouseSearchStatusController searchState;
+
+  const SCSelectHouseSearchStaticView({required this.searchState, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +40,8 @@ class SCSelectHouseSearchStaticView extends StatelessWidget {
           )
       ),
       onTap: () {
-        SCSelectHouseSearchStatusController searchState = Get.find<SCSelectHouseSearchStatusController>();
         searchState.updateSearchStatus(isShowCancel: true);
       },);
-
   }
 
   /// 搜索icon
@@ -57,7 +56,7 @@ class SCSelectHouseSearchStaticView extends StatelessWidget {
           fontSize: SCFonts.f14,
           fontWeight: FontWeight.normal,
           color: SCColors.color_B0B1B8),
-    )
+      )
     );
   }
 

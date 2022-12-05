@@ -8,7 +8,6 @@ import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_pages.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_path.dart';
 import 'package:smartcommunity/Utils/Toast/sc_toast.dart';
-
 import '../../GetXController/sc_select_house_search_status_controller.dart';
 
 /// Copyright (c), 浙江慧享信息科技有限公司
@@ -17,29 +16,26 @@ import '../../GetXController/sc_select_house_search_status_controller.dart';
 /// Email: wangtao1@lvchengfuwu.com
 /// Date: 2022/8/18 11:50
 /// Description: 选择房号 - 列表
+
 class SCSelectHouseListView extends StatefulWidget {
   SCSelectHouseLogicType? type = SCSelectHouseLogicType.login;
   final String? communityId;
 
-  SCSelectHouseListView({Key? key, this.communityId, this.type})
-      : super(key: key);
+  final SCSelectHouseSearchStatusController searchState;
+  final SCSelectHouseDataController selectState;
+
+  SCSelectHouseListView({Key? key,
+    required this.selectState,
+    required this.searchState,
+    this.communityId,
+    this.type,
+  }) : super(key: key);
 
   @override
-  State<SCSelectHouseListView> createState() =>
-      _SCSelectHouseListViewState();
+  State<SCSelectHouseListView> createState() => _SCSelectHouseListViewState();
 }
 
-class _SCSelectHouseListViewState
-    extends State<SCSelectHouseListView> {
-  SCSelectHouseSearchStatusController searchStatusController =
-  Get.put(SCSelectHouseSearchStatusController());
-  SCSelectHouseSearchStatusController searchStatusState =
-  Get.find<SCSelectHouseSearchStatusController>();
-
-  SCSelectHouseDataController dataController =
-  Get.put(SCSelectHouseDataController());
-  SCSelectHouseDataController dataState =
-  Get.find<SCSelectHouseDataController>();
+class _SCSelectHouseListViewState extends State<SCSelectHouseListView> {
 
   @override
   void initState() {
@@ -48,28 +44,19 @@ class _SCSelectHouseListViewState
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SCSelectHouseSearchStatusController>(
-        builder: (sCSelectHouseState) {
-          return GetBuilder<SCSelectHouseDataController>(builder: (state) {
-            return houseList();
-          });
-        });
-  }
-
-  Widget houseList() {
-    if (searchStatusState.isShowCancel) {
-      List<ScSelectHouseModel> searchResultList = dataState.searchResultList;
+    if (widget.searchState.isShowCancel) {
+      List<ScSelectHouseModel> searchResultList = widget.selectState.searchResultList;
       if (searchResultList == null || searchResultList.length == 0) {
         return _emptyView();
       } else {
-        return _gridView(dataState.searchResultList);
+        return _gridView(widget.selectState.searchResultList);
       }
     } else {
-      List<ScSelectHouseModel> dataList = dataState.dataList;
+      List<ScSelectHouseModel> dataList = widget.selectState.dataList;
       if (dataList == null || dataList.length == 0) {
         return _emptyView();
       } else {
-        return _gridView(dataState.dataList);
+        return _gridView(widget.selectState.dataList);
       }
     }
   }
@@ -111,18 +98,18 @@ class _SCSelectHouseListViewState
   Widget _hasChecked(bool isSearch, int index) {
     return GestureDetector(
       child: Container(
-        padding: EdgeInsets.only(left: 14.0, right: 14.0),
+        padding: const EdgeInsets.only(left: 14.0, right: 14.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadiusDirectional.circular(8.0),
           color: SCColors.color_FFF0E6,
           //设置四周边框
-          border: new Border.all(width: 1, color: SCColors.color_FF6C00),
+          border: Border.all(width: 1, color: SCColors.color_FF6C00),
         ),
         child: Center(
           child: Text(
             breakWord(isSearch
-                ? '${dataState.searchResultList[index].name}'
-                : '${dataState.dataList[index].name}'),
+                ? '${widget.selectState.searchResultList[index].name}'
+                : '${widget.selectState.dataList[index].name}'),
             style: _hasCheckedTextStyle(),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -131,8 +118,7 @@ class _SCSelectHouseListViewState
       ),
       onTap: () {
         if (isSearch) {
-          List<ScSelectHouseModel> searchResultList =
-              dataState.searchResultList;
+          List<ScSelectHouseModel> searchResultList = widget.selectState.searchResultList;
           for (int i = 0; i < searchResultList.length; i++) {
             if (i == index) {
               searchResultList[i].isChecked = true;
@@ -140,11 +126,11 @@ class _SCSelectHouseListViewState
               searchResultList[i].isChecked = false;
             }
           }
-          dataController.updateSearchList(list: searchResultList);
+          widget.selectState.updateSearchList(list: searchResultList);
 
           bool? haveChild = searchResultList[index].haveChild;
           if (haveChild!) {
-            dataController.loadHouseInfo(
+            widget.selectState.loadHouseInfo(
                 communityId: widget.communityId!,
                 currentId: (searchResultList[index].id).toString(),
                 callback: () {
@@ -160,7 +146,7 @@ class _SCSelectHouseListViewState
             }
           }
         } else {
-          List<ScSelectHouseModel> houseCommunityList = dataState.dataList;
+          List<ScSelectHouseModel> houseCommunityList = widget.selectState.dataList;
           for (int i = 0; i < houseCommunityList.length; i++) {
             if (i == index) {
               houseCommunityList[i].isChecked = true;
@@ -168,11 +154,11 @@ class _SCSelectHouseListViewState
               houseCommunityList[i].isChecked = false;
             }
           }
-          dataController.updateDataList(list: houseCommunityList);
+          widget.selectState.updateDataList(list: houseCommunityList);
 
           bool? haveChild = houseCommunityList[index].haveChild;
           if (haveChild!) {
-            dataController.loadHouseInfo(
+            widget.selectState.loadHouseInfo(
                 communityId: widget.communityId!,
                 currentId: (houseCommunityList[index].id).toString(),
                 callback: () {
@@ -197,7 +183,7 @@ class _SCSelectHouseListViewState
   Widget _hasNotChecked(bool isSearch, int index) {
     return GestureDetector(
       child: Container(
-        padding: EdgeInsets.only(left: 14.0, right: 14.0),
+        padding: const EdgeInsets.only(left: 14.0, right: 14.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadiusDirectional.circular(8.0),
           color: SCColors.color_F7F8FA,
@@ -205,8 +191,8 @@ class _SCSelectHouseListViewState
         child: Center(
           child: Text(
             breakWord(isSearch
-                ? '${dataState.searchResultList[index].name}'
-                : '${dataState.dataList[index].name}'),
+                ? '${widget.selectState.searchResultList[index].name}'
+                : '${widget.selectState.dataList[index].name}'),
             style: _hasNotCheckedTextStyle(),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -215,8 +201,7 @@ class _SCSelectHouseListViewState
       ),
       onTap: () {
         if (isSearch) {
-          List<ScSelectHouseModel> searchResultList =
-              dataState.searchResultList;
+          List<ScSelectHouseModel> searchResultList = widget.selectState.searchResultList;
           for (int i = 0; i < searchResultList.length; i++) {
             if (i == index) {
               searchResultList[i].isChecked = true;
@@ -224,11 +209,11 @@ class _SCSelectHouseListViewState
               searchResultList[i].isChecked = false;
             }
           }
-          dataController.updateSearchList(list: searchResultList);
+          widget.selectState.updateSearchList(list: searchResultList);
 
           bool? haveChild = searchResultList[index].haveChild;
           if (haveChild!) {
-            dataController.loadHouseInfo(
+            widget.selectState.loadHouseInfo(
                 communityId: widget.communityId!,
                 currentId: (searchResultList[index].id).toString(),
                 callback: () {
@@ -244,7 +229,7 @@ class _SCSelectHouseListViewState
             }
           }
         } else {
-          List<ScSelectHouseModel> houseCommunityList = dataState.dataList;
+          List<ScSelectHouseModel> houseCommunityList = widget.selectState.dataList;
           for (int i = 0; i < houseCommunityList.length; i++) {
             if (i == index) {
               houseCommunityList[i].isChecked = true;
@@ -252,11 +237,11 @@ class _SCSelectHouseListViewState
               houseCommunityList[i].isChecked = false;
             }
           }
-          dataController.updateDataList(list: houseCommunityList);
+          widget.selectState.updateDataList(list: houseCommunityList);
 
           bool? haveChild = houseCommunityList[index].haveChild;
           if (haveChild!) {
-            dataController.loadHouseInfo(
+            widget.selectState.loadHouseInfo(
                 communityId: widget.communityId!,
                 currentId: (houseCommunityList[index].id).toString(),
                 callback: () {
@@ -282,27 +267,20 @@ class _SCSelectHouseListViewState
     ScSelectHouseModel scSelectHouseModel = ScSelectHouseModel(
         communityId: currentId, id: int.parse(currentId), name: currentName);
 
-    SCSelectHouseDataController scSelectHouseDataController =
-    Get.put(SCSelectHouseDataController());
-    List<ScSelectHouseModel> navigatorList =
-        scSelectHouseDataController.navigatorList;
+    List<ScSelectHouseModel> navigatorList = widget.selectState.navigatorList;
     navigatorList.removeAt(navigatorList.length - 1);
     navigatorList.add(scSelectHouseModel);
 
-    ScSelectHouseModel scSelectHouseModelTemp =
-    ScSelectHouseModel(id: 0, name: "请选择");
+    ScSelectHouseModel scSelectHouseModelTemp = ScSelectHouseModel(id: 0, name: "请选择");
     navigatorList.add(scSelectHouseModelTemp);
-    scSelectHouseDataController.updateNavigatorList(list: navigatorList);
+    widget.selectState.updateNavigatorList(list: navigatorList);
   }
 
   /// 绑定房号
   void bindHousePage(String houseId, String currentRoomName) {
     /// 从缓存中去取数据
     /// 第一个数据是园区
-    SCSelectHouseDataController scSelectHouseDataController =
-    Get.find<SCSelectHouseDataController>();
-    List<ScSelectHouseModel> navigatorList =
-        scSelectHouseDataController.navigatorList;
+    List<ScSelectHouseModel> navigatorList = widget.selectState.navigatorList;
     String houseName = '';
 
     for (int i = 1; i < navigatorList.length - 1; i++) {

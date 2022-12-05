@@ -66,16 +66,16 @@ class SCServiceController extends GetxController {
       ],"module": {"id": "1", "name": "物业管家"}
       },
       {"applets": [
-        {"icon": {"fileKey": "","name": SCAsset.iconServiceIntegral},"id": "21","name": "积分管理哦"},
-        {"icon": {"fileKey": "","name": SCAsset.iconServiceReport},"id": "22","name": "报事报修哦"},
-        {"icon": {"fileKey": "","name": SCAsset.iconServicePay},"id": "23","name": "小区缴费哦"},
-        {"icon": {"fileKey": "","name": SCAsset.iconServiceFinance},"id": "24","name": "家庭理财哦"},
-        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "25","name": "社区社群哦"},
-        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "26","name": "智慧社区哦"},
-        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "27","name": "智慧街道哦"},
-        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "28","name": "社区游玩哦"},
-        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "29","name": "智慧出行哦"},
-        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "20","name": "智慧预约哦"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceIntegral},"id": "21","name": "积分管理"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceReport},"id": "22","name": "报事报修"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServicePay},"id": "23","name": "小区缴费"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceFinance},"id": "24","name": "家庭理财"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "25","name": "社区社群"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "26","name": "智慧社区"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "27","name": "智慧街道"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "28","name": "社区游玩"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "29","name": "智慧出行"},
+        {"icon": {"fileKey": "","name": SCAsset.iconServiceCommunity},"id": "20","name": "智慧预约"},
       ],"module": {"id": "2","name": "智慧应用"}
       },
       {"applets": [
