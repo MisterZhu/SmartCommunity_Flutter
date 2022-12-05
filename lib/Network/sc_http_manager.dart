@@ -42,7 +42,7 @@ class SCHttpManager {
         _headers!['Authorization'] = user.token;
       }
 
-      log('通用全局单例====headers=====$_headers');
+      // log('通用全局单例====headers=====$_headers');
       _baseOptions = BaseOptions(
         baseUrl: SCConfig.BASE_URL,
         connectTimeout: SCDefaultValue.timeOut,
@@ -53,7 +53,6 @@ class SCHttpManager {
 
       _dio = Dio();
       _dio!.options = _baseOptions!;
-      //
       (_dio!.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
           (client) {
         //抓Https包设置  信任所有https证书
@@ -61,8 +60,8 @@ class SCHttpManager {
             (X509Certificate cert, String host, int port) => true;
         return null;
       };
-      _dio?.interceptors
-          .add(LogInterceptor(responseBody: true, requestBody: true)); // 日志打印
+      // _dio?.interceptors
+      //     .add(LogInterceptor(responseBody: true, requestBody: true)); // 日志打印
       // print("options.headers-->" + options.headers.toString());
 
     }

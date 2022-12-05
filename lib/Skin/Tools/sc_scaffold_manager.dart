@@ -89,13 +89,13 @@ class SCScaffoldManager {
       _preferences.getString(SkinDefaultKey.scaffold_key);
       var localJson = jsonDecode(scaffolfJsonString ?? '');
       _scaffoldModel = SCScaffoldModel.fromJson(localJson);
-      log('皮肤数据:${SCScaffoldManager.instance.scaffoldModel.toJson()}');
-      log('皮肤已设置完成');
+      // log('皮肤数据:${SCScaffoldManager.instance.scaffoldModel.toJson()}');
+      // log('皮肤已设置完成');
     } else {
       _scaffoldModel = SCScaffoldModel.fromJson(scaffoldJson);
       _preferences.setString(
           SkinDefaultKey.scaffold_key, jsonEncode(scaffoldJson));
-      log('设置皮肤完成');
+      // log('设置皮肤完成');
     }
 
     final state = Get.find<SCCustomScaffoldController>();
@@ -203,7 +203,7 @@ class SCScaffoldManager {
     if (contains == true) {
       var data = SCSpUtil.getMap(SCKey.kUserData);
       _user = SCUser.fromJson(data);
-      print('本地数据：${_user.toJson()}');
+      // print('本地数据：${_user.toJson()}');
       return _user;
     }
   }
