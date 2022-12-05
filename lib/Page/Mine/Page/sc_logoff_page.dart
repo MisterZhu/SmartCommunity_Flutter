@@ -12,7 +12,6 @@ import '../../../Constants/sc_type_define.dart';
 import '../../../Skin/View/sc_custom_scaffold.dart';
 import '../../../Utils/Colors/sc_color_hex.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
-import '../../../Utils/Toast/sc_toast.dart';
 import '../../../Utils/sc_utils.dart';
 import '../../Login/View/Login/sc_agreement_item.dart';
 import '../GetXController/sc_logoff_controller.dart';

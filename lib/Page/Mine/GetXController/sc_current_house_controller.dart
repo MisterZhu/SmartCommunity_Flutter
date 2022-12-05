@@ -6,7 +6,6 @@ import 'package:smartcommunity/Skin/Model/sc_user.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import '../../../Network/sc_http_manager.dart';
 import '../../../Network/sc_url.dart';
-import '../../../Utils/Toast/sc_toast.dart';
 import '../Model/sc_current_house_review_model.dart';
 
 class SCCurrentHouseController extends GetxController {

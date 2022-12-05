@@ -5,7 +5,6 @@ import 'package:sc_uikit/sc_uikit.dart';
 import '../../../Network/sc_http_manager.dart';
 import '../../../Network/sc_url.dart';
 import '../../../Skin/Tools/sc_scaffold_manager.dart';
-import '../../../Utils/Toast/sc_toast.dart';
 
 /// 账户注销controller
 

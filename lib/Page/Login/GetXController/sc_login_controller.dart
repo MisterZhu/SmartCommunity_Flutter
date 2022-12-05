@@ -12,7 +12,6 @@ import '../../../Skin/Model/sc_user.dart';
 import '../../../Skin/Tools/sc_scaffold_manager.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
 import '../../../Utils/Router/sc_router_path.dart';
-import '../../../Utils/Toast/sc_toast.dart';
 
 class SCLoginController extends GetxController {
   /// 是否同意相关协议，默认不同意

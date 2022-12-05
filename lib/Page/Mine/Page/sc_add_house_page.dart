@@ -11,7 +11,6 @@ import 'package:smartcommunity/Page/Login/Model/SelectHouse/sc_user_identity.dar
 import 'package:smartcommunity/Skin/Model/sc_user.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
-import 'package:smartcommunity/Utils/Toast/sc_toast.dart';
 import '../../../Constants/sc_asset.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import '../../../Utils/sc_utils.dart';

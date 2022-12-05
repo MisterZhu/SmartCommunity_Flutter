@@ -1,7 +1,7 @@
 
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:tobias/tobias.dart' as tobias;
 import '../../Constants/sc_default_value.dart';
-import '../Toast/sc_toast.dart';
 
 class SCAliPayUtils {
 

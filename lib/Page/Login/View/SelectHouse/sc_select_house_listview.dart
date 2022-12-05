@@ -5,9 +5,7 @@ import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Login/GetXController/sc_select_house_data_controller.dart';
 import 'package:smartcommunity/Page/Login/Model/SelectHouse/sc_select_house_block_model.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
-import 'package:smartcommunity/Utils/Router/sc_router_pages.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_path.dart';
-import 'package:smartcommunity/Utils/Toast/sc_toast.dart';
 
 import '../../GetXController/sc_select_house_search_status_controller.dart';
 

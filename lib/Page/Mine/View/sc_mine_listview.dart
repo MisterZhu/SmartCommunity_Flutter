@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_default_value.dart';
 import 'package:smartcommunity/Constants/sc_h5.dart';
 import 'package:smartcommunity/Constants/sc_skin_value.dart';
@@ -17,7 +18,6 @@ import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
 import '../../../Network/sc_config.dart';
 import '../../../Utils/Router/sc_router_path.dart';
-import '../../../Utils/Toast/sc_toast.dart';
 
 /// 我的-listview
 
