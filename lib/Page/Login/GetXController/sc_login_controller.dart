@@ -62,7 +62,7 @@ class SCLoginController extends GetxController {
   }
 
   /// 请求登录接口
-  login() {
+  login({required Function(bool success) resultHandler}) {
     SCLoadingUtils.show();
     SCHttpManager.instance.post(
         url: SCUrl.kPhoneCodeLoginUrl,
@@ -92,6 +92,8 @@ class SCLoginController extends GetxController {
           SCScaffoldManager.instance.user = user;
           SCScaffoldManager.instance.isLogin = true;
 
+          resultHandler(true);
+
           if (showCloseBtn) {
             SCRouterHelper.back(null);
             Get.forceAppUpdate();
@@ -99,7 +101,7 @@ class SCLoginController extends GetxController {
             if (user.communityId == null || user.communityId == '') {
               SCRouterHelper.pathPage(SCRouterPath.selectCommunityPath, {"type" : SCSelectHouseLogicType.login});
             } else {
-              SCRouterHelper.codeOffAllPage(10000, null);
+              SCRouterHelper.pathOffAllPage(SCRouterPath.tabPath, null);
             }
           }
         },
@@ -109,6 +111,7 @@ class SCLoginController extends GetxController {
             String message = value['message'];
             SCToast.showTip(message);
           }
+          resultHandler(false);
         });
   }
 }

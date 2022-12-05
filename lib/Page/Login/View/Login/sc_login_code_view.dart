@@ -20,16 +20,13 @@ class SCLoginCodeView extends StatelessWidget {
 
   SCLoginCodeController codeState = Get.find<SCLoginCodeController>();
 
-  late BuildContext currentContext;
-
   @override
   Widget build(BuildContext context) {
-    currentContext = context;
-    return body();
+    return body(context);
   }
 
   /// body
-  Widget body() {
+  Widget body(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.only(bottom: SCUtils().getBottomSafeArea()),
@@ -42,7 +39,7 @@ class SCLoginCodeView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SizedBox(height: 18.0,),
-          topItem(),
+          topItem(context),
           const SizedBox(height: 8.0,),
           phoneItem(),
           const SizedBox(height: 28.0,),
@@ -50,14 +47,14 @@ class SCLoginCodeView extends StatelessWidget {
           const SizedBox(height: 18.0,),
           sendCodeItem(),
           const SizedBox(height: 42.0,),
-          keyboardView(),
+          keyboardView(context),
         ],
       ),
     );
   }
 
   /// 顶部文字item
-  Widget topItem() {
+  Widget topItem(BuildContext context) {
     return SizedBox(
       height: 30.0,
       child: Row(
@@ -84,7 +81,7 @@ class SCLoginCodeView extends StatelessWidget {
                   height: 18.0,
                 ),
                 onPressed: () {
-                  closeView();
+                  clearData(context);
                 }),
           ),
         ],
@@ -162,26 +159,29 @@ class SCLoginCodeView extends StatelessWidget {
   }
 
   /// 数字键盘
-  Widget keyboardView() {
+  Widget keyboardView(BuildContext context) {
     return SCNumberKeyboardItem(numberTapAction: (int number) {
       codeState.numberListAdd(value: number);
       if (codeState.numberList.length == 6) {
         loginState.code = codeState.numberList.join();
-        closeView();
-        loginState.login();
+        loginState.login(resultHandler: (status) {
+          if (status == true) {
+            clearData(context);
+          }
+        });
       }
     }, deleteAction: () {
       codeState.numberListDelete();
     },);
   }
 
-  /// 关闭当前页面
-  closeView() {
+  /// 清空数据，并关闭页面
+  clearData(BuildContext context) {
     codeState.disposeTimer();
     codeState.numberListClear();
     codeState.codeTime = 60;
     codeState.codeText = '重新发送';
-    Navigator.of(currentContext).pop();
+    Navigator.of(context).pop();
   }
 
   /// 请求发送验证码接口
