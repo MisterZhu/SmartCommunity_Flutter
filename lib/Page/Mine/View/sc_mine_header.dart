@@ -3,8 +3,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:smartcommunity/Constants/sc_asset.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
-import 'package:smartcommunity/Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
 

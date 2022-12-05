@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
-import 'package:smartcommunity/Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Login/Model/sc_city_model.dart';
 
 /// 城市搜索结果item

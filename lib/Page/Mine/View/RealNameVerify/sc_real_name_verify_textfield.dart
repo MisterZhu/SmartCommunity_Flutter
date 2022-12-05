@@ -5,9 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/Page/Mine/View/RealNameVerify/sc_input_formatter.dart';
-
-import '../../../../Constants/sc_colors.dart';
-import '../../../../Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import '../../GetXController/sc_real_name_verify_controller.dart';
 
 /// 实名认证姓名、身份证号输入TextField

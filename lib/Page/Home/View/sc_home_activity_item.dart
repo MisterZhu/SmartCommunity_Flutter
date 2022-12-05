@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
-import 'package:smartcommunity/Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Home/View/sc_home_activity_top_item.dart';
 
 /// 首页-热门活动

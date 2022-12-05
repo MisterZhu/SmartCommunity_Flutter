@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_agreement.dart';
 import 'package:smartcommunity/Constants/sc_type_define.dart';
 import 'package:smartcommunity/Page/Login/GetXController/sc_login_controller.dart';
@@ -15,10 +16,7 @@ import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_path.dart';
 import 'package:smartcommunity/Utils/Toast/sc_toast.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
-import '../../../../Constants/sc_asset.dart';
-import '../../../../Constants/sc_colors.dart';
 import '../../../../Utils/Colors/sc_color_hex.dart';
-import '../../../../Widgets/Dialog/sc_dialog_utils.dart';
 import '../../GetXController/sc_login_code_controller.dart';
 import 'sc_login_agreement.dart';
 

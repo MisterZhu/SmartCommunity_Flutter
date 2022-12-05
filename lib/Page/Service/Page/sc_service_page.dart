@@ -7,10 +7,8 @@ import 'package:smartcommunity/Network/sc_config.dart';
 import 'package:smartcommunity/Page/Service/GetXController/sc_service_controller.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_path.dart';
 import 'package:smartcommunity/Utils/sc_sp_utils.dart';
-
-import '../../../Constants/sc_colors.dart';
 import '../../../Constants/sc_default_value.dart';
-import '../../../Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import '../../../Constants/sc_h5.dart';
 import '../../../Skin/Tools/sc_scaffold_manager.dart';
 import '../../../Utils/Router/sc_router_helper.dart';

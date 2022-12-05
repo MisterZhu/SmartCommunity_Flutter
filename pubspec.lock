@@ -429,6 +429,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  logger:
+    dependency: "direct main"
+    description:
+      name: logger
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   lpinyin:
     dependency: "direct main"
     description:
@@ -646,6 +653,24 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.27.4"
+  sc_tools:
+    dependency: transitive
+    description:
+      path: "."
+      ref: "0.0.1"
+      resolved-ref: "772361f4c9b1b8be5a929acc5ba1b9a1734c8aa7"
+      url: "http://10.100.10.22/jizuo-flutter/flutter_library/sc_tools.git"
+    source: git
+    version: "0.0.1"
+  sc_uikit:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: "0.0.1"
+      resolved-ref: "10a203673cd5c46bb00424811ab80e90e8c6e9db"
+      url: "http://10.100.10.22/jizuo-flutter/flutter_library/sc_uikit.git"
+    source: git
+    version: "0.0.1"
   scrollable_positioned_list:
     dependency: transitive
     description:

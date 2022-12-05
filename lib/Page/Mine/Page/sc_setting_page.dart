@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
 import 'package:smartcommunity/Page/Mine/View/Setting/sc_setting_listview.dart';
 import 'package:smartcommunity/Skin/View/sc_custom_scaffold.dart';
-import '../../../Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
 import '../../../Utils/Router/sc_router_path.dart';
-import '../../../Widgets/Dialog/sc_base_dialog.dart';
-import '../../../Widgets/Dialog/sc_dialog_utils.dart';
 import '../GetXController/sc_setting_controller.dart';
 
 /// 设置page

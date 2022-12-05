@@ -4,11 +4,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smartcommunity/Constants/sc_agreement.dart';
 import 'package:smartcommunity/Constants/sc_default_value.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
-import '../../../Constants/sc_colors.dart';
 import '../../../Constants/sc_key.dart';
 import '../../../Utils/Router/sc_router_path.dart';
 import '../../../Utils/Toast/sc_toast.dart';

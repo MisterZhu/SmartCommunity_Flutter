@@ -2,10 +2,10 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_enum.dart';
 import 'package:smartcommunity/Page/Login/Model/sc_community_model.dart';
 import 'package:smartcommunity/Page/Login/View/SelectCommunity/sc_community_item.dart';
-import '../../../../Constants/sc_colors.dart';
 import '../../../../Page/Login/GetXController/sc_search_community_controller.dart';
 import '../../GetXController/sc_select_community_controller.dart';
 

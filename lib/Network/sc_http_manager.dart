@@ -3,13 +3,11 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:smartcommunity/Constants/sc_default_value.dart';
 import 'package:smartcommunity/Network/sc_config.dart';
 import 'package:smartcommunity/Network/sc_url.dart';
 import 'package:smartcommunity/Skin/Model/sc_user.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
-import 'package:smartcommunity/Utils/Toast/sc_toast.dart';
 
 import '../Constants/sc_key.dart';
 import '../Utils/Loading/sc_loading_utils.dart';
@@ -113,7 +111,7 @@ class SCHttpManager {
   }
 
   /// 通用的POST请求
-  post({required String url, dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
+  Future post({required String url, dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
     Options options = Options(
         headers: headers
     );
@@ -140,6 +138,7 @@ class SCHttpManager {
         }
       }
     }
+    return Future(() => status);
   }
 
   /// 通用的PUT请求

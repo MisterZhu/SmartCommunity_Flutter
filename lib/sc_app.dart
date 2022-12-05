@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Base/sc_all_binding.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_pages.dart';
@@ -38,7 +38,7 @@ void startApp() async {
   runApp(GetMaterialApp(
     theme: ThemeData(
         primaryColor: Colors.white,
-        colorScheme: const ColorScheme(brightness: Brightness.light, primary: Colors.white, onPrimary: SCColors.color_1B1C33, secondary: SCColors.color_1B1C33, onSecondary: Colors.white, error: Colors.white, onError: Colors.white, background: Colors.white, onBackground: Colors.white, surface: Colors.white, onSurface: Colors.white)
+        colorScheme: ColorScheme(brightness: Brightness.light, primary: Colors.white, onPrimary: SCColors.color_1B1C33, secondary: SCColors.color_1B1C33, onSecondary: Colors.white, error: Colors.white, onError: Colors.white, background: Colors.white, onBackground: Colors.white, surface: Colors.white, onSurface: Colors.white)
     ),
     navigatorKey: navigatorKey,
     debugShowCheckedModeBanner: false,

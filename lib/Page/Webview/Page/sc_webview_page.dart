@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_key.dart';
 import 'package:smartcommunity/Skin/View/sc_custom_scaffold.dart';
 import 'package:smartcommunity/Utils/sc_sp_utils.dart';
@@ -43,6 +44,9 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
   String _richText = "";
 
   bool _isLocalUrl = false;
+
+  /// 进度
+  double progress = 0;
 
   @override
   void initState() {
@@ -134,30 +138,62 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
             ? RichText(
                 text: TextSpan(text: _richText),
               )
-            : WebView(
-                initialUrl: _isLocalUrl ? "" : _url,
+            : contentItem();
+  }
 
-                /// 是否开启JS
-                javascriptMode: JavascriptMode.unrestricted,
+  /// content
+  Widget contentItem() {
+    return Stack(
+      children: [
+        webViewItem(),
+        progressIndicator(),
+      ],
+    );
+  }
 
-                /// 跟H5交互的方法到此处处理
-                javascriptChannels: {_jxTokenChannel(context)},
+  /// webView
+  Widget webViewItem() {
+    return WebView(
+      initialUrl: _isLocalUrl ? "" : _url,
 
-                ///WebView创建
-                onWebViewCreated: _onWebViewCreated,
+      /// 是否开启JS
+      javascriptMode: JavascriptMode.unrestricted,
 
-                ///页面开始加载
-                onPageStarted: _onPageStarted,
+      /// 跟H5交互的方法到此处处理
+      javascriptChannels: {_jxTokenChannel(context)},
 
-                ///页面加载结束
-                onPageFinished: _onPageFinished,
+      ///WebView创建
+      onWebViewCreated: _onWebViewCreated,
 
-                onProgress: _onProgress,
+      ///页面开始加载
+      onPageStarted: _onPageStarted,
 
-                ///如果出现错误
-                onWebResourceError: (WebResourceError error) =>
-                    debugPrint('error:${error.description}'),
-              );
+      ///页面加载结束
+      onPageFinished: _onPageFinished,
+
+      onProgress: _onProgress,
+
+      ///如果出现错误
+      onWebResourceError: (WebResourceError error) =>
+          debugPrint('error:${error.description}'),
+    );
+  }
+
+  /// 进度条
+  Widget progressIndicator() {
+    bool offstage = progress < 1.0 ? false : true;
+    return Positioned(
+        left: 0,
+        right: 0,
+        top: 0,
+        child: Offstage(
+          offstage: offstage,
+          child: LinearProgressIndicator(
+            backgroundColor: Colors.transparent,
+            color: SCColors.primaryColor,
+            value: progress,
+          ),
+        ));
   }
 
   /// webView创建
@@ -181,7 +217,11 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
   }
 
   void _onProgress(int progress) {
-    print('---> progress $progress');
+    if (mounted) {
+      setState(() {
+        this.progress = progress / 100;
+      });
+    }
   }
 
   _loadHtmlFromAssets() async {

@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 import '../../../../Constants/sc_asset.dart';
-import '../../../../Constants/sc_colors.dart';
-import '../../../../Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import '../../GetXController/sc_my_house_controller.dart';
 import '../../Model/sc_my_house_model.dart';
 

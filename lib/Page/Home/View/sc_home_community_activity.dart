@@ -1,15 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Home/View/sc_home_activity_bottom_content.dart';
 import 'package:smartcommunity/Page/Home/View/sc_home_activity_bottom_tag.dart';
 import 'package:smartcommunity/Page/Home/View/sc_home_activity_image_tag.dart';
 import 'package:smartcommunity/Page/Home/View/sc_home_activity_top_item.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
-
-import '../../../Constants/sc_colors.dart';
 import '../../../Constants/sc_enum.dart';
-import '../../../Constants/sc_fonts.dart';
 
 /// 首页-园区活动cell，最多3个，图片大小107*102
 

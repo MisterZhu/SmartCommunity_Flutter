@@ -14,12 +14,8 @@ import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Utils/Loading/sc_loading_utils.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/Utils/Toast/sc_toast.dart';
-import 'package:smartcommunity/Widgets/Dialog/sc_base_dialog.dart';
-import 'package:smartcommunity/Widgets/Dialog/sc_bottom_sheet_model.dart';
-import 'package:smartcommunity/Widgets/Dialog/sc_dialog_utils.dart';
 import '../../../Constants/sc_asset.dart';
-import '../../../Constants/sc_colors.dart';
-import '../../../Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import '../../../Utils/sc_utils.dart';
 import '../GetXController/sc_add_house_controller.dart';
 

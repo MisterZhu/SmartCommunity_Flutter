@@ -1,7 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
-import '../../../../Constants/sc_colors.dart';
-import '../../../../Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import '../../../../Utils/sc_utils.dart';
 
 /// 游客模式、邀请码注册按钮

@@ -2,9 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../../Constants/sc_colors.dart';
-import '../../../Constants/sc_fonts.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 
 /// 首页活动cell图片下半部分半透明的标签
 

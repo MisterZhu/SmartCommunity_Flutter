@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Home/GetXController/sc_home_controller.dart';
 import 'package:smartcommunity/Page/Home/GetXController/sc_home_controller1.dart';
 import 'package:smartcommunity/Page/Home/GetXController/sc_home_controller2.dart';

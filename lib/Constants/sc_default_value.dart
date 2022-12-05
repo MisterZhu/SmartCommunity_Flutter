@@ -7,7 +7,7 @@ class SCDefaultValue {
   static const  double defaultScreenWidth = 375.0;
 
   /// APP名称
-  static const String appName = '邑生活';
+  static const String appName = '善数生活';
 
   /// client
   static const String client = 'jm-app';

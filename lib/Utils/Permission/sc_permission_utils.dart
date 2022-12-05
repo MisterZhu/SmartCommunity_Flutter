@@ -8,13 +8,8 @@ import 'package:smartcommunity/Constants/sc_key.dart';
 import 'package:smartcommunity/sc_app.dart';
 import 'package:smartcommunity/Utils/sc_sp_utils.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
-import 'package:smartcommunity/Widgets/Dialog/sc_base_dialog.dart';
-import 'package:smartcommunity/Widgets/Dialog/sc_dialog_utils.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
-
-import '../../Constants/sc_colors.dart';
-import '../../Constants/sc_fonts.dart';
-import '../../Widgets/Dialog/sc_bottom_sheet_model.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import '../Router/sc_router_helper.dart';
 import '../Router/sc_router_path.dart';
 

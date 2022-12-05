@@ -1,10 +1,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 
 import '../../../../Constants/sc_asset.dart';
-import '../../../../Constants/sc_fonts.dart';
 
 /// 自定义数字键盘
 class SCNumberKeyboardItem extends StatelessWidget {

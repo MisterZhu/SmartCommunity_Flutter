@@ -374,6 +374,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "logger",
+      "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/logger-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "lpinyin",
       "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/lpinyin-2.0.3",
       "packageUri": "lib/",
@@ -558,6 +564,18 @@
       "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "sc_tools",
+      "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/git/sc_tools-772361f4c9b1b8be5a929acc5ba1b9a1734c8aa7/",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "sc_uikit",
+      "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/git/sc_uikit-10a203673cd5c46bb00424811ab80e90e8c6e9db/",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "scrollable_positioned_list",
@@ -788,7 +806,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-12-02T08:28:22.615663Z",
+  "generated": "2022-12-05T03:04:19.432479Z",
   "generator": "pub",
   "generatorVersion": "2.17.1"
 }

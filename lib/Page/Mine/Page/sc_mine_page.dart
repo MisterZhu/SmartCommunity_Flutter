@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:smartcommunity/Constants/sc_colors.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_type_define.dart';
 import 'package:smartcommunity/Page/Mine/GetXController/sc_mine_controller.dart';
 import 'package:smartcommunity/Page/Mine/View/sc_mine_listview.dart';

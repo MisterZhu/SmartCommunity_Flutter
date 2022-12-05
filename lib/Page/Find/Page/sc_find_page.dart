@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_asset.dart';
 import 'package:smartcommunity/Page/Home/GetXController/sc_home_controller2.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
-
-import '../../../Constants/sc_colors.dart';
 import '../../Home/View/Skin2/sc_home_skin2.dart';
 
 /// 发现-page
