@@ -7,4 +7,6 @@ class SCH5FlutterKey {
   static const String jxToken = '_app_callback_token';
   /// 扫码
   static const String scan = 'sc_app_scan';
+  /// 用户信息
+  static const String userInfo = 'sc_app_user_info';
 }

@@ -9,6 +9,7 @@ import 'package:smartcommunity/Constants/sc_key.dart';
 import 'package:smartcommunity/Page/Login/Model/SelectCommunity/sc_location_model.dart';
 import 'package:smartcommunity/Page/Webview/Constant/sc_flutter_h5_key.dart';
 import 'package:smartcommunity/Page/Webview/Constant/sc_h5_flutter_key.dart';
+import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Skin/View/sc_custom_scaffold.dart';
 import 'package:smartcommunity/Utils/Permission/sc_permission_utils.dart';
 import 'package:smartcommunity/Utils/sc_sp_utils.dart';
@@ -172,6 +173,7 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
         jxTokenChannel(context),
         getLocationChannel(context),
         scanChannel(context),
+        userInfoChannel(context),
       },
 
       ///WebView创建
@@ -285,6 +287,19 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
           webViewController?.runJavascript(SCUtils()
               .flutterCallH5(h5Name: SCFlutterH5Key.scan, params: value));
         });
+      });
+
+  ///  用户信息-channel
+  JavascriptChannel userInfoChannel(BuildContext context) => JavascriptChannel(
+      name: SCH5FlutterKey.userInfo,
+      onMessageReceived: (JavascriptMessage message) {
+        var params = {
+          'token' : SCScaffoldManager.instance.user.token,
+          'phone' : SCScaffoldManager.instance.user.mobileNum,
+          'userName' : SCScaffoldManager.instance.user.userName,
+        };
+        webViewController?.runJavascript(SCUtils()
+            .flutterCallH5(h5Name: SCFlutterH5Key.userInfo, params: params));
       });
 
   /// 缓存建信租房token
