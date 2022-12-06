@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,7 +25,16 @@ class SCHouseSearchDynamicView extends StatelessWidget {
   /// 文本框内容改变
   final Function(String value)? valueChangedAction;
 
-  SCHouseSearchDynamicView({Key? key, this.isShowCancel = false, this.cancelAction, this.valueChangedAction}) : super(key: key);
+  final SCSelectHouseSearchStatusController searchState;
+  final SCSelectHouseDataController selectState;
+
+  SCHouseSearchDynamicView({Key? key,
+    required this.selectState,
+    required this.searchState,
+    this.isShowCancel = false,
+    this.cancelAction,
+    this.valueChangedAction
+  }) : super(key: key);
 
   // controller
   final TextEditingController controller = TextEditingController();
@@ -43,26 +51,22 @@ class SCHouseSearchDynamicView extends StatelessWidget {
   Widget body(BuildContext context) {
     if (isShowCancel) {
       showKeyboard(context);
-      return Container(
-        child: Row(
-            children: [
-              Expanded(child: searchItem(context)),
-              const SizedBox(width: 6,),
-              cancelItem()
-            ]
-        ),
+      return Row(
+          children: [
+            Expanded(child: searchItem(context)),
+            const SizedBox(width: 6,),
+            cancelItem()
+          ]
       );
     } else {
-      return SCSelectHouseSearchStaticView();
+      return SCSelectHouseSearchStaticView(searchState: searchState,);
     }
   }
 
   showCancelButton() {
-    // SCSearchCityController searchState = Get.find<SCSearchCityController>();
     // searchState.updateCancelButtonStatus(status: true);
     //
-    // SCSelectCityController state = Get.find<SCSelectCityController>();
-    // state.updateSearchResult(status: true);
+    // selectState.updateSearchResult(status: true);
   }
 
   showKeyboard(BuildContext context) {
@@ -96,10 +100,8 @@ class SCHouseSearchDynamicView extends StatelessWidget {
     if (cancelAction != null) {
       cancelAction?.call();
     }
-    SCSelectHouseDataController state = Get.find<SCSelectHouseDataController>();
-    SCSelectHouseSearchStatusController sCSelectHouseState = Get.find<SCSelectHouseSearchStatusController>();
-    sCSelectHouseState.updateSearchStatus(isShowCancel: false);
-    state.updateSearchList(list: []);
+    searchState.updateSearchStatus(isShowCancel: false);
+    selectState.updateSearchList(list: []);
   }
 
   /// 搜索框
@@ -167,11 +169,10 @@ class SCHouseSearchDynamicView extends StatelessWidget {
     if (valueChangedAction != null) {
       valueChangedAction?.call(value);
     }
-    SCSelectHouseDataController state = Get.find<SCSelectHouseDataController>();
-    List<ScSelectHouseModel> houseCommunityList = state.dataList;
+    List<ScSelectHouseModel> houseCommunityList = selectState.dataList;
     List<ScSelectHouseModel> searchResultList = [];
-    if(value.isNotEmpty) {
-      if(houseCommunityList != null){
+    if (value.isNotEmpty) {
+      if (houseCommunityList != null) {
         for(int i = 0; i < houseCommunityList.length; i++) {
           ScSelectHouseModel scSelectHouseModel = houseCommunityList[i];
           String? name = scSelectHouseModel.name;
@@ -180,10 +181,10 @@ class SCHouseSearchDynamicView extends StatelessWidget {
           }
         }
       }
-      state.updateSearchList(list:searchResultList);
+      selectState.updateSearchList(list:searchResultList);
     } else {
       print('-->输入的东西为空');
-      state.updateSearchList(list:[]);
+      selectState.updateSearchList(list:[]);
     }
   }
 }

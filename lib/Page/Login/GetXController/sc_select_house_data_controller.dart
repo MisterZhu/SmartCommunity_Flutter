@@ -1,3 +1,5 @@
+
+import 'dart:developer';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Network/sc_http_manager.dart';
@@ -19,6 +21,16 @@ class SCSelectHouseDataController extends GetxController {
 
   /// 搜索结果
   List<ScSelectHouseModel> searchResultList = [];
+
+  String pageName = '';
+
+  String tag = '';
+
+  @override
+  onInit() {
+    super.onInit();
+    getCurrentTag();
+  }
 
   /// 导航栏数据
   updateNavigatorList({required List<ScSelectHouseModel> list}) {

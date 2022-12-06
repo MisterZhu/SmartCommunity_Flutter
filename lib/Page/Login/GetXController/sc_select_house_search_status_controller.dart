@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 /// Copyright (c), 浙江慧享信息科技有限公司
@@ -11,12 +12,20 @@ class SCSelectHouseSearchStatusController extends GetxController {
   /// 搜索是否显示取消
   bool isShowCancel = false;
 
+  String pageName = '';
+
+  String tag = '';
+
+  @override
+  onInit() {
+    super.onInit();
+    getCurrentTag();
+  }
 
   /// 刷新搜索状态
-  updateSearchStatus({bool isShowCancel = false}){
+  updateSearchStatus({bool isShowCancel = false}) {
     this.isShowCancel = isShowCancel;
     update();
   }
-
 
 }
