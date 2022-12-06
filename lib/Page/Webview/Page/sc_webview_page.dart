@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_key.dart';
@@ -12,11 +10,10 @@ import 'package:smartcommunity/Page/Login/Model/SelectCommunity/sc_location_mode
 import 'package:smartcommunity/Page/Webview/Constant/sc_flutter_h5_key.dart';
 import 'package:smartcommunity/Page/Webview/Constant/sc_h5_flutter_key.dart';
 import 'package:smartcommunity/Skin/View/sc_custom_scaffold.dart';
-import 'package:smartcommunity/Utils/sc_location_utils.dart';
+import 'package:smartcommunity/Utils/Permission/sc_permission_utils.dart';
 import 'package:smartcommunity/Utils/sc_sp_utils.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
 import '../../../Constants/sc_asset.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
 import '../../../Utils/sc_string_utils.dart';
@@ -171,7 +168,11 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
       javascriptMode: JavascriptMode.unrestricted,
 
       /// 跟H5交互的方法到此处处理
-      javascriptChannels: {jxTokenChannel(context)},
+      javascriptChannels: {
+        jxTokenChannel(context),
+        getLocationChannel(context),
+        scanChannel(context),
+      },
 
       ///WebView创建
       onWebViewCreated: _onWebViewCreated,
@@ -269,65 +270,22 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
       JavascriptChannel(
           name: SCH5FlutterKey.location,
           onMessageReceived: (JavascriptMessage message) {
-            startLocation();
+            SCPermissionUtils.startLocationWithPrivacyAlert(
+                completionHandler: (dynamic value, SCLocationModel? model) {
+              webViewController?.runJavascript(SCUtils().flutterCallH5(
+                  h5Name: SCFlutterH5Key.location, params: value));
+            });
           });
 
-  /// 定位
-  startLocation() async {
-    LocationPermission permission = await SCLocationUtils.requestPermission();
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.deniedForever) {
-      /// 定位被拒绝，无权限
-      var params = {
-        "status": 2,
-      };
-      webViewController?.runJavascript(SCUtils()
-          .flutterCallH5(h5Name: SCFlutterH5Key.location, params: params));
-    } else if (permission == LocationPermission.whileInUse ||
-        permission == LocationPermission.always) {
-      /// 已获取定位权限
-      Position position = await SCLocationUtils.location();
-      reGeoCode(position: position);
-    } else {
-      /// 权限无法确定
-      var params = {
-        "status": 0,
-      };
-      webViewController?.runJavascript(SCUtils()
-          .flutterCallH5(h5Name: SCFlutterH5Key.location, params: params));
-    }
-  }
-
-  /// 逆地理编码
-  reGeoCode({required Position position}) async {
-    await SCLocationUtils.reGeoCode(
-        position: position,
-        success: (value) {
-          SCLocationModel model = value;
-          var params = {
-            "status": 1,
-            "data": {
-              "longitude": position.longitude,
-              "latitude": position.latitude,
-              "city": model.addressComponent?.city,
-              "cityCode": model.addressComponent?.citycode
-            }
-          };
+  ///  扫码-channel
+  JavascriptChannel scanChannel(BuildContext context) => JavascriptChannel(
+      name: SCH5FlutterKey.scan,
+      onMessageReceived: (JavascriptMessage message) {
+        SCPermissionUtils.scanCodeWithPrivacyAlert(completionHandler: (value) {
           webViewController?.runJavascript(SCUtils()
-              .flutterCallH5(h5Name: SCFlutterH5Key.location, params: params));
-        },
-        failure: (value) {
-          var params = {
-            "status": 1,
-            "data": {
-              "longitude": position.longitude,
-              "latitude": position.latitude,
-            }
-          };
-          webViewController?.runJavascript(SCUtils()
-              .flutterCallH5(h5Name: SCFlutterH5Key.location, params: params));
+              .flutterCallH5(h5Name: SCFlutterH5Key.scan, params: value));
         });
-  }
+      });
 
   /// 缓存建信租房token
   cacheJXToken(String token) {

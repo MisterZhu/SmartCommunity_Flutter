@@ -32,8 +32,10 @@ class SCHttpManager {
   ///通用全局单例，第一次使用时初始化
   SCHttpManager._internal() {
     if (null == _dio) {
-      _headers = {'Content-Type': 'application/json; charset=utf-8',
-        'client' : SCDefaultValue.client};
+      _headers = {
+        'Content-Type': 'application/json; charset=utf-8',
+        'client': SCDefaultValue.client
+      };
       if (SCScaffoldManager.instance.isLogin == true) {
         SCUser user = SCScaffoldManager.instance.getUserData();
         _headers!['Authorization'] = user.token;
@@ -78,16 +80,20 @@ class SCHttpManager {
   }
 
   /// 通用的GET请求
-  get({required String url, dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
-    Options options = Options(
-        headers: headers
-    );
+  get(
+      {required String url,
+      dynamic params,
+      Map<String, dynamic>? headers,
+      Function(dynamic value)? success,
+      Function(dynamic value)? failure}) async {
+    Options options = Options(headers: headers);
     late Response response;
     late Object exception;
     bool status = false;
 
     try {
-      response = await _dio!.get(url, queryParameters: params, options: headers == null ? null : options);
+      response = await _dio!.get(url,
+          queryParameters: params, options: headers == null ? null : options);
       status = true;
     } catch (e) {
       status = false;
@@ -107,16 +113,22 @@ class SCHttpManager {
   }
 
   /// 通用的POST请求
-  Future post({required String url, dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
-    Options options = Options(
-        headers: headers
-    );
+  Future post(
+      {required String url,
+      dynamic params,
+      Map<String, dynamic>? headers,
+      Function(dynamic value)? success,
+      Function(dynamic value)? failure}) async {
+    Options options = Options(headers: headers);
     late Response response;
     late Object exception;
     bool status = false;
 
     try {
-      response = await _dio!.post(url, queryParameters: params is Map<String, dynamic> ? params : {}, data: params, options: headers == null ? null : options);
+      response = await _dio!.post(url,
+          queryParameters: params is Map<String, dynamic> ? params : {},
+          data: params,
+          options: headers == null ? null : options);
       status = true;
     } catch (e) {
       status = false;
@@ -138,16 +150,22 @@ class SCHttpManager {
   }
 
   /// 通用的PUT请求
-  put({required String url, dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
-    Options options = Options(
-        headers: headers
-    );
+  put(
+      {required String url,
+      dynamic params,
+      Map<String, dynamic>? headers,
+      Function(dynamic value)? success,
+      Function(dynamic value)? failure}) async {
+    Options options = Options(headers: headers);
     late Response response;
     late Object exception;
     bool status = false;
 
     try {
-      response = await _dio!.put(url, queryParameters: params, data: params, options: headers == null ? null : options);
+      response = await _dio!.put(url,
+          queryParameters: params,
+          data: params,
+          options: headers == null ? null : options);
       status = true;
     } catch (e) {
       status = false;
@@ -167,16 +185,22 @@ class SCHttpManager {
   }
 
   /// 通用的DELETE请求
-  delete({required String url, dynamic params, Map<String, dynamic>? headers, Function(dynamic value)? success, Function(dynamic value)? failure}) async {
-    Options options = Options(
-        headers: headers
-    );
+  delete(
+      {required String url,
+      dynamic params,
+      Map<String, dynamic>? headers,
+      Function(dynamic value)? success,
+      Function(dynamic value)? failure}) async {
+    Options options = Options(headers: headers);
     late Response response;
     late Object exception;
     bool status = false;
 
     try {
-      response = await _dio!.delete(url, queryParameters: params, data: params, options: headers == null ? null : options);
+      response = await _dio!.delete(url,
+          queryParameters: params,
+          data: params,
+          options: headers == null ? null : options);
       status = true;
     } catch (e) {
       status = false;
@@ -236,8 +260,10 @@ doResponse(Response response) {
 doError(e) {
   print('报错数据:$e');
   SCLoadingUtils.hide();
+
   /// 错误码
   int code = 0;
+
   /// message
   String message = SCDefaultValue.errorMessage;
 
@@ -249,48 +275,49 @@ doError(e) {
       message = SCDefaultValue.netErrorMessage;
     } else {
       code = error.response?.statusCode ?? 500;
-      switch(error.response?.statusCode) {
-        case 201: {
+      switch (error.response?.statusCode) {
+        case 201:
+          {}
+          break;
 
-        }
-        break;
-
-        case 400: {
-          if (error.response?.data is Map) {
-            var errorData = error.response?.data;
-            message = errorData['msg'] ?? SCDefaultValue.errorMessage;
-          } else {
-            message = error.response?.data.toString() ?? SCDefaultValue.errorMessage;
+        case 400:
+          {
+            if (error.response?.data is Map) {
+              var errorData = error.response?.data;
+              message = errorData['msg'] ?? SCDefaultValue.errorMessage;
+            } else {
+              message = error.response?.data.toString() ??
+                  SCDefaultValue.errorMessage;
+            }
           }
-        }
-        break;
+          break;
 
-        case 401: {
-          /// 登录失效
-          accountExpired();
-        }
-        break;
-
-        case 403: {
-
-        }
-        break;
-
-        case 404: {
-
-        }
-        break;
-
-        case 500: {
-          if (error.response?.data is Map) {
-            var errorData = error.response?.data;
-            message = errorData['msg'] ?? SCDefaultValue.errorMessage;
-          } else {
-            message = error.response?.data.toString() ?? SCDefaultValue.errorMessage;
+        case 401:
+          {
+            /// 登录失效
+            accountExpired();
           }
-        }
-        break;
+          break;
 
+        case 403:
+          {}
+          break;
+
+        case 404:
+          {}
+          break;
+
+        case 500:
+          {
+            if (error.response?.data is Map) {
+              var errorData = error.response?.data;
+              message = errorData['msg'] ?? SCDefaultValue.errorMessage;
+            } else {
+              message = error.response?.data.toString() ??
+                  SCDefaultValue.errorMessage;
+            }
+          }
+          break;
       }
     }
   } else {
@@ -299,8 +326,8 @@ doError(e) {
   }
 
   var params = {
-    'code' : code,
-    'message' : message,
+    'code': code,
+    'message': message,
   };
   return params;
 }

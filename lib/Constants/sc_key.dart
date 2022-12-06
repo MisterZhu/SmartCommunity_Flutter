@@ -14,6 +14,8 @@ class SCKey {
   static const String kIsShowPhotoAlert = "kIsShowPhotoAlert";
   /// 是否显示相机权限提示弹窗
   static const String kIsShowCameraAlert = "kIsShowCameraAlert";
+  /// 是否显示定位权限提示弹窗
+  static const String kIsShowLocationAlert = "kIsShowLocationAlert";
   /// 建信租房应用token
   static const String kJianXinRentingToken = "kJianXinRentingToken";
 }

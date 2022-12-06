@@ -52,19 +52,22 @@ class SCDefaultValue {
   static const String accountExpiredMessage = '账户已过期,请重新登录!';
 
   /// 扫码权限弹窗提示内容
-  static const String scanAlertMessage = "允许“${appName}”访问您的相机权限，用于您在提交工单、使用报事报修、参与活动、扫一扫功能";
+  static const String scanAlertMessage = "允许“$appName”访问您的相机权限，用于您在提交工单、使用报事报修、参与活动、扫一扫功能";
 
   /// 相册权限弹窗提示内容
-  static const String photoAlertMessage = "允许“${appName}”访问您的相册权限，用于您在提交工单、使用报事报修、参与活动、修改头像";
+  static const String photoAlertMessage = "允许“$appName”访问您的相册权限，用于您在提交工单、使用报事报修、参与活动、修改头像";
 
   /// 相机权限弹窗提示内容
-  static const String cameraAlertMessage = "允许“${appName}”访问您的相机权限，用于您在提交工单、使用报事报修、参与活动、修改头像";
+  static const String cameraAlertMessage = "允许“$appName”访问您的相机权限，用于您在提交工单、使用报事报修、参与活动、修改头像";
 
   /// 相机无权限提示
   static const String noCameraPermissionMessage = "相机权限受限，请在设置中开启相机权限";
 
   /// 相册无权限提示
   static const String noPhotoPermissionMessage = "相册权限受限，请在设置中开启相册权限";
+
+  /// 定位权限弹窗提示内容
+  static const String locationAlertMessage = "允许“$appName”访问您的位置权限，用于您在快速定位所在园区、参与活动功能";
 
   /// 输入姓名提示
   static const String inputNameTip = "请输入姓名";

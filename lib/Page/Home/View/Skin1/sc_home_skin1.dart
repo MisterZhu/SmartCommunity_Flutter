@@ -112,7 +112,7 @@ class SCHomeSkin1 extends StatelessWidget {
         stickyColor: state.navigationStickyColor,
         normalColor: state.navigationNormalColor,
         scanAction: () {
-          SCPermissionUtils.scanCode();
+          SCPermissionUtils.scanCodeWithPrivacyAlert();
         },
         messageAction: () {
           SCLoadingUtils.developing();

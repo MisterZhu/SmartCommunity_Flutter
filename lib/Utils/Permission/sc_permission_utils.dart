@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:smartcommunity/Constants/sc_default_value.dart';
 import 'package:smartcommunity/Constants/sc_key.dart';
-import 'package:smartcommunity/sc_app.dart';
+import 'package:smartcommunity/Page/Login/Model/SelectCommunity/sc_location_model.dart';
+import 'package:smartcommunity/Utils/sc_location_utils.dart';
 import 'package:smartcommunity/Utils/sc_sp_utils.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
@@ -16,8 +18,9 @@ import '../Router/sc_router_path.dart';
 /// 权限管理工具
 
 class SCPermissionUtils {
-  /// 使用扫一扫
-  static scanCode({Function? completionHandler}) async {
+  /// 使用扫一扫-隐私权限提示
+  static scanCodeWithPrivacyAlert(
+      {Function(dynamic result)? completionHandler}) async {
     Future.delayed(const Duration(seconds: 0), () async {
       SCUtils.getCurrentContext(completionHandler: (context) async {
         bool isShowAlert = SCSpUtil.getBool(SCKey.kIsShowScanCodeAlert);
@@ -36,25 +39,35 @@ class SCPermissionUtils {
                   textColor: SCColors.color_1B1C33,
                   fontWeight: FontWeight.w400, onTap: () async {
                 SCSpUtil.setBool(SCKey.kIsShowScanCodeAlert, true);
-                PermissionStatus permissionStatus =
-                    await Permission.camera.request();
-                if (permissionStatus == PermissionStatus.granted) {
-                  var result = await SCRouterHelper.pathPage(
-                      SCRouterPath.scanPath, null);
-                  completionHandler?.call(result);
-                } else {
-                  noPermissionAlert(SCDefaultValue.noCameraPermissionMessage);
-                }
+                scanCode(completionHandler);
               }),
             ],
           );
         } else {
-          var result =
-              await SCRouterHelper.pathPage(SCRouterPath.scanPath, null);
-          completionHandler?.call(result);
+          scanCode(completionHandler);
         }
       });
     });
+  }
+
+  /// 使用扫一扫-无隐私权限提示
+  static scanCode(Function(dynamic result)? completionHandler) async {
+    PermissionStatus permissionStatus = await Permission.camera.request();
+    if (permissionStatus == PermissionStatus.granted) {
+      var result = await SCRouterHelper.pathPage(SCRouterPath.scanPath, null);
+      var params = {
+        "status": 1, // 0-权限无法确定，1-成功，2-相机权限被拒绝
+        "data": {"result": result}
+      };
+      completionHandler?.call(params);
+    } else {
+      var params = {
+        "status": 2, // 0-权限无法确定，1-成功，2-相机权限被拒绝
+        "data": {"result": ''}
+      };
+      completionHandler?.call(params);
+      noPermissionAlert(SCDefaultValue.noCameraPermissionMessage);
+    }
   }
 
   /// 使用相机相册
@@ -127,8 +140,7 @@ class SCPermissionUtils {
                   await Permission.photos.request();
               if (permissionStatus == PermissionStatus.granted) {
                 SCUtils.getCurrentContext(completionHandler: (context) async {
-                  List<AssetEntity>? result =
-                      await AssetPicker.pickAssets(
+                  List<AssetEntity>? result = await AssetPicker.pickAssets(
                     context,
                     pickerConfig: AssetPickerConfig(
                         maxAssets: maxCount,
@@ -139,9 +151,9 @@ class SCPermissionUtils {
                   if (result != null) {
                     List<String> imagesPathList = [];
                     //遍历
-                    for(var entity in result){
+                    for (var entity in result) {
                       File? imgFile = await entity.file;
-                      if(imgFile != null) imagesPathList.add(imgFile.path);
+                      if (imgFile != null) imagesPathList.add(imgFile.path);
                     }
                     completionHandler?.call(imagesPathList);
                   }
@@ -167,9 +179,9 @@ class SCPermissionUtils {
             if (result != null) {
               List<String> imagesPathList = [];
               //遍历
-              for(var entity in result){
+              for (var entity in result) {
                 File? imgFile = await entity.file;
-                if(imgFile != null) imagesPathList.add(imgFile.path);
+                if (imgFile != null) imagesPathList.add(imgFile.path);
               }
               completionHandler?.call(imagesPathList);
             }
@@ -225,6 +237,99 @@ class SCPermissionUtils {
         }
       }
     });
+  }
+
+  /// 使用定位-隐私权限提示
+  static startLocationWithPrivacyAlert(
+      {Function(dynamic result, SCLocationModel? model)?
+          completionHandler}) async {
+    Future.delayed(const Duration(seconds: 0), () async {
+      SCUtils.getCurrentContext(completionHandler: (context) async {
+        bool isShowAlert = SCSpUtil.getBool(SCKey.kIsShowLocationAlert);
+        if (!isShowAlert) {
+          SCDialogUtils.instance.showMiddleDialog(
+            context: context,
+            title: "温馨提示",
+            content: SCDefaultValue.locationAlertMessage,
+            customWidgetButtons: [
+              defaultCustomButton(context,
+                  text: '取消',
+                  textColor: SCColors.color_1B1C33,
+                  fontWeight: FontWeight.w400),
+              defaultCustomButton(context,
+                  text: '确定',
+                  textColor: SCColors.color_1B1C33,
+                  fontWeight: FontWeight.w400, onTap: () async {
+                SCSpUtil.setBool(SCKey.kIsShowLocationAlert, true);
+                startLocation(completionHandler: completionHandler);
+              }),
+            ],
+          );
+        } else {
+          startLocation(completionHandler: completionHandler);
+        }
+      });
+    });
+  }
+
+  /// 使用定位-无隐私权限提示
+  static startLocation(
+      {Function(dynamic result, SCLocationModel? model)?
+          completionHandler}) async {
+    LocationPermission permission = await SCLocationUtils.requestPermission();
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      /// 定位被拒绝，无权限
+      var params = {
+        "status": 2, // 0-权限无法确定，1-成功，2-相机权限被拒绝
+        "data": {"result": ''}
+      };
+      completionHandler?.call(params, null);
+    } else if (permission == LocationPermission.whileInUse ||
+        permission == LocationPermission.always) {
+      /// 已获取定位权限
+      Position position = await SCLocationUtils.location();
+      reGeoCode(position: position, completionHandler: completionHandler);
+    } else {
+      /// 权限无法确定
+      var params = {
+        "status": 0, // 0-权限无法确定，1-成功，2-相机权限被拒绝
+        "data": {"result": ''}
+      };
+      completionHandler?.call(params, null);
+    }
+  }
+
+  /// 逆地理编码
+  static reGeoCode(
+      {required Position position,
+      Function(dynamic result, SCLocationModel? model)?
+          completionHandler}) async {
+    await SCLocationUtils.reGeoCode(
+        position: position,
+        success: (value) {
+          SCLocationModel model = value;
+          var params = {
+            "status": 1,
+            "data": {
+              "longitude": position.longitude,
+              "latitude": position.latitude,
+              "city": model.addressComponent?.city,
+              "cityCode": model.addressComponent?.citycode
+            }
+          };
+          completionHandler?.call(params, model);
+        },
+        failure: (value) {
+          var params = {
+            "status": 1,
+            "data": {
+              "longitude": position.longitude,
+              "latitude": position.latitude,
+            }
+          };
+          completionHandler?.call(params, null);
+        });
   }
 
   /// 无权限弹窗
