@@ -7,4 +7,8 @@ class SCFlutterH5Key {
   static const String scan = 'sc_app_scan_result';
   /// 用户信息结果
   static const String userInfo = 'sc_app_user_info_result';
+  /// 相机
+  static const String camera = 'sc_app_camera_result';
+  /// 相册
+  static const String photos  = 'sc_app_photos_result';
 }

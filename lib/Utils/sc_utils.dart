@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -158,5 +159,13 @@ class SCUtils {
   String flutterCallH5({required String h5Name, required var params}) {
     var jsonParams = jsonEncode(params);
     return "$h5Name('$jsonParams')";
+  }
+
+  /*本地图片转base64字符串*/
+  Future<String> localImageToBase64(String path) async{
+    ByteData bytes = await rootBundle.load(path);
+    var buffer = bytes.buffer;
+    String base64 = jsonEncode(Uint8List.view(buffer));
+    return base64;
   }
 }

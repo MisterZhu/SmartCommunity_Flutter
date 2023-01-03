@@ -38,9 +38,9 @@ class SCPermissionUtils {
                   text: '确定',
                   textColor: SCColors.color_1B1C33,
                   fontWeight: FontWeight.w400, onTap: () async {
-                SCSpUtil.setBool(SCKey.kIsShowScanCodeAlert, true);
-                scanCode(completionHandler);
-              }),
+                    SCSpUtil.setBool(SCKey.kIsShowScanCodeAlert, true);
+                    scanCode(completionHandler);
+                  }),
             ],
           );
         } else {
@@ -73,9 +73,9 @@ class SCPermissionUtils {
   /// 使用相机相册
   static showImagePicker(
       {Function? completionHandler,
-      int? maxLength,
-      List<AssetEntity>? assets,
-      RequestType? requestType}) {
+        int? maxLength,
+        List<AssetEntity>? assets,
+        RequestType? requestType}) {
     List<SCBottomSheetModel> dataList = [
       SCBottomSheetModel(
           title: "拍照",
@@ -95,7 +95,9 @@ class SCPermissionUtils {
           onTap: (index, context) {
             if (index == 0) {
               // 相机
-              takePhoto(completionHandler);
+              takePhoto((String path){
+                completionHandler?.call([path]);
+              });
             } else {
               // 相册
               photoPicker(
@@ -111,9 +113,9 @@ class SCPermissionUtils {
   /// 相册选择照片
   static photoPicker(
       {Function? completionHandler,
-      int? maxLength,
-      List<AssetEntity>? assets,
-      RequestType? requestType}) async {
+        int? maxLength,
+        List<AssetEntity>? assets,
+        RequestType? requestType}) async {
     // 默认1张
     int maxCount = maxLength ?? 1;
     if (maxCount <= 0) {
@@ -135,33 +137,33 @@ class SCPermissionUtils {
                 text: '确定',
                 textColor: SCColors.color_1B1C33,
                 fontWeight: FontWeight.w400, onTap: () async {
-              SCSpUtil.setBool(SCKey.kIsShowPhotoAlert, true);
-              PermissionStatus permissionStatus =
+                  SCSpUtil.setBool(SCKey.kIsShowPhotoAlert, true);
+                  PermissionStatus permissionStatus =
                   await Permission.photos.request();
-              if (permissionStatus == PermissionStatus.granted) {
-                SCUtils.getCurrentContext(completionHandler: (context) async {
-                  List<AssetEntity>? result = await AssetPicker.pickAssets(
-                    context,
-                    pickerConfig: AssetPickerConfig(
-                        maxAssets: maxCount,
-                        selectedAssets: assets,
-                        requestType: requestType ?? RequestType.common,
-                        textDelegate: const AssetPickerTextDelegate()),
-                  );
-                  if (result != null) {
-                    List<String> imagesPathList = [];
-                    //遍历
-                    for (var entity in result) {
-                      File? imgFile = await entity.file;
-                      if (imgFile != null) imagesPathList.add(imgFile.path);
-                    }
-                    completionHandler?.call(imagesPathList);
+                  if (permissionStatus == PermissionStatus.granted) {
+                    SCUtils.getCurrentContext(completionHandler: (context) async {
+                      List<AssetEntity>? result = await AssetPicker.pickAssets(
+                        context,
+                        pickerConfig: AssetPickerConfig(
+                            maxAssets: maxCount,
+                            selectedAssets: assets,
+                            requestType: requestType ?? RequestType.common,
+                            textDelegate: const AssetPickerTextDelegate()),
+                      );
+                      if (result != null) {
+                        List<String> imagesPathList = [];
+                        //遍历
+                        for (var entity in result) {
+                          File? imgFile = await entity.file;
+                          if (imgFile != null) imagesPathList.add(imgFile.path);
+                        }
+                        completionHandler?.call(imagesPathList);
+                      }
+                    });
+                  } else {
+                    noPermissionAlert(SCDefaultValue.noPhotoPermissionMessage);
                   }
-                });
-              } else {
-                noPermissionAlert(SCDefaultValue.noPhotoPermissionMessage);
-              }
-            }),
+                }),
           ],
         );
       } else {
@@ -194,7 +196,7 @@ class SCPermissionUtils {
   }
 
   /// 拍照
-  static takePhoto(Function? completionHandler) {
+  static takePhoto(Function(String path)? completionHandler) {
     SCUtils.getCurrentContext(completionHandler: (context) async {
       bool isShowAlert = SCSpUtil.getBool(SCKey.kIsShowCameraAlert);
       if (!isShowAlert) {
@@ -211,18 +213,18 @@ class SCPermissionUtils {
                 text: '确定',
                 textColor: SCColors.color_1B1C33,
                 fontWeight: FontWeight.w400, onTap: () async {
-              SCSpUtil.setBool(SCKey.kIsShowCameraAlert, true);
-              PermissionStatus permissionStatus =
+                  SCSpUtil.setBool(SCKey.kIsShowCameraAlert, true);
+                  PermissionStatus permissionStatus =
                   await Permission.camera.request();
-              if (permissionStatus == PermissionStatus.granted) {
-                ImagePicker picker = ImagePicker();
-                final XFile? imageFile =
+                  if (permissionStatus == PermissionStatus.granted) {
+                    ImagePicker picker = ImagePicker();
+                    final XFile? imageFile =
                     await picker.pickImage(source: ImageSource.camera);
-                completionHandler?.call(imageFile!.path);
-              } else {
-                noPermissionAlert(SCDefaultValue.noCameraPermissionMessage);
-              }
-            }),
+                    completionHandler?.call(imageFile!.path);
+                  } else {
+                    noPermissionAlert(SCDefaultValue.noCameraPermissionMessage);
+                  }
+                }),
           ],
         );
       } else {
@@ -230,7 +232,7 @@ class SCPermissionUtils {
         if (permissionStatus == PermissionStatus.granted) {
           ImagePicker picker = ImagePicker();
           final XFile? imageFile =
-              await picker.pickImage(source: ImageSource.camera);
+          await picker.pickImage(source: ImageSource.camera);
           completionHandler?.call(imageFile!.path);
         } else {
           noPermissionAlert(SCDefaultValue.noCameraPermissionMessage);
@@ -242,7 +244,7 @@ class SCPermissionUtils {
   /// 使用定位-隐私权限提示
   static startLocationWithPrivacyAlert(
       {Function(dynamic result, SCLocationModel? model)?
-          completionHandler}) async {
+      completionHandler}) async {
     Future.delayed(const Duration(seconds: 0), () async {
       SCUtils.getCurrentContext(completionHandler: (context) async {
         bool isShowAlert = SCSpUtil.getBool(SCKey.kIsShowLocationAlert);
@@ -260,9 +262,9 @@ class SCPermissionUtils {
                   text: '确定',
                   textColor: SCColors.color_1B1C33,
                   fontWeight: FontWeight.w400, onTap: () async {
-                SCSpUtil.setBool(SCKey.kIsShowLocationAlert, true);
-                startLocation(completionHandler: completionHandler);
-              }),
+                    SCSpUtil.setBool(SCKey.kIsShowLocationAlert, true);
+                    startLocation(completionHandler: completionHandler);
+                  }),
             ],
           );
         } else {
@@ -275,7 +277,7 @@ class SCPermissionUtils {
   /// 使用定位-无隐私权限提示
   static startLocation(
       {Function(dynamic result, SCLocationModel? model)?
-          completionHandler}) async {
+      completionHandler}) async {
     LocationPermission permission = await SCLocationUtils.requestPermission();
     if (permission == LocationPermission.denied ||
         permission == LocationPermission.deniedForever) {
@@ -303,8 +305,8 @@ class SCPermissionUtils {
   /// 逆地理编码
   static reGeoCode(
       {required Position position,
-      Function(dynamic result, SCLocationModel? model)?
-          completionHandler}) async {
+        Function(dynamic result, SCLocationModel? model)?
+        completionHandler}) async {
     await SCLocationUtils.reGeoCode(
         position: position,
         success: (value) {
@@ -344,8 +346,8 @@ class SCPermissionUtils {
                 text: '确定',
                 textColor: SCColors.color_1B1C33,
                 fontWeight: FontWeight.w400, onTap: () {
-              openAppSettings();
-            })
+                  openAppSettings();
+                })
           ]);
     });
   }
