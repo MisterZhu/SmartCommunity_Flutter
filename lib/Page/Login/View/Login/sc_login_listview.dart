@@ -117,7 +117,6 @@ class SCLoginListView extends StatelessWidget {
       return SCLoginCodeBtn(
         enable: state.codeBtnEnable,
         onPressed: () {
-          SCLoginController state = Get.find<SCLoginController>();
           if (state.codeBtnEnable == false) {
             return;
           }
