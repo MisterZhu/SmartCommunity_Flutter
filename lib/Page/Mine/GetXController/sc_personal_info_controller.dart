@@ -48,6 +48,7 @@ class SCPersonalInfoController extends GetxController {
           scUser.gender = userInfoModel.gender;
           scUser.birthday = userInfoModel.birthday;
           SCScaffoldManager.instance.cacheUserData(scUser.toJson());
+
           /// 更新
           update();
           if (updateStatus) {

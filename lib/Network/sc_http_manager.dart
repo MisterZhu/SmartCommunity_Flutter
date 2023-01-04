@@ -59,8 +59,8 @@ class SCHttpManager {
             (X509Certificate cert, String host, int port) => true;
         return null;
       };
-      // _dio?.interceptors
-      //     .add(LogInterceptor(responseBody: true, requestBody: true)); // 日志打印
+      _dio?.interceptors
+          .add(LogInterceptor(responseBody: true, requestBody: true)); // 日志打印
       // print("options.headers-->" + options.headers.toString());
 
     }
@@ -80,12 +80,12 @@ class SCHttpManager {
   }
 
   /// 通用的GET请求
-  get(
+  Future get(
       {required String url,
-      dynamic params,
-      Map<String, dynamic>? headers,
-      Function(dynamic value)? success,
-      Function(dynamic value)? failure}) async {
+        dynamic params,
+        Map<String, dynamic>? headers,
+        Function(dynamic value)? success,
+        Function(dynamic value)? failure}) async {
     Options options = Options(headers: headers);
     late Response response;
     late Object exception;
@@ -110,6 +110,8 @@ class SCHttpManager {
         }
       }
     }
+
+    return Future(() => status);
   }
 
   /// 通用的POST请求

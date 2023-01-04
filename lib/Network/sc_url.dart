@@ -25,6 +25,11 @@ class SCUrl {
   /// 退出登录url
   static const String kLogoutUrl = '/api/user/loginOut';
 
+  /************************* 首页 *************************/
+
+  /// 首页url
+  static const String kHomeUrl = '/api/applet/decoration/pattern/visitor';
+
  /************************* 服务 *************************/
 
   /// 应用列表url

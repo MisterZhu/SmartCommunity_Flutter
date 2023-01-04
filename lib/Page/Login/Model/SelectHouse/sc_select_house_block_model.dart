@@ -10,7 +10,7 @@
 /// isChecked : true
 
 class ScSelectHouseModel {
-  num? id;
+  int? id;
   String? name;
   String? pid;
   String? communityId;
@@ -18,7 +18,7 @@ class ScSelectHouseModel {
   num? type;
   String? typeName;
   String? typeNameFlag;
-  num? floor;
+  String? floor;
   bool? haveChild;
   bool? isChecked = false;
 
