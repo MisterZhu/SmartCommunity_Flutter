@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_enum.dart';
+import 'package:smartcommunity/Skin/View/sc_custom_scaffold.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_path.dart';
 import 'package:smartcommunity/Utils/sc_location_utils.dart';
 
@@ -89,27 +90,26 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
+    return SCCustomScaffold(
+        title: "选择项目",
         centerTitle: true,
-        title: titleItem(),
-        backgroundColor: SCColors.color_FFFFFF,
         elevation: 0,
-        automaticallyImplyLeading: true,
-      ),
-      body: Container(
-        color: SCColors.color_FFFFFF,
-        width: double.infinity,
-        height: double.infinity,
-        child: Column(
-          children: [
-            header(),
-            Expanded(
-              child: communityListView(),
-            )
-          ],
-        ),
+        actions: [skipItem()],
+        body: body());
+  }
+
+  Widget body() {
+    return Container(
+      color: SCColors.color_FFFFFF,
+      width: double.infinity,
+      height: double.infinity,
+      child: Column(
+        children: [
+          header(),
+          Expanded(
+            child: communityListView(),
+          )
+        ],
       ),
     );
   }
@@ -141,14 +141,25 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
     });
   }
 
-  /// title
-  Widget titleItem() {
-    return const Text(
-      '选择项目',
-      style: TextStyle(
-          fontSize: SCFonts.f16,
-          fontWeight: FontWeight.bold,
-          color: SCColors.color_1B1C33),
+  /// 跳过
+  Widget skipItem() {
+    return Offstage(
+      offstage: type != SCSelectHouseLogicType.login,
+      child: CupertinoButton(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          minSize: 60.0,
+          child: const Text(
+            '跳过',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: SCFonts.f14,
+              fontWeight: FontWeight.w500,
+              color: SCColors.color_1B1D33,
+            ),
+          ),
+          onPressed: () {
+            SCRouterHelper.pathOffAllPage(SCRouterPath.tabPath, null);
+          }),
     );
   }
 
