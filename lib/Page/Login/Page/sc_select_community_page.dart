@@ -143,21 +143,24 @@ class SCSelectCommunityState extends State<SCSelectCommunityPage>
 
   /// 跳过
   Widget skipItem() {
-    return CupertinoButton(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      minSize: 60.0,
-      child: const Text(
-        '跳过',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: SCFonts.f14,
-          fontWeight: FontWeight.w500,
-          color: SCColors.color_1B1D33,
-        ),
-      ),
-      onPressed: () {
-        SCRouterHelper.pathOffAllPage(SCRouterPath.tabPath, null);
-      });
+    return Offstage(
+      offstage: type != SCSelectHouseLogicType.login,
+      child: CupertinoButton(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          minSize: 60.0,
+          child: const Text(
+            '跳过',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: SCFonts.f14,
+              fontWeight: FontWeight.w500,
+              color: SCColors.color_1B1D33,
+            ),
+          ),
+          onPressed: () {
+            SCRouterHelper.pathOffAllPage(SCRouterPath.tabPath, null);
+          }),
+    );
   }
 
   /// 社区列表
