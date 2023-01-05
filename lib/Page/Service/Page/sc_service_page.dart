@@ -33,7 +33,7 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
   @override
   void initState() {
     super.initState();
-    loadData();
+    state.loadAppListData();
   }
 
   @override
@@ -61,14 +61,12 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
 
   /// body
   Widget body() {
-    return GetBuilder<SCServiceController>(builder: (state){
-      return Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: SCColors.color_F6F6F6,
-        child: skin(),
-      );
-    });
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      color: SCColors.color_F6F6F6,
+      child: skin(),
+    );
   }
 
   Widget skin() {
@@ -109,13 +107,6 @@ class SCServiceState extends State<SCServicePage> with AutomaticKeepAliveClientM
         itemDetail(title);
       },
     );
-  }
-
-  /// 获取数据，接口没返回数据，暂时用本地测试数据
-  loadData() {
-    SCServiceController state = Get.find<SCServiceController>();
-    //state.loadAppListData();
-    state.loadTestData();
   }
 
   /// 应用详情

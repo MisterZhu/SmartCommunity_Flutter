@@ -59,8 +59,8 @@ class SCHttpManager {
             (X509Certificate cert, String host, int port) => true;
         return null;
       };
-      // _dio?.interceptors
-      //     .add(LogInterceptor(responseBody: true, requestBody: true)); // 日志打印
+      _dio?.interceptors
+          .add(LogInterceptor(responseBody: true, requestBody: true)); // 日志打印
       // print("options.headers-->" + options.headers.toString());
 
     }
