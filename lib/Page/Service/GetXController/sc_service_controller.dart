@@ -109,6 +109,7 @@ class SCServiceController extends GetxController {
           'housingId' : housingId,
         },
         success: (value) {
+          log('应用列表===$value');
           List<SCServiceModuleModel> dataList = List<SCServiceModuleModel>.from(value.map((e) => SCServiceModuleModel.fromJson(e)).toList());
           updateModuleList(list: dataList);
         },
