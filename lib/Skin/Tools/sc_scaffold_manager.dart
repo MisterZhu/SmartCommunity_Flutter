@@ -18,6 +18,7 @@ import '../../Constants/sc_skin_value.dart';
 import '../../Utils/Router/sc_router_helper.dart';
 import '../../Utils/sc_sp_utils.dart';
 import '../GetXController/sc_scaffold_controller.dart';
+import '../Model/sc_home_visitor_decoration_model.dart';
 import '../Model/sc_scaffold_model.dart';
 import '../Model/sc_user.dart';
 
@@ -38,9 +39,12 @@ class SCScaffoldManager {
 
   static late List _getXTagList;
 
+  static late SCHomeVisitorDecorationModel _visitorDecorationModel;
+
   SCScaffoldManager._internal() {
     _scaffoldModel = SCScaffoldModel();
     _user = SCUser();
+    _visitorDecorationModel = SCHomeVisitorDecorationModel();
   }
 
   SCScaffoldModel get scaffoldModel => _scaffoldModel;
@@ -52,6 +56,8 @@ class SCScaffoldManager {
   SharedPreferences get preferences => _preferences;
 
   List get getXTagList => _getXTagList;
+
+  SCHomeVisitorDecorationModel get visitorDecorationModel => _visitorDecorationModel;
 
   /// 初始化
   void initBase() {
@@ -66,11 +72,17 @@ class SCScaffoldManager {
     cacheUserData(user.toJson());
   }
 
-  /// set user
+  /// set isLogin
   set isLogin(bool isLogin) {
     // TODO: implement user=
     _isLogin = isLogin;
     cacheUserIsLogin(isLogin);
+  }
+
+  /// set visitorDecorationModel
+  set visitorDecorationModel(SCHomeVisitorDecorationModel visitorDecorationModel) {
+    _visitorDecorationModel = visitorDecorationModel;
+    cacheVisitorDecorationModel(visitorDecorationModel.toJson());
   }
 
   /// 初始化scaffold数据
@@ -167,6 +179,11 @@ class SCScaffoldManager {
   /*缓存用户信息*/
   cacheUserData(dynamic data) async {
     SCSpUtil.setMap(SCKey.kUserData, data);
+  }
+
+  /*缓存游客模式装修信息*/
+  cacheVisitorDecorationModel(dynamic data) async {
+    SCSpUtil.setMap(SCKey.kVisitorDecorationModel, data);
   }
 
   /*退出登录*/

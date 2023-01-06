@@ -174,6 +174,8 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
         getLocationChannel(context),
         scanChannel(context),
         userInfoChannel(context),
+        cameraChannel(context),
+        photosChannel(context),
       },
 
       ///WebView创建
@@ -284,8 +286,14 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
       name: SCH5FlutterKey.scan,
       onMessageReceived: (JavascriptMessage message) {
         SCPermissionUtils.scanCodeWithPrivacyAlert(completionHandler: (value) {
+          var params = {
+            "status" : 1,
+            "data" : {
+              "result" : value
+            }
+          };
           webViewController?.runJavascript(SCUtils()
-              .flutterCallH5(h5Name: SCFlutterH5Key.scan, params: value));
+              .flutterCallH5(h5Name: SCFlutterH5Key.scan, params: params));
         });
       });
 
@@ -300,6 +308,44 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
         };
         webViewController?.runJavascript(SCUtils()
             .flutterCallH5(h5Name: SCFlutterH5Key.userInfo, params: params));
+      });
+
+  ///  相机-channel
+  JavascriptChannel cameraChannel(BuildContext context) => JavascriptChannel(
+      name: SCH5FlutterKey.camera,
+      onMessageReceived: (JavascriptMessage message) {
+        SCPermissionUtils.takePhoto((String path) async {
+          String base64 = await SCUtils().localImageToBase64(path);
+          var params = {
+            "status" : 1,
+            "data" : {
+              "result" : base64
+            }
+          };
+          webViewController?.runJavascript(SCUtils()
+              .flutterCallH5(h5Name: SCFlutterH5Key.camera, params: params));
+        });
+      });
+
+  //  相册-channel
+  JavascriptChannel photosChannel(BuildContext context) => JavascriptChannel(
+      name: SCH5FlutterKey.photos,
+      onMessageReceived: (JavascriptMessage message) {
+        SCPermissionUtils.photoPicker(completionHandler: (List pathList) async {
+          List list = [];
+          for (String path in pathList) {
+            String base64 = await SCUtils().localImageToBase64(path);
+            list.add(base64);
+          }
+          var params = {
+            "status" : 1,
+            "data" : {
+              "result" : list
+            }
+          };
+          webViewController?.runJavascript(SCUtils()
+              .flutterCallH5(h5Name: SCFlutterH5Key.photos, params: params));
+        });
       });
 
   /// 缓存建信租房token

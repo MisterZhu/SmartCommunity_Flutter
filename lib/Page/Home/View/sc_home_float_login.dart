@@ -27,20 +27,20 @@ class SCHomeFloatLogin extends StatelessWidget {
   /// body
   Widget body(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 20.0),
+      padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0),
       child: Container(
-        height: 80.0,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        height: 60.0,
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
         decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.8),
-            borderRadius: BorderRadius.circular(6.0)),
+            color: SCColors.color_1B1D33.withOpacity(0.9),
+            borderRadius: BorderRadius.circular(8.0)),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             iconItem(),
-            const SizedBox(width: 12.0,),
+            const SizedBox(width: 10.0,),
             contentItem(),
             const SizedBox(width: 10.0,),
             loginBtnItem()
@@ -53,12 +53,12 @@ class SCHomeFloatLogin extends StatelessWidget {
   /// icon
   Widget iconItem() {
     return Container(
-      width: 40.0,
-      height: 40.0,
+      width: 36.0,
+      height: 36.0,
       decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(6.0)),
-      child: Image.asset(SCAsset.iconLogo60, width: 40.0, height: 40.0,),
+          borderRadius: BorderRadius.circular(5.0)),
+      child: Image.asset(SCAsset.iconLogo60, width: 36.0, height: 36.0,),
     );
   }
 
@@ -71,23 +71,23 @@ class SCHomeFloatLogin extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
           Text(
-            '欢迎来到${SCDefaultValue.appName}～',
+            '欢迎来到${SCDefaultValue.appName}',
             textAlign: TextAlign.left,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              fontSize: SCFonts.f14,
-              fontWeight: FontWeight.w500,
+              fontSize: SCFonts.f13,
+              fontWeight: FontWeight.w400,
               color: SCColors.color_FFFFFF,
           ),),
-          SizedBox(height: 3.0,),
+          SizedBox(height: 2.0,),
           Text(
             '赶快登录打开新的世界吧',
             textAlign: TextAlign.left,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              fontSize: SCFonts.f12,
+              fontSize: SCFonts.f13,
               fontWeight: FontWeight.w400,
               color: SCColors.color_FFFFFF,
             ),),
@@ -99,18 +99,18 @@ class SCHomeFloatLogin extends StatelessWidget {
   /// 登录按钮
   Widget loginBtnItem() {
     return SizedBox(
-      width: 80.0,
-      height: 30.0,
+      width: 72.0,
+      height: 26.0,
       child: CupertinoButton(
           padding: EdgeInsets.zero,
-          color: SCColors.color_00C365,
-          borderRadius: BorderRadius.circular(15.0),
+          color: SCColors.color_FFFFFF,
+          borderRadius: BorderRadius.circular(13.0),
           child: const Text(
-            '马上登录',
+            '立即登录',
             style: TextStyle(
-              fontSize: SCFonts.f14,
+              fontSize: SCFonts.f12,
               fontWeight: FontWeight.w400,
-              color: SCColors.color_FFFFFF,
+              color: SCColors.color_000000,
             ),
           ),
           onPressed: () {

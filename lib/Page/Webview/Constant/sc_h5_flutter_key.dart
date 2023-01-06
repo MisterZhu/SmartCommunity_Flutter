@@ -9,4 +9,8 @@ class SCH5FlutterKey {
   static const String scan = 'sc_app_scan';
   /// 用户信息
   static const String userInfo = 'sc_app_user_info';
+  /// 相机
+  static const String camera = 'sc_app_camera';
+  /// 相册
+  static const String photos  = 'sc_app_photos';
 }

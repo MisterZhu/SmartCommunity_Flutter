@@ -32,8 +32,8 @@ class SCHomeAllItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: DecoratedBox(
           decoration: BoxDecoration(
-            color: bgColor,
-            borderRadius: BorderRadius.circular(6.0),
+            color: SCColors.color_FFFFFF,
+            borderRadius: BorderRadius.circular(4.0),
           ),
         child: StaggeredGridView.countBuilder(
             padding: const EdgeInsets.only(

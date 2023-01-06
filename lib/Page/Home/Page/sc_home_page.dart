@@ -58,6 +58,8 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
     }
     /// 获取用户信息
     getUserInfo();
+    /// 获取首页数据
+    getHomeInfo();
   }
 
   /// body
@@ -121,5 +123,9 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
         state.update();
       });
     }
+  }
+
+  /// 获取首页数据
+  getHomeInfo() {
   }
 }

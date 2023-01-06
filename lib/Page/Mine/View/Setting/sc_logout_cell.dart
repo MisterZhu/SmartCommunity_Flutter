@@ -19,7 +19,7 @@ class SCLogOutCell extends StatelessWidget {
   Widget body() {
     return SizedBox(
       width: double.infinity,
-      height: 60.0,
+      height: 48.0,
       child: CupertinoButton(
         padding: EdgeInsets.zero,
         color: SCColors.color_FFFFFF,
@@ -29,8 +29,8 @@ class SCLogOutCell extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: SCFonts.f16,
-            fontWeight: FontWeight.w500,
-            color: SCColors.color_1B1C33),
+            fontWeight: FontWeight.w400,
+            color: SCColors.color_1B1D33),
           ),
           onPressed: () {
             logout();

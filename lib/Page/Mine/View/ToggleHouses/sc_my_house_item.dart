@@ -34,8 +34,8 @@ class SCMyHouseItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(child: leftItem()),
-          const SizedBox(width: 24.0,),
-          rightItem()
+          // const SizedBox(width: 24.0,),
+          // rightItem()
        ],
       )
     );

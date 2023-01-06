@@ -18,7 +18,7 @@ import '../../../Utils/Date/sc_date_utils.dart';
 import '../../../Constants/sc_type_define.dart';
 import '../../../Utils/Router/sc_router_path.dart';
 
-/// 设置listview
+/// 个人资料listview
 
 class SCPersonalInfoListView extends StatelessWidget {
   const SCPersonalInfoListView(
@@ -56,29 +56,28 @@ class SCPersonalInfoListView extends StatelessWidget {
         },
         separatorBuilder: (BuildContext context, int index) {
           bool isLine = true;
-          if (index == 5 || index == 6 || index == 7) {
+          if (index == 0) {
             isLine = false;
           }
           return getLine(isLine);
         },
-        itemCount: 9);
+        itemCount: 6);
   }
 
   /// cell
   Widget getCell(int index, BuildContext context) {
-    /// 头像
-    String userPicUrl = userHeadPicUrl ?? SCAsset.iconMineUserDefault;
 
     if (index == 0) {
-      return SCSettingCell(
-        title: '头像',
-        cellType: SCSettingCellType.imageArrowType,
-        imageUrl: userPicUrl,
-        onTap: () {
-          selectHeadPicAction();
-        },
-      );
+      return headPicItem();
     } else if (index == 1) {
+      return SCSettingCell(
+        title: '昵称',
+        content: SCScaffoldManager.instance.user.nickName,
+        cellType: SCSettingCellType.contentArrowType,
+        onTap: () {},
+      );
+
+    } else if (index == 2) {
       return SCSettingCell(
         title: '姓名',
         content: userNameString,
@@ -88,38 +87,31 @@ class SCPersonalInfoListView extends StatelessWidget {
           SCRouterHelper.pathPage(SCRouterPath.realNameVerifyPath, null);
         },
       );
-    } else if (index == 2) {
-      return SCSettingCell(
-        title: '昵称',
-        content: SCScaffoldManager.instance.user.nickName,
-        cellType: SCSettingCellType.contentArrowType,
-        onTap: () {},
-      );
     } else if (index == 3) {
-      String? phone = SCScaffoldManager.instance.user.mobileNum;
-      String phoneText = phone?.replaceRange(3, 7, '****') ?? '';
       return SCSettingCell(
-        title: '手机号',
-        content: phoneText,
-        cellType: SCSettingCellType.contentArrowType,
-        onTap: () {},
-      );
-    } else if (index == 4) {
-      return SCSettingCell(
-        title: '性别',
-        content: genderString,
+        title: '民族',
+        content: '汉族',
         cellType: SCSettingCellType.contentArrowType,
         onTap: () {
-          selectSexAction(context);
+          SCRouterHelper.pathPage(SCRouterPath.realNameVerifyPath, null);
         },
       );
-    } else if (index == 5) {
+    } else if (index == 4) {
       return SCSettingCell(
         title: '出生日期',
         content: birthdayString ?? '请选择',
         cellType: SCSettingCellType.contentArrowType,
         onTap: () {
           selectBirthdayAction(context);
+        },
+      );
+    } else if (index == 5) {
+      return SCSettingCell(
+        title: '性别',
+        content: genderString,
+        cellType: SCSettingCellType.contentArrowType,
+        onTap: () {
+          selectSexAction(context);
         },
       );
     } else if (index == 6) {
@@ -171,7 +163,7 @@ class SCPersonalInfoListView extends StatelessWidget {
   Widget line() {
     return Container(
       color: SCColors.color_FFFFFF,
-      padding: const EdgeInsets.only(left: 12.0),
+      padding: const EdgeInsets.only(left: 16.0),
       child: Container(
         height: 0.5,
         width: double.infinity,
@@ -182,9 +174,45 @@ class SCPersonalInfoListView extends StatelessWidget {
 
   Widget line10() {
     return Container(
-      height: 10.0,
+      height: 8.0,
       width: double.infinity,
       color: SCColors.color_F5F5F5,
+    );
+  }
+
+  /// 头像
+  Widget headPicItem() {
+    String userPicUrl = userHeadPicUrl ?? SCAsset.iconMineUserDefault;
+    return GestureDetector(
+      onTap: () {
+        selectHeadPicAction();
+      },
+      child: Container(
+        width: double.infinity,
+        height: 130,
+        color: SCColors.color_FFFFFF,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(30.0),
+              child: SCUtils.imageWidget(url: userPicUrl, width: 60.0, height: 60.0, fit: BoxFit.cover),
+            ),
+            const SizedBox(height: 8,),
+            const Text(
+              '点击更换头像',
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  fontSize: SCFonts.f14,
+                  fontWeight: FontWeight.w400,
+                  color: SCColors.color_1B1D33
+              ),)
+          ],
+        ),
+      ),
     );
   }
 

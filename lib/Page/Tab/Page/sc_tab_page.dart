@@ -10,7 +10,9 @@ import 'package:smartcommunity/Page/Service/Page/sc_service_page.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_path.dart';
-
+import '../../../Network/sc_config.dart';
+import '../../../Skin/Model/sc_home_visitor_decoration_model.dart';
+import '../../../Skin/Model/sc_user.dart';
 import '../../../Utils/sc_utils.dart';
 
 /// tab-page
@@ -57,6 +59,80 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    if (SCScaffoldManager.instance.isLogin) {
+
+    } else {
+      SCHomeVisitorDecorationModel visitorDecorationModel = SCScaffoldManager.instance.visitorDecorationModel;
+      List<NavigationList>? tabList = visitorDecorationModel.overallDecoration?.bottomNavigation?.navigationList;
+      if (tabList != null) {
+        pageList = [];
+        tabbarItems = [];
+        for (NavigationList tab in tabList) {
+          if (tab.title == '首页') {
+            pageList.add(SCHomePage());
+            String normalIcon =  SCAsset.iconNormalHome;
+            if (tab.iconInfo?.unchecked != null) {
+              normalIcon = SCConfig.getImageUrl(tab.iconInfo?.unchecked ?? '');
+            }
+            String selectIcon =  SCAsset.iconSelectedHome;
+            if (tab.iconInfo?.unchecked != null) {
+              selectIcon = SCConfig.getImageUrl(tab.iconInfo?.checked ?? '');
+            }
+            tabbarItems.add(BottomNavigationBarItem(
+              icon: SCUtils.imageWidget(url: normalIcon),
+              activeIcon: SCUtils.imageWidget(url: selectIcon),
+              label: '首页',
+            ));
+          } else if (tab.title == '服务') {
+            pageList.add(SCServicePage());
+            String normalIcon =  SCAsset.iconNormalService;
+            if (tab.iconInfo?.unchecked != null) {
+              normalIcon = SCConfig.getImageUrl(tab.iconInfo?.unchecked ?? '');
+            }
+            String selectIcon =  SCAsset.iconSelectedService;
+            if (tab.iconInfo?.unchecked != null) {
+              selectIcon = SCConfig.getImageUrl(tab.iconInfo?.checked ?? '');
+            }
+            tabbarItems.add(BottomNavigationBarItem(
+              icon: SCUtils.imageWidget(url: normalIcon),
+              activeIcon: SCUtils.imageWidget(url: selectIcon),
+              label: '服务',
+            ));
+          } else if (tab.title == '发现') {
+            pageList.add(SCFindPage());
+            String normalIcon =  SCAsset.iconNormalFind;
+            if (tab.iconInfo?.unchecked != null) {
+              normalIcon = SCConfig.getImageUrl(tab.iconInfo?.unchecked ?? '');
+            }
+            String selectIcon =  SCAsset.iconSelectedFind;
+            if (tab.iconInfo?.unchecked != null) {
+              selectIcon = SCConfig.getImageUrl(tab.iconInfo?.checked ?? '');
+            }
+            tabbarItems.add(BottomNavigationBarItem(
+              icon: SCUtils.imageWidget(url: normalIcon),
+              activeIcon: SCUtils.imageWidget(url: selectIcon),
+              label: '发现',
+            ));
+          } else if (tab.title == '我的') {
+            pageList.add(SCMinePage());
+            String normalIcon =  SCAsset.iconNormalMine;
+            if (tab.iconInfo?.unchecked != null) {
+              normalIcon = SCConfig.getImageUrl(tab.iconInfo?.unchecked ?? '');
+            }
+            String selectIcon =  SCAsset.iconSelectedMine;
+            if (tab.iconInfo?.unchecked != null) {
+              selectIcon = SCConfig.getImageUrl(tab.iconInfo?.checked ?? '');
+            }
+            tabbarItems.add(BottomNavigationBarItem(
+              icon: SCUtils.imageWidget(url: normalIcon),
+              activeIcon: SCUtils.imageWidget(url: selectIcon),
+              label: '我的',
+            ));
+          }
+        }
+      }
+    }
     tabController = TabController(length: tabbarItems.length, vsync: this);
     pageController = PageController(initialPage: currentIndex);
   }
@@ -84,8 +160,8 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent),
           child: CupertinoTabBar(
-            activeColor: SCColors.color_1B1C33,
-            inactiveColor: SCColors.color_8A8A8A,
+            activeColor: SCColors.color_FF6C00,
+            inactiveColor: SCColors.color_5E5F66,
             items: tabbarItems,
             currentIndex: currentIndex,
             backgroundColor: Colors.white,

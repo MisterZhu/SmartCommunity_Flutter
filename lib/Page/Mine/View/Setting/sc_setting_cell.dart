@@ -34,6 +34,8 @@ class SCSettingCell extends StatelessWidget {
   /// content
   final String? content;
 
+  final Color? contentColor;
+
   /// image
   final String imageUrl;
 
@@ -53,22 +55,22 @@ class SCSettingCell extends StatelessWidget {
     {
       'tagType' : SCTypeDefine.realNameVerifyStatusNo,
       'tagText' : '未实名',
-      'tagBgColor' : SCColors.color_F2F3F5,
-      'tagTextColor' : SCColors.color_8D8E99,},
+      'tagBgColor' : SCColors.color_FFFFFF,
+      'tagTextColor' : SCColors.color_FF6C00,},
     {
       'tagType' : SCTypeDefine.realNameVerifyStatusSuccess,
       'tagText' : '已实名',
-      'tagBgColor' : SCColors.color_E7F1FF,
-      'tagTextColor' : SCColors.color_1677FF,},
+      'tagBgColor' : SCColors.color_FFFFFF,
+      'tagTextColor' : SCColors.color_FF6C00,},
     {
       'tagType' : SCTypeDefine.realNameVerifyStatusReview,
       'tagText' : '审核中',
-      'tagBgColor' : SCColors.color_FFEBEC,
+      'tagBgColor' : SCColors.color_FFFFFF,
       'tagTextColor' : SCColors.color_FF1D32,},
     {
       'tagType' : SCTypeDefine.realNameVerifyStatusFailed,
       'tagText' : '未通过',
-      'tagBgColor' : SCColors.color_FFEBEC,
+      'tagBgColor' : SCColors.color_FFFFFF,
       'tagTextColor' : SCColors.color_FF1D32,},
   ];
   
@@ -77,6 +79,7 @@ class SCSettingCell extends StatelessWidget {
   SCSettingCell({Key? key,
     this.title = '',
     this.content = '',
+    this.contentColor = SCColors.color_1B1D33,
     this.imageUrl = SCAsset.iconMineUserDefault,
     this.cellType = SCSettingCellType.arrowType,
     this.switchIndex = 0,
@@ -98,7 +101,7 @@ class SCSettingCell extends StatelessWidget {
   /// body
   Widget body() {
     return SizedBox(
-      height: 44.0,
+      height: 48.0,
       child: bodyItem(),
     );
   }
@@ -121,7 +124,7 @@ class SCSettingCell extends StatelessWidget {
   Widget rowItem() {
     return Container(
       color: SCColors.color_FFFFFF,
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -159,6 +162,7 @@ class SCSettingCell extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           contentWidget(),
+          const SizedBox(width: 7.0,),
           arrowIcon()
         ],
       );
@@ -168,6 +172,7 @@ class SCSettingCell extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           imageWidget(),
+          const SizedBox(width: 7.0,),
           arrowIcon()
         ],
       );
@@ -188,10 +193,10 @@ class SCSettingCell extends StatelessWidget {
       textAlign: TextAlign.left,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: const TextStyle(
-        fontSize: SCFonts.f14,
+      style: TextStyle(
+        fontSize: SCFonts.f16,
         fontWeight: FontWeight.w400,
-        color: SCColors.color_5E5E66
+        color: contentColor
     ),);
   }
 
@@ -204,7 +209,7 @@ class SCSettingCell extends StatelessWidget {
   
   /// 箭头icon
   Widget arrowIcon() {
-    return Image.asset(SCAsset.iconMineDetailGrey, width: 22.0, height: 22.0,);
+    return Image.asset(SCAsset.iconMineDetailGrey, width: 16.0, height: 16.0,);
   }
 
   /// 开关组件
@@ -226,8 +231,9 @@ class SCSettingCell extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         tagItem(status: tagType),
-        const SizedBox(width: 8.0,),
+        const SizedBox(width: 10.0,),
         contentWidget(),
+        const SizedBox(width: 7.0,),
         arrowIcon()
       ],
     );
@@ -236,12 +242,13 @@ class SCSettingCell extends StatelessWidget {
   /// 审核状态标签, status:0未实名，1已实名，2审核中，3未通过
   Widget tagItem({required int status}) {
     return Container(
-      height: 22.0,
+      height: 19.0,
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
       decoration: BoxDecoration(
           color: tagData['tagBgColor'],
-          borderRadius: BorderRadius.circular(2.0)
+          borderRadius: BorderRadius.circular(2.0),
+          border: Border.all(color: tagData['tagTextColor'], width: 0.5)
       ),
       child: Text(
       tagData['tagText'],
@@ -250,7 +257,7 @@ class SCSettingCell extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         fontSize: SCFonts.f12,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w400,
         color: tagData['tagTextColor']),
       )
     );

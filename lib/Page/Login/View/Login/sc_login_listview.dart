@@ -205,13 +205,13 @@ class SCLoginListView extends StatelessWidget {
 
   /// 请求发送验证码接口
   sendCode() {
-    SCLoginController state = Get.find<SCLoginController>();
-    state.sendCode(resultHandler: (status) {
-      if (status == true) {
+    // SCLoginController state = Get.find<SCLoginController>();
+    // state.sendCode(resultHandler: (status) {
+    //   if (status == true) {
         /// 发送验证码成功弹出输入验证码页面
         showCodeView();
-      }
-    });
+    //   }
+    // });
   }
 
   /// 输入验证码页面
