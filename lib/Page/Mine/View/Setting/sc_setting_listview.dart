@@ -35,12 +35,12 @@ class SCSettingListView extends StatelessWidget {
         },
         separatorBuilder: (BuildContext context, int index) {
           bool isLine = true;
-          if (index == 3) {
+          if (index == 1) {
             isLine = false;
           }
           return getLine(isLine);
         },
-        itemCount: 5);
+        itemCount: 3);
   }
   
   Widget getCell(int index) {
@@ -48,22 +48,20 @@ class SCSettingListView extends StatelessWidget {
       return SCSettingCell(title: '关于我们', onTap: (){
 
       },);
+    // } else if (index == 1) {
+    //   return SCSettingCell(title: '用户协议', onTap: (){
+    //     var params = {'title' : '用户协议', 'url' : SCAgreement.userAgreementUrl};
+    //     SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
+    //   },);
+    // } else if (index == 2) {
+    //   return SCSettingCell(title: '隐私政策', onTap: (){
+    //     var params = {'title' : '隐私政策', 'url' : SCAgreement.privacyProtocolUrl};
+    //     SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
+    //   },);
     } else if (index == 1) {
-      return SCSettingCell(title: '用户协议', onTap: (){
-        var params = {'title' : '用户协议', 'url' : SCAgreement.userAgreementUrl};
-        SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
+      return SCSettingCell(title: '账号管理', onTap: (){
       },);
     } else if (index == 2) {
-      return SCSettingCell(title: '隐私政策', onTap: (){
-        var params = {'title' : '隐私政策', 'url' : SCAgreement.privacyProtocolUrl};
-        SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
-      },);
-    } else if (index == 3) {
-      return SCSettingCell(title: '账号管理', onTap: (){
-
-
-      },);
-    } else if (index == 4) {
       return logoutCell();
     } else {
       return const SizedBox(height: 100.0,);

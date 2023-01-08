@@ -97,12 +97,20 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
 
   /// skin1
   Widget skin1() {
-    return SCHomeSkin1();
+    return SizedBox(
+      width: double.infinity,
+      height: double.infinity,
+      child: SCHomeSkin1(),
+    );
   }
 
   /// skin2
   Widget skin2() {
-    return SCHomeSkin2();
+    return SizedBox(
+      width: double.infinity,
+      height: double.infinity,
+      child: SCHomeSkin2(),
+    );
   }
 
   /// 登录悬浮窗

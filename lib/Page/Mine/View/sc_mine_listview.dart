@@ -16,6 +16,7 @@ import 'package:smartcommunity/Page/Mine/View/sc_mine_wallet_item.dart';
 import 'package:smartcommunity/Skin/Model/sc_user.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
+import '../../../Constants/sc_asset.dart';
 import '../../../Network/sc_config.dart';
 import '../../../Utils/Router/sc_router_path.dart';
 
@@ -27,9 +28,9 @@ class SCMineListView extends StatelessWidget {
       this.scrollFunction,
       required this.dataList,
       this.propertCurrentIndex = 0,
-      this.user
-      })
-      : super(key: key);
+      this.user,
+      this.backgroundImageUrl = SCAsset.iconMineBackground,
+      }) : super(key: key);
 
   /// listView数据源
   final List dataList;
@@ -41,6 +42,8 @@ class SCMineListView extends StatelessWidget {
   Function(double offset)? scrollFunction;
 
   final SCUser? user;
+
+  final String backgroundImageUrl;
 
   ScrollController scrollController = ScrollController();
 
@@ -85,6 +88,9 @@ class SCMineListView extends StatelessWidget {
     } else if (type == SCTypeDefine.SC_MINE_TYPE_SERVICE) {
       // 服务
       return serviceCell();
+    } else if (type == SCTypeDefine.SC_MINE_TYPE_DEVELOPING) {
+      // 服务
+      return developingCell();
     } else {
       // 测试
       return testCell();
@@ -94,6 +100,7 @@ class SCMineListView extends StatelessWidget {
   /// header-cell
   Widget headerCell() {
     return SCMineHeaderItem(
+      backgroundImageUrl: backgroundImageUrl,
       userName: user?.userName,
       userPic: user?.getHeadPicUrl(),
       settingTap: () {
@@ -104,6 +111,12 @@ class SCMineListView extends StatelessWidget {
       },
       membershipTap: () {
         workOrder();
+      },
+      myHouseTap: () {
+        myHouse();
+      },
+      myBillTap: () {
+        myBill();
       },
     );
   }
@@ -198,6 +211,36 @@ class SCMineListView extends StatelessWidget {
     );
   }
 
+  /// 开发中cell
+  Widget developingCell() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const SizedBox(height: 40.0,),
+        Image.asset(
+          SCAsset.iconDeveloping,
+          width: 144.0,
+          height: 144.0,
+          fit: BoxFit.contain,
+        ),
+        const SizedBox(
+          height: 2.0,
+        ),
+        const Text(
+          '更多功能正在开发中',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: SCFonts.f14,
+            fontWeight: FontWeight.w400,
+            color: SCColors.color_8D8E99),
+        ),
+      ],
+    );
+  }
+
   /// 测试-cell
   Widget testCell() {
     return const SizedBox(
@@ -245,4 +288,25 @@ class SCMineListView extends StatelessWidget {
     String url = SCConfig.getH5Url(SCH5.workOrderUrl) + "?" + "defCommunityId=" + defCommunityId + "&Authorization=" + token + "&defRoomId=" + defRoomId + "&client=" + SCDefaultValue.client;
     SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "工单", "url" : url});
   }
+
+  /// 我的房屋
+  myHouse() {
+    String token = SCScaffoldManager.instance.user.token ?? "";
+    String userId = SCScaffoldManager.instance.user.id ?? "";
+    String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
+    String phoneNum = SCScaffoldManager.instance.user.mobileNum ?? '';
+    String url = "${SCConfig.getH5Url(SCH5.myHouseUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent('杭州市')}&latitude=30.25961&longitude=120.13026&gender=1";
+    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "我的房屋", "url" : url});
+  }
+
+  /// 我的账单
+  myBill() {
+    String token = SCScaffoldManager.instance.user.token ?? "";
+    String userId = SCScaffoldManager.instance.user.id ?? "";
+    String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
+    String phoneNum = SCScaffoldManager.instance.user.mobileNum ?? '';
+    String url = "${SCConfig.getH5Url(SCH5.myBillUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent('杭州市')}&latitude=30.25961&longitude=120.13026&gender=1";
+    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "我的账单", "url" : url});
+  }
+
 }

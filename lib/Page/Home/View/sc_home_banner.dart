@@ -9,6 +9,8 @@ import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_asset.dart';
 import 'package:smartcommunity/Page/Home/GetXController/sc_home_controller1.dart';
 
+import '../../../Utils/sc_utils.dart';
+
 class SCHomeBanner extends StatelessWidget {
   const SCHomeBanner(
       {Key? key,
@@ -47,11 +49,42 @@ class SCHomeBanner extends StatelessWidget {
       },
       child: Stack(
         children: [
-          backgroundImage(),
+          swiperItem(),
+          //backgroundImage(),
           bottomRadiusBar(context),
-          banner(context),
+          //banner(context),
         ],
       ),
+    );
+  }
+
+  /// swiperItem
+  Widget swiperItem() {
+    return AspectRatio(
+      aspectRatio: bannerBGScale,
+      child: Swiper(
+        autoplay: true,
+        onTap: (index) {
+          onTap?.call(index);
+        },
+        itemBuilder: (BuildContext context, int index) {
+          return SCUtils.imageWidget(url: bannerList[index], fit: BoxFit.cover);
+        },
+        itemCount: bannerList.length,
+        pagination: const SwiperPagination(
+          margin: EdgeInsets.only(bottom: 20.0),
+          alignment: Alignment.bottomCenter,
+          builder: DotSwiperPaginationBuilder(
+              size: 5.0,
+              activeSize: 5.0,
+              color: Colors.grey,
+              activeColor: Colors.white
+          )
+        ),
+        onIndexChanged: (index) {
+
+        },
+      )
     );
   }
 
@@ -59,10 +92,7 @@ class SCHomeBanner extends StatelessWidget {
   Widget backgroundImage() {
     return AspectRatio(
       aspectRatio: bannerBGScale,
-      child: Image.asset(
-        backgroundImageUrl,
-        fit: BoxFit.cover,
-      ),
+      child: SCUtils.imageWidget(url: backgroundImageUrl, fit: BoxFit.cover),
     );
   }
 
@@ -102,10 +132,7 @@ class SCHomeBanner extends StatelessWidget {
                 index: currentIndex,
                 autoplay: false,
                 itemBuilder: (BuildContext context, int index) {
-                  return Image.asset(
-                    bannerList[index],
-                    fit: BoxFit.cover,
-                  );
+                  return SCUtils.imageWidget(url: bannerList[index], fit: BoxFit.cover);
                 },
                 itemCount: bannerList.length,
                 onIndexChanged: (index) {

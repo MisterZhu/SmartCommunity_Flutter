@@ -324,6 +324,14 @@ class SCAsset {
   /// 我的-实名认证-身份证-水印
   static const String iconRealNameVerifyCardWatermark = 'images/mine/ic_real_name_watermark.png';
 
+  /// 我的-我的房屋icon
+  static const String iconMyHouse = 'images/mine/ic_my_house.png';
+  /// 我的-我的账单
+  static const String iconMyBill = 'images/mine/ic_my_bill.png';
+  /// 我的-开发中
+  static const String iconDeveloping = 'images/mine/ic_developing.png';
+
+
 /************* 我的-切换房屋 *************/
 
 }

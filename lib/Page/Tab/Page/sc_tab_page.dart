@@ -60,9 +60,9 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
     // TODO: implement initState
     super.initState();
 
-    if (SCScaffoldManager.instance.isLogin) {
-
-    } else {
+    // if (SCScaffoldManager.instance.isLogin) {
+    //
+    // } else {
       SCHomeVisitorDecorationModel visitorDecorationModel = SCScaffoldManager.instance.visitorDecorationModel;
       List<NavigationList>? tabList = visitorDecorationModel.overallDecoration?.bottomNavigation?.navigationList;
       if (tabList != null) {
@@ -76,7 +76,7 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
               normalIcon = SCConfig.getImageUrl(tab.iconInfo?.unchecked ?? '');
             }
             String selectIcon =  SCAsset.iconSelectedHome;
-            if (tab.iconInfo?.unchecked != null) {
+            if (tab.iconInfo?.checked != null) {
               selectIcon = SCConfig.getImageUrl(tab.iconInfo?.checked ?? '');
             }
             tabbarItems.add(BottomNavigationBarItem(
@@ -91,7 +91,7 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
               normalIcon = SCConfig.getImageUrl(tab.iconInfo?.unchecked ?? '');
             }
             String selectIcon =  SCAsset.iconSelectedService;
-            if (tab.iconInfo?.unchecked != null) {
+            if (tab.iconInfo?.checked != null) {
               selectIcon = SCConfig.getImageUrl(tab.iconInfo?.checked ?? '');
             }
             tabbarItems.add(BottomNavigationBarItem(
@@ -106,7 +106,7 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
               normalIcon = SCConfig.getImageUrl(tab.iconInfo?.unchecked ?? '');
             }
             String selectIcon =  SCAsset.iconSelectedFind;
-            if (tab.iconInfo?.unchecked != null) {
+            if (tab.iconInfo?.checked != null) {
               selectIcon = SCConfig.getImageUrl(tab.iconInfo?.checked ?? '');
             }
             tabbarItems.add(BottomNavigationBarItem(
@@ -121,7 +121,7 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
               normalIcon = SCConfig.getImageUrl(tab.iconInfo?.unchecked ?? '');
             }
             String selectIcon =  SCAsset.iconSelectedMine;
-            if (tab.iconInfo?.unchecked != null) {
+            if (tab.iconInfo?.checked != null) {
               selectIcon = SCConfig.getImageUrl(tab.iconInfo?.checked ?? '');
             }
             tabbarItems.add(BottomNavigationBarItem(
@@ -131,7 +131,7 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
             ));
           }
         }
-      }
+    //  }
     }
     tabController = TabController(length: tabbarItems.length, vsync: this);
     pageController = PageController(initialPage: currentIndex);
@@ -160,7 +160,7 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent),
           child: CupertinoTabBar(
-            activeColor: SCColors.color_FF6C00,
+            activeColor: SCColors.color_1B1D33,
             inactiveColor: SCColors.color_5E5F66,
             items: tabbarItems,
             currentIndex: currentIndex,

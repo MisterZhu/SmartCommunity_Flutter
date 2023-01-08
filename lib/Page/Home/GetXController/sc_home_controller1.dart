@@ -1,4 +1,6 @@
 /// 首页皮肤1-GetxController
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -10,6 +12,7 @@ import 'package:smartcommunity/Page/Home/Model/sc_home_news_model.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import '../../../Constants/sc_default_value.dart';
 import '../../../Constants/sc_h5.dart';
+import '../../../Skin/Model/sc_home_visitor_decoration_model.dart';
 // import 'package:image_cropper/image_cropper.dart';
 
 class SCHomeController1 extends GetxController {
@@ -36,16 +39,16 @@ class SCHomeController1 extends GetxController {
 
   /// 所有banner
   List allBannerList = [
-    SCAsset.homeBanner1,
-    SCAsset.homeBanner2,
-    SCAsset.homeBanner3
+    //SCAsset.homeBanner1,
+    // SCAsset.homeBanner2,
+    // SCAsset.homeBanner3
   ];
 
   /// 所有banner的背景图片
   List allBannerBGList = [
-    SCAsset.homeBannerBG1,
-    SCAsset.homeBannerBG2,
-    SCAsset.homeBannerBG3
+    //SCAsset.homeBannerBG1,
+    // SCAsset.homeBannerBG2,
+    // SCAsset.homeBannerBG3
   ];
 
   /// 活动图片list
@@ -60,6 +63,9 @@ class SCHomeController1 extends GetxController {
     SCAsset.homeActivity1,
     SCAsset.homeActivity2,
   ];
+
+  /// 轮播图滚动速度
+  int autoplaySpeed = 2;
 
   /// 资讯list
   List<SCHomeNewsModel>? allNewsList;
@@ -91,6 +97,7 @@ class SCHomeController1 extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    getHomeDecorationData();
     allNewsList = List.from(homeNewsList)
         .map((e) => SCHomeNewsModel.fromJson(e))
         .toList();
@@ -104,48 +111,10 @@ class SCHomeController1 extends GetxController {
     String workOrderUrl =
         "${SCConfig.getH5Url(SCH5.workOrderUrl)}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
     allItemsList = [
-      {"iconUrl": SCAsset.iconItem10, "title": "新工单", "subUrl": workOrderUrl},
       {
-        "iconUrl": SCAsset.iconItem1,
-        "title": "园区缴费",
-        "subUrl": SCH5.communityPayUrl
+        "iconUrl": SCAsset.iconItem1, "title": "园区缴费", "subUrl": SCH5.communityPayUrl
       },
-      {"iconUrl": SCAsset.iconItem2, "title": "预缴账户", "subUrl": SCH5.prepayUrl},
-      {
-        "iconUrl": SCAsset.iconItem3,
-        "title": "项目入驻",
-        "subUrl": SCH5.projectEnterUrl
-      },
-      {
-        "iconUrl": SCAsset.iconItem4,
-        "title": "公共缴费",
-        "subUrl": SCH5.publicPayUrl
-      },
-      {
-        "iconUrl": SCAsset.iconItem5,
-        "title": "问卷调查",
-        "subUrl": SCH5.questionnaireSurveyUrl
-      },
-      {
-        "iconUrl": SCAsset.iconItem6,
-        "title": "访客通行",
-        "subUrl": SCH5.visitorUrl
-      },
-      {
-        "iconUrl": SCAsset.iconItem7,
-        "title": "入伙验房",
-        "subUrl": SCH5.houseInspectionManagementUrl
-      },
-      {
-        "iconUrl": SCAsset.iconItem8,
-        "title": "园区停车",
-        "subUrl": SCH5.communityParkUrl
-      },
-      {
-        "iconUrl": SCAsset.iconItem9,
-        "title": "垃圾分类",
-        "subUrl": SCH5.garbageSortUrl
-      },
+      {"iconUrl": SCAsset.iconItem8, "title": "工单", "subUrl": workOrderUrl},
     ];
   }
 
@@ -162,6 +131,41 @@ class SCHomeController1 extends GetxController {
   void resetAllData() {
     bannerCurrentIndex = 0;
     update();
+  }
+
+  /// 获取首页装修数据
+  getHomeDecorationData() {
+    //if (SCScaffoldManager.instance.isLogin) {
+
+    // } else {
+      SCHomeVisitorDecorationModel visitorDecorationModel = SCScaffoldManager.instance.visitorDecorationModel;
+      List<PageDecorationList>? pageList = visitorDecorationModel.pageDecorationList;
+      if (pageList != null) {
+        for (PageDecorationList page in pageList) {
+          if (page.name == '首页') {
+            List<ComponentList>? list = page.componentList;
+            if (list != null) {
+              for (ComponentList component in list) {
+                if (component.name == '轮播图') {
+                  var info = jsonDecode(component.info ?? '');
+                  autoplaySpeed = info['autoplaySpeed'];
+                  List? imagesList = info['advertisementImgList'];
+                  if (imagesList != null) {
+                    for (var imageDic in imagesList) {
+                      String fileKey = imageDic['fileKey'];
+                      if (fileKey.isNotEmpty) {
+                        allBannerList.add(SCConfig.getImageUrl(fileKey));
+                        allBannerBGList.add(SCConfig.getImageUrl(fileKey));
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+   // }
   }
 
   @override

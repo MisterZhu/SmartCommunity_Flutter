@@ -34,16 +34,24 @@ class SCMineHeaderItem extends StatelessWidget {
   /// 点击会员
   final Function? membershipTap;
 
+  /// 点击我的房屋
+  final Function? myHouseTap;
+
+  /// 点击我的账单
+  final Function? myBillTap;
+
   const SCMineHeaderItem(
       {Key? key,
       this.backgroundImageUrl = SCAsset.iconMineBackground,
-      this.backgroundImageScale = 750.0 / 380.0,
+      this.backgroundImageScale = 375.0 / 200.0,
       this.settingTap,
       this.headerTap,
       this.membershipTap,
       this.userName = "",
-      this.userPic})
-      : super(key: key);
+      this.userPic,
+      this.myHouseTap,
+      this.myBillTap
+      }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +61,7 @@ class SCMineHeaderItem extends StatelessWidget {
   /// body
   Widget body() {
     return Stack(
+      alignment: Alignment.topCenter,
       children: [
         backgroundImageItem(),
         contentItem(),
@@ -62,31 +71,32 @@ class SCMineHeaderItem extends StatelessWidget {
 
   /// 背景图片
   Widget backgroundImageItem() {
-    return AspectRatio(
-      aspectRatio: backgroundImageScale,
-      child: Image.asset(
-        backgroundImageUrl,
-        fit: BoxFit.cover,
-      ),
+    return SizedBox(
+        width: double.infinity,
+        height: getImageHeight(),
+        child: AspectRatio(
+          aspectRatio: backgroundImageScale,
+          child: SCUtils.imageWidget(url: backgroundImageUrl, fit: BoxFit.cover)
+        ),
     );
   }
 
   /// content
   Widget contentItem() {
-    return Positioned(
-        left: 0,
-        right: 0,
-        bottom: 0,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            userInfoItem(),
-            const SizedBox(
-              height: 20.0,
-            ),
-            memberInfoBackgroundImageItem(),
-          ],
-        ));
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            height: getImageHeight() - 90.0,
+          ),
+          userInfoItem(),
+          const SizedBox(
+            height: 17.0,
+          ),
+          //memberInfoBackgroundImageItem(),
+          serviceItem(),
+        ],
+      );
   }
 
   /// 用户头像等信息
@@ -265,6 +275,94 @@ class SCMineHeaderItem extends StatelessWidget {
             )
           ],
         ));
+  }
+
+  /// serviceItem
+  Widget serviceItem() {
+    List list = [{'icon': SCAsset.iconMyHouse, 'name': '我的房屋'}, {'icon': SCAsset.iconMyBill, 'name': '我的账单'}];
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(4.0),
+        ),
+        child: ListView.separated(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            itemBuilder: (BuildContext context, int index) {
+              var dic = list[index];
+              return cell(dic['icon'], dic['name'], index);
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return Container(
+                color: SCColors.color_FFFFFF,
+                padding: const EdgeInsets.only(left: 12.0),
+                child: Container(
+                  height: 0.5,
+                  width: double.infinity,
+                  color: SCColors.color_EDEDF0,
+                ),
+              );
+            },
+            itemCount: 2),
+      ),
+    );
+  }
+
+  Widget cell(String icon, String name, int index) {
+    return GestureDetector(
+      onTap: () {
+        if (index == 0) {
+          myHouseTap?.call();
+        } else if (index == 1) {
+          myBillTap?.call();
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        height: 54.0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(
+              icon,
+              width: 18.0,
+              height: 18.0,
+              fit: BoxFit.contain,
+            ),
+            const SizedBox(
+              width: 6.0,
+            ),
+            Expanded(
+                child: Text(
+                  name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                      fontSize: SCFonts.f14,
+                      fontWeight: FontWeight.w500,
+                      color: SCColors.color_1B1D33),
+                )),
+            const SizedBox(
+              width: 9.0,
+            ),
+            Image.asset(
+              SCAsset.iconMineDetailGrey,
+              width: 16.0,
+              height: 16.0,
+              fit: BoxFit.cover,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  getImageHeight() {
+    return SCUtils().getScreenWidth() / backgroundImageScale;
   }
 
   /// 点击设置

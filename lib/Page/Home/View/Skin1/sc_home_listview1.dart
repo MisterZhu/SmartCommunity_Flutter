@@ -127,6 +127,7 @@ class SCHomeListView1State extends State<SCHomeListView1>
 
   @override
   Widget build(BuildContext context) {
+    return listView();
     return PullToRefreshNotification(
         color: Colors.blue,
         onRefresh: onRefresh,
@@ -160,7 +161,6 @@ class SCHomeListView1State extends State<SCHomeListView1>
       (PullToRefreshScrollNotificationInfo? info) {
         Future.delayed(const Duration(milliseconds: 1), () {
           double offset = info?.dragOffset ?? 0;
-          SCHomeNav1Controller nav1State = Get.find<SCHomeNav1Controller>();
           nav1State.hiddenNav(isHidden: offset > 0);
         });
         return SliverToBoxAdapter(
@@ -418,8 +418,7 @@ class SCHomeListView1State extends State<SCHomeListView1>
 
   /// 测试数据-应用详情
   itemDetail(int index) {
-    SCHomeController2 controller = Get.find<SCHomeController2>();
-    var data = controller.allItemsList[index];
+    var data = state.allItemsList[index];
     String title = data['title'];
     String url = data['subUrl'];
     var params = {"title": title, "url": url};

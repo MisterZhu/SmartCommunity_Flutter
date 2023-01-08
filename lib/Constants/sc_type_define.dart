@@ -47,6 +47,9 @@ class SCTypeDefine {
   static const int SC_MINE_TYPE_PROPERTY = 4;
   /// 服务
   static const int SC_MINE_TYPE_SERVICE = 5;
+  /// 开发中
+  static const int SC_MINE_TYPE_DEVELOPING = 6;
+
   /************************* 我的-cellType *************************/
 
   /************************* 登录页面-cellType *************************/

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 
+import '../../../Utils/sc_utils.dart';
+
 /// 首页-swiper广告图
 
 class SCHomeSwiper extends StatelessWidget {
@@ -49,14 +51,11 @@ class SCHomeSwiper extends StatelessWidget {
               onTap?.call(index);
             },
             itemBuilder: (BuildContext context, int index) {
-              return Image.asset(
-                imageList[index],
-                fit: BoxFit.cover,
-              );
+              return SCUtils.imageWidget(url: imageList[index], fit: BoxFit.cover);
             },
             itemCount: imageList.length,
             pagination: SwiperPagination(
-                margin: EdgeInsets.only(bottom: 5.0),
+                margin: const EdgeInsets.only(bottom: 5.0),
                 alignment: Alignment.bottomCenter,
                 builder: DotSwiperPaginationBuilder(
                     size: 5.0,
