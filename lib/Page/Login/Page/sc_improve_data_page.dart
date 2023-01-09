@@ -13,8 +13,6 @@ import '../View/ImproveData/sc_input_name_alert.dart';
 /// 完善资料page
 
 class SCImproveDataPage extends StatefulWidget {
-  const SCImproveDataPage({Key? key}) : super(key: key);
-
   @override
   SCImproveDataPageState createState() => SCImproveDataPageState();
 }
@@ -22,7 +20,6 @@ class SCImproveDataPage extends StatefulWidget {
 class SCImproveDataPageState extends State<SCImproveDataPage> {
 
   SCImproveDataController state = Get.put(SCImproveDataController());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +66,7 @@ class SCImproveDataPageState extends State<SCImproveDataPage> {
           selectBirthdayAction(context);
         },
         genderAction: () {
-          selectSexAction(context);
+          selectSexAction(['保密', '男', '女']);
         },
         sureAction: () {
           state.postData();
@@ -94,17 +91,22 @@ class SCImproveDataPageState extends State<SCImproveDataPage> {
   }
 
   /// 选择性别
-  selectSexAction(BuildContext context) {
-    SCPickerUtils pickerUtils =
-    SCPickerUtils(pickerType: SCPickerType.normal, pickerData: ['保密','男', '女']);
-    pickerUtils.completionHandler = (selectedValues, selecteds) {
-      String genderString = '保密';
-      if (selectedValues.isNotEmpty) {
-        genderString = selectedValues.first;
-      }
-      state.updateGender(genderString);
-    };
-    pickerUtils.showPicker(context);
+  selectSexAction(List list) {
+    List<SCBottomSheetModel> dataList = [];
+    for (int i = 0; i < list.length; i++) {
+      SCBottomSheetModel scBottomSheetModel = SCBottomSheetModel(
+          title: list[i],
+          color: SCColors.color_1B1C33,
+          fontSize: SCFonts.f16,
+          fontWeight: FontWeight.w400);
+      dataList.add(scBottomSheetModel);
+    }
+    SCDialogUtils.instance.showBottomDialog(
+      context: context,
+      dataList: dataList,
+      onTap: (index, context) {
+         state.updateGender(list[index]);
+      });
   }
 
   /// 选择出生日期

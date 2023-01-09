@@ -35,7 +35,7 @@ class SCPersonalInfoPageState extends State<SCPersonalInfoPage> {
           userNameString: SCScaffoldManager.instance.user.userName,
           birthdayString: SCScaffoldManager.instance.user.birthday,
           userHeadPicUrl: SCScaffoldManager.instance.user.getHeadPicUrl(),
-          genderString: SCUtils.getGenderString(gender: SCScaffoldManager.instance.user.gender ?? 1,
+          genderString: SCUtils.getGenderString(gender: SCScaffoldManager.instance.user.gender ?? 0,
           ),
         );
       }),

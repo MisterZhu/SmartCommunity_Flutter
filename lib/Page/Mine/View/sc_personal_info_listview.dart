@@ -111,7 +111,7 @@ class SCPersonalInfoListView extends StatelessWidget {
         content: genderString,
         cellType: SCSettingCellType.contentArrowType,
         onTap: () {
-          selectSexAction(context);
+          selectSexAction(['保密', '男', '女'], context);
         },
       );
     } else if (index == 6) {
@@ -238,21 +238,23 @@ class SCPersonalInfoListView extends StatelessWidget {
   }
 
   /// 选择性别
-  selectSexAction(BuildContext context) {
-    SCPickerUtils pickerUtils =
-        SCPickerUtils(pickerType: SCPickerType.normal, pickerData: ['男', '女']);
-    pickerUtils.completionHandler = (selectedValues, selecteds) {
-      String genderString = '男';
-      int gender = 1;
-
-      if (selectedValues.isNotEmpty) {
-        genderString = selectedValues.first;
-      }
-
-      gender = SCUtils.getGenderNumber(genderString: genderString);
-      changeGender(gender: gender);
-    };
-    pickerUtils.showPicker(context);
+  selectSexAction(List list, BuildContext context) {
+    List<SCBottomSheetModel> dataList = [];
+    for (int i = 0; i < list.length; i++) {
+      SCBottomSheetModel scBottomSheetModel = SCBottomSheetModel(
+          title: list[i],
+          color: SCColors.color_1B1C33,
+          fontSize: SCFonts.f16,
+          fontWeight: FontWeight.w400);
+      dataList.add(scBottomSheetModel);
+    }
+    SCDialogUtils.instance.showBottomDialog(
+        context: context,
+        dataList: dataList,
+        onTap: (index, context) {
+          int gender = SCUtils.getGenderNumber(genderString: list[index]);
+          changeGender(gender: gender);
+        });
   }
 
   /// 选择出生日期
