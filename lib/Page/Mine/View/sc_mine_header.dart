@@ -142,9 +142,7 @@ class SCMineHeaderItem extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            child: SizedBox(),
-          ),
+          const Expanded(child: SizedBox(),),
           GestureDetector(
             child: Image.asset(
               SCAsset.iconSettingBlack,
@@ -305,7 +303,7 @@ class SCMineHeaderItem extends StatelessWidget {
                 ),
               );
             },
-            itemCount: 2),
+            itemCount: list.length),
       ),
     );
   }

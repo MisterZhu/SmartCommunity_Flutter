@@ -111,6 +111,7 @@ class SCSettingCell extends StatelessWidget {
       return rowItem();
     } else {
       return GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: () {
           if (onTap != null) {
             onTap?.call();

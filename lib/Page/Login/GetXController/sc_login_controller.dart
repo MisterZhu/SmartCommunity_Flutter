@@ -93,16 +93,18 @@ class SCLoginController extends GetxController {
 
           resultHandler(true);
 
-          if (showCloseBtn) {
-            SCRouterHelper.back(null);
-            Get.forceAppUpdate();
-          } else {
-            if (user.communityId == null || user.communityId == '') {
-              SCRouterHelper.pathPage(SCRouterPath.selectCommunityPath, {"type" : SCSelectHouseLogicType.login});
-            } else {
-              SCRouterHelper.pathOffAllPage(SCRouterPath.tabPath, null);
-            }
-          }
+          SCRouterHelper.pathOffAllPage(SCRouterPath.improveDataPagePath, null);
+
+          // if (showCloseBtn) {
+          //   SCRouterHelper.back(null);
+          //   Get.forceAppUpdate();
+          // } else {
+          //   if (user.communityId == null || user.communityId == '') {
+          //     SCRouterHelper.pathPage(SCRouterPath.selectCommunityPath, {"type" : SCSelectHouseLogicType.login});
+          //   } else {
+          //     SCRouterHelper.pathOffAllPage(SCRouterPath.tabPath, null);
+          //   }
+          // }
         },
         failure: (value) {
           log('登陆失败===$value');

@@ -3,6 +3,7 @@ import 'package:smartcommunity/Page/Base/Scan/Page/sc_scan_page.dart';
 import 'package:smartcommunity/Page/Guide/Page/sc_base_privacy_page.dart';
 import 'package:smartcommunity/Page/Guide/Page/sc_guide_page.dart';
 import 'package:smartcommunity/Page/Home/Page/sc_home_page.dart';
+import 'package:smartcommunity/Page/Login/Page/sc_improve_data_page.dart';
 import 'package:smartcommunity/Page/Login/Page/sc_select_house_page.dart';
 import 'package:smartcommunity/Page/Login/Page/sc_login_page.dart';
 import 'package:smartcommunity/Page/Login/View/Login/sc_login_code_view.dart';
@@ -63,6 +64,8 @@ class SCRouterPages {
     GetPage(name: SCRouterPath.personalInfoPath, page: () => SCPersonalInfoPage()),
     /*实名认证*/
     GetPage(name: SCRouterPath.realNameVerifyPath, page: () => SCRealNameVerifyPage()),
+    /*完善资料*/
+    GetPage(name: SCRouterPath.improveDataPagePath, page: () => SCImproveDataPage()),
   ];
 
   /*根据code使用路由*/

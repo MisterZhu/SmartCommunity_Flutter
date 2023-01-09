@@ -256,6 +256,12 @@ class SCAsset {
   /// 选择项目列表空白占位图
   static const String iconCommunityNoData = 'images/ic_community_nodata.png';
 
+  /// 完善信息弹窗-背景图
+  static const String iconImproveDataBg = 'images/login/ic_improve_data_bg.png';
+
+  /// 验证姓名弹窗-背景
+  static const String iconVerifyNameBg = 'images/login/ic_verify_name_bg.png';
+
   /************* 登录 *************/
 
   /************* 全部应用 *************/
