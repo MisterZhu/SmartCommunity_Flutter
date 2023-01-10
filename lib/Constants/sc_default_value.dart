@@ -98,6 +98,9 @@ class SCDefaultValue {
   /// 未安装微信
   static const String unInstallWeChatTip = "请安装微信";
 
+  /// 需要房号
+  static const String needHouseId = "当前应用需要房号信息，请绑定房号";
+
   /// 图片路径
   static const files = "/files/";
 }

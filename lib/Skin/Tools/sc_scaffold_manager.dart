@@ -60,9 +60,9 @@ class SCScaffoldManager {
   SCHomeVisitorDecorationModel get visitorDecorationModel => _visitorDecorationModel;
 
   /// 初始化
-  void initBase() {
+  Future initBase() {
     Get.put(SCCustomScaffoldController());
-    SCScaffoldManager.instance.initScaffold();
+    return SCScaffoldManager.instance.initScaffold();
   }
 
   /// set user
@@ -220,7 +220,10 @@ class SCScaffoldManager {
     if (contains == true) {
       var data = SCSpUtil.getMap(SCKey.kUserData);
       _user = SCUser.fromJson(data);
-      // print('本地数据：${_user.toJson()}');
+      if (_user.token != null) {
+        _isLogin = true;
+      }
+      //print('本地数据：${_user.toJson()}');
       return _user;
     }
   }

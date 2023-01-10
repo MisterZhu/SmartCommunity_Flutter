@@ -14,9 +14,10 @@ import 'package:smartcommunity/Skin/Model/sc_user.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Utils/Date/sc_date_utils.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
+import '../../../Skin/Tools/sc_skin_config.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
-import '../../../Utils/Router/sc_router_path.dart';
 import '../../Service/GetXController/sc_service_controller.dart';
+import '../../Tab/Page/sc_tab_page.dart';
 import '../View/Skin1/sc_home_skin1.dart';
 import '../View/Skin2/sc_home_skin2.dart';
 
@@ -100,7 +101,9 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
     return SizedBox(
       width: double.infinity,
       height: double.infinity,
-      child: SCHomeSkin1(),
+      child: GetBuilder<SCHomeController1>(builder: (state) {
+        return SCHomeSkin1();
+      })
     );
   }
 
@@ -109,9 +112,11 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
     return SizedBox(
       width: double.infinity,
       height: double.infinity,
-      child: SCHomeSkin2(),
+      child: GetBuilder<SCHomeController2>(builder: (state) {
+        return SCHomeSkin2();
+      })
     );
-  }
+}
 
   /// 登录悬浮窗
   Widget floatLoginWidget() {
@@ -135,5 +140,11 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
 
   /// 获取首页数据
   getHomeInfo() {
+    /// 获取装修数据
+    SCSkinConfig.getVisitorDecorationData(successHandler: (){
+      state1.updateHomeDecorationData();
+
+    });
   }
+
 }

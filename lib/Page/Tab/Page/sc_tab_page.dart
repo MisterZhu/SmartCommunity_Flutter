@@ -28,7 +28,7 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
   int currentIndex = 0;
   List<Widget> pageList = [
     SCHomePage(),
-    SCServicePage(),
+    // SCServicePage(),
     // SCFindPage(),
     SCMinePage()
   ];
@@ -38,11 +38,11 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
       activeIcon: Image.asset(SCAsset.iconSelectedHome),
       label: '首页',
     ),
-    BottomNavigationBarItem(
-      icon: Image.asset(SCAsset.iconNormalService),
-      activeIcon: Image.asset(SCAsset.iconSelectedService),
-      label: '服务',
-    ),
+    // BottomNavigationBarItem(
+    //   icon: Image.asset(SCAsset.iconNormalService),
+    //   activeIcon: Image.asset(SCAsset.iconSelectedService),
+    //   label: '服务',
+    // ),
     // BottomNavigationBarItem(
     //   icon: Image.asset(SCAsset.iconNormalFind),
     //   activeIcon: Image.asset(SCAsset.iconSelectedFind),

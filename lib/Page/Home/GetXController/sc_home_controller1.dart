@@ -39,14 +39,14 @@ class SCHomeController1 extends GetxController {
 
   /// 所有banner
   List allBannerList = [
-    //SCAsset.homeBanner1,
+    SCAsset.homeBanner1,
     // SCAsset.homeBanner2,
     // SCAsset.homeBanner3
   ];
 
   /// 所有banner的背景图片
   List allBannerBGList = [
-    //SCAsset.homeBannerBG1,
+    SCAsset.homeBannerBG1,
     // SCAsset.homeBannerBG2,
     // SCAsset.homeBannerBG3
   ];
@@ -97,7 +97,6 @@ class SCHomeController1 extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getHomeDecorationData();
     allNewsList = List.from(homeNewsList)
         .map((e) => SCHomeNewsModel.fromJson(e))
         .toList();
@@ -111,10 +110,8 @@ class SCHomeController1 extends GetxController {
     String workOrderUrl =
         "${SCConfig.getH5Url(SCH5.workOrderUrl)}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
     allItemsList = [
-      {
-        "iconUrl": SCAsset.iconItem1, "title": "园区缴费", "subUrl": SCH5.communityPayUrl
-      },
-      {"iconUrl": SCAsset.iconItem8, "title": "工单", "subUrl": workOrderUrl},
+      {"iconUrl": SCAsset.iconItem1, "title": "园区缴费", "subUrl": SCH5.communityPayUrl, "needHouseId": true},
+      {"iconUrl": SCAsset.iconItem8, "title": "工单", "subUrl": workOrderUrl, "needHouseId": false},
     ];
   }
 
@@ -133,8 +130,8 @@ class SCHomeController1 extends GetxController {
     update();
   }
 
-  /// 获取首页装修数据
-  getHomeDecorationData() {
+  /// 更新首页装修数据
+  updateHomeDecorationData() {
     //if (SCScaffoldManager.instance.isLogin) {
 
     // } else {
@@ -151,11 +148,11 @@ class SCHomeController1 extends GetxController {
                   autoplaySpeed = info['autoplaySpeed'];
                   List? imagesList = info['advertisementImgList'];
                   if (imagesList != null) {
+                    allBannerList = [];
                     for (var imageDic in imagesList) {
                       String fileKey = imageDic['fileKey'];
                       if (fileKey.isNotEmpty) {
                         allBannerList.add(SCConfig.getImageUrl(fileKey));
-                        allBannerBGList.add(SCConfig.getImageUrl(fileKey));
                       }
                     }
                   }
@@ -166,6 +163,7 @@ class SCHomeController1 extends GetxController {
         }
       }
    // }
+    update();
   }
 
   @override

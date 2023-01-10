@@ -4,9 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../../Network/sc_http_manager.dart';
-import '../../Network/sc_url.dart';
-import '../Model/sc_home_visitor_decoration_model.dart';
 import '../../Utils/Colors/sc_color_hex.dart';
 import '../../Constants/sc_skin_value.dart';
 import '../Tools/sc_scaffold_manager.dart';
@@ -26,7 +23,6 @@ class SCCustomScaffoldController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getVisitorDecorationData();
   }
 
   /*设置导航栏背景色*/
@@ -53,17 +49,4 @@ class SCCustomScaffoldController extends GetxController {
     update();
   }
 
-  /// 游客模式装修API
-  getVisitorDecorationData() {
-    SCHttpManager.instance.get(
-        url: SCUrl.kVisitorDecorationUrl,
-        success: (value) {
-          //print("游客模式装修成功:$value");
-          SCHomeVisitorDecorationModel visitorDecorationModel = SCHomeVisitorDecorationModel.fromJson(value);
-          SCScaffoldManager.instance.visitorDecorationModel = visitorDecorationModel;
-        },
-        failure: (value) {
-          print("游客模式装修失败:$value");
-        });
-  }
 }

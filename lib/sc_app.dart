@@ -13,11 +13,13 @@ import 'package:smartcommunity/Utils/Router/sc_router_pages.dart';
 import 'package:smartcommunity/Utils/WeChat/sc_wechat_utils.dart';
 import 'package:smartcommunity/Utils/sc_sp_utils.dart';
 
+import 'Skin/Tools/sc_skin_config.dart';
+
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void startApp() async {
 
-  SCScaffoldManager.instance.initBase();
+  await SCScaffoldManager.instance.initBase();
 
   SCLoadingUtils.initLoading();
 

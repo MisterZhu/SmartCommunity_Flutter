@@ -421,8 +421,29 @@ class SCHomeListView1State extends State<SCHomeListView1>
     var data = state.allItemsList[index];
     String title = data['title'];
     String url = data['subUrl'];
-    var params = {"title": title, "url": url};
-    SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
+    bool needHouseId = data['needHouseId'];
+    if (needHouseId) {
+      SCDialogUtils.instance.showMiddleDialog(
+        context: context,
+        title: "温馨提示",
+        content: SCDefaultValue.needHouseId,
+        customWidgetButtons: [
+          defaultCustomButton(context,
+              text: '取消',
+              textColor: SCColors.color_1B1C33,
+              fontWeight: FontWeight.w400),
+          defaultCustomButton(context,
+              text: '确定',
+              textColor: SCColors.color_FF6C00,
+              fontWeight: FontWeight.w400, onTap: () async {
+                print('去绑定房号===========');
+              }),
+        ],
+      );
+    } else {
+      var params = {"title": title, "url": url};
+      SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
+    }
   }
 
   /// 切换皮肤
