@@ -54,9 +54,9 @@ class SCScaffoldManager {
   List get getXTagList => _getXTagList;
 
   /// 初始化
-  void initBase() {
+  Future initBase() {
     Get.put(SCCustomScaffoldController());
-    SCScaffoldManager.instance.initScaffold();
+    return SCScaffoldManager.instance.initScaffold();
   }
 
   /// set user

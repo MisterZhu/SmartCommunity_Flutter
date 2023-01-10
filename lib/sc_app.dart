@@ -17,7 +17,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void startApp() async {
 
-  SCScaffoldManager.instance.initBase();
+  await SCScaffoldManager.instance.initBase();
 
   SCLoadingUtils.initLoading();
 
