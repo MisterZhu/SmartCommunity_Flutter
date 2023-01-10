@@ -58,7 +58,7 @@ class SCCustomScaffoldController extends GetxController {
     SCHttpManager.instance.get(
         url: SCUrl.kVisitorDecorationUrl,
         success: (value) {
-          print("游客模式装修成功:$value");
+          //print("游客模式装修成功:$value");
           SCHomeVisitorDecorationModel visitorDecorationModel = SCHomeVisitorDecorationModel.fromJson(value);
           SCScaffoldManager.instance.visitorDecorationModel = visitorDecorationModel;
         },

@@ -117,7 +117,7 @@ class SCInputNameAlertState extends State<SCInputNameAlert> {
         decoration: BoxDecoration(
             color: SCColors.color_F7F8FA,
             borderRadius: BorderRadius.circular(4.0),
-            border: Border.all(color: SCColors.color_CBCBCB, width: 0.5)
+            border: Border.all(color: SCColors.color_E3E3E5, width: 0.5)
         ),
         child: nameTextField(),
       ),

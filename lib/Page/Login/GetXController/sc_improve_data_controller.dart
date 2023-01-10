@@ -1,5 +1,6 @@
 
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 
 import '../../../Utils/Router/sc_router_helper.dart';
 import '../../../Utils/Router/sc_router_path.dart';
@@ -41,7 +42,11 @@ class SCImproveDataController extends GetxController {
   }
 
   postData() {
-    SCRouterHelper.pathOffAllPage(SCRouterPath.tabPath, null);
+    if (name != null) {
+      SCRouterHelper.pathOffAllPage(SCRouterPath.tabPath, null);
+    } else {
+      SCToast.showTip('姓名不能为空');
+    }
 
   }
 

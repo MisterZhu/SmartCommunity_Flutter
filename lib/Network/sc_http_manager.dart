@@ -41,7 +41,7 @@ class SCHttpManager {
         _headers!['Authorization'] = user.token;
       }
 
-      // log('通用全局单例====headers=====$_headers');
+      //print('通用全局单例====headers=====$_headers');
       _baseOptions = BaseOptions(
         baseUrl: SCConfig.BASE_URL,
         connectTimeout: SCDefaultValue.timeOut,
