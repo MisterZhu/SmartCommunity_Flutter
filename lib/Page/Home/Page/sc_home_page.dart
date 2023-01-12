@@ -9,10 +9,12 @@ import 'package:smartcommunity/Page/Home/GetXController/sc_home_controller2.dart
 import 'package:smartcommunity/Page/Home/GetXController/sc_home_nav1_controller.dart';
 import 'package:smartcommunity/Page/Home/View/Skin2/sc_home_navigation2.dart';
 import 'package:smartcommunity/Page/Home/View/sc_home_float_login.dart';
+import 'package:smartcommunity/Page/Login/Model/SelectCommunity/sc_location_model.dart';
 import 'package:smartcommunity/Page/Mine/GetXController/sc_personal_info_controller.dart';
 import 'package:smartcommunity/Skin/Model/sc_user.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Utils/Date/sc_date_utils.dart';
+import 'package:smartcommunity/Utils/sc_location_utils.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
 import '../../../Skin/Tools/sc_skin_config.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
@@ -61,6 +63,8 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
     getUserInfo();
     /// 获取首页数据
     getHomeInfo();
+    /// 定位
+    location();
   }
 
   /// body
@@ -144,6 +148,22 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
     SCSkinConfig.getVisitorDecorationData(successHandler: (){
       state1.updateHomeDecorationData();
 
+    });
+  }
+
+  /// 定位
+  location() {
+    SCLocationUtils.locationAll((result, status) {
+      if (status == 1) {
+        double longitude = result['longitude'];
+        double latitude = result['latitude'];
+        SCScaffoldManager.instance.longitude = longitude;
+        SCScaffoldManager.instance.latitude = latitude;
+        if (result['data'] is SCLocationModel) {
+          SCLocationModel model = result['data'];
+          SCScaffoldManager.instance.city = model.addressComponent?.city ?? '';
+        }
+      }
     });
   }
 
