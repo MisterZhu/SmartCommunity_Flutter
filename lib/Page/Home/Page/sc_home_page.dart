@@ -12,9 +12,7 @@ import 'package:smartcommunity/Page/Home/View/sc_home_float_login.dart';
 import 'package:smartcommunity/Page/Mine/GetXController/sc_personal_info_controller.dart';
 import 'package:smartcommunity/Skin/Model/sc_user.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
-import 'package:smartcommunity/Utils/Date/sc_date_utils.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
-import '../../../Skin/Tools/sc_skin_config.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
 import '../../Service/GetXController/sc_service_controller.dart';
 import '../../Tab/Page/sc_tab_page.dart';
@@ -59,8 +57,6 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
     }
     /// 获取用户信息
     getUserInfo();
-    /// 获取首页数据
-    getHomeInfo();
   }
 
   /// body
@@ -136,15 +132,6 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
         state.update();
       });
     }
-  }
-
-  /// 获取首页数据
-  getHomeInfo() {
-    /// 获取装修数据
-    SCSkinConfig.getVisitorDecorationData(successHandler: (){
-      state1.updateHomeDecorationData();
-
-    });
   }
 
 }
