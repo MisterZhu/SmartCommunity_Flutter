@@ -20,6 +20,7 @@ import 'package:smartcommunity/Page/Home/View/sc_home_items.dart';
 import 'package:smartcommunity/Page/Home/View/sc_home_news_item.dart';
 import 'package:smartcommunity/Page/Home/View/sc_home_swiper.dart';
 import 'package:smartcommunity/Page/Login/GetXController/sc_login_controller.dart';
+import 'package:smartcommunity/Skin/Model/sc_user.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
 import '../../../../Constants/sc_default_value.dart';
 import '../../../../Constants/sc_enum.dart';
@@ -422,7 +423,7 @@ class SCHomeListView1State extends State<SCHomeListView1>
     String title = data['title'];
     String url = data['subUrl'];
     bool needHouseId = data['needHouseId'];
-    if (needHouseId) {
+    if (needHouseId && SCScaffoldManager.instance.user.housingId == null) {
       SCDialogUtils.instance.showMiddleDialog(
         context: context,
         title: "温馨提示",
