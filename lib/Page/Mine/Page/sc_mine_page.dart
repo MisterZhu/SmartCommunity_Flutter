@@ -9,10 +9,9 @@ import 'package:smartcommunity/Page/Mine/GetXController/sc_mine_controller.dart'
 import 'package:smartcommunity/Page/Mine/View/sc_mine_listview.dart';
 import 'package:smartcommunity/Page/Mine/View/sc_mine_navigation.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
-
 import '../../../Constants/sc_asset.dart';
 import '../../../Network/sc_config.dart';
-import '../../../Skin/Model/sc_home_visitor_decoration_model.dart';
+import '../../../Skin/Model/sc_visitor_decoration_model.dart';
 import '../../../Skin/Tools/sc_scaffold_manager.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
 import '../../../Utils/Router/sc_router_path.dart';
@@ -40,7 +39,7 @@ class SCMineState extends State<SCMinePage> with AutomaticKeepAliveClientMixin{
     if (SCScaffoldManager.instance.isLogin) {
 
     //} else {
-      SCHomeVisitorDecorationModel visitorDecorationModel = SCScaffoldManager
+      SCVisitorDecorationModel visitorDecorationModel = SCScaffoldManager
           .instance.visitorDecorationModel;
       List<PageDecorationList>? pageList = visitorDecorationModel
           .pageDecorationList;

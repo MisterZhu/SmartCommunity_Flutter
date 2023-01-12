@@ -111,6 +111,7 @@ class SCMineHeaderItem extends StatelessWidget {
             onTap: () {
               headerAction();
             },
+            behavior: HitTestBehavior.opaque,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(24.0),
               child: SCUtils.imageWidget(

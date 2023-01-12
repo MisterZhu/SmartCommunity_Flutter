@@ -4,7 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import '../../Network/sc_http_manager.dart';
 import '../../Network/sc_url.dart';
-import '../Model/sc_home_visitor_decoration_model.dart';
+import '../Model/sc_visitor_decoration_model.dart';
 
 /// 皮肤配置
 class SCSkinConfig {
@@ -14,7 +14,7 @@ class SCSkinConfig {
     SCHttpManager.instance.get(
         url: SCUrl.kVisitorDecorationUrl,
         success: (value) {
-          SCHomeVisitorDecorationModel visitorDecorationModel = SCHomeVisitorDecorationModel.fromJson(value);
+          SCVisitorDecorationModel visitorDecorationModel = SCVisitorDecorationModel.fromJson(value);
           SCScaffoldManager.instance.visitorDecorationModel = visitorDecorationModel;
           successHandler?.call();
         },
