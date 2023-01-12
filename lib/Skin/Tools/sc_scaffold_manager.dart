@@ -3,7 +3,6 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -18,9 +17,9 @@ import '../../Constants/sc_skin_value.dart';
 import '../../Utils/Router/sc_router_helper.dart';
 import '../../Utils/sc_sp_utils.dart';
 import '../GetXController/sc_scaffold_controller.dart';
-import '../Model/sc_home_visitor_decoration_model.dart';
 import '../Model/sc_scaffold_model.dart';
 import '../Model/sc_user.dart';
+import '../Model/sc_visitor_decoration_model.dart';
 
 class SCScaffoldManager {
   factory SCScaffoldManager() => _instance;
@@ -39,12 +38,12 @@ class SCScaffoldManager {
 
   static late List _getXTagList;
 
-  static late SCHomeVisitorDecorationModel _visitorDecorationModel;
+  static late SCVisitorDecorationModel _visitorDecorationModel;
 
   SCScaffoldManager._internal() {
     _scaffoldModel = SCScaffoldModel();
     _user = SCUser();
-    _visitorDecorationModel = SCHomeVisitorDecorationModel();
+    _visitorDecorationModel = SCVisitorDecorationModel();
   }
 
   SCScaffoldModel get scaffoldModel => _scaffoldModel;
@@ -57,7 +56,7 @@ class SCScaffoldManager {
 
   List get getXTagList => _getXTagList;
 
-  SCHomeVisitorDecorationModel get visitorDecorationModel => _visitorDecorationModel;
+  SCVisitorDecorationModel get visitorDecorationModel => _visitorDecorationModel;
 
   /// 初始化
   Future initBase() {
@@ -80,7 +79,7 @@ class SCScaffoldManager {
   }
 
   /// set visitorDecorationModel
-  set visitorDecorationModel(SCHomeVisitorDecorationModel visitorDecorationModel) {
+  set visitorDecorationModel(SCVisitorDecorationModel visitorDecorationModel) {
     _visitorDecorationModel = visitorDecorationModel;
     cacheVisitorDecorationModel(visitorDecorationModel.toJson());
   }

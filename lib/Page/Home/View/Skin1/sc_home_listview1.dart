@@ -429,21 +429,31 @@ class SCHomeListView1State extends State<SCHomeListView1>
         content: SCDefaultValue.needHouseId,
         customWidgetButtons: [
           defaultCustomButton(context,
-              text: '取消',
-              textColor: SCColors.color_1B1C33,
-              fontWeight: FontWeight.w400),
+            text: '取消',
+            textColor: SCColors.color_1B1C33,
+            fontWeight: FontWeight.w400),
           defaultCustomButton(context,
-              text: '确定',
-              textColor: SCColors.color_FF6C00,
-              fontWeight: FontWeight.w400, onTap: () async {
-                print('去绑定房号===========');
-              }),
+            text: '确定',
+            textColor: SCColors.color_FF6C00,
+            fontWeight: FontWeight.w400, onTap: () async {
+              myHouse();
+            }),
         ],
       );
     } else {
       var params = {"title": title, "url": url};
       SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
     }
+  }
+
+  /// 我的房屋
+  myHouse() {
+    String token = SCScaffoldManager.instance.user.token ?? "";
+    String userId = SCScaffoldManager.instance.user.id ?? "";
+    String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
+    String phoneNum = SCScaffoldManager.instance.user.mobileNum ?? '';
+    String url = "${SCConfig.getH5Url(SCH5.myHouseUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent('杭州市')}&latitude=30.25961&longitude=120.13026&gender=1";
+    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "我的房屋", "url" : url});
   }
 
   /// 切换皮肤

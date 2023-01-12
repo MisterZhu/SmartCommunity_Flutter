@@ -84,7 +84,7 @@ class SCPersonalInfoListView extends StatelessWidget {
         tagType: SCTypeDefine.realNameVerifyStatusNo,
         cellType: SCSettingCellType.tagContentArrowType,
         onTap: () {
-          SCRouterHelper.pathPage(SCRouterPath.realNameVerifyPath, null);
+          //SCRouterHelper.pathPage(SCRouterPath.realNameVerifyPath, null);
         },
       );
     } else if (index == 3) {

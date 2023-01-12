@@ -12,7 +12,7 @@ import 'package:smartcommunity/Page/Home/Model/sc_home_news_model.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import '../../../Constants/sc_default_value.dart';
 import '../../../Constants/sc_h5.dart';
-import '../../../Skin/Model/sc_home_visitor_decoration_model.dart';
+import '../../../Skin/Model/sc_visitor_decoration_model.dart';
 // import 'package:image_cropper/image_cropper.dart';
 
 class SCHomeController1 extends GetxController {
@@ -135,7 +135,7 @@ class SCHomeController1 extends GetxController {
     //if (SCScaffoldManager.instance.isLogin) {
 
     // } else {
-      SCHomeVisitorDecorationModel visitorDecorationModel = SCScaffoldManager.instance.visitorDecorationModel;
+      SCVisitorDecorationModel visitorDecorationModel = SCScaffoldManager.instance.visitorDecorationModel;
       List<PageDecorationList>? pageList = visitorDecorationModel.pageDecorationList;
       if (pageList != null) {
         for (PageDecorationList page in pageList) {
