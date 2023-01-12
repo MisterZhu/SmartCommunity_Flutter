@@ -40,6 +40,15 @@ class SCScaffoldManager {
 
   static late SCVisitorDecorationModel _visitorDecorationModel;
 
+  /// 经度
+  static late double _latitude;
+
+  /// 纬度
+  static late double _longitude;
+
+  /// 城市名称
+  static late String _city;
+
   SCScaffoldManager._internal() {
     _scaffoldModel = SCScaffoldModel();
     _user = SCUser();
@@ -58,8 +67,17 @@ class SCScaffoldManager {
 
   SCVisitorDecorationModel get visitorDecorationModel => _visitorDecorationModel;
 
+  double get latitude => _latitude;
+
+  double get longitude => _longitude;
+
+  String get city => _city;
+
   /// 初始化
   Future initBase() {
+    _longitude = 0;
+    _latitude = 0;
+    _city = '';
     Get.put(SCCustomScaffoldController());
     return SCScaffoldManager.instance.initScaffold();
   }
@@ -82,6 +100,24 @@ class SCScaffoldManager {
   set visitorDecorationModel(SCVisitorDecorationModel visitorDecorationModel) {
     _visitorDecorationModel = visitorDecorationModel;
     cacheVisitorDecorationModel(visitorDecorationModel.toJson());
+  }
+
+  /// set latitude
+  set latitude(double latitude) {
+    // TODO: implement latitude=
+    _latitude = latitude;
+  }
+
+  /// set longitude
+  set longitude(double longitude) {
+    // TODO: implement longitude=
+    _longitude = longitude;
+  }
+
+  /// set city
+  set city(String city) {
+    // TODO: implement city=
+    _city = city;
   }
 
   /// 初始化scaffold数据

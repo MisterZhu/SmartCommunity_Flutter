@@ -8,6 +8,53 @@ import '../Network/sc_url.dart';
 import '../Page/Login/Model/SelectCommunity/sc_location_model.dart';
 
 class SCLocationUtils {
+
+  /// 获取位置-仅仅是posotion, status:0-权限被拒绝，1-获取成功，2-权限无法确定
+  static locationOnlyPosition(Function(Position? position, int status)? completeHandler) async{
+    LocationPermission permission = await SCLocationUtils.requestPermission();
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      /// 定位被拒绝，无权限
+      completeHandler?.call(null, 0);
+    } else if (permission == LocationPermission.whileInUse ||
+        permission == LocationPermission.always) {
+      /// 已获取定位权限
+      Position position = await SCLocationUtils.location();
+      completeHandler?.call(position, 1);
+    } else {
+      /// 权限无法确定
+      completeHandler?.call(null, 2);
+    }
+  }
+
+  /// 获取具体微信信息, status:0-权限被拒绝，1-获取成功，2-权限无法确定
+  static locationAll(Function(dynamic? result, int status)? completeHandler) async{
+    LocationPermission permission = await SCLocationUtils.requestPermission();
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      /// 定位被拒绝，无权限
+      completeHandler?.call(null, 0);
+    } else if (permission == LocationPermission.whileInUse ||
+        permission == LocationPermission.always) {
+      /// 已获取定位权限
+      Position position = await SCLocationUtils.location();
+      reGeoCode(position: position, success: (value){
+        SCLocationModel model = value;
+        var params = {
+          "longitude" : position.longitude,
+          "latitude" : position.latitude,
+          "data" : model
+        };
+        completeHandler?.call(params, 1);
+      }, failure: (value){
+        completeHandler?.call(value, 1);
+      });
+    } else {
+      /// 权限无法确定
+      completeHandler?.call(null, 2);
+    }
+  }
+
   /// 获取定位权限
   static Future<LocationPermission> requestPermission() async{
     LocationPermission permission = await Geolocator.requestPermission();
@@ -17,7 +64,6 @@ class SCLocationUtils {
   /// 获取位置
   static Future<Position> location() async{
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    log('定位位置:${position.toJson()}');
     return position;
   }
 
@@ -45,7 +91,6 @@ class SCLocationUtils {
         url: SCUrl.kReGeoCodeUrl, params: params, success: (response) {
       int status = int.parse(response['status']);
       if (status == 1) {
-        log('位置成功:$response');
         var data = response['regeocode'];
         SCLocationModel model = SCLocationModel.fromJson(data);
 
@@ -54,7 +99,6 @@ class SCLocationUtils {
         failure?.call(SCDefaultValue.errorMessage);
       }
     }, failure: (error) {
-      log('位置失败:$error');
       failure?.call(SCDefaultValue.errorMessage);
     });
   }
