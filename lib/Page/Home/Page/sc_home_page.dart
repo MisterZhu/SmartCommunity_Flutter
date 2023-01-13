@@ -15,7 +15,8 @@ import 'package:smartcommunity/Skin/Model/sc_user.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Skin/Tools/sc_skin_config.dart';
 import 'package:smartcommunity/Utils/Date/sc_date_utils.dart';
-import 'package:smartcommunity/Utils/sc_location_utils.dart';
+import 'package:smartcommunity/Utils/Permission/sc_location_utils.dart';
+import 'package:smartcommunity/Utils/Permission/sc_permission_utils.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
 import '../../Service/GetXController/sc_service_controller.dart';
@@ -152,16 +153,18 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
 
   /// 定位
   location() {
-    SCLocationUtils.locationAll((result, status) {
+    SCPermissionUtils.startLocationWithPrivacyAlert(completionHandler: (var result, SCLocationModel? model){
+      int status = result['status'];
       if (status == 1) {
-        double longitude = result['longitude'];
-        double latitude = result['latitude'];
+        var data = result['data'];
+        double longitude = data['longitude'];
+        double latitude = data['latitude'];
+        String city = data['city'];
         SCScaffoldManager.instance.longitude = longitude;
         SCScaffoldManager.instance.latitude = latitude;
-        if (result['data'] is SCLocationModel) {
-          SCLocationModel model = result['data'];
-          SCScaffoldManager.instance.city = model.addressComponent?.city ?? '';
-        }
+        SCScaffoldManager.instance.city = city;
+      } else {
+
       }
     });
   }

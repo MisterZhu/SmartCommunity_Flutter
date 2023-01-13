@@ -14,7 +14,7 @@ import 'package:smartcommunity/Page/Login/View/SelectCity/sc_city_search_result_
 import '../../../Constants/sc_enum.dart';
 import '../../../Skin/Tools/sc_scaffold_manager.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
-import '../../../Utils/sc_location_utils.dart';
+import '../../../Utils/Permission/sc_location_utils.dart';
 import '../../../Utils/sc_utils.dart';
 import '../GetXController/sc_search_city_controller.dart';
 import '../Model/SelectCommunity/sc_location_model.dart';
