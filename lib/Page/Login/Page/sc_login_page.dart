@@ -49,7 +49,7 @@ class SCLoginState extends State<SCLoginPage> {
         width: double.infinity,
         height: double.infinity,
         color: SCColors.color_F2F3F5,
-        child: SCLoginListView(showClose: widget.showCloseBtn),
+        child: SCLoginListView(state: state, showClose: widget.showCloseBtn),
       ),
     );
   }

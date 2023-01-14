@@ -141,8 +141,6 @@ class SCUtils {
   static int getGenderNumber({required String genderString}) {
     if (genderString == '男') {
       return 1;
-    } else if (genderString == '女') {
-      return 2;
     } else {
       return 0;
     }
@@ -152,10 +150,8 @@ class SCUtils {
   static String getGenderString({required int gender}) {
     if (gender == 1) {
       return '男';
-    } else if (gender == 2) {
-      return '女';
     } else {
-      return '保密';
+      return '女';
     }
   }
 

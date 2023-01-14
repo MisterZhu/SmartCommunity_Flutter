@@ -12,6 +12,9 @@ class SCDefaultValue {
   /// client
   static const String client = 'jm-app';
 
+  /// appCode
+  static const String appCode = '100';
+
   /// 高德web key
   static const String kAMapWebKey = 'fb48becc7b7a077d4da585a977d39ed2';
 

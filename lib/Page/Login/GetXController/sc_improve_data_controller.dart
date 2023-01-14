@@ -1,7 +1,12 @@
 
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:sc_uikit/sc_uikit.dart';
-
+import 'dart:convert' as convert;
+import '../../../Constants/sc_default_value.dart';
+import '../../../Network/sc_http_manager.dart';
+import '../../../Network/sc_url.dart';
+import '../../../Skin/Model/sc_user.dart';
+import '../../../Skin/Tools/sc_scaffold_manager.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
 import '../../../Utils/Router/sc_router_path.dart';
 
@@ -40,14 +45,4 @@ class SCImproveDataController extends GetxController {
     gender = str;
     update();
   }
-
-  postData() {
-    if (name != null) {
-      SCRouterHelper.pathOffAllPage(SCRouterPath.tabPath, null);
-    } else {
-      SCToast.showTip('姓名不能为空');
-    }
-
-  }
-
 }

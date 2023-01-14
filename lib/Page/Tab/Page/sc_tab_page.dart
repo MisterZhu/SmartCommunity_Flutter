@@ -73,7 +73,7 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
   getVisitorDecorationData() {
     SCHomeController1 homeState1 = Get.put(SCHomeController1());
     SCSkinConfig.getVisitorDecorationData(successHandler: (){
-      updateTabBarItems();
+      //updateTabBarItems();
       homeState1.updateHomeDecorationData();
     });
   }

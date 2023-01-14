@@ -103,14 +103,21 @@ class SCHomeController1 extends GetxController {
     homeFeatureStyle1 = SCHomeFeatureStyle.featureStyle1;
     homeFeatureStyle2 = SCHomeFeatureStyle.featureStyle2;
 
-    /// 新工单
-    String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
     String token = SCScaffoldManager.instance.user.token ?? "";
-    String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
-    String workOrderUrl =
-        "${SCConfig.getH5Url(SCH5.workOrderUrl)}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
+    String userId = SCScaffoldManager.instance.user.id ?? "";
+    String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
+    String phoneNum = SCScaffoldManager.instance.user.mobileNum ?? '';
+    int gender = SCScaffoldManager.instance.user.gender ?? 0;
+    String city = SCScaffoldManager.instance.city;
+    double longitude = SCScaffoldManager.instance.longitude;
+    double latitude = SCScaffoldManager.instance.latitude;
+    String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+
+    String communityPayUrl = "${SCConfig.getH5Url(SCH5.communityPayUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String workOrderUrl = "${SCConfig.getH5Url(SCH5.workOrderUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+
     allItemsList = [
-      {"iconUrl": SCAsset.iconItem1, "title": "园区缴费", "subUrl": SCH5.communityPayUrl, "needHouseId": true},
+      {"iconUrl": SCAsset.iconItem1, "title": "物业缴费", "subUrl": communityPayUrl, "needHouseId": true},
       {"iconUrl": SCAsset.iconItem8, "title": "工单", "subUrl": workOrderUrl, "needHouseId": false},
     ];
   }

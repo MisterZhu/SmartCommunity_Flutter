@@ -12,6 +12,7 @@ import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
 import '../../GetXController/sc_login_code_controller.dart';
 import '../../GetXController/sc_login_controller.dart';
+import '../../Page/sc_improve_data_page.dart';
 
 /// 输入验证码页面
 class SCLoginCodeView extends StatelessWidget {
@@ -164,15 +165,30 @@ class SCLoginCodeView extends StatelessWidget {
       codeState.numberListAdd(value: number);
       if (codeState.numberList.length == 6) {
         loginState.code = codeState.numberList.join();
-        loginState.login(resultHandler: (status) {
-          if (status == true) {
+        loginState.codeLogin(resultHandler: (code) {
+          if (code == 200) {
             clearData(context);
+          } else if (code == 200000003) {
+            /// 需要输入用户名称
+            showImproveDataPage();
           }
         });
       }
     }, deleteAction: () {
       codeState.numberListDelete();
     },);
+  }
+
+  /// 显示完善信息页面
+  showImproveDataPage() {
+    SCUtils.getCurrentContext(completionHandler: (context) async {
+      Navigator.push(context, MaterialPageRoute(
+          fullscreenDialog: true,
+          builder: (BuildContext context) {
+            return SCImproveDataPage(phone: loginState.phone, code: loginState.code);
+          }),
+      );
+    });
   }
 
   /// 清空数据，并关闭页面
