@@ -266,7 +266,7 @@ class SCHomeListView1State extends State<SCHomeListView1>
       backgroundImageUrl: widget.bannerBackgroundImageUrl,
       currentIndex: widget.bannerCurrentIndex,
       onTap: (int index) {
-        workOrder();
+        //workOrder();
       },
     );
   }
