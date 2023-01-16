@@ -424,31 +424,51 @@ class SCHomeListView1State extends State<SCHomeListView1>
 
   /// 点击跳转到应用详情
   itemDetail(int index) {
-    var data = state.allItemsList[index];
-    String title = data['title'];
-    String url = data['subUrl'];
-    bool needHouseId = data['needHouseId'];
-    if (needHouseId && SCScaffoldManager.instance.user.housingId == null) {
+    if (SCScaffoldManager.instance.isLogin) {
+      var data = state.allItemsList[index];
+      String title = data['title'];
+      String url = data['subUrl'];
+      bool needHouseId = data['needHouseId'];
+      if (needHouseId && SCScaffoldManager.instance.user.housingId == null) {
+        SCDialogUtils.instance.showMiddleDialog(
+          context: context,
+          title: "温馨提示",
+          content: SCDefaultValue.needHouseId,
+          customWidgetButtons: [
+            defaultCustomButton(context,
+                text: '取消',
+                textColor: SCColors.color_1B1C33,
+                fontWeight: FontWeight.w400),
+            defaultCustomButton(context,
+                text: '确定',
+                textColor: SCColors.color_FF6C00,
+                fontWeight: FontWeight.w400, onTap: () async {
+                  myHouse();
+                }),
+          ],
+        );
+      } else {
+        var params = {"title": title, "url": url};
+        SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
+      }
+    } else {
       SCDialogUtils.instance.showMiddleDialog(
         context: context,
         title: "温馨提示",
-        content: SCDefaultValue.needHouseId,
+        content: SCDefaultValue.needLoginTip,
         customWidgetButtons: [
           defaultCustomButton(context,
-            text: '取消',
-            textColor: SCColors.color_1B1C33,
-            fontWeight: FontWeight.w400),
+              text: '取消',
+              textColor: SCColors.color_1B1C33,
+              fontWeight: FontWeight.w400),
           defaultCustomButton(context,
-            text: '确定',
-            textColor: SCColors.color_FF6C00,
-            fontWeight: FontWeight.w400, onTap: () async {
-              myHouse();
-            }),
+              text: '登录',
+              textColor: SCColors.color_FF6C00,
+              fontWeight: FontWeight.w400, onTap: () async {
+                SCRouterHelper.presentLoginPage();
+              }),
         ],
       );
-    } else {
-      var params = {"title": title, "url": url};
-      SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
     }
   }
 
