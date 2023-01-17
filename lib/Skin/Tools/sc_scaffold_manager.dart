@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,6 +50,12 @@ class SCScaffoldManager {
   /// 城市名称
   static late String _city;
 
+  /// flutter调用原生的channel
+  static MethodChannel flutterToNative = const MethodChannel('flutter_native');
+
+  /// 原生调用flutter的channel
+  static EventChannel nativeToFlutter = const EventChannel('native_flutter');
+
   SCScaffoldManager._internal() {
     _scaffoldModel = SCScaffoldModel();
     _user = SCUser();
@@ -78,6 +85,7 @@ class SCScaffoldManager {
     _longitude = 0;
     _latitude = 0;
     _city = '';
+    listenNativeToFlutterChannel();
     Get.put(SCCustomScaffoldController());
     return SCScaffoldManager.instance.initScaffold();
   }
@@ -328,4 +336,28 @@ class SCScaffoldManager {
     }
     return success;
   }
+
+  /// 监听原生调用flutter的消息
+  listenNativeToFlutterChannel() {
+    nativeToFlutter.receiveBroadcastStream().listen(getNativeData, onError: getNativeDataError);
+  }
+
+  /*获得到原生传递过来的消息*/
+  void getNativeData(dynamic data) {
+    print('原生传递过来的消息:${data.toString()}');
+
+    // Map<String, dynamic> baseParams = new Map<String, dynamic>.from(data);
+    // String? key = baseParams['key'];
+    // Map<String, dynamic> params =
+    // new Map<String, dynamic>.from(baseParams['data']);
+    // if (key == flutter_headerParams_key) {
+    //   MJAppInit.initHttp(params);
+    //   setState(() {
+    //     nativeHeaderState = true;
+    //   });
+    // }
+  }
+
+  /*获取到错误*/
+  void getNativeDataError(Object err) {}
 }
