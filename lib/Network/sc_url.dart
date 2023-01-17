@@ -13,6 +13,9 @@ class SCUrl {
   /// 验证码登录url
   static const String kPhoneCodeLoginUrl = '/api/user/loginByCode';
 
+  /// 验证码登录验证姓名url
+  static const String kPhoneCodeLoginWithNameUrl = '/api/user/login4C';
+
   /// 通过坐标经纬度查询项目url
   static const String kSearchCommunityByLocationUrl = '/api/space/community/searchCommunityByPlace';
 

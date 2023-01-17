@@ -266,7 +266,7 @@ class SCHomeListView1State extends State<SCHomeListView1>
       backgroundImageUrl: widget.bannerBackgroundImageUrl,
       currentIndex: widget.bannerCurrentIndex,
       onTap: (int index) {
-        workOrder();
+        //workOrder();
       },
     );
   }
@@ -408,42 +408,67 @@ class SCHomeListView1State extends State<SCHomeListView1>
 
   /// 测试数据-工单
   workOrder() {
-    String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
     String token = SCScaffoldManager.instance.user.token ?? "";
-    String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
-    String url =
-        "${SCConfig.getH5Url(SCH5.workOrderUrl)}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
-    var params = {"title": "工单", "url": url};
+    String userId = SCScaffoldManager.instance.user.id ?? "";
+    String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
+    String phoneNum = SCScaffoldManager.instance.user.mobileNum ?? '';
+    int gender = SCScaffoldManager.instance.user.gender ?? 0;
+    String city = SCScaffoldManager.instance.city;
+    double longitude = SCScaffoldManager.instance.longitude;
+    double latitude = SCScaffoldManager.instance.latitude;
+    String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+    String workOrderUrl = "${SCConfig.getH5Url(SCH5.workOrderUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    var params = {"title": "工单", "url": workOrderUrl};
     SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
   }
 
-  /// 测试数据-应用详情
+  /// 点击跳转到应用详情
   itemDetail(int index) {
-    var data = state.allItemsList[index];
-    String title = data['title'];
-    String url = data['subUrl'];
-    bool needHouseId = data['needHouseId'];
-    if (needHouseId && SCScaffoldManager.instance.user.housingId == null) {
+    if (SCScaffoldManager.instance.isLogin) {
+      var data = state.allItemsList[index];
+      String title = data['title'];
+      String url = data['subUrl'];
+      bool needHouseId = data['needHouseId'];
+      if (needHouseId && SCScaffoldManager.instance.user.housingId == null) {
+        SCDialogUtils.instance.showMiddleDialog(
+          context: context,
+          title: "温馨提示",
+          content: SCDefaultValue.needHouseId,
+          customWidgetButtons: [
+            defaultCustomButton(context,
+                text: '取消',
+                textColor: SCColors.color_1B1C33,
+                fontWeight: FontWeight.w400),
+            defaultCustomButton(context,
+                text: '确定',
+                textColor: SCColors.color_FF6C00,
+                fontWeight: FontWeight.w400, onTap: () async {
+                  myHouse();
+                }),
+          ],
+        );
+      } else {
+        var params = {"title": title, "url": url};
+        SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
+      }
+    } else {
       SCDialogUtils.instance.showMiddleDialog(
         context: context,
         title: "温馨提示",
-        content: SCDefaultValue.needHouseId,
+        content: SCDefaultValue.needLoginTip,
         customWidgetButtons: [
           defaultCustomButton(context,
-            text: '取消',
-            textColor: SCColors.color_1B1C33,
-            fontWeight: FontWeight.w400),
+              text: '取消',
+              textColor: SCColors.color_1B1C33,
+              fontWeight: FontWeight.w400),
           defaultCustomButton(context,
-            text: '确定',
-            textColor: SCColors.color_FF6C00,
-            fontWeight: FontWeight.w400, onTap: () async {
-              myHouse();
-            }),
+              text: '登录',
+              textColor: SCColors.color_FF6C00,
+              fontWeight: FontWeight.w400, onTap: () async {
+                SCRouterHelper.presentLoginPage();
+              }),
         ],
       );
-    } else {
-      var params = {"title": title, "url": url};
-      SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
     }
   }
 
@@ -453,7 +478,11 @@ class SCHomeListView1State extends State<SCHomeListView1>
     String userId = SCScaffoldManager.instance.user.id ?? "";
     String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
     String phoneNum = SCScaffoldManager.instance.user.mobileNum ?? '';
-    String url = "${SCConfig.getH5Url(SCH5.myHouseUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent('杭州市')}&latitude=30.25961&longitude=120.13026&gender=1";
+    int gender = SCScaffoldManager.instance.user.gender ?? 0;
+    String city = SCScaffoldManager.instance.city;
+    double longitude = SCScaffoldManager.instance.longitude;
+    double latitude = SCScaffoldManager.instance.latitude;
+    String url = "${SCConfig.getH5Url(SCH5.myHouseUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender";
     SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "我的房屋", "url" : url});
   }
 

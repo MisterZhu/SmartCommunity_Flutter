@@ -12,6 +12,9 @@ class SCDefaultValue {
   /// client
   static const String client = 'jm-app';
 
+  /// appCode
+  static const String appCode = '100';
+
   /// 高德web key
   static const String kAMapWebKey = 'fb48becc7b7a077d4da585a977d39ed2';
 
@@ -100,6 +103,9 @@ class SCDefaultValue {
 
   /// 需要房号
   static const String needHouseId = "当前应用需要房号信息，请绑定房号";
+
+  /// 提示登录
+  static const String needLoginTip = "登录后可获取更多优质服务";
 
   /// 图片路径
   static const files = "/files/";

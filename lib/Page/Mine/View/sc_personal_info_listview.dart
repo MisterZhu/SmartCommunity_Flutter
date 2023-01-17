@@ -111,7 +111,7 @@ class SCPersonalInfoListView extends StatelessWidget {
         content: genderString,
         cellType: SCSettingCellType.contentArrowType,
         onTap: () {
-          selectSexAction(['保密', '男', '女'], context);
+          selectSexAction(['男', '女'], context);
         },
       );
     } else if (index == 6) {

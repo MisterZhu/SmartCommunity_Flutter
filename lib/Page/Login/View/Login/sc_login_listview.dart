@@ -17,6 +17,7 @@ import 'package:smartcommunity/Utils/Router/sc_router_path.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
 import '../../../../Utils/Colors/sc_color_hex.dart';
 import '../../GetXController/sc_login_code_controller.dart';
+import '../../Page/sc_improve_data_page.dart';
 import 'sc_login_agreement.dart';
 
 /// 登录页listview
@@ -25,8 +26,9 @@ class SCLoginListView extends StatelessWidget {
 
   late final BuildContext currentContext;
   final bool showClose;
+  final SCLoginController state;
 
-  SCLoginListView({Key? key, this.showClose = false,}) : super(key: key);
+  SCLoginListView({Key? key, required this.state, this.showClose = false,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -205,13 +207,12 @@ class SCLoginListView extends StatelessWidget {
 
   /// 请求发送验证码接口
   sendCode() {
-    // SCLoginController state = Get.find<SCLoginController>();
-    // state.sendCode(resultHandler: (status) {
-    //   if (status == true) {
+    state.sendCode(resultHandler: (status) {
+      if (status == true) {
         /// 发送验证码成功弹出输入验证码页面
         showCodeView();
-    //   }
-    // });
+      }
+    });
   }
 
   /// 输入验证码页面

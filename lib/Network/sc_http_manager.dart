@@ -1,4 +1,5 @@
 /// 网络请求
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:dio/adapter.dart';
@@ -223,7 +224,7 @@ class SCHttpManager {
 
   /// 校验登录
   checkLogin({required String url, dynamic headers, dynamic data}) {
-    if (url == SCUrl.kPhoneCodeLoginUrl) {
+    if (url == SCUrl.kPhoneCodeLoginUrl || url == SCUrl.kPhoneCodeLoginWithNameUrl) {
       String token = '';
 
       var list = headers['authorization'];
@@ -235,13 +236,14 @@ class SCHttpManager {
           SCHttpManager.instance._baseOptions?.headers = _headers;
         }
       }
-
-      var userData = data['userInfoV'];
-      userData['token'] = token;
-      if (token != '') {
-        SCScaffoldManager.instance.cacheUserIsLogin(true);
+      if (data['userInfoV'] != null) {
+        var userData = data['userInfoV'];
+        userData['token'] = token;
+        if (token != '') {
+          SCScaffoldManager.instance.cacheUserIsLogin(true);
+        }
+        SCScaffoldManager.instance.cacheUserData(userData);
       }
-      SCScaffoldManager.instance.cacheUserData(userData);
     }
   }
 }

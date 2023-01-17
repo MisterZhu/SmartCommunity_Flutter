@@ -7,12 +7,21 @@ import 'package:sc_uikit/sc_uikit.dart';
 import '../../../Utils/Date/sc_date_utils.dart';
 import '../../../Utils/sc_utils.dart';
 import '../GetXController/sc_improve_data_controller.dart';
+import '../GetXController/sc_login_controller.dart';
 import '../View/ImproveData/sc_improve_data_alert.dart';
 import '../View/ImproveData/sc_input_name_alert.dart';
 
 /// 完善资料page
 
 class SCImproveDataPage extends StatefulWidget {
+  SCImproveDataPage({Key? key, this.phone, this.code}) : super(key: key);
+
+  /// 手机号
+  final String? phone;
+
+  /// 验证码
+  final String? code;
+
   @override
   SCImproveDataPageState createState() => SCImproveDataPageState();
 }
@@ -47,6 +56,7 @@ class SCImproveDataPageState extends State<SCImproveDataPage> {
   Widget maskItem() {
     return Container(
       width: double.infinity,
+      height: double.infinity,
       color: SCColors.color_000000.withOpacity(0.5),
     );
   }
@@ -66,10 +76,24 @@ class SCImproveDataPageState extends State<SCImproveDataPage> {
           selectBirthdayAction(context);
         },
         genderAction: () {
-          selectSexAction(['保密', '男', '女']);
+          selectSexAction(['男', '女']);
         },
         sureAction: () {
-          state.postData();
+          if (state.name != null) {
+            SCLoginController loginState = Get.find<SCLoginController>();
+            int gender = SCUtils.getGenderNumber(genderString: state.gender ?? '男');
+            loginState.codeLoginWithName(
+              userInputName: state.name!,
+              birthday: state.birthday ?? '',
+              gender: '$gender',
+              resultHandler: (){
+              state.name = null;
+              state.birthday = null;
+              state.gender = null;
+            });
+          } else {
+            SCToast.showTip('姓名不能为空');
+          }
         },
       );
     });
