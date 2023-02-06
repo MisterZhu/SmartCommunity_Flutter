@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:ffi';
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -41,6 +42,9 @@ class SCScaffoldManager {
 
   static late SCVisitorDecorationModel _visitorDecorationModel;
 
+  /// eventBus
+  static late EventBus _eventBus;
+
   /// 经度
   static late double _latitude;
 
@@ -73,6 +77,8 @@ class SCScaffoldManager {
   List get getXTagList => _getXTagList;
 
   SCVisitorDecorationModel get visitorDecorationModel => _visitorDecorationModel;
+
+  EventBus get eventBus => _eventBus;
 
   double get latitude => _latitude;
 
@@ -132,6 +138,7 @@ class SCScaffoldManager {
   Future initScaffold() async {
     _getXTagList = [];
     _preferences = await SharedPreferences.getInstance();
+    _eventBus = EventBus();
 
     bool hasScaffoldKey =
     _preferences.containsKey(SkinDefaultKey.scaffold_key);

@@ -20,4 +20,6 @@ class SCKey {
   static const String kJianXinRentingToken = "kJianXinRentingToken";
   /// 游客模式装修key
   static const String kVisitorDecorationModel = 'kVisitorDecorationModel';
+  /// 刷新用户信息key
+  static const String kReloadUserInfo = "kReloadUserInfo";
 }

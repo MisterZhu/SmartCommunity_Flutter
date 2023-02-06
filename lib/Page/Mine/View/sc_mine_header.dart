@@ -289,6 +289,7 @@ class SCMineHeaderItem extends StatelessWidget {
         child: ListView.separated(
             padding: EdgeInsets.zero,
             shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
               var dic = list[index];
               return cell(dic['icon'], dic['name'], index);

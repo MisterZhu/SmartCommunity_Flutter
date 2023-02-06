@@ -14,9 +14,12 @@ import 'sc_home_navigation1.dart';
 
 class SCHomeSkin1 extends StatelessWidget {
 
-  SCHomeSkin1({Key? key}) : super(key: key);
+  SCHomeSkin1({Key? key, this.getUserInfoAction}) : super(key: key);
 
   final GlobalKey navigationKey = GlobalKey();
+
+  /// 获取用户信息
+  final Function? getUserInfoAction;
 
   SCHomeNav1Controller nav1State = Get.find<SCHomeNav1Controller>();
 
@@ -90,6 +93,9 @@ class SCHomeSkin1 extends StatelessWidget {
           // state.changeNavigationState(offset: offset);
           SCHomeNav1Controller nav1controller = Get.find<SCHomeNav1Controller>();
           nav1controller.changeNavigationState(offset: offset);
+        },
+        getUserInfoAction: () {
+          getUserInfoAction?.call();
         },
       );
     });

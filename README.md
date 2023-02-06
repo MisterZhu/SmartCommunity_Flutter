@@ -1,4 +1,9 @@
 # smartcommunity
+# 善数生活
+
+# 1.每次打包需要切换环境，研发、预发、生产
+# 2.安卓打包报错
+##  直接从flutter>packages>flutter_tools>gradle>flutter更改flutter.minSdkVersion = 19
 
 A new Flutter project.
 

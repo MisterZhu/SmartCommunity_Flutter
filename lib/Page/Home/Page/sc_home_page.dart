@@ -1,8 +1,11 @@
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sc_uikit/sc_uikit.dart';
+import 'package:smartcommunity/Constants/sc_key.dart';
 import 'package:smartcommunity/Page/Home/GetXController/sc_home_controller.dart';
 import 'package:smartcommunity/Page/Home/GetXController/sc_home_controller1.dart';
 import 'package:smartcommunity/Page/Home/GetXController/sc_home_controller2.dart';
@@ -38,6 +41,8 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
   SCServiceController service = Get.put(SCServiceController());
   SCPersonalInfoController personalInfoController = Get.put(SCPersonalInfoController());
   SCHomeNav1Controller nav1State = Get.put(SCHomeNav1Controller());
+  /// 通知
+  late StreamSubscription notification;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +55,7 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
   @override
   dispose() {
     super.dispose();
+    notification.cancel();
   }
 
   @override
@@ -66,6 +72,7 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
     getHomeInfo();
     /// 定位
     location();
+    addNotification();
   }
 
   /// body
@@ -107,7 +114,11 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
       width: double.infinity,
       height: double.infinity,
       child: GetBuilder<SCHomeController1>(builder: (state) {
-        return SCHomeSkin1();
+        return SCHomeSkin1(
+          getUserInfoAction: () {
+            getUserInfo();
+          },
+        );
       })
     );
   }
@@ -165,6 +176,16 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
         SCScaffoldManager.instance.city = city;
       } else {
 
+      }
+    });
+  }
+
+  /// 通知
+  addNotification() {
+    notification = SCScaffoldManager.instance.eventBus.on().listen((event) {
+      String key = event['key'];
+      if (key == SCKey.kReloadUserInfo) {
+        getUserInfo();
       }
     });
   }

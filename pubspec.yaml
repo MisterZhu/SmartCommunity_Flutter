@@ -94,6 +94,8 @@ dependencies:
   intl: any
   # 日志 https://pub.flutter-io.cn/packages/logger/install
   logger: ^1.1.0
+  # 事件通知处理 https://pub.flutter-io.cn/packages/event_bus/install
+  event_bus: ^2.0.0
   # 私有UI库
   sc_uikit:
     git:

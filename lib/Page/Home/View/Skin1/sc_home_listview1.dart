@@ -46,7 +46,9 @@ class SCHomeListView1 extends StatefulWidget {
       this.bannerBGScale = 750.0 / 544.0,
       this.bannerScale = 686.0 / 280.0,
       this.bannerCurrentIndex = 0,
-      this.bannerBackgroundImageUrl = SCAsset.homeBannerBG1})
+      this.bannerBackgroundImageUrl = SCAsset.homeBannerBG1,
+      this.getUserInfoAction
+      })
       : super(key: key);
 
   /// listView数据源
@@ -75,6 +77,9 @@ class SCHomeListView1 extends StatefulWidget {
 
   /// tab数据源
   final List tabTitleList;
+
+  /// 获取用户信息
+  final Function? getUserInfoAction;
 
   @override
   SCHomeListView1State createState() => SCHomeListView1State();
@@ -449,7 +454,9 @@ class SCHomeListView1State extends State<SCHomeListView1>
         );
       } else {
         var params = {"title": title, "url": url};
-        SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
+        SCRouterHelper.pathPage(SCRouterPath.webViewPath, params)?.then((value) {
+          widget.getUserInfoAction?.call();
+        });
       }
     } else {
       SCDialogUtils.instance.showMiddleDialog(
@@ -473,7 +480,7 @@ class SCHomeListView1State extends State<SCHomeListView1>
   }
 
   /// 我的房屋
-  myHouse() {
+  myHouse() async{
     String token = SCScaffoldManager.instance.user.token ?? "";
     String userId = SCScaffoldManager.instance.user.id ?? "";
     String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
@@ -483,7 +490,9 @@ class SCHomeListView1State extends State<SCHomeListView1>
     double longitude = SCScaffoldManager.instance.longitude;
     double latitude = SCScaffoldManager.instance.latitude;
     String url = "${SCConfig.getH5Url(SCH5.myHouseUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender";
-    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "我的房屋", "url" : url});
+    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "我的房屋", "url" : url})?.then((value) {
+      widget.getUserInfoAction?.call();
+    });
   }
 
   /// 切换皮肤
