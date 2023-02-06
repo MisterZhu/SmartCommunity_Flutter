@@ -86,10 +86,12 @@ class SCImproveDataPageState extends State<SCImproveDataPage> {
               userInputName: state.name!,
               birthday: state.birthday ?? '',
               gender: '$gender',
-              resultHandler: (){
-              state.name = null;
-              state.birthday = null;
-              state.gender = null;
+              resultHandler: (status){
+                if (status) {
+                  state.name = null;
+                  state.birthday = null;
+                  state.gender = null;
+                }
             });
           } else {
             SCToast.showTip('姓名不能为空');

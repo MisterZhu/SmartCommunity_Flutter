@@ -120,7 +120,7 @@ class SCLoginController extends GetxController {
     required String userInputName,
     required String birthday,
     required String gender,
-    required Function resultHandler}) {
+    required Function(bool success) resultHandler}) {
     SCLoadingUtils.show();
     SCHttpManager.instance.post(
         url: SCUrl.kPhoneCodeLoginWithNameUrl,
@@ -152,7 +152,7 @@ class SCLoginController extends GetxController {
           }
           SCScaffoldManager.instance.user = user;
           SCScaffoldManager.instance.isLogin = true;
-          resultHandler();
+          resultHandler(true);
           SCRouterHelper.pathOffAllPage(SCRouterPath.tabPath, null);
         },
         failure: (value) {
@@ -161,7 +161,7 @@ class SCLoginController extends GetxController {
             String message = value['message'];
             SCToast.showTip(message);
           }
-          resultHandler();
+          resultHandler(false);
         });
 
   }
