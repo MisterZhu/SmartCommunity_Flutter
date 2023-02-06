@@ -27,7 +27,7 @@ class SCConfig {
       case SCEnvironment.develop:
         return "https://jmdev.wisharetec.com";
       case SCEnvironment.pretest:
-        return "https://jm.wisharetec.com";
+        return "https://jmtest.wisharetec.com";
       case SCEnvironment.production:
         return "https://jm.wisharetec.com";
       default:
