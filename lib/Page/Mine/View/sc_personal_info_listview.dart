@@ -11,6 +11,7 @@ import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
 import 'package:smartcommunity/Utils/Upload/sc_upload_utils.dart';
 import 'package:smartcommunity/Utils/WeChat/sc_wechat_utils.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import '../../../Constants/sc_asset.dart';
 import '../../../Constants/sc_default_value.dart';
 import '../../../Utils/AliPay/sc_alipay_utils.dart';
@@ -74,7 +75,9 @@ class SCPersonalInfoListView extends StatelessWidget {
         title: '昵称',
         content: SCScaffoldManager.instance.user.nickName,
         cellType: SCSettingCellType.contentArrowType,
-        onTap: () {},
+        onTap: () {
+          SCRouterHelper.pathPage(SCRouterPath.nicknamePath, null);
+        },
       );
 
     } else if (index == 2) {
@@ -218,7 +221,7 @@ class SCPersonalInfoListView extends StatelessWidget {
 
   /// 选择头像
   selectHeadPicAction() {
-    SCPermissionUtils.showImagePicker(completionHandler: (result) {
+    SCPermissionUtils.showImagePicker(requestType: RequestType.image, completionHandler: (result) {
       List<String> imagePathList = result;
       String imagePath = imagePathList.first;
       if (imagePath != '' && imagePath.isNotEmpty) {

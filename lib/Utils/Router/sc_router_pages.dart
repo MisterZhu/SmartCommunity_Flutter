@@ -11,6 +11,7 @@ import 'package:smartcommunity/Page/Mine/Page/sc_add_house_page.dart';
 import 'package:smartcommunity/Page/Mine/Page/sc_logoff_page.dart';
 import 'package:smartcommunity/Page/Mine/Page/sc_personal_info_page.dart';
 import 'package:smartcommunity/Page/Mine/Page/sc_real_name_verify_page.dart';
+import 'package:smartcommunity/Page/Mine/Page/sc_set_nickname_page.dart';
 import 'package:smartcommunity/Page/Mine/Page/sc_toggle_houses_page.dart';
 import 'package:smartcommunity/Page/Tab/Page/sc_tab_page.dart';
 import 'package:smartcommunity/Page/Webview/Page/sc_webview_page.dart';
@@ -66,6 +67,9 @@ class SCRouterPages {
     GetPage(name: SCRouterPath.realNameVerifyPath, page: () => SCRealNameVerifyPage()),
     /*完善资料*/
     GetPage(name: SCRouterPath.improveDataPagePath, page: () => SCImproveDataPage()),
+    /*设置昵称*/
+    GetPage(name: SCRouterPath.nicknamePath, page: () => SCSetNicknamePage()),
+
   ];
 
   /*根据code使用路由*/
