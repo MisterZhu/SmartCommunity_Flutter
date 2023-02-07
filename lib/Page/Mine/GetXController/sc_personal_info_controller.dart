@@ -15,14 +15,16 @@ class SCPersonalInfoController extends GetxController {
   String userHeadPicUrl = SCAsset.iconMineUserDefault;
 
   /// 修改用户信息
-  changeUserInfo({required dynamic params}) {
+  changeUserInfo({required dynamic params, Function? successHandler}) {
     SCLoadingUtils.show(text: SCDefaultValue.loadingMessage);
     SCHttpManager.instance.put(
         url: SCUrl.kChangeAccountInfoUrl,
         params: params,
         success: (value) {
           SCLoadingUtils.hide();
-          getUserInfo();
+          getUserInfo(successHandler: () {
+            successHandler?.call();
+          });
         },
         failure: (value) {
           SCLoadingUtils.show(text: value['message']);

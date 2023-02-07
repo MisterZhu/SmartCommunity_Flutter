@@ -62,4 +62,7 @@ class SCRouterPath {
   /// 注销账户
   static String logoffPath = "/root/Mine/sc_logoff_page";
 
+  /// 设置昵称
+  static String nicknamePath = "/root/Mine/sc_set_nickname_page";
+
 }
