@@ -136,11 +136,15 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
   /// 获取用户信息
   getUserInfo() {
     if (SCScaffoldManager.instance.isLogin) {
-      personalInfoController.getUserInfo(updateAll: false, successHandler: (){
-        state.update();
+      personalInfoController.getUserInfo(
+        updateAll: false,
+        successHandler: (){
+          state1.updateHomeData();
+          state.update();
       });
     }
   }
+
   /// 获取首页数据
   getHomeInfo() {
     /// 获取装修数据

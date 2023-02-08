@@ -103,6 +103,11 @@ class SCHomeController1 extends GetxController {
     homeFeatureStyle1 = SCHomeFeatureStyle.featureStyle1;
     homeFeatureStyle2 = SCHomeFeatureStyle.featureStyle2;
 
+    updateHomeData();
+  }
+
+  /// 更新首页数据
+  updateHomeData() {
     String token = SCScaffoldManager.instance.user.token ?? "";
     String userId = SCScaffoldManager.instance.user.id ?? "";
     String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
@@ -120,6 +125,7 @@ class SCHomeController1 extends GetxController {
       {"iconUrl": SCAsset.iconItem1, "title": "物业缴费", "subUrl": communityPayUrl, "needHouseId": true},
       {"iconUrl": SCAsset.iconItem8, "title": "工单", "subUrl": workOrderUrl, "needHouseId": true},
     ];
+    update();
   }
 
   /// 修改bannerIndex
