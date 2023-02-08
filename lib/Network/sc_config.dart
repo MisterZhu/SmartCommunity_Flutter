@@ -25,13 +25,13 @@ class SCConfig {
   static String get BASE_H5_URL {
     switch (env) {
       case SCEnvironment.develop:
-        return "https://saasdev.wisharetec.com";
+        return "https://jmdev.wisharetec.com";
       case SCEnvironment.pretest:
-        return "https://saastest.wisharetec.com";
+        return "https://jmtest.wisharetec.com";
       case SCEnvironment.production:
-        return "https://saas.wisharetec.com";
+        return "https://jm.wisharetec.com";
       default:
-        return "https://saasdev.wisharetec.com";
+        return "https://jmdev.wisharetec.com";
     }
   }
 

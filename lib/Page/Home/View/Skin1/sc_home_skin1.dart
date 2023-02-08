@@ -97,6 +97,9 @@ class SCHomeSkin1 extends StatelessWidget {
         getUserInfoAction: () {
           getUserInfoAction?.call();
         },
+        refreshAction: () {
+          getUserInfoAction?.call();
+        },
       );
     });
   }
