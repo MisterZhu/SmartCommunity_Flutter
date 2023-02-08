@@ -34,6 +34,7 @@ class SCPersonalInfoController extends GetxController {
 
   /// 获取用户信息
   getUserInfo({Function? successHandler, bool? updateAll}) {
+    loadMyHouseData();
     SCHttpManager.instance.get(
         url: SCUrl.kFetchUserInfoUrl,
         success: (value) {
@@ -60,5 +61,26 @@ class SCPersonalInfoController extends GetxController {
           successHandler?.call();
         },
         failure: (value) {});
+  }
+
+  /// 获取房号列表，取第一个房号为默认房号
+  loadMyHouseData() {
+    SCLoadingUtils.show();
+    SCHttpManager.instance.get(
+        url: SCUrl.kMyHouseUrl,
+        success: (value) {
+          List list = value;
+          if (list.isNotEmpty) {
+            /// 存储communityId数据到SCUser
+            SCUser scUser = SCScaffoldManager.instance.getUserData();
+            scUser.communityId = list[0]['communityId'];
+            SCScaffoldManager.instance.cacheUserData(scUser.toJson());
+            /// 更新
+            update();
+          }
+        },
+        failure: (value) {
+
+        });
   }
 }

@@ -429,7 +429,7 @@ class SCHomeListView1State extends State<SCHomeListView1>
       String title = data['title'];
       String url = data['subUrl'];
       bool needHouseId = data['needHouseId'];
-      if (needHouseId && SCScaffoldManager.instance.user.housingId == null) {
+      if (needHouseId && SCScaffoldManager.instance.user.communityId == null) {
         SCDialogUtils.instance.showMiddleDialog(
           context: context,
           title: "温馨提示",
