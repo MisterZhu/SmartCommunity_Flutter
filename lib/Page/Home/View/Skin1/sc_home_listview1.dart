@@ -277,7 +277,6 @@ class SCHomeListView1State extends State<SCHomeListView1>
 
   /// banner-cell
   Widget bannerCell() {
-    print("banner===${widget.bannerList}");
     return SCHomeBanner(
       bannerBGScale: widget.bannerBGScale,
       bannerScale: widget.bannerScale,
@@ -450,30 +449,30 @@ class SCHomeListView1State extends State<SCHomeListView1>
       String title = data['title'];
       String url = data['subUrl'];
       bool needHouseId = data['needHouseId'];
-      // if (needHouseId && SCScaffoldManager.instance.user.housingId == null) {
-      //   SCDialogUtils.instance.showMiddleDialog(
-      //     context: context,
-      //     title: "温馨提示",
-      //     content: SCDefaultValue.needHouseId,
-      //     customWidgetButtons: [
-      //       defaultCustomButton(context,
-      //           text: '取消',
-      //           textColor: SCColors.color_1B1C33,
-      //           fontWeight: FontWeight.w400),
-      //       defaultCustomButton(context,
-      //           text: '确定',
-      //           textColor: SCColors.color_FF6C00,
-      //           fontWeight: FontWeight.w400, onTap: () async {
-      //             myHouse();
-      //           }),
-      //     ],
-      //   );
-      // } else {
+      if (needHouseId && SCScaffoldManager.instance.user.communityId == null) {
+        SCDialogUtils.instance.showMiddleDialog(
+          context: context,
+          title: "温馨提示",
+          content: SCDefaultValue.needHouseId,
+          customWidgetButtons: [
+            defaultCustomButton(context,
+                text: '取消',
+                textColor: SCColors.color_1B1C33,
+                fontWeight: FontWeight.w400),
+            defaultCustomButton(context,
+                text: '确定',
+                textColor: SCColors.color_FF6C00,
+                fontWeight: FontWeight.w400, onTap: () async {
+                  myHouse();
+                }),
+          ],
+        );
+      } else {
         var params = {"title": title, "url": url};
         SCRouterHelper.pathPage(SCRouterPath.webViewPath, params)?.then((value) {
           widget.getUserInfoAction?.call();
         });
-      // }
+      }
     } else {
       SCDialogUtils.instance.showMiddleDialog(
         context: context,

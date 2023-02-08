@@ -8,6 +8,7 @@ import 'package:smartcommunity/Page/Mine/Model/sc_user_info_model.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import '../../../Constants/sc_asset.dart';
 import '../../../Skin/Model/sc_user.dart';
+import '../Model/sc_house_list_model.dart';
 
 /// 个人资料controller
 
@@ -51,14 +52,38 @@ class SCPersonalInfoController extends GetxController {
           scUser.birthday = userInfoModel.birthday;
           SCScaffoldManager.instance.cacheUserData(scUser.toJson());
 
-          /// 更新
-          update();
           if (updateStatus) {
             SCMineController mineController = Get.find<SCMineController>();
             mineController.update();
           }
-          successHandler?.call();
+          getCommunityId(success: () {
+            successHandler?.call();
+          });
+          update();
         },
         failure: (value) {});
+  }
+
+  /// 获取房号列表，取第一个审核通过的房号为默认房号
+  getCommunityId({Function? success}) {
+    SCLoadingUtils.show();
+    SCHttpManager.instance.get(
+        url: SCUrl.kMyHouseUrl,
+        success: (value) {
+          List list = List<SCHouseListModel>.from(value.map((e) => SCHouseListModel.fromJson(e)).toList());
+          for (int i = 0; i < list.length; i++ ) {
+            SCHouseListModel model = list[i];
+            if (model.examineStatus == 1) {//examineStatus审核状态, 0 审核中, 1 审核通过, 2 审核拒绝
+              /// 存储communityId数据到SCUser
+              SCUser scUser = SCScaffoldManager.instance.getUserData();
+              scUser.communityId = model.communityId;
+              SCScaffoldManager.instance.cacheUserData(scUser.toJson());
+            }
+          }
+          success?.call();
+        },
+        failure: (value) {
+
+        });
   }
 }
