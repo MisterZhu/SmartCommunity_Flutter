@@ -65,4 +65,7 @@ class SCRouterPath {
   /// 设置昵称
   static String nicknamePath = "/root/Mine/sc_set_nickname_page";
 
+  /// 抓包设置
+  static String proxyPage = "/lib/Page/Mine/Home/Page/sc_proxy_page";
+
 }

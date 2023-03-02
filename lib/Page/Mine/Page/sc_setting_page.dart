@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:smartcommunity/Page/Mine/View/Setting/sc_setting_listview.dart';
 import 'package:smartcommunity/Skin/View/sc_custom_scaffold.dart';
 import 'package:sc_uikit/sc_uikit.dart';
+import '../../../Constants/sc_enum.dart';
+import '../../../Network/sc_config.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
 import '../../../Utils/Router/sc_router_path.dart';
 import '../GetXController/sc_setting_controller.dart';
@@ -21,7 +24,12 @@ class SCSettingState extends State<SCSettingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SCCustomScaffold(title: "设置", centerTitle: true, elevation: 0, body: body());
+    return SCCustomScaffold(
+        title: "设置",
+        centerTitle: true,
+        elevation: 0,
+        actions: [proxyItem()],
+        body: body());
   }
 
   /// body
@@ -61,6 +69,29 @@ class SCSettingState extends State<SCSettingPage> {
                     fontSize: SCFonts.f16)))
       ],
     );
+  }
+
+  /// 抓包
+  Widget proxyItem() {
+    if (SCConfig.env != SCEnvironment.production) {
+      return CupertinoButton(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          minSize: 60.0,
+          child: const Text(
+            '抓包',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: SCFonts.f16,
+              fontWeight: FontWeight.w500,
+              color: SCColors.color_4285F4,
+            ),
+          ),
+          onPressed: () {
+            SCRouterHelper.pathPage(SCRouterPath.proxyPage, null);
+          });
+    } else {
+      return const SizedBox();
+    }
   }
 
 }
