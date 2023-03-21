@@ -61,7 +61,7 @@ class SCHomeSkin2 extends StatelessWidget {
               SCRouterHelper.pathPage(SCRouterPath.scanPath, null);
             },
             messageAction: () {
-              SCLoadingUtils.developing();
+              SCRouterHelper.pathPage(SCRouterPath.messagePage, null);
             },
           );
         }));

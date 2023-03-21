@@ -18,6 +18,7 @@ import 'package:smartcommunity/Page/Webview/Page/sc_webview_page.dart';
 
 import '../../Page/Login/Page/sc_select_city_page.dart';
 import '../../Page/Login/Page/sc_select_community_page.dart';
+import '../../Page/Message/Page/sc_message_page.dart';
 import '../../Page/Mine/Page/sc_apply_logoff_page.dart';
 import '../../Page/Mine/Page/sc_proxy_page.dart';
 import '../../Page/Mine/Page/sc_setting_page.dart';
@@ -72,6 +73,8 @@ class SCRouterPages {
     GetPage(name: SCRouterPath.nicknamePath, page: () => SCSetNicknamePage()),
     /*抓包设置*/
     GetPage(name: SCRouterPath.proxyPage, page: () => SCProxyPage()),
+    /*消息*/
+    GetPage(name: SCRouterPath.messagePage, page: () => SCMessagePage()),
   ];
 
   /*根据code使用路由*/

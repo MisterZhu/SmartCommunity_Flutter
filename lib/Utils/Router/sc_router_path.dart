@@ -68,4 +68,10 @@ class SCRouterPath {
   /// 抓包设置
   static String proxyPage = "/lib/Page/Mine/Home/Page/sc_proxy_page";
 
+
+  ///*************************** 消息 ******************************/
+
+  /// 消息
+  static String messagePage = "/lib/Page/Message/Page/sc_message_page";
+
 }

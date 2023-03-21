@@ -7,6 +7,9 @@ class SCConfig {
   /// 环境
   static SCEnvironment env = SCEnvironment.develop;
 
+  /// iOS是否支持平方SC字体
+  static bool isSupportPFSCForIOS = true;
+
   /// base url
   static String get BASE_URL {
     switch (env) {
@@ -46,6 +49,16 @@ class SCConfig {
       return url;
     } else {
       return BASE_H5_URL + url;
+    }
+  }
+
+
+  /// iOS平方SC配置
+  static List<String> getPFSCForIOS() {
+    if (isSupportPFSCForIOS) {
+      return ["PingFang SC"];
+    } else {
+      return [];
     }
   }
 

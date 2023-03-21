@@ -338,6 +338,18 @@ class SCAsset {
   static const String iconDeveloping = 'images/mine/ic_developing.png';
 
 
-/************* 我的-切换房屋 *************/
+  /************* 我的-切换房屋 *************/
+
+  /// ****************  消息 ****************/
+
+  /// 消息-类型icon
+  static const String iconMessageType = "images/message/icon_message_type.png";
+
+  /// 消息-更多按钮icon
+  static const String iconMessageMore = "images/message/icon_message_more.png";
+
+  /// 内容图片-默认占位图icon
+  static const String iconMessageContentDefault = "images/message/icon_message_content_default.png";
+
 
 }
