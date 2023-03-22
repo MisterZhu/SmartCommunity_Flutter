@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_asset.dart';
-import 'package:smartcommunity/Page/Message/View/sc_message_card_cell.dart';
 
 /// 消息listview
 class SCMessageListView extends StatelessWidget {
@@ -21,7 +21,7 @@ class SCMessageListView extends StatelessWidget {
             contentIcon: SCAsset.iconMessageContentDefault,
             money: 300.00,
             bottomContentList: [{'title': '订单编号', 'content': '12345678901111'}, {'title': '备注', 'content': '已关闭'}],
-            detailTapAction: (index) {
+            detailTapAction: () {
 
             },
           );

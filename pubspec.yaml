@@ -100,7 +100,7 @@ dependencies:
   sc_uikit:
     git:
       url: http://10.100.10.22/jizuo-flutter/flutter_library/sc_uikit.git
-      ref: '0.0.1'
+      ref: '0.0.3'
 
 dev_dependencies:
   flutter_test:
