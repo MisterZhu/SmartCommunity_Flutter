@@ -8,7 +8,7 @@ import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_enum.dart';
 import 'package:smartcommunity/Skin/View/sc_custom_scaffold.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_path.dart';
-import 'package:smartcommunity/Utils/sc_location_utils.dart';
+import 'package:smartcommunity/Utils/Permission/sc_location_utils.dart';
 
 import '../../../Constants/sc_asset.dart';
 import '../../../Skin/Tools/sc_scaffold_manager.dart';

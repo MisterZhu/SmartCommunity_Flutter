@@ -1,11 +1,11 @@
 
 class SCH5 {
   /// 工单h5
-  static const String workOrderUrl = "https://jmdev.wisharetec.com/h5Manage-order/#/userOrder/report";
+  static const String workOrderUrl = "/h5Manage-order/#/userOrder/report";
   /// 积分h5
   static const String integralUrl = "https://saasprod.4001113900.com:10020/h5new/newUser/index.html#/home/integral";
   /// 物业缴费
-  static const String communityPayUrl = "https://jmdev.wisharetec.com/h5Open/#/propertyPay/index";
+  static const String communityPayUrl = "/h5Open/#/propertyPay/index";
   /// 预缴账户
   static const String prepayUrl = "https://saasprod.4001113900.com:10020/h5new/newUser/index.html#/home/prepayAccount?defCommunityId=fe38ad0a-beaa-11eb-bdca-005056b13afd&appVersion=3.11.3&token=9f3f3eb4-5e39-40df-baeb-faaf2883fc34&defRoomId=2759511&defOrgId=2678533";
   /// 项目入驻
@@ -32,8 +32,8 @@ class SCH5 {
   static const String jxRentingHomeUrl = "https://hxzfczt.wisharetec.com/h5new/#/publishRentalHouse/tenant/index";
 
   /// 我的账单
-  static const String myBillUrl = "https://jmdev.wisharetec.com/h5Open/#/userBill/index";
+  static const String myBillUrl = "/h5Open/#/userBill/index";
 
   /// 我的房屋
-  static const String myHouseUrl = "https://jmdev.wisharetec.com/h5Open/#/userHouse/myRoomNo";
+  static const String myHouseUrl = "/h5Open/#/userHouse/myRoomNo";
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sc_uikit/sc_uikit.dart';
+import 'package:smartcommunity/Constants/sc_key.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
 import '../../../Constants/sc_asset.dart';
@@ -198,6 +199,9 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
 
   /*底部tabbar点击*/
   void tabbarTap(int index) {
+    if (index == 0) {
+      reloadUserInfo();
+    }
     updateStatusBar(index);
     if (currentIndex != index) {
       if (!SCScaffoldManager.instance.isLogin) {
@@ -223,4 +227,11 @@ class SCTabState extends State<SCTabPage> with TickerProviderStateMixin{
       SCUtils().changeStatusBarStyle(style: SystemUiOverlayStyle.dark);
     }
   }
+
+  /// 刷新用户信息
+  reloadUserInfo() {
+    var params = {"key" : SCKey.kReloadUserInfo};
+    SCScaffoldManager.instance.eventBus.fire(params);
+  }
+
 }

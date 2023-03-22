@@ -10,6 +10,8 @@
 		011F200328D45CEB00A4502F /* launch_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 011F200128D45CEB00A4502F /* launch_bottom.png */; };
 		011F200428D45CEC00A4502F /* launch_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 011F200228D45CEB00A4502F /* launch_top.png */; };
 		01939418286BFC110045B72C /* SwiftHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01939417286BFC110045B72C /* SwiftHeader.swift */; };
+		01BC6CCF29710BDB0003074D /* SCCurrentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BC6CCD29710BDA0003074D /* SCCurrentViewController.m */; };
+		01BC6CD229710C800003074D /* SCWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BC6CD129710C800003074D /* SCWebViewController.m */; };
 		0842081B290B877B00080EFE /* SCFlutterNativePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0842081A290B877B00080EFE /* SCFlutterNativePlugin.m */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
@@ -39,6 +41,10 @@
 		011F200228D45CEB00A4502F /* launch_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_top.png; sourceTree = "<group>"; };
 		01939416286BFC110045B72C /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		01939417286BFC110045B72C /* SwiftHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftHeader.swift; sourceTree = "<group>"; };
+		01BC6CCD29710BDA0003074D /* SCCurrentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCCurrentViewController.m; sourceTree = "<group>"; };
+		01BC6CCE29710BDA0003074D /* SCCurrentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCurrentViewController.h; sourceTree = "<group>"; };
+		01BC6CD029710C800003074D /* SCWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCWebViewController.h; sourceTree = "<group>"; };
+		01BC6CD129710C800003074D /* SCWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCWebViewController.m; sourceTree = "<group>"; };
 		01C2BC442901225900A2888C /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		08420819290B877B00080EFE /* SCFlutterNativePlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCFlutterNativePlugin.h; sourceTree = "<group>"; };
 		0842081A290B877B00080EFE /* SCFlutterNativePlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCFlutterNativePlugin.m; sourceTree = "<group>"; };
@@ -132,6 +138,10 @@
 				7AFFD8EE1D35381100E5BB4D /* AppDelegate.m */,
 				08420819290B877B00080EFE /* SCFlutterNativePlugin.h */,
 				0842081A290B877B00080EFE /* SCFlutterNativePlugin.m */,
+				01BC6CCE29710BDA0003074D /* SCCurrentViewController.h */,
+				01BC6CCD29710BDA0003074D /* SCCurrentViewController.m */,
+				01BC6CD029710C800003074D /* SCWebViewController.h */,
+				01BC6CD129710C800003074D /* SCWebViewController.m */,
 				01939417286BFC110045B72C /* SwiftHeader.swift */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
@@ -321,7 +331,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				978B8F6F1D3862AE00F588F7 /* AppDelegate.m in Sources */,
+				01BC6CD229710C800003074D /* SCWebViewController.m in Sources */,
 				97C146F31CF9000F007C117D /* main.m in Sources */,
+				01BC6CCF29710BDB0003074D /* SCCurrentViewController.m in Sources */,
 				01939418286BFC110045B72C /* SwiftHeader.swift in Sources */,
 				0842081B290B877B00080EFE /* SCFlutterNativePlugin.m in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,

@@ -22,4 +22,6 @@ class SCKey {
   static const String kVisitorDecorationModel = 'kVisitorDecorationModel';
   /// 抓包key
   static const String kProxyMap = "kProxyMap";
+  /// 刷新用户信息key
+  static const String kReloadUserInfo = "kReloadUserInfo";
 }

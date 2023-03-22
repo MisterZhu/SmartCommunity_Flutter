@@ -56,7 +56,7 @@ class SCMineListView extends StatelessWidget {
   Widget body() {
     scrollNotify();
     return ListView.separated(
-        controller: scrollController,
+        // controller: scrollController,
         padding: EdgeInsets.zero,
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
@@ -89,7 +89,7 @@ class SCMineListView extends StatelessWidget {
       // 服务
       return serviceCell();
     } else if (type == SCTypeDefine.SC_MINE_TYPE_DEVELOPING) {
-      // 服务
+      // 占位图
       return developingCell();
     } else {
       // 测试
@@ -216,6 +216,7 @@ class SCMineListView extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
         const SizedBox(height: 40.0,),
         Image.asset(

@@ -1,7 +1,10 @@
 /// 首页第一套皮肤-listview
+import 'dart:ffi';
+
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:pull_to_refresh_notification/pull_to_refresh_notification.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_asset.dart';
@@ -46,7 +49,10 @@ class SCHomeListView1 extends StatefulWidget {
       this.bannerBGScale = 750.0 / 544.0,
       this.bannerScale = 686.0 / 280.0,
       this.bannerCurrentIndex = 0,
-      this.bannerBackgroundImageUrl = SCAsset.homeBannerBG1})
+      this.bannerBackgroundImageUrl = SCAsset.homeBannerBG1,
+      this.getUserInfoAction,
+      this.refreshAction
+      })
       : super(key: key);
 
   /// listView数据源
@@ -54,6 +60,9 @@ class SCHomeListView1 extends StatefulWidget {
 
   /// 滑动回调
   Function(double offset)? scrollFunction;
+
+  /// 刷新回调
+  Function? refreshAction;
 
   /// banner背景大图比例
   final double bannerBGScale;
@@ -76,6 +85,9 @@ class SCHomeListView1 extends StatefulWidget {
   /// tab数据源
   final List tabTitleList;
 
+  /// 获取用户信息
+  final Function? getUserInfoAction;
+
   @override
   SCHomeListView1State createState() => SCHomeListView1State();
 }
@@ -85,6 +97,8 @@ class SCHomeListView1State extends State<SCHomeListView1>
   SCHomeController1 state = Get.find<SCHomeController1>();
 
   SCHomeNav1Controller nav1State = Get.find<SCHomeNav1Controller>();
+
+  RefreshController refreshController = RefreshController(initialRefresh: false);
 
   /// tabController
   late final TabController tabController;
@@ -123,6 +137,7 @@ class SCHomeListView1State extends State<SCHomeListView1>
     }
     tabController.dispose();
     scrollController.dispose();
+    refreshController.dispose();
     super.dispose();
   }
 
@@ -197,10 +212,13 @@ class SCHomeListView1State extends State<SCHomeListView1>
 
   /// listView
   Widget listView() {
-    return ListView.separated(
+    return SmartRefresher(controller: refreshController,onRefresh: onRefresh, header: const SCCustomHeader(
+      style: SCCustomHeaderStyle.noNavigation,
+    ), child: ListView.separated(
         padding: EdgeInsets.zero,
         shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
+        controller: scrollController,
+        // physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
           int type = widget.dataList[index]['type'];
           return getCell(type: type);
@@ -212,7 +230,7 @@ class SCHomeListView1State extends State<SCHomeListView1>
             return lineWidget();
           }
         },
-        itemCount: widget.dataList.length);
+        itemCount: widget.dataList.length));
   }
 
   /// 获取cell
@@ -398,6 +416,8 @@ class SCHomeListView1State extends State<SCHomeListView1>
   /// 下拉刷新
   Future<bool> onRefresh() async {
     return await Future.delayed(const Duration(milliseconds: 500), () {
+      refreshController.refreshCompleted();
+      widget?.refreshAction?.call();
       // if (tabController.index == 0) {
       //   SCHomeNewsRespority respority = repositoryList.first;
       //   return respority.refresh(false);
@@ -449,7 +469,9 @@ class SCHomeListView1State extends State<SCHomeListView1>
         );
       } else {
         var params = {"title": title, "url": url};
-        SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
+        SCRouterHelper.pathPage(SCRouterPath.webViewPath, params)?.then((value) {
+          widget.getUserInfoAction?.call();
+        });
       }
     } else {
       SCDialogUtils.instance.showMiddleDialog(
@@ -473,7 +495,7 @@ class SCHomeListView1State extends State<SCHomeListView1>
   }
 
   /// 我的房屋
-  myHouse() {
+  myHouse() async{
     String token = SCScaffoldManager.instance.user.token ?? "";
     String userId = SCScaffoldManager.instance.user.id ?? "";
     String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
@@ -483,7 +505,9 @@ class SCHomeListView1State extends State<SCHomeListView1>
     double longitude = SCScaffoldManager.instance.longitude;
     double latitude = SCScaffoldManager.instance.latitude;
     String url = "${SCConfig.getH5Url(SCH5.myHouseUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender";
-    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "我的房屋", "url" : url});
+    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "我的房屋", "url" : url})?.then((value) {
+      widget.getUserInfoAction?.call();
+    });
   }
 
   /// 切换皮肤

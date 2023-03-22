@@ -23,7 +23,7 @@ class SCMinePage extends StatefulWidget {
   SCMineState createState() => SCMineState();
 }
 
-class SCMineState extends State<SCMinePage> with AutomaticKeepAliveClientMixin{
+class SCMineState extends State<SCMinePage> with AutomaticKeepAliveClientMixin {
   SCMineController state = Get.put(SCMineController());
 
   String backgroundImageUrl = SCAsset.iconMineBackground;
@@ -37,12 +37,11 @@ class SCMineState extends State<SCMinePage> with AutomaticKeepAliveClientMixin{
   initState() {
     super.initState();
     if (SCScaffoldManager.instance.isLogin) {
-
-    //} else {
-      SCVisitorDecorationModel visitorDecorationModel = SCScaffoldManager
-          .instance.visitorDecorationModel;
-      List<PageDecorationList>? pageList = visitorDecorationModel
-          .pageDecorationList;
+      //} else {
+      SCVisitorDecorationModel visitorDecorationModel =
+          SCScaffoldManager.instance.visitorDecorationModel;
+      List<PageDecorationList>? pageList =
+          visitorDecorationModel.pageDecorationList;
       if (pageList != null) {
         for (PageDecorationList page in pageList) {
           if (page.name == '我的') {
@@ -66,12 +65,32 @@ class SCMineState extends State<SCMinePage> with AutomaticKeepAliveClientMixin{
 
   /// body
   Widget body() {
+    List dataList = [
+      SCTypeDefine.SC_MINE_TYPE_HEADER,
+      // SCTypeDefine.SC_MINE_TYPE_CHANGERHOUSE,
+      // SCTypeDefine.SC_MINE_TYPE_SCORE,
+      // SCTypeDefine.SC_MINE_TYPE_WALLET,
+      // SCTypeDefine.SC_MINE_TYPE_PROPERTY,
+      //SCTypeDefine.SC_MINE_TYPE_SERVICE,
+      SCTypeDefine.SC_MINE_TYPE_DEVELOPING,
+      10001,
+    ];
     return Scaffold(
       body: Container(
         color: SCColors.color_F5F5F5,
         width: double.infinity,
         height: double.infinity,
-        child: stack(),
+        child: GetBuilder<SCMineController>(builder: (state) {
+          return SCMineListView(
+            backgroundImageUrl: backgroundImageUrl,
+            user: SCScaffoldManager.instance.user,
+            propertCurrentIndex: state.propertyCurrentIndex,
+            dataList: dataList,
+            scrollFunction: (double offset) {
+              state.changeNavigationState(offset: offset);
+            },
+          );
+        }),
       ),
     );
   }
@@ -98,17 +117,22 @@ class SCMineState extends State<SCMinePage> with AutomaticKeepAliveClientMixin{
       SCTypeDefine.SC_MINE_TYPE_DEVELOPING,
       10001,
     ];
-    return GetBuilder<SCMineController>(builder: (state){
-      return SCMineListView(
-        backgroundImageUrl: backgroundImageUrl,
-        user: SCScaffoldManager.instance.user,
-        propertCurrentIndex: state.propertyCurrentIndex,
-        dataList: dataList,
-        scrollFunction: (double offset) {
-          state.changeNavigationState(offset: offset);
-        },
-      );
-    });
+    return Positioned(
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        child: GetBuilder<SCMineController>(builder: (state) {
+          return SCMineListView(
+            backgroundImageUrl: backgroundImageUrl,
+            user: SCScaffoldManager.instance.user,
+            propertCurrentIndex: state.propertyCurrentIndex,
+            dataList: dataList,
+            scrollFunction: (double offset) {
+              state.changeNavigationState(offset: offset);
+            },
+          );
+        }));
   }
 
   /// navigation
@@ -120,7 +144,7 @@ class SCMineState extends State<SCMinePage> with AutomaticKeepAliveClientMixin{
         isSticky: state.navigationSticky,
         itemColor: state.itemColor,
         settingAction: () {
-            SCRouterHelper.pathPage(SCRouterPath.settingPath, null);
+          SCRouterHelper.pathPage(SCRouterPath.settingPath, null);
         },
       );
     });

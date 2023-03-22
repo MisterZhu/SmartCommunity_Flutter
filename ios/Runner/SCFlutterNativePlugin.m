@@ -7,6 +7,17 @@
 
 #import "SCFlutterNativePlugin.h"
 
+@interface SCFlutterNativePlugin ()
+
+@property (nonatomic, strong) NSMutableArray *messageArray;
+
+/// 单项管道，有可能使用多次
+@property (nonatomic, copy) FlutterEventSink eventSink;
+
+- (void)postData:(NSDictionary *)params;
+
+@end
+
 
 @implementation SCFlutterNativePlugin
 

@@ -1,8 +1,11 @@
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sc_uikit/sc_uikit.dart';
+import 'package:smartcommunity/Constants/sc_key.dart';
 import 'package:smartcommunity/Page/Home/GetXController/sc_home_controller.dart';
 import 'package:smartcommunity/Page/Home/GetXController/sc_home_controller1.dart';
 import 'package:smartcommunity/Page/Home/GetXController/sc_home_controller2.dart';
@@ -15,7 +18,8 @@ import 'package:smartcommunity/Skin/Model/sc_user.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Skin/Tools/sc_skin_config.dart';
 import 'package:smartcommunity/Utils/Date/sc_date_utils.dart';
-import 'package:smartcommunity/Utils/sc_location_utils.dart';
+import 'package:smartcommunity/Utils/Permission/sc_location_utils.dart';
+import 'package:smartcommunity/Utils/Permission/sc_permission_utils.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
 import '../../Service/GetXController/sc_service_controller.dart';
@@ -37,6 +41,8 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
   SCServiceController service = Get.put(SCServiceController());
   SCPersonalInfoController personalInfoController = Get.put(SCPersonalInfoController());
   SCHomeNav1Controller nav1State = Get.put(SCHomeNav1Controller());
+  /// 通知
+  late StreamSubscription notification;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +55,7 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
   @override
   dispose() {
     super.dispose();
+    notification.cancel();
   }
 
   @override
@@ -65,6 +72,7 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
     getHomeInfo();
     /// 定位
     location();
+    addNotification();
   }
 
   /// body
@@ -106,7 +114,11 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
       width: double.infinity,
       height: double.infinity,
       child: GetBuilder<SCHomeController1>(builder: (state) {
-        return SCHomeSkin1();
+        return SCHomeSkin1(
+          getUserInfoAction: () {
+            getUserInfo();
+          },
+        );
       })
     );
   }
@@ -156,16 +168,28 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
 
   /// 定位
   location() {
-    SCLocationUtils.locationAll((result, status) {
+    SCPermissionUtils.startLocationWithPrivacyAlert(completionHandler: (var result, SCLocationModel? model){
+      int status = result['status'];
       if (status == 1) {
-        double longitude = result['longitude'];
-        double latitude = result['latitude'];
+        var data = result['data'];
+        double longitude = data['longitude'];
+        double latitude = data['latitude'];
+        String city = data['city'];
         SCScaffoldManager.instance.longitude = longitude;
         SCScaffoldManager.instance.latitude = latitude;
-        if (result['data'] is SCLocationModel) {
-          SCLocationModel model = result['data'];
-          SCScaffoldManager.instance.city = model.addressComponent?.city ?? '';
-        }
+        SCScaffoldManager.instance.city = city;
+      } else {
+
+      }
+    });
+  }
+
+  /// 通知
+  addNotification() {
+    notification = SCScaffoldManager.instance.eventBus.on().listen((event) {
+      String key = event['key'];
+      if (key == SCKey.kReloadUserInfo) {
+        getUserInfo();
       }
     });
   }
