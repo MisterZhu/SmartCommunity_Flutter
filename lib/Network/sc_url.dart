@@ -75,4 +75,9 @@ class SCUrl {
 
   /// 获取用户信息
   static const String kFetchUserInfoUrl = "/api/user/residentInfo";
+
+  /************************* 消息 *************************/
+  /// 消息列表
+  static const String kMessageListUrl = "/api/msg/message/page";
+
 }

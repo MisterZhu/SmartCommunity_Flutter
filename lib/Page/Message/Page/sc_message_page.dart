@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import '../../../../Skin/View/sc_custom_scaffold.dart';
+import '../../../Skin/Tools/sc_scaffold_manager.dart';
+import '../Controller/sc_message_controller.dart';
 import '../View/sc_message_listview.dart';
 
 /// 消息page
@@ -13,6 +15,28 @@ class SCMessagePage extends StatefulWidget {
 }
 
 class SCMessagePageState extends State<SCMessagePage> {
+
+  /// SCMessageController
+  late SCMessageController controller;
+
+  /// SCMessageController - tag
+  String controllerTag = '';
+
+  @override
+  initState() {
+    super.initState();
+    controllerTag = SCScaffoldManager.instance.getXControllerTag((SCMessagePage).toString());
+    controller = Get.put(SCMessageController(), tag: controllerTag);
+    controller.loadData(isMore: false);
+  }
+
+  @override
+  dispose() {
+    SCScaffoldManager.instance.deleteGetXControllerTag((SCMessagePage).toString(), controllerTag);
+    controller.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +54,12 @@ class SCMessagePageState extends State<SCMessagePage> {
       width: double.infinity,
       height: double.infinity,
       color: SCColors.color_F2F3F5,
-      child: SCMessageListView(),
+      child: GetBuilder<SCMessageController>(
+          tag: controllerTag,
+          init: controller,
+          builder: (state) {
+            return SCMessageListView(state: state);
+          }),
     );
   }
 }
