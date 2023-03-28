@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_asset.dart';
-import 'package:smartcommunity/Page/Message/View/sc_message_card_cell.dart';
 import '../Controller/sc_message_controller.dart';
 import '../Model/sc_message_model.dart';
 

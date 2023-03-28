@@ -236,7 +236,7 @@ packages:
       name: flutter_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.5"
+    version: "2.1.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -665,7 +665,7 @@ packages:
     description:
       path: "."
       ref: "0.0.1"
-      resolved-ref: "772361f4c9b1b8be5a929acc5ba1b9a1734c8aa7"
+      resolved-ref: dc892e42ca590e35ccb6f02750714c7f1d107719
       url: "http://10.100.10.22/jizuo-flutter/flutter_library/sc_tools.git"
     source: git
     version: "0.0.1"
@@ -673,8 +673,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.1"
-      resolved-ref: a11e92430f277d578bd7baba7c2b1310411ab736
+      ref: "0.0.3"
+      resolved-ref: "51024926e22f139a48e427cca5ae8daeac6bd386"
       url: "http://10.100.10.22/jizuo-flutter/flutter_library/sc_uikit.git"
     source: git
     version: "0.0.1"

@@ -136,18 +136,20 @@ class SCHttpManager {
   /// 通用的POST请求
   Future post(
       {required String url,
-      dynamic params,
-      Map<String, dynamic>? headers,
-      Function(dynamic value)? success,
-      Function(dynamic value)? failure}) async {
+        dynamic params,
+        bool? isQuery,
+        Map<String, dynamic>? headers,
+        Function(dynamic value)? success,
+        Function(dynamic value)? failure}) async {
     Options options = Options(headers: headers);
     late Response response;
     late Object exception;
     bool status = false;
+    bool query = isQuery ?? false;
 
     try {
       response = await _dio!.post(url,
-          queryParameters: params is Map<String, dynamic> ? params : {},
+          queryParameters: query ? params : {},
           data: params,
           options: headers == null ? null : options);
       status = true;
@@ -280,7 +282,6 @@ doResponse(Response response) {
 
 /// 处理dio请求异常
 doError(e) {
-  print('报错数据:$e');
   SCLoadingUtils.hide();
 
   /// 错误码
@@ -301,7 +302,17 @@ doError(e) {
         case 201:
           {}
           break;
-
+        case 300:
+          {
+            if (error.response?.data is Map) {
+              var errorData = error.response?.data;
+              message = errorData['msg'] ?? SCDefaultValue.errorMessage;
+            } else {
+              message = error.response?.data.toString() ??
+                  SCDefaultValue.errorMessage;
+            }
+          }
+          break;
         case 400:
           {
             if (error.response?.data is Map) {
@@ -322,14 +333,53 @@ doError(e) {
           break;
 
         case 403:
-          {}
+          {
+            if (error.response?.data is Map) {
+              var errorData = error.response?.data;
+              message = errorData['msg'] ?? SCDefaultValue.errorMessage;
+            } else {
+              message = error.response?.data.toString() ??
+                  SCDefaultValue.errorMessage;
+            }
+          }
           break;
 
         case 404:
-          {}
+          {
+            if (error.response?.data is Map) {
+              var errorData = error.response?.data;
+              message = errorData['msg'] ?? SCDefaultValue.errorMessage;
+            } else {
+              message = error.response?.data.toString() ??
+                  SCDefaultValue.errorMessage;
+            }
+          }
+          break;
+
+        case 405:
+          {
+            if (error.response?.data is Map) {
+              var errorData = error.response?.data;
+              message = errorData['msg'] ?? SCDefaultValue.errorMessage;
+            } else {
+              message = error.response?.data.toString() ??
+                  SCDefaultValue.errorMessage;
+            }
+          }
           break;
 
         case 500:
+          {
+            if (error.response?.data is Map) {
+              var errorData = error.response?.data;
+              message = errorData['msg'] ?? SCDefaultValue.errorMessage;
+            } else {
+              message = error.response?.data.toString() ??
+                  SCDefaultValue.errorMessage;
+            }
+          }
+          break;
+        case 503:
           {
             if (error.response?.data is Map) {
               var errorData = error.response?.data;

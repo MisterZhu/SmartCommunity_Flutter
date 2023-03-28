@@ -14,7 +14,7 @@ class SCHexColor extends Color {
   static int _getStringColor(String hexColor) {
     hexColor = hexColor.toUpperCase().replaceAll("#", "");
     if (hexColor.length == 6) {
-      hexColor = "FF" + hexColor;
+      hexColor = "FF$hexColor";
     }
     return int.parse(hexColor, radix: 16);
   }
@@ -27,7 +27,7 @@ class SCHexColor extends Color {
       /// 0xFFFFFFFF
       /// 将十进制转换成为16进制 返回字符串但是没有0x开头
       String temp = color.value.toRadixString(16);
-      color = "#" + temp.substring(2, 8);
+      color = "#${temp.substring(2, 8)}";
     }
     return color.toString();
   }

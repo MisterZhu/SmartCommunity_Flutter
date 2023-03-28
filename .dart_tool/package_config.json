@@ -201,7 +201,7 @@
     },
     {
       "name": "flutter_picker",
-      "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/flutter_picker-2.0.5",
+      "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/hosted/pub.dartlang.org/flutter_picker-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -573,13 +573,13 @@
     },
     {
       "name": "sc_tools",
-      "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/git/sc_tools-772361f4c9b1b8be5a929acc5ba1b9a1734c8aa7/",
+      "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/git/sc_tools-dc892e42ca590e35ccb6f02750714c7f1d107719/",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "sc_uikit",
-      "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/git/sc_uikit-a11e92430f277d578bd7baba7c2b1310411ab736/",
+      "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/git/sc_uikit-51024926e22f139a48e427cca5ae8daeac6bd386/",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -812,7 +812,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-03-22T01:32:23.068493Z",
+  "generated": "2023-03-28T05:58:19.657356Z",
   "generator": "pub",
   "generatorVersion": "2.17.1"
 }

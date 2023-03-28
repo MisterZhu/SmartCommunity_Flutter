@@ -123,7 +123,7 @@ class SCLoginListView extends StatelessWidget {
             return;
           }
 
-          if (SCUtils().checkPhone(phone: state.phone) == false) {
+          if (state.phone.length != 11) {
             SCToast.showTipWithGravity(msg: '请输入正确的手机号', gravity: ToastGravity.BOTTOM);
             return;
           }
