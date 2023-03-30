@@ -70,8 +70,8 @@ class SCCouponPageState extends State<SCCouponPage> with SingleTickerProviderSta
                 controller: tabController,
                 children: [
                   SCCouponView(state: controller, status: 0,),
-                  SCCouponView(state: controller, status: 3,),
-                  SCCouponView(state: controller, status: 4,),
+                  SCCouponView(state: controller, status: 1,),
+                  SCCouponView(state: controller, status: 2,),
                 ])
             ),
           ],

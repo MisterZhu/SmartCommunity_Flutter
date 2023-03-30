@@ -6,7 +6,7 @@ import '../../../Constants/sc_asset.dart';
 /// 优惠券cell
 
 class SCCouponCell extends StatelessWidget {
-  /// 状态，0显示规则，1显示获取按钮， 2显示已领取，3显示已使用，4显示已失效
+  /// 状态，0显示规则，1显示已使用，2显示已失效，3显示获取按钮，4显示已领取
   final int status;
 
   /// 名称
@@ -48,7 +48,7 @@ class SCCouponCell extends StatelessWidget {
         width: double.infinity,
         height: 70.0,
         decoration: BoxDecoration(
-            color: status > 2 ? SCColors.color_EDEDF0 : SCColors.color_FFFFFF,
+            color: (status == 1 || status == 2) ? SCColors.color_EDEDF0 : SCColors.color_FFFFFF,
             borderRadius: BorderRadius.circular(8.0)),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -149,14 +149,14 @@ class SCCouponCell extends StatelessWidget {
             text: '¥',
             style: TextStyle(
                 fontSize: SCFonts.f16,
-                color:  status > 2 ? SCColors.color_8D8E99 : SCColors.color_FF571A,
+                color: (status == 1 || status == 2) ? SCColors.color_8D8E99 : SCColors.color_FF571A,
                 fontWeight: FontWeight.w500),
             children: [
               TextSpan(
                   text: money,
                   style: TextStyle(
                       fontSize: SCFonts.f28,
-                      color: status > 2 ? SCColors.color_8D8E99 : SCColors.color_FF571A,
+                      color: (status == 1 || status == 2) ? SCColors.color_8D8E99 : SCColors.color_FF571A,
                       fontWeight: FontWeight.w700))
             ]));
   }
@@ -187,7 +187,7 @@ class SCCouponCell extends StatelessWidget {
           style: TextStyle(
               fontSize: SCFonts.f16,
               fontWeight: FontWeight.w400,
-              color: status > 2 ? SCColors.color_8D8E99 : SCColors.color_1B1D33)),
+              color: (status == 1 || status == 2) ? SCColors.color_8D8E99 : SCColors.color_1B1D33)),
     );
   }
 
@@ -240,6 +240,32 @@ class SCCouponCell extends StatelessWidget {
         ),
       );
     } else if (status == 1) {
+      /// 显示已使用
+      return Container(
+        width: 61.0,
+        height: 70.0,
+        alignment: Alignment.bottomRight,
+        child: Image.asset(
+          SCAsset.iconCouponUsed,
+          width: 52.0,
+          height: 49.0,
+          fit: BoxFit.fill,
+        ),
+      );
+    } else if (status == 2) {
+      /// 显示已失效
+      return Container(
+        width: 61.0,
+        height: 70.0,
+        alignment: Alignment.bottomRight,
+        child: Image.asset(
+          SCAsset.iconCouponExpired,
+          width: 52.0,
+          height: 49.0,
+          fit: BoxFit.fill,
+        ),
+      );
+    } else if (status == 3) {
       /// 显示获取按钮
       return SizedBox(
         width: 50.0,
@@ -261,7 +287,7 @@ class SCCouponCell extends StatelessWidget {
               getAction?.call();
             }),
       );
-    } else if (status == 2) {
+    } else if (status == 4) {
       /// 显示已领取
       return Container(
         width: 61.0,
@@ -269,32 +295,6 @@ class SCCouponCell extends StatelessWidget {
         alignment: Alignment.bottomRight,
         child: Image.asset(
           SCAsset.iconCouponGot,
-          width: 52.0,
-          height: 49.0,
-          fit: BoxFit.fill,
-        ),
-      );
-    } else if (status == 3) {
-      /// 显示已使用
-      return Container(
-        width: 61.0,
-        height: 70.0,
-        alignment: Alignment.bottomRight,
-        child: Image.asset(
-          SCAsset.iconCouponUsed,
-          width: 52.0,
-          height: 49.0,
-          fit: BoxFit.fill,
-        ),
-      );
-    } else if (status == 4) {
-      /// 显示已失效
-      return Container(
-        width: 61.0,
-        height: 70.0,
-        alignment: Alignment.bottomRight,
-        child: Image.asset(
-          SCAsset.iconCouponExpired,
           width: 52.0,
           height: 49.0,
           fit: BoxFit.fill,
