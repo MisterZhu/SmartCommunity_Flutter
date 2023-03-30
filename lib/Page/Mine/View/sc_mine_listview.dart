@@ -118,6 +118,9 @@ class SCMineListView extends StatelessWidget {
       myBillTap: () {
         myBill();
       },
+      myCoupon: () {
+        SCRouterHelper.pathPage(SCRouterPath.couponPage, null);
+      }
     );
   }
 

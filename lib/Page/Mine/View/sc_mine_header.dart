@@ -40,6 +40,9 @@ class SCMineHeaderItem extends StatelessWidget {
   /// 点击我的账单
   final Function? myBillTap;
 
+  /// 点击我的优惠券
+  final Function? myCoupon;
+
   const SCMineHeaderItem(
       {Key? key,
       this.backgroundImageUrl = SCAsset.iconMineBackground,
@@ -50,7 +53,8 @@ class SCMineHeaderItem extends StatelessWidget {
       this.userName = "",
       this.userPic,
       this.myHouseTap,
-      this.myBillTap
+      this.myBillTap,
+      this.myCoupon
       }) : super(key: key);
 
   @override
@@ -278,7 +282,11 @@ class SCMineHeaderItem extends StatelessWidget {
 
   /// serviceItem
   Widget serviceItem() {
-    List list = [{'icon': SCAsset.iconMyHouse, 'name': '我的房屋'}, {'icon': SCAsset.iconMyBill, 'name': '我的账单'}];
+    List list = [
+      {'icon': SCAsset.iconMyHouse, 'name': '我的房屋'},
+      {'icon': SCAsset.iconMyBill, 'name': '我的账单'},
+      {'icon': SCAsset.iconMyBill, 'name': '我的优惠券'},
+    ];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Container(
@@ -317,6 +325,8 @@ class SCMineHeaderItem extends StatelessWidget {
           myHouseTap?.call();
         } else if (index == 1) {
           myBillTap?.call();
+        } else if (index == 2) {
+          myCoupon?.call();
         }
       },
       child: Container(

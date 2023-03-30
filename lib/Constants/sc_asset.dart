@@ -352,4 +352,31 @@ class SCAsset {
   static const String iconMessageContentDefault = "images/message/icon_message_content_default.png";
 
 
+  /// ****************  优惠券 ****************/
+
+  /// 优惠券-规则-箭头icon
+  static const String iconCouponRule = "images/coupon/icon_coupon_rule.png";
+
+  /// 优惠券列表-空白占位图icon
+  static const String iconCouponEmpty = "images/coupon/icon_coupon_empty.png";
+
+  /// 优惠券列表-虚线icon
+  static const String iconCouponLine = "images/coupon/icon_coupon_line.png";
+
+  /// 优惠券背景图icon
+  static const String iconCouponBg = "images/coupon/icon_coupon_bg.png";
+
+  /// 优惠券-已领取icon
+  static const String iconCouponGot = "images/coupon/icon_coupon_got.png";
+
+  /// 优惠券-已使用icon
+  static const String iconCouponUsed = "images/coupon/icon_coupon_used.png";
+
+  /// 优惠券-已失效icon
+  static const String iconCouponExpired = "images/coupon/icon_coupon_expired.png";
+
+
+  /// 优惠券-弹窗-关闭icon
+  static const String iconCouponClose = "images/coupon/icon_coupon_close.png";
+
 }

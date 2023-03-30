@@ -74,4 +74,10 @@ class SCRouterPath {
   /// 消息
   static String messagePage = "/lib/Page/Message/Page/sc_message_page";
 
+  ///*************************** 优惠券 ******************************/
+
+  /// 优惠券
+  static String couponPage = "/lib/Page/Coupon/Page/sc_coupon_page";
+
+
 }
