@@ -10,6 +10,9 @@ class SCCouponController extends GetxController {
 
   List dataList = ['1'];
 
+  /// 数据加载完成
+  bool loadCompleted = false;
+
   @override
   onInit() {
     super.onInit();

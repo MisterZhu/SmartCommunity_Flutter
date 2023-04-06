@@ -673,8 +673,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.3"
-      resolved-ref: "51024926e22f139a48e427cca5ae8daeac6bd386"
+      ref: "0.0.4"
+      resolved-ref: "9233095223ac80ac4bc67ee546cd12f813ff8a00"
       url: "http://10.100.10.22/jizuo-flutter/flutter_library/sc_uikit.git"
     source: git
     version: "0.0.1"

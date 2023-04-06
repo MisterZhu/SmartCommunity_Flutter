@@ -20,7 +20,6 @@ import '../View/ToggleHouses/sc_current_house_view.dart';
 import '../View/ToggleHouses/sc_message_tab.dart';
 import '../View/ToggleHouses/sc_my_house_view.dart';
 import '../View/ToggleHouses/sc_normal_tab.dart';
-import '../View/ToggleHouses/sc_tab_indicator.dart';
 
 /// 切换房屋-page
 

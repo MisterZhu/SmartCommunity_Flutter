@@ -65,23 +65,27 @@ class SCCouponView extends StatelessWidget {
 
   /// emptyView
   Widget emptyView() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const SizedBox(
-          height: 124.0,
-        ),
-        Image.asset(SCAsset.iconCouponEmpty, width: 144.0, height: 144.0,),
-        const SizedBox(
-          height: 2.0,
-        ),
-        const Text("暂无优惠券", style: TextStyle(
-            fontSize: SCFonts.f14,
-            fontWeight: FontWeight.w400,
-            color: SCColors.color_8D8E99
-        ),)
-      ],
-    );
+    if (state.loadCompleted == true) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(
+            height: 124.0,
+          ),
+          Image.asset(SCAsset.iconCouponEmpty, width: 144.0, height: 144.0,),
+          const SizedBox(
+            height: 2.0,
+          ),
+          const Text("暂无优惠券", style: TextStyle(
+              fontSize: SCFonts.f14,
+              fontWeight: FontWeight.w400,
+              color: SCColors.color_8D8E99
+          ),)
+        ],
+      );
+    } else {
+      return const SizedBox();
+    }
   }
 
   /// 显示优惠券弹窗

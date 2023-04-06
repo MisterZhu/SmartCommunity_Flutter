@@ -78,6 +78,6 @@ class SCUrl {
 
   /************************* 消息 *************************/
   /// 消息列表
-  static const String kMessageListUrl = "/api/msg/message/page";
+  static const String kMessageListUrl = "/api/msg/noticeConsumer/list";
 
 }

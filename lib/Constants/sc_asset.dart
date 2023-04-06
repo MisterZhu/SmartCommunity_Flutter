@@ -351,6 +351,8 @@ class SCAsset {
   /// 内容图片-默认占位图icon
   static const String iconMessageContentDefault = "images/message/icon_message_content_default.png";
 
+  /// 消息列表-空白占位图icon
+  static const String iconMessageEmpty = "images/message/icon_message_empty_default.png";
 
   /// ****************  优惠券 ****************/
 
