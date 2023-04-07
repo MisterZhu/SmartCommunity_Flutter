@@ -23,7 +23,7 @@ class SCMessageCardModel {
     title = json['title'];
     cardCode = json['cardCode'];
     icon = json['icon'] != null ? Icon.fromJson(json['icon']) : null;
-    linkImage = json['linkImage'];
+    linkImage = json['linkImage'] != null ? Icon.fromJson(json['linkImage']) : null;
     category = json['category'];
     modelCode = json['modelCode'];
     modelCodeName = json['modelCodeName'];
@@ -42,7 +42,7 @@ class SCMessageCardModel {
   String? title;
   int? cardCode;
   Icon? icon;
-  String? linkImage;
+  Icon? linkImage;
   String? category;
   String? modelCode;
   String? modelCodeName;
@@ -60,7 +60,9 @@ class SCMessageCardModel {
     if (icon != null) {
       map['icon'] = icon?.toJson();
     }
-    map['linkImage'] = linkImage;
+    if (linkImage != null) {
+      map['linkImage'] = linkImage?.toJson();
+    }
     map['category'] = category;
     map['modelCode'] = modelCode;
     map['modelCodeName'] = modelCodeName;

@@ -13,10 +13,10 @@ class SCMessageListView extends StatelessWidget {
   /// SCMessageController
   final SCMessageController state;
 
-  SCMessageListView({Key? key, required this.state}) : super(key: key);
-
   /// RefreshController
-  RefreshController refreshController = RefreshController(initialRefresh: false);
+  final RefreshController refreshController;
+
+  SCMessageListView({Key? key, required this.state, required this.refreshController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class SCMessageListView extends StatelessWidget {
         ),
         onRefresh: onRefresh,
         onLoading: loadMore,
-        child: state.dataList.isNotEmpty ? listView() : emptyView()
+        child: listView() //state.dataList.isNotEmpty ? listView() : emptyView()
     );
   }
 
@@ -72,11 +72,14 @@ class SCMessageListView extends StatelessWidget {
             time: SCDateUtils.relativeDateFormat(DateTime.parse(model.noticeTime ?? '')),
             head: head,
             content: content,
-            contentIcon: model.linkImage != null ? SCConfig.getImageUrl(model.linkImage ?? '') : SCAsset.iconMessageContentDefault,
+            contentIcon: model.linkImage?.fileKey != null ? SCConfig.getImageUrl(model.linkImage?.fileKey ?? '') : SCAsset.iconMessageContentDefault,
             bottomContentList: list,
             detailTapAction: () {
-              if (model.jumpDetail == true) {
-                /// 可以跳转到详情
+              if (model.noticeArriveId != null) {
+                state.loadDetailData(model.noticeArriveId!);
+              }
+              if (model.jumpDetail == true && model.noticeCardType == 2) {
+                /// 可以跳转到详情 且 是文章消息卡片
               }
             },
           );
@@ -128,7 +131,7 @@ class SCMessageListView extends StatelessWidget {
     state.loadData(
         isMore: true,
         completeHandler: (bool success) {
-          refreshController.loadNoData();
+          refreshController.loadComplete();
         });
   }
 

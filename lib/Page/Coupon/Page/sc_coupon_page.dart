@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import '../../../../Skin/View/sc_custom_scaffold.dart';
 import '../../../Skin/Tools/sc_scaffold_manager.dart';
@@ -25,6 +26,9 @@ class SCCouponPageState extends State<SCCouponPage> with SingleTickerProviderSta
 
   late TabController tabController;
 
+  /// RefreshController
+  RefreshController refreshController = RefreshController(initialRefresh: false);
+
   List tabList = ['未使用', '已使用', '已失效',];
 
   @override
@@ -40,6 +44,7 @@ class SCCouponPageState extends State<SCCouponPage> with SingleTickerProviderSta
   dispose() {
     SCScaffoldManager.instance.deleteGetXControllerTag((SCCouponPage).toString(), controllerTag);
     controller.dispose();
+    refreshController.dispose();
     super.dispose();
   }
 
@@ -69,9 +74,9 @@ class SCCouponPageState extends State<SCCouponPage> with SingleTickerProviderSta
             Expanded(child: TabBarView(
                 controller: tabController,
                 children: [
-                  SCCouponView(state: controller, status: 0,),
-                  SCCouponView(state: controller, status: 1,),
-                  SCCouponView(state: controller, status: 2,),
+                  SCCouponView(state: controller, status: 0, refreshController: refreshController,),
+                  SCCouponView(state: controller, status: 1, refreshController: refreshController,),
+                  SCCouponView(state: controller, status: 2, refreshController: refreshController,),
                 ])
             ),
           ],

@@ -17,10 +17,10 @@ class SCCouponView extends StatelessWidget {
 
   final int status;
 
-  SCCouponView({Key? key, required this.state, required this.status}) : super(key: key);
-
   /// RefreshController
-  RefreshController refreshController = RefreshController(initialRefresh: false);
+  final RefreshController refreshController;
+
+  SCCouponView({Key? key, required this.state, required this.status, required this.refreshController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

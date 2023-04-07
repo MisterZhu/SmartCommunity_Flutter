@@ -53,4 +53,18 @@ class SCMessageController extends GetxController {
         });
   }
 
+  /// 获取详情并更新为已读
+  loadDetailData(int noticeArriveId) {
+    SCHttpManager.instance.get(
+        url: SCUrl.kMessageDetailUrl,
+        params: {"noticeArriveId": noticeArriveId},
+        success: (value) {
+          SCLoadingUtils.hide();
+          update();
+        },
+        failure: (value) {
+          SCToast.showTip(value['message']);
+        });
+  }
+
 }

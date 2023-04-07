@@ -579,7 +579,7 @@
     },
     {
       "name": "sc_uikit",
-      "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/git/sc_uikit-9233095223ac80ac4bc67ee546cd12f813ff8a00/",
+      "rootUri": "file:///Users/ly/Desktop/software/flutter-3.0.1/.pub-cache/git/sc_uikit-4aae4342db67713070a704fbb914e024bbcd8b85/",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -812,7 +812,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-04-06T08:36:02.240164Z",
+  "generated": "2023-04-07T02:18:50.711086Z",
   "generator": "pub",
   "generatorVersion": "2.17.1"
 }
