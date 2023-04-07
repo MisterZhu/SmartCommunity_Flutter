@@ -29,7 +29,7 @@ class SCMessageListView extends StatelessWidget {
         ),
         onRefresh: onRefresh,
         onLoading: loadMore,
-        child: listView() //state.dataList.isNotEmpty ? listView() : emptyView()
+        child: state.dataList.isNotEmpty ? listView() : emptyView()
     );
   }
 
