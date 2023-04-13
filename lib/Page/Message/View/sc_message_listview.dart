@@ -33,7 +33,6 @@ class SCMessageListView extends StatelessWidget {
     );
   }
 
-
   Widget listView() {
     return ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
@@ -77,9 +76,6 @@ class SCMessageListView extends StatelessWidget {
             detailTapAction: () {
               if (model.noticeArriveId != null) {
                 state.loadDetailData(model.noticeArriveId!);
-              }
-              if (model.jumpDetail == true && model.noticeCardType == 2) {
-                /// 可以跳转到详情 且 是文章消息卡片
               }
             },
           );

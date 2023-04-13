@@ -83,4 +83,16 @@ class SCUrl {
   /// 获取详情并更新为已读
   static const String kMessageDetailUrl = "/api/msg/noticeConsumer";
 
+
+  /************************* 优惠券 *************************/
+  /// 我的卡包列表
+  static const String kMyCouponListUrl = "/api/operation/voucher/user/myPageFront";
+
+  /// 可领的券列表
+  static const String kReceiveCouponListUrl = "/api/operation/voucher/user/obtainablePage";
+
+  /// 领取优惠券
+  static const String kReceiveCouponUrl = "/api/operation/voucher/user/gain";
+
+
 }

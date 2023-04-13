@@ -331,7 +331,17 @@ doError(e) {
             accountExpired();
           }
           break;
-
+        case 402:
+          {
+            if (error.response?.data is Map) {
+              var errorData = error.response?.data;
+              message = errorData['msg'] ?? SCDefaultValue.errorMessage;
+            } else {
+              message = error.response?.data.toString() ??
+                  SCDefaultValue.errorMessage;
+            }
+          }
+          break;
         case 403:
           {
             if (error.response?.data is Map) {

@@ -6,7 +6,7 @@ import '../../../Constants/sc_asset.dart';
 /// 优惠券cell
 
 class SCCouponCell extends StatelessWidget {
-  /// 状态，0显示规则，1显示已使用，2显示已失效，3显示获取按钮，4显示已领取
+  /// status，0未使用，1已使用，2已失效，3获取按钮，4已领取
   final int status;
 
   /// 名称
@@ -59,7 +59,7 @@ class SCCouponCell extends StatelessWidget {
             lineItem(),
             const SizedBox(width: 9.0,),
             Expanded(child: middleItem()),
-            const SizedBox(width: 10.0,),
+            const SizedBox(width: 1.0,),
             rightItem(),
             const SizedBox(width: 12.0,),
           ],

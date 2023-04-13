@@ -77,7 +77,7 @@ class SCRouterPath {
   ///*************************** 优惠券 ******************************/
 
   /// 优惠券
-  static String couponPage = "/lib/Page/Coupon/Page/sc_coupon_page";
+  static String myCouponPage = "/lib/Page/Coupon/Page/sc_my_coupon_page";
 
 
 }

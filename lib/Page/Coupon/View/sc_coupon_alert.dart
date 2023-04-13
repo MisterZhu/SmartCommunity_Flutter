@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Coupon/View/sc_coupon_cell.dart';
 import '../../../Constants/sc_asset.dart';
+import '../Controller/sc_receive_coupon_controller.dart';
+import '../Model/sc_coupon_model.dart';
 
 /// 优惠券弹窗
 
 class SCCouponAlert extends StatefulWidget {
   SCCouponAlert({Key? key,
-    this.getAction,
+    required this.controller,
   }) : super(key: key);
 
-  /// 获取
-  final Function(int index)? getAction;
+  final SCReceiveCouponController controller;
 
   @override
   SCCouponAlertState createState() => SCCouponAlertState();
@@ -96,22 +97,30 @@ class SCCouponAlertState extends State<SCCouponAlert> {
           padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 12.0, bottom: 24.0),
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
+            SCCouponModel model = widget.controller.receiveCouponList[index];
             return SCCouponCell(
-              status: index,
-              name: '店铺优惠券100',
-              validity: '有效期至2022-05-10 12:00',
-              money: '100',
-              condition: '满200可用',
+              status: 3,
+              name: model.title,
+              validity: '有效期至${model.gmtExpire}',
+              money: '${model.deductAmount}',
+              condition: model.subTitle,
               getAction: () {
-                widget.getAction?.call(index);
+                getCoupon(model);
               },
             );
           },
           separatorBuilder: (BuildContext context, int index) {
             return const SizedBox(height: 10.0,);
           },
-          itemCount: 5),
+          itemCount: widget.controller.receiveCouponList.length),
     );
+  }
+
+  /// 领取优惠券
+  getCoupon(SCCouponModel model) {
+    widget.controller.receiveCoupon(voucherId: model.id ?? '',  completeHandler: (status) {
+
+    });
   }
 
 }

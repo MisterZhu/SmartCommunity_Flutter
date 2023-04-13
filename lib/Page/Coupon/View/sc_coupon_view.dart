@@ -1,3 +1,4 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sc_uikit/sc_uikit.dart';
@@ -6,14 +7,15 @@ import 'package:smartcommunity/Page/Coupon/View/sc_coupon_cell.dart';
 import 'package:smartcommunity/Page/Coupon/View/sc_coupon_use_rules_alert.dart';
 import '../../../Constants/sc_asset.dart';
 import '../../../Utils/sc_utils.dart';
-import '../Controller/sc_coupon_controller.dart';
+import '../Controller/sc_my_coupon_controller.dart';
+import '../Model/sc_coupon_model.dart';
 
 
 /// 优惠券listview
 class SCCouponView extends StatelessWidget {
 
-  /// SCCouponController
-  final SCCouponController state;
+  /// SCMyCouponController
+  final SCMyCouponController state;
 
   final int status;
 
@@ -24,6 +26,15 @@ class SCCouponView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<SCCouponModel> list = [];
+    /// status，0未使用，1已使用，2已失效，3获取按钮，4已领取
+    if (status == 0) {
+      list = state.myCouponList;
+    } else if (status == 1) {
+      list = state.usedCouponList;
+    } else if (status == 2) {
+      list = state.expiredCouponList;
+    }
     return SmartRefresher(
         controller: refreshController,
         enablePullUp: true,
@@ -33,34 +44,34 @@ class SCCouponView extends StatelessWidget {
         ),
         onRefresh: onRefresh,
         onLoading: loadMore,
-        child: state.dataList.isNotEmpty ? listView() : emptyView()
+        child: list.isNotEmpty ? listView(list) : emptyView()
     );
   }
 
   /// listView
-  Widget listView() {
+  Widget listView(List<SCCouponModel> list) {
     return ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
+          /// model.state状态：0-未使用/1-已预扣/2-已使用/3-已过期/4-已作废
+          SCCouponModel model = list[index];
+          String time = formatDate(DateTime.parse(model.gmtExpire ?? ''), [yyyy, '-', mm, '-', dd, ' ', HH, ':', nn]);
           return SCCouponCell(
             status: status,
-            name: '店铺优惠券',
-            validity: '有效期至2022-05-05 12:00',
-            money: '30',
-            condition: '满200可用',
-            getAction: () {
-              showCouponAlert();
-            },
+            name: model.title,
+            validity: '有效期至$time',
+            money: '${model.deductAmount}',
+            condition: model.subTitle,
             ruleAction: () {
-              showUseRulesAlert();
+              showUseRulesAlert(model.instructions ?? '');
             },
           );
         },
         separatorBuilder: (BuildContext context, int index) {
           return const SizedBox(height: 10.0,);
         },
-        itemCount: 5);
+        itemCount: list.length);
   }
 
   /// emptyView
@@ -88,28 +99,14 @@ class SCCouponView extends StatelessWidget {
     }
   }
 
-  /// 显示优惠券弹窗
-  showCouponAlert() {
-    SCUtils.getCurrentContext(completionHandler: (BuildContext context) {
-      SCDialogUtils().showCustomBottomDialog(
-          isDismissible: true,
-          context: context,
-          widget: SCCouponAlert(
-            getAction: (index) {
-
-            },
-          ));
-    });
-  }
-
   /// 显示使用规则弹窗
-  showUseRulesAlert() {
+  showUseRulesAlert(String value) {
     SCUtils.getCurrentContext(completionHandler: (BuildContext context) {
       SCDialogUtils().showCustomBottomDialog(
           isDismissible: true,
           context: context,
           widget: SCCouponUseRulesAlert(
-            content: '1、满200.00减15.00\n2、限酒店商城应用内使用\n3、限相关商品分类使用\n4、限手机号152 6768 8989使用\n5、有效期至2023-12-12 23:00:00有效',
+            content: value,
             closeAction: () {
               Navigator.of(context).pop();
             },
@@ -119,24 +116,64 @@ class SCCouponView extends StatelessWidget {
 
   /// 下拉刷新
   Future onRefresh() async {
-    state.loadData(
-        isMore: false,
-        completeHandler: (bool success, bool last) {
-          refreshController.refreshCompleted();
-          refreshController.loadComplete();
-        });
+    /// status，0未使用，1已使用，2已失效，3获取按钮，4已领取
+    if (status == 0) {
+      state.loadMyCouponData(
+          isMore: false,
+          completeHandler: (bool success, bool last) {
+            refreshController.refreshCompleted();
+            refreshController.loadComplete();
+          });
+    } else if (status == 1) {
+      state.loadUsedCouponData(
+          isMore: false,
+          completeHandler: (bool success, bool last) {
+            refreshController.refreshCompleted();
+            refreshController.loadComplete();
+          });
+    } else if (status == 2) {
+      state.loadExpiredCouponData(
+          isMore: false,
+          completeHandler: (bool success, bool last) {
+            refreshController.refreshCompleted();
+            refreshController.loadComplete();
+          });
+    }
   }
 
   /// 上拉加载
   void loadMore() async {
-    state.loadData(
-        isMore: true,
-        completeHandler: (bool success, bool last) {
-          if (last) {
-            refreshController.loadNoData();
-          } else {
-            refreshController.loadComplete();
-          }
-        });
+    /// status，0未使用，1已使用，2已失效，3获取按钮，4已领取
+    if (status == 0) {
+      state.loadMyCouponData(
+          isMore: true,
+          completeHandler: (bool success, bool last) {
+            if (last) {
+              refreshController.loadNoData();
+            } else {
+              refreshController.loadComplete();
+            }
+          });
+    } else if (status == 1) {
+      state.loadUsedCouponData(
+          isMore: true,
+          completeHandler: (bool success, bool last) {
+            if (last) {
+              refreshController.loadNoData();
+            } else {
+              refreshController.loadComplete();
+            }
+          });
+    } else if (status == 2) {
+      state.loadExpiredCouponData(
+          isMore: true,
+          completeHandler: (bool success, bool last) {
+            if (last) {
+              refreshController.loadNoData();
+            } else {
+              refreshController.loadComplete();
+            }
+          });
+    }
   }
 }

@@ -16,7 +16,7 @@ import 'package:smartcommunity/Page/Mine/Page/sc_toggle_houses_page.dart';
 import 'package:smartcommunity/Page/Tab/Page/sc_tab_page.dart';
 import 'package:smartcommunity/Page/Webview/Page/sc_webview_page.dart';
 
-import '../../Page/Coupon/Page/sc_coupon_page.dart';
+import '../../Page/Coupon/Page/sc_my_coupon_page.dart';
 import '../../Page/Login/Page/sc_select_city_page.dart';
 import '../../Page/Login/Page/sc_select_community_page.dart';
 import '../../Page/Message/Page/sc_message_page.dart';
@@ -77,7 +77,7 @@ class SCRouterPages {
     /*消息*/
     GetPage(name: SCRouterPath.messagePage, page: () => SCMessagePage()),
     /*优惠券*/
-    GetPage(name: SCRouterPath.couponPage, page: () => SCCouponPage()),
+    GetPage(name: SCRouterPath.myCouponPage, page: () => SCMyCouponPage()),
   ];
 
   /*根据code使用路由*/

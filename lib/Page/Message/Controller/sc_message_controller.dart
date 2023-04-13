@@ -34,14 +34,16 @@ class SCMessageController extends GetxController {
         success: (value) {
           SCLoadingUtils.hide();
           loadCompleted = true;
-          List list = value['infoList'];
-          indexId = value['indexId'];
-          if (isLoadMore == true) {
-            dataList.addAll(List<SCMessageCardModel>.from(
-                list.map((e) => SCMessageCardModel.fromJson(e)).toList()));
-          } else {
-            dataList = List<SCMessageCardModel>.from(
-                list.map((e) => SCMessageCardModel.fromJson(e)).toList());
+          if (value['infoList'] != null) {
+            List list = value['infoList'];
+            indexId = value['indexId'];
+            if (isLoadMore == true) {
+              dataList.addAll(List<SCMessageCardModel>.from(
+                  list.map((e) => SCMessageCardModel.fromJson(e)).toList()));
+            } else {
+              dataList = List<SCMessageCardModel>.from(
+                  list.map((e) => SCMessageCardModel.fromJson(e)).toList());
+            }
           }
           update();
           completeHandler?.call(true);
