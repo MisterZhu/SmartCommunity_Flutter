@@ -9,6 +9,9 @@ class SCDefaultValue {
   /// APP名称
   static const String appName = '善数生活';
 
+  /// h5渠道，用于表示h5是应用在flutter上
+  static int h5Channel = 1;
+
   /// client
   static const String client = 'jm-app';
 

@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_asset.dart';
 import 'package:smartcommunity/Utils/Date/sc_date_utils.dart';
 import '../../../Network/sc_config.dart';
+import '../../../Utils/Router/sc_router_helper.dart';
+import '../../../Utils/Router/sc_router_path.dart';
+import '../../../Utils/sc_utils.dart';
 import '../Controller/sc_message_controller.dart';
 import '../Model/sc_message_card_model.dart';
 
@@ -74,6 +79,17 @@ class SCMessageListView extends StatelessWidget {
             contentIcon: model.linkImage?.fileKey != null ? SCConfig.getImageUrl(model.linkImage?.fileKey ?? '') : SCAsset.iconMessageContentDefault,
             bottomContentList: list,
             detailTapAction: () {
+              if (model.ext != null) {
+                var ext = jsonDecode(model.ext ?? '');
+                if (ext['jumpUrl'] != null) {
+                  if (model.cardCode == 'CONTENT_MESSAGE') {
+                    // 跳转到站内信详情h5
+                    String jumpUrl = SCConfig.getH5Url('/h5Manage/#${ext['jumpUrl']}');
+                    String url = SCUtils.getWebViewUrl(url: jumpUrl, title: '详情',  needJointParams: true);
+                    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {'title' : '详情', 'url' : url});
+                  }
+                }
+              }
               if (model.noticeArriveId != null) {
                 state.loadDetailData(model.noticeArriveId!);
               }

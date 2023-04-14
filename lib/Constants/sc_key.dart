@@ -24,4 +24,6 @@ class SCKey {
   static const String kProxyMap = "kProxyMap";
   /// 刷新用户信息key
   static const String kReloadUserInfo = "kReloadUserInfo";
+  /// h5渠道key
+  static const String kH5Channel = "SCCHANNEL";
 }

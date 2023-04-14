@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/Constants/sc_default_value.dart';
 import '../Constants/sc_asset.dart';
+import '../Constants/sc_key.dart';
+import '../Skin/Tools/sc_scaffold_manager.dart';
 import '../sc_app.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 
@@ -168,4 +171,53 @@ class SCUtils {
     String base64 = jsonEncode(Uint8List.view(buffer));
     return base64;
   }
+
+  /*获取webView的url*/
+  static String getWebViewUrl({required String url, required String title, required bool needJointParams}) {
+    String token = SCScaffoldManager.instance.user.token ?? "";
+    String client = SCDefaultValue.client;
+    //String defOrgId = SCScaffoldManager.instance.user.tenantId ?? '';
+    //String defOrgName = Uri.encodeComponent(SCScaffoldManager.instance.user.tenantName ?? '');
+    //String spaceIds = SCScaffoldManager.instance.spaceIds ?? '';
+    String defOrgId = '';
+    String defOrgName = '';
+    String spaceIds = '';
+    String phoneNum = SCScaffoldManager.instance.user.mobileNum ?? '';
+    String userId = SCScaffoldManager.instance.user.id ?? '';
+    String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
+    int reportPageCode = 1;
+    String titleString = Uri.encodeComponent(title);
+
+    /// 拼接符号
+    String jointSymbol = "";
+
+    /// 经度
+    double latitude = SCScaffoldManager.instance.latitude;
+
+    /// 纬度
+    double longitude = SCScaffoldManager.instance.longitude;
+
+    /// h5渠道-key
+    String h5ChannelKey = SCKey.kH5Channel;
+
+    /// h5渠道-value
+    int h5ChannelValue = SCDefaultValue.h5Channel;
+
+
+    if (url.contains('?')) {
+      jointSymbol = "&";
+    } else {
+      jointSymbol = "?";
+    }
+    if (Platform.isAndroid) {
+      String newUrl =
+          "$url${jointSymbol}Authorization=$token&client=$client&defOrgId=$defOrgId&defOrgName=$defOrgName&tenantId=$defOrgId&phoneNum=$phoneNum&spaceIds=$spaceIds&userId=$userId&userName=$userName&latitude=$latitude&longitude=$longitude&reportPageCode=$reportPageCode&title=$titleString";
+      return newUrl;
+    } else {
+      String newUrl =
+          "$url${jointSymbol}Authorization=$token&client=$client&defOrgId=$defOrgId&defOrgName=$defOrgName&tenantId=$defOrgId&phoneNum=$phoneNum&spaceIds=$spaceIds&userId=$userId&userName=$userName&latitude=$latitude&longitude=$longitude&reportPageCode=$reportPageCode&title=$titleString";
+      return newUrl;
+    }
+  }
+
 }
