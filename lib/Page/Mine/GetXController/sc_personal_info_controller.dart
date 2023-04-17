@@ -77,6 +77,7 @@ class SCPersonalInfoController extends GetxController {
               /// 存储communityId数据到SCUser
               SCUser scUser = SCScaffoldManager.instance.getUserData();
               scUser.communityId = model.communityId;
+              scUser.spaceId = model.spaceId;
               SCScaffoldManager.instance.cacheUserData(scUser.toJson());
             }
           }

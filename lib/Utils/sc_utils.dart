@@ -176,12 +176,9 @@ class SCUtils {
   static String getWebViewUrl({required String url, required String title, required bool needJointParams}) {
     String token = SCScaffoldManager.instance.user.token ?? "";
     String client = SCDefaultValue.client;
-    //String defOrgId = SCScaffoldManager.instance.user.tenantId ?? '';
-    //String defOrgName = Uri.encodeComponent(SCScaffoldManager.instance.user.tenantName ?? '');
-    //String spaceIds = SCScaffoldManager.instance.spaceIds ?? '';
-    String defOrgId = '';
-    String defOrgName = '';
-    String spaceIds = '';
+    String defOrgId = SCScaffoldManager.instance.user.communityId ?? '';
+    String defOrgName = Uri.encodeComponent(SCScaffoldManager.instance.user.communityName ?? '');
+    String spaceIds = '${SCScaffoldManager.instance.user.spaceId}' ?? '';
     String phoneNum = SCScaffoldManager.instance.user.mobileNum ?? '';
     String userId = SCScaffoldManager.instance.user.id ?? '';
     String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
