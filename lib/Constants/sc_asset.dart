@@ -354,6 +354,12 @@ class SCAsset {
   /// 消息列表-空白占位图icon
   static const String iconMessageEmpty = "images/message/icon_message_empty_default.png";
 
+  /// 消息列表-tab更多icon
+  static const String iconMessageTabMore = "images/message/icon_message_tab_more.png";
+
+  /// 消息列表-tab更多弹窗背景图
+  static const String iconMessageMoreBg = "images/message/icon_message_more_dialog_bg.png";
+
   /// ****************  优惠券 ****************/
 
   /// 优惠券-规则-箭头icon
