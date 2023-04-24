@@ -91,8 +91,8 @@ class SCMessageListView extends StatelessWidget {
                   if (model.cardCode == 'CONTENT_MESSAGE') {
                     // 跳转到站内信详情h5
                     String jumpUrl = SCConfig.getH5Url(ext['jumpUrl']);
-                    String url = SCUtils.getWebViewUrl(url: jumpUrl, title: '详情',  needJointParams: true);
-                    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {'title' : '详情', 'url' : url});
+                    String url = SCUtils.getWebViewUrl(url: jumpUrl, title: '通知公告',  needJointParams: true);
+                    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {'title' : '通知公告', 'url' : url});
                   }
                 }
               }
