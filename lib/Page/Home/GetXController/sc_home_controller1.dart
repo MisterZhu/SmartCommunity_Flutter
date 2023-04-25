@@ -191,7 +191,9 @@ class SCHomeController1 extends GetxController {
         url: SCUrl.kMessageCountUrl,
         params: {'checked': false},
         success: (value) {
-          SCScaffoldManager.instance.messageCount = value ?? 0;
+          if (value is int) {
+            SCScaffoldManager.instance.unreadMessageCount = value ?? 0;
+          }
         },
         failure: (value) {
         });

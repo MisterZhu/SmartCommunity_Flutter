@@ -137,8 +137,8 @@ class SCMessagePageState extends State<SCMessagePage> with SingleTickerProviderS
 
   /// 刷新tabList
   updateTabList() {
-    if (controller.unreadDataList.isNotEmpty) {
-      return ['全部', '未读(${controller.unreadDataList.length})'];
+    if (SCScaffoldManager.instance.unreadMessageCount > 0) {
+      return ['全部', '未读(${SCScaffoldManager.instance.unreadMessageCount})'];
     } else {
       return ['全部', '未读'];
     }
