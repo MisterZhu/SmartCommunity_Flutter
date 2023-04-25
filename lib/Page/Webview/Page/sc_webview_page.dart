@@ -176,6 +176,7 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
         userInfoChannel(context),
         cameraChannel(context),
         photosChannel(context),
+        callChannel(context),
       },
 
       ///WebView创建
@@ -347,6 +348,23 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
               .flutterCallH5(h5Name: SCFlutterH5Key.photos, params: params));
         });
       });
+
+  //  拨号-channel
+  JavascriptChannel callChannel(BuildContext context) => JavascriptChannel(
+      name: SCH5FlutterKey.call,
+      onMessageReceived: (JavascriptMessage message) {
+        var params = jsonDecode(message.message);
+        String phone = params['phone'];
+        SCUtils.call(phone);
+        Future.delayed(const Duration(milliseconds: 500), () {
+          if (mounted) {
+            setState(() {
+              progress = 1;
+            });
+          }
+        });
+      });
+
 
   /// 缓存建信租房token
   cacheJXToken(String token) {
