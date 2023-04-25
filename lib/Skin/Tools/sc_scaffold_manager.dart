@@ -55,7 +55,7 @@ class SCScaffoldManager {
   static late String _city;
 
   /// 消息数量
-  static late int _messageCount;
+  static late int _unreadMessageCount;
 
   /// flutter调用原生的channel
   static MethodChannel flutterToNative = const MethodChannel('flutter_native');
@@ -89,13 +89,13 @@ class SCScaffoldManager {
 
   String get city => _city;
 
-  int get messageCount => _messageCount;
+  int get unreadMessageCount => _unreadMessageCount;
   /// 初始化
   Future initBase() {
     _longitude = 0;
     _latitude = 0;
     _city = '';
-    _messageCount = 0;
+    _unreadMessageCount = 0;
     listenNativeToFlutterChannel();
     Get.put(SCCustomScaffoldController());
     return SCScaffoldManager.instance.initScaffold();
@@ -139,8 +139,8 @@ class SCScaffoldManager {
     _city = city;
   }
 
-  set messageCount(int messageCount) {
-    _messageCount = messageCount;
+  set unreadMessageCount(int unreadMessageCount) {
+    _unreadMessageCount = unreadMessageCount;
   }
 
   /// 初始化scaffold数据

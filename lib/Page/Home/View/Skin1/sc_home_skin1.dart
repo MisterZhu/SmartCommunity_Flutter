@@ -115,7 +115,7 @@ class SCHomeSkin1 extends StatelessWidget {
         communityName = SCScaffoldManager.instance.user.communityName ?? '';
       }
       return SCHomeNavigation1(
-        unreadNum: SCScaffoldManager.instance.messageCount,
+        unreadNum: SCScaffoldManager.instance.unreadMessageCount,
         key: navigationKey,
         roomTitle: communityName,
         titleMaxLength: state.titleMaxLength,
