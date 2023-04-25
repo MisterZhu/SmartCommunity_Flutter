@@ -12,6 +12,7 @@ import 'package:smartcommunity/Page/Home/Model/sc_home_news_model.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import '../../../Constants/sc_default_value.dart';
 import '../../../Constants/sc_h5.dart';
+import '../../../Constants/sc_key.dart';
 import '../../../Network/sc_http_manager.dart';
 import '../../../Network/sc_url.dart';
 import '../../../Skin/Model/sc_visitor_decoration_model.dart';
@@ -104,7 +105,7 @@ class SCHomeController1 extends GetxController {
         .toList();
     homeFeatureStyle1 = SCHomeFeatureStyle.featureStyle1;
     homeFeatureStyle2 = SCHomeFeatureStyle.featureStyle2;
-    updateMessage();
+    loadUnreadMessageCount();
     updateHomeData();
   }
 
@@ -185,14 +186,16 @@ class SCHomeController1 extends GetxController {
     update();
   }
 
-  /// 更新消息数量
-  updateMessage() {
+  /// 获取未读消息数量
+  loadUnreadMessageCount() {
     SCHttpManager.instance.get(
         url: SCUrl.kMessageCountUrl,
         params: {'checked': false},
         success: (value) {
           if (value is int) {
-            SCScaffoldManager.instance.unreadMessageCount = value ?? 0;
+            SCScaffoldManager.instance.unreadMessageCount = value;
+            var params = {"key" : SCKey.kReloadUnreadMessageCount};
+            SCScaffoldManager.instance.eventBus.fire(params);
           }
         },
         failure: (value) {

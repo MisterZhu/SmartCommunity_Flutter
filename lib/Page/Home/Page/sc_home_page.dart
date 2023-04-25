@@ -116,6 +116,7 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
       child: GetBuilder<SCHomeController1>(builder: (state) {
         return SCHomeSkin1(
           getUserInfoAction: () {
+            state1.loadUnreadMessageCount();
             getUserInfo();
           },
         );
@@ -190,6 +191,8 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
       String key = event['key'];
       if (key == SCKey.kReloadUserInfo) {
         getUserInfo();
+      } else if (key == SCKey.kReloadUnreadMessageCount) {
+        state.update();
       }
     });
   }

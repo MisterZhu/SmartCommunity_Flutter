@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Utils/Permission/sc_permission_utils.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
-import 'package:smartcommunity/Utils/Router/sc_router_pages.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_path.dart';
 import '../../../../Constants/sc_asset.dart';
 import '../../../../Constants/sc_type_define.dart';
@@ -128,7 +127,10 @@ class SCHomeSkin1 extends StatelessWidget {
           SCPermissionUtils.scanCodeWithPrivacyAlert();
         },
         messageAction: () {
-          SCRouterHelper.pathPage(SCRouterPath.messagePage, null);
+          SCRouterHelper.pathPage(SCRouterPath.messagePage, null)?.then((value) {
+            SCHomeController1 controller1 = SCHomeController1();
+            controller1.loadUnreadMessageCount();
+          });
         },
         searchAction: () {
           SCLoadingUtils.developing();

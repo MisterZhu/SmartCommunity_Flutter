@@ -417,7 +417,7 @@ class SCHomeListView1State extends State<SCHomeListView1>
   Future<bool> onRefresh() async {
     return await Future.delayed(const Duration(milliseconds: 500), () {
       refreshController.refreshCompleted();
-      widget?.refreshAction?.call();
+      widget.refreshAction?.call();
       // if (tabController.index == 0) {
       //   SCHomeNewsRespority respority = repositoryList.first;
       //   return respority.refresh(false);
