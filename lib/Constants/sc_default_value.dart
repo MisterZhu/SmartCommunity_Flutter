@@ -113,6 +113,9 @@ class SCDefaultValue {
   /// 拨号失败
   static const String callFailedTip = "拨号失败";
 
+  /// 跳转浏览器失败
+  static const String browserFailedTip = "跳转失败";
+
   /// 图片路径
   static const files = "/files/";
 }

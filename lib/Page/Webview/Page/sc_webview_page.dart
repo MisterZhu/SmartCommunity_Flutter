@@ -177,6 +177,7 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
         cameraChannel(context),
         photosChannel(context),
         callChannel(context),
+        browserChannel(context),
       },
 
       ///WebView创建
@@ -356,6 +357,23 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
         var params = jsonDecode(message.message);
         String phone = params['phone'];
         SCUtils.call(phone);
+        Future.delayed(const Duration(milliseconds: 500), () {
+          if (mounted) {
+            setState(() {
+              progress = 1;
+            });
+          }
+        });
+      });
+
+  //  浏览器-channel
+  JavascriptChannel browserChannel(BuildContext context) => JavascriptChannel(
+      name: SCH5FlutterKey.browser,
+      onMessageReceived: (JavascriptMessage message) {
+        var params = jsonDecode(message.message);
+        print("浏览器===$params");
+        // String phone = params['phone'];
+        SCUtils.browser(params);
         Future.delayed(const Duration(milliseconds: 500), () {
           if (mounted) {
             setState(() {

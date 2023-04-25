@@ -232,4 +232,17 @@ class SCUtils {
     }
   }
 
+  /// 打开浏览器
+  static browser(String url) async{
+    if (url.isEmpty) {
+      SCToast.showTip(SCDefaultValue.browserFailedTip);
+      return;
+    }
+    Uri uri = Uri.parse(url);
+    bool success = await launchUrl(uri,mode: LaunchMode.externalApplication);
+    if (success == false) {
+      SCToast.showTip(SCDefaultValue.browserFailedTip);
+    }
+  }
+
 }

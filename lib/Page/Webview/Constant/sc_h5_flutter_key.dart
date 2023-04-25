@@ -15,4 +15,6 @@ class SCH5FlutterKey {
   static const String photos  = 'sc_app_photos';
   /// 拨号
   static const String call  = 'sc_app_phone';
+  /// 打开浏览器
+  static const String browser  = 'sc_app_browser';
 }
