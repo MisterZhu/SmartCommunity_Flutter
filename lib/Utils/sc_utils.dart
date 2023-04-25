@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:smartcommunity/Constants/sc_default_value.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../Constants/sc_asset.dart';
 import '../Constants/sc_key.dart';
 import '../Skin/Tools/sc_scaffold_manager.dart';
@@ -214,6 +215,20 @@ class SCUtils {
       String newUrl =
           "$url${jointSymbol}Authorization=$token&client=$client&defOrgId=$defOrgId&defOrgName=$defOrgName&tenantId=$defOrgId&phoneNum=$phoneNum&spaceIds=$spaceIds&userId=$userId&userName=$userName&latitude=$latitude&longitude=$longitude&reportPageCode=$reportPageCode&title=$titleString";
       return newUrl;
+    }
+  }
+
+  /*打电话*/
+  static call(String phone) async{
+    if (phone.isEmpty) {
+      SCToast.showTip(SCDefaultValue.callFailedTip);
+      return;
+    }
+    String phonePath = 'tel:$phone';
+    Uri uri = Uri.parse(phonePath);
+    bool success = await launchUrl(uri);
+    if (success == false) {
+      SCToast.showTip(SCDefaultValue.callFailedTip);
     }
   }
 

@@ -93,6 +93,8 @@
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>允许App访问相册，您将可以上传相册照片及保存照片到相册。</string>

@@ -110,6 +110,9 @@ class SCDefaultValue {
   /// 提示登录
   static const String needLoginTip = "登录后可获取更多优质服务";
 
+  /// 拨号失败
+  static const String callFailedTip = "拨号失败";
+
   /// 图片路径
   static const files = "/files/";
 }
