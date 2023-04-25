@@ -60,7 +60,6 @@ class SCMessagePageState extends State<SCMessagePage> with SingleTickerProviderS
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return SCCustomScaffold(
@@ -83,7 +82,6 @@ class SCMessagePageState extends State<SCMessagePage> with SingleTickerProviderS
       tag: controllerTag,
       init: controller,
       builder: (state) {
-        return SCMessageListView(state: controller, type: 0, refreshController: refreshController1);
         return Stack(
           alignment: Alignment.topRight,
           children: [

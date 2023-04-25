@@ -33,7 +33,10 @@ class SCUrl {
   /// 游客模式装修url
   static const String kVisitorDecorationUrl = '/api/applet/decoration/pattern/visitor';
 
- /************************* 服务 *************************/
+  /// 首页消息数量url
+  static const String kMessageCountUrl = '/api/msg/noticeConsumer/count';
+
+  /************************* 服务 *************************/
 
   /// 应用列表url
   static const String kServiceAppListUrl = '/api/applet/user/list';

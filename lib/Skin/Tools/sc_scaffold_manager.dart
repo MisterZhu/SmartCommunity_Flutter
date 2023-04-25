@@ -54,6 +54,9 @@ class SCScaffoldManager {
   /// 城市名称
   static late String _city;
 
+  /// 消息数量
+  static late int _messageCount;
+
   /// flutter调用原生的channel
   static MethodChannel flutterToNative = const MethodChannel('flutter_native');
 
@@ -86,11 +89,13 @@ class SCScaffoldManager {
 
   String get city => _city;
 
+  int get messageCount => _messageCount;
   /// 初始化
   Future initBase() {
     _longitude = 0;
     _latitude = 0;
     _city = '';
+    _messageCount = 0;
     listenNativeToFlutterChannel();
     Get.put(SCCustomScaffoldController());
     return SCScaffoldManager.instance.initScaffold();
@@ -132,6 +137,10 @@ class SCScaffoldManager {
   set city(String city) {
     // TODO: implement city=
     _city = city;
+  }
+
+  set messageCount(int messageCount) {
+    _messageCount = messageCount;
   }
 
   /// 初始化scaffold数据

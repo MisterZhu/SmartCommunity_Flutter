@@ -449,6 +449,7 @@ class SCHomeListView1State extends State<SCHomeListView1>
       String title = data['title'];
       String url = data['subUrl'];
       bool needHouseId = data['needHouseId'];
+      bool? isDeveloping = data['isDeveloping'];
       if (needHouseId && SCScaffoldManager.instance.user.communityId == null) {
         SCDialogUtils.instance.showMiddleDialog(
           context: context,
@@ -469,6 +470,10 @@ class SCHomeListView1State extends State<SCHomeListView1>
         );
       } else {
         var params = {"title": title, "url": url};
+        if (isDeveloping == true) {
+          SCToast.showTip('功能开发中...');
+          return;
+        }
         SCRouterHelper.pathPage(SCRouterPath.webViewPath, params)?.then((value) {
           widget.getUserInfoAction?.call();
         });

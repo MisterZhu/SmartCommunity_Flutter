@@ -45,8 +45,12 @@ class SCHomeNavigation1 extends StatelessWidget {
   /// 房号文本数字数量
   final int? titleMaxLength;
 
+  /// 消息未读数量
+  final int unreadNum;
+
   SCHomeNavigation1(
       {Key? key,
+      required this.unreadNum,
       this.backgroundColor = Colors.transparent,
       this.normalColor = Colors.white,
       this.stickyColor = Colors.black,
@@ -60,6 +64,9 @@ class SCHomeNavigation1 extends StatelessWidget {
       this.opacity = 1.0,
       this.titleMaxLength = 10})
       : super(key: key);
+
+  /// 未读组件高出消息icon8.0
+  double topOffset = 8.0;
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +102,7 @@ class SCHomeNavigation1 extends StatelessWidget {
       color: Colors.transparent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [houseItem(context), rightActionsItem()],
       ),
     );
@@ -164,35 +172,93 @@ class SCHomeNavigation1 extends StatelessWidget {
     return Expanded(
         child: Row(
       mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        messageItem(),
+        const SizedBox(
+          width: 16.0,
+        ),
         GestureDetector(
           child: Image.asset(
             SCAsset.iconScan,
-            width: 22.0,
-            height: 22.0,
+            width: 24.0,
+            height: 24.0,
             color: isSticky == true ? stickyColor : normalColor,
           ),
           onTap: () {
             scan();
           },
         ),
-        const SizedBox(
-          width: 16.0,
-        ),
-        GestureDetector(
-          child: Image.asset(
-            SCAsset.iconMessage,
-            width: 22.0,
-            height: 22.0,
-            color: isSticky == true ? stickyColor : normalColor,
-          ),
-          onTap: () {
-            message();
-          },
-        ),
       ],
     ));
   }
+
+  Widget messageItem() {
+    if (unreadNum > 0) {
+      return SizedBox(
+        width: 36.0,
+        height: 30,
+        child: Stack(
+          alignment: Alignment.topRight,
+          children: [
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: bellIcon(),),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: unreadItem(),)
+          ],
+        ),
+      );
+    } else {
+      return bellIcon();
+    }
+  }
+
+  /// 消息icon
+  Widget bellIcon() {
+    return GestureDetector(
+      child: Image.asset(
+        SCAsset.iconMessage,
+        width: 24.0,
+        height: 24.0,
+        color: isSticky == true ? stickyColor : normalColor,
+      ),
+      onTap: () {
+        message();
+      },
+    );
+  }
+
+  /// 未读数量
+  Widget unreadItem() {
+    String text = unreadNum > 99 ? '99+' : '$unreadNum';
+    return Offstage(
+      offstage: unreadNum == 0,
+      child: Container(
+        height: 14.0,
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            color: SCColors.color_FF4040,
+            borderRadius: BorderRadius.circular(7.0),
+            border: Border.all(color: SCColors.color_FFFFFF, width: 0.5)),
+        child: Text(
+          text,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+              fontSize: SCFonts.f10,
+              fontWeight: FontWeight.w500,
+              color: SCColors.color_FFFFFF),
+        ),
+      ),
+    );
+  }
+
 
   /// 搜索框item
   Widget searchItem() {
