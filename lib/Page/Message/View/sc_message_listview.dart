@@ -76,7 +76,7 @@ class SCMessageListView extends StatelessWidget {
           }
           return SCMessageCardCell(
             type: cardType,
-            title: model.title,
+            title: model.category,
             icon: model.icon?.fileKey != null ? SCConfig.getImageUrl(model.icon?.fileKey ?? '') : SCAsset.iconMessageType,
             time: SCDateUtils.relativeDateFormat(DateTime.parse(model.noticeTime ?? '')),
             isUnread: type == 1 ? true : false,
