@@ -22,13 +22,13 @@ class SCDefaultValue {
   static const String kAMapWebKey = 'fb48becc7b7a077d4da585a977d39ed2';
 
   /// 微信appId
-  static const String kWeChatAppId = "wx37e729dfef38aad2";
+  static const String kWeChatAppId = "wx723fd7a4cb33146e";
 
   /// 微信appKey
-  static const String kWeChatAppKey = "9c43d236e8df615e5cf2501f189d0cd1";
+  static const String kWeChatAppKey = "f3efd17386b3a55753e4f565a76bb107";
 
   /// 微信universalLink
-  static const String kWeChatUniversalLink = "https://90ebce5254556de5a7c4db4334ced558.share2dlink.com/";
+  static const String kWeChatUniversalLink = "https://3c2700fc09d6a05386e7af5ee5fec806.share2dlink.com/";
 
   /// 网络超时时间
   static const int timeOut = 30000;

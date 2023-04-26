@@ -17,4 +17,8 @@ class SCH5FlutterKey {
   static const String call  = 'sc_app_phone';
   /// 打开浏览器
   static const String browser  = 'sc_app_browser';
+  /// 微信支付
+  static const String wechatPay  = 'sc_app_wechat_pay';
+  /// 支付宝支付
+  static const String alipay  = 'sc_app_alipay';
 }

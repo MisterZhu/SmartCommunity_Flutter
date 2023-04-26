@@ -134,7 +134,7 @@ class SCPersonalInfoListView extends StatelessWidget {
             packageValue: 'packageValue',
             nonceStr: 'nonceStr',
             sign: 'sign',
-            payResult: (result) {
+            result: (result) {
 
             }
           );

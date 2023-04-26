@@ -11,6 +11,7 @@ import 'package:smartcommunity/Page/Webview/Constant/sc_flutter_h5_key.dart';
 import 'package:smartcommunity/Page/Webview/Constant/sc_h5_flutter_key.dart';
 import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Skin/View/sc_custom_scaffold.dart';
+import 'package:smartcommunity/Utils/Pay/sc_pay_utils.dart';
 import 'package:smartcommunity/Utils/Permission/sc_permission_utils.dart';
 import 'package:smartcommunity/Utils/sc_sp_utils.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
@@ -178,6 +179,8 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
         photosChannel(context),
         callChannel(context),
         browserChannel(context),
+        wechatPayChannel(context),
+        alipayChannel(context),
       },
 
       ///WebView创建
@@ -289,10 +292,8 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
       onMessageReceived: (JavascriptMessage message) {
         SCPermissionUtils.scanCodeWithPrivacyAlert(completionHandler: (value) {
           var params = {
-            "status" : 1,
-            "data" : {
-              "result" : value
-            }
+            "status": 1,
+            "data": {"result": value}
           };
           webViewController?.runJavascript(SCUtils()
               .flutterCallH5(h5Name: SCFlutterH5Key.scan, params: params));
@@ -304,9 +305,9 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
       name: SCH5FlutterKey.userInfo,
       onMessageReceived: (JavascriptMessage message) {
         var params = {
-          'token' : SCScaffoldManager.instance.user.token,
-          'phone' : SCScaffoldManager.instance.user.mobileNum,
-          'userName' : SCScaffoldManager.instance.user.userName,
+          'token': SCScaffoldManager.instance.user.token,
+          'phone': SCScaffoldManager.instance.user.mobileNum,
+          'userName': SCScaffoldManager.instance.user.userName,
         };
         webViewController?.runJavascript(SCUtils()
             .flutterCallH5(h5Name: SCFlutterH5Key.userInfo, params: params));
@@ -319,10 +320,8 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
         SCPermissionUtils.takePhoto((String path) async {
           String base64 = await SCUtils().localImageToBase64(path);
           var params = {
-            "status" : 1,
-            "data" : {
-              "result" : base64
-            }
+            "status": 1,
+            "data": {"result": base64}
           };
           webViewController?.runJavascript(SCUtils()
               .flutterCallH5(h5Name: SCFlutterH5Key.camera, params: params));
@@ -340,10 +339,8 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
             list.add(base64);
           }
           var params = {
-            "status" : 1,
-            "data" : {
-              "result" : list
-            }
+            "status": 1,
+            "data": {"result": list}
           };
           webViewController?.runJavascript(SCUtils()
               .flutterCallH5(h5Name: SCFlutterH5Key.photos, params: params));
@@ -371,8 +368,6 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
       name: SCH5FlutterKey.browser,
       onMessageReceived: (JavascriptMessage message) {
         var params = jsonDecode(message.message);
-        print("浏览器===$params");
-        // String phone = params['phone'];
         SCUtils.browser(params);
         Future.delayed(const Duration(milliseconds: 500), () {
           if (mounted) {
@@ -383,6 +378,27 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
         });
       });
 
+  //  微信支付channel
+  JavascriptChannel wechatPayChannel(BuildContext context) => JavascriptChannel(
+      name: SCH5FlutterKey.wechatPay,
+      onMessageReceived: (JavascriptMessage message) {
+        var params = jsonDecode(message.message);
+        SCPayUtils().wechatPay(result: (value) {
+          webViewController?.runJavascript(SCUtils()
+              .flutterCallH5(h5Name: SCFlutterH5Key.wechatPay, params: jsonEncode(value)));
+        });
+      });
+
+  //  支付宝支付channel
+  JavascriptChannel alipayChannel(BuildContext context) => JavascriptChannel(
+      name: SCH5FlutterKey.alipay,
+      onMessageReceived: (JavascriptMessage message) {
+        var params = jsonDecode(message.message);
+        SCPayUtils().alipay(result: (value) {
+          webViewController?.runJavascript(SCUtils()
+              .flutterCallH5(h5Name: SCFlutterH5Key.alipay, params: jsonEncode(value)));
+        });
+      });
 
   /// 缓存建信租房token
   cacheJXToken(String token) {
