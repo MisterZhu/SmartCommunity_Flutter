@@ -11,4 +11,8 @@ class SCFlutterH5Key {
   static const String camera = 'sc_app_camera_result';
   /// 相册
   static const String photos  = 'sc_app_photos_result';
+  /// 微信支付结果
+  static const String wechatPay  = 'sc_app_wechat_pay_result';
+  /// 支付宝支付结果
+  static const String alipay  = 'sc_app_alipay_result';
 }

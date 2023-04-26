@@ -22,7 +22,7 @@ class SCWeChatUtils {
   static Future<bool> jumpMiniProgram(
       {required String username,
       String? path,
-      WXMiniProgramType miniProgramType = WXMiniProgramType.RELEASE}) async{
+      WXMiniProgramType miniProgramType = WXMiniProgramType.RELEASE}) async {
     bool installWechat = await installed();
     if (!installWechat) {
       SCToast.showTip(SCDefaultValue.unInstallWeChatTip);
@@ -33,7 +33,7 @@ class SCWeChatUtils {
   }
 
   /// 分享图片到会话
-  static void shareBinaryImage(Uint8List source) async{
+  static void shareBinaryImage(Uint8List source) async {
     bool installWechat = await installed();
     if (!installWechat) {
       SCToast.showTip(SCDefaultValue.unInstallWeChatTip);
@@ -44,7 +44,7 @@ class SCWeChatUtils {
   }
 
   /// 分享图片到会话
-  static void shareAssetImage(String source) async{
+  static void shareAssetImage(String source) async {
     bool installWechat = await installed();
     if (!installWechat) {
       SCToast.showTip(SCDefaultValue.unInstallWeChatTip);
@@ -55,7 +55,7 @@ class SCWeChatUtils {
   }
 
   /// 分享图片到会话
-  static void shareFileImage(File source) async{
+  static void shareFileImage(File source) async {
     bool installWechat = await installed();
     if (!installWechat) {
       SCToast.showTip(SCDefaultValue.unInstallWeChatTip);
@@ -66,7 +66,7 @@ class SCWeChatUtils {
   }
 
   /// 分享图片到会话
-  static void shareNetWorkImage(String source) async{
+  static void shareNetWorkImage(String source) async {
     bool installWechat = await installed();
     if (!installWechat) {
       SCToast.showTip(SCDefaultValue.unInstallWeChatTip);
@@ -77,7 +77,7 @@ class SCWeChatUtils {
   }
 
   /// 分享文字到会话
-  static void shareText(String source) async{
+  static void shareText(String source) async {
     bool installWechat = await installed();
     if (!installWechat) {
       SCToast.showTip(SCDefaultValue.unInstallWeChatTip);
@@ -91,7 +91,7 @@ class SCWeChatUtils {
       {required String url,
       String? title,
       String? content,
-      WeChatImage? image}) async{
+      WeChatImage? image}) async {
     bool installWechat = await installed();
     if (!installWechat) {
       SCToast.showTip(SCDefaultValue.unInstallWeChatTip);
@@ -120,12 +120,20 @@ class SCWeChatUtils {
     required String packageValue, // 微信要求的标识字符串
     required String nonceStr, // 随机字符串
     required String sign, // 计算好的签名
-    Function(bool result)? payResult
-  }) async{
-
+    Function(dynamic data)? result, // 支付结果
+  }) async {
+    /// 支付状态：0-未知错误,1-成功,2-失败
+    int payStatus = 0;
+    /// message
+    String msg = "";
     bool installWechat = await installed();
     if (!installWechat) {
       SCToast.showTip(SCDefaultValue.unInstallWeChatTip);
+      payStatus = 2;
+      msg = SCDefaultValue.unInstallWeChatTip;
+      result?.call({
+        "data": {"result": payStatus, "msg": msg}
+      });
       return;
     }
 
@@ -144,15 +152,21 @@ class SCWeChatUtils {
     wxPay = weChatResponseEventHandler.listen((event) async {
       wxPay?.cancel();
       if (event.errCode == 0) {
-        payResult?.call(true);
+        payStatus = 1;
+        msg = SCDefaultValue.paySuccessTip;
         SCToast.showTip(SCDefaultValue.paySuccessTip);
       } else {
-        payResult?.call(false);
+        payStatus = 2;
         if (event.errStr == null || event.errStr == '' || event.errStr == ' ') {
+          msg = SCDefaultValue.payFailureTip;
           SCToast.showTip(SCDefaultValue.payFailureTip);
         } else {
+          msg = event.errStr!;
           SCToast.showTip(event.errStr!);
         }
+        result?.call({
+          "data": {"result": payStatus, "msg": msg}
+        });
       }
     });
   }
