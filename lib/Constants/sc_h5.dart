@@ -8,9 +8,10 @@ class SCH5 {
   static const String communityPayUrl = "/h5Open/#/propertyPay/index";
   /// 常用电话
   static const String frequentlyMobileUrl = "/h5Open/#/frePhone/index";
-
   /// 问卷调查
   static const String questionnaire = '';
+  /// 商城购物
+  static const String mallUrl = '/h5Open/#/retailMall/index';
 
   /// 预缴账户
   static const String prepayUrl = "https://saasprod.4001113900.com:10020/h5new/newUser/index.html#/home/prepayAccount?defCommunityId=fe38ad0a-beaa-11eb-bdca-005056b13afd&appVersion=3.11.3&token=9f3f3eb4-5e39-40df-baeb-faaf2883fc34&defRoomId=2759511&defOrgId=2678533";

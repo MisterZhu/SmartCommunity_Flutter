@@ -112,6 +112,8 @@ class SCAsset {
   static const String iconItem11 = 'images/icon_mobile.png';
   /// 首页-问卷调查
   static const String iconItem12 = 'images/icon_questionnaire.png';
+  /// 首页-商城购物
+  static const String iconItem13 = 'images/icon_mall.png';
 
 
   /// 首页-banner1
