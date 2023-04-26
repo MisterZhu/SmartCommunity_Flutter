@@ -95,17 +95,9 @@ class SCMessagePageState extends State<SCMessagePage> with SingleTickerProviderS
                 },
                 tapAction: (index) {
                   if (index == 0) {
-                    controller.deleteMessage(allRead: true, completeHandler: (status) {
-                      if (status == true) {
-                        reloadData();
-                      }
-                    });
+                    controller.deleteMessage(allRead: true);
                   } else if (index == 1) {
-                    controller.deleteMessage(allClear: true, completeHandler: (status) {
-                      if (status == true) {
-                        reloadData();
-                      }
-                    });
+                    controller.deleteMessage(allClear: true);
                   }
                   controller.updateMoreDialogStatus();
                 },),
@@ -144,9 +136,4 @@ class SCMessagePageState extends State<SCMessagePage> with SingleTickerProviderS
     }
   }
 
-  /// 重新加载数据
-  reloadData() {
-    controller.loadAllData(isMore: false);
-    controller.loadUnreadData(isMore: false);
-  }
 }
