@@ -121,7 +121,7 @@ class SCPersonalInfoListView extends StatelessWidget {
       return SCSettingCell(
         title: '支付宝支付',
         onTap: () {
-          SCAliPayUtils.aliPay();
+          SCAliPayUtils.aliPay(data: '');
         },
       );
     } else if (index == 7) {
@@ -134,6 +134,8 @@ class SCPersonalInfoListView extends StatelessWidget {
             packageValue: 'packageValue',
             nonceStr: 'nonceStr',
             sign: 'sign',
+            appId: '',
+            timestamp: 1682579031,
             result: (result) {
 
             }

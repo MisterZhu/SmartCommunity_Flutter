@@ -120,6 +120,8 @@ class SCWeChatUtils {
     required String packageValue, // 微信要求的标识字符串
     required String nonceStr, // 随机字符串
     required String sign, // 计算好的签名
+    required int timestamp,// 时间戳
+    required String appId,// appId
     Function(dynamic data)? result, // 支付结果
   }) async {
     /// 支付状态：0-未知错误,1-成功,2-失败
@@ -136,10 +138,8 @@ class SCWeChatUtils {
       });
       return;
     }
-
-    int timestamp = SCDateUtils.timestamp();
     payWithWeChat(
-        appId: SCDefaultValue.kWeChatAppId,
+        appId: appId,
         partnerId: partnerId,
         prepayId: prepayId,
         packageValue: packageValue,

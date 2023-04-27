@@ -5,20 +5,29 @@ import 'package:smartcommunity/Utils/WeChat/sc_wechat_utils.dart';
 
 class SCPayUtils {
   /// 调用支付宝支付
-  alipay({Function(dynamic data)? result}) {
-    SCAliPayUtils.aliPay(result: (value) {
+  alipay({required String data, Function(dynamic data)? result}) {
+    SCAliPayUtils.aliPay(data: data, result: (value) {
       result?.call(value);
     });
   }
 
   /// 调用微信支付
-  wechatPay({Function(dynamic data)? result}) {
+  wechatPay({required dynamic params, Function(dynamic data)? result}) {
+    String partnerId = params['partnerid'];
+    String prepayId = params['prepayid'];
+    String packageValue = params['package'];
+    String nonceStr = params['noncestr'];
+    String sign = params['sign'];
+    String appId = params['appId'];
+    int timestamp = int.parse(params['timestamp']);
     SCWeChatUtils.wechatPay(
-        partnerId: '',
-        prepayId: '',
-        packageValue: '',
-        nonceStr: '',
-        sign: '',
+        partnerId: partnerId,
+        prepayId: prepayId,
+        packageValue: packageValue,
+        nonceStr: nonceStr,
+        sign: sign,
+        timestamp: timestamp,
+        appId: appId,
         result: (value) {
           result?.call(value);
         });
