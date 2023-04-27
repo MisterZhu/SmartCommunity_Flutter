@@ -9,7 +9,7 @@ class SCH5 {
   /// 常用电话
   static const String frequentlyMobileUrl = "/h5Open/#/frePhone/index";
   /// 问卷调查
-  static const String questionnaire = '';
+  static const String questionnaireUrl = '/h5Open/#/questionnaire/questionnaireList';
   /// 商城购物
   static const String mallUrl = '/h5Open/#/retailMall/index';
 
