@@ -154,20 +154,17 @@ class SCWeChatUtils {
       if (event.errCode == 0) {
         payStatus = 1;
         msg = SCDefaultValue.paySuccessTip;
-        SCToast.showTip(SCDefaultValue.paySuccessTip);
       } else {
         payStatus = 2;
         if (event.errStr == null || event.errStr == '' || event.errStr == ' ') {
           msg = SCDefaultValue.payFailureTip;
-          SCToast.showTip(SCDefaultValue.payFailureTip);
         } else {
           msg = event.errStr!;
-          SCToast.showTip(event.errStr!);
         }
-        result?.call({
-          "data": {"result": payStatus, "msg": msg}
-        });
       }
+      result?.call({
+        "data": {"result": payStatus, "msg": msg}
+      });
     });
   }
 }
