@@ -16,6 +16,7 @@ class SCAliPayUtils {
     String msg = "";
     if (isInstalled) {
       tobias.aliPay(data).then((payResult) {
+        print("支付结果===$payResult");
         if (payResult['resultStatus'] == '9000' || payResult['resultStatus'] == 9000) {
           payStatus = 1;
           msg = SCDefaultValue.paySuccessTip;
