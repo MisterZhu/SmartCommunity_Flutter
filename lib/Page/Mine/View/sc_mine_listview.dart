@@ -120,6 +120,18 @@ class SCMineListView extends StatelessWidget {
       },
       myCoupon: () {
         SCRouterHelper.pathPage(SCRouterPath.myCouponPage, null);
+      },
+      feedback: () {
+        String token = SCScaffoldManager.instance.user.token ?? "";
+        String userId = SCScaffoldManager.instance.user.id ?? "";
+        String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
+        String phoneNum = SCScaffoldManager.instance.user.mobileNum ?? '';
+        int gender = SCScaffoldManager.instance.user.gender ?? 0;
+        String city = SCScaffoldManager.instance.city;
+        double longitude = SCScaffoldManager.instance.longitude;
+        double latitude = SCScaffoldManager.instance.latitude;
+        String url = "${SCConfig.getH5Url(SCH5.feedBackUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender";
+        SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "意见反馈", "url" : url});
       }
     );
   }
