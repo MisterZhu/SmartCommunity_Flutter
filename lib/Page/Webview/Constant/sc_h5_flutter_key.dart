@@ -21,4 +21,6 @@ class SCH5FlutterKey {
   static const String wechatPay  = 'sc_app_wechat_pay';
   /// 支付宝支付
   static const String alipay  = 'sc_app_alipay';
+  /// 返回原生页面
+  static const String goback  = 'sc_app_back';
 }

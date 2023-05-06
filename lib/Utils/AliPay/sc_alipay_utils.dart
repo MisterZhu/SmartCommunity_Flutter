@@ -16,7 +16,7 @@ class SCAliPayUtils {
     /// message
     String msg = "";
     // if (isInstalled) {
-      tobias.aliPay(data, evn:AliPayEvn.SANDBOX).then((payResult) {
+      tobias.aliPay(data, evn:AliPayEvn.ONLINE).then((payResult) {
         print("支付宝支付结果===$payResult");
         if (payResult['resultStatus'] == '9000' || payResult['resultStatus'] == 9000) {
           payStatus = 1;

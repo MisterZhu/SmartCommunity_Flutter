@@ -181,6 +181,7 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
         browserChannel(context),
         wechatPayChannel(context),
         alipayChannel(context),
+        gobackNativeChannel(context),
       },
 
       ///WebView创建
@@ -403,6 +404,13 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
           webViewController?.runJavascript(SCUtils()
               .flutterCallH5(h5Name: SCFlutterH5Key.alipay, params: jsonEncode(value)));
         });
+      });
+
+  /// 返回原生页面
+  JavascriptChannel gobackNativeChannel(BuildContext context) => JavascriptChannel(
+      name: SCH5FlutterKey.goback,
+      onMessageReceived: (JavascriptMessage message) {
+        SCRouterHelper.back(null);
       });
 
   /// 缓存建信租房token

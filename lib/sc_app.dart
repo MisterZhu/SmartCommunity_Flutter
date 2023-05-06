@@ -36,6 +36,8 @@ void startApp() async {
     ));
   }
 
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(GetMaterialApp(
     theme: ThemeData(
         primaryColor: Colors.white,
