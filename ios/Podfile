@@ -1,5 +1,6 @@
 # Uncomment this line to define a global platform for your project
-platform :ios, '9.0'
+# Xcode14.3配置：platform :ios, '9.0'
+platform :ios, '11.0'
 
 source 'https://github.com/CocoaPods/Specs.git'
 inhibit_all_warnings!
@@ -40,6 +41,8 @@ post_install do |installer|
     flutter_additional_ios_build_settings(target)
 
     target.build_configurations.each do |config|
+      # Xcode14.3配置：去掉
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
       # You can remove unused permissions here
       # for more infomation: https://github.com/BaseflowIT/flutter-permission-handler/blob/master/permission_handler/ios/Classes/PermissionHandlerEnums.h
       # e.g. when you don't need camera permission, just add 'PERMISSION_CAMERA=0'

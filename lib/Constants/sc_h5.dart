@@ -12,6 +12,8 @@ class SCH5 {
   static const String questionnaireUrl = '/h5Open/#/questionnaire/questionnaireList';
   /// 商城购物
   static const String mallUrl = '/h5Open/#/retailMall/index';
+  /// 意见反馈
+  static const String feedBackUrl = '/h5Open/#/feedBack/index';
 
   /// 预缴账户
   static const String prepayUrl = "https://saasprod.4001113900.com:10020/h5new/newUser/index.html#/home/prepayAccount?defCommunityId=fe38ad0a-beaa-11eb-bdca-005056b13afd&appVersion=3.11.3&token=9f3f3eb4-5e39-40df-baeb-faaf2883fc34&defRoomId=2759511&defOrgId=2678533";

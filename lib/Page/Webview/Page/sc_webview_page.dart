@@ -383,7 +383,9 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
       name: SCH5FlutterKey.wechatPay,
       onMessageReceived: (JavascriptMessage message) {
         var params = jsonDecode(message.message);
+        print("微信支付参数===$params");
         SCPayUtils().wechatPay(params:params ,result: (value) {
+          print("微信支付000===${jsonEncode(value)}");
           webViewController?.runJavascript(SCUtils()
               .flutterCallH5(h5Name: SCFlutterH5Key.wechatPay, params: jsonEncode(value)));
         });
@@ -394,8 +396,10 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
       name: SCH5FlutterKey.alipay,
       onMessageReceived: (JavascriptMessage message) {
         var params = jsonDecode(message.message);
+        print("支付宝支付参数===$params");
         String payData = params['payData'];
         SCPayUtils().alipay(data: payData, result: (value) {
+          print("支付宝a===$value");
           webViewController?.runJavascript(SCUtils()
               .flutterCallH5(h5Name: SCFlutterH5Key.alipay, params: jsonEncode(value)));
         });

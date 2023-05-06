@@ -1,6 +1,7 @@
 
 import 'package:sc_uikit/sc_uikit.dart';
 import 'package:tobias/tobias.dart' as tobias;
+import 'package:tobias/tobias.dart';
 import '../../Constants/sc_default_value.dart';
 
 class SCAliPayUtils {
@@ -14,17 +15,15 @@ class SCAliPayUtils {
     int payStatus = 0;
     /// message
     String msg = "";
-    if (isInstalled) {
-      tobias.aliPay(data).then((payResult) {
-        print("支付结果===$payResult");
+    // if (isInstalled) {
+      tobias.aliPay(data, evn:AliPayEvn.SANDBOX).then((payResult) {
+        print("支付宝支付结果===$payResult");
         if (payResult['resultStatus'] == '9000' || payResult['resultStatus'] == 9000) {
           payStatus = 1;
           msg = SCDefaultValue.paySuccessTip;
-          SCToast.showTip(SCDefaultValue.paySuccessTip);
         } else {
           payStatus = 2;
           msg = payResult['memo'];
-          SCToast.showTip(payResult['memo']);
         }
         result?.call({
           "data": {
@@ -33,16 +32,16 @@ class SCAliPayUtils {
           }
         });
       });
-    } else {
-      SCToast.showTip(SCDefaultValue.unInstallAliPayTip);
-      payStatus = 2;
-      msg = SCDefaultValue.unInstallAliPayTip;
-      result?.call({
-        "data": {
-          "result": payStatus,
-          "msg": msg
-        }
-      });
-    }
+    // } else {
+    //   SCToast.showTip(SCDefaultValue.unInstallAliPayTip);
+    //   payStatus = 2;
+    //   msg = SCDefaultValue.unInstallAliPayTip;
+    //   result?.call({
+    //     "data": {
+    //       "result": payStatus,
+    //       "msg": msg
+    //     }
+    //   });
+    // }
   }
 }

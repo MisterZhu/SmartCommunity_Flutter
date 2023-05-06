@@ -43,6 +43,9 @@ class SCMineHeaderItem extends StatelessWidget {
   /// 点击我的优惠券
   final Function? myCoupon;
 
+  /// 点击意见反馈
+  final Function? feedback;
+
   const SCMineHeaderItem(
       {Key? key,
       this.backgroundImageUrl = SCAsset.iconMineBackground,
@@ -54,7 +57,8 @@ class SCMineHeaderItem extends StatelessWidget {
       this.userPic,
       this.myHouseTap,
       this.myBillTap,
-      this.myCoupon
+      this.myCoupon,
+      this.feedback,
       }) : super(key: key);
 
   @override
@@ -286,6 +290,7 @@ class SCMineHeaderItem extends StatelessWidget {
       {'icon': SCAsset.iconMyHouse, 'name': '我的房屋'},
       {'icon': SCAsset.iconMyBill, 'name': '我的账单'},
       {'icon': SCAsset.iconMyBill, 'name': '我的优惠券'},
+      {'icon': SCAsset.iconMyBill, 'name': '意见反馈'},
     ];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -327,6 +332,8 @@ class SCMineHeaderItem extends StatelessWidget {
           myBillTap?.call();
         } else if (index == 2) {
           myCoupon?.call();
+        } else if (index == 3) {
+          feedback?.call();
         }
       },
       child: Container(
