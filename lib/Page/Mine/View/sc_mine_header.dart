@@ -290,7 +290,6 @@ class SCMineHeaderItem extends StatelessWidget {
       {'icon': SCAsset.iconMyHouse, 'name': '我的房屋'},
       {'icon': SCAsset.iconMyBill, 'name': '我的账单'},
       {'icon': SCAsset.iconMyBill, 'name': '我的优惠券'},
-      {'icon': SCAsset.iconMyBill, 'name': '意见反馈'},
     ];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),

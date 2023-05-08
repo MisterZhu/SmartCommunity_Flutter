@@ -8,6 +8,9 @@ import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
 import '../../../../Constants/sc_agreement.dart';
 import '../../../../Constants/sc_default_value.dart';
+import '../../../../Constants/sc_h5.dart';
+import '../../../../Network/sc_config.dart';
+import '../../../../Utils/Device/sc_device_utils.dart';
 import '../../../../Utils/Router/sc_router_path.dart';
 import '../../../Home/GetXController/sc_home_controller.dart';
 import '../../GetXController/sc_setting_controller.dart';
@@ -35,12 +38,12 @@ class SCSettingListView extends StatelessWidget {
         },
         separatorBuilder: (BuildContext context, int index) {
           bool isLine = true;
-          if (index == 1) {
+          if (index == 2) {
             isLine = false;
           }
           return getLine(isLine);
         },
-        itemCount: 3);
+        itemCount: 4);
   }
   
   Widget getCell(int index) {
@@ -62,6 +65,10 @@ class SCSettingListView extends StatelessWidget {
       return SCSettingCell(title: '账号管理', onTap: (){
       },);
     } else if (index == 2) {
+      return SCSettingCell(title: '功能反馈', onTap: (){
+        feedBack();
+      },);
+    } else if (index == 3) {
       return logoutCell();
     } else {
       return const SizedBox(height: 100.0,);
@@ -99,6 +106,26 @@ class SCSettingListView extends StatelessWidget {
       if (status == true) {
         SCScaffoldManager.instance.logout();
       }
+    });
+  }
+
+  /// 功能反馈
+  feedBack() {
+    String token = SCScaffoldManager.instance.user.token ?? "";
+    String userId = SCScaffoldManager.instance.user.id ?? "";
+    String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
+    String phoneNum = SCScaffoldManager.instance.user.mobileNum ?? '';
+    int gender = SCScaffoldManager.instance.user.gender ?? 0;
+    String city = SCScaffoldManager.instance.city;
+    double longitude = SCScaffoldManager.instance.longitude;
+    double latitude = SCScaffoldManager.instance.latitude;
+    SCDeviceUtils.getDeviceInfo(result: (value){
+      String device = value['machine'] + "," + value['systemName'] + "," + value['systemVersion'];
+      String terminalName = Uri.encodeComponent(value['appName']);
+      String terminalVersion = value['version'];
+      device = device.replaceAll(RegExp(r"\s+\b|\b\s"), "");
+      String url = "${SCConfig.getH5Url(SCH5.feedBackUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&device=$device&terminalName=$terminalName&terminalVersion=$terminalVersion";
+      SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "功能反馈", "url" : url});
     });
   }
 

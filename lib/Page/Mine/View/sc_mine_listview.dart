@@ -18,6 +18,7 @@ import 'package:smartcommunity/Skin/Tools/sc_scaffold_manager.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
 import '../../../Constants/sc_asset.dart';
 import '../../../Network/sc_config.dart';
+import '../../../Utils/Device/sc_device_utils.dart';
 import '../../../Utils/Router/sc_router_path.dart';
 
 /// 我的-listview
@@ -130,8 +131,14 @@ class SCMineListView extends StatelessWidget {
         String city = SCScaffoldManager.instance.city;
         double longitude = SCScaffoldManager.instance.longitude;
         double latitude = SCScaffoldManager.instance.latitude;
-        String url = "${SCConfig.getH5Url(SCH5.feedBackUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender";
-        SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "意见反馈", "url" : url});
+        SCDeviceUtils.getDeviceInfo(result: (value){
+          String device = value['machine'] + "," + value['systemName'] + "," + value['systemVersion'];
+          String terminalName = Uri.encodeComponent(value['appName']);
+          String terminalVersion = value['version'];
+          device = device.replaceAll(RegExp(r"\s+\b|\b\s"), "");
+          String url = "${SCConfig.getH5Url(SCH5.feedBackUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&device=$device&terminalName=$terminalName&terminalVersion=$terminalVersion";
+          SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "意见反馈", "url" : url});
+        });
       }
     );
   }

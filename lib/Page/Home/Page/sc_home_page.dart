@@ -21,7 +21,6 @@ import 'package:smartcommunity/Utils/Date/sc_date_utils.dart';
 import 'package:smartcommunity/Utils/Permission/sc_location_utils.dart';
 import 'package:smartcommunity/Utils/Permission/sc_permission_utils.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
-import '../../../Utils/Device/sc_device_utils.dart';
 import '../../../Utils/Router/sc_router_helper.dart';
 import '../../Service/GetXController/sc_service_controller.dart';
 import '../../Tab/Page/sc_tab_page.dart';
@@ -74,14 +73,6 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
     /// 定位
     location();
     addNotification();
-    getDeviceInfo();
-  }
-
-  /// 获取设备信息
-  getDeviceInfo() {
-    SCDeviceUtils.getDeviceInfo(result: (value){
-      print("设备信息===$value");
-    });
   }
 
   /// body
