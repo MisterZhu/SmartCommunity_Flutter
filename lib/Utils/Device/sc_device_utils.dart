@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -7,27 +10,33 @@ class SCDeviceUtils {
 
   /// 获取设备信息
   static getDeviceInfo({required Function(Map<String, dynamic>) result}) async{
-    print("111");
     var deviceInfoPlugin = DeviceInfoPlugin();
     var deviceInfo = await deviceInfoPlugin.deviceInfo;
     var allInfo = deviceInfo.data;
-    print("aaa===$allInfo");
+
+    if (Platform.isIOS) {
+      var utsname = allInfo['utsname'];
+      String iMachine = utsname['machine'];
+      allInfo['machine'] = getIphoneModel(iMachine);
+    } else if (Platform.isAndroid) {
+      AndroidDeviceInfo androidDeviceInfo = await deviceInfoPlugin.androidInfo;
+      AndroidBuildVersion androidBuildVersion = androidDeviceInfo.version;
+      String release = androidBuildVersion.release;
+      allInfo['systemVersion'] = release;
+      allInfo['machine'] = allInfo['manufacturer'];
+      allInfo['systemName'] = "Android";
+    }
+
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
-
-    var utsname = allInfo['utsname'];
-    String iMachine = utsname['machine'];
-
     String appName = packageInfo.appName;
     String packageName = packageInfo.packageName;
     String version = packageInfo.version;
     String buildNumber = packageInfo.buildNumber;
 
-    allInfo['machine'] = getIphoneModel(iMachine);
     allInfo['appName'] = appName;
     allInfo['packageName'] = packageName;
     allInfo['version'] = version;
     allInfo['buildNumber'] = buildNumber;
-
 
     result.call(allInfo);
   }

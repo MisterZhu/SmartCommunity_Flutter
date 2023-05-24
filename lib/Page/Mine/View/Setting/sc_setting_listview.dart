@@ -49,7 +49,7 @@ class SCSettingListView extends StatelessWidget {
   Widget getCell(int index) {
     if (index == 0) {
       return SCSettingCell(title: '关于我们', onTap: (){
-
+        SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"url": SCH5.aboutH5Url, 'title': '关于'});
       },);
     // } else if (index == 1) {
     //   return SCSettingCell(title: '用户协议', onTap: (){
@@ -63,6 +63,7 @@ class SCSettingListView extends StatelessWidget {
     //   },);
     } else if (index == 1) {
       return SCSettingCell(title: '账号管理', onTap: (){
+        SCToast.showTip('功能开发中');
       },);
     } else if (index == 2) {
       return SCSettingCell(title: '功能反馈', onTap: (){
@@ -119,6 +120,7 @@ class SCSettingListView extends StatelessWidget {
     String city = SCScaffoldManager.instance.city;
     double longitude = SCScaffoldManager.instance.longitude;
     double latitude = SCScaffoldManager.instance.latitude;
+    print("功能反馈");
     SCDeviceUtils.getDeviceInfo(result: (value){
       String device = value['machine'] + "," + value['systemName'] + "," + value['systemVersion'];
       String terminalName = Uri.encodeComponent(value['appName']);

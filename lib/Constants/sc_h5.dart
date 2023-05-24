@@ -45,4 +45,7 @@ class SCH5 {
 
   /// 我的房屋
   static const String myHouseUrl = "/h5Open/#/userHouse/myRoomNo";
+
+  /// 关于
+  static const String aboutH5Url = "https://sq.wisharetec.com/h5new/public/homepage/indexSSSH.html";
 }
