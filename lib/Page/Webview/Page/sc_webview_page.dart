@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_key.dart';
@@ -384,7 +385,9 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
       name: SCH5FlutterKey.wechatPay,
       onMessageReceived: (JavascriptMessage message) {
         var params = jsonDecode(message.message);
+        Fluttertoast.showToast(msg: "微信支付");
         SCPayUtils().wechatPay(params:params ,result: (value) {
+          Fluttertoast.showToast(msg:value.toString());
           webViewController?.runJavascript(SCUtils()
               .flutterCallH5(h5Name: SCFlutterH5Key.wechatPay, params: jsonEncode(value)));
         });

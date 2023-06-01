@@ -692,19 +692,17 @@ packages:
     dependency: transitive
     description:
       path: "."
-      ref: "0.0.1"
-      resolved-ref: dc892e42ca590e35ccb6f02750714c7f1d107719
+      ref: HEAD
+      resolved-ref: "49b13756484fc854a180d5d58210854a15c36315"
       url: "http://10.100.10.22/jizuo-flutter/flutter_library/sc_tools.git"
     source: git
     version: "0.0.1"
   sc_uikit:
     dependency: "direct main"
     description:
-      path: "."
-      ref: "0.0.4"
-      resolved-ref: "4aae4342db67713070a704fbb914e024bbcd8b85"
-      url: "http://10.100.10.22/jizuo-flutter/flutter_library/sc_uikit.git"
-    source: git
+      path: "D:\\workspace\\flutter_uikit\\sc_uikit"
+      relative: false
+    source: path
     version: "0.0.1"
   scrollable_positioned_list:
     dependency: transitive
@@ -802,6 +800,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0"
+  stamp_image:
+    dependency: transitive
+    description:
+      name: stamp_image
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   stream_channel:
     dependency: transitive
     description:
