@@ -105,13 +105,13 @@ dependencies:
   # 包信息 https://pub.flutter-io.cn/packages/package_info_plus/install
   package_info_plus: ^3.1.2
 
-  sc_uikit:
-    path: D:\workspace\flutter_uikit\sc_uikit
+ # sc_uikit:
+ #   path: D:\workspace\flutter_uikit\sc_uikit
   # 私有UI库
-  #sc_uikit:
-  #  git:
-   #   url: http://10.100.10.22/jizuo-flutter/flutter_library/sc_uikit.git
-     # ref: '0.0.4'
+  sc_uikit:
+    git:
+      url: http://10.100.10.22/jizuo-flutter/flutter_library/sc_uikit.git
+      ref: '0.0.4'
 
 dev_dependencies:
   flutter_test:

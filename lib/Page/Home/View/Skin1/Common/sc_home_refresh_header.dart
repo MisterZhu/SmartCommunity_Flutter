@@ -1,4 +1,5 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh_notification/pull_to_refresh_notification.dart';
 import 'package:sc_uikit/sc_uikit.dart';
@@ -34,7 +35,7 @@ class SCHomeRefreshHeader extends StatelessWidget {
       color: color ?? Colors.transparent,
       child: const CupertinoActivityIndicator(
         radius: 16,
-        activeColor: SCColors.color_1B1C33,
+        color: SCColors.color_1B1C33,
       ),
     );
   }
