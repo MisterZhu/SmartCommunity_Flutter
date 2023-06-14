@@ -114,6 +114,7 @@ class SCAsset {
   static const String iconItem12 = 'images/icon_questionnaire.png';
   /// 首页-商城购物
   static const String iconItem13 = 'images/icon_mall.png';
+  static const String iconItem15= 'images/things_out_door.png';
 
 
   /// 首页-banner1

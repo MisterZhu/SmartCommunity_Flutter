@@ -16,6 +16,8 @@ class SCH5 {
   //物品借用
   static const String broowUrl = 'https://jmdev.wisharetec.com/h5Open/#/itemBorrowing/index';
 
+  static const String doorOutUrl = 'https://jmdev.wisharetec.com/h5Open/#/articleTake/articleList';
+
 
   /// 意见反馈
   static const String feedBackUrl = '/h5Open/#/feedBack/index';
