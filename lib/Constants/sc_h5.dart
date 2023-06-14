@@ -12,6 +12,11 @@ class SCH5 {
   static const String questionnaireUrl = '/h5Open/#/questionnaire/questionnaireList';
   /// 商城购物
   static const String mallUrl = '/h5Open/#/retailMall/index';
+
+  //物品借用
+  static const String broowUrl = 'https://jmdev.wisharetec.com/h5Open/#/itemBorrowing/index';
+
+
   /// 意见反馈
   static const String feedBackUrl = '/h5Open/#/feedBack/index';
 
