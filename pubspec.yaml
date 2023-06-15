@@ -104,8 +104,9 @@ dependencies:
   device_info_plus: ^8.2.2
   # 包信息 https://pub.flutter-io.cn/packages/package_info_plus/install
   package_info_plus: ^3.1.2
+  universal_platform: ^1.0.0+1
 
- # sc_uikit:
+  # sc_uikit:
  #   path: D:\workspace\flutter_uikit\sc_uikit
   # 私有UI库
   sc_uikit:

@@ -13,10 +13,12 @@ class SCH5 {
   /// 商城购物
   static const String mallUrl = '/h5Open/#/retailMall/index';
 
-  //物品借用
-  static const String broowUrl = 'https://jmdev.wisharetec.com/h5Open/#/itemBorrowing/index';
-
-  static const String doorOutUrl = 'https://jmdev.wisharetec.com/h5Open/#/articleTake/articleList';
+  ///物品借用
+  static const String broowUrl = '/h5Open/#/itemBorrowing/index';
+  ///物品出门
+  static const String doorOutUrl = '/h5Open/#/articleTake/articleList';
+  ///访客邀约
+  static const String invitationUrl = '/h5Open/#/visitorInvitation/index';
 
 
   /// 意见反馈
