@@ -117,7 +117,7 @@ class SCAsset {
   /// 首页-物品出门
   static const String iconItem15= 'images/things_out_door.png';
   /// 首页-访客邀约
-  static const String iconItem16= 'images/things_out_door.png';
+  static const String iconItem16= 'images/icon_iniv.png';
 
 
   /// 首页-banner1
