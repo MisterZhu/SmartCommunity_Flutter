@@ -7,7 +7,7 @@ class SCDefaultValue {
   static const  double defaultScreenWidth = 375.0;
 
   /// APP名称
-  static const String appName = '善数生活';
+  static const String appName = '方圆管家+';
 
   /// h5渠道，用于表示h5是应用在flutter上
   static int h5Channel = 1;
@@ -19,7 +19,7 @@ class SCDefaultValue {
   static const String appCode = '100';
 
   /// 高德web key
-  static const String kAMapWebKey = 'fb48becc7b7a077d4da585a977d39ed2';
+  static const String kAMapWebKey = 'a88d7d7f333e55129411579a79841d4d';
 
   /// 微信appId
   static const String kWeChatAppId = "wx723fd7a4cb33146e";

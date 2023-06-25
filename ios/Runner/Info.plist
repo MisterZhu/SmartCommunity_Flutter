@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>善数生活</string>
+	<string>方圆管家+</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -103,7 +103,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>允许App访问相机，您将可以在App中拍摄照片、视频、使用扫一扫功能。</string>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>善数生活App需要访问您的本地网络才能与善数生活服务器连接</string>
+	<string>方圆管家+App需要访问您的本地网络才能与方圆管家+服务器连接</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>允许App访问定位信息，您将快速定位到所属园区。</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

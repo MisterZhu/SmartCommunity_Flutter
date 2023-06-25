@@ -36,8 +36,8 @@ android {
 
     signingConfigs {
         wishare {
-            storeFile file('../yishenghuo.key')
-            keyAlias 'yishenghuo'
+            storeFile file('../fangyuan.keystore')
+            keyAlias 'fangyuan'
             keyPassword 'hx123456'
             storePassword 'hx123456'
             v1SigningEnabled true
@@ -47,7 +47,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.wishare.community.smartcommunity"
+        applicationId "com.fangyuan.community"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
 
