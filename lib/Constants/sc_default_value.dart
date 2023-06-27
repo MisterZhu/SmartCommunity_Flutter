@@ -7,7 +7,7 @@ class SCDefaultValue {
   static const  double defaultScreenWidth = 375.0;
 
   /// APP名称
-  static const String appName = '方圆管家+';
+  static const String appName = '方圆管家';
 
   /// h5渠道，用于表示h5是应用在flutter上
   static int h5Channel = 1;
