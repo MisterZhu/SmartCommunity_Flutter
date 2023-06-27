@@ -57,6 +57,7 @@ dependencies:
   # 汉字转拼音 https://pub.flutter-io.cn/packages/lpinyin
   lpinyin: ^2.0.2
   # 网络库 https://pub.flutter-io.cn/packages/dio/install
+  http_proxy: ^1.2.1
   dio: ^4.0.6
   # 定位 https://pub.flutter-io.cn/packages/geolocator/install
   geolocator: ^9.0.1
