@@ -18,7 +18,7 @@ class SCConfig {
       case SCEnvironment.pretest:
         return "https://test.fyelife.cn:28080";
       case SCEnvironment.production:
-        return "https://bsp.fineland.cn";
+        return "https://bsp.fineland.cn/";
       default:
         return "https://test.fyelife.cn";
     }
