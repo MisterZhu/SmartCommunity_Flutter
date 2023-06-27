@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:http_proxy/http_proxy.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_default_value.dart';
 import 'package:smartcommunity/Network/sc_config.dart';
@@ -73,14 +74,17 @@ class SCHttpManager {
   }
 
   /// 设置代理
-  setProxy(HttpClient client) {
-    if (SCConfig.env != SCEnvironment.production) {
-      if (SCSpUtil.getKeys().contains(SCKey.kProxyMap)) {
-        var map = SCSpUtil.getMap(SCKey.kProxyMap);
+  setProxy(HttpClient client) async {
+    HttpProxy proxy = await HttpProxy.createHttpProxy();
+    if (SCConfig.isSupportProxyForProduction) {
+      if((proxy.host?? '').isNotEmpty && (proxy.port?? '').isNotEmpty){
+        client.idleTimeout = const Duration(seconds: 5);
         client.findProxy = (uri) {
-          /// 172.16.171.69、172.16.171.30、172.16.171.63
-          return "PROXY ${map['IP']}:${map['port']}";
+          log("----抓包代理:host=${proxy.host}:${proxy.host}----");
+          return "PROXY ${proxy.host}:${proxy.port}";
         };
+      }else{
+        log("----未设置抓包代理----");
       }
     }
   }

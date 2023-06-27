@@ -7,6 +7,8 @@ class SCConfig {
   /// 环境
   static SCEnvironment env = SCEnvironment.develop;
 
+  static bool isSupportProxyForProduction = false;
+
   /// iOS是否支持平方SC字体
   static bool isSupportPFSCForIOS = true;
 
