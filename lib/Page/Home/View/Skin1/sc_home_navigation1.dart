@@ -90,7 +90,7 @@ class SCHomeNavigation1 extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         scanItem(context),
-        searchItem(),
+        // searchItem(),
       ],
     );
   }
@@ -178,17 +178,17 @@ class SCHomeNavigation1 extends StatelessWidget {
         const SizedBox(
           width: 16.0,
         ),
-        GestureDetector(
-          child: Image.asset(
-            SCAsset.iconScan,
-            width: 24.0,
-            height: 24.0,
-            color: isSticky == true ? stickyColor : normalColor,
-          ),
-          onTap: () {
-            scan();
-          },
-        ),
+        // GestureDetector(
+        //   child: Image.asset(
+        //     SCAsset.iconScan,
+        //     width: 24.0,
+        //     height: 24.0,
+        //     color: isSticky == true ? stickyColor : normalColor,
+        //   ),
+        //   onTap: () {
+        //     scan();
+        //   },
+        // ),
       ],
     ));
   }

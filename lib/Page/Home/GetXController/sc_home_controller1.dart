@@ -135,10 +135,10 @@ class SCHomeController1 extends GetxController {
       {"iconUrl": SCAsset.iconItem8, "title": "工单", "subUrl": workOrderUrl, "needHouseId": true},
       {"iconUrl": SCAsset.iconItem12, "title": "调查问卷", "subUrl": questionnaireUrl, "needHouseId": true},
       {"iconUrl": SCAsset.iconItem11, "title": "常用电话", "subUrl": frequentlyMobileUrl, "needHouseId": true},
-      {"iconUrl": SCAsset.iconItem13, "title": "商城购物", "subUrl": mallUrl, "needHouseId": true},
-      {"iconUrl": SCAsset.iconItem13, "title": "物品借用", "subUrl": broowUrl, "needHouseId": true},
-      {"iconUrl": SCAsset.iconItem15, "title": "物品出门", "subUrl": doorOutUrl, "needHouseId": true},
-      {"iconUrl": SCAsset.iconItem16, "title": "访客邀约", "subUrl": invitationUrl, "needHouseId": true},
+      // {"iconUrl": SCAsset.iconItem13, "title": "商城购物", "subUrl": mallUrl, "needHouseId": true},
+      // {"iconUrl": SCAsset.iconItem13, "title": "物品借用", "subUrl": broowUrl, "needHouseId": true},
+      // {"iconUrl": SCAsset.iconItem15, "title": "物品出门", "subUrl": doorOutUrl, "needHouseId": true},
+      // {"iconUrl": SCAsset.iconItem16, "title": "访客邀约", "subUrl": invitationUrl, "needHouseId": true},
     ];
     update();
   }
