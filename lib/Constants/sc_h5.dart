@@ -19,6 +19,8 @@ class SCH5 {
   static const String doorOutUrl = '/h5Open/#/articleTake/articleList';
   ///访客邀约
   static const String invitationUrl = '/h5Open/#/visitorInvitation/index';
+  /// 银行代收
+  static const String bankSignUrl = '/h5Open/#/bankSign/index';
 
 
   /// 意见反馈

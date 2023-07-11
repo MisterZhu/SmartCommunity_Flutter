@@ -118,6 +118,8 @@ class SCAsset {
   static const String iconItem15= 'images/things_out_door.png';
   /// 首页-访客邀约
   static const String iconItem16= 'images/icon_iniv.png';
+  /// 首页-银行待收
+  static const String iconItem17= 'images/icon_bank_collect.png';
 
 
   /// 首页-banner1
