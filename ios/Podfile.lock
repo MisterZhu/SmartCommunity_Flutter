@@ -13,6 +13,8 @@ PODS:
   - FMDB/standard (2.7.5)
   - geolocator_apple (1.2.0):
     - Flutter
+  - http_proxy (0.0.1):
+    - Flutter
   - image_picker_ios (0.0.1):
     - Flutter
   - MTBBarcodeScanner (5.0.11)
@@ -52,6 +54,7 @@ DEPENDENCIES:
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - fluwx (from `.symlinks/plugins/fluwx/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
+  - http_proxy (from `.symlinks/plugins/http_proxy/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
@@ -66,7 +69,7 @@ DEPENDENCIES:
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/CocoaPods/Specs:
     - FMDB
     - MTBBarcodeScanner
     - Toast
@@ -83,6 +86,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/fluwx/ios"
   geolocator_apple:
     :path: ".symlinks/plugins/geolocator_apple/ios"
+  http_proxy:
+    :path: ".symlinks/plugins/http_proxy/ios"
   image_picker_ios:
     :path: ".symlinks/plugins/image_picker_ios/ios"
   package_info_plus:
@@ -115,6 +120,7 @@ SPEC CHECKSUMS:
   fluwx: 02670633ce7509206f62b366e9734e7dda81e100
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   geolocator_apple: cc556e6844d508c95df1e87e3ea6fa4e58c50401
+  http_proxy: 20f129d3e1c70cfdef92530b374c619832027729
   image_picker_ios: 58b9c4269cb176f89acea5e5d043c9358f2d25f8
   MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
@@ -131,6 +137,6 @@ SPEC CHECKSUMS:
   webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
   WechatOpenSDK_Fuck: aa8f4b0af902837e887a1d40c62f06c060c1dc98
 
-PODFILE CHECKSUM: 5447cca4ac54874f9beb0be039a59ac98550fdb9
+PODFILE CHECKSUM: 640519e765b33bd7b9dd7bbdbee035b21445a3db
 
 COCOAPODS: 1.12.1
