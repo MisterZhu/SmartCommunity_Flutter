@@ -63,7 +63,7 @@ class SCLocationUtils {
 
   /// 获取位置
   static Future<Position> location() async{
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high,forceAndroidLocationManager:true);
     return position;
   }
 
