@@ -45,9 +45,10 @@ class SCHomeSkin1 extends StatelessWidget {
   /// listview
   Widget listView() {
     List dataList = [
+      ///topBg
+      // {'type': SCTypeDefine.SC_HOME_TYPE_TOPBG, 'data': []},
       /// banner
       {'type': SCTypeDefine.SC_HOME_TYPE_BANNER, 'data': []},
-
       /// 应用列表
       {'type': SCTypeDefine.SC_HOME_TYPE_ALLITEMS, 'data': []},
 

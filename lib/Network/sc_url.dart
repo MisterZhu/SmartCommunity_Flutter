@@ -97,5 +97,7 @@ class SCUrl {
   /// 领取优惠券
   static const String kReceiveCouponUrl = "/jmapi/operation/voucher/user/gain";
 
+  /// page模版
+  static const String pageTemplate = "/applet/decoration/v2/template";
 
 }

@@ -13,8 +13,11 @@ import 'package:smartcommunity/Page/Home/Model/sc_home_news_model.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
 
 import '../../../Constants/sc_default_value.dart';
+import '../../../Constants/sc_key.dart';
 import '../../../Constants/sc_type_define.dart';
 import '../../../Network/sc_config.dart';
+import '../../../Network/sc_http_manager.dart';
+import '../../../Network/sc_url.dart';
 import '../../../Skin/Tools/sc_scaffold_manager.dart';
 // import 'package:image_cropper/image_cropper.dart';
 
@@ -57,22 +60,22 @@ class SCHomeController2 extends GetxController {
   void onInit() {
     super.onInit();
     /// 新工单
-    String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
-    String token = SCScaffoldManager.instance.user.token ?? "";
-    String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
-    String workOrderUrl = "${SCConfig.getH5Url(SCH5.workOrderUrl)}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
-    allItemsList = [
-      {"iconUrl" : SCAsset.iconItem10, "title" : "新工单", "subUrl" : workOrderUrl},
-      {"iconUrl" : SCAsset.iconItem1, "title" : "园区缴费", "subUrl" : SCH5.communityPayUrl},
-      {"iconUrl" : SCAsset.iconItem2, "title" : "预缴账户", "subUrl" : SCH5.prepayUrl},
-      {"iconUrl" : SCAsset.iconItem3, "title" : "项目入驻", "subUrl" : SCH5.projectEnterUrl},
-      {"iconUrl" : SCAsset.iconItem4, "title" : "公共缴费", "subUrl" : SCH5.publicPayUrl},
-      {"iconUrl" : SCAsset.iconItem5, "title" : "问卷调查", "subUrl" : SCH5.questionnaireSurveyUrl},
-      {"iconUrl" : SCAsset.iconItem6, "title" : "访客通行", "subUrl" : SCH5.visitorUrl},
-      {"iconUrl" : SCAsset.iconItem7, "title" : "入伙验房", "subUrl" : SCH5.houseInspectionManagementUrl},
-      {"iconUrl" : SCAsset.iconItem8, "title" : "园区停车", "subUrl" : SCH5.communityParkUrl},
-      {"iconUrl" : SCAsset.iconItem9, "title" : "垃圾分类", "subUrl" : SCH5.garbageSortUrl},
-    ];
+    // String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+    // String token = SCScaffoldManager.instance.user.token ?? "";
+    // String defRoomId = SCScaffoldManager.instance.user.spaceId.toString();
+    // String workOrderUrl = "${SCConfig.getH5Url(SCH5.workOrderUrl)}?defCommunityId=$defCommunityId&Authorization=$token&defRoomId=$defRoomId&client=${SCDefaultValue.client}";
+    // allItemsList = [
+    //   {"iconUrl" : SCAsset.iconItem10, "title" : "新工单", "subUrl" : workOrderUrl},
+    //   {"iconUrl" : SCAsset.iconItem1, "title" : "园区缴费", "subUrl" : SCH5.communityPayUrl},
+    //   {"iconUrl" : SCAsset.iconItem2, "title" : "预缴账户", "subUrl" : SCH5.prepayUrl},
+    //   {"iconUrl" : SCAsset.iconItem3, "title" : "项目入驻", "subUrl" : SCH5.projectEnterUrl},
+    //   {"iconUrl" : SCAsset.iconItem4, "title" : "公共缴费", "subUrl" : SCH5.publicPayUrl},
+    //   {"iconUrl" : SCAsset.iconItem5, "title" : "问卷调查", "subUrl" : SCH5.questionnaireSurveyUrl},
+    //   {"iconUrl" : SCAsset.iconItem6, "title" : "访客通行", "subUrl" : SCH5.visitorUrl},
+    //   {"iconUrl" : SCAsset.iconItem7, "title" : "入伙验房", "subUrl" : SCH5.houseInspectionManagementUrl},
+    //   {"iconUrl" : SCAsset.iconItem8, "title" : "园区停车", "subUrl" : SCH5.communityParkUrl},
+    //   {"iconUrl" : SCAsset.iconItem9, "title" : "垃圾分类", "subUrl" : SCH5.garbageSortUrl},
+    // ];
     listViewData =  [
       /// banner
       {'type': SCTypeDefine.SC_HOME_TYPE_BANNER, 'data': []},
@@ -92,8 +95,44 @@ class SCHomeController2 extends GetxController {
       /// 精选商品
       {'type': SCTypeDefine.SC_HOME_TYPE_GOODS, 'data': []},
     ];
-    // navigationOffset = 44.0 + SCUtils().getTopSafeArea();
+    navigationOffset = 44.0 + SCUtils().getTopSafeArea();
+    updateHomeData();
     navigationOffset = topNavBGImageHeight;
+  }
+
+
+  /// 更新首页数据
+  updateHomeData() {
+    String token = SCScaffoldManager.instance.user.token ?? "";
+    String userId = SCScaffoldManager.instance.user.id ?? "";
+    String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
+    String phoneNum = SCScaffoldManager.instance.user.mobileNum ?? '';
+    int gender = SCScaffoldManager.instance.user.gender ?? 0;
+    String city = SCScaffoldManager.instance.city;
+    double longitude = SCScaffoldManager.instance.longitude;
+    double latitude = SCScaffoldManager.instance.latitude;
+    String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
+
+    String communityPayUrl = "${SCConfig.getH5Url(SCH5.communityPayUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String workOrderUrl = "${SCConfig.getH5Url(SCH5.workOrderUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String questionnaireUrl = "${SCConfig.getH5Url(SCH5.questionnaireUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String frequentlyMobileUrl = "${SCConfig.getH5Url(SCH5.frequentlyMobileUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String mallUrl = "${SCConfig.getH5Url(SCH5.mallUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String broowUrl = "${SCConfig.getH5Url(SCH5.broowUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String doorOutUrl = "${SCConfig.getH5Url(SCH5.doorOutUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String invitationUrl = "${SCConfig.getH5Url(SCH5.invitationUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+
+    allItemsList = [
+      {"iconUrl": SCAsset.iconItem1, "title": "物业缴费", "subUrl": communityPayUrl, "needHouseId": true},
+      {"iconUrl": SCAsset.iconItem8, "title": "工单", "subUrl": workOrderUrl, "needHouseId": true},
+      {"iconUrl": SCAsset.iconItem12, "title": "调查问卷", "subUrl": questionnaireUrl, "needHouseId": true},
+      {"iconUrl": SCAsset.iconItem11, "title": "常用电话", "subUrl": frequentlyMobileUrl, "needHouseId": true},
+      // {"iconUrl": SCAsset.iconItem13, "title": "商城购物", "subUrl": mallUrl, "needHouseId": true},
+      // {"iconUrl": SCAsset.iconItem13, "title": "物品借用", "subUrl": broowUrl, "needHouseId": true},
+      // {"iconUrl": SCAsset.iconItem15, "title": "物品出门", "subUrl": doorOutUrl, "needHouseId": true},
+      // {"iconUrl": SCAsset.iconItem16, "title": "访客邀约", "subUrl": invitationUrl, "needHouseId": true},
+    ];
+    update();
   }
 
   /// 修改导航栏透状态
@@ -128,6 +167,23 @@ class SCHomeController2 extends GetxController {
       communityName = name;
     }
     update();
+  }
+
+
+  /// 获取未读消息数量
+  loadUnreadMessageCount() {
+    SCHttpManager.instance.get(
+        url: SCUrl.kMessageCountUrl,
+        params: {'checked': false},
+        success: (value) {
+          if (value is int) {
+            SCScaffoldManager.instance.unreadMessageCount = value;
+            var params = {"key" : SCKey.kReloadUnreadMessageCount};
+            SCScaffoldManager.instance.eventBus.fire(params);
+          }
+        },
+        failure: (value) {
+        });
   }
 
   @override

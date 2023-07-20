@@ -46,13 +46,12 @@ class SCHomeListView1 extends StatefulWidget {
       required this.bannerList,
       required this.navigationHeight,
       required this.tabTitleList,
-      this.bannerBGScale = 750.0 / 544.0,
+      this.bannerBGScale = 705.0 / 544.0,
       this.bannerScale = 686.0 / 280.0,
       this.bannerCurrentIndex = 0,
       this.bannerBackgroundImageUrl = SCAsset.homeBannerBG1,
       this.getUserInfoAction,
-      this.refreshAction
-      })
+      this.refreshAction})
       : super(key: key);
 
   /// listView数据源
@@ -98,7 +97,8 @@ class SCHomeListView1State extends State<SCHomeListView1>
 
   SCHomeNav1Controller nav1State = Get.find<SCHomeNav1Controller>();
 
-  RefreshController refreshController = RefreshController(initialRefresh: false);
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
 
   /// tabController
   late final TabController tabController;
@@ -204,37 +204,44 @@ class SCHomeListView1State extends State<SCHomeListView1>
   /// tabBar
   Widget tabBarItem() {
     return SCHomeTabBar(
-        tabController: tabController,
-        titleList: widget.tabTitleList,
-        height: tabBarHeight,
+      tabController: tabController,
+      titleList: widget.tabTitleList,
+      height: tabBarHeight,
     );
   }
 
   /// listView
   Widget listView() {
-    return SmartRefresher(controller: refreshController,onRefresh: onRefresh, header: const SCCustomHeader(
-      style: SCCustomHeaderStyle.noNavigation,
-    ), child: ListView.separated(
-        padding: EdgeInsets.zero,
-        shrinkWrap: true,
-        controller: scrollController,
-        // physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (BuildContext context, int index) {
-          int type = widget.dataList[index]['type'];
-          return getCell(type: type);
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          if (widget.dataList[index] == SCTypeDefine.SC_HOME_TYPE_GRID) {
-            return const SizedBox();
-          } else {
-            return lineWidget();
-          }
-        },
-        itemCount: widget.dataList.length));
+    return SmartRefresher(
+        controller: refreshController,
+        onRefresh: onRefresh,
+        header: const SCCustomHeader(
+          style: SCCustomHeaderStyle.noNavigation,
+        ),
+        child: ListView.separated(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            controller: scrollController,
+            // physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (BuildContext context, int index) {
+              int type = widget.dataList[index]['type'];
+              return getCell(type: type);
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              if (widget.dataList[index] == SCTypeDefine.SC_HOME_TYPE_GRID) {
+                return const SizedBox();
+              } else {
+                return lineWidget();
+              }
+            },
+            itemCount: widget.dataList.length));
   }
 
   /// 获取cell
   Widget getCell({required int type}) {
+    // if (type == SCTypeDefine.SC_HOME_TYPE_TOPBG) {
+    //   return topBG();
+    // } else
     if (type == SCTypeDefine.SC_HOME_TYPE_BANNER) {
       // banner
       return bannerCell();
@@ -277,16 +284,52 @@ class SCHomeListView1State extends State<SCHomeListView1>
 
   /// banner-cell
   Widget bannerCell() {
-    return SCHomeBanner(
-      bannerBGScale: widget.bannerBGScale,
-      bannerScale: widget.bannerScale,
-      bannerList: widget.bannerList,
-      backgroundImageUrl: widget.bannerBackgroundImageUrl,
-      currentIndex: widget.bannerCurrentIndex,
-      onTap: (int index) {
-        //workOrder();
-      },
+    return Stack(
+      children: [
+        topBG(),
+        Positioned(
+          top: 100.0,
+          left: 0.0,
+          right: 0.0,
+          child: ClipRect(
+              child: Container(
+            width: double.infinity,
+            // height: 300,
+            padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: SCHomeBanner(
+                bannerBGScale: widget.bannerBGScale,
+                bannerScale: widget.bannerScale,
+                bannerList: widget.bannerList,
+                backgroundImageUrl: widget.bannerBackgroundImageUrl,
+                currentIndex: widget.bannerCurrentIndex,
+                onTap: (int index) {
+                  //workOrder();
+                },
+              ),
+            ),
+          )),
+        ),
+        SizedBox(
+          height: 220.0,
+        )
+      ],
     );
+  }
+
+  /// 顶部背景图片
+  Widget topBG() {
+    return GetBuilder<SCHomeController1>(builder: (state) {
+      return Visibility(
+          visible: !state.navigationSticky,
+          child: Image.asset(
+            SCAsset.homeSkin2TopBG,
+            fit: BoxFit.fill,
+            width: SCUtils().getScreenWidth(),
+            height: state.topNavBGImageHeight,
+          ));
+    });
   }
 
   /// 应用列表-cell
@@ -430,14 +473,16 @@ class SCHomeListView1State extends State<SCHomeListView1>
   workOrder() {
     String token = SCScaffoldManager.instance.user.token ?? "";
     String userId = SCScaffoldManager.instance.user.id ?? "";
-    String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
+    String userName =
+        Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
     String phoneNum = SCScaffoldManager.instance.user.mobileNum ?? '';
     int gender = SCScaffoldManager.instance.user.gender ?? 0;
     String city = SCScaffoldManager.instance.city;
     double longitude = SCScaffoldManager.instance.longitude;
     double latitude = SCScaffoldManager.instance.latitude;
     String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
-    String workOrderUrl = "${SCConfig.getH5Url(SCH5.workOrderUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String workOrderUrl =
+        "${SCConfig.getH5Url(SCH5.workOrderUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
     var params = {"title": "工单", "url": workOrderUrl};
     SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
   }
@@ -464,8 +509,8 @@ class SCHomeListView1State extends State<SCHomeListView1>
                 text: '确定',
                 textColor: SCColors.color_FF6C00,
                 fontWeight: FontWeight.w400, onTap: () async {
-                  myHouse();
-                }),
+              myHouse();
+            }),
           ],
         );
       } else {
@@ -474,7 +519,8 @@ class SCHomeListView1State extends State<SCHomeListView1>
           SCToast.showTip('功能开发中...');
           return;
         }
-        SCRouterHelper.pathPage(SCRouterPath.webViewPath, params)?.then((value) {
+        SCRouterHelper.pathPage(SCRouterPath.webViewPath, params)
+            ?.then((value) {
           widget.getUserInfoAction?.call();
         });
       }
@@ -492,25 +538,28 @@ class SCHomeListView1State extends State<SCHomeListView1>
               text: '登录',
               textColor: SCColors.color_FF6C00,
               fontWeight: FontWeight.w400, onTap: () async {
-                SCRouterHelper.presentLoginPage();
-              }),
+            SCRouterHelper.presentLoginPage();
+          }),
         ],
       );
     }
   }
 
   /// 我的房屋
-  myHouse() async{
+  myHouse() async {
     String token = SCScaffoldManager.instance.user.token ?? "";
     String userId = SCScaffoldManager.instance.user.id ?? "";
-    String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
+    String userName =
+        Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
     String phoneNum = SCScaffoldManager.instance.user.mobileNum ?? '';
     int gender = SCScaffoldManager.instance.user.gender ?? 0;
     String city = SCScaffoldManager.instance.city;
     double longitude = SCScaffoldManager.instance.longitude;
     double latitude = SCScaffoldManager.instance.latitude;
-    String url = "${SCConfig.getH5Url(SCH5.myHouseUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender";
-    SCRouterHelper.pathPage(SCRouterPath.webViewPath, {"title" : "我的房屋", "url" : url})?.then((value) {
+    String url =
+        "${SCConfig.getH5Url(SCH5.myHouseUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender";
+    SCRouterHelper.pathPage(
+        SCRouterPath.webViewPath, {"title": "我的房屋", "url": url})?.then((value) {
       widget.getUserInfoAction?.call();
     });
   }

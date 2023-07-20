@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Constants/sc_asset.dart';
 import 'package:smartcommunity/Constants/sc_enum.dart';
 import 'package:smartcommunity/Constants/sc_skin_value.dart';
@@ -16,9 +17,30 @@ import '../../../Constants/sc_key.dart';
 import '../../../Network/sc_http_manager.dart';
 import '../../../Network/sc_url.dart';
 import '../../../Skin/Model/sc_visitor_decoration_model.dart';
+import '../../../Utils/sc_utils.dart';
 // import 'package:image_cropper/image_cropper.dart';
 
 class SCHomeController1 extends GetxController {
+
+  /// 背景图片scale
+  double topNavBGImageScale = 782.0 / 384.0;
+  /// 背景图片高度
+  double topNavBGImageHeight = 168.0 - (SCUtils().getTopSafeArea() > 20 ? 0.0 : 30.0);
+
+  /// 导航栏不透明度
+  double opacity = 1.0;
+
+  /// 导航栏默认offset
+  double navigationOffset = 64.0;
+
+  /// 导航栏背景颜色,默认白色
+  Color navigationBackgroundColor = SCColors.color_FE8947;
+  /// 导航栏状态，是否置顶
+  bool navigationSticky = false;
+  /// 导航栏置顶颜色,默认白色
+  Color navigationStickyColor = Colors.white;
+  /// 未置顶颜色,默认白色
+  Color navigationNormalColor = Colors.white;
   /// banner背景大图比例
   double bannerBGScale = 750.0 / 544.0;
 
@@ -129,18 +151,16 @@ class SCHomeController1 extends GetxController {
     String broowUrl = "${SCConfig.getH5Url(SCH5.broowUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
     String doorOutUrl = "${SCConfig.getH5Url(SCH5.doorOutUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
     String invitationUrl = "${SCConfig.getH5Url(SCH5.invitationUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
-    String bankCollectUrl = "${SCConfig.getH5Url(SCH5.bankSignUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
 
     allItemsList = [
       {"iconUrl": SCAsset.iconItem1, "title": "物业缴费", "subUrl": communityPayUrl, "needHouseId": true},
       {"iconUrl": SCAsset.iconItem8, "title": "工单", "subUrl": workOrderUrl, "needHouseId": true},
       {"iconUrl": SCAsset.iconItem12, "title": "调查问卷", "subUrl": questionnaireUrl, "needHouseId": true},
       {"iconUrl": SCAsset.iconItem11, "title": "常用电话", "subUrl": frequentlyMobileUrl, "needHouseId": true},
-      // {"iconUrl": SCAsset.iconItem17, "title": "银行划款", "subUrl": bankCollectUrl, "needHouseId": true},
-      // {"iconUrl": SCAsset.iconItem13, "title": "商城购物", "subUrl": mallUrl, "needHouseId": true},
-      // {"iconUrl": SCAsset.iconItem13, "title": "物品借用", "subUrl": broowUrl, "needHouseId": true},
-      // {"iconUrl": SCAsset.iconItem15, "title": "物品出门", "subUrl": doorOutUrl, "needHouseId": true},
-      // {"iconUrl": SCAsset.iconItem16, "title": "访客邀约", "subUrl": invitationUrl, "needHouseId": true},
+      {"iconUrl": SCAsset.iconItem13, "title": "商城购物", "subUrl": mallUrl, "needHouseId": true},
+      {"iconUrl": SCAsset.iconItem13, "title": "物品借用", "subUrl": broowUrl, "needHouseId": true},
+      {"iconUrl": SCAsset.iconItem15, "title": "物品出门", "subUrl": doorOutUrl, "needHouseId": true},
+      {"iconUrl": SCAsset.iconItem16, "title": "访客邀约", "subUrl": invitationUrl, "needHouseId": true},
     ];
     update();
   }

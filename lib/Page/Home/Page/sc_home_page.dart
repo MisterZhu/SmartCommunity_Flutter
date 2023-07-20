@@ -104,7 +104,7 @@ class SCHomeState extends State<SCHomePage>
   Widget skin() {
     return GetBuilder<SCHomeController>(builder: (state) {
       if (state.skinStyle == 0) {
-        return skin1();
+        return skin2();
       } else if (state.skinStyle == 1) {
         return skin2();
       } else {
@@ -134,19 +134,13 @@ class SCHomeState extends State<SCHomePage>
         width: double.infinity,
         height: double.infinity,
         child: GetBuilder<SCHomeController2>(builder: (state) {
-          return SCHomeSkin2();
+          return SCHomeSkin2( getUserInfoAction: () {
+            state2.loadUnreadMessageCount();
+            getUserInfo();
+          },);
         }));
   }
 
-  /// skin3
-  Widget skin3() {
-    return SizedBox(
-        width: double.infinity,
-        height: double.infinity,
-        child: GetBuilder<SCHomeController2>(builder: (state) {
-          return SCHomeSkin2();
-        }));
-  }
 
   /// 登录悬浮窗
   Widget floatLoginWidget() {

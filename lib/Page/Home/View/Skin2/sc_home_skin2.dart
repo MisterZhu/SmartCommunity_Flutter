@@ -7,15 +7,17 @@ import 'package:smartcommunity/Page/Home/View/Skin2/sc_home_navigation2.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_path.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
 import '../../../../Constants/sc_asset.dart';
+import '../../../../Skin/Tools/sc_scaffold_manager.dart';
 import '../../../../Utils/Router/sc_router_helper.dart';
 
 /// 首页第二套皮肤
 
 class SCHomeSkin2 extends StatelessWidget {
-  SCHomeSkin2({Key? key}) : super(key: key);
+  SCHomeSkin2({Key? key,this.getUserInfoAction}) : super(key: key);
 
   double navHeight = 44.0 + SCUtils().getTopSafeArea();
-
+  /// 获取用户信息
+  final Function? getUserInfoAction;
   SCHomeController2 state = Get.find<SCHomeController2>();
 
   @override
@@ -29,6 +31,7 @@ class SCHomeSkin2 extends StatelessWidget {
       children: [topBG(), topNav(), listView()],
     );
   }
+
 
   /// 顶部背景图片
   Widget topBG() {
@@ -51,6 +54,7 @@ class SCHomeSkin2 extends StatelessWidget {
         height: navHeight,
         child: GetBuilder<SCHomeController2>(builder: (state){
           return SCHomeNavigation2(
+            unreadNum: SCScaffoldManager.instance.unreadMessageCount,
             roomTitle: state.communityName,
             isSticky: state.navigationSticky,
             backgroundColor: state.navigationBackgroundColor,
@@ -79,6 +83,12 @@ class SCHomeSkin2 extends StatelessWidget {
           scrollFunction: (value) {
             state.changeNavigationState(offset: value);
           },
+         getUserInfoAction: () {
+           getUserInfoAction?.call();
+         },
+         refreshAction: () {
+           getUserInfoAction?.call();
+         },
        );
       }),
     );

@@ -30,6 +30,8 @@ class SCTypeDefine {
   static const int SC_HOME_TYPE_LIFE2 = 12;
   /// 精选商品
   static const int SC_HOME_TYPE_GOODS = 13;
+  /// 背景图
+  static const int SC_HOME_TYPE_TOPBG = 14;
 
 
   /************************* 首页-cellType *************************/

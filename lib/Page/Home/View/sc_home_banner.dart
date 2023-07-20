@@ -48,6 +48,7 @@ class SCHomeBanner extends StatelessWidget {
         bannerTap();
       },
       child: Stack(
+
         children: [
           swiperItem(),
           //backgroundImage(),
@@ -61,7 +62,7 @@ class SCHomeBanner extends StatelessWidget {
   /// swiperItem
   Widget swiperItem() {
     return AspectRatio(
-      aspectRatio: bannerBGScale,
+      aspectRatio: bannerScale,
       child: Swiper(
         autoplay: true,
         onTap: (index) {

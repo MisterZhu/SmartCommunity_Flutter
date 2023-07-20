@@ -39,8 +39,12 @@ class SCHomeNavigation2 extends StatelessWidget {
   /// 消息
   final Function? messageAction;
 
+  /// 消息未读数量
+  final int unreadNum;
+
   SCHomeNavigation2({
     Key? key,
+    required this.unreadNum,
     this.backgroundColor = Colors.transparent,
     this.normalColor = Colors.white,
     this.stickyColor = Colors.white,
@@ -79,7 +83,7 @@ class SCHomeNavigation2 extends StatelessWidget {
       color: Colors.transparent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [roomItem(), rightActionsItem()],
+        children: [rightActionsItem()],
       ),
     );
   }
@@ -131,34 +135,34 @@ class SCHomeNavigation2 extends StatelessWidget {
         child: Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        GestureDetector(
-          onTap: () {
-            searchAction?.call();
-          },
-          child: Image.asset(
-            SCAsset.iconNavSearchWhite,
-            width: 22.0,
-            height: 22.0,
-            color: isSticky == true ? stickyColor : normalColor,
-          ),
-        ),
-        const SizedBox(
-          width: 16.0,
-        ),
-        GestureDetector(
-          onTap: () {
-            messageAction?.call();
-          },
-          child: Image.asset(
-            SCAsset.iconMessage,
-            width: 22.0,
-            height: 22.0,
-            color: isSticky == true ? stickyColor : normalColor,
-          ),
-        ),
-        const SizedBox(
-          width: 16.0,
-        ),
+        // GestureDetector(
+        //   onTap: () {
+        //     searchAction?.call();
+        //   },
+        //   child: Image.asset(
+        //     SCAsset.iconNavSearchWhite,
+        //     width: 22.0,
+        //     height: 22.0,
+        //     color: isSticky == true ? stickyColor : normalColor,
+        //   ),
+        // ),
+        // const SizedBox(
+        //   width: 16.0,
+        // ),
+        // GestureDetector(
+        //   onTap: () {
+        //     messageAction?.call();
+        //   },
+        //   child: Image.asset(
+        //     SCAsset.iconMessage,
+        //     width: 22.0,
+        //     height: 22.0,
+        //     color: isSticky == true ? stickyColor : normalColor,
+        //   ),
+        // ),
+        // const SizedBox(
+        //   width: 16.0,
+        // ),
         GestureDetector(
           onTap: () {
             messageAction?.call();
@@ -170,9 +174,81 @@ class SCHomeNavigation2 extends StatelessWidget {
             color: isSticky == true ? stickyColor : normalColor,
           ),
         ),
+        const SizedBox(
+          width: 16.0,
+        ),
+        messageItem(),
       ],
     ));
   }
+
+
+  Widget messageItem() {
+    if (unreadNum > 0) {
+      return SizedBox(
+        width: 36.0,
+        height: 30,
+        child: Stack(
+          alignment: Alignment.topRight,
+          children: [
+            Positioned(
+              bottom: 3,
+              left: 0,
+              right: 0,
+              child: bellIcon(),),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: unreadItem(),)
+          ],
+        ),
+      );
+    } else {
+      return bellIcon();
+    }
+  }
+
+  /// 消息icon
+  Widget bellIcon() {
+    return GestureDetector(
+      child: Image.asset(
+        SCAsset.iconMessage,
+        width: 24.0,
+        height: 24.0,
+        color: isSticky == true ? stickyColor : normalColor,
+      ),
+      onTap: () {
+        message();
+      },
+    );
+  }
+
+  /// 未读数量
+  Widget unreadItem() {
+    String text = unreadNum > 99 ? '99+' : '$unreadNum';
+    return Offstage(
+      offstage: unreadNum == 0,
+      child: Container(
+        height: 14.0,
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            color: SCColors.color_FF4040,
+            borderRadius: BorderRadius.circular(7.0),
+            border: Border.all(color: SCColors.color_FFFFFF, width: 0.5)),
+        child: Text(
+          text,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+              fontSize: SCFonts.f10,
+              fontWeight: FontWeight.w500,
+              color: SCColors.color_FFFFFF),
+        ),
+      ),
+    );
+  }
+
 
   /// 背景颜色
   Color getBackgroundColor() {
@@ -195,5 +271,10 @@ class SCHomeNavigation2 extends StatelessWidget {
   /// 切换房号
   void changeHouse() {
     changeHouseAction?.call();
+  }
+
+  /// 消息详情
+  void message() {
+    messageAction?.call();
   }
 }
