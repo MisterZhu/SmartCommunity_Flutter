@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -34,13 +33,16 @@ class SCHomePage extends StatefulWidget {
   SCHomeState createState() => SCHomeState();
 }
 
-class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
+class SCHomeState extends State<SCHomePage>
+    with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
   SCHomeController state = Get.put(SCHomeController());
   SCHomeController1 state1 = Get.put(SCHomeController1());
   SCHomeController2 state2 = Get.put(SCHomeController2());
   SCServiceController service = Get.put(SCServiceController());
-  SCPersonalInfoController personalInfoController = Get.put(SCPersonalInfoController());
+  SCPersonalInfoController personalInfoController =
+      Get.put(SCPersonalInfoController());
   SCHomeNav1Controller nav1State = Get.put(SCHomeNav1Controller());
+
   /// 通知
   late StreamSubscription notification;
 
@@ -66,10 +68,13 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
       state2.communityName = SCScaffoldManager.instance.user.communityName!;
       nav1State.communityName = SCScaffoldManager.instance.user.communityName!;
     }
+
     /// 获取用户信息
     getUserInfo();
+
     /// 获取首页数据
     getHomeInfo();
+
     /// 定位
     location();
     addNotification();
@@ -111,65 +116,73 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
   /// skin1
   Widget skin1() {
     return SizedBox(
-      width: double.infinity,
-      height: double.infinity,
-      child: GetBuilder<SCHomeController1>(builder: (state) {
-        return SCHomeSkin1(
-          getUserInfoAction: () {
-            state1.loadUnreadMessageCount();
-            getUserInfo();
-          },
-        );
-      })
-    );
+        width: double.infinity,
+        height: double.infinity,
+        child: GetBuilder<SCHomeController1>(builder: (state) {
+          return SCHomeSkin1(
+            getUserInfoAction: () {
+              state1.loadUnreadMessageCount();
+              getUserInfo();
+            },
+          );
+        }));
   }
 
   /// skin2
   Widget skin2() {
     return SizedBox(
-      width: double.infinity,
-      height: double.infinity,
-      child: GetBuilder<SCHomeController2>(builder: (state) {
-        return SCHomeSkin2();
-      })
-    );
-}
+        width: double.infinity,
+        height: double.infinity,
+        child: GetBuilder<SCHomeController2>(builder: (state) {
+          return SCHomeSkin2();
+        }));
+  }
+
+  /// skin3
+  Widget skin3() {
+    return SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: GetBuilder<SCHomeController2>(builder: (state) {
+          return SCHomeSkin2();
+        }));
+  }
 
   /// 登录悬浮窗
   Widget floatLoginWidget() {
     return Visibility(
-      visible: !SCScaffoldManager.instance.isLogin,
-      child: SCHomeFloatLogin(
-        onTap: (){
-          SCRouterHelper.presentLoginPage();
-      },
-    ));
+        visible: !SCScaffoldManager.instance.isLogin,
+        child: SCHomeFloatLogin(
+          onTap: () {
+            SCRouterHelper.presentLoginPage();
+          },
+        ));
   }
 
   /// 获取用户信息
   getUserInfo() {
     if (SCScaffoldManager.instance.isLogin) {
       personalInfoController.getUserInfo(
-        updateAll: false,
-        successHandler: (){
-          state1.updateHomeData();
-          state.update();
-      });
+          updateAll: false,
+          successHandler: () {
+            state1.updateHomeData();
+            state.update();
+          });
     }
   }
 
   /// 获取首页数据
   getHomeInfo() {
     /// 获取装修数据
-    SCSkinConfig.getVisitorDecorationData(successHandler: (){
+    SCSkinConfig.getVisitorDecorationData(successHandler: () {
       state1.updateHomeDecorationData();
-
     });
   }
 
   /// 定位
   location() {
-    SCPermissionUtils.startLocationWithPrivacyAlert(completionHandler: (var result, SCLocationModel? model){
+    SCPermissionUtils.startLocationWithPrivacyAlert(
+        completionHandler: (var result, SCLocationModel? model) {
       int status = result['status'];
       if (status == 1) {
         var data = result['data'];
@@ -179,9 +192,7 @@ class SCHomeState extends State<SCHomePage> with AutomaticKeepAliveClientMixin, 
         SCScaffoldManager.instance.longitude = longitude;
         SCScaffoldManager.instance.latitude = latitude;
         SCScaffoldManager.instance.city = city;
-      } else {
-
-      }
+      } else {}
     });
   }
 
