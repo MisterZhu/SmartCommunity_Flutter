@@ -16,7 +16,7 @@ class SCConfig {
   static String get BASE_URL {
     switch (env) {
       case SCEnvironment.develop:
-        return "https://saasdev.wisharetec.com/";
+        return "https://jmdev.wisharetec.com/";
       case SCEnvironment.pretest:
         return "https://test.fyelife.cn:28080";
       case SCEnvironment.production:
@@ -30,7 +30,7 @@ class SCConfig {
   static String get BASE_H5_URL {
     switch (env) {
       case SCEnvironment.develop:
-        return "https://saasdev.wisharetec.com/";
+        return "https://jmdev.wisharetec.com/";
       case SCEnvironment.pretest:
         return "https://test.fyelife.cn:28080";
       case SCEnvironment.production:
