@@ -97,6 +97,7 @@ class SCHomeController2 extends GetxController {
     ];
     navigationOffset = 44.0 + SCUtils().getTopSafeArea();
     updateHomeData();
+    loadPageTemplate();
     navigationOffset = topNavBGImageHeight;
   }
 
@@ -169,6 +170,29 @@ class SCHomeController2 extends GetxController {
     update();
   }
 
+  /// 获取pageTemplate
+  loadPageTemplate(){
+    SCHttpManager.instance.get(
+      url:SCUrl.pageTemplate,
+      params: {"id":'22'},
+      success: (value){
+        log("${value}");
+      },
+      failure: (err){}
+    );
+  }
+
+  /// 获取pageTemplateId
+  loadTemplateId() {
+    SCHttpManager.instance.get(
+      url:SCUrl.getTemplateId,
+      params: {"id":SCConfig.getTerminalId()},
+      success: (value){
+        log("${value}");
+      },
+      failure: (err){}
+    );
+  }
 
   /// 获取未读消息数量
   loadUnreadMessageCount() {

@@ -98,6 +98,8 @@ class SCUrl {
   static const String kReceiveCouponUrl = "/jmapi/operation/voucher/user/gain";
 
   /// page模版
-  static const String pageTemplate = "/applet/decoration/v2/template";
+  static const String pageTemplate = "/jmapi/applet/decoration/v2/template";
+  /// 获取模版id
+  static const String getTemplateId = "/jmapi/config/terminal";
 
 }

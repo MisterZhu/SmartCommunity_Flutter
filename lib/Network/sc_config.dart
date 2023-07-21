@@ -16,7 +16,7 @@ class SCConfig {
   static String get BASE_URL {
     switch (env) {
       case SCEnvironment.develop:
-        return "https://test.fyelife.cn:28080";
+        return "https://saasdev.wisharetec.com/";
       case SCEnvironment.pretest:
         return "https://test.fyelife.cn:28080";
       case SCEnvironment.production:
@@ -30,7 +30,7 @@ class SCConfig {
   static String get BASE_H5_URL {
     switch (env) {
       case SCEnvironment.develop:
-        return "https://test.fyelife.cn:28080";
+        return "https://saasdev.wisharetec.com/";
       case SCEnvironment.pretest:
         return "https://test.fyelife.cn:28080";
       case SCEnvironment.production:
@@ -54,7 +54,6 @@ class SCConfig {
     }
   }
 
-
   /// iOS平方SC配置
   static List<String> getPFSCForIOS() {
     if (isSupportPFSCForIOS) {
@@ -64,4 +63,8 @@ class SCConfig {
     }
   }
 
+  /// iOS平方SC配置
+  static String getTerminalId() {
+    return '13586181992931';
+  }
 }
