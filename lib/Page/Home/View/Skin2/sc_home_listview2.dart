@@ -1,4 +1,3 @@
-import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -17,12 +16,18 @@ import '../../../../Utils/Router/sc_router_helper.dart';
 import '../../GetXController/sc_home_controller.dart';
 import '../../GetXController/sc_home_controller2.dart';
 import '../sc_home_community_activity.dart';
+import '../sc_home_infor_item.dart';
 import '../sc_home_items.dart';
 import '../sc_home_swiper.dart';
 
 /// 首页第二套皮肤-listview
 class SCHomeListView2 extends StatefulWidget {
-  SCHomeListView2({Key? key, this.scrollFunction,this.refreshAction,this.getUserInfoAction, required this.dataList})
+  SCHomeListView2(
+      {Key? key,
+      this.scrollFunction,
+      this.refreshAction,
+      this.getUserInfoAction,
+      required this.dataList})
       : super(key: key);
 
   Function(double offset)? scrollFunction;
@@ -49,11 +54,11 @@ class SCHomeListView2State extends State<SCHomeListView2> {
       onRefresh: () {
         onRefresh();
       },
-      onLoading: () {
-        onLoad();
-      },
+      // onLoading: () {
+      //   onLoad();
+      // },
       controller: state.refreshController,
-      enablePullUp: true,
+      enablePullUp: false,
       header: const SCCustomHeader(),
       child: ListView.separated(
           controller: state.scrollController,
@@ -80,7 +85,8 @@ class SCHomeListView2State extends State<SCHomeListView2> {
       return itemsCell();
     } else if (type == SCTypeDefine.SC_HOME_TYPE_COMMUNITY1) {
       // 园区活动
-      return communityCell1();
+      // return communityCell1();
+      return communityInforCell();
     } else if (type == SCTypeDefine.SC_HOME_TYPE_COMMUNITY2) {
       // 园区活动2
       return communityCell2();
@@ -145,6 +151,11 @@ class SCHomeListView2State extends State<SCHomeListView2> {
         itemDetail(index);
       },
     );
+  }
+
+  /// 社区资讯cell1
+  Widget communityInforCell() {
+    return CommunitInfoItem(state: state);
   }
 
   /// 园区活动cell1
@@ -332,7 +343,7 @@ class SCHomeListView2State extends State<SCHomeListView2> {
     String token = SCScaffoldManager.instance.user.token ?? "";
     String userId = SCScaffoldManager.instance.user.id ?? "";
     String userName =
-    Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
+        Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
     String phoneNum = SCScaffoldManager.instance.user.mobileNum ?? '';
     int gender = SCScaffoldManager.instance.user.gender ?? 0;
     String city = SCScaffoldManager.instance.city;
@@ -356,3 +367,5 @@ class SCHomeListView2State extends State<SCHomeListView2> {
     }
   }
 }
+
+

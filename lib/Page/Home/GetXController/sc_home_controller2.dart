@@ -52,6 +52,9 @@ class SCHomeController2 extends GetxController {
   /// listView数据
   List listViewData = [];
 
+  /// 资讯list
+  List<SCHomeNewsModel>? allNewsList;
+
   RefreshController refreshController = RefreshController(initialRefresh: false);
 
   ScrollController scrollController = ScrollController();
@@ -76,6 +79,9 @@ class SCHomeController2 extends GetxController {
     //   {"iconUrl" : SCAsset.iconItem8, "title" : "园区停车", "subUrl" : SCH5.communityParkUrl},
     //   {"iconUrl" : SCAsset.iconItem9, "title" : "垃圾分类", "subUrl" : SCH5.garbageSortUrl},
     // ];
+    allNewsList = List.from(homeNewsList)
+        .map((e) => SCHomeNewsModel.fromJson(e))
+        .toList();
     listViewData =  [
       /// banner
       {'type': SCTypeDefine.SC_HOME_TYPE_BANNER, 'data': []},

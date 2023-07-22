@@ -1,36 +1,48 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sc_uikit/sc_uikit.dart';
 
 class SCHomeInforNoImageItem extends StatelessWidget {
   final String title;
+  final String date;
   final VoidCallback onTap;
 
-  SCHomeInforNoImageItem({
+  const SCHomeInforNoImageItem({super.key, 
     required this.title,
+    required this.date,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 12),
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(8),
-      ),
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.all(12),
+      color: SCColors.color_FFFFFF,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             title,
-            maxLines: 2,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: SCColors.color_1B1D33),
+            maxLines: 2, // 最多显示两行
+            overflow: TextOverflow.ellipsis,
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 15),
+
           Text(
-            'Time',
-            style: TextStyle(color: Colors.grey),
+            date,
+            style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: SCColors.color_8D8E99),
+
+            maxLines: 1, // 只显示一行
+            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),

@@ -44,7 +44,7 @@ List homeNewsList= [
     "imageHeight" : 334.0
   },
   {
-    "imageUrl": 'images/icon_news2.png',
+    "imageUrl": '',
     "title": "今日最美晚霞，摄影爱好者齐齐出动",
     "date": "发表于2小时前",
     "likeState" : true,
@@ -62,8 +62,8 @@ List homeNewsList= [
     "imageHeight" : 446.0
   },
   {
-    "imageUrl": 'images/icon_news4.png',
-    "title": "共享单车你体验了吗？",
+    "imageUrl": '',
+    "title": "共享单车你体验了吗？反正我体验了，哈哈哈，那叫一个算数啊个圣诞节快乐房间看电视了房间舒服的沙发等方式",
     "date": "发表于4小时前",
     "likeState" : true,
     "likeCount": 104,
