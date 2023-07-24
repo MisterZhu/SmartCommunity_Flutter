@@ -277,12 +277,12 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
             var jsonMessage = message.message;
             var decodedMessage = jsonDecode(jsonMessage);
             var id = decodedMessage['id'];
-
-            SCSpUtil.setString(SCKey.kFangYuanCommunityId, id);
-            String token = SCSpUtil.getString(SCKey.kFangYuanCommunityId);
+            SCScaffoldManager.instance.user.communityId = id;
             print("fycommunityId = " + jsonMessage);
             print("token = " + id);
-            
+            var iddd = SCScaffoldManager.instance.user.communityId ?? "";
+            print("iddd = " + iddd);
+
           });
 
   /// 建信租房token-channel

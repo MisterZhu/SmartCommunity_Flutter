@@ -3,871 +3,871 @@
   "packages": [
     {
       "name": "async",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/async-2.9.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/async-2.9.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "auto_size_text",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/auto_size_text-3.0.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/auto_size_text-3.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "azlistview",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/azlistview-2.0.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/azlistview-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "boolean_selector",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/boolean_selector-2.1.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/boolean_selector-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "cached_network_image",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/cached_network_image-3.2.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/cached_network_image-3.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "cached_network_image_platform_interface",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/cached_network_image_platform_interface-1.0.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/cached_network_image_platform_interface-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "cached_network_image_web",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/cached_network_image_web-1.0.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/cached_network_image_web-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "characters",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/characters-1.2.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/characters-1.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "clock",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/clock-1.1.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/clock-1.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "collection",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/collection-1.16.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/collection-1.16.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "cross_file",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/cross_file-0.3.3+4",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/cross_file-0.3.3+4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "crypto",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/crypto-3.0.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/crypto-3.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "csslib",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/csslib-0.17.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/csslib-0.17.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "cupertino_icons",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/cupertino_icons-1.0.5",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/cupertino_icons-1.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "custom_refresh_indicator",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/custom_refresh_indicator-2.0.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/custom_refresh_indicator-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "date_format",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/date_format-2.0.7",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/date_format-2.0.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "device_info_plus",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/device_info_plus-8.2.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/device_info_plus-8.2.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "device_info_plus_platform_interface",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/device_info_plus_platform_interface-7.0.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/device_info_plus_platform_interface-7.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "dio",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/dio-4.0.6",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/dio-4.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "easy_refresh",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/easy_refresh-3.3.2+1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/easy_refresh-3.3.2+1",
       "packageUri": "lib/",
       "languageVersion": "2.13"
     },
     {
       "name": "event_bus",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/event_bus-2.0.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/event_bus-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "extended_image",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/extended_image-6.2.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/extended_image-6.2.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "extended_image_library",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/extended_image_library-3.3.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/extended_image_library-3.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "extended_list",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/extended_list-3.0.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/extended_list-3.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "extended_list_library",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/extended_list_library-3.0.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/extended_list_library-3.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "extended_nested_scroll_view",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/extended_nested_scroll_view-5.1.3",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/extended_nested_scroll_view-5.1.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "fake_async",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/fake_async-1.3.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/fake_async-1.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "ffi",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/ffi-2.0.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/ffi-2.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "file",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/file-6.1.4",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/file-6.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/packages/flutter",
+      "rootUri": "file:///Users/geyuming/fvm/versions/3.3.10/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "flutter_blurhash",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/flutter_blurhash-0.7.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/flutter_blurhash-0.7.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "flutter_cache_manager",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/flutter_cache_manager-3.3.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/flutter_cache_manager-3.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter_easyloading",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/flutter_easyloading-3.0.5",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/flutter_easyloading-3.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/flutter_lints-2.0.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/flutter_lints-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "flutter_picker",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/flutter_picker-2.1.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/flutter_picker-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter_plugin_android_lifecycle",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/flutter_plugin_android_lifecycle-2.0.14",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/flutter_plugin_android_lifecycle-2.0.14",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "flutter_spinkit",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/flutter_spinkit-5.2.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/flutter_spinkit-5.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter_staggered_grid_view",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/flutter_staggered_grid_view-0.4.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/flutter_staggered_grid_view-0.4.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter_swiper_null_safety",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/flutter_swiper_null_safety-1.0.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/flutter_swiper_null_safety-1.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/packages/flutter_test",
+      "rootUri": "file:///Users/geyuming/fvm/versions/3.3.10/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "flutter_web_plugins",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/packages/flutter_web_plugins",
+      "rootUri": "file:///Users/geyuming/fvm/versions/3.3.10/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "fluttertoast",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/fluttertoast-8.2.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/fluttertoast-8.2.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "fluwx",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/fluwx-3.8.4",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/fluwx-3.8.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "geolocator",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/geolocator-9.0.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/geolocator-9.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "geolocator_android",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/geolocator_android-4.1.8",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/geolocator_android-4.1.8",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "geolocator_apple",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/geolocator_apple-2.2.5",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/geolocator_apple-2.2.5",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "geolocator_platform_interface",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/geolocator_platform_interface-4.0.7",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/geolocator_platform_interface-4.0.7",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "geolocator_web",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/geolocator_web-2.1.6",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/geolocator_web-2.1.6",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "geolocator_windows",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/geolocator_windows-0.1.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/geolocator_windows-0.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "get",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/get-4.6.5",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/get-4.6.5",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "html",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/html-0.15.3",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/html-0.15.3",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "http",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/http-0.13.5",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/http-0.13.5",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "http_client_helper",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/http_client_helper-2.0.4",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/http_client_helper-2.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "http_parser",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/http_parser-4.0.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/http_parser-4.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "http_proxy",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/http_proxy-1.2.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/http_proxy-1.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "image_picker",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/image_picker-0.8.7+1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/image_picker-0.8.7+1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "image_picker_android",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/image_picker_android-0.8.6+6",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/image_picker_android-0.8.6+6",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "image_picker_for_web",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/image_picker_for_web-2.1.12",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/image_picker_for_web-2.1.12",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "image_picker_ios",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/image_picker_ios-0.8.6+9",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/image_picker_ios-0.8.6+9",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "image_picker_platform_interface",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/image_picker_platform_interface-2.6.3",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/image_picker_platform_interface-2.6.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "intl",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/intl-0.18.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/intl-0.18.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "js",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/js-0.6.4",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/js-0.6.4",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "lints",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/lints-2.0.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/lints-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "loading_more_list",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/loading_more_list-5.0.3",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/loading_more_list-5.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "loading_more_list_library",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/loading_more_list_library-2.0.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/loading_more_list_library-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "logger",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/logger-1.3.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/logger-1.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "lpinyin",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/lpinyin-2.0.3",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/lpinyin-2.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "matcher",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/matcher-0.12.12",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/matcher-0.12.12",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "material_color_utilities",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/material_color_utilities-0.1.5",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/material_color_utilities-0.1.5",
       "packageUri": "lib/",
       "languageVersion": "2.13"
     },
     {
       "name": "meta",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/meta-1.8.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/meta-1.8.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "nested",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/nested-1.0.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/nested-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "octo_image",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/octo_image-1.0.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/octo_image-1.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "package_info_plus",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/package_info_plus-3.1.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/package_info_plus-3.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "package_info_plus_platform_interface",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/package_info_plus_platform_interface-2.0.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/package_info_plus_platform_interface-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/path-1.8.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/path-1.8.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path_drawing",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/path_drawing-1.0.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/path_drawing-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path_parsing",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/path_parsing-1.0.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/path_parsing-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path_provider",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/path_provider-2.0.15",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/path_provider-2.0.15",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/path_provider_android-2.0.27",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/path_provider_android-2.0.27",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "path_provider_foundation",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/path_provider_foundation-2.2.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/path_provider_foundation-2.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "path_provider_linux",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/path_provider_linux-2.1.10",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/path_provider_linux-2.1.10",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "path_provider_platform_interface",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/path_provider_platform_interface-2.0.6",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/path_provider_platform_interface-2.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path_provider_windows",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/path_provider_windows-2.1.6",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/path_provider_windows-2.1.6",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "pedantic",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/pedantic-1.11.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/pedantic-1.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "permission_handler",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/permission_handler-10.2.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/permission_handler-10.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "permission_handler_android",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/permission_handler_android-10.2.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/permission_handler_android-10.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "permission_handler_apple",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/permission_handler_apple-9.0.8",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/permission_handler_apple-9.0.8",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "permission_handler_platform_interface",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/permission_handler_platform_interface-3.9.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/permission_handler_platform_interface-3.9.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "permission_handler_windows",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/permission_handler_windows-0.1.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/permission_handler_windows-0.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "photo_manager",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/photo_manager-2.6.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/photo_manager-2.6.0",
       "packageUri": "lib/",
       "languageVersion": "2.13"
     },
     {
       "name": "platform",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/platform-3.1.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/platform-3.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "plugin_platform_interface",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/plugin_platform_interface-2.1.4",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/plugin_platform_interface-2.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "process",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/process-4.2.4",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/process-4.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "provider",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/provider-6.0.5",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/provider-6.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "pull_to_refresh",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/pull_to_refresh-2.0.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/pull_to_refresh-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "pull_to_refresh_notification",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/pull_to_refresh_notification-3.0.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/pull_to_refresh_notification-3.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "qr_code_scanner",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/qr_code_scanner-1.0.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/qr_code_scanner-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "rxdart",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/rxdart-0.27.7",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/rxdart-0.27.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "sc_tools",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/git/sc_tools-dc892e42ca590e35ccb6f02750714c7f1d107719/",
+      "rootUri": "file:///Users/geyuming/.pub-cache/git/sc_tools-dc892e42ca590e35ccb6f02750714c7f1d107719/",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "sc_uikit",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/git/sc_uikit-4aae4342db67713070a704fbb914e024bbcd8b85/",
+      "rootUri": "file:///Users/geyuming/.pub-cache/git/sc_uikit-4aae4342db67713070a704fbb914e024bbcd8b85/",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "scrollable_positioned_list",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/scrollable_positioned_list-0.2.3",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/scrollable_positioned_list-0.2.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "shared_preferences",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-2.1.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "shared_preferences_android",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_android-2.1.4",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_android-2.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "shared_preferences_foundation",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_foundation-2.2.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_foundation-2.2.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "shared_preferences_linux",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_linux-2.2.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_linux-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "shared_preferences_platform_interface",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_platform_interface-2.2.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_platform_interface-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "shared_preferences_web",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_web-2.1.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_web-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "shared_preferences_windows",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_windows-2.2.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences_windows-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///Users/geyuming/fvm/versions/3.3.10/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "source_span",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/source_span-1.9.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/source_span-1.9.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "sqflite",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/sqflite-2.0.3+1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/sqflite-2.0.3+1",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "sqflite_common",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/sqflite_common-2.4.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/sqflite_common-2.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.16"
     },
     {
       "name": "stack_trace",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/stack_trace-1.10.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/stack_trace-1.10.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "stream_channel",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/stream_channel-2.1.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/stream_channel-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "string_scanner",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/string_scanner-1.1.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/string_scanner-1.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "synchronized",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/synchronized-3.0.0+3",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/synchronized-3.0.0+3",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "term_glyph",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/term_glyph-1.2.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/term_glyph-1.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "test_api",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/test_api-0.4.12",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/test_api-0.4.12",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "tobias",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/tobias-2.4.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/tobias-2.4.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "typed_data",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/typed_data-1.3.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/typed_data-1.3.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "universal_platform",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/universal_platform-1.0.0+1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/universal_platform-1.0.0+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "url_launcher",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-6.1.10",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-6.1.10",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "url_launcher_android",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/url_launcher_android-6.0.26",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/url_launcher_android-6.0.26",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "url_launcher_ios",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/url_launcher_ios-6.0.18",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/url_launcher_ios-6.0.18",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "url_launcher_linux",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/url_launcher_linux-3.0.5",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/url_launcher_linux-3.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "url_launcher_macos",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/url_launcher_macos-3.0.5",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/url_launcher_macos-3.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "url_launcher_platform_interface",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/url_launcher_platform_interface-2.1.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/url_launcher_platform_interface-2.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "url_launcher_web",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/url_launcher_web-2.0.16",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/url_launcher_web-2.0.16",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "url_launcher_windows",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/url_launcher_windows-3.0.6",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/url_launcher_windows-3.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "uuid",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/uuid-3.0.7",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/uuid-3.0.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "vector_math",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/vector_math-2.1.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/vector_math-2.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "video_player",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/video_player-2.6.1",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/video_player-2.6.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "video_player_android",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/video_player_android-2.4.3",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/video_player_android-2.4.3",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "video_player_avfoundation",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/video_player_avfoundation-2.3.9",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/video_player_avfoundation-2.3.9",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "video_player_platform_interface",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/video_player_platform_interface-6.1.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/video_player_platform_interface-6.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "video_player_web",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/video_player_web-2.0.16",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/video_player_web-2.0.16",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "visibility_detector",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/visibility_detector-0.3.3",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/visibility_detector-0.3.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "waterfall_flow",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/waterfall_flow-3.0.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/waterfall_flow-3.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "webview_flutter",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter-3.0.4",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter-3.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "webview_flutter_android",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter_android-2.10.4",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter_android-2.10.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "webview_flutter_platform_interface",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter_platform_interface-1.9.5",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter_platform_interface-1.9.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "webview_flutter_wkwebview",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter_wkwebview-2.9.5",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/webview_flutter_wkwebview-2.9.5",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "wechat_assets_picker",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/wechat_assets_picker-8.3.2",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/wechat_assets_picker-8.3.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "win32",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/win32-4.1.4",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/win32-4.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "xdg_directories",
-      "rootUri": "file:///Users/fanyu/Downloads/flutter/.pub-cache/hosted/pub.flutter-io.cn/xdg_directories-1.0.0",
+      "rootUri": "file:///Users/geyuming/.pub-cache/hosted/pub.flutter-io.cn/xdg_directories-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -878,11 +878,7 @@
       "languageVersion": "2.17"
     }
   ],
-<<<<<<< HEAD
-  "generated": "2023-07-24T06:05:07.959023Z",
-=======
-  "generated": "2023-07-24T02:55:01.308795Z",
->>>>>>> 152ae0d8b6f6edab81b3c1224bac99dc098ffb24
+  "generated": "2023-07-24T06:44:26.716550Z",
   "generator": "pub",
   "generatorVersion": "2.18.6"
 }
