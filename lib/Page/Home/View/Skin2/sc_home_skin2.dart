@@ -38,7 +38,12 @@ class SCHomeSkin2 extends StatelessWidget {
     return GetBuilder<SCHomeController2>(builder: (state){
       return Visibility(
           visible: !state.navigationSticky,
-          child: Image.asset(
+          child: state.imageUrl.isNotEmpty ? Image.network(
+            state.imageUrl,
+            fit: BoxFit.fill,
+            width: SCUtils().getScreenWidth(),
+            height: state.topNavBGImageHeight,
+          ) : Image.asset(
             SCAsset.homeSkin2TopBG,
             fit: BoxFit.fill,
             width: SCUtils().getScreenWidth(),
