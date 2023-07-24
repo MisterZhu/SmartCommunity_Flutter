@@ -64,8 +64,11 @@ class SCHomeController2 extends GetxController {
 
   /// 资讯list
   List<SCHomeNewsModel>? allNewsList;
+
   //推广list
   List<SCHomePromotionModel> promotionList = [];
+  List<String> promotionListFilekey = [];
+
   //资讯list
   List<SCHomeNewsModel> inforList = [];
 
@@ -309,6 +312,14 @@ class SCHomeController2 extends GetxController {
         success: (value) {
           promotionList = List<SCHomePromotionModel>.from(
               value.map((e) => SCHomePromotionModel.fromJson(e)).toList());
+          var pictures = promotionList.first.pictures ?? [];
+          promotionListFilekey = pictures
+              .map((e) => e?.fileKey ?? '')
+              .toList()
+              .where((es) => es.isNotEmpty)
+              .toList()
+              .map((ess) => SCConfig.getImageUrl(ess))
+              .toList();
           update();
         },
         failure: (err) {
