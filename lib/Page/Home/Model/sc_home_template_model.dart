@@ -6,105 +6,79 @@
 
 import 'dart:convert';
 
-class SCHomeModel2 {
-  Background? background;
-  BottomNavigation? bottomNavigation;
+class SCHomeTemplateModel {
   String? id;
   String? name;
-  List<PageDecorationList>? pageDecorationList;
+  String? type;
+  List<String>? pageId;
+  BottomNavigation? bottomNavigation;
+  TopNavigation? topNavigation;
+  Background? background;
+  String? tenantId;
   int? state;
   String? stateName;
-  String? tenantId;
-  TopNavigation? topNavigation;
-  String? type;
+  List<PageDecorationList>? pageDecorationList;
 
-  SCHomeModel2(
-      {this.background,
-        this.bottomNavigation,
-        this.id,
-        this.name,
-        this.pageDecorationList,
-        this.state,
-        this.stateName,
-        this.tenantId,
-        this.topNavigation,
-        this.type});
+  SCHomeTemplateModel(
+      {this.id,
+      this.name,
+      this.type,
+      this.pageId,
+      this.bottomNavigation,
+      this.topNavigation,
+      this.background,
+      this.tenantId,
+      this.state,
+      this.stateName,
+      this.pageDecorationList});
 
-  SCHomeModel2.fromJson(Map<String, dynamic> json) {
-    background = json['background'] != null
-        ? new Background.fromJson(json['background'])
-        : null;
+  SCHomeTemplateModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    type = json['type'];
+    pageId = json['pageId'].cast<String>();
     bottomNavigation = json['bottomNavigation'] != null
         ? new BottomNavigation.fromJson(json['bottomNavigation'])
         : null;
-    id = json['id'];
-    name = json['name'];
+    topNavigation = json['topNavigation'] != null
+        ? new TopNavigation.fromJson(json['topNavigation'])
+        : null;
+    background = json['background'] != null
+        ? new Background.fromJson(json['background'])
+        : null;
+    tenantId = json['tenantId'];
+    state = json['state'];
+    stateName = json['stateName'];
     if (json['pageDecorationList'] != null) {
       pageDecorationList = <PageDecorationList>[];
       json['pageDecorationList'].forEach((v) {
         pageDecorationList!.add(new PageDecorationList.fromJson(v));
       });
     }
-
-    state = json['state'];
-    stateName = json['stateName'];
-    tenantId = json['tenantId'];
-    topNavigation = json['topNavigation'] != null
-        ? new TopNavigation.fromJson(json['topNavigation'])
-        : null;
-    type = json['type'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.background != null) {
-      data['background'] = this.background!.toJson();
-    }
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['type'] = this.type;
+    data['pageId'] = this.pageId;
     if (this.bottomNavigation != null) {
       data['bottomNavigation'] = this.bottomNavigation!.toJson();
     }
-    data['id'] = this.id;
-    data['name'] = this.name;
+    if (this.topNavigation != null) {
+      data['topNavigation'] = this.topNavigation!.toJson();
+    }
+    if (this.background != null) {
+      data['background'] = this.background!.toJson();
+    }
+    data['tenantId'] = this.tenantId;
+    data['state'] = this.state;
+    data['stateName'] = this.stateName;
     if (this.pageDecorationList != null) {
       data['pageDecorationList'] =
           this.pageDecorationList!.map((v) => v.toJson()).toList();
     }
-   
-    data['state'] = this.state;
-    data['stateName'] = this.stateName;
-    data['tenantId'] = this.tenantId;
-    if (this.topNavigation != null) {
-      data['topNavigation'] = this.topNavigation!.toJson();
-    }
-    data['type'] = this.type;
-    return data;
-  }
-}
-
-class Background {
-  String? fileKey;
-  String? name;
-  int? size;
-  String? suffix;
-  int? type;
-
-  Background({this.fileKey, this.name, this.size, this.suffix, this.type});
-
-  Background.fromJson(Map<String, dynamic> json) {
-    fileKey = json['fileKey'];
-    name = json['name'];
-    size = json['size'];
-    suffix = json['suffix'];
-    type = json['type'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['fileKey'] = this.fileKey;
-    data['name'] = this.name;
-    data['size'] = this.size;
-    data['suffix'] = this.suffix;
-    data['type'] = this.type;
     return data;
   }
 }
@@ -137,92 +111,30 @@ class BottomNavigation {
 }
 
 class NavigationList {
-  String? checked;
-  int? id;
   String? pageId;
   String? title;
+  int? id;
+  String? checked;
   String? unchecked;
 
   NavigationList(
-      {this.checked, this.id, this.pageId, this.title, this.unchecked});
+      {this.pageId, this.title, this.id, this.checked, this.unchecked});
 
   NavigationList.fromJson(Map<String, dynamic> json) {
-    checked = json['checked'];
-    id = json['id'];
     pageId = json['pageId'];
     title = json['title'];
+    id = json['id'];
+    checked = json['checked'];
     unchecked = json['unchecked'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['checked'] = this.checked;
-    data['id'] = this.id;
     data['pageId'] = this.pageId;
     data['title'] = this.title;
+    data['id'] = this.id;
+    data['checked'] = this.checked;
     data['unchecked'] = this.unchecked;
-    return data;
-  }
-}
-
-class PageDecorationList {
-  String? appletJumpPath;
-  String? code;
-  List<ComponentList>? componentList;
-  String? id;
-  String? name;
-
-  PageDecorationList(
-      {this.appletJumpPath, this.code, this.componentList, this.id, this.name});
-
-  PageDecorationList.fromJson(Map<String, dynamic> json) {
-    appletJumpPath = json['appletJumpPath'];
-    code = json['code'];
-    if (json['componentList'] != null) {
-      componentList = <ComponentList>[];
-      json['componentList'].forEach((v) {
-        componentList!.add(new ComponentList.fromJson(v));
-      });
-    }
-    id = json['id'];
-    name = json['name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['appletJumpPath'] = this.appletJumpPath;
-    data['code'] = this.code;
-    if (this.componentList != null) {
-      data['componentList'] =
-          this.componentList!.map((v) => v.toJson()).toList();
-    }
-    data['id'] = this.id;
-    data['name'] = this.name;
-    return data;
-  }
-}
-
-class ComponentList {
-  String? code;
-  String? id;
-  String? info;
-  String? name;
-
-  ComponentList({this.code, this.id, this.info, this.name});
-
-  ComponentList.fromJson(Map<String, dynamic> json) {
-    code = json['code'];
-    id = json['id'];
-    info = json['info'];
-    name = json['name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['code'] = this.code;
-    data['id'] = this.id;
-    data['info'] = this.info;
-    data['name'] = this.name;
     return data;
   }
 }
@@ -239,6 +151,96 @@ class TopNavigation {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['color'] = this.color;
+    return data;
+  }
+}
+
+class Background {
+  String? fileKey;
+  String? name;
+  String? suffix;
+  int? size;
+  int? type;
+
+  Background({this.fileKey, this.name, this.suffix, this.size, this.type});
+
+  Background.fromJson(Map<String, dynamic> json) {
+    fileKey = json['fileKey'];
+    name = json['name'];
+    suffix = json['suffix'];
+    size = json['size'];
+    type = json['type'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['fileKey'] = this.fileKey;
+    data['name'] = this.name;
+    data['suffix'] = this.suffix;
+    data['size'] = this.size;
+    data['type'] = this.type;
+    return data;
+  }
+}
+
+class PageDecorationList {
+  String? id;
+  String? name;
+  String? code;
+  String? appletJumpPath;
+  List<ComponentList>? componentList;
+
+  PageDecorationList(
+      {this.id, this.name, this.code, this.appletJumpPath, this.componentList});
+
+  PageDecorationList.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    code = json['code'];
+    appletJumpPath = json['appletJumpPath'];
+    if (json['componentList'] != null) {
+      componentList = <ComponentList>[];
+      json['componentList'].forEach((v) {
+        componentList!.add(new ComponentList.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['code'] = this.code;
+    data['appletJumpPath'] = this.appletJumpPath;
+    if (this.componentList != null) {
+      data['componentList'] =
+          this.componentList!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class ComponentList {
+  String? id;
+  String? info;
+  String? name;
+  String? code;
+
+  ComponentList({this.id, this.info, this.name, this.code});
+
+  ComponentList.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    info = json['info'];
+    name = json['name'];
+    code = json['code'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['info'] = this.info;
+    data['name'] = this.name;
+    data['code'] = this.code;
     return data;
   }
 }
