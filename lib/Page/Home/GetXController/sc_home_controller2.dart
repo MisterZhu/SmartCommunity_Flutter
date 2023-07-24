@@ -68,7 +68,7 @@ class SCHomeController2 extends GetxController {
   List<SCHomeNewsModel> inforList = [];
 
   RefreshController refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController(initialRefresh: false);
 
   ScrollController scrollController = ScrollController();
 
@@ -97,6 +97,7 @@ class SCHomeController2 extends GetxController {
         .map((e) => SCHomeNewsModel.fromJson(e))
         .toList();
     listViewData = [
+
       /// banner
       {'type': SCTypeDefine.SC_HOME_TYPE_BANNER, 'data': []},
 
@@ -131,7 +132,7 @@ class SCHomeController2 extends GetxController {
     String token = SCScaffoldManager.instance.user.token ?? "";
     String userId = SCScaffoldManager.instance.user.id ?? "";
     String userName =
-        Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
+    Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
     String phoneNum = SCScaffoldManager.instance.user.mobileNum ?? '';
     int gender = SCScaffoldManager.instance.user.gender ?? 0;
     String city = SCScaffoldManager.instance.city;
@@ -140,21 +141,53 @@ class SCHomeController2 extends GetxController {
     String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
 
     String communityPayUrl =
-        "${SCConfig.getH5Url(SCH5.communityPayUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+        "${SCConfig.getH5Url(
+        SCH5.communityPayUrl)}?Authorization=$token&client=${SCDefaultValue
+        .client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri
+        .encodeComponent(
+        city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
     String workOrderUrl =
-        "${SCConfig.getH5Url(SCH5.workOrderUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+        "${SCConfig.getH5Url(
+        SCH5.workOrderUrl)}?Authorization=$token&client=${SCDefaultValue
+        .client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri
+        .encodeComponent(
+        city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
     String questionnaireUrl =
-        "${SCConfig.getH5Url(SCH5.questionnaireUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+        "${SCConfig.getH5Url(
+        SCH5.questionnaireUrl)}?Authorization=$token&client=${SCDefaultValue
+        .client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri
+        .encodeComponent(
+        city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
     String frequentlyMobileUrl =
-        "${SCConfig.getH5Url(SCH5.frequentlyMobileUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+        "${SCConfig.getH5Url(
+        SCH5.frequentlyMobileUrl)}?Authorization=$token&client=${SCDefaultValue
+        .client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri
+        .encodeComponent(
+        city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
     String mallUrl =
-        "${SCConfig.getH5Url(SCH5.mallUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+        "${SCConfig.getH5Url(
+        SCH5.mallUrl)}?Authorization=$token&client=${SCDefaultValue
+        .client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri
+        .encodeComponent(
+        city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
     String broowUrl =
-        "${SCConfig.getH5Url(SCH5.broowUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+        "${SCConfig.getH5Url(
+        SCH5.broowUrl)}?Authorization=$token&client=${SCDefaultValue
+        .client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri
+        .encodeComponent(
+        city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
     String doorOutUrl =
-        "${SCConfig.getH5Url(SCH5.doorOutUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+        "${SCConfig.getH5Url(
+        SCH5.doorOutUrl)}?Authorization=$token&client=${SCDefaultValue
+        .client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri
+        .encodeComponent(
+        city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
     String invitationUrl =
-        "${SCConfig.getH5Url(SCH5.invitationUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+        "${SCConfig.getH5Url(
+        SCH5.invitationUrl)}?Authorization=$token&client=${SCDefaultValue
+        .client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri
+        .encodeComponent(
+        city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
 
     allItemsList = [
       {
@@ -236,7 +269,18 @@ class SCHomeController2 extends GetxController {
             imageUrl = SCConfig.getImageUrl(fileKey);
           }
 
-          log("message:${imageUrl}");
+
+          log("背景图片:${imageUrl}");
+         var info = List.from(
+              List.from(value?['pageDecorationList']).firstWhereOrNull((e) =>
+              e['code'] == 'home')?['componentList']
+          ).firstWhereOrNull((e2) => e2['code'] == 'banner')?['info'];
+
+          log("infosssss:${info}");
+          log("infosssss:${info != null && info.isNotEmpty}");
+          if (info != null && info.isNotEmpty) {
+            loadBanner(info);
+          }
         },
         failure: (err) {});
   }
@@ -246,6 +290,29 @@ class SCHomeController2 extends GetxController {
     SCHttpManager.instance.get(
         url: SCUrl.getTemplateId,
         params: {"id": SCConfig.getTerminalId()},
+        success: (value) {
+          loadPageTemplate(value?['templateId'] as String);
+        },
+        failure: (err) {});
+  }
+
+  /// 获取getBannerURL
+  loadBanner(Map<dynamic, dynamic> params) {
+    log("pppppp${params}");
+
+    var categoryId = params['categoryId'];
+    var maxCount = params['maxCount'];
+
+    log("wwwwwww${categoryId}");
+    var p = {
+      'locationId': categoryId??'',
+      'maxCount': maxCount??'',
+      'communityId': SCScaffoldManager.instance.user.communityId ?? '',
+    };
+
+    SCHttpManager.instance.post(
+        url: SCUrl.getBannerURL,
+        params: p,
         success: (value) {
           print(11111111);
           loadPageTemplate(value?['templateId'] as String);
