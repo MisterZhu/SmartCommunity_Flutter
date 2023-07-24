@@ -23,4 +23,6 @@ class SCH5FlutterKey {
   static const String alipay  = 'sc_app_alipay';
   /// 返回原生页面
   static const String goback  = 'sc_app_back';
+  /// 方圆当前社区ID
+  static const String fycommunityId  = 'sc_app_fycommunityId';
 }

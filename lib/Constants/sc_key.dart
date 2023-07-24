@@ -18,6 +18,8 @@ class SCKey {
   static const String kIsShowLocationAlert = "kIsShowLocationAlert";
   /// 建信租房应用token
   static const String kJianXinRentingToken = "kJianXinRentingToken";
+  /// 方圆当前社区ID
+  static const String kFangYuanCommunityId = "kFangYuanCommunityId";
   /// 游客模式装修key
   static const String kVisitorDecorationModel = 'kVisitorDecorationModel';
   /// 抓包key

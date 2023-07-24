@@ -183,6 +183,7 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
         wechatPayChannel(context),
         alipayChannel(context),
         gobackNativeChannel(context),
+        fyCurrentCommunityId(context),
       },
 
       ///WebView创建
@@ -267,6 +268,22 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
       SCRouterHelper.back(null);
     }
   }
+
+  //  方圆当前社区ID
+  JavascriptChannel fyCurrentCommunityId(BuildContext context) =>
+      JavascriptChannel(
+          name: SCH5FlutterKey.fycommunityId,
+          onMessageReceived: (JavascriptMessage message) {
+            var jsonMessage = message.message;
+            var decodedMessage = jsonDecode(jsonMessage);
+            var id = decodedMessage['id'];
+
+            SCSpUtil.setString(SCKey.kFangYuanCommunityId, id);
+            String token = SCSpUtil.getString(SCKey.kFangYuanCommunityId);
+            print("fycommunityId = " + jsonMessage);
+            print("token = " + id);
+            
+          });
 
   /// 建信租房token-channel
   JavascriptChannel jxTokenChannel(BuildContext context) => JavascriptChannel(
@@ -386,11 +403,13 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
       onMessageReceived: (JavascriptMessage message) {
         var params = jsonDecode(message.message);
         Fluttertoast.showToast(msg: "微信支付");
-        SCPayUtils().wechatPay(params:params ,result: (value) {
-          Fluttertoast.showToast(msg:value.toString());
-          webViewController?.runJavascript(SCUtils()
-              .flutterCallH5(h5Name: SCFlutterH5Key.wechatPay, params: jsonEncode(value)));
-        });
+        SCPayUtils().wechatPay(
+            params: params,
+            result: (value) {
+              Fluttertoast.showToast(msg: value.toString());
+              webViewController?.runJavascript(SCUtils().flutterCallH5(
+                  h5Name: SCFlutterH5Key.wechatPay, params: jsonEncode(value)));
+            });
       });
 
   //  支付宝支付channel
@@ -399,18 +418,21 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
       onMessageReceived: (JavascriptMessage message) {
         var params = jsonDecode(message.message);
         String payData = params['payData'];
-        SCPayUtils().alipay(data: payData, result: (value) {
-          webViewController?.runJavascript(SCUtils()
-              .flutterCallH5(h5Name: SCFlutterH5Key.alipay, params: jsonEncode(value)));
-        });
+        SCPayUtils().alipay(
+            data: payData,
+            result: (value) {
+              webViewController?.runJavascript(SCUtils().flutterCallH5(
+                  h5Name: SCFlutterH5Key.alipay, params: jsonEncode(value)));
+            });
       });
 
   /// 返回原生页面
-  JavascriptChannel gobackNativeChannel(BuildContext context) => JavascriptChannel(
-      name: SCH5FlutterKey.goback,
-      onMessageReceived: (JavascriptMessage message) {
-        SCRouterHelper.back(null);
-      });
+  JavascriptChannel gobackNativeChannel(BuildContext context) =>
+      JavascriptChannel(
+          name: SCH5FlutterKey.goback,
+          onMessageReceived: (JavascriptMessage message) {
+            SCRouterHelper.back(null);
+          });
 
   /// 缓存建信租房token
   cacheJXToken(String token) {
