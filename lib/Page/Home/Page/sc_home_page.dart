@@ -137,7 +137,6 @@ class SCHomeState extends State<SCHomePage>
           return SCHomeSkin2( getUserInfoAction: () {
             state2.loadUnreadMessageCount();
             state2.loadTemplateId();
-            state2.loadPageTemplate();
             getUserInfo();
           },);
         }));

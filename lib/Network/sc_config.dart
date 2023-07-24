@@ -63,7 +63,7 @@ class SCConfig {
     }
   }
 
-  /// iOS平方SC配置
+  /// 终端id
   static String getTerminalId() {
     return '13586181992931';
   }
