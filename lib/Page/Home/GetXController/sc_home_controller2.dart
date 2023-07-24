@@ -124,7 +124,6 @@ class SCHomeController2 extends GetxController {
     navigationOffset = 44.0 + SCUtils().getTopSafeArea();
     updateHomeData();
     loadTemplateId();
-    loadInforList();
     navigationOffset = topNavBGImageHeight;
   }
 
@@ -247,14 +246,41 @@ class SCHomeController2 extends GetxController {
                       ?.componentList)
               .firstWhereOrNull((e2) => e2.code == 'banner')
               ?.info;
-
-          log("infosssss:${info}");
-          log("infosssss:${info != null && info.isNotEmpty}");
           if (info != null && info.isNotEmpty) {
-            loadBanner(info);
+            var decodedMessage = jsonDecode(info);
+            var categoryId = decodedMessage['categoryId'];
+            var maxCount = decodedMessage['maxCount'];
+            var params = {
+              'locationId': categoryId ?? '',
+              'maxCount': maxCount ?? '',
+              'communityId': SCScaffoldManager.instance.user.communityId ?? '',
+            };
+            loadPromotionList(params);
+          }
+          var info2 = List.from(
+                  List.from(templateModel?.pageDecorationList ?? [])
+                      .firstWhereOrNull((e) => e.code == 'home')
+                      ?.componentList)
+              .firstWhereOrNull((e2) => e2.code == 'information')
+              ?.info;
+          if (info2 != null && info2.isNotEmpty) {
+            var decodedMessage = jsonDecode(info2);
+            var categoryId = decodedMessage['categoryId'];
+            var maxCount = decodedMessage['maxCount'];
+            var params = {
+              'categoryId': categoryId ?? '',
+              'maxCount': maxCount ?? '',
+              'communityId': SCScaffoldManager.instance.user.communityId ?? '',
+            };
+            loadInforList(params);
           }
         },
-        failure: (err) {});
+        failure: (err) {
+          if (err['message'] != null) {
+            String message = err['message'];
+            SCToast.showTip(message);
+          }
+        });
   }
 
   /// 获取pageTemplateId
@@ -265,54 +291,52 @@ class SCHomeController2 extends GetxController {
         success: (value) {
           loadPageTemplate(value?['templateId'] as String);
         },
-        failure: (err) {});
-  }
-
-  /// 获取getBannerURL
-  loadBanner(String json) {
-    print("pppppp${json}");
-    var decodedMessage = jsonDecode(json);
-    var categoryId = decodedMessage['categoryId'];
-    var maxCount = decodedMessage['maxCount'];
-
-    print("wwwwwww${categoryId}");
-    var params = {
-      'locationId': categoryId ?? '',
-      'maxCount': maxCount ?? '',
-      'communityId': SCScaffoldManager.instance.user.communityId ?? '',
-    };
-    loadPromotionList(params);
+        failure: (err) {
+          if (err['message'] != null) {
+            String message = err['message'];
+            SCToast.showTip(message);
+          }
+        });
   }
 
   /// 推广列表不分页查询
-  loadPromotionList(dynamic params,) {
+  loadPromotionList(
+    dynamic params,
+  ) {
     SCHttpManager.instance.post(
         url: SCUrl.getPromotionListUrl,
         params: params,
         success: (value) {
           promotionList = List<SCHomePromotionModel>.from(
               value.map((e) => SCHomePromotionModel.fromJson(e)).toList());
-          print(222);
+          update();
         },
-        failure: (err) {});
+        failure: (err) {
+          if (err['message'] != null) {
+            String message = err['message'];
+            SCToast.showTip(message);
+          }
+        });
   }
 
   /// 资讯列表不分页查询
-  loadInforList() {
-    var params = {
-      "communityId": SCScaffoldManager.instance.user.communityId ?? "",
-      "categoryId": 13646517987151,
-      "maxCount": 10,
-    };
+  loadInforList(
+    dynamic params,
+  ) {
     SCHttpManager.instance.post(
         url: SCUrl.getInforListUrl,
         params: params,
         success: (value) {
           inforList = List<SCHomeNewsModel>.from(
               value.map((e) => SCHomeNewsModel.fromJson(e)).toList());
-          print(3333);
+          update();
         },
-        failure: (err) {});
+        failure: (err) {
+          if (err['message'] != null) {
+            String message = err['message'];
+            SCToast.showTip(message);
+          }
+        });
   }
 
   /// 获取未读消息数量
