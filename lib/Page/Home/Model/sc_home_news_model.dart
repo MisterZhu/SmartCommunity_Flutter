@@ -11,6 +11,8 @@ SCHomeNewsModel scHomeNewsModelFromJson(String str) => SCHomeNewsModel.fromJson(
 String scHomeNewsModelToJson(SCHomeNewsModel data) => json.encode(data.toJson());
 
 class SCHomeNewsModel {
+  var frontCover;
+
   SCHomeNewsModel({
     this.imageUrl,
     this.title,

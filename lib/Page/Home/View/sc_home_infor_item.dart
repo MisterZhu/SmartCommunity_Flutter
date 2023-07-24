@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Home/View/sc_home_infor_image_item.dart';
@@ -26,12 +23,13 @@ class CommunitInfoItem extends StatelessWidget {
           width: double.infinity,
           padding:
               const EdgeInsets.only(left: 20, top: 8, bottom: 16), // 设置左边距为24像素
-          child: const Text(
-            '社区资讯', // 替换为您的标题内容
-            style: TextStyle(
-              fontSize: 16, 
-              fontWeight: FontWeight.w500,
-              color: SCColors.color_1B1D33),
+          child: Text(
+            state.inforInfo?.title ?? "",
+            // "社区资讯",
+            style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: SCColors.color_1B1D33),
           ),
         ),
         ClipRRect(
@@ -39,7 +37,9 @@ class CommunitInfoItem extends StatelessWidget {
             topLeft: Radius.circular(8.0),
             topRight: Radius.circular(8.0),
           ),
-          child: Container(
+          child: Visibility(
+            visible: (state.inforList.isNotEmpty),
+            child: Container(
             height: 4,
             decoration: const BoxDecoration(
               color: SCColors.color_FFFFFF,
@@ -50,21 +50,23 @@ class CommunitInfoItem extends StatelessWidget {
             ),
             margin: const EdgeInsets.only(left: 16.0, right: 16.0),
           ),
+          ),
         ),
         ListView.builder(
           padding: EdgeInsets.zero, // 设置padding为零
           physics: const NeverScrollableScrollPhysics(), // 禁用子ListView的滚动
           shrinkWrap: true,
 
-          itemCount: state.allNewsList?.length,
+          itemCount: state.inforList.length,
           itemBuilder: (context, index) {
-            SCHomeNewsModel newsItem = state.allNewsList![index];
-            if (newsItem.imageUrl != null && newsItem.imageUrl!.isNotEmpty) {
+            var newsItem = state.inforList[index];
+            if (newsItem.frontCover != null &&
+                newsItem.frontCover!.isNotEmpty) {
               // 有图片的样式
               return SCHomeInforImageItem(
                 title: newsItem.title ?? "",
-                date: newsItem.date ?? "",
-                image: newsItem.imageUrl!,
+                date: newsItem.gmtCreate ?? "",
+                image: newsItem.frontCover!,
                 onTap: () {
                   // 处理有图片样式的单元格点击事件
                   print('点击了有图片的资讯');
@@ -74,7 +76,7 @@ class CommunitInfoItem extends StatelessWidget {
               // 无图片的样式
               return SCHomeInforNoImageItem(
                 title: newsItem.title ?? "",
-                date: newsItem.date ?? "",
+                date: newsItem.gmtCreate ?? "",
                 onTap: () {
                   // 处理无图片样式的单元格点击事件
                   print('点击了无图片的资讯');

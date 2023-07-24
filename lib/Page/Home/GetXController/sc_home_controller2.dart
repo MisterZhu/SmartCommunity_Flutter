@@ -10,6 +10,7 @@ import 'package:smartcommunity/Constants/sc_asset.dart';
 import 'package:smartcommunity/Constants/sc_enum.dart';
 import 'package:smartcommunity/Constants/sc_h5.dart';
 import 'package:smartcommunity/Constants/sc_skin_value.dart';
+import 'package:smartcommunity/Page/Home/Model/sc_home_infor_model.dart';
 import 'package:smartcommunity/Page/Home/Model/sc_home_news_model.dart';
 import 'package:smartcommunity/Utils/sc_utils.dart';
 
@@ -62,12 +63,15 @@ class SCHomeController2 extends GetxController {
   /// listView数据
   List listViewData = [];
 
-  /// 资讯list
-  List<SCHomeNewsModel>? allNewsList;
   //推广list
   List<SCHomePromotionModel> promotionList = [];
   //资讯list
-  List<SCHomeNewsModel> inforList = [];
+  List<SCHomeInforModel> inforList = [];
+
+  /// info1
+  BannerInfo? bannerInfo;
+  ///info2
+  InfoInfo? inforInfo;
 
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
@@ -96,9 +100,7 @@ class SCHomeController2 extends GetxController {
     //   {"iconUrl" : SCAsset.iconItem8, "title" : "园区停车", "subUrl" : SCH5.communityParkUrl},
     //   {"iconUrl" : SCAsset.iconItem9, "title" : "垃圾分类", "subUrl" : SCH5.garbageSortUrl},
     // ];
-    allNewsList = List.from(homeNewsList)
-        .map((e) => SCHomeNewsModel.fromJson(e))
-        .toList();
+  
     listViewData = [
       /// banner
       {'type': SCTypeDefine.SC_HOME_TYPE_BANNER, 'data': []},
@@ -109,17 +111,17 @@ class SCHomeController2 extends GetxController {
       /// 园区活动1
       {'type': SCTypeDefine.SC_HOME_TYPE_COMMUNITY1, 'data': []},
 
-      /// 园区活动2
-      {'type': SCTypeDefine.SC_HOME_TYPE_COMMUNITY2, 'data': []},
+      // /// 园区活动2
+      // {'type': SCTypeDefine.SC_HOME_TYPE_COMMUNITY2, 'data': []},
 
-      /// 热门活动1
-      {'type': SCTypeDefine.SC_HOME_TYPE_LIFE1, 'data': []},
+      // /// 热门活动1
+      // {'type': SCTypeDefine.SC_HOME_TYPE_LIFE1, 'data': []},
 
-      /// 热门活动2
-      {'type': SCTypeDefine.SC_HOME_TYPE_LIFE2, 'data': []},
+      // /// 热门活动2
+      // {'type': SCTypeDefine.SC_HOME_TYPE_LIFE2, 'data': []},
 
-      /// 精选商品
-      {'type': SCTypeDefine.SC_HOME_TYPE_GOODS, 'data': []},
+      // /// 精选商品
+      // {'type': SCTypeDefine.SC_HOME_TYPE_GOODS, 'data': []},
     ];
     navigationOffset = 44.0 + SCUtils().getTopSafeArea();
     updateHomeData();
@@ -246,12 +248,14 @@ class SCHomeController2 extends GetxController {
                       ?.componentList)
               .firstWhereOrNull((e2) => e2.code == 'banner')
               ?.info;
+              
           if (info != null && info.isNotEmpty) {
-            var decodedMessage = jsonDecode(info);
-            var categoryId = decodedMessage['categoryId'];
-            var maxCount = decodedMessage['maxCount'];
+            dynamic binfoJson = jsonDecode(info);
+              bannerInfo = BannerInfo.fromJson(binfoJson);
+            var categoryId = bannerInfo?.categoryId;
+            var maxCount = bannerInfo?.maxCount;
             var params = {
-              'locationId': categoryId ?? '',
+              'locationId': categoryId ?? 0,
               'maxCount': maxCount ?? '',
               'communityId': SCScaffoldManager.instance.user.communityId ?? '',
             };
@@ -264,12 +268,13 @@ class SCHomeController2 extends GetxController {
               .firstWhereOrNull((e2) => e2.code == 'information')
               ?.info;
           if (info2 != null && info2.isNotEmpty) {
-            var decodedMessage = jsonDecode(info2);
-            var categoryId = decodedMessage['categoryId'];
-            var maxCount = decodedMessage['maxCount'];
+            dynamic binfoJson = jsonDecode(info2);
+              inforInfo = InfoInfo.fromJson(binfoJson);
+            var categoryId = inforInfo?.categoryId;
+            var maxCount = inforInfo?.maxCount;
             var params = {
-              'categoryId': categoryId ?? '',
-              'maxCount': maxCount ?? '',
+              'categoryId': categoryId ?? 0,
+              'maxCount': maxCount ?? 0,
               'communityId': SCScaffoldManager.instance.user.communityId ?? '',
             };
             loadInforList(params);
@@ -327,8 +332,8 @@ class SCHomeController2 extends GetxController {
         url: SCUrl.getInforListUrl,
         params: params,
         success: (value) {
-          inforList = List<SCHomeNewsModel>.from(
-              value.map((e) => SCHomeNewsModel.fromJson(e)).toList());
+          inforList = List<SCHomeInforModel>.from(
+              value.map((e) => SCHomeInforModel.fromJson(e)).toList());
           update();
         },
         failure: (err) {

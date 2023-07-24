@@ -20,17 +20,17 @@ class SCHomeTemplateModel {
   List<PageDecorationList>? pageDecorationList;
 
   SCHomeTemplateModel(
-      {this.id,
-      this.name,
-      this.type,
-      this.pageId,
-      this.bottomNavigation,
-      this.topNavigation,
-      this.background,
-      this.tenantId,
-      this.state,
-      this.stateName,
-      this.pageDecorationList});
+      {id,
+      name,
+      type,
+      pageId,
+      bottomNavigation,
+      topNavigation,
+      background,
+      tenantId,
+      state,
+      stateName,
+      pageDecorationList});
 
   SCHomeTemplateModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -38,13 +38,13 @@ class SCHomeTemplateModel {
     type = json['type'];
     pageId = json['pageId'].cast<String>();
     bottomNavigation = json['bottomNavigation'] != null
-        ? new BottomNavigation.fromJson(json['bottomNavigation'])
+        ? BottomNavigation.fromJson(json['bottomNavigation'])
         : null;
     topNavigation = json['topNavigation'] != null
-        ? new TopNavigation.fromJson(json['topNavigation'])
+        ? TopNavigation.fromJson(json['topNavigation'])
         : null;
     background = json['background'] != null
-        ? new Background.fromJson(json['background'])
+        ? Background.fromJson(json['background'])
         : null;
     tenantId = json['tenantId'];
     state = json['state'];
@@ -52,32 +52,32 @@ class SCHomeTemplateModel {
     if (json['pageDecorationList'] != null) {
       pageDecorationList = <PageDecorationList>[];
       json['pageDecorationList'].forEach((v) {
-        pageDecorationList!.add(new PageDecorationList.fromJson(v));
+        pageDecorationList!.add(PageDecorationList.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['type'] = this.type;
-    data['pageId'] = this.pageId;
-    if (this.bottomNavigation != null) {
-      data['bottomNavigation'] = this.bottomNavigation!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['type'] = type;
+    data['pageId'] = pageId;
+    if (bottomNavigation != null) {
+      data['bottomNavigation'] = bottomNavigation!.toJson();
     }
-    if (this.topNavigation != null) {
-      data['topNavigation'] = this.topNavigation!.toJson();
+    if (topNavigation != null) {
+      data['topNavigation'] = topNavigation!.toJson();
     }
-    if (this.background != null) {
-      data['background'] = this.background!.toJson();
+    if (background != null) {
+      data['background'] = background!.toJson();
     }
-    data['tenantId'] = this.tenantId;
-    data['state'] = this.state;
-    data['stateName'] = this.stateName;
-    if (this.pageDecorationList != null) {
+    data['tenantId'] = tenantId;
+    data['state'] = state;
+    data['stateName'] = stateName;
+    if (pageDecorationList != null) {
       data['pageDecorationList'] =
-          this.pageDecorationList!.map((v) => v.toJson()).toList();
+          pageDecorationList!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -87,24 +87,23 @@ class BottomNavigation {
   int? iconLocation;
   List<NavigationList>? navigationList;
 
-  BottomNavigation({this.iconLocation, this.navigationList});
+  BottomNavigation({iconLocation, navigationList});
 
   BottomNavigation.fromJson(Map<String, dynamic> json) {
     iconLocation = json['iconLocation'];
     if (json['navigationList'] != null) {
       navigationList = <NavigationList>[];
       json['navigationList'].forEach((v) {
-        navigationList!.add(new NavigationList.fromJson(v));
+        navigationList!.add(NavigationList.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['iconLocation'] = this.iconLocation;
-    if (this.navigationList != null) {
-      data['navigationList'] =
-          this.navigationList!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['iconLocation'] = iconLocation;
+    if (navigationList != null) {
+      data['navigationList'] = navigationList!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -117,8 +116,7 @@ class NavigationList {
   String? checked;
   String? unchecked;
 
-  NavigationList(
-      {this.pageId, this.title, this.id, this.checked, this.unchecked});
+  NavigationList({pageId, title, id, checked, unchecked});
 
   NavigationList.fromJson(Map<String, dynamic> json) {
     pageId = json['pageId'];
@@ -129,12 +127,12 @@ class NavigationList {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['pageId'] = this.pageId;
-    data['title'] = this.title;
-    data['id'] = this.id;
-    data['checked'] = this.checked;
-    data['unchecked'] = this.unchecked;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['pageId'] = pageId;
+    data['title'] = title;
+    data['id'] = id;
+    data['checked'] = checked;
+    data['unchecked'] = unchecked;
     return data;
   }
 }
@@ -142,15 +140,15 @@ class NavigationList {
 class TopNavigation {
   int? color;
 
-  TopNavigation({this.color});
+  TopNavigation({color});
 
   TopNavigation.fromJson(Map<String, dynamic> json) {
     color = json['color'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['color'] = this.color;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['color'] = color;
     return data;
   }
 }
@@ -162,7 +160,7 @@ class Background {
   int? size;
   int? type;
 
-  Background({this.fileKey, this.name, this.suffix, this.size, this.type});
+  Background({fileKey, name, suffix, size, type});
 
   Background.fromJson(Map<String, dynamic> json) {
     fileKey = json['fileKey'];
@@ -173,12 +171,12 @@ class Background {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['fileKey'] = this.fileKey;
-    data['name'] = this.name;
-    data['suffix'] = this.suffix;
-    data['size'] = this.size;
-    data['type'] = this.type;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['fileKey'] = fileKey;
+    data['name'] = name;
+    data['suffix'] = suffix;
+    data['size'] = size;
+    data['type'] = type;
     return data;
   }
 }
@@ -190,8 +188,7 @@ class PageDecorationList {
   String? appletJumpPath;
   List<ComponentList>? componentList;
 
-  PageDecorationList(
-      {this.id, this.name, this.code, this.appletJumpPath, this.componentList});
+  PageDecorationList({id, name, code, appletJumpPath, componentList});
 
   PageDecorationList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -201,20 +198,19 @@ class PageDecorationList {
     if (json['componentList'] != null) {
       componentList = <ComponentList>[];
       json['componentList'].forEach((v) {
-        componentList!.add(new ComponentList.fromJson(v));
+        componentList!.add(ComponentList.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['code'] = this.code;
-    data['appletJumpPath'] = this.appletJumpPath;
-    if (this.componentList != null) {
-      data['componentList'] =
-          this.componentList!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['code'] = code;
+    data['appletJumpPath'] = appletJumpPath;
+    if (componentList != null) {
+      data['componentList'] = componentList!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -226,21 +222,83 @@ class ComponentList {
   String? name;
   String? code;
 
-  ComponentList({this.id, this.info, this.name, this.code});
+  ComponentList({id, info, name, code});
 
   ComponentList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    // info = json['info'] != null ? CompInfo.fromJson(json['info']) : null;
+    // if (json['info'] != null) {
+    //   dynamic jsonData = jsonDecode(json['info']);
+    //   info = CompInfo.fromJson(jsonData);
+    // }
     info = json['info'];
     name = json['name'];
     code = json['code'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['info'] = this.info;
-    data['name'] = this.name;
-    data['code'] = this.code;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['info'] = info;
+    data['name'] = name;
+    data['code'] = code;
+    return data;
+  }
+}
+
+class InfoInfo {
+  String? title;
+  int? categoryId;
+  int? maxCount;
+  String? type;
+  int? sort;
+
+  InfoInfo({id, info, name, code, sort});
+
+  InfoInfo.fromJson(Map<String, dynamic> json) {
+    title = json['title'];
+    categoryId = json['categoryId'];
+    maxCount = json['maxCount'];
+    type = json['type'];
+    sort = json["sort"];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['title'] = title;
+    data['categoryId'] = categoryId;
+    data['maxCount'] = maxCount;
+    data['type'] = type;
+    data['sort'] = sort;
+
+    return data;
+  }
+}
+class BannerInfo {
+  String? title;
+  int? categoryId;
+  String? maxCount;
+  String? type;
+  int? sort;
+
+  BannerInfo({id, info, name, code, sort});
+
+  BannerInfo.fromJson(Map<String, dynamic> json) {
+    title = json['title'];
+    categoryId = json['categoryId'];
+    maxCount = json['maxCount'];
+    type = json['type'];
+    sort = json["sort"];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['title'] = title;
+    data['categoryId'] = categoryId;
+    data['maxCount'] = maxCount;
+    data['type'] = type;
+    data['sort'] = sort;
+
     return data;
   }
 }
