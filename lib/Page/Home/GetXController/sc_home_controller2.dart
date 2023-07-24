@@ -19,6 +19,7 @@ import '../../../Network/sc_config.dart';
 import '../../../Network/sc_http_manager.dart';
 import '../../../Network/sc_url.dart';
 import '../../../Skin/Tools/sc_scaffold_manager.dart';
+import '../Model/sc_home_promotion_model.dart';
 // import 'package:image_cropper/image_cropper.dart';
 
 class SCHomeController2 extends GetxController {
@@ -61,6 +62,10 @@ class SCHomeController2 extends GetxController {
 
   /// 资讯list
   List<SCHomeNewsModel>? allNewsList;
+  //推广list
+  List<SCHomePromotionModel> promotionList = [];
+  //资讯list
+  List<SCHomeNewsModel> inforList = [];
 
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
@@ -116,6 +121,8 @@ class SCHomeController2 extends GetxController {
     navigationOffset = 44.0 + SCUtils().getTopSafeArea();
     updateHomeData();
     loadTemplateId();
+    loadPromotionList();
+    loadInforList();
     navigationOffset = topNavBGImageHeight;
   }
 
@@ -224,7 +231,6 @@ class SCHomeController2 extends GetxController {
         success: (value) {
           log("获取的模版：${value}");
 
-
           String fileKey = value['background']['fileKey'];
           if (fileKey.isNotEmpty) {
             imageUrl = SCConfig.getImageUrl(fileKey);
@@ -243,6 +249,42 @@ class SCHomeController2 extends GetxController {
         success: (value) {
           print(11111111);
           loadPageTemplate(value?['templateId'] as String);
+        },
+        failure: (err) {});
+  }
+
+  /// 推广列表不分页查询
+  loadPromotionList() {
+    var params = {
+      "communityId": SCScaffoldManager.instance.user.communityId ?? "",
+      "locationId": 13553016454031,
+      "maxCount": 1,
+    };
+    SCHttpManager.instance.post(
+        url: SCUrl.getPromotionListUrl,
+        params: params,
+        success: (value) {
+          promotionList = List<SCHomePromotionModel>.from(
+              value.map((e) => SCHomePromotionModel.fromJson(e)).toList());
+          print(222);
+        },
+        failure: (err) {});
+  }
+
+  /// 资讯列表不分页查询
+  loadInforList() {
+    var params = {
+      "communityId": SCScaffoldManager.instance.user.communityId ?? "",
+      "categoryId": 13646517987151,
+      "maxCount": 10,
+    };
+    SCHttpManager.instance.post(
+        url: SCUrl.getInforListUrl,
+        params: params,
+        success: (value) {
+          inforList = List<SCHomeNewsModel>.from(
+              value.map((e) => SCHomeNewsModel.fromJson(e)).toList());
+          print(3333);
         },
         failure: (err) {});
   }

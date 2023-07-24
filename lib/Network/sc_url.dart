@@ -104,4 +104,10 @@ class SCUrl {
   /// 获取模版id
   static const String getTemplateId = "${api}/config/terminal";
 
+  /// 推广列表不分页查询
+  static const String getPromotionListUrl = "${api}/content/promotion/list";
+  /// 资讯列表不分页查询
+  static const String getInforListUrl = "${api}/content/information/list";
+
+
 }

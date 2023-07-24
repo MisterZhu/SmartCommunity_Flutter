@@ -12,7 +12,6 @@ class SCHomeModel2 {
   String? id;
   String? name;
   List<PageDecorationList>? pageDecorationList;
-  List<Null>? pageId;
   int? state;
   String? stateName;
   String? tenantId;
@@ -25,7 +24,6 @@ class SCHomeModel2 {
         this.id,
         this.name,
         this.pageDecorationList,
-        this.pageId,
         this.state,
         this.stateName,
         this.tenantId,
@@ -47,12 +45,7 @@ class SCHomeModel2 {
         pageDecorationList!.add(new PageDecorationList.fromJson(v));
       });
     }
-    if (json['pageId'] != null) {
-      pageId = <Null>[];
-      json['pageId'].forEach((v) {
-        pageId!.add(v as dynamic);
-      });
-    }
+
     state = json['state'];
     stateName = json['stateName'];
     tenantId = json['tenantId'];
@@ -76,9 +69,7 @@ class SCHomeModel2 {
       data['pageDecorationList'] =
           this.pageDecorationList!.map((v) => v.toJson()).toList();
     }
-    if (this.pageId != null) {
-      data['pageId'] = this.pageId!.map((v) => v.toJson()).toList();
-    }
+   
     data['state'] = this.state;
     data['stateName'] = this.stateName;
     data['tenantId'] = this.tenantId;
