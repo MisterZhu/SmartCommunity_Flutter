@@ -103,7 +103,7 @@ class SCHomeController2 extends GetxController {
     ];
     navigationOffset = 44.0 + SCUtils().getTopSafeArea();
     updateHomeData();
-    loadPageTemplate();
+    loadTemplateId();
     navigationOffset = topNavBGImageHeight;
   }
 
@@ -177,12 +177,12 @@ class SCHomeController2 extends GetxController {
   }
 
   /// 获取pageTemplate
-  loadPageTemplate(){
+  loadPageTemplate(String id){
     SCHttpManager.instance.get(
       url:SCUrl.pageTemplate,
-      params: {"id":'22'},
+      params: {"id":id},
       success: (value){
-        log("${value}");
+        log("获取的模版：${value}");
       },
       failure: (err){}
     );
@@ -194,7 +194,9 @@ class SCHomeController2 extends GetxController {
       url:SCUrl.getTemplateId,
       params: {"id":SCConfig.getTerminalId()},
       success: (value){
-        log("${value}");
+        if(value){
+          loadPageTemplate(value?.templateId as String);
+        }
       },
       failure: (err){}
     );
