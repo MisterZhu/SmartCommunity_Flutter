@@ -103,5 +103,7 @@ class SCUrl {
   static const String pageTemplate = "${api}/applet/decoration/v2/template";
   /// 获取模版id
   static const String getTemplateId = "${api}/config/terminal";
+ /// banner图
+  static const String getBannerURL = "${api}/content/promotion/list";
 
 }
