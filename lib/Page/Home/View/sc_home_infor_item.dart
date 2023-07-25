@@ -34,39 +34,45 @@ class CommunitInfoItem extends StatelessWidget {
         ),
         ClipRRect(
           borderRadius: BorderRadius.circular(8.0), // 设置四个角的圆角半径，可以根据需要调整值
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16.0), // 设置左右边距为 16
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.0),
+              color: SCColors.color_FFFFFF, // 添加一个背景颜色，确保圆角效果正确显示
+            ),
+            child: ListView.builder(
+              padding: EdgeInsets.zero, // 设置padding为零
+              physics: const NeverScrollableScrollPhysics(), // 禁用子ListView的滚动
+              shrinkWrap: true,
 
-          child: ListView.builder(
-            padding: EdgeInsets.zero, // 设置padding为零
-            physics: const NeverScrollableScrollPhysics(), // 禁用子ListView的滚动
-            shrinkWrap: true,
-
-            itemCount: state.inforList.length,
-            itemBuilder: (context, index) {
-              var newsItem = state.inforList[index];
-              if (newsItem.frontCover != null &&
-                  newsItem.frontCover!.isNotEmpty) {
-                // 有图片的样式
-                return SCHomeInforImageItem(
-                  title: newsItem.title ?? "",
-                  date: newsItem.gmtCreate ?? "",
-                  image: newsItem.frontCover!,
-                  onTap: () {
-                    // 处理有图片样式的单元格点击事件
-                    print('点击了有图片的资讯');
-                  },
-                );
-              } else {
-                // 无图片的样式
-                return SCHomeInforNoImageItem(
-                  title: newsItem.title ?? "",
-                  date: newsItem.gmtCreate ?? "",
-                  onTap: () {
-                    // 处理无图片样式的单元格点击事件
-                    print('点击了无图片的资讯');
-                  },
-                );
-              }
-            },
+              itemCount: state.inforList.length,
+              itemBuilder: (context, index) {
+                var newsItem = state.inforList[index];
+                if (newsItem.frontCover != null &&
+                    newsItem.frontCover!.isNotEmpty) {
+                  // 有图片的样式
+                  return SCHomeInforImageItem(
+                    title: newsItem.title ?? "",
+                    date: newsItem.gmtCreate ?? "",
+                    image: newsItem.frontCover!,
+                    onTap: () {
+                      // 处理有图片样式的单元格点击事件
+                      print('点击了有图片的资讯');
+                    },
+                  );
+                } else {
+                  // 无图片的样式
+                  return SCHomeInforNoImageItem(
+                    title: newsItem.title ?? "",
+                    date: newsItem.gmtCreate ?? "",
+                    onTap: () {
+                      // 处理无图片样式的单元格点击事件
+                      print('点击了无图片的资讯');
+                    },
+                  );
+                }
+              },
+            ),
           ),
         ),
       ],

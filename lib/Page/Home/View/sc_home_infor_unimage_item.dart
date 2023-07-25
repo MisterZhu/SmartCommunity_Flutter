@@ -21,8 +21,8 @@ class SCHomeInforNoImageItem extends StatelessWidget {
         onTap.call();
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 16),
-        padding: const EdgeInsets.all(12),
+        margin: const EdgeInsets.all(4),
+        padding: const EdgeInsets.all(8),
         color: SCColors.color_FFFFFF,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
