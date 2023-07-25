@@ -18,6 +18,60 @@ import '../Router/sc_router_path.dart';
 /// 权限管理工具
 
 class SCPermissionUtils {
+  // 麦克风权限
+  static requestMicrophonePermission() async {
+    PermissionStatus status = await Permission.microphone.request();
+    SCUtils.getCurrentContext(completionHandler: (context) async {
+      if (status.isGranted) {
+        // 麦克风权限已授予，可以执行相应操作
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('授权成功'),
+            content: Text('麦克风权限已授予，您可以使用麦克风功能。'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('确定'),
+              ),
+            ],
+          ),
+        );
+      } else if (status.isDenied || status.isRestricted) {
+        // 麦克风权限未授予或受限，可以弹出提示或进行其他处理
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('未授权'),
+            content: Text('麦克风权限未授予或受限，您可以前往应用设置中授予麦克风权限。'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('确定'),
+              ),
+            ],
+          ),
+        );
+      } else if (status.isPermanentlyDenied) {
+        // 麦克风权限永久拒绝，可以引导用户去设置中授予权限
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('权限被拒绝'),
+            content: Text('麦克风权限被永久拒绝，请前往应用设置中授予麦克风权限。'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('确定'),
+              ),
+            ],
+          ),
+        );
+        openAppSettings(); // 打开应用设置页面
+      }
+    });
+  }
+
   /// 使用扫一扫-隐私权限提示
   static scanCodeWithPrivacyAlert(
       {Function(dynamic result)? completionHandler}) async {

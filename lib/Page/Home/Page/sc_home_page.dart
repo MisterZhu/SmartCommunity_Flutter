@@ -108,7 +108,7 @@ class SCHomeState extends State<SCHomePage>
       } else if (state.skinStyle == 1) {
         return skin2();
       } else {
-        return skin1();
+        return skin2();
       }
     });
   }
@@ -199,6 +199,9 @@ class SCHomeState extends State<SCHomePage>
         getUserInfo();
       } else if (key == SCKey.kReloadUnreadMessageCount) {
         state.update();
+        state2.update();
+      } else if (key == SCKey.kRefreshHomeData) {
+        state2.refreshHomeData();
       }
     });
   }

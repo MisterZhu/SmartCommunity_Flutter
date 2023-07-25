@@ -21,11 +21,12 @@ import '../../../Utils/sc_utils.dart';
 // import 'package:image_cropper/image_cropper.dart';
 
 class SCHomeController1 extends GetxController {
-
   /// 背景图片scale
   double topNavBGImageScale = 782.0 / 384.0;
+
   /// 背景图片高度
-  double topNavBGImageHeight = 168.0 - (SCUtils().getTopSafeArea() > 20 ? 0.0 : 30.0);
+  double topNavBGImageHeight =
+      168.0 - (SCUtils().getTopSafeArea() > 20 ? 0.0 : 30.0);
 
   /// 导航栏不透明度
   double opacity = 1.0;
@@ -35,12 +36,16 @@ class SCHomeController1 extends GetxController {
 
   /// 导航栏背景颜色,默认白色
   Color navigationBackgroundColor = SCColors.color_FE8947;
+
   /// 导航栏状态，是否置顶
   bool navigationSticky = false;
+
   /// 导航栏置顶颜色,默认白色
   Color navigationStickyColor = Colors.white;
+
   /// 未置顶颜色,默认白色
   Color navigationNormalColor = Colors.white;
+
   /// banner背景大图比例
   double bannerBGScale = 750.0 / 544.0;
 
@@ -135,7 +140,8 @@ class SCHomeController1 extends GetxController {
   updateHomeData() {
     String token = SCScaffoldManager.instance.user.token ?? "";
     String userId = SCScaffoldManager.instance.user.id ?? "";
-    String userName = Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
+    String userName =
+        Uri.encodeComponent(SCScaffoldManager.instance.user.userName ?? '');
     String phoneNum = SCScaffoldManager.instance.user.mobileNum ?? '';
     int gender = SCScaffoldManager.instance.user.gender ?? 0;
     String city = SCScaffoldManager.instance.city;
@@ -143,24 +149,72 @@ class SCHomeController1 extends GetxController {
     double latitude = SCScaffoldManager.instance.latitude;
     String defCommunityId = SCScaffoldManager.instance.user.communityId ?? "";
 
-    String communityPayUrl = "${SCConfig.getH5Url(SCH5.communityPayUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
-    String workOrderUrl = "${SCConfig.getH5Url(SCH5.workOrderUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
-    String questionnaireUrl = "${SCConfig.getH5Url(SCH5.questionnaireUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
-    String frequentlyMobileUrl = "${SCConfig.getH5Url(SCH5.frequentlyMobileUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
-    String mallUrl = "${SCConfig.getH5Url(SCH5.mallUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
-    String broowUrl = "${SCConfig.getH5Url(SCH5.broowUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
-    String doorOutUrl = "${SCConfig.getH5Url(SCH5.doorOutUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
-    String invitationUrl = "${SCConfig.getH5Url(SCH5.invitationUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String communityPayUrl =
+        "${SCConfig.getH5Url(SCH5.communityPayUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String workOrderUrl =
+        "${SCConfig.getH5Url(SCH5.workOrderUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String questionnaireUrl =
+        "${SCConfig.getH5Url(SCH5.questionnaireUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String frequentlyMobileUrl =
+        "${SCConfig.getH5Url(SCH5.frequentlyMobileUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String mallUrl =
+        "${SCConfig.getH5Url(SCH5.mallUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String broowUrl =
+        "${SCConfig.getH5Url(SCH5.broowUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String doorOutUrl =
+        "${SCConfig.getH5Url(SCH5.doorOutUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
+    String invitationUrl =
+        "${SCConfig.getH5Url(SCH5.invitationUrl)}?Authorization=$token&client=${SCDefaultValue.client}&userId=$userId&userName=$userName&phoneNum=$phoneNum&city=${Uri.encodeComponent(city)}&latitude=$latitude&longitude=$longitude&gender=$gender&defCommunityId=$defCommunityId";
 
     allItemsList = [
-      {"iconUrl": SCAsset.iconItem1, "title": "物业缴费", "subUrl": communityPayUrl, "needHouseId": true},
-      {"iconUrl": SCAsset.iconItem8, "title": "工单", "subUrl": workOrderUrl, "needHouseId": true},
-      {"iconUrl": SCAsset.iconItem12, "title": "调查问卷", "subUrl": questionnaireUrl, "needHouseId": true},
-      {"iconUrl": SCAsset.iconItem11, "title": "常用电话", "subUrl": frequentlyMobileUrl, "needHouseId": true},
-      {"iconUrl": SCAsset.iconItem13, "title": "商城购物", "subUrl": mallUrl, "needHouseId": true},
-      {"iconUrl": SCAsset.iconItem13, "title": "物品借用", "subUrl": broowUrl, "needHouseId": true},
-      {"iconUrl": SCAsset.iconItem15, "title": "物品出门", "subUrl": doorOutUrl, "needHouseId": true},
-      {"iconUrl": SCAsset.iconItem16, "title": "访客邀约", "subUrl": invitationUrl, "needHouseId": true},
+      {
+        "iconUrl": SCAsset.iconItem1,
+        "title": "物业缴费",
+        "subUrl": communityPayUrl,
+        "needHouseId": true
+      },
+      {
+        "iconUrl": SCAsset.iconItem8,
+        "title": "工单",
+        "subUrl": workOrderUrl,
+        "needHouseId": true
+      },
+      {
+        "iconUrl": SCAsset.iconItem12,
+        "title": "调查问卷",
+        "subUrl": questionnaireUrl,
+        "needHouseId": true
+      },
+      {
+        "iconUrl": SCAsset.iconItem11,
+        "title": "常用电话",
+        "subUrl": frequentlyMobileUrl,
+        "needHouseId": true
+      },
+      {
+        "iconUrl": SCAsset.iconItem13,
+        "title": "商城购物",
+        "subUrl": mallUrl,
+        "needHouseId": true
+      },
+      {
+        "iconUrl": SCAsset.iconItem13,
+        "title": "物品借用",
+        "subUrl": broowUrl,
+        "needHouseId": true
+      },
+      {
+        "iconUrl": SCAsset.iconItem15,
+        "title": "物品出门",
+        "subUrl": doorOutUrl,
+        "needHouseId": true
+      },
+      {
+        "iconUrl": SCAsset.iconItem16,
+        "title": "访客邀约",
+        "subUrl": invitationUrl,
+        "needHouseId": true
+      },
     ];
     update();
   }
@@ -185,25 +239,26 @@ class SCHomeController1 extends GetxController {
     //if (SCScaffoldManager.instance.isLogin) {
 
     // } else {
-      SCVisitorDecorationModel visitorDecorationModel = SCScaffoldManager.instance.visitorDecorationModel;
-      List<PageDecorationList>? pageList = visitorDecorationModel.pageDecorationList;
-      if (pageList != null) {
-        for (PageDecorationList page in pageList) {
-          if (page.name == '首页') {
-            List<ComponentList>? list = page.componentList;
-            if (list != null) {
-              for (ComponentList component in list) {
-                if (component.name == '轮播图') {
-                  var info = jsonDecode(component.info ?? '');
-                  autoplaySpeed = info['autoplaySpeed'];
-                  List? imagesList = info['advertisementImgList'];
-                  if (imagesList != null) {
-                    allBannerList = [];
-                    for (var imageDic in imagesList) {
-                      String fileKey = imageDic['fileKey'];
-                      if (fileKey.isNotEmpty) {
-                        allBannerList.add(SCConfig.getImageUrl(fileKey));
-                      }
+    SCVisitorDecorationModel visitorDecorationModel =
+        SCScaffoldManager.instance.visitorDecorationModel;
+    List<PageDecorationList>? pageList =
+        visitorDecorationModel.pageDecorationList;
+    if (pageList != null) {
+      for (PageDecorationList page in pageList) {
+        if (page.name == '首页') {
+          List<ComponentList>? list = page.componentList;
+          if (list != null) {
+            for (ComponentList component in list) {
+              if (component.name == '轮播图') {
+                var info = jsonDecode(component.info ?? '');
+                autoplaySpeed = info['autoplaySpeed'];
+                List? imagesList = info['advertisementImgList'];
+                if (imagesList != null) {
+                  allBannerList = [];
+                  for (var imageDic in imagesList) {
+                    String fileKey = imageDic['fileKey'];
+                    if (fileKey.isNotEmpty) {
+                      allBannerList.add(SCConfig.getImageUrl(fileKey));
                     }
                   }
                 }
@@ -212,7 +267,8 @@ class SCHomeController1 extends GetxController {
           }
         }
       }
-   // }
+    }
+    // }
     update();
   }
 
@@ -224,12 +280,11 @@ class SCHomeController1 extends GetxController {
         success: (value) {
           if (value is int) {
             SCScaffoldManager.instance.unreadMessageCount = value;
-            var params = {"key" : SCKey.kReloadUnreadMessageCount};
+            var params = {"key": SCKey.kReloadUnreadMessageCount};
             SCScaffoldManager.instance.eventBus.fire(params);
           }
         },
-        failure: (value) {
-        });
+        failure: (value) {});
   }
 
   @override

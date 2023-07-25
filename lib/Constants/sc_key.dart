@@ -30,4 +30,6 @@ class SCKey {
   static const String kReloadUnreadMessageCount = "kReloadUnreadMessageCount";
   /// h5渠道key
   static const String kH5Channel = "SCCHANNEL";
+   /// 刷新首页数据
+  static const String kRefreshHomeData = "kRefreshHomeData";
 }

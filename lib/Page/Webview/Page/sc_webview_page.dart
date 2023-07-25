@@ -282,6 +282,8 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
             print("token = " + id);
             var iddd = SCScaffoldManager.instance.user.communityId ?? "";
             print("iddd = " + iddd);
+            SCScaffoldManager.instance.eventBus
+              .fire({'key': SCKey.kRefreshHomeData});
           });
 
   /// 建信租房token-channel

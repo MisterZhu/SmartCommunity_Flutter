@@ -70,6 +70,7 @@ class SCHomeController2 extends GetxController {
 
   /// info1
   BannerInfo? bannerInfo;
+
   ///info2
   InfoInfo? inforInfo;
 
@@ -100,7 +101,7 @@ class SCHomeController2 extends GetxController {
     //   {"iconUrl" : SCAsset.iconItem8, "title" : "园区停车", "subUrl" : SCH5.communityParkUrl},
     //   {"iconUrl" : SCAsset.iconItem9, "title" : "垃圾分类", "subUrl" : SCH5.garbageSortUrl},
     // ];
-  
+
     listViewData = [
       /// banner
       {'type': SCTypeDefine.SC_HOME_TYPE_BANNER, 'data': []},
@@ -127,6 +128,11 @@ class SCHomeController2 extends GetxController {
     updateHomeData();
     loadTemplateId();
     navigationOffset = topNavBGImageHeight;
+  }
+
+  refreshHomeData() {
+    updateHomeData();
+    loadTemplateId();
   }
 
   /// 更新首页数据
@@ -248,10 +254,10 @@ class SCHomeController2 extends GetxController {
                       ?.componentList)
               .firstWhereOrNull((e2) => e2.code == 'banner')
               ?.info;
-              
+
           if (info != null && info.isNotEmpty) {
             dynamic binfoJson = jsonDecode(info);
-              bannerInfo = BannerInfo.fromJson(binfoJson);
+            bannerInfo = BannerInfo.fromJson(binfoJson);
             var categoryId = bannerInfo?.categoryId;
             var maxCount = bannerInfo?.maxCount;
             var params = {
@@ -269,7 +275,7 @@ class SCHomeController2 extends GetxController {
               ?.info;
           if (info2 != null && info2.isNotEmpty) {
             dynamic binfoJson = jsonDecode(info2);
-              inforInfo = InfoInfo.fromJson(binfoJson);
+            inforInfo = InfoInfo.fromJson(binfoJson);
             var categoryId = inforInfo?.categoryId;
             var maxCount = inforInfo?.maxCount;
             var params = {

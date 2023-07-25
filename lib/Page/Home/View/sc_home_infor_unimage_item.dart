@@ -15,36 +15,42 @@ class SCHomeInforNoImageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
-      padding: const EdgeInsets.all(12),
-      color: SCColors.color_FFFFFF,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: SCColors.color_1B1D33),
-            maxLines: 2, // 最多显示两行
-            overflow: TextOverflow.ellipsis,
-          ),
-          const SizedBox(height: 15),
-
-          Text(
-            date,
-            style: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: SCColors.color_8D8E99),
-
-            maxLines: 1, // 只显示一行
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
+    return GestureDetector(
+      onTap: () {
+        // 处理点击事件
+        onTap.call();
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.all(12),
+        color: SCColors.color_FFFFFF,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: SCColors.color_1B1D33),
+              maxLines: 2, // 最多显示两行
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 15),
+    
+            Text(
+              date,
+              style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: SCColors.color_8D8E99),
+    
+              maxLines: 1, // 只显示一行
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
       ),
     );
   }
