@@ -135,7 +135,7 @@ class SCHomeListView2State extends State<SCHomeListView2> {
       normalColor: SCColors.color_FFFFFF,
       activeColor: SCColors.color_FF6C00,
       onTap: (int index) {
-        workOrder();
+        // workOrder();
       },
     );
   }
@@ -305,7 +305,9 @@ class SCHomeListView2State extends State<SCHomeListView2> {
           ],
         );
       } else {
-        var params = {"title": title, "url": "http://172.16.191.89:8081/h5Manage/#/meterReadingTask/meterReadingTaskList?spaceIds=120260068&orgIdList=&Authorization=eyJhbGciOiJFUzI1NiJ9.eyJ1IjoiMTI5MDM2MzcwOTcyMTA5IiwibiI6IuadqOa0gSIsInQiOiJlYjFlMWFkOC04NWFmLTQyZDAtYmEzYy0yMTIyOWJlMTkwMDkiLCJvIjpbNjk4XSwiciI6WyIxMDQ2ODYyMTQ2Mjc4MDIiLCIxMDQ2ODYzOTYxMTc4MDQiLCIxMDcwOTA0OTIwNDA2MDUiLCIxMTE2NzE2NDU3NDE1MDUiXSwiZXhwIjoxNjkxMDUyOTk5LCJydCI6NzIwMH0.w80up5Y-dHKWbl947bluAAzqONMGy7IHr5n3Rqg5swFeyB0_NttcVJ8j35q_KN657YIO-6fqRKFTWQ31ZDBsgg&userId=129036370972109&userName=杨洁&client=co-wecom&defOrgId=eb1e1ad8-85af-42d0-ba3c-21229be19009&defOrgName=海滨租户&fromQw=1&tenantId=eb1e1ad8-85af-42d0-ba3c-21229be19009&phoneNum=18011623935&appId=wxb9a6e4e0bc429469"};
+        print('url123:$url');
+        var params = {"title": title, "url":
+        "http://172.16.191.89:8080/h5Manage/#/meterReadingTask/meterReadingTaskList?spaceIds=120260068&orgIdList=&Authorization=eyJhbGciOiJFUzI1NiJ9.eyJ1IjoiMTI5MDM2MzcwOTcyMTA5IiwibiI6IuadqOa0gSIsInQiOiJlYjFlMWFkOC04NWFmLTQyZDAtYmEzYy0yMTIyOWJlMTkwMDkiLCJvIjpbNjk4XSwiciI6WyIxMDQ2ODYyMTQ2Mjc4MDIiLCIxMDQ2ODYzOTYxMTc4MDQiLCIxMDcwOTA0OTIwNDA2MDUiLCIxMTE2NzE2NDU3NDE1MDUiXSwiZXhwIjoxNjkxMDUyOTk5LCJydCI6NzIwMH0.w80up5Y-dHKWbl947bluAAzqONMGy7IHr5n3Rqg5swFeyB0_NttcVJ8j35q_KN657YIO-6fqRKFTWQ31ZDBsgg&userId=129036370972109&userName=杨洁&client=co-wecom&defOrgId=eb1e1ad8-85af-42d0-ba3c-21229be19009&defOrgName=海滨租户&fromQw=1&tenantId=eb1e1ad8-85af-42d0-ba3c-21229be19009&phoneNum=18011623935&appId=wxb9a6e4e0bc429469"};
         if (isDeveloping == true) {
           SCToast.showTip('功能开发中...');
           return;

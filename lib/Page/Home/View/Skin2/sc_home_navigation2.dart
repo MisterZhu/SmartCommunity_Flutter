@@ -163,17 +163,17 @@ class SCHomeNavigation2 extends StatelessWidget {
         // const SizedBox(
         //   width: 16.0,
         // ),
-        GestureDetector(
-          onTap: () {
-            scanAction?.call();
-          },
-          child: Image.asset(
-            SCAsset.iconScan,
-            width: 22.0,
-            height: 22.0,
-            color: isSticky == true ? stickyColor : normalColor,
-          ),
-        ),
+        // GestureDetector(
+        //   onTap: () {
+        //     scanAction?.call();
+        //   },
+        //   child: Image.asset(
+        //     SCAsset.iconScan,
+        //     width: 22.0,
+        //     height: 22.0,
+        //     color: isSticky == true ? stickyColor : normalColor,
+        //   ),
+        // ),
         const SizedBox(
           width: 16.0,
         ),
