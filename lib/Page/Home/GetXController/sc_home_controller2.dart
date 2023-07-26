@@ -1,6 +1,7 @@
 /// 首页皮肤2-GetxController
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -65,6 +66,7 @@ class SCHomeController2 extends GetxController {
 
   //推广list
   List<SCHomePromotionModel> promotionList = [];
+  List<String?> promotionListFileKey = [];
   //资讯list
   List<SCHomeInforModel> inforList = [];
 
@@ -127,6 +129,18 @@ class SCHomeController2 extends GetxController {
     navigationOffset = 44.0 + SCUtils().getTopSafeArea();
     updateHomeData();
     loadTemplateId();
+    var params1 = {
+      'locationId': 13553016454031,
+      'maxCount': 1,
+      'communityId': SCScaffoldManager.instance.user.communityId ?? '',
+    };
+    var params2 = {
+      'categoryId': 13646517987151,
+      'maxCount': 10,
+      'communityId': SCScaffoldManager.instance.user.communityId ?? '',
+    };
+    loadInforList(params2);
+    loadPromotionList(params1);
     navigationOffset = topNavBGImageHeight;
   }
 
@@ -248,43 +262,43 @@ class SCHomeController2 extends GetxController {
           }
 
           log("背景图片:${imageUrl}");
-          var info = List.from(
-                  List.from(templateModel?.pageDecorationList ?? [])
-                      .firstWhereOrNull((e) => e.code == 'home')
-                      ?.componentList)
-              .firstWhereOrNull((e2) => e2.code == 'banner')
-              ?.info;
-
-          if (info != null && info.isNotEmpty) {
-            dynamic binfoJson = jsonDecode(info);
-            bannerInfo = BannerInfo.fromJson(binfoJson);
-            var categoryId = bannerInfo?.categoryId;
-            var maxCount = bannerInfo?.maxCount;
-            var params = {
-              'locationId': categoryId ?? 0,
-              'maxCount': maxCount ?? '',
-              'communityId': SCScaffoldManager.instance.user.communityId ?? '',
-            };
-            loadPromotionList(params);
-          }
-          var info2 = List.from(
-                  List.from(templateModel?.pageDecorationList ?? [])
-                      .firstWhereOrNull((e) => e.code == 'home')
-                      ?.componentList)
-              .firstWhereOrNull((e2) => e2.code == 'information')
-              ?.info;
-          if (info2 != null && info2.isNotEmpty) {
-            dynamic binfoJson = jsonDecode(info2);
-            inforInfo = InfoInfo.fromJson(binfoJson);
-            var categoryId = inforInfo?.categoryId;
-            var maxCount = inforInfo?.maxCount;
-            var params = {
-              'categoryId': categoryId ?? 0,
-              'maxCount': maxCount ?? 0,
-              'communityId': SCScaffoldManager.instance.user.communityId ?? '',
-            };
-            loadInforList(params);
-          }
+          // var info = List.from(
+          //         List.from(templateModel?.pageDecorationList ?? [])
+          //             .firstWhereOrNull((e) => e.code == 'home')
+          //             ?.componentList)
+          //     .firstWhereOrNull((e2) => e2.code == 'banner')
+          //     ?.info;
+          //
+          // if (info != null && info.isNotEmpty) {
+          //   dynamic binfoJson = jsonDecode(info);
+          //   bannerInfo = BannerInfo.fromJson(binfoJson);
+          //   var categoryId = bannerInfo?.categoryId;
+          //   var maxCount = bannerInfo?.maxCount;
+          //   var params = {
+          //     'locationId': categoryId ?? 0,
+          //     'maxCount': maxCount ?? '',
+          //     'communityId': SCScaffoldManager.instance.user.communityId ?? '',
+          //   };
+          //   loadPromotionList(params);
+          // }
+          // var info2 = List.from(
+          //         List.from(templateModel?.pageDecorationList ?? [])
+          //             .firstWhereOrNull((e) => e.code == 'home')
+          //             ?.componentList)
+          //     .firstWhereOrNull((e2) => e2.code == 'information')
+          //     ?.info;
+          // if (info2 != null && info2.isNotEmpty) {
+          //   dynamic binfoJson = jsonDecode(info2);
+          //   inforInfo = InfoInfo.fromJson(binfoJson);
+          //   var categoryId = inforInfo?.categoryId;
+          //   var maxCount = inforInfo?.maxCount;
+          //   var params = {
+          //     'categoryId': categoryId ?? 0,
+          //     'maxCount': maxCount ?? 0,
+          //     'communityId': SCScaffoldManager.instance.user.communityId ?? '',
+          //   };
+          //   loadInforList(params);
+          // }
         },
         failure: (err) {
           if (err['message'] != null) {
@@ -314,12 +328,16 @@ class SCHomeController2 extends GetxController {
   loadPromotionList(
     dynamic params,
   ) {
+    log('11111111111');
     SCHttpManager.instance.post(
         url: SCUrl.getPromotionListUrl,
         params: params,
         success: (value) {
           promotionList = List<SCHomePromotionModel>.from(
               value.map((e) => SCHomePromotionModel.fromJson(e)).toList());
+          promotionListFileKey = promotionList?.first?.pictures?.where((es) => es != null)
+          .map((e)=>SCConfig.getImageUrl(e.fileKey!))?.toList()??[];
+          log("promotionList2222222${promotionListFileKey}");
           update();
         },
         failure: (err) {

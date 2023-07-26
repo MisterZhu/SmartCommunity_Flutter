@@ -131,9 +131,7 @@ class SCHomeListView2State extends State<SCHomeListView2> {
       horizontalPadding: 16.0,
       radius: 4.0,
       imageScale: 686.0 / 232.0,
-      imageList: const [
-        SCAsset.homeSkin2Banner,
-      ],
+      imageList:state.promotionListFileKey,
       normalColor: SCColors.color_FFFFFF,
       activeColor: SCColors.color_FF6C00,
       onTap: (int index) {
