@@ -132,18 +132,18 @@ class SCHomeController2 extends GetxController {
     loadTemplateId();
     /*正式
     推广    13795403737604
-    资讯   13751484480401
+    资讯    13751484480401
     测试
     推广     13553016454031
     资讯     13646517987151
     * */
     var params1 = {
-      'locationId': 13795403737604,
+      'locationId': SCConfig.locationId,
       'maxCount': 1,
       'communityId': SCScaffoldManager.instance.user.communityId ?? '',
     };
     var params2 = {
-      'categoryId': 13751484480401,
+      'categoryId': SCConfig.categoryId,
       'maxCount': 10,
       'communityId': SCScaffoldManager.instance.user.communityId ?? '',
     };
@@ -320,7 +320,7 @@ class SCHomeController2 extends GetxController {
   loadTemplateId() {
     SCHttpManager.instance.get(
         url: SCUrl.getTemplateId,
-        params: {"id": SCConfig.getTerminalId()},
+        params: {"id": SCConfig.getTerminalId},
         success: (value) {
           loadPageTemplate(value?['templateId'] as String);
         },

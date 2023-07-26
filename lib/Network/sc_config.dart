@@ -40,6 +40,45 @@ class SCConfig {
     }
   }
 
+  /// 终端ID
+  static String get getTerminalId {
+    switch (env) {
+      case SCEnvironment.develop:
+        return "13586181992931";
+      case SCEnvironment.pretest:
+        return "13586181992931";
+      case SCEnvironment.production:
+        return "13993084622811";
+      default:
+        return "13993084622811";
+    }
+  }
+  /// 推广ID
+  static String get locationId {
+    switch (env) {
+      case SCEnvironment.develop:
+        return "13553016454031";
+      case SCEnvironment.pretest:
+        return "13553016454031";
+      case SCEnvironment.production:
+        return "13795403737604";
+      default:
+        return "13795403737604";
+    }
+  }
+  /// 分类ID
+  static String get categoryId {
+    switch (env) {
+      case SCEnvironment.develop:
+        return "13646517987151";
+      case SCEnvironment.pretest:
+        return "13646517987151";
+      case SCEnvironment.production:
+        return "13751484480401";
+      default:
+        return "13751484480401";
+    }
+  }
   /// 图片url
   static String getImageUrl(String url) {
     return BASE_URL + SCDefaultValue.files + url;
@@ -61,10 +100,5 @@ class SCConfig {
     } else {
       return [];
     }
-  }
-
-  /// 终端id
-  static String getTerminalId() {
-    return '13586181992931';
   }
 }
