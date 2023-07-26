@@ -67,6 +67,7 @@ class SCHomeController2 extends GetxController {
   //推广list
   List<SCHomePromotionModel> promotionList = [];
   List<String?> promotionListFileKey = [];
+
   //资讯list
   List<SCHomeInforModel> inforList = [];
 
@@ -129,13 +130,20 @@ class SCHomeController2 extends GetxController {
     navigationOffset = 44.0 + SCUtils().getTopSafeArea();
     updateHomeData();
     loadTemplateId();
+    /*正式
+    推广    13795403737604
+    资讯   13751484480401
+    测试
+    推广     13553016454031
+    资讯     13646517987151
+    * */
     var params1 = {
-      'locationId': 13553016454031,
+      'locationId': 13795403737604,
       'maxCount': 1,
       'communityId': SCScaffoldManager.instance.user.communityId ?? '',
     };
     var params2 = {
-      'categoryId': 13646517987151,
+      'categoryId': 13751484480401,
       'maxCount': 10,
       'communityId': SCScaffoldManager.instance.user.communityId ?? '',
     };
@@ -335,8 +343,11 @@ class SCHomeController2 extends GetxController {
         success: (value) {
           promotionList = List<SCHomePromotionModel>.from(
               value.map((e) => SCHomePromotionModel.fromJson(e)).toList());
-          promotionListFileKey = promotionList?.first?.pictures?.where((es) => es != null)
-          .map((e)=>SCConfig.getImageUrl(e.fileKey!))?.toList()??[];
+          promotionListFileKey = promotionList?.first?.pictures
+                  ?.where((es) => es != null)
+                  .map((e) => SCConfig.getImageUrl(e.fileKey!))
+                  ?.toList() ??
+              [];
           log("promotionList2222222${promotionListFileKey}");
           update();
         },
