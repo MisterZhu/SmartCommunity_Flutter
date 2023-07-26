@@ -139,7 +139,8 @@ class SCHomeState extends State<SCHomePage>
             state2.loadTemplateId();
             getUserInfo();
           },);
-        }));
+        })
+    );
   }
 
 

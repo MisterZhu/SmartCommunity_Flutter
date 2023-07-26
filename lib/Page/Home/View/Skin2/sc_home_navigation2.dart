@@ -165,7 +165,7 @@ class SCHomeNavigation2 extends StatelessWidget {
         // ),
         GestureDetector(
           onTap: () {
-            messageAction?.call();
+            scanAction?.call();
           },
           child: Image.asset(
             SCAsset.iconScan,

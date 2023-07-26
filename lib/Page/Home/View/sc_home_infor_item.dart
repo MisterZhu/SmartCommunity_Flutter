@@ -3,6 +3,11 @@ import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Home/View/sc_home_infor_image_item.dart';
 import 'package:smartcommunity/Page/Home/View/sc_home_infor_unimage_item.dart';
 
+import '../../../Constants/sc_h5.dart';
+import '../../../Network/sc_config.dart';
+import '../../../Skin/Tools/sc_scaffold_manager.dart';
+import '../../../Utils/Router/sc_router_helper.dart';
+import '../../../Utils/Router/sc_router_path.dart';
 import '../GetXController/sc_home_controller2.dart';
 import '../Model/sc_home_news_model.dart';
 
@@ -41,8 +46,10 @@ class CommunitInfoItem extends StatelessWidget {
               color: SCColors.color_FFFFFF, // 添加一个背景颜色，确保圆角效果正确显示
             ),
             child: ListView.builder(
-              padding: EdgeInsets.zero, // 设置padding为零
-              physics: const NeverScrollableScrollPhysics(), // 禁用子ListView的滚动
+              padding: EdgeInsets.zero,
+              // 设置padding为零
+              physics: const NeverScrollableScrollPhysics(),
+              // 禁用子ListView的滚动
               shrinkWrap: true,
 
               itemCount: state.inforList.length,
@@ -58,6 +65,12 @@ class CommunitInfoItem extends StatelessWidget {
                     onTap: () {
                       // 处理有图片样式的单元格点击事件
                       print('点击了有图片的资讯');
+                      String token = SCScaffoldManager.instance.user.token ?? "";
+
+                      String workOrderUrl =
+                          "${SCConfig.getH5Url(SCH5.inforDetailUrl)}?id=${newsItem.id}&Authorization=$token";
+                      var params = {"title": "社区资讯", "url": workOrderUrl};
+                      SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
                     },
                   );
                 } else {
@@ -68,6 +81,13 @@ class CommunitInfoItem extends StatelessWidget {
                     onTap: () {
                       // 处理无图片样式的单元格点击事件
                       print('点击了无图片的资讯');
+                      String token = SCScaffoldManager.instance.user.token ?? "";
+
+                      String workOrderUrl =
+                          "${SCConfig.getH5Url(SCH5.inforDetailUrl)}?id=${newsItem.id}&Authorization=$token";
+                      var params = {"title": "社区资讯", "url": workOrderUrl};
+                      // var params = {'title' : "社区资讯", 'url' : url,'removeLoginCheck' : true};
+                      SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
                     },
                   );
                 }

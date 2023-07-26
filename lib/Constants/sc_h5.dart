@@ -59,4 +59,7 @@ class SCH5 {
 
   /// 关于
   static const String aboutH5Url = "https://sq.wisharetec.com/h5new/public/homepage/indexSSSH.html";
+
+  /// 资讯详情h5
+  static const String inforDetailUrl = "/H5Open/#/information/informationDetail";
 }
