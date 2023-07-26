@@ -38,11 +38,17 @@ class SCBasePrivacyState extends State<SCBasePrivacyPage> {
 
   /// body
   Widget body() {
-    return Stack(
-      children: [
-        maskItem(),
-        privacyAlertItem()
-      ],
+    // return Stack(
+    //   children: [
+    //     maskItem(),
+    //     privacyAlertItem()
+    //   ],
+    // );
+    return Scaffold(
+      backgroundColor: SCColors.color_F5F7F7,
+      body: Center(
+        child: privacyAlertItem(),
+      ),
     );
   }
 
