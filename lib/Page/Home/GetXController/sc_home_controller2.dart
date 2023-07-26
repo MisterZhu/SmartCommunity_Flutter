@@ -21,7 +21,9 @@ import '../../../Constants/sc_type_define.dart';
 import '../../../Network/sc_config.dart';
 import '../../../Network/sc_http_manager.dart';
 import '../../../Network/sc_url.dart';
+import '../../../Skin/Model/sc_user.dart';
 import '../../../Skin/Tools/sc_scaffold_manager.dart';
+import '../../Mine/Model/sc_house_list_model.dart';
 import '../Model/sc_home_promotion_model.dart';
 import '../Model/sc_home_template_model.dart';
 // import 'package:image_cropper/image_cropper.dart';
@@ -128,6 +130,14 @@ class SCHomeController2 extends GetxController {
       // {'type': SCTypeDefine.SC_HOME_TYPE_GOODS, 'data': []},
     ];
     navigationOffset = 44.0 + SCUtils().getTopSafeArea();
+    var iddd = SCScaffoldManager.instance.user.communityId ?? "";
+    print("iddd = " + iddd);
+    if (iddd.isEmpty) {
+      print("获取：communityId" + iddd);
+
+      getCommunityId();
+    }
+
     updateHomeData();
     loadTemplateId();
     /*正式
@@ -155,6 +165,20 @@ class SCHomeController2 extends GetxController {
   refreshHomeData() {
     updateHomeData();
     loadTemplateId();
+
+
+    var params1 = {
+      'locationId': SCConfig.locationId,
+      'maxCount': 1,
+      'communityId': SCScaffoldManager.instance.user.communityId ?? '',
+    };
+    var params2 = {
+      'categoryId': SCConfig.categoryId,
+      'maxCount': 10,
+      'communityId': SCScaffoldManager.instance.user.communityId ?? '',
+    };
+    loadInforList(params2);
+    loadPromotionList(params1);
   }
 
   /// 更新首页数据
@@ -389,6 +413,29 @@ class SCHomeController2 extends GetxController {
             SCScaffoldManager.instance.unreadMessageCount = value;
             var params = {"key": SCKey.kReloadUnreadMessageCount};
             SCScaffoldManager.instance.eventBus.fire(params);
+          }
+        },
+        failure: (value) {});
+  }
+
+  /// 获取房号列表，取第一个审核通过的房号为默认房号
+  getCommunityId() {
+    SCHttpManager.instance.get(
+        url: SCUrl.kMyHouseUrl,
+        success: (value) {
+          List list = List<SCHouseListModel>.from(
+              value.map((e) => SCHouseListModel.fromJson(e)).toList());
+          for (int i = 0; i < list.length; i++) {
+            SCHouseListModel model = list[i];
+            if (model.examineStatus == 1) {
+              //examineStatus审核状态, 0 审核中, 1 审核通过, 2 审核拒绝
+              /// 存储communityId数据到SCUser
+              SCUser scUser = SCScaffoldManager.instance.getUserData();
+              scUser.communityId = model.communityId;
+              scUser.spaceId = model.spaceId;
+              SCScaffoldManager.instance.cacheUserData(scUser.toJson());
+              refreshHomeData();
+            }
           }
         },
         failure: (value) {});
