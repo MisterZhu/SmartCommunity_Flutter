@@ -5,6 +5,6 @@ import 'package:smartcommunity/sc_app.dart';
 void main() async{
   SCConfig.env = SCEnvironment.develop;
 
-  SCConfig.isSupportProxyForProduction = false;
+  // SCConfig.isSupportProxyForProduction = false;
   startApp();
 }

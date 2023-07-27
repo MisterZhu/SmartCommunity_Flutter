@@ -2,6 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>是否允许方圆管家使用您的蓝牙外围设备？</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>允许方圆管家使用期间访问您的定位信息，将快速定位到所属园区。</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>是否允许此方圆管家App使用语音识别</string>
+	<key>NSMotionUsageDescription</key>
+	<string>方圆管家App希望访问您的运动数据，需要开启运动使用权限</string>
+	<key>NSContactsUsageDescription</key>
+	<string>方圆管家App希望访问您的通讯录，为您匹配通讯录好友，需要开启访问通讯录权限</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>方圆管家App希望访问您的日历，需要开启访问日历权限</string>
+	<key>NSCameraUsageDescription</key>
+	<string>方圆管家App为了让您保存或修改图像视频等，需要开启相关权限</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -19,7 +33,7 @@
 		<string>zh</string>
 	</array>
 	<key>CFBundleName</key>
-	<string>smartcommunity</string>
+	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -100,8 +114,6 @@
 	<string>允许App访问相册，您将可以上传相册照片及保存照片到相册。</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>允许App访问蓝牙，您将可以使用智能开门服务。</string>
-	<key>NSCameraUsageDescription</key>
-	<string>允许App访问相机，您将可以在App中拍摄照片、视频、使用扫一扫功能。</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>方圆管家App需要访问您的本地网络才能与方圆管家服务器连接</string>
 	<key>NSLocationAlwaysUsageDescription</key>
