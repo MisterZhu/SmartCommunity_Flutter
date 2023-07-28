@@ -56,19 +56,23 @@ class SCBasicPrivacyAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     initData();
-    return body();
+    // return body();
+    return body(context);
+
   }
 
   /// body
-  Widget body() {
-    /// 弹窗宽度
-    double width = 200;
-
-    if (SCUtils().getScreenWidth() > SCDefaultValue.defaultScreenWidth) {
-      width = 311.0;
-    } else {
-      width = SCUtils().getScreenWidth() - 64.0;
+  Widget body(BuildContext context) {    /// 弹窗宽度
+    double width = 311;
+    var getScreenWidth = MediaQuery.of(context).size.width;
+    if (getScreenWidth != 0) {
+      if (getScreenWidth > SCDefaultValue.defaultScreenWidth) {
+        width = 311.0;
+      } else {
+        width = SCUtils().getScreenWidth() - 64.0;
+      }
     }
+
 
     return Center(
       child: Column(

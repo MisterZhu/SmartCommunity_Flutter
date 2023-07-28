@@ -163,7 +163,6 @@ class SCHomeController2 extends GetxController {
   }
 
   refreshHomeData() {
-    updateHomeData();
     loadTemplateId();
 
 
@@ -179,6 +178,7 @@ class SCHomeController2 extends GetxController {
     };
     loadInforList(params2);
     loadPromotionList(params1);
+    loadUnreadMessageCount();
   }
 
   /// 更新首页数据
@@ -284,8 +284,9 @@ class SCHomeController2 extends GetxController {
         url: SCUrl.pageTemplate,
         params: {"id": id},
         success: (value) {
+          refreshController.refreshCompleted();
+          refreshController.loadComplete();
           templateModel = SCHomeTemplateModel.fromJson(value);
-          log("获取的模版：${value}");
 
           String fileKey = templateModel?.background?.fileKey ??
               ""; //value['background']['fileKey'];
@@ -293,7 +294,6 @@ class SCHomeController2 extends GetxController {
             imageUrl = SCConfig.getImageUrl(fileKey);
           }
 
-          log("背景图片:${imageUrl}");
           // var info = List.from(
           //         List.from(templateModel?.pageDecorationList ?? [])
           //             .firstWhereOrNull((e) => e.code == 'home')
@@ -331,8 +331,11 @@ class SCHomeController2 extends GetxController {
           //   };
           //   loadInforList(params);
           // }
+
         },
         failure: (err) {
+          refreshController.refreshCompleted();
+          refreshController.loadComplete();
           if (err['message'] != null) {
             String message = err['message'];
             SCToast.showTip(message);
@@ -365,6 +368,7 @@ class SCHomeController2 extends GetxController {
         url: SCUrl.getPromotionListUrl,
         params: params,
         success: (value) {
+
           promotionList = List<SCHomePromotionModel>.from(
               value.map((e) => SCHomePromotionModel.fromJson(e)).toList());
           promotionListFileKey = promotionList?.first?.pictures
@@ -372,14 +376,16 @@ class SCHomeController2 extends GetxController {
                   .map((e) => SCConfig.getImageUrl(e.fileKey!))
                   ?.toList() ??
               [];
-          log("promotionList2222222${promotionListFileKey}");
           update();
         },
         failure: (err) {
+
           if (err['message'] != null) {
             String message = err['message'];
             SCToast.showTip(message);
           }
+          promotionList = [];
+          update();
         });
   }
 
@@ -400,6 +406,8 @@ class SCHomeController2 extends GetxController {
             String message = err['message'];
             SCToast.showTip(message);
           }
+          inforList = [];
+          update();
         });
   }
 

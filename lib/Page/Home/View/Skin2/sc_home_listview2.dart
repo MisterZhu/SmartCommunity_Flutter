@@ -127,17 +127,22 @@ class SCHomeListView2State extends State<SCHomeListView2> {
 
   /// swiper广告图
   Widget bannerCell() {
-    return SCHomeSwiper(
+    // 判断state.promotionListFileKey是否为0
+    bool shouldShowBanner = state.promotionListFileKey != null && state.promotionListFileKey.isNotEmpty;
+
+    return shouldShowBanner
+        ? SCHomeSwiper(
       horizontalPadding: 16.0,
       radius: 4.0,
       imageScale: 686.0 / 232.0,
-      imageList:state.promotionListFileKey,
+      imageList: state.promotionListFileKey,
       normalColor: SCColors.color_FFFFFF,
       activeColor: SCColors.color_FF6C00,
       onTap: (int index) {
         // workOrder();
       },
-    );
+    )
+        : const SizedBox(height: 100.0); // 如果state.promotionListFileKey为0或为null，返回一个空容器，即不展示内容
   }
 
   /// 应用列表-cell
@@ -245,11 +250,12 @@ class SCHomeListView2State extends State<SCHomeListView2> {
 
   /// 刷新
   Future onRefresh() async {
-    Future.delayed(const Duration(milliseconds: 1500), () {
-      state.refreshController.refreshCompleted();
-      changeSkin();
-      widget.refreshAction?.call();
-    });
+    // Future.delayed(const Duration(milliseconds: 1500), () {
+    //   state.refreshController.refreshCompleted();
+    //   changeSkin();
+    //   widget.refreshAction?.call();
+    // });
+    state.refreshHomeData();
   }
 
   /// 测试数据-工单
