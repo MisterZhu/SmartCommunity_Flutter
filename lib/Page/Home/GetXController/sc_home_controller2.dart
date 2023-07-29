@@ -164,7 +164,7 @@ class SCHomeController2 extends GetxController {
 
   refreshHomeData() {
     loadTemplateId();
-
+    updateHomeData();
 
     var params1 = {
       'locationId': SCConfig.locationId,
