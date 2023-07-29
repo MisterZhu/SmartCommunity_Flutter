@@ -199,7 +199,7 @@ class SCHomeState extends State<SCHomePage>
       if (key == SCKey.kReloadUserInfo) {
         getUserInfo();
       } else if (key == SCKey.kReloadUnreadMessageCount) {
-        state.update();
+        // state.update();
         state2.update();
       } else if (key == SCKey.kRefreshHomeData) {
         state2.refreshHomeData();

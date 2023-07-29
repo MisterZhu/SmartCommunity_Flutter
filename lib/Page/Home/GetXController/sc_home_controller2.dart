@@ -131,7 +131,7 @@ class SCHomeController2 extends GetxController {
     ];
     navigationOffset = 44.0 + SCUtils().getTopSafeArea();
     var iddd = SCScaffoldManager.instance.user.communityId ?? "";
-    print("iddd = " + iddd);
+    print("iddd2222 = " + iddd);
     if (iddd.isEmpty) {
       print("获取：communityId" + iddd);
 
@@ -176,6 +176,8 @@ class SCHomeController2 extends GetxController {
       'maxCount': 10,
       'communityId': SCScaffoldManager.instance.user.communityId ?? '',
     };
+    print("------------------99999999999${SCScaffoldManager.instance.user.communityId}");
+
     loadInforList(params2);
     loadPromotionList(params1);
     loadUnreadMessageCount();
@@ -364,6 +366,8 @@ class SCHomeController2 extends GetxController {
     dynamic params,
   ) {
     log('11111111111');
+    promotionList = [];
+
     SCHttpManager.instance.post(
         url: SCUrl.getPromotionListUrl,
         params: params,
@@ -393,6 +397,8 @@ class SCHomeController2 extends GetxController {
   loadInforList(
     dynamic params,
   ) {
+    inforList = [];
+
     SCHttpManager.instance.post(
         url: SCUrl.getInforListUrl,
         params: params,
@@ -442,6 +448,7 @@ class SCHomeController2 extends GetxController {
               scUser.communityId = model.communityId;
               scUser.spaceId = model.spaceId;
               SCScaffoldManager.instance.cacheUserData(scUser.toJson());
+              print("------------------111111111111111${scUser.communityId}");
               refreshHomeData();
             }
           }

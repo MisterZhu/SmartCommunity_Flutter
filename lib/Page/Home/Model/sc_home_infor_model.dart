@@ -26,7 +26,7 @@ class SCHomeInforModel {
   String? tags;
   String? tenantId;
   Detail? detail;
-  String? frontCover;
+  SCFrontCover? frontCover;
   String? showEffect;
   String? imgList;
   List<TargetObj>? targetObj;
@@ -76,8 +76,8 @@ class SCHomeInforModel {
     tags = json['tags'];
     tenantId = json['tenantId'];
     detail =
-        json['detail'] != null ? new Detail.fromJson(json['detail']) : null;
-    frontCover = json['frontCover'];
+        json['detail'] != null ? Detail.fromJson(json['detail']) : null;
+    frontCover = json['frontCover'] != null ? SCFrontCover.fromJson(json['frontCover']) : null;
     showEffect = json['showEffect'];
     imgList = json['imgList'];
     if (json['targetObj'] != null) {
@@ -136,7 +136,21 @@ class Detail {
     return data;
   }
 }
+class SCFrontCover {
+  String? fileKey;
 
+  SCFrontCover({this.fileKey});
+
+  SCFrontCover.fromJson(Map<String, dynamic> json) {
+    fileKey = json['fileKey'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['fileKey'] = this.fileKey;
+    return data;
+  }
+}
 class TargetObj {
   String? label;
   String? value;

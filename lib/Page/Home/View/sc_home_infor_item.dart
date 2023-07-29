@@ -55,13 +55,13 @@ class CommunitInfoItem extends StatelessWidget {
               itemCount: state.inforList.length,
               itemBuilder: (context, index) {
                 var newsItem = state.inforList[index];
-                if (newsItem.frontCover != null &&
-                    newsItem.frontCover!.isNotEmpty) {
+                if (newsItem.frontCover != null) {
                   // 有图片的样式
+                  final imaUrl = SCConfig.getImageUrl(newsItem.frontCover!.fileKey!);
                   return SCHomeInforImageItem(
                     title: newsItem.title ?? "",
                     date: newsItem.gmtCreate ?? "",
-                    image: newsItem.frontCover!,
+                    image: imaUrl,
                     onTap: () {
                       // 处理有图片样式的单元格点击事件
                       print('点击了有图片的资讯');

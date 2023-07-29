@@ -269,6 +269,8 @@ class SCToggleHousesState extends State<SCToggleHousesPage>
     user.spaceName = model.spaceName;
     user.identityId = model.identityId;
     SCScaffoldManager.instance.cacheUserData(user.toJson());
+    print("------------------66666666666${user.communityId}");
+
     myHouseState.updateCurrentHousingId(model.id);
     /// 当前房号的信息也要重新获取
     loadCurrentHouseBasicData();

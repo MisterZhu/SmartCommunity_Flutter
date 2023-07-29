@@ -282,6 +282,8 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
             print("token = " + id);
             var iddd = SCScaffoldManager.instance.user.communityId ?? "";
             print("iddd = " + iddd);
+            print("------------------888888888${SCScaffoldManager.instance.user.communityId}");
+
             SCScaffoldManager.instance.eventBus
               .fire({'key': SCKey.kRefreshHomeData});
           });
