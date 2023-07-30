@@ -69,6 +69,7 @@ class SCHomeController2 extends GetxController {
   //推广list
   List<SCHomePromotionModel> promotionList = [];
   List<String?> promotionListFileKey = [];
+  double pictureRatio = 4.0;
 
   //资讯list
   List<SCHomeInforModel> inforList = [];
@@ -380,6 +381,7 @@ class SCHomeController2 extends GetxController {
                   .map((e) => SCConfig.getImageUrl(e.fileKey!))
                   ?.toList() ??
               [];
+          pictureRatio = promotionList?.first?.pictureRatio == "1" ? 4.0 : 2.5;
           update();
         },
         failure: (err) {

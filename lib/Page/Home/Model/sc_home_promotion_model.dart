@@ -19,7 +19,7 @@ class SCHomePromotionModel {
   int? isFixedOnline;
   int? isFixedOffline;
   String? target;
-  String? targetObj;
+  List<SCTargetObj>? targetObj;
   String? pictureRatio;
 
   SCHomePromotionModel(
@@ -65,7 +65,7 @@ class SCHomePromotionModel {
     if (json['pictures'] != null) {
       pictures = <PromotionPictures>[];
       json['pictures'].forEach((v) {
-        pictures!.add(new PromotionPictures.fromJson(v));
+        pictures!.add(PromotionPictures.fromJson(v));
       });
     }
     detail = json['detail'];
@@ -73,7 +73,12 @@ class SCHomePromotionModel {
     isFixedOnline = json['isFixedOnline'];
     isFixedOffline = json['isFixedOffline'];
     target = json['target'];
-    targetObj = json['targetObj'];
+    if (json['targetObj'] != null) {
+      targetObj = <SCTargetObj>[];
+      json['targetObj'].forEach((v) {
+        targetObj!.add(SCTargetObj.fromJson(v));
+      });
+    }
     pictureRatio = json['pictureRatio'];
   }
 
@@ -106,7 +111,24 @@ class SCHomePromotionModel {
     return data;
   }
 }
+class SCTargetObj {
+  String? label;
+  String? value;
 
+  SCTargetObj({this.label, this.value});
+
+  SCTargetObj.fromJson(Map<String, dynamic> json) {
+    label = json['label'];
+    value = json['value'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['label'] = this.label;
+    data['value'] = this.value;
+    return data;
+  }
+}
 class PromotionLocation {
   String? label;
   int? value;

@@ -41,17 +41,15 @@ class SCRouterPages {
     /*引导页*/
     GetPage(name: SCRouterPath.guidePath, page: () => SCGuidePage()),
     /*首次的用户协议和隐私政策弹窗*/
-    GetPage(name: SCRouterPath.basePrivacyPath, page: () => SCBasePrivacyPage()),
+    GetPage(name: SCRouterPath.basePrivacyPath, page: () => const SCBasePrivacyPage()),
     /*webView*/
-    GetPage(name: SCRouterPath.webViewPath, page: () => SCWebViewPage()),
+    GetPage(name: SCRouterPath.webViewPath, page: () => const SCWebViewPage()),
     /*城市选择*/
     GetPage(name: SCRouterPath.selectCityPath, page: () => SCSelectCityPage()),
     /*社区选择*/
-    GetPage(name: SCRouterPath.selectCommunityPath, page: () => SCSelectCommunityPage()),
-    /*webView*/
-    GetPage(name: SCRouterPath.webViewPath, page: () => SCWebViewPage()),
+    GetPage(name: SCRouterPath.selectCommunityPath, page: () => const SCSelectCommunityPage()),
     /*房号选择*/
-    GetPage(name: SCRouterPath.selectHousePath, page: () => SCSelectHousePage()),
+    GetPage(name: SCRouterPath.selectHousePath, page: () => const SCSelectHousePage()),
     /*全部应用*/
     GetPage(name: SCRouterPath.servicePagePath, page: () => SCServicePage()),
     /*切换房屋*/
