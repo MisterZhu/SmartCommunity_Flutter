@@ -277,11 +277,17 @@ class _SCWebViewPageState extends State<SCWebViewPage> {
             var jsonMessage = message.message;
             var decodedMessage = jsonDecode(jsonMessage);
             var id = decodedMessage['id'];
+            var spaceId = decodedMessage['spaceId'] as int;
+
             SCScaffoldManager.instance.user.communityId = id;
+            SCScaffoldManager.instance.user.spaceId = spaceId;
+
             print("fycommunityId = " + jsonMessage);
             print("token = " + id);
             var iddd = SCScaffoldManager.instance.user.communityId ?? "";
             print("iddd = " + iddd);
+            print("spaceId = $spaceId");
+
             print("------------------888888888${SCScaffoldManager.instance.user.communityId}");
 
             SCScaffoldManager.instance.eventBus

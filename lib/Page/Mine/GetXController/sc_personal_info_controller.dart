@@ -39,6 +39,8 @@ class SCPersonalInfoController extends GetxController {
         url: SCUrl.kFetchUserInfoUrl,
         success: (value) {
           var communityId = SCScaffoldManager.instance.user.communityId ?? "";
+          var spaceId = SCScaffoldManager.instance.user.spaceId ?? 0;
+
           bool updateStatus = updateAll ?? true;
           SCUserInfoModel userInfoModel = SCUserInfoModel.fromJson(value);
 
@@ -53,6 +55,7 @@ class SCPersonalInfoController extends GetxController {
           scUser.birthday = userInfoModel.birthday;
           if (communityId.isNotEmpty) {
             scUser.communityId = communityId;
+            scUser.spaceId = spaceId;
           }
           SCScaffoldManager.instance.cacheUserData(scUser.toJson());
 

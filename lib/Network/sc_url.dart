@@ -2,7 +2,7 @@
 
 class SCUrl {
 
-  static const String api = 'api';
+  static const String api = 'jmapi';
   /// 高德逆地理编码url
   static const String kReGeoCodeUrl = 'https://restapi.amap.com/v3/geocode/regeo';
 

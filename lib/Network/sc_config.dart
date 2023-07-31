@@ -39,7 +39,19 @@ class SCConfig {
         return "https://bsp.fineland.cn";
     }
   }
-
+  /// 图片base url
+  static String get BASE_IMG_URL {
+    switch (env) {
+      case SCEnvironment.develop:
+        return "https://jmdev.wisharetec.com/";
+      case SCEnvironment.pretest:
+        return "https://test.fyelife.cn:28080";
+      case SCEnvironment.production:
+        return "https://bsp.fineland.cn";
+      default:
+        return "https://test.fyelife.cn";
+    }
+  }
   /// 终端ID
   static String get getTerminalId {
     switch (env) {
@@ -81,7 +93,7 @@ class SCConfig {
   }
   /// 图片url
   static String getImageUrl(String url) {
-    return BASE_URL + SCDefaultValue.files + url;
+    return BASE_IMG_URL + SCDefaultValue.files + url;
   }
 
   /// h5 url
