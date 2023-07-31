@@ -94,6 +94,8 @@ class SCLoginController extends GetxController {
               user.identityName = jsonParams['identityName'];
               user.housingId = jsonParams['housingId'];
             }
+            print("------------------2222222222222${user.communityId}");
+
             SCScaffoldManager.instance.user = user;
             SCScaffoldManager.instance.isLogin = true;
             resultHandler(200);
@@ -150,6 +152,8 @@ class SCLoginController extends GetxController {
             user.identityName = jsonParams['identityName'];
             user.housingId = jsonParams['housingId'];
           }
+          print("------------------333333333333${user.communityId}");
+
           SCScaffoldManager.instance.user = user;
           SCScaffoldManager.instance.isLogin = true;
           resultHandler(true);

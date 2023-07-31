@@ -76,7 +76,7 @@ class SCHomeInforImageItem extends StatelessWidget {
                 height: 75,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(4),
-                  child: Image.asset(
+                  child: Image.network(
                     image,
                     fit: BoxFit.cover,
                   ),

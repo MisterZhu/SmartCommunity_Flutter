@@ -38,6 +38,7 @@ class SCPersonalInfoController extends GetxController {
     SCHttpManager.instance.get(
         url: SCUrl.kFetchUserInfoUrl,
         success: (value) {
+          var communityId = SCScaffoldManager.instance.user.communityId ?? "";
           bool updateStatus = updateAll ?? true;
           SCUserInfoModel userInfoModel = SCUserInfoModel.fromJson(value);
 
@@ -50,15 +51,23 @@ class SCPersonalInfoController extends GetxController {
           scUser.headPicUri = userInfoModel.headPicUri;
           scUser.gender = userInfoModel.gender;
           scUser.birthday = userInfoModel.birthday;
+          if (communityId.isNotEmpty) {
+            scUser.communityId = communityId;
+          }
           SCScaffoldManager.instance.cacheUserData(scUser.toJson());
 
           if (updateStatus) {
             SCMineController mineController = Get.find<SCMineController>();
             mineController.update();
           }
-          getCommunityId(success: () {
+          if (communityId.isEmpty) {
+            getCommunityId(success: () {
+              successHandler?.call();
+            });
+          }else{
             successHandler?.call();
-          });
+          }
+
           update();
         },
         failure: (value) {});
@@ -77,6 +86,8 @@ class SCPersonalInfoController extends GetxController {
               /// 存储communityId数据到SCUser
               SCUser scUser = SCScaffoldManager.instance.getUserData();
               scUser.communityId = model.communityId;
+              print("------------------4444444444${scUser.communityId}");
+
               scUser.spaceId = model.spaceId;
               SCScaffoldManager.instance.cacheUserData(scUser.toJson());
             }
