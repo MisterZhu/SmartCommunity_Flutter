@@ -58,7 +58,7 @@ class SCH5 {
   static const String myHouseUrl = "/h5Open/#/userHouse/myRoomNo";
 
   /// 关于
-  static const String aboutH5Url = "https://sq.wisharetec.com/h5new/public/homepage/indexSSSH.html";
+  static const String aboutH5Url = "https://bsp.fineland.cn/h5Public/homepage/indexFYGJ.html";
 
   /// 资讯详情h5
   static const String inforDetailUrl = "/H5Open/#/information/informationDetail";
