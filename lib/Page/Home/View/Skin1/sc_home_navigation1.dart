@@ -222,10 +222,10 @@ class SCHomeNavigation1 extends StatelessWidget {
   Widget bellIcon() {
     return GestureDetector(
       child: Image.asset(
-        SCAsset.iconMessage,
+        SCAsset.iconMessage_black,
         width: 24.0,
         height: 24.0,
-        color: isSticky == true ? stickyColor : normalColor,
+        // color: SCColors.color_000000,
       ),
       onTap: () {
         message();

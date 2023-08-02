@@ -61,5 +61,5 @@ class SCH5 {
   static const String aboutH5Url = "https://bsp.fineland.cn/h5Public/homepage/indexFYGJ.html";
 
   /// 资讯详情h5
-  static const String inforDetailUrl = "/H5Open/#/information/informationDetail";
+  static const String inforDetailUrl = "/h5Open/#/information/informationDetail";
 }

@@ -28,6 +28,8 @@ class SCAsset {
   static const String iconScan = 'images/icon_scan_white.png';
   /// 白色消息icon
   static const String iconMessage = 'images/icon_message_white.png';
+  /// 黑色消息icon
+  static const String iconMessage_black = 'images/icon_message_black.png';
   /// 白色搜索icon
   static const String iconWhiteSearch = 'images/icon_search_white.png';
   /// 点赞-灰色icon
