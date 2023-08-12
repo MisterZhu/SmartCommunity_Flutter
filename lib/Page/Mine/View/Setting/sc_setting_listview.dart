@@ -1,4 +1,5 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sc_uikit/sc_uikit.dart';
@@ -38,12 +39,12 @@ class SCSettingListView extends StatelessWidget {
         },
         separatorBuilder: (BuildContext context, int index) {
           bool isLine = true;
-          if (index == 2) {
+          if (index == 2 || index == 3) {
             isLine = false;
           }
           return getLine(isLine);
         },
-        itemCount: 4);
+        itemCount: 5);
   }
   
   Widget getCell(int index) {
@@ -70,6 +71,8 @@ class SCSettingListView extends StatelessWidget {
         feedBack();
       },);
     } else if (index == 3) {
+      return logOffCell();
+    }  else if (index == 4) {
       return logoutCell();
     } else {
       return const SizedBox(height: 100.0,);
@@ -84,15 +87,34 @@ class SCSettingListView extends StatelessWidget {
     }
   }
 
-  /// 注销
-  Widget logoffCell() {
-    return SCSettingCell(title: '注销账户',onTap: (){
-      if (logoff != null) {
-        logoff?.call();
-      }
-    },);
+  // /// 注销
+  // Widget logoffCell() {
+  //   return SCSettingCell(title: '注销账户',onTap: (){
+  //     unsubscribe();
+  //   },);
+  // }
+  /// 注销cell
+  Widget logOffCell() {
+    return SizedBox(
+      width: double.infinity,
+      height: 48.0,
+      child: CupertinoButton(
+          padding: EdgeInsets.zero,
+          color: SCColors.color_FFFFFF,
+          borderRadius: BorderRadius.circular(0.0),
+          child: const Text(
+            "注销",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: SCFonts.f16,
+                fontWeight: FontWeight.w500,
+                color: SCColors.color_4285F4),
+          ),
+          onPressed: () {
+            unsubscribe();
+          }),
+    );
   }
-
   /// 退出登录cell
   Widget logoutCell() {
     return SCLogOutCell(onTap: (){
@@ -100,6 +122,33 @@ class SCSettingListView extends StatelessWidget {
     },);
   }
 
+  /// 注销账户
+  unsubscribe() {
+    BuildContext? context = Get.context!;
+    SCDialogUtils.instance.showMiddleDialog(
+      context: context,
+      title: '注销提示',
+      content: SCDefaultValue.logOffTip,
+      customWidgetButtons: [
+        defaultCustomButton(context,
+            text: '取消',
+            textColor: SCColors.color_1B1C33,
+            fontWeight: FontWeight.w400),
+        defaultCustomButton(context,
+            text: '确定',
+            textColor: SCColors.color_1B1C33,
+            fontWeight: FontWeight.w400, onTap: () {
+              SCSettingController state = Get.find<SCSettingController>();
+              state.logOff(resultHandler: (status) {
+                if (status == true) {
+                  SCScaffoldManager.instance.logout();
+                }
+              });
+            }),
+      ],
+    );
+
+  }
   /// 退出登录
   logout() {
     SCSettingController state = Get.find<SCSettingController>();
@@ -109,7 +158,6 @@ class SCSettingListView extends StatelessWidget {
       }
     });
   }
-
   /// 功能反馈
   feedBack() {
     String token = SCScaffoldManager.instance.user.token ?? "";

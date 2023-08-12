@@ -44,5 +44,22 @@ class SCSettingController extends GetxController {
           resultHandler(false);
         });
   }
-
+  /// 注销
+  logOff({required Function(bool success) resultHandler}) {
+    SCLoadingUtils.show();
+    SCHttpManager.instance.delete(
+        url: SCUrl.kLogoffUrl,
+        params: null,
+        success: (value) {
+          SCLoadingUtils.success(text:'注销成功');
+          resultHandler(true);
+        },
+        failure: (value) {
+          if (value['message'] != null) {
+            String message = value['message'];
+            SCToast.showTip(message);
+          }
+          resultHandler(false);
+        });
+  }
 }

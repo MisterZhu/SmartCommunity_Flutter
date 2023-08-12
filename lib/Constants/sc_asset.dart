@@ -26,6 +26,8 @@ class SCAsset {
   static const String iconArrowDown = 'images/icon_arrow_down_white.png';
   /// 白色扫一扫icon
   static const String iconScan = 'images/icon_scan_white.png';
+  /// 白色扫一扫icon
+  static const String iconScanB = 'images/icon_scan_black.png';
   /// 白色消息icon
   static const String iconMessage = 'images/icon_message_white.png';
   /// 黑色消息icon

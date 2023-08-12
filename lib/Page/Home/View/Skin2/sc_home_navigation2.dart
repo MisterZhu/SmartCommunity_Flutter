@@ -160,20 +160,20 @@ class SCHomeNavigation2 extends StatelessWidget {
         //     color: isSticky == true ? stickyColor : normalColor,
         //   ),
         // ),
-        // const SizedBox(
-        //   width: 16.0,
-        // ),
-        // GestureDetector(
-        //   onTap: () {
-        //     scanAction?.call();
-        //   },
-        //   child: Image.asset(
-        //     SCAsset.iconScan,
-        //     width: 22.0,
-        //     height: 22.0,
-        //     color: isSticky == true ? stickyColor : normalColor,
-        //   ),
-        // ),
+        const SizedBox(
+          width: 16.0,
+        ),
+        GestureDetector(
+          onTap: () {
+            scanAction?.call();
+          },
+          child: Image.asset(
+            SCAsset.iconScanB,
+            width: 22.0,
+            height: 22.0,
+            color: Colors.black,
+          ),
+        ),
         const SizedBox(
           width: 16.0,
         ),
@@ -186,7 +186,7 @@ class SCHomeNavigation2 extends StatelessWidget {
   Widget messageItem() {
     if (unreadNum > 0) {
       return SizedBox(
-        width: 36.0,
+        width: 30.0,
         height: 30,
         child: Stack(
           alignment: Alignment.topRight,

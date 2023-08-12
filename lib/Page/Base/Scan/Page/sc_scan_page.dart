@@ -9,6 +9,8 @@ import 'package:sc_uikit/sc_uikit.dart';
 import 'package:smartcommunity/Page/Base/Scan/View/sc_scan_navigation.dart';
 import 'package:smartcommunity/Utils/Router/sc_router_helper.dart';
 import '../../../../Constants/sc_default_value.dart';
+import '../../../../Skin/Tools/sc_scaffold_manager.dart';
+import '../../../../Utils/Router/sc_router_path.dart';
 import '../../../../Utils/sc_utils.dart';
 import '../Controller/sc_scan_controller.dart';
 
@@ -92,6 +94,17 @@ class SCScanState extends State<SCScanPage> {
     controller.scannedDataStream.listen((scanData) {
       controller.stopCamera();
       SCRouterHelper.back(scanData.code);
+      //TODO
+      if (scanData.code?.isNotEmpty ?? false) {
+        final scanStr = scanData.code!;
+        if (scanStr.contains("http")){
+          String token = SCScaffoldManager.instance.user.token ?? "";
+          String url =
+              "$scanStr?Authorization=$token";
+          var params = {"title": "活动详情", "url": url};
+          SCRouterHelper.pathPage(SCRouterPath.webViewPath, params);
+        }
+      }
     });
   }
 

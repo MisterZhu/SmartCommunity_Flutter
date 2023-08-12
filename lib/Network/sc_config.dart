@@ -16,13 +16,13 @@ class SCConfig {
   static String get BASE_URL {
     switch (env) {
       case SCEnvironment.develop:
-        return "https://jmdev.wisharetec.com/";
+        return "https://jmdev.wisharetec.com/api";
       case SCEnvironment.pretest:
-        return "https://test.fyelife.cn:28080";
+        return "https://test.fyelife.cn:28080/api";
       case SCEnvironment.production:
-        return "https://bsp.fineland.cn/";
+        return "https://bsp.fineland.cn/jmapi";
       default:
-        return "https://test.fyelife.cn";
+        return "https://bsp.fineland.cn/jmapi";
     }
   }
 
@@ -32,11 +32,11 @@ class SCConfig {
       case SCEnvironment.develop:
         return "https://jmdev.wisharetec.com/";
       case SCEnvironment.pretest:
-        return "https://test.fyelife.cn:28080";
+        return "https://test.fyelife.cn:28080/";
       case SCEnvironment.production:
-        return "https://bsp.fineland.cn";
+        return "https://bsp.fineland.cn/";
       default:
-        return "https://bsp.fineland.cn";
+        return "https://bsp.fineland.cn/";
     }
   }
   /// 图片base url

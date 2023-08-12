@@ -86,13 +86,13 @@ class SCLoginController extends GetxController {
               var jsonValue = defaultParams['jsonValue'];
               var jsonParams = convert.jsonDecode(jsonValue);
               user.defaultConfigId = defaultConfigId;
-              user.communityId = jsonParams['communityId'];
-              user.communityName = jsonParams['communityName'];
-              user.spaceId = jsonParams['spaceId'];
-              user.spaceName = jsonParams['spaceName'];
-              user.identityId = jsonParams['identityId'];
-              user.identityName = jsonParams['identityName'];
-              user.housingId = jsonParams['housingId'];
+              user.communityId = jsonParams['communityId'] ?? '';
+              user.communityName = jsonParams['communityName'] ?? '';
+              user.spaceId = jsonParams['spaceId'] ?? '';
+              user.spaceName = jsonParams['spaceName'] ?? '';
+              user.identityId = jsonParams['identityId'] ?? '';
+              user.identityName = jsonParams['identityName'] ?? '';
+              user.housingId = jsonParams['housingId'] ?? '';
             }
             print("------------------2222222222222${user.communityId}");
 
