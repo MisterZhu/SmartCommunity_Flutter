@@ -47,7 +47,7 @@ class SCSettingController extends GetxController {
   /// 注销
   logOff({required Function(bool success) resultHandler}) {
     SCLoadingUtils.show();
-    SCHttpManager.instance.delete(
+    SCHttpManager.instance.post(
         url: SCUrl.kLogoffUrl,
         params: null,
         success: (value) {

@@ -18,7 +18,7 @@ class SCConfig {
       case SCEnvironment.develop:
         return "https://jmdev.wisharetec.com/api";
       case SCEnvironment.pretest:
-        return "https://test.fyelife.cn:28080/api";
+        return "https://test.fyelife.cn:28080/jmapi";
       case SCEnvironment.production:
         return "https://bsp.fineland.cn/jmapi";
       default:

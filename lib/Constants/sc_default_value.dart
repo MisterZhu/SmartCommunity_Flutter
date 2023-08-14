@@ -14,7 +14,6 @@ class SCDefaultValue {
 
   /// client
   static const String client = 'jm-app';
-  // static const String client = 'co-pc';
 
   /// appCode
   static const String appCode = '100';
@@ -58,7 +57,7 @@ class SCDefaultValue {
   /// 账户过期
   static const String accountExpiredMessage = '账户已过期,请重新登录!';
   /// 设置-注销账号提示
-  static const String logOffTip = "你正在申请注销你在$appName下的账号。注销后，你将退出$appName，该账号将无法继续使用，账号下的所有数据也无法处理，请确认是否注销";
+  static const String logOffTip = "你正在申请注销你在$appName下的账号。注销后，你将退出$appName，账号数据将在7天后清除，如在该时间内重新登录则视为恢复账号，请确认是否注销";
 
   /// 扫码权限弹窗提示内容
   static const String scanAlertMessage = "允许“$appName”访问您的相机权限，用于您在提交工单、使用报事报修、参与活动、扫一扫功能";
